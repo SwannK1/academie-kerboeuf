@@ -31,6 +31,7 @@ export type MissionPedagogy = {
   narrativeContext?: string;
   studentObjective?: string;
   schoolSkill?: string;
+  successCriteria?: string[];
   duration?: string;
   level?: string;
   materials?: string[];

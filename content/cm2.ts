@@ -105,6 +105,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Comprendre une information implicite en relevant des indices précis dans un texte court.",
       schoolSkill:
         "Faire une inférence en reliant plusieurs indices du texte à ses connaissances, puis justifier sa réponse par une phrase complète.",
+      successCriteria: [
+        "Je relève au moins deux indices précis dans le texte.",
+        "Je formule une hypothèse qui reste possible avec ces indices.",
+        "Je justifie ma réponse avec une phrase complète : je pense que... parce que...",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -188,10 +193,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Texte support en haut de fiche.",
-          "Quatre questions avec espace pour citer les indices.",
-          "Encadré méthode : indice + hypothèse + justification.",
-          "Trace écrite à compléter ou à copier en fin de séance.",
+          "Une fiche recto avec le texte support en haut.",
+          "Quatre questions avec une ligne « indices du texte » sous chaque réponse.",
+          "Encadré méthode noir et blanc : indice + hypothèse + justification.",
+          "Trace écrite courte à compléter en bas de page.",
         ],
       },
       progressStatus: {
@@ -206,14 +211,16 @@ export const cm2Missions: Cm2Mission[] = [
           "Distribuer une fiche avec le texte, les questions, une zone d’indices et la trace écrite courte. Garder la correction pour la mise en commun.",
       },
     },
-    curriculumDomain: "Français",
-    curriculumCompetency: "Lire et justifier une réponse",
-    curriculumObjective: "à vérifier",
+    curriculumDomain: "Français · Lecture et compréhension",
+    curriculumCompetency: "Comprendre l’implicite d’un texte et justifier une réponse avec des indices.",
+    curriculumObjective:
+      "Construire une inférence simple en reliant les indices du texte à ses connaissances.",
     officialLevel: "CM2",
     cycle: "Cycle 3",
     skillTags: ["inférence", "lecture", "justification"],
     teacherUse: ["projection", "impression"],
-    studentUse: "Lire le texte seul et compléter le carnet d’indices.",
+    studentUse:
+      "Lire le texte, relever les indices, formuler une hypothèse, puis justifier la réponse avec une phrase complète.",
   },
   {
     slug: "mission-calcul",
@@ -244,6 +251,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Calculer mentalement en choisissant une stratégie adaptée, puis expliquer pourquoi elle fonctionne.",
       schoolSkill:
         "Utiliser les décompositions, les regroupements et les propriétés des opérations pour mener un calcul mental raisonné.",
+      successCriteria: [
+        "Je choisis une stratégie adaptée aux nombres du calcul.",
+        "J’écris ou j’explique les étapes de ma méthode.",
+        "Je vérifie que mon résultat est cohérent.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -327,10 +339,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Trois calculs avec une colonne résultat.",
-          "Une colonne stratégie pour expliquer la méthode.",
-          "Une zone de vérification par ordre de grandeur ou opération inverse.",
-          "Trace écrite courte à compléter.",
+          "Une fiche recto avec les trois calculs.",
+          "Deux colonnes sobres : résultat et stratégie.",
+          "Une ligne de vérification par ordre de grandeur ou opération inverse.",
+          "Trace écrite courte à compléter en bas de page.",
         ],
       },
       progressStatus: {
@@ -345,14 +357,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer le défi avec colonnes résultat, stratégie et vérification pour garder une trace de méthode.",
       },
     },
-    curriculumDomain: "Mathématiques",
-    curriculumCompetency: "Résoudre un problème",
-    curriculumObjective: "à vérifier",
+    curriculumDomain: "Mathématiques · Calcul mental et stratégies",
+    curriculumCompetency:
+      "Calculer mentalement en utilisant des décompositions, regroupements et propriétés des opérations.",
+    curriculumObjective:
+      "Choisir une stratégie de calcul efficace, l’expliquer et vérifier la cohérence du résultat.",
     officialLevel: "CM2",
     cycle: "Cycle 3",
     skillTags: ["calcul mental", "stratégie", "vérification"],
-    teacherUse: ["projection", "entraînement"],
-    studentUse: "Résoudre les calculs individuellement en notant la stratégie.",
+    teacherUse: ["projection", "impression", "entraînement"],
+    studentUse:
+      "Résoudre les calculs, noter la stratégie utilisée, puis vérifier un résultat avec une méthode simple.",
   },
   {
     slug: "laboratoire-scientifique",
@@ -383,6 +398,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Observer un phénomène, formuler une hypothèse et organiser une démarche scientifique simple.",
       schoolSkill:
         "Pratiquer une démarche d’investigation : distinguer observation et explication, formuler une hypothèse, interpréter un résultat.",
+      successCriteria: [
+        "Je décris ce que j’observe sans expliquer trop vite.",
+        "Je justifie mon hypothèse avec une comparaison précise.",
+        "J’écris une conclusion courte appuyée sur les résultats.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -476,10 +496,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Support d’observation avec les trois graines.",
-          "Tableau observation / hypothèse / conclusion.",
-          "Questions progressives avec espace de justification.",
-          "Trace écrite courte à compléter en fin de séance.",
+          "Une fiche recto avec le support des trois graines.",
+          "Un tableau observation / hypothèse / conclusion.",
+          "Questions progressives avec une ligne de justification.",
+          "Trace écrite courte à compléter en bas de page.",
         ],
       },
       progressStatus: {
@@ -494,14 +514,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer le support avec un tableau observation, hypothèse, conclusion et une trace écrite courte.",
       },
     },
-    curriculumDomain: "Sciences",
-    curriculumCompetency: "à vérifier",
-    curriculumObjective: "à vérifier",
+    curriculumDomain: "Sciences · Démarche d’investigation",
+    curriculumCompetency:
+      "Observer un phénomène, formuler une hypothèse et conclure à partir de résultats comparés.",
+    curriculumObjective:
+      "Distinguer observation, hypothèse et conclusion dans une situation scientifique simple.",
     officialLevel: "CM2",
     cycle: "Cycle 3",
     skillTags: ["démarche scientifique", "hypothèse", "observation"],
     teacherUse: ["projection", "impression"],
-    studentUse: "Compléter la fiche d’observation après avoir lu le support.",
+    studentUse:
+      "Observer le support, comparer les situations, formuler une hypothèse, puis écrire une conclusion prudente.",
   },
   {
     slug: "archives-historiques",
@@ -643,6 +666,7 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer le document avec une fiche d’analyse et une trace écrite courte.",
       },
     },
+    teacherUse: ["projection", "impression"],
   },
   {
     slug: "cartographe-du-monde",
@@ -673,6 +697,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Lire une carte simple en utilisant son orientation, sa légende et ses repères pour localiser des lieux.",
       schoolSkill:
         "Utiliser les éléments d’une carte pour localiser, décrire un itinéraire et comprendre l’organisation d’un espace.",
+      successCriteria: [
+        "J’utilise la légende pour identifier les lieux.",
+        "Je localise les éléments avec le vocabulaire géographique.",
+        "Je justifie mon itinéraire avec des repères de la carte.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -766,10 +795,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Carte textuelle avec légende à compléter.",
-          "Espace de croquis avec rose des vents.",
-          "Questions progressives sur localisation et itinéraire.",
-          "Trace écrite courte à compléter.",
+          "Une fiche recto avec la carte textuelle.",
+          "Une légende simple à compléter en noir et blanc.",
+          "Un espace de croquis avec rose des vents.",
+          "Trace écrite courte à compléter en bas de page.",
         ],
       },
       progressStatus: {
@@ -784,6 +813,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer la carte textuelle avec un espace de croquis, une légende et une rose des vents.",
       },
     },
+    curriculumDomain: "Géographie · Lire et comprendre une carte",
+    curriculumCompetency:
+      "Utiliser une légende, une orientation et des repères spatiaux pour localiser et décrire un espace.",
+    curriculumObjective:
+      "Lire une carte simple, décrire des localisations et justifier un itinéraire avec des indices spatiaux.",
+    officialLevel: "CM2",
+    cycle: "Cycle 3",
+    skillTags: ["carte", "légende", "localisation"],
+    teacherUse: ["projection", "impression"],
+    studentUse:
+      "Lire la carte textuelle, compléter la légende, localiser les lieux, puis justifier un itinéraire.",
   },
   {
     slug: "production-ecrit",
@@ -814,6 +854,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Écrire un court texte organisé en respectant une consigne, puis améliorer son brouillon avec une grille simple.",
       schoolSkill:
         "Planifier, rédiger et réviser un court texte en utilisant des connecteurs et des critères de réussite explicites.",
+      successCriteria: [
+        "Je respecte les étapes demandées par la consigne.",
+        "J’organise mon texte avec un début, un développement et une fin.",
+        "Je relis mon brouillon avec la grille avant de le finaliser.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -897,10 +942,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Consigne en haut de fiche.",
-          "Espace de plan en trois étapes.",
-          "Zone de brouillon de 8 à 10 lignes.",
-          "Grille de relecture : consigne, connecteurs, ponctuation, clarté.",
+          "Une fiche recto avec la consigne en haut.",
+          "Un espace de plan en trois étapes.",
+          "Une zone de brouillon de 8 à 10 lignes.",
+          "Une grille de relecture courte : consigne, ordre, ponctuation.",
         ],
       },
       progressStatus: {
@@ -915,6 +960,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer la mission comme fiche d’écriture avec trois zones : plan, brouillon, grille de relecture.",
       },
     },
+    curriculumDomain: "Français · Production d’écrit",
+    curriculumCompetency:
+      "Rédiger un texte court organisé en respectant une consigne et en révisant son brouillon.",
+    curriculumObjective:
+      "Planifier, écrire puis améliorer un court récit à l’aide de connecteurs et de critères simples.",
+    officialLevel: "CM2",
+    cycle: "Cycle 3",
+    skillTags: ["écriture", "planification", "révision"],
+    teacherUse: ["projection", "impression"],
+    studentUse:
+      "Préparer le plan, rédiger un texte court, puis relire avec la grille avant la mise au propre.",
   },
   {
     slug: "lecture-strategique",
@@ -945,6 +1001,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Comprendre l’idée principale d’un texte court et justifier ses réponses avec des indices explicites ou implicites.",
       schoolSkill:
         "Adapter sa stratégie de lecture pour repérer les informations essentielles, distinguer explicite et implicite, puis justifier une réponse.",
+      successCriteria: [
+        "Je relève les informations importantes sans tout recopier.",
+        "Je formule l’idée principale en une phrase claire.",
+        "Je distingue ce qui est écrit de ce que je peux déduire.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -1028,10 +1089,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Texte support avec marge pour surligner les informations.",
-          "Questions progressives avec colonne « indices du texte ».",
-          "Mini tableau explicite / implicite à compléter.",
-          "Trace écrite courte à recopier ou compléter.",
+          "Une fiche recto avec le texte support et une marge d’indices.",
+          "Quatre questions avec une colonne « indices du texte ».",
+          "Un mini tableau explicite / implicite à compléter.",
+          "Trace écrite courte à compléter en bas de page.",
         ],
       },
       progressStatus: {
@@ -1046,6 +1107,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer le texte avec une marge d’indices, un tableau explicite/implicite et une zone de justification.",
       },
     },
+    curriculumDomain: "Français · Lecture et compréhension",
+    curriculumCompetency:
+      "Identifier les informations essentielles d’un texte et distinguer explicite et implicite.",
+    curriculumObjective:
+      "Adapter sa lecture à la consigne, résumer l’idée principale et justifier avec des indices.",
+    officialLevel: "CM2",
+    cycle: "Cycle 3",
+    skillTags: ["lecture stratégique", "explicite", "implicite"],
+    teacherUse: ["projection", "impression"],
+    studentUse:
+      "Lire le texte, relever les informations importantes, formuler l’idée principale, puis justifier avec des indices.",
   },
   {
     slug: "defis-mathematiques",
@@ -1076,6 +1148,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Résoudre un problème court en repérant les données utiles, en choisissant l’opération et en vérifiant la réponse.",
       schoolSkill:
         "Comprendre un énoncé de problème, modéliser la situation par une opération et rédiger une réponse justifiée.",
+      successCriteria: [
+        "Je repère la question et les données utiles.",
+        "Je choisis une stratégie de calcul et je l’explique.",
+        "J’écris une phrase-réponse et je vérifie le résultat.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -1159,10 +1236,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Énoncé avec espace pour souligner les données utiles.",
-          "Tableau : question, données, opération, réponse.",
-          "Ligne de vérification du résultat.",
-          "Petit défi de réinvestissement en bas de fiche.",
+          "Une fiche recto avec l’énoncé en haut.",
+          "Un tableau sobre : question, données utiles, opération, réponse.",
+          "Une ligne de vérification du résultat.",
+          "Petit défi de réinvestissement en bas de page.",
         ],
       },
       progressStatus: {
@@ -1177,6 +1254,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer le problème avec zones données, calcul, phrase-réponse et vérification.",
       },
     },
+    curriculumDomain: "Mathématiques · Résolution de problèmes",
+    curriculumCompetency:
+      "Résoudre un problème en identifiant les données utiles, en choisissant une opération et en vérifiant la réponse.",
+    curriculumObjective:
+      "Comprendre un énoncé court, expliciter une stratégie et rédiger une réponse justifiée.",
+    officialLevel: "CM2",
+    cycle: "Cycle 3",
+    skillTags: ["problème", "données utiles", "vérification"],
+    teacherUse: ["projection", "impression"],
+    studentUse:
+      "Lire l’énoncé, repérer les données utiles, calculer, écrire une phrase-réponse et vérifier le résultat.",
   },
   {
     slug: "enquete-grammaticale",
@@ -1308,6 +1396,7 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer la phrase avec une légende couleur, un tableau d’analyse et une zone de réécriture.",
       },
     },
+    teacherUse: ["projection", "impression"],
   },
 ];
 

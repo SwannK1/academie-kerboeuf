@@ -25,6 +25,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
     pedagogy.studentObjective ||
       pedagogy.duration ||
       pedagogy.level ||
+      (pedagogy.successCriteria && pedagogy.successCriteria.length > 0) ||
       (pedagogy.materials && pedagogy.materials.length > 0),
   );
   const hasVocabulary =
@@ -97,6 +98,23 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
                       className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
                     >
                       {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            {pedagogy.successCriteria && pedagogy.successCriteria.length > 0 ? (
+              <div className="mt-4">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                  Critères de réussite
+                </p>
+                <ul className="mt-2 grid gap-2">
+                  {pedagogy.successCriteria.map((criterion) => (
+                    <li
+                      key={criterion}
+                      className="rounded border border-jade/20 bg-jade/10 p-3 text-sm leading-6 text-muted"
+                    >
+                      {criterion}
                     </li>
                   ))}
                 </ul>
