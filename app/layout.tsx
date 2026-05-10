@@ -3,10 +3,36 @@ import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
 import "./globals.css";
 
+// TODO: remplacer par le domaine réel avant mise en production
+const BASE_URL = "https://academie-kerboeuf.fr";
+
 export const metadata: Metadata = {
-  title: "Académie Kerboeuf | Missions pédagogiques immersives",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Académie Kerboeuf | Missions pédagogiques immersives",
+    template: "%s | Académie Kerboeuf",
+  },
   description:
-    "Une plateforme pédagogique immersive pour élèves, enseignants et parents.",
+    "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Académie Kerboeuf",
+    title: "Académie Kerboeuf | Missions pédagogiques immersives",
+    description:
+      "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+    url: BASE_URL,
+  },
+  twitter: {
+    card: "summary",
+    title: "Académie Kerboeuf | Missions pédagogiques immersives",
+    description:
+      "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
