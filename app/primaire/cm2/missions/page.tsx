@@ -4,10 +4,15 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { LevelHero } from "@/components/levels/level-hero";
 import { MissionGrid } from "@/components/missions/mission-grid";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { TeacherDashboard } from "@/components/cm2/teacher-dashboard";
 import type { MissionCardData } from "@/components/missions/mission-card";
 import { cm2Level, cm2Missions, type Cm2Mission } from "@/content/cm2";
 import { felixProjects } from "@/content/felix-missions";
-import { getPublicStatusKey } from "@/content/public-status";
+import {
+  getPublicStatusKey,
+  getPublicStatusLabel,
+  type PublicStatusKey,
+} from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Missions CM2 | Académie Kerboeuf",
@@ -74,6 +79,12 @@ const audienceCards = [
     text: "Les séances sont pensées pour être projetées, imprimées, lancées en rituel ou utilisées en atelier guidé.",
     accent: "border-sky/30 text-sky",
   },
+];
+
+const projectStatusSummary: PublicStatusKey[] = [
+  "available",
+  "upcoming",
+  "in-progress",
 ];
 
 function toMissionCardData(mission: Cm2Mission): MissionCardData {
@@ -178,6 +189,8 @@ export default function Cm2MissionsPage() {
         </div>
       </section>
 
+      <TeacherDashboard missions={cm2Missions} projects={felixProjects} />
+
       {/* Projets Félix enrichis */}
       <section className="px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="felix-projects-title">
         <div className="mx-auto max-w-7xl">
@@ -194,14 +207,16 @@ export default function Cm2MissionsPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              {(["disponible", "bientôt", "en préparation"] as const).map((status) => {
-                const count = felixProjects.filter((p) => p.status === status).length;
+              {projectStatusSummary.map((statusKey) => {
+                const count = felixProjects.filter(
+                  (project) => getPublicStatusKey(project.status) === statusKey,
+                ).length;
                 return count > 0 ? (
                   <span
-                    key={status}
+                    key={statusKey}
                     className="rounded border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-bold text-muted"
                   >
-                    {count} {status}
+                    {count} {getPublicStatusLabel(statusKey)}
                   </span>
                 ) : null;
               })}
