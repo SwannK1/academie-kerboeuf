@@ -1,26 +1,300 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #09100f;
+  --foreground: #f7f3e8;
+  --muted: #a7b2a6;
+  --panel: #101916;
+  --panel-soft: #18231f;
+  --gold: #f3c45b;
+  --ember: #de6848;
+  --jade: #50c8a4;
+  --sky: #8bc8ff;
+  --ink: #050807;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-panel: var(--panel);
+  --color-panel-soft: var(--panel-soft);
+  --color-gold: var(--gold);
+  --color-ember: var(--ember);
+  --color-jade: var(--jade);
+  --color-sky: var(--sky);
+  --color-ink: var(--ink);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 16% 8%, rgba(80, 200, 164, 0.18), transparent 28rem),
+    radial-gradient(circle at 88% 18%, rgba(243, 196, 91, 0.16), transparent 24rem),
+    linear-gradient(180deg, #09100f 0%, #0d1714 42%, #111816 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(243, 196, 91, 0.35);
+  color: #fff7d6;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.mission-grid {
+  background-image:
+    linear-gradient(rgba(247, 243, 232, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 243, 232, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.map-line {
+  background:
+    linear-gradient(90deg, transparent 0 4%, rgba(243, 196, 91, 0.8) 4% 5%, transparent 5% 12%),
+    linear-gradient(135deg, transparent 0 42%, rgba(80, 200, 164, 0.5) 42% 43%, transparent 43%);
+}
+
+.mission-detail-page--projection {
+  background:
+    radial-gradient(circle at 16% 8%, rgba(243, 196, 91, 0.14), transparent 30rem),
+    linear-gradient(180deg, #08100e 0%, #0d1714 100%);
+}
+
+.mission-detail-page--projection .mission-detail-hero h1 {
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+}
+
+.mission-detail-page--projection .mission-detail-hero p,
+.mission-detail-page--projection .mission-detail-body p {
+  font-size: clamp(1.08rem, 1.45vw, 1.5rem);
+  line-height: 1.85;
+}
+
+.mission-detail-page--projection .mission-detail-body {
+  padding-top: 1rem;
+}
+
+.mission-detail-page--projection .mission-detail-body > div {
+  max-width: 82rem;
+  grid-template-columns: 1fr;
+}
+
+.mission-detail-page--projection .mission-detail-card,
+.mission-detail-page--projection .mission-question,
+.mission-detail-page--projection .mission-correction {
+  border-color: rgba(247, 243, 232, 0.2);
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.mission-detail-page--projection .mission-question {
+  padding: 1.5rem;
+}
+
+.mission-detail-page--print {
+  background: #ffffff;
+  color: #111111;
+}
+
+.mission-detail-page--print .mission-detail-effects {
+  display: none;
+}
+
+.mission-detail-page--print .mission-detail-hero,
+.mission-detail-page--print .mission-detail-body {
+  background: #ffffff;
+}
+
+.mission-detail-page--print .mission-detail-hero {
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.mission-detail-page--print .mission-detail-hero h1,
+.mission-detail-page--print .mission-detail-hero p,
+.mission-detail-page--print .mission-detail-body h2,
+.mission-detail-page--print .mission-detail-body p,
+.mission-detail-page--print .mission-detail-body span {
+  color: #111111;
+}
+
+.mission-detail-page--print .mission-detail-card,
+.mission-detail-page--print .mission-question,
+.mission-detail-page--print .mission-correction,
+.mission-detail-page--print aside,
+.mission-detail-page--print .mission-detail-body div {
+  border-color: #c9c9c9;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.mission-detail-page--print .mission-detail-body > div {
+  grid-template-columns: 0.72fr 1.28fr;
+}
+
+.mission-detail-page--print .mission-detail-actions button,
+.mission-detail-page--print .mission-detail-chrome a {
+  border-color: #111111;
+  background: #ffffff;
+  color: #111111;
+}
+
+.mission-detail-page--print .mission-correction--hidden {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+    size: A4 portrait;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  /* ── Hide chrome, nav, decorations ── */
+  body.print-mission-detail header,
+  body.print-mission-detail footer,
+  body.print-mission-detail nav,
+  .mission-detail-chrome,
+  .mission-detail-actions,
+  .mission-detail-effects,
+  .mission-grid,
+  .map-line {
+    display: none !important;
+  }
+
+  /* ── Base: white background everywhere ── */
+  .mission-detail-page,
+  .mission-detail-hero,
+  .mission-detail-body {
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  /* ── All text → dark, all bg → transparent ── */
+  .mission-detail-page * {
+    color: #111111 !important;
+    background: transparent !important;
+    border-color: #cccccc !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* ── Cards: restore a very light fill ── */
+  .mission-detail-card,
+  .mission-detail-page article {
+    background: #f8f8f8 !important;
+    border: 1px solid #cccccc !important;
+  }
+
+  /* ── Aside (hero metadata panel) ── */
+  .mission-detail-hero aside {
+    background: #f3f3f3 !important;
+    border: 1px solid #cccccc !important;
+  }
+
+  /* ── Page font ── */
+  .mission-detail-page {
+    font-size: 11pt;
+    line-height: 1.55;
+  }
+
+  /* ── Hero: compact header ── */
+  .mission-detail-hero {
+    padding: 0 0 8mm !important;
+  }
+
+  .mission-detail-hero h1 {
+    font-size: 24pt !important;
+    line-height: 1.08 !important;
+  }
+
+  /* ── Collapse all grids to single column ── */
+  .mission-detail-hero .grid,
+  .mission-detail-body .grid {
+    display: block !important;
+  }
+
+  /* ── Body padding reset ── */
+  .mission-detail-body {
+    padding: 0 !important;
+  }
+
+  .mission-detail-body > div,
+  .mission-detail-body > section {
+    max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* ── Cards: break management ── */
+  .mission-detail-card,
+  .mission-detail-page article,
+  .mission-detail-hero aside {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    padding: 10pt !important;
+    margin-bottom: 8pt;
+  }
+
+  /* ── Question blocks (shared-mission-detail) ── */
+  .mission-question {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ── Question items: space for pupil answers ── */
+  .mission-detail-body ol > li {
+    padding-bottom: 20pt;
+    margin-bottom: 4pt;
+    border-bottom: 1px dotted #aaaaaa !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .mission-detail-body ol > li:last-child {
+    border-bottom: none !important;
+    padding-bottom: 4pt;
+  }
+
+  /* ── List items inside cards ── */
+  .mission-detail-body ul > li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ── Correction: hidden by default ── */
+  .mission-correction--hidden {
+    display: none !important;
+  }
+
+  /* ── Links: plain text in print ── */
+  .mission-detail-page a {
+    text-decoration: none !important;
+  }
+
+  /* ── Remove glow accents (h-1 bars, rounded-full blobs) ── */
+  .mission-detail-page [class*="h-1"],
+  .mission-detail-page [class*="blur-"] {
+    display: none !important;
+  }
 }
