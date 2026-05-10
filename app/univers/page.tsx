@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { UniversHero } from "@/components/academy/univers-hero";
 import { academyLevels, academySubjects } from "@/content/academy";
 import { cm2Missions } from "@/content/cm2";
 import { maternelleWorld, emblematicStudents } from "@/content/students";
@@ -43,6 +44,12 @@ const accentBg: Record<AccentKey, string> = {
   sky: "bg-sky/10",
   ember: "bg-ember/10",
 };
+const accentBgSolid: Record<AccentKey, string> = {
+  gold: "bg-gold",
+  jade: "bg-jade",
+  sky: "bg-sky",
+  ember: "bg-ember",
+};
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -76,55 +83,16 @@ export default function UniversPage() {
       </div>
 
       {/* ── HERO ────────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mission-grid absolute inset-0 -z-20 opacity-30" />
-        <div className="map-line absolute inset-x-[-12%] top-[45%] -z-10 h-56 rotate-[-7deg] opacity-30" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.06),rgba(9,16,15,0.97))]" />
-
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.68fr] lg:items-end">
-          <div>
-            <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
-              Bible narrative & pédagogique
-            </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
-              Bienvenue dans l&apos;univers de l&apos;Académie Kerboeuf
-            </h1>
-            <p className="mt-5 text-2xl font-black text-jade sm:text-3xl">
-              Une école secrète où chaque savoir devient une porte à ouvrir.
-            </p>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
-              Cette page est la bible publique de l&apos;Académie Kerboeuf — son
-              histoire, ses territoires, ses guides, ses élèves et les valeurs
-              qui font de chaque mission un acte pédagogique sérieux.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <CtaLink href="/professeurs" color="gold">
-                Rencontrer les professeurs
-              </CtaLink>
-              <CtaLink href="/primaire" color="jade">
-                Explorer le primaire
-              </CtaLink>
-            </div>
-          </div>
-
-          {/* Métriques */}
-          <div className="rounded-md border border-white/12 bg-panel/75 p-5 shadow-2xl shadow-black/35">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
-              État du monde
-            </p>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <Metric value={academyCycles.length} label="cycles" />
-              <Metric value={academyLevels.length + 3} label="niveaux" />
-              <Metric value={referentProfessors.length} label="professeurs référents" />
-              <Metric value={officialPersonalities.length} label="personnalités" />
-              <Metric value={emblematicStudents.length} label="élèves" />
-              <Metric value={missionCount} label="missions" />
-              <Metric value={academySubjects.length} label="matières" />
-              <Metric value={learningPaths.length} label="parcours" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <UniversHero
+        cyclesCount={academyCycles.length}
+        levelsCount={academyLevels.length + 3}
+        referentProfessorsCount={referentProfessors.length}
+        personalitiesCount={officialPersonalities.length}
+        studentsCount={emblematicStudents.length}
+        missionsCount={missionCount}
+        subjectsCount={academySubjects.length}
+        pathsCount={learningPaths.length}
+      />
 
       {/* ── 1. HISTOIRE ─────────────────────────────────────────────────────── */}
       <Section
@@ -431,7 +399,7 @@ export default function UniversPage() {
             >
               <div className="flex items-center gap-3">
                 <div
-                  className={`h-3 w-3 rounded-full ${accentBg[theme.accentColor].replace("/10", "")} ring-2 ${accentBorder[theme.accentColor]}`}
+                  className={`h-3 w-3 rounded-full ${accentBgSolid[theme.accentColor]} ring-2 ${accentBorder[theme.accentColor]}`}
                 />
                 <h3
                   className={`font-mono text-xs font-black uppercase tracking-[0.2em] ${accentText[theme.accentColor]}`}
@@ -569,7 +537,7 @@ export default function UniversPage() {
               <h3 className="mt-3 text-lg font-black text-foreground">
                 {path.title}
               </h3>
-              <p className="mt-1 text-xs font-semibold text-jade">
+              <p className="mt-1 text-xs font-semibold text-gold">
                 {path.subject}
               </p>
               <p className="mt-3 text-xs leading-6 text-muted">
@@ -675,17 +643,6 @@ export default function UniversPage() {
 }
 
 // ─── Composants locaux ────────────────────────────────────────────────────────
-
-function Metric({ value, label }: { value: number; label: string }) {
-  return (
-    <div className="rounded border border-white/10 bg-white/[0.04] p-3">
-      <p className="font-mono text-2xl font-black text-gold">{value}</p>
-      <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
-        {label}
-      </p>
-    </div>
-  );
-}
 
 function Section({
   eyebrow,
