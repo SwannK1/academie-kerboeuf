@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { AccessibilityPanel } from "@/components/cm2/accessibility-panel";
 import { AssessmentPanel } from "@/components/cm2/assessment-panel";
 import { BadgeGrid } from "@/components/cm2/badge-grid";
 import { DifferentiationPanel } from "@/components/cm2/differentiation-panel";
 import { MissionSkillPanel } from "@/components/cm2/mission-skill-panel";
+import { OfficialReferencePanel } from "@/components/cm2/official-reference-panel";
+import { SequencePanel } from "@/components/cm2/sequence-panel";
 import { CurriculumLinkPanel } from "@/components/missions/curriculum-link-panel";
 import { DetailPanel } from "@/components/missions/detail-panel";
 import { MissionLearningFlow } from "@/components/missions/mission-learning-flow";
@@ -59,6 +62,13 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
   if (felixProject) {
     const place = getFelixPlaceBySlug(felixProject.associatedPlace);
     const badges = getFelixBadgesBySlugs(felixProject.associatedBadges);
+
+    const qualityStatusStyle: Record<string, string> = {
+      validée: "border-jade/30 bg-jade/10 text-jade",
+      "en relecture": "border-gold/30 bg-gold/10 text-gold",
+      prototype: "border-sky/30 bg-sky/10 text-sky",
+      brouillon: "border-ember/30 bg-ember/10 text-ember",
+    };
 
     return (
       <main className="mission-detail-page">
@@ -137,6 +147,18 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                     <dd className="text-sm font-bold text-foreground">{place.name}</dd>
                   </div>
                 ) : null}
+                {felixProject.qualityStatus ? (
+                  <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                    <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                      Qualité
+                    </dt>
+                    <dd>
+                      <span className={`rounded border px-2 py-0.5 text-xs font-bold ${qualityStatusStyle[felixProject.qualityStatus.state] ?? "border-white/15 bg-white/[0.04] text-muted"}`}>
+                        {felixProject.qualityStatus.state}
+                      </span>
+                    </dd>
+                  </div>
+                ) : null}
                 <div>
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                     Rôle de Félix
@@ -213,6 +235,16 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
               successCriteria={felixProject.successCriteria}
               restitution={felixProject.restitution}
             />
+
+            <SequencePanel sequence={felixProject.sequence} />
+
+            <OfficialReferencePanel
+              officialReference={felixProject.officialReference}
+              lsuLinks={felixProject.lsuLinks}
+              crossCurricular={felixProject.crossCurricular}
+            />
+
+            <AccessibilityPanel accessibility={felixProject.accessibility} />
 
             {badges.length > 0 ? (
               <div className="mission-detail-card rounded-md border border-white/10 bg-white/[0.04] p-5">
