@@ -258,7 +258,7 @@ export default function UniversPage() {
       <Section
         eyebrow="Chapitre IV"
         title="Les professeurs référents"
-        text="Neuf guides qui donnent une identité claire à chaque niveau de l'Académie."
+        text="Neuf guides qui donnent une identité claire aux grands paliers de l'Académie."
         band
       >
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
