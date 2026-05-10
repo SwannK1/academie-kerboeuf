@@ -283,7 +283,7 @@ export const mainPlaces: AcademyPlace[] = [
     category: "college",
     inhabitant: "Akira — 3e",
     description:
-      "Sobre, sombre, d'une précision absolue. Pas de décorations — seulement les plans de synthèse d'Akira. Entrer ici, c'est entrer dans la dernière étape. Chaque mot compte.",
+      "Sobre, sombre, d'une précision absolue. Pas de décorations — seulement les plans de synthèse d'Akira. Entrer ici, c'est entrer dans la dernière étape du collège. Chaque mot compte.",
     accentColor: "gold",
   },
   {

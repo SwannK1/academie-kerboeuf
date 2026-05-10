@@ -621,8 +621,9 @@ export default function UniversPage() {
                 Choisis une porte de l&apos;Académie.
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-                Les niveaux, les missions et les parcours sont déjà structurés
-                et prêts à être utilisés en classe ou explorés librement.
+                Les niveaux, les missions et les parcours sont cartographiés,
+                avec des statuts qui distinguent ce qui est prêt, à venir ou en
+                préparation.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:w-64 lg:grid-cols-1">

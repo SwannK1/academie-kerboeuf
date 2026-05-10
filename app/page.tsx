@@ -53,7 +53,7 @@ const USAGES = [
   {
     tag: "Impression",
     title: "Imprimer des activités",
-    text: "Chaque mission peut être imprimée en fiche individuelle pour travailler en autonomie.",
+    text: "Les missions disponibles indiquent les usages prévus pour l’impression et le travail en autonomie.",
     href: "/ressources",
     accent: "gold" as Accent,
   },
@@ -104,12 +104,12 @@ const WORLDS = [
 const TEACHER_BLOCKS = [
   {
     title: "Préparer",
-    text: "Chaque mission est organisée avec objectif, compétence ciblée et conseils de mise en œuvre.",
+    text: "Les dossiers structurés affichent objectif, compétence ciblée et conseils de mise en œuvre quand ils sont prêts.",
     accent: "gold" as Accent,
   },
   {
     title: "Projeter",
-    text: "Un support propre, lisible sur grand écran, prêt à projeter sans adaptation.",
+    text: "Les missions disponibles signalent les supports pensés pour une projection lisible en classe.",
     accent: "jade" as Accent,
   },
   {
@@ -119,7 +119,7 @@ const TEACHER_BLOCKS = [
   },
   {
     title: "Corriger",
-    text: "Chaque mission inclut une correction guidée, utilisable en collectif ou en différenciation.",
+    text: "Les missions finalisées incluent une correction guidée, utilisable en collectif ou en différenciation.",
     accent: "ember" as Accent,
   },
 ];
@@ -209,7 +209,7 @@ export default function Home() {
                 {[
                   { value: "4", label: "niveaux scolaires", color: "text-jade" },
                   { value: "12+", label: "classes structurées", color: "text-gold" },
-                  { value: "40+", label: "missions disponibles", color: "text-sky" },
+                  { value: "40+", label: "missions structurées", color: "text-sky" },
                   { value: "5", label: "parcours progressifs", color: "text-ember" },
                 ].map(({ value, label, color }) => (
                   <div key={label} className="rounded border border-white/10 bg-white/[0.04] p-4">
@@ -304,7 +304,7 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <SectionHeader
               eyebrow="Les personnages"
-              title="Des visages récurrents pour chaque niveau."
+              title="Des visages récurrents à travers les niveaux."
               text="Retrouver le même professeur d’une séance à l’autre — un repère narratif qui rend les compétences mémorables."
             />
             <div className="flex shrink-0 gap-3">
@@ -496,8 +496,8 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow="Pour les enseignants"
-            title="Prêt à préparer, projeter, imprimer, corriger."
-            text="L’Académie Kerboeuf est pensée pour le quotidien de la classe : chaque ressource est immédiatement exploitable."
+            title="Préparer, projeter, imprimer, corriger."
+            text="L’Académie Kerboeuf est pensée pour le quotidien de la classe : les ressources disponibles signalent clairement leurs usages."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {TEACHER_BLOCKS.map((block, i) => {

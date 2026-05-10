@@ -824,7 +824,7 @@ const extendedByLevelSlug: Record<string, ProfessorExtended> = {
     pedagogicalRole:
       "Transformer des connaissances dispersées en réponses organisées et présentées avec assurance. Akira prépare les élèves aux exercices de bilan, aux oraux et aux choix d'orientation de fin de collège.",
     academyFunction:
-      "Gardien du sceau. Akira valide les parcours accomplis à l'Académie Kerboeuf et prépare chaque élève à présenter son bilan de Cycle 4 avec assurance. Il est le dernier professeur que les élèves rencontrent avant de quitter l'Académie.",
+      "Gardien du sceau. Akira valide les parcours accomplis au collège Kerboeuf et prépare chaque élève à présenter son bilan de Cycle 4 avec assurance. Il marque la dernière étape du collège avant l'entrée dans les exigences du lycée.",
     studentExperience:
       "Les élèves d'Akira ont conscience d'être dans la dernière étape. Cette conscience leur donne une gravité particulière — ils travaillent comme s'ils savaient que leurs réponses seront lues longtemps après. Ils apprennent à parler et à écrire comme quelqu'un qui a quelque chose à prouver.",
     missionPhilosophy:
