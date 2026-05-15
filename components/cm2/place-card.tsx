@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { AcademyPlace } from "@/content/felix-types";
 
 const colorMap = {
@@ -18,7 +19,19 @@ export function PlaceCard({ place }: PlaceCardProps) {
       className={`rounded-md border bg-white/[0.04] p-5 ${c.ring}`}
       aria-label={place.name}
     >
-      <div className={`mb-4 h-1 rounded-full ${c.bar}`} aria-hidden="true" />
+      {place.image ? (
+        <div className="relative mb-4 aspect-video overflow-hidden rounded-sm">
+          <Image
+            src={place.image}
+            alt={place.imageAlt ?? place.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            className="object-cover"
+          />
+        </div>
+      ) : (
+        <div className={`mb-4 h-1 rounded-full ${c.bar}`} aria-hidden="true" />
+      )}
       <p className={`text-xs font-bold uppercase tracking-[0.18em] ${c.text}`}>
         Lieu narratif
       </p>

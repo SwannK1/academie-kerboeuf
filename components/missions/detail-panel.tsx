@@ -2,11 +2,19 @@ import type { ReactNode } from "react";
 
 type DetailPanelProps = {
   title: string;
+  titleLevel?: "h2" | "h3" | "h4";
   eyebrow?: string;
   children: ReactNode;
 };
 
-export function DetailPanel({ title, eyebrow, children }: DetailPanelProps) {
+export function DetailPanel({
+  title,
+  titleLevel = "h2",
+  eyebrow,
+  children,
+}: DetailPanelProps) {
+  const Heading = titleLevel;
+
   return (
     <article className="mission-detail-card rounded-md border border-white/10 bg-white/[0.045] p-5">
       {eyebrow ? (
@@ -14,7 +22,7 @@ export function DetailPanel({ title, eyebrow, children }: DetailPanelProps) {
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="text-xl font-black text-foreground">{title}</h2>
+      <Heading className="text-xl font-black text-foreground">{title}</Heading>
       <div className="mt-5">{children}</div>
     </article>
   );

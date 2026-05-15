@@ -110,7 +110,11 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
 
   if (linkBasePath) {
     return (
-      <Link href={`${linkBasePath}/${mission.slug}`} className={linkedClassName}>
+      <Link
+        href={`${linkBasePath}/${mission.slug}`}
+        aria-label={`Mission ${String(index + 1).padStart(2, "0")} – ${mission.title} (${mission.subject})`}
+        className={linkedClassName}
+      >
         {content}
       </Link>
     );

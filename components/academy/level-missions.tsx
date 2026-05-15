@@ -77,7 +77,7 @@ export function LevelMissions({ level }: LevelMissionsProps) {
                       href={getLevelPath(level)}
                       className="inline-flex rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:border-jade/35 hover:bg-jade/10"
                     >
-                      Retour au niveau
+                      Retour à {level.label}
                     </Link>
                     <Link
                       href="/ressources"

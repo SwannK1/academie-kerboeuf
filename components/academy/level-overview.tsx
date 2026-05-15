@@ -114,6 +114,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
           <div className="grid gap-5 sm:grid-cols-2">
             <Link
               href={`/professeurs/${level.professor.slug}`}
+              aria-label={`Voir la fiche du professeur ${level.professor.name}`}
               className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
             >
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -136,7 +137,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 {level.professor.specialty}
               </p>
               <span className="mt-5 inline-flex text-sm font-bold text-gold transition group-hover:translate-x-1">
-                Voir la fiche
+                Voir la fiche de {level.professor.name}
               </span>
             </Link>
 
@@ -231,7 +232,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <ul className="mt-4 grid gap-2">
                   {validCompetencies.slice(0, 5).map((comp, i) => (
                     <li key={i} className="flex gap-2.5 text-sm text-muted">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sky/50" />
+                      <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 rounded-full bg-sky/50" />
                       <span className="leading-6">{comp}</span>
                     </li>
                   ))}
@@ -308,6 +309,8 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                       {resource.title}
                     </p>
                     <span
+                      role="img"
+                      aria-label={getPublicStatusLabel(resource.status)}
                       className={`mt-0.5 size-2 shrink-0 rounded-full ${
                         getPublicStatusDotClassName(resource.status)
                       }`}
@@ -371,6 +374,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <Link
                   key={path.slug}
                   href={`/parcours/${path.slug}`}
+                  aria-label={`Ouvrir le parcours : ${path.title}`}
                   className="group relative overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-0.5 hover:border-gold/30 hover:bg-white/[0.07]"
                 >
                   <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_100%,rgba(243,196,91,0.08),transparent_50%)]" />
@@ -389,7 +393,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                     <ul className="mt-4 grid gap-1.5">
                       {path.competencies.slice(0, 3).map((c, i) => (
                         <li key={i} className="flex gap-2 text-xs text-muted">
-                          <span className="mt-1.5 size-1 shrink-0 rounded-full bg-gold/50" />
+                          <span aria-hidden="true" className="mt-1.5 size-1 shrink-0 rounded-full bg-gold/50" />
                           {c}
                         </li>
                       ))}

@@ -60,7 +60,7 @@ export function LevelHero({
             </span>
           </div>
           <div className="mt-6 flex items-center gap-4">
-            <div className="grid size-20 place-items-center rounded-md border border-jade/35 bg-jade/15 text-3xl font-black text-jade">
+            <div aria-hidden="true" className="grid size-20 place-items-center rounded-md border border-jade/35 bg-jade/15 text-3xl font-black text-jade">
               {characterInitial}
             </div>
             <div>

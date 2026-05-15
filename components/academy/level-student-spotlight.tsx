@@ -27,7 +27,7 @@ export function LevelStudentSpotlight({ student }: LevelStudentSpotlightProps) {
             {student.image ? (
               <Image
                 src={student.image}
-                alt={student.name}
+                alt={`Portrait de ${student.name}, élève emblématique de l'Académie Kerboeuf`}
                 fill
                 sizes="(max-width: 768px) 100vw, 14rem"
                 className="object-cover"
@@ -59,14 +59,14 @@ export function LevelStudentSpotlight({ student }: LevelStudentSpotlightProps) {
                 href={`/eleves/${student.slug}`}
                 className={`rounded-md border px-4 py-2 text-sm font-bold transition hover:opacity-90 ${accent.badgeClass}`}
               >
-                Voir son profil
+                Voir le profil de {student.name}
               </Link>
               {student.missionsHref ? (
                 <Link
                   href={student.missionsHref}
                   className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
                 >
-                  Missions associées
+                  Missions de {student.name}
                 </Link>
               ) : null}
             </div>
