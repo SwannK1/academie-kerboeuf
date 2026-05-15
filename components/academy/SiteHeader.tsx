@@ -10,13 +10,7 @@ const navItems = [
   { label: "Primaire", href: "/primaire" },
   { label: "Collège", href: "/college" },
   { label: "Lycée", href: "/lycee" },
-  { label: "Élèves", href: "/eleves" },
-  { label: "Missions", href: "/missions-recentes" },
   { label: "Ressources", href: "/ressources" },
-  { label: "Parcours", href: "/parcours" },
-  { label: "Programmes", href: "/programmes" },
-  { label: "Professeurs", href: "/professeurs" },
-  { label: "Univers", href: "/univers" },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -75,13 +69,6 @@ export function SiteHeader() {
             );
           })}
         </div>
-
-        <Link
-          href="/missions-recentes"
-          className="hidden rounded-md bg-gold px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#ffd778] xl:inline-flex"
-        >
-          Tableau des missions
-        </Link>
 
         <button
           type="button"
