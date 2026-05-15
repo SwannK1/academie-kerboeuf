@@ -36,36 +36,26 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
   const hasProjectionOrPrint = Boolean(
     pedagogy.projectionVersion || pedagogy.printableVersion,
   );
+  const hasTeacherContent = Boolean(
+    pedagogy.progressStatus ||
+      hasMethod ||
+      hasExtension ||
+      correction.length > 0 ||
+      hasProjectionOrPrint ||
+      hasUsage,
+  );
 
   return (
     <div className="mx-auto mb-14 max-w-7xl">
-      <div className="mb-8 grid gap-6 border-b border-white/10 pb-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
-            Structure pédagogique
-          </p>
-          <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-            Mission prête à scénariser
-          </h2>
-        </div>
-        {pedagogy.progressStatus ? (
-          <div className="rounded-md border border-gold/25 bg-gold/10 p-4">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
-              Statut de progression
-            </p>
-            <p className="mt-2 text-lg font-black text-foreground">
-              {pedagogy.progressStatus.state}
-            </p>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              {pedagogy.progressStatus.detail}
-            </p>
-          </div>
-        ) : null}
+      <div className="mb-8 border-b border-white/10 pb-6">
+        <h2 className="text-3xl font-black text-foreground sm:text-4xl">
+          Déroulement de la séance
+        </h2>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
         {hasSessionOverview ? (
-          <DetailPanel title="Fiche séance">
+          <DetailPanel title="Fiche séance" titleLevel="h3">
             <dl className="grid gap-3 sm:grid-cols-2">
               {pedagogy.studentObjective ? (
                 <SessionMeta
@@ -88,9 +78,9 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
             </dl>
             {pedagogy.materials && pedagogy.materials.length > 0 ? (
               <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Matériel
-                </p>
+                </h4>
                 <ul className="mt-2 grid gap-2">
                   {pedagogy.materials.map((item) => (
                     <li
@@ -105,9 +95,9 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
             ) : null}
             {pedagogy.successCriteria && pedagogy.successCriteria.length > 0 ? (
               <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Critères de réussite
-                </p>
+                </h4>
                 <ul className="mt-2 grid gap-2">
                   {pedagogy.successCriteria.map((criterion) => (
                     <li
@@ -124,7 +114,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
         ) : null}
 
         {pedagogy.immersiveIntroduction ? (
-          <DetailPanel title="Introduction immersive">
+          <DetailPanel title="Introduction immersive" titleLevel="h3">
             <p className="text-base leading-8 text-foreground">
               {pedagogy.immersiveIntroduction}
             </p>
@@ -132,7 +122,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
         ) : null}
 
         {pedagogy.narrativeContext ? (
-          <DetailPanel title="Contexte narratif">
+          <DetailPanel title="Contexte narratif" titleLevel="h3">
             <p className="text-sm leading-7 text-muted">
               {pedagogy.narrativeContext}
             </p>
@@ -140,7 +130,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
         ) : null}
 
         {hasVocabulary ? (
-          <DetailPanel title="Vocabulaire utile">
+          <DetailPanel title="Vocabulaire utile" titleLevel="h3">
             <div className="flex flex-wrap gap-2">
               {pedagogy.usefulVocabulary!.map((word) => (
                 <span
@@ -155,7 +145,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
         ) : null}
 
         {pedagogy.mainChallenge ? (
-          <DetailPanel title={pedagogy.mainChallenge.label}>
+          <DetailPanel title={pedagogy.mainChallenge.label} titleLevel="h3">
             <p className="text-base leading-8 text-foreground">
               {pedagogy.mainChallenge.content}
             </p>
@@ -163,7 +153,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
         ) : null}
 
         {questions.length > 0 ? (
-          <DetailPanel title="Questions progressives">
+          <DetailPanel title="Questions progressives" titleLevel="h3">
             <ol className="space-y-3">
               {questions.map((question, index) => (
                 <li
@@ -182,125 +172,148 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
             </ol>
           </DetailPanel>
         ) : null}
-
-        {hasMethod ? (
-          <DetailPanel title="Méthode / conseil">
-            <div className="space-y-4">
-              {pedagogy.schoolSkill ? (
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                    Compétence scolaire
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-foreground">
-                    {pedagogy.schoolSkill}
-                  </p>
-                </div>
-              ) : null}
-              {pedagogy.methodTip ? (
-                <div className="rounded border border-jade/25 bg-jade/10 p-4">
-                  <p className="text-sm leading-7 text-muted">
-                    {pedagogy.methodTip}
-                  </p>
-                </div>
-              ) : null}
-            </div>
-          </DetailPanel>
-        ) : null}
-
-        {hasExtension ? (
-          <DetailPanel title="Réinvestissement / trace écrite">
-            <div className="space-y-4">
-              {pedagogy.reinvestmentActivity ? (
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                    Activité de réinvestissement
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-muted">
-                    {pedagogy.reinvestmentActivity}
-                  </p>
-                </div>
-              ) : null}
-              {pedagogy.shortWrittenTrace ? (
-                <div className="rounded border border-gold/25 bg-gold/10 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
-                    Trace écrite courte
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-foreground">
-                    {pedagogy.shortWrittenTrace}
-                  </p>
-                </div>
-              ) : null}
-            </div>
-          </DetailPanel>
-        ) : null}
-
-        {correction.length > 0 ? (
-          <DetailPanel title="Correction">
-            <ol className="space-y-3">
-              {correction.map((item, index) => (
-                <li
-                  key={`${item.prompt}-${item.answer}`}
-                  className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
-                >
-                  <span className="mr-2 font-mono font-bold text-gold">
-                    {index + 1}.
-                  </span>
-                  <span className="block font-bold text-foreground">
-                    {item.prompt}
-                  </span>
-                  <span className="mt-1 block">{item.answer}</span>
-                </li>
-              ))}
-            </ol>
-          </DetailPanel>
-        ) : null}
-
-        {hasProjectionOrPrint ? (
-          <DetailPanel title="Versions classe">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {pedagogy.projectionVersion ? (
-                <ClassroomVersion
-                  accentClass="text-sky"
-                  version={pedagogy.projectionVersion}
-                />
-              ) : null}
-              {pedagogy.printableVersion ? (
-                <ClassroomVersion
-                  accentClass="text-gold"
-                  version={pedagogy.printableVersion}
-                />
-              ) : null}
-            </div>
-          </DetailPanel>
-        ) : null}
-
-        {hasUsage ? (
-          <DetailPanel title="Projection / impression">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {pedagogy.usage?.projection ? (
-                <div className="rounded border border-sky/25 bg-sky/10 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
-                    À projeter
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-muted">
-                    {pedagogy.usage.projection}
-                  </p>
-                </div>
-              ) : null}
-              {pedagogy.usage?.printing ? (
-                <div className="rounded border border-gold/25 bg-gold/10 p-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
-                    À imprimer
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-muted">
-                    {pedagogy.usage.printing}
-                  </p>
-                </div>
-              ) : null}
-            </div>
-          </DetailPanel>
-        ) : null}
       </div>
+
+      {hasTeacherContent ? (
+        <div className="mt-10 border-t border-white/10 pt-8">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
+            Pour l&apos;enseignant
+          </p>
+          <div className="mt-6 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+            {pedagogy.progressStatus ? (
+              <div className="rounded-md border border-gold/25 bg-gold/10 p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                  Statut de progression
+                </p>
+                <p className="mt-2 text-lg font-black text-foreground">
+                  {pedagogy.progressStatus.state}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  {pedagogy.progressStatus.detail}
+                </p>
+              </div>
+            ) : null}
+
+            {hasMethod ? (
+              <DetailPanel title="Méthode / conseil" titleLevel="h3">
+                <div className="space-y-4">
+                  {pedagogy.schoolSkill ? (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                        Compétence scolaire
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-foreground">
+                        {pedagogy.schoolSkill}
+                      </p>
+                    </div>
+                  ) : null}
+                  {pedagogy.methodTip ? (
+                    <div className="rounded border border-jade/25 bg-jade/10 p-4">
+                      <p className="text-sm leading-7 text-muted">
+                        {pedagogy.methodTip}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              </DetailPanel>
+            ) : null}
+
+            {hasExtension ? (
+              <DetailPanel title="Réinvestissement / trace écrite" titleLevel="h3">
+                <div className="space-y-4">
+                  {pedagogy.reinvestmentActivity ? (
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                        Activité de réinvestissement
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-muted">
+                        {pedagogy.reinvestmentActivity}
+                      </p>
+                    </div>
+                  ) : null}
+                  {pedagogy.shortWrittenTrace ? (
+                    <div className="rounded border border-gold/25 bg-gold/10 p-4">
+                      <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                        Trace écrite courte
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-foreground">
+                        {pedagogy.shortWrittenTrace}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              </DetailPanel>
+            ) : null}
+
+            {correction.length > 0 ? (
+              <DetailPanel title="Correction" titleLevel="h3">
+                <ol className="space-y-3">
+                  {correction.map((item, index) => (
+                    <li
+                      key={`${item.prompt}-${item.answer}`}
+                      className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                    >
+                      <span className="mr-2 font-mono font-bold text-gold">
+                        {index + 1}.
+                      </span>
+                      <span className="block font-bold text-foreground">
+                        {item.prompt}
+                      </span>
+                      <span className="mt-1 block">{item.answer}</span>
+                    </li>
+                  ))}
+                </ol>
+              </DetailPanel>
+            ) : null}
+
+            {hasProjectionOrPrint ? (
+              <DetailPanel title="Versions classe" titleLevel="h3">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {pedagogy.projectionVersion ? (
+                    <ClassroomVersion
+                      accentClass="text-sky"
+                      version={pedagogy.projectionVersion}
+                    />
+                  ) : null}
+                  {pedagogy.printableVersion ? (
+                    <ClassroomVersion
+                      accentClass="text-gold"
+                      version={pedagogy.printableVersion}
+                    />
+                  ) : null}
+                </div>
+              </DetailPanel>
+            ) : null}
+
+            {hasUsage ? (
+              <DetailPanel title="Projection / impression" titleLevel="h3">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {pedagogy.usage?.projection ? (
+                    <div className="rounded border border-sky/25 bg-sky/10 p-4">
+                      <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
+                        À projeter
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-muted">
+                        {pedagogy.usage.projection}
+                      </p>
+                    </div>
+                  ) : null}
+                  {pedagogy.usage?.printing ? (
+                    <div className="rounded border border-gold/25 bg-gold/10 p-4">
+                      <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                        À imprimer
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-muted">
+                        {pedagogy.usage.printing}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              </DetailPanel>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -325,9 +338,9 @@ function ClassroomVersion({
 }) {
   return (
     <div className="rounded border border-white/10 bg-white/[0.035] p-4">
-      <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accentClass}`}>
+      <h4 className={`text-xs font-bold uppercase tracking-[0.18em] ${accentClass}`}>
         {version.title}
-      </p>
+      </h4>
       <ul className="mt-3 space-y-2">
         {version.content.map((item) => (
           <li key={item} className="text-sm leading-6 text-muted">
