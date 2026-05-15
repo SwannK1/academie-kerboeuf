@@ -1,4 +1,10 @@
-import type { AcademyCharacter, AcademyPlace, AcademyBadge } from "@/content/felix-types";
+import type {
+  AcademyCharacter,
+  AcademyPlace,
+  AcademyBadge,
+  PedagogicalImageHero,
+} from "@/content/felix-types";
+import { getPublicStatus } from "@/content/public-status";
 
 export const felixCharacter: AcademyCharacter = {
   slug: "felix",
@@ -31,7 +37,7 @@ export const felixCharacter: AcademyCharacter = {
   voiceTone:
     "Direct, encourageant, légèrement mystérieux. Félix parle avec précision mais sait aussi raconter des histoires. Il dit « observe », « vérifie », « justifie » plutôt que « c'est bien » ou « bravo ».",
   associatedPlaces: [
-    "carthotheque-des-lisieres",
+    "cartotheque-des-lisieres",
     "classe-atelier",
     "observatoire",
     "agora",
@@ -53,7 +59,7 @@ export const felixCharacter: AcademyCharacter = {
 
 export const felixPlaces: AcademyPlace[] = [
   {
-    slug: "carthotheque-des-lisieres",
+    slug: "cartotheque-des-lisieres",
     name: "Cartothèque des Lisières",
     description:
       "Une salle aux murs couverts de cartes du monde, de la France et des territoires locaux. Félix y apprend à lire, produire et critiquer des représentations spatiales.",
@@ -152,6 +158,83 @@ export const felixPlaces: AcademyPlace[] = [
   },
 ];
 
+export const courDesExplorateursHero: PedagogicalImageHero = {
+  id: "cour-des-explorateurs",
+  eyebrow: "Image pédagogique",
+  title: "La Cour des Explorateurs",
+  description:
+    "Un premier prototype sobre pour relier l'image d'un lieu aux espaces pédagogiques qui l'entourent, sans imposer une carte complexe.",
+  image: {
+    src: "/images/academie-kerboeuf/lieux/maternelle/jardin-des-petits-home.PNG",
+    alt: "Vue illustrée d'un lieu de l'Académie Kerboeuf utilisé comme support pour la Cour des Explorateurs.",
+  },
+  zones: [
+    {
+      title: "Bibliothèque",
+      description:
+        "Espace de lecture, d'inférences et de recherche documentaire pour apprendre à justifier une interprétation.",
+      discipline: "Français",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/lecture-strategique",
+      status: getPublicStatus("disponible"),
+    },
+    {
+      title: "Atelier des Mathématiques",
+      description:
+        "Lieu de défis, de calcul raisonné et de problèmes à plusieurs étapes.",
+      discipline: "Mathématiques",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/defis-mathematiques",
+      status: getPublicStatus("disponible"),
+    },
+    {
+      title: "Observatoire",
+      description:
+        "Point d'observation pour mesurer, comparer et formuler des hypothèses à partir d'indices.",
+      discipline: "Sciences",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/station-meteo-de-felix",
+      status: getPublicStatus("disponible"),
+    },
+    {
+      title: "Laboratoire",
+      description:
+        "Espace d'expérimentation pour organiser une démarche scientifique et garder une trace exploitable.",
+      discipline: "Sciences et technologie",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/laboratoire-scientifique",
+      status: getPublicStatus("en construction"),
+    },
+    {
+      title: "Salle Informatique",
+      description:
+        "Zone de production numérique, de recherche guidée et de prévention autour des usages en ligne.",
+      discipline: "EMC / Numérique",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/corps-relations-consentement-internet",
+      status: getPublicStatus("à venir"),
+    },
+    {
+      title: "Jardin",
+      description:
+        "Terrain d'observation du vivant, de carnets de traces et de projets liés à l'environnement.",
+      discipline: "Sciences / EDD",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/journal-des-traces-de-felix",
+      status: getPublicStatus("disponible"),
+    },
+    {
+      title: "Gymnase",
+      description:
+        "Lieu d'entraînement coopératif pour travailler le corps, la santé et l'entraide.",
+      discipline: "EPS / Santé",
+      professor: "Félix",
+      href: "/primaire/cm2/missions/defi-sante-et-cooperation",
+      status: getPublicStatus("à venir"),
+    },
+  ],
+};
+
 export const felixBadges: AcademyBadge[] = [
   {
     slug: "pisteur-des-sources",
@@ -218,8 +301,14 @@ export const felixBadges: AcademyBadge[] = [
   },
 ];
 
+/** @deprecated Utiliser "cartotheque-des-lisieres" (sans th). Alias temporaire pour compatibilité. */
+const SLUG_ALIASES: Record<string, string> = {
+  "carthotheque-des-lisieres": "cartotheque-des-lisieres",
+};
+
 export function getFelixPlaceBySlug(slug: string): AcademyPlace | undefined {
-  return felixPlaces.find((place) => place.slug === slug);
+  const canonical = SLUG_ALIASES[slug] ?? slug;
+  return felixPlaces.find((place) => place.slug === canonical);
 }
 
 export function getFelixBadgeBySlug(slug: string): AcademyBadge | undefined {

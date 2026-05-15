@@ -1,3 +1,5 @@
+import type { PublicStatus } from "@/content/public-status";
+
 // ── Référence aux programmes officiels ─────────────────────────────────────
 export type OfficialReference = {
   cycle: string;
@@ -66,6 +68,10 @@ export type AcademyPlace = {
   activities: string[];
   character: string;
   accentColor: "jade" | "gold" | "sky" | "ember";
+  /** Chemin relatif à /public, ex. "/images/academie-kerboeuf/lieux/primaire/observatoire.webp" */
+  image?: string;
+  /** Alt text pédagogique — décrit ce que montre l'image, pas le nom du lieu */
+  imageAlt?: string;
 };
 
 export type AcademyBadge = {
@@ -74,6 +80,27 @@ export type AcademyBadge = {
   description: string;
   gesture: string;
   color: "jade" | "gold" | "sky" | "ember";
+};
+
+export type PedagogicalImageZone = {
+  title: string;
+  description: string;
+  discipline: string;
+  professor: string;
+  href: string;
+  status: PublicStatus;
+};
+
+export type PedagogicalImageHero = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  zones: PedagogicalImageZone[];
 };
 
 export type MissionSkill = {
