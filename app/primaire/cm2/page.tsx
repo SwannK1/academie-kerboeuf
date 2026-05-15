@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Level, cm2Missions } from "@/content/cm2";
+import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
 
 export const metadata: Metadata = {
   title: "CM2 — La Grande Classe des Explorateurs | Académie Kerboeuf",
@@ -9,90 +10,14 @@ export const metadata: Metadata = {
     "Page niveau CM2 : matières, domaines et missions de la Grande Classe des Explorateurs, guidée par Félix le Lynx.",
 };
 
-// ── Types ──────────────────────────────────────────────────────────────────────
+// ── Données UI ─────────────────────────────────────────────────────────────────
 
-type Accent = "jade" | "gold" | "sky" | "ember";
-type SubjectStatus = "available" | "upcoming";
-
-type Cm2Subject = {
-  title: string;
-  promise: string;
-  domains: string[];
-  status: SubjectStatus;
-  accent: Accent;
-};
-
-// ── Données ────────────────────────────────────────────────────────────────────
-
-const ACCENT: Record<
-  Accent,
-  { text: string; border: string }
-> = {
+const ACCENT: Record<string, { text: string; border: string }> = {
   jade:  { text: "text-jade",  border: "border-jade/30"  },
   gold:  { text: "text-gold",  border: "border-gold/30"  },
   sky:   { text: "text-sky",   border: "border-sky/30"   },
   ember: { text: "text-ember", border: "border-ember/30" },
 };
-
-// Domaines issus du curriculum CM2 — missions disponibles vérifiées dans /content/cm2.ts
-const CM2_SUBJECTS: Cm2Subject[] = [
-  {
-    title: "Français",
-    promise: "Lire finement, écrire avec méthode, analyser la langue.",
-    domains: ["Lecture et compréhension", "Production d'écrit", "Étude de la langue"],
-    status: "available",
-    accent: "gold",
-  },
-  {
-    title: "Mathématiques",
-    promise: "Calculer avec stratégie, résoudre des défis, vérifier le résultat.",
-    domains: ["Calcul mental", "Résolution de problèmes"],
-    status: "available",
-    accent: "jade",
-  },
-  {
-    title: "Histoire-Géographie",
-    promise: "Lire des documents, situer dans le temps et dans l'espace.",
-    domains: ["Repères chronologiques", "Lecture de cartes et d'espaces"],
-    status: "available",
-    accent: "sky",
-  },
-  {
-    title: "Sciences et technologie",
-    promise: "Observer, formuler une hypothèse, comparer, conclure.",
-    domains: ["Démarche scientifique", "Observation et expérimentation"],
-    status: "available",
-    accent: "ember",
-  },
-  {
-    title: "EMC",
-    promise: "Argumenter, écouter, coopérer et exercer un jugement responsable.",
-    domains: ["Vie collective", "Jugement moral et civique"],
-    status: "upcoming",
-    accent: "sky",
-  },
-  {
-    title: "Anglais",
-    promise: "Comprendre et s'exprimer dans une langue vivante.",
-    domains: [],
-    status: "upcoming",
-    accent: "jade",
-  },
-  {
-    title: "Arts",
-    promise: "Créer une trace visuelle, observer et présenter un travail.",
-    domains: [],
-    status: "upcoming",
-    accent: "ember",
-  },
-  {
-    title: "EPS",
-    promise: "Coopérer, respecter une règle, stabiliser des repères corporels.",
-    domains: [],
-    status: "upcoming",
-    accent: "jade",
-  },
-];
 
 // ── Page ───────────────────────────────────────────────────────────────────────
 
@@ -149,21 +74,29 @@ export default function Cm2Page() {
       {/* ── Matières ──────────────────────────────────────────────────────── */}
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 border-b border-white/10 pb-6">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-              Programmes CM2
-            </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-              Les matières de la Grande Classe
-            </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-              Chaque matière est structurée en domaines et notions.
-              Les missions s&apos;y rattachent progressivement.
-            </p>
+          <div className="mb-8 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
+                Programmes CM2
+              </p>
+              <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+                Les matières de la Grande Classe
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
+                Chaque matière est structurée en domaines et notions.
+                Les missions s&apos;y rattachent progressivement.
+              </p>
+            </div>
+            <Link
+              href="/primaire/cm2/matieres"
+              className="shrink-0 rounded-md border border-jade/30 bg-jade/[0.05] px-4 py-2.5 text-sm font-bold text-jade transition hover:bg-jade/[0.09]"
+            >
+              Voir toutes les matières →
+            </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {CM2_SUBJECTS.map((subject) => (
-              <SubjectCard key={subject.title} subject={subject} />
+            {cm2Subjects.map((subject) => (
+              <SubjectCard key={subject.slug} subject={subject} />
             ))}
           </div>
         </div>
@@ -246,11 +179,12 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const isAvailable = subject.status === "available";
 
   return (
-    <article
-      className={`flex min-h-full flex-col rounded-md border p-5 ${
+    <Link
+      href={`/primaire/cm2/matieres/${subject.slug}`}
+      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${
         isAvailable
-          ? `${t.border} bg-white/[0.04]`
-          : "border-white/10 bg-white/[0.025]"
+          ? `${t.border} bg-white/[0.04] hover:bg-white/[0.07]`
+          : "border-white/10 bg-white/[0.025] hover:bg-white/[0.04]"
       }`}
     >
       <p
@@ -261,7 +195,7 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
         {subject.title}
       </p>
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-        {subject.promise}
+        {subject.shortDescription}
       </p>
 
       {subject.domains.length > 0 ? (
@@ -275,7 +209,7 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
         </ul>
       ) : null}
 
-      <div className="mt-4 border-t border-white/10 pt-3">
+      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
         <span
           className={`text-xs font-bold uppercase tracking-[0.12em] ${
             isAvailable ? t.text : "text-white/25"
@@ -283,7 +217,15 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
         >
           {isAvailable ? "Missions disponibles" : "À structurer"}
         </span>
+        <span
+          className={`text-xs transition group-hover:translate-x-0.5 ${
+            isAvailable ? t.text : "text-white/20"
+          }`}
+          aria-hidden="true"
+        >
+          →
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }
