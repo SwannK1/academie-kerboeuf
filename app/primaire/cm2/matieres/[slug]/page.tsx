@@ -3,10 +3,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getCm2MissionBySlug } from "@/content/cm2";
+import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import {
-  cm2Subjects,
-  getCm2SubjectBySlug,
-} from "@/content/cm2-subjects";
+  getCm2SubjectTree,
+  type Cm2DomainNode,
+  type Cm2SubdomainNode,
+} from "@/content/cm2-learning-tree";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -28,10 +30,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ── Helpers UI ────────────────────────────────────────────────────────────────
 
-const ACCENT: Record<
-  string,
-  { text: string; border: string; bg: string }
-> = {
+type AccentTokens = { text: string; border: string; bg: string };
+
+const ACCENT: Record<string, AccentTokens> = {
   jade:  { text: "text-jade",  border: "border-jade/30",  bg: "bg-jade/10"  },
   gold:  { text: "text-gold",  border: "border-gold/30",  bg: "bg-gold/10"  },
   sky:   { text: "text-sky",   border: "border-sky/30",   bg: "bg-sky/10"   },
@@ -49,6 +50,8 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
   const t = ACCENT[subject.accent];
   const isAvailable = subject.status === "available";
 
+  const tree = getCm2SubjectTree(slug);
+
   const linkedMissions = (subject.missionSlugs ?? [])
     .map((s) => getCm2MissionBySlug(s))
     .filter((m): m is NonNullable<typeof m> => m !== undefined);
@@ -59,10 +62,10 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
             items={[
-              { label: "Accueil",  href: "/"                         },
-              { label: "Primaire", href: "/primaire"                 },
-              { label: "CM2",      href: "/primaire/cm2"             },
-              { label: "Matières", href: "/primaire/cm2/matieres"   },
+              { label: "Accueil",  href: "/"                        },
+              { label: "Primaire", href: "/primaire"                },
+              { label: "CM2",      href: "/primaire/cm2"            },
+              { label: "Matières", href: "/primaire/cm2/matieres"  },
               { label: subject.title                                 },
             ]}
           />
@@ -74,9 +77,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.03),rgba(9,16,15,0.95))]" />
         <div className="mx-auto max-w-7xl">
-          <p
-            className={`inline-flex rounded-md border ${t.border} ${t.bg} px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}
-          >
+          <p className={`inline-flex rounded-md border ${t.border} ${t.bg} px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
             CM2 · Cycle 3
           </p>
           <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
@@ -85,40 +86,52 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
             {subject.shortDescription}
           </p>
+
+          {/* Lieu + guides */}
+          {tree && (
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className={`inline-flex items-center rounded-md border ${t.border} ${t.bg} px-3 py-1.5 text-xs font-bold ${t.text}`}>
+                {tree.place.label}
+              </span>
+              {tree.guides.map((guide) => (
+                <span
+                  key={guide.id}
+                  className="inline-flex items-center rounded-md border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-muted"
+                >
+                  {guide.name}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       {/* ── Contenu disponible ────────────────────────────────────────────── */}
       {isAvailable ? (
         <>
-          {/* Domaines */}
-          {subject.domains.length > 0 ? (
+          {/* Domaines + sous-domaines + leçons */}
+          {tree && tree.domains.length > 0 && (
             <section className="px-4 pb-14 sm:px-6 lg:px-8">
               <div className="mx-auto max-w-7xl">
-                <div className="mb-6 border-b border-white/10 pb-5">
+                <div className="mb-8 border-b border-white/10 pb-5">
                   <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
                     Structure
                   </p>
                   <h2 className="mt-2 text-2xl font-black text-foreground">
-                    Domaines travaillés
+                    Domaines et sous-domaines
                   </h2>
                 </div>
-                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {subject.domains.map((domain) => (
-                    <li
-                      key={domain}
-                      className={`rounded-md border ${t.border} ${t.bg} px-4 py-3 text-sm font-semibold text-foreground`}
-                    >
-                      {domain}
-                    </li>
+                <div className="space-y-5">
+                  {tree.domains.map((domain) => (
+                    <DomainBlock key={domain.id} domain={domain} t={t} />
                   ))}
-                </ul>
+                </div>
               </div>
             </section>
-          ) : null}
+          )}
 
           {/* Missions liées */}
-          {linkedMissions.length > 0 ? (
+          {linkedMissions.length > 0 && (
             <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
               <div className="mx-auto max-w-7xl">
                 <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
@@ -144,9 +157,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                       href={`/primaire/cm2/missions/${mission.slug}`}
                       className={`group flex flex-col rounded-md border ${mission.theme.ringClass ?? "border-white/10"} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
                     >
-                      <p
-                        className={`text-xs font-bold uppercase tracking-[0.18em] ${mission.theme.textClass}`}
-                      >
+                      <p className={`text-xs font-bold uppercase tracking-[0.18em] ${mission.theme.textClass}`}>
                         {mission.subject}
                       </p>
                       <h3 className="mt-3 text-lg font-black text-foreground">
@@ -155,9 +166,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                       <p className="mt-2 flex-1 text-sm leading-6 text-muted">
                         {mission.objective}
                       </p>
-                      <span
-                        className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${mission.theme.textClass}`}
-                      >
+                      <span className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${mission.theme.textClass}`}>
                         Ouvrir la mission →
                       </span>
                     </Link>
@@ -165,10 +174,10 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                 </div>
               </div>
             </section>
-          ) : null}
+          )}
 
           {/* Focus enseignant */}
-          {subject.teacherFocus ? (
+          {subject.teacherFocus && (
             <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
               <div className="mx-auto max-w-7xl">
                 <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
@@ -181,7 +190,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                 </div>
               </div>
             </section>
-          ) : null}
+          )}
         </>
       ) : (
         /* ── Matière à structurer ─────────────────────────────────────────── */
@@ -195,18 +204,29 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                 Les domaines, notions et missions pour cette matière sont en
                 cours de construction dans l&apos;Académie Kerboeuf.
               </p>
-              {subject.domains.length > 0 ? (
+
+              {/* Aperçu de l'arbre même pour les matières à venir */}
+              {tree && tree.domains.length > 0 && (
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {subject.domains.map((domain) => (
+                  {tree.domains.map((domain) => (
                     <li
-                      key={domain}
-                      className="rounded border border-white/10 bg-ink/30 px-4 py-3 text-sm text-muted"
+                      key={domain.id}
+                      className="rounded border border-white/10 bg-ink/30 px-4 py-3"
                     >
-                      {domain}
+                      <p className="text-sm font-semibold text-muted">{domain.title}</p>
+                      {domain.subdomains.length > 0 && (
+                        <ul className="mt-2 space-y-1">
+                          {domain.subdomains.map((sub) => (
+                            <li key={sub.id} className="text-xs text-white/35">
+                              · {sub.title}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>
-              ) : null}
+              )}
             </div>
           </div>
         </section>
@@ -241,5 +261,61 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
         </div>
       </section>
     </main>
+  );
+}
+
+// ── Composants ────────────────────────────────────────────────────────────────
+
+function DomainBlock({ domain, t }: { domain: Cm2DomainNode; t: AccentTokens }) {
+  return (
+    <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
+            Domaine
+          </p>
+          <h3 className="mt-1 text-lg font-black text-foreground">{domain.title}</h3>
+          {domain.place?.zone && (
+            <p className="mt-1 text-xs text-muted">
+              Zone · {domain.place.zone}
+            </p>
+          )}
+        </div>
+        <span className="shrink-0 rounded border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-white/35">
+          {domain.subdomains.length}&nbsp;sous-domaine{domain.subdomains.length > 1 ? "s" : ""}
+        </span>
+      </div>
+
+      {domain.subdomains.length > 0 && (
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {domain.subdomains.map((sub) => (
+            <SubdomainItem key={sub.id} subdomain={sub} />
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function SubdomainItem({ subdomain }: { subdomain: Cm2SubdomainNode }) {
+  return (
+    <li className="rounded border border-white/10 bg-white/[0.03] px-3 py-3">
+      <p className="text-sm font-semibold text-foreground">{subdomain.title}</p>
+      {subdomain.lessons.length > 0 ? (
+        <ul className="mt-2 space-y-1">
+          {subdomain.lessons.map((lesson) => (
+            <li key={lesson.id} className="flex items-baseline gap-2 text-xs text-muted">
+              <span className="shrink-0 text-white/25" aria-hidden="true">·</span>
+              <span className="flex-1">{lesson.title}</span>
+              <span className="shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[10px] text-white/25">
+                à venir
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-1 text-xs text-white/30">À structurer</p>
+      )}
+    </li>
   );
 }
