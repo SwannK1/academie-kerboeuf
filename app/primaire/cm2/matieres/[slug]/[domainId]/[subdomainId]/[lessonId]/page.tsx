@@ -9,6 +9,7 @@ import {
   getCm2LessonByRouteSlug,
   getCm2SubdomainById,
 } from "@/content/cm2-learning-tree";
+import { CM2_ACCENT } from "@/lib/cm2-accent";
 
 type PageProps = {
   params: Promise<{
@@ -49,6 +50,7 @@ type LessonExample = { label: string; text: string; inference: string };
 type LessonContent = {
   intro: string;
   retiens: LessonSection[];
+  examplesTitle: string;
   exemples: LessonExample[];
   entrainement: string[];
 };
@@ -71,6 +73,7 @@ const LESSON_CONTENT: Record<string, LessonContent> = {
         body: "On repère l'indice, on réfléchit à ce qu'il suggère, puis on relie plusieurs indices ensemble pour déduire une information. C'est comme une enquête !",
       },
     ],
+    examplesTitle: "Comment repérer les indices ?",
     exemples: [
       {
         label: "Exemple 1",
@@ -93,17 +96,6 @@ const LESSON_CONTENT: Record<string, LessonContent> = {
   },
 };
 
-// ── Accent helpers ────────────────────────────────────────────────────────────
-
-type AccentTokens = { text: string; border: string; bg: string };
-
-const ACCENT: Record<string, AccentTokens> = {
-  jade:  { text: "text-jade",  border: "border-jade/30",  bg: "bg-jade/10"  },
-  gold:  { text: "text-gold",  border: "border-gold/30",  bg: "bg-gold/10"  },
-  sky:   { text: "text-sky",   border: "border-sky/30",   bg: "bg-sky/10"   },
-  ember: { text: "text-ember", border: "border-ember/30", bg: "bg-ember/10" },
-};
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function Cm2LessonPage({ params }: PageProps) {
@@ -118,7 +110,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
   const domain = getCm2DomainById(slug, domainId);
   const subdomain = getCm2SubdomainById(slug, domainId, subdomainId);
 
-  const t = ACCENT[subject.accent] ?? ACCENT.gold;
+  const t = CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold;
   const content = LESSON_CONTENT[lessonId];
 
   const subjectHref = `/primaire/cm2/matieres/${slug}`;
@@ -206,7 +198,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
                   Exemple guidé
                 </p>
                 <h2 className="mt-2 text-2xl font-black text-foreground">
-                  Comment repérer les indices ?
+                  {content.examplesTitle}
                 </h2>
               </div>
               <div className="space-y-4">
@@ -242,7 +234,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
               <ol className="space-y-3">
                 {content.entrainement.map((step, i) => (
                   <li
-                    key={i}
+                    key={step}
                     className="flex gap-4 rounded-md border border-white/10 bg-white/[0.025] p-4"
                   >
                     <span className={`shrink-0 text-xl font-black ${t.text}`}>

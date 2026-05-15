@@ -9,6 +9,7 @@ import {
   type Cm2DomainNode,
   type Cm2SubdomainNode,
 } from "@/content/cm2-learning-tree";
+import { type AccentTokens, CM2_ACCENT } from "@/lib/cm2-accent";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -30,15 +31,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ── Helpers UI ────────────────────────────────────────────────────────────────
 
-type AccentTokens = { text: string; border: string; bg: string };
-
-const ACCENT: Record<string, AccentTokens> = {
-  jade:  { text: "text-jade",  border: "border-jade/30",  bg: "bg-jade/10"  },
-  gold:  { text: "text-gold",  border: "border-gold/30",  bg: "bg-gold/10"  },
-  sky:   { text: "text-sky",   border: "border-sky/30",   bg: "bg-sky/10"   },
-  ember: { text: "text-ember", border: "border-ember/30", bg: "bg-ember/10" },
-};
-
 // ── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function Cm2SubjectPage({ params }: PageProps) {
@@ -47,7 +39,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
 
   if (!subject) notFound();
 
-  const t = ACCENT[subject.accent];
+  const t = CM2_ACCENT[subject.accent];
   const isAvailable = subject.status === "available";
 
   const tree = getCm2SubjectTree(slug);
