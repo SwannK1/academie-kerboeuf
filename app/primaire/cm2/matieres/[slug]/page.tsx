@@ -123,7 +123,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                 </div>
                 <div className="space-y-5">
                   {tree.domains.map((domain) => (
-                    <DomainBlock key={domain.id} domain={domain} t={t} />
+                    <DomainBlock key={domain.id} domain={domain} t={t} subjectSlug={slug} />
                   ))}
                 </div>
               </div>
@@ -266,7 +266,15 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
 
 // ── Composants ────────────────────────────────────────────────────────────────
 
-function DomainBlock({ domain, t }: { domain: Cm2DomainNode; t: AccentTokens }) {
+function DomainBlock({
+  domain,
+  t,
+  subjectSlug,
+}: {
+  domain: Cm2DomainNode;
+  t: AccentTokens;
+  subjectSlug: string;
+}) {
   return (
     <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
       <div className="flex items-start justify-between gap-4">
@@ -289,7 +297,12 @@ function DomainBlock({ domain, t }: { domain: Cm2DomainNode; t: AccentTokens }) 
       {domain.subdomains.length > 0 && (
         <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {domain.subdomains.map((sub) => (
-            <SubdomainItem key={sub.id} subdomain={sub} />
+            <SubdomainItem
+              key={sub.id}
+              subdomain={sub}
+              subjectSlug={subjectSlug}
+              domainId={domain.id}
+            />
           ))}
         </ul>
       )}
@@ -297,21 +310,45 @@ function DomainBlock({ domain, t }: { domain: Cm2DomainNode; t: AccentTokens }) 
   );
 }
 
-function SubdomainItem({ subdomain }: { subdomain: Cm2SubdomainNode }) {
+function SubdomainItem({
+  subdomain,
+  subjectSlug,
+  domainId,
+}: {
+  subdomain: Cm2SubdomainNode;
+  subjectSlug: string;
+  domainId: string;
+}) {
   return (
     <li className="rounded border border-white/10 bg-white/[0.03] px-3 py-3">
       <p className="text-sm font-semibold text-foreground">{subdomain.title}</p>
       {subdomain.lessons.length > 0 ? (
         <ul className="mt-2 space-y-1">
-          {subdomain.lessons.map((lesson) => (
-            <li key={lesson.id} className="flex items-baseline gap-2 text-xs text-muted">
-              <span className="shrink-0 text-white/25" aria-hidden="true">·</span>
-              <span className="flex-1">{lesson.title}</span>
-              <span className="shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[10px] text-white/25">
-                à venir
-              </span>
-            </li>
-          ))}
+          {subdomain.lessons.map((lesson) => {
+            const lessonHref = lesson.routeSlug
+              ? `/primaire/cm2/matieres/${subjectSlug}/${domainId}/${subdomain.id}/${lesson.routeSlug}`
+              : null;
+            return (
+              <li key={lesson.id} className="flex items-baseline gap-2 text-xs text-muted">
+                <span className="shrink-0 text-white/25" aria-hidden="true">·</span>
+                {lessonHref ? (
+                  <Link
+                    href={lessonHref}
+                    className="flex-1 font-semibold text-foreground transition hover:underline"
+                  >
+                    {lesson.title}
+                  </Link>
+                ) : (
+                  <span className="flex-1">{lesson.title}</span>
+                )}
+                {!lessonHref && (
+                  <span className="shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[10px] text-white/25">
+                    à venir
+                  </span>
+                )}
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <p className="mt-1 text-xs text-white/30">À structurer</p>

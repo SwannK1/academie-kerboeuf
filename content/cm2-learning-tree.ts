@@ -40,6 +40,8 @@ export type Cm2LessonNode = {
   title: string;
   description?: string;
   status: Cm2LearningStatus;
+  /** When defined, this lesson has a routed page at `…/[lessonId]` using this slug. */
+  routeSlug?: string;
   resources: Cm2LessonResource[];
   linkedMissionSlugs?: string[];
 };
@@ -110,6 +112,7 @@ export const cm2LearningTree: Cm2LearningTree = [
                 id: "francais-lecture-inferences-reperer",
                 title: "Repérer les indices dans le texte",
                 status: "upcoming",
+                routeSlug: "reperer-les-indices",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
                   { type: "exercise",   label: "Exercices",  status: "upcoming" },
@@ -883,15 +886,31 @@ export function getAllCm2LessonPaths(): Cm2LessonPath[] {
     for (const domain of subject.domains) {
       for (const subdomain of domain.subdomains) {
         for (const lesson of subdomain.lessons) {
+          if (!lesson.routeSlug) continue;
           paths.push({
             subjectSlug: subject.subjectSlug,
             domainId: domain.id,
             subdomainId: subdomain.id,
-            lessonId: lesson.id,
+            lessonId: lesson.routeSlug,
           });
         }
       }
     }
   }
   return paths;
+}
+
+export function getCm2LessonByRouteSlug(
+  subjectSlug: string,
+  domainId: string,
+  subdomainId: string,
+  routeSlug: string,
+): Cm2LessonNode | undefined {
+  const subject = cm2LearningTree.find((s) => s.subjectSlug === subjectSlug);
+  if (!subject) return undefined;
+  const domain = subject.domains.find((d) => d.id === domainId);
+  if (!domain) return undefined;
+  const subdomain = domain.subdomains.find((sd) => sd.id === subdomainId);
+  if (!subdomain) return undefined;
+  return subdomain.lessons.find((l) => l.routeSlug === routeSlug);
 }
