@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LevelStudentSpotlight } from "@/components/academy/level-student-spotlight";
+import { PedagogicalImageHero } from "@/components/academy/interactive-image-map";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Badge } from "@/components/cm2/badge";
 import { BadgeGrid } from "@/components/cm2/badge-grid";
@@ -11,7 +12,12 @@ import { SectionHeader } from "@/components/cm2/section-header";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Level, cm2Missions, type Cm2Mission } from "@/content/cm2";
 import { getCurriculumLevel } from "@/content/curriculum";
-import { felixCharacter, felixPlaces, felixBadges } from "@/content/felix-character";
+import {
+  courDesExplorateursHero,
+  felixCharacter,
+  felixPlaces,
+  felixBadges,
+} from "@/content/felix-character";
 import { felixProjects } from "@/content/felix-missions";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
@@ -35,7 +41,7 @@ export default function Cm2Page() {
   );
 
   return (
-    <main>
+    <main className="cm2-catalog-print">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -48,7 +54,7 @@ export default function Cm2Page() {
         </div>
       </div>
 
-      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+      <section className="cm2-print-hero relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(243,196,91,0.17),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.12),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
@@ -108,11 +114,15 @@ export default function Cm2Page() {
         </div>
       </section>
 
-      {student ? <LevelStudentSpotlight student={student} /> : null}
+      {student ? (
+        <div className="cm2-print-hide">
+          <LevelStudentSpotlight student={student} />
+        </div>
+      ) : null}
 
       {curriculum ? (
         <>
-          <section className="px-4 py-14 sm:px-6 lg:px-8">
+          <section className="cm2-print-section px-4 py-14 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
               <SectionHeader
                 eyebrow="Domaines travaillés"
@@ -127,7 +137,7 @@ export default function Cm2Page() {
             </div>
           </section>
 
-          <section className="px-4 pb-14 sm:px-6 lg:px-8">
+          <section className="cm2-print-section px-4 pb-14 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
               <SectionHeader
                 eyebrow="Compétences principales"
@@ -149,12 +159,14 @@ export default function Cm2Page() {
       ) : null}
 
       {/* Félix le lynx — section narrative */}
-      <div className="border-t border-white/10">
+      <div className="cm2-print-hide border-t border-white/10">
         <CharacterHero character={felixCharacter} accentColor="jade" />
       </div>
 
+      <PedagogicalImageHero {...courDesExplorateursHero} />
+
       {/* Badges */}
-      <section className="px-4 pb-14 sm:px-6 lg:px-8" aria-labelledby="badges-title">
+      <section className="cm2-print-hide px-4 pb-14 sm:px-6 lg:px-8" aria-labelledby="badges-title">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 border-b border-white/10 pb-6">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-jade">
@@ -172,7 +184,7 @@ export default function Cm2Page() {
       </section>
 
       {/* Lieux narratifs */}
-      <section className="px-4 pb-14 sm:px-6 lg:px-8" aria-labelledby="places-title">
+      <section className="cm2-print-hide px-4 pb-14 sm:px-6 lg:px-8" aria-labelledby="places-title">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 border-b border-white/10 pb-6">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky">
@@ -194,7 +206,7 @@ export default function Cm2Page() {
       </section>
 
       {/* Projets CM2 enrichis */}
-      <section className="px-4 pb-14 sm:px-6 lg:px-8" aria-labelledby="projects-title">
+      <section className="cm2-print-section px-4 pb-14 sm:px-6 lg:px-8" aria-labelledby="projects-title">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-6 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
             <div>
@@ -240,7 +252,7 @@ export default function Cm2Page() {
         </div>
       </section>
 
-      <section className="px-4 pb-14 sm:px-6 lg:px-8">
+      <section className="cm2-print-section px-4 pb-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-6 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
             <SectionHeader
@@ -271,7 +283,7 @@ export default function Cm2Page() {
       </section>
 
       {cm2Path ? (
-        <section className="px-4 pb-14 sm:px-6 lg:px-8">
+        <section className="cm2-print-section px-4 pb-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="rounded-md border border-gold/20 bg-gold/[0.055] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
@@ -326,7 +338,7 @@ export default function Cm2Page() {
       ) : null}
 
       {curriculum ? (
-        <section className="px-4 pb-20 sm:px-6 lg:px-8">
+        <section className="cm2-print-hide px-4 pb-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

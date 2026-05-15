@@ -297,4 +297,118 @@ a {
   .mission-detail-page [class*="blur-"] {
     display: none !important;
   }
+
+  /* ── CM2 catalog pages: sober direct printing ── */
+  .cm2-catalog-print,
+  .cm2-catalog-print section {
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .cm2-catalog-print,
+  .cm2-catalog-print * {
+    color: #111111 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  .cm2-catalog-print nav,
+  .cm2-catalog-print .cm2-print-hide,
+  .cm2-catalog-print .mission-grid,
+  .cm2-catalog-print .absolute,
+  .cm2-catalog-print [class*="shadow-"],
+  .cm2-catalog-print [class*="blur-"] {
+    display: none !important;
+  }
+
+  .cm2-catalog-print > div:first-child {
+    display: none !important;
+  }
+
+  .cm2-catalog-print section,
+  .cm2-catalog-print .cm2-print-section,
+  .cm2-catalog-print .cm2-print-hero {
+    padding: 0 0 8mm !important;
+    margin: 0 !important;
+  }
+
+  .cm2-catalog-print section > div,
+  .cm2-catalog-print .cm2-print-section > div,
+  .cm2-catalog-print .cm2-print-hero > div {
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .cm2-catalog-print .grid,
+  .cm2-catalog-print .flex {
+    display: block !important;
+  }
+
+  .cm2-catalog-print h1 {
+    font-size: 24pt !important;
+    line-height: 1.08 !important;
+    margin: 0 0 5mm !important;
+  }
+
+  .cm2-catalog-print h2 {
+    font-size: 16pt !important;
+    line-height: 1.2 !important;
+    margin-top: 0 !important;
+  }
+
+  .cm2-catalog-print h3,
+  .cm2-catalog-print h4 {
+    font-size: 12pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .cm2-catalog-print p,
+  .cm2-catalog-print li,
+  .cm2-catalog-print dd,
+  .cm2-catalog-print span {
+    font-size: 9.5pt !important;
+    line-height: 1.45 !important;
+  }
+
+  .cm2-catalog-print a {
+    text-decoration: none !important;
+  }
+
+  .cm2-catalog-print a,
+  .cm2-catalog-print article,
+  .cm2-catalog-print aside,
+  .cm2-catalog-print [class*="rounded"] {
+    background: #ffffff !important;
+    border-color: #cfcfcf !important;
+  }
+
+  .cm2-catalog-print a,
+  .cm2-catalog-print article,
+  .cm2-catalog-print aside {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 6pt !important;
+  }
+
+  .cm2-catalog-print .cm2-print-section a,
+  .cm2-catalog-print .cm2-print-section article {
+    padding: 7pt !important;
+  }
+
+  .cm2-catalog-print [class*="border-b"],
+  .cm2-catalog-print [class*="border-t"] {
+    border-color: #cfcfcf !important;
+  }
+
+  .cm2-catalog-print [class*="translate"],
+  .cm2-catalog-print [class*="transition"] {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cm2-catalog-print [class*="line-clamp"] {
+    display: block !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+  }
 }
