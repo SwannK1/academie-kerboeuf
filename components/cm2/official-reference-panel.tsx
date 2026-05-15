@@ -31,9 +31,9 @@ export function OfficialReferencePanel({
 
   return (
     <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+      <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         Ancrages officiels
-      </p>
+      </h2>
 
       {officialReference ? (
         <div className="mt-4">
@@ -50,21 +50,21 @@ export function OfficialReferencePanel({
           </div>
 
           {officialReference.programReference ? (
-            <p className="mt-3 text-xs leading-5 text-muted">
+            <p className="mt-3 text-sm leading-6 text-muted">
               {officialReference.programReference}
             </p>
           ) : null}
 
           {officialReference.competencyItems.length > 0 ? (
             <div className="mt-4">
-              <p className="text-xs font-bold text-foreground">
+              <h3 className="text-sm font-bold text-foreground">
                 Compétences du socle
-              </p>
+              </h3>
               <ul className="mt-2 space-y-1">
                 {officialReference.competencyItems.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2 text-xs leading-5 text-muted"
+                    className="flex items-start gap-2 text-sm leading-6 text-muted"
                   >
                     <span
                       className="mt-1.5 size-1 shrink-0 rounded-full bg-jade/60"
@@ -81,20 +81,20 @@ export function OfficialReferencePanel({
 
       {lsuLinks && lsuLinks.length > 0 ? (
         <div className="mt-5 border-t border-white/10 pt-4">
-          <p className="text-xs font-bold text-foreground">
+          <h3 className="text-sm font-bold text-foreground">
             Livret Scolaire Unique (LSU)
-          </p>
+          </h3>
           <div className="mt-3 space-y-4">
             {lsuLinks.map((domain) => (
               <div key={domain.domain}>
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
+                <h4 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
                   {domain.domain}
-                </p>
+                </h4>
                 <ul className="mt-1 space-y-1">
                   {domain.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2 text-xs leading-5 text-muted"
+                      className="flex items-start gap-2 text-sm leading-6 text-muted"
                     >
                       <span
                         className="mt-1.5 size-1 shrink-0 rounded-full bg-white/25"
@@ -112,7 +112,7 @@ export function OfficialReferencePanel({
 
       {crossCurricular && crossCurricular.length > 0 ? (
         <div className="mt-5 border-t border-white/10 pt-4">
-          <p className="text-xs font-bold text-foreground">Liens transversaux</p>
+          <h3 className="text-sm font-bold text-foreground">Liens transversaux</h3>
           <div className="mt-3 space-y-3">
             {crossCurricular.map((link) => (
               <div key={link.framework} className="flex items-start gap-3">
@@ -121,7 +121,7 @@ export function OfficialReferencePanel({
                 >
                   {link.framework}
                 </span>
-                <p className="text-xs leading-5 text-muted">{link.description}</p>
+                <p className="text-sm leading-6 text-muted">{link.description}</p>
               </div>
             ))}
           </div>

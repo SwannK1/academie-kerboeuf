@@ -28,9 +28,9 @@ const tiers = [
 export function DifferentiationPanel({ differentiation }: DifferentiationPanelProps) {
   return (
     <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
+      <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
         Différenciation
-      </p>
+      </h2>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-3">
         {tiers.map((tier) => {
@@ -40,11 +40,11 @@ export function DifferentiationPanel({ differentiation }: DifferentiationPanelPr
               key={tier.key}
               className="rounded border border-white/10 bg-ink/35 p-4"
             >
-              <span
+              <h3
                 className={`inline-flex rounded border px-2 py-0.5 text-xs font-bold uppercase tracking-[0.12em] ${tier.color}`}
               >
                 {tier.label}
-              </span>
+              </h3>
               <p className="mt-3 text-xs leading-6 text-muted">{data.description}</p>
               <ul className="mt-3 space-y-1" aria-label={`Supports — ${tier.label}`}>
                 {data.supports.map((support) => (

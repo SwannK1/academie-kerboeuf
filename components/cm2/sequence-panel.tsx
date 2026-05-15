@@ -20,9 +20,9 @@ export function SequencePanel({ sequence }: Props) {
   return (
     <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
       <div className="flex items-baseline gap-3">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+        <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
           Séquence de séances
-        </p>
+        </h2>
         <span className="text-xs font-bold text-foreground">
           {sequence.length} séance{sequence.length > 1 ? "s" : ""}
         </span>
@@ -44,9 +44,9 @@ export function SequencePanel({ sequence }: Props) {
               </span>
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-bold text-foreground">
+                  <h3 className="text-sm font-bold text-foreground">
                     {step.title}
-                  </p>
+                  </h3>
                   <span
                     className={`rounded border px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] ${config.color}`}
                   >
@@ -56,7 +56,7 @@ export function SequencePanel({ sequence }: Props) {
                     {step.duration}
                   </span>
                 </div>
-                <p className="mt-1 text-xs leading-5 text-muted">
+                <p className="mt-1 text-sm leading-6 text-muted">
                   {step.description}
                 </p>
               </div>

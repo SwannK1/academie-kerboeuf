@@ -27,9 +27,9 @@ export function AssessmentPanel({
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
         <div className="flex items-center gap-3">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+          <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
             Évaluation
-          </p>
+          </h2>
           <span
             className={`rounded border px-2 py-0.5 text-xs font-bold uppercase tracking-[0.12em] ${typeInfo.color}`}
           >
@@ -37,14 +37,14 @@ export function AssessmentPanel({
           </span>
         </div>
 
-        <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-foreground">
+        <h3 className="mt-4 text-sm font-bold uppercase tracking-[0.16em] text-foreground">
           Critères
-        </p>
+        </h3>
         <ul className="mt-2 space-y-2" aria-label="Critères d'évaluation">
           {assessment.criteria.map((criterion) => (
             <li
               key={criterion}
-              className="rounded border border-white/10 bg-ink/35 p-2 text-xs leading-6 text-muted"
+              className="rounded border border-white/10 bg-ink/35 p-2 text-sm leading-6 text-muted"
             >
               {criterion}
             </li>
@@ -53,12 +53,12 @@ export function AssessmentPanel({
 
         {assessment.selfEvaluation && assessment.selfEvaluation.length > 0 ? (
           <>
-            <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-foreground">
+            <h3 className="mt-4 text-sm font-bold uppercase tracking-[0.16em] text-foreground">
               Auto-évaluation élève
-            </p>
+            </h3>
             <ul className="mt-2 space-y-2" aria-label="Auto-évaluation">
               {assessment.selfEvaluation.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-xs text-muted">
+                <li key={item} className="flex items-start gap-2 text-sm leading-6 text-muted">
                   <span className="mt-1.5 size-1.5 shrink-0 rounded-sm border border-white/30" aria-hidden="true" />
                   {item}
                 </li>
@@ -70,9 +70,9 @@ export function AssessmentPanel({
 
       <div className="space-y-4">
         <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+          <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
             Critères de réussite
-          </p>
+          </h2>
           <ul className="mt-3 space-y-2" aria-label="Critères de réussite">
             {successCriteria.map((criterion, index) => (
               <li key={index} className="flex items-start gap-3">
@@ -86,17 +86,17 @@ export function AssessmentPanel({
         </div>
 
         <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+          <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
             Restitution
-          </p>
+          </h2>
           <div className="mt-3 space-y-3">
             <div>
-              <p className="text-xs font-bold text-foreground">Pour les familles</p>
-              <p className="mt-1 text-xs leading-6 text-muted">{restitution.family}</p>
+              <h3 className="text-sm font-bold text-foreground">Pour les familles</h3>
+              <p className="mt-1 text-sm leading-6 text-muted">{restitution.family}</p>
             </div>
             <div className="border-t border-white/10 pt-3">
-              <p className="text-xs font-bold text-foreground">Pour l&apos;enseignant</p>
-              <p className="mt-1 text-xs leading-6 text-muted">{restitution.teacher}</p>
+              <h3 className="text-sm font-bold text-foreground">Pour l&apos;enseignant</h3>
+              <p className="mt-1 text-sm leading-6 text-muted">{restitution.teacher}</p>
             </div>
           </div>
         </div>

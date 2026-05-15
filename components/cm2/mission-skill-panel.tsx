@@ -28,9 +28,9 @@ export function MissionSkillPanel({ skills, evidence }: MissionSkillPanelProps) 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
+        <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
           Compétences travaillées
-        </p>
+        </h2>
         <ul className="mt-4 space-y-3" aria-label="Compétences">
           {skills.map((skill) => {
             const badgeClass =
@@ -38,7 +38,7 @@ export function MissionSkillPanel({ skills, evidence }: MissionSkillPanelProps) 
             return (
               <li key={skill.id} className="rounded border border-white/10 bg-ink/35 p-3">
                 <div className="flex items-start justify-between gap-3">
-                  <p className="font-bold text-foreground text-sm">{skill.label}</p>
+                  <h3 className="font-bold text-foreground text-sm">{skill.label}</h3>
                   <span
                     className={`shrink-0 rounded border px-2 py-0.5 text-xs font-bold uppercase tracking-[0.12em] ${badgeClass}`}
                   >
@@ -53,9 +53,9 @@ export function MissionSkillPanel({ skills, evidence }: MissionSkillPanelProps) 
       </div>
 
       <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+        <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
           Preuves attendues
-        </p>
+        </h2>
         <ul className="mt-4 space-y-3" aria-label="Preuves attendues">
           {evidence.map((item, index) => (
             <li

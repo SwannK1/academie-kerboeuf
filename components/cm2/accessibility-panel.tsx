@@ -30,32 +30,32 @@ export function AccessibilityPanel({ accessibility }: Props) {
 
   return (
     <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+      <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         Aides pédagogiques
-      </p>
+      </h2>
 
       <div className="mt-4 divide-y divide-white/10">
         {sections.map((section) => (
           <div key={section.label} className="py-4 first:pt-0">
-            <p
-              className={`text-xs font-bold uppercase tracking-[0.12em] ${section.color}`}
+            <h3
+              className={`text-sm font-bold uppercase tracking-[0.12em] ${section.color}`}
             >
               {section.label}
-            </p>
-            <p className="mt-1 text-xs leading-5 text-muted">{section.text}</p>
+            </h3>
+            <p className="mt-1 text-sm leading-6 text-muted">{section.text}</p>
           </div>
         ))}
 
         {hasGeneral ? (
           <div className="py-4 first:pt-0 last:pb-0">
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
+            <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
               Aménagements généraux
-            </p>
+            </h3>
             <ul className="mt-2 space-y-1">
               {accessibility.general!.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-2 text-xs leading-5 text-muted"
+                  className="flex items-start gap-2 text-sm leading-6 text-muted"
                 >
                   <span
                     className="mt-1.5 size-1 shrink-0 rounded-full bg-white/30"
