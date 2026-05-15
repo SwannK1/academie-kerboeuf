@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { cm2Missions } from "@/content/cm2";
 import { cm2Subjects } from "@/content/cm2-subjects";
+import { getAllCm2LessonPaths } from "@/content/cm2-learning-tree";
 import { felixProjects } from "@/content/felix-missions";
 import { learningPaths } from "@/content/learning-paths";
 import { getElementaryPedagogicalPlaces } from "@/content/pedagogical-places";
@@ -16,6 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cm2MissionRoutes = [...cm2Missions, ...felixProjects].map((mission) => ({
     url: `${BASE_URL}/primaire/cm2/missions/${mission.slug}`,
     priority: 0.6,
+  }));
+  const cm2LessonRoutes = getAllCm2LessonPaths().map((p) => ({
+    url: `${BASE_URL}/primaire/cm2/matieres/${p.subjectSlug}/${p.domainId}/${p.subdomainId}/${p.lessonId}`,
+    priority: 0.55,
   }));
   const cm2LearningPathRoutes = learningPaths
     .filter((path) => path.levelSlug === "cm2")
@@ -40,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/primaire/cm2/missions`, priority: 0.7 },
     { url: `${BASE_URL}/primaire/cm2/matieres`, priority: 0.7 },
     ...cm2SubjectRoutes,
+    ...cm2LessonRoutes,
     { url: `${BASE_URL}/primaire/cm2/parcours`, priority: 0.6 },
     ...cm2MissionRoutes,
     ...cm2LearningPathRoutes,
