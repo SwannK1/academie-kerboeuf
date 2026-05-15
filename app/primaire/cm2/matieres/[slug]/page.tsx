@@ -39,7 +39,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
 
   if (!subject) notFound();
 
-  const t = CM2_ACCENT[subject.accent];
+  const t = CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold;
   const isAvailable = subject.status === "available";
 
   const tree = getCm2SubjectTree(slug);

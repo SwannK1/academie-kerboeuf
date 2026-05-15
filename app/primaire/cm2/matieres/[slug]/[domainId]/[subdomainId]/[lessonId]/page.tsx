@@ -109,6 +109,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
 
   const domain = getCm2DomainById(slug, domainId);
   const subdomain = getCm2SubdomainById(slug, domainId, subdomainId);
+  if (!domain || !subdomain) notFound();
 
   const t = CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold;
   const content = LESSON_CONTENT[lessonId];
@@ -234,7 +235,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
               <ol className="space-y-3">
                 {content.entrainement.map((step, i) => (
                   <li
-                    key={step}
+                    key={`${lessonId}-${i}`}
                     className="flex gap-4 rounded-md border border-white/10 bg-white/[0.025] p-4"
                   >
                     <span className={`shrink-0 text-xl font-black ${t.text}`}>
