@@ -8,7 +8,6 @@ import {
   getCm2DomainById,
   getCm2LessonByRouteSlug,
   getCm2SubdomainById,
-  type Cm2LessonNode,
 } from "@/content/cm2-learning-tree";
 
 type PageProps = {
