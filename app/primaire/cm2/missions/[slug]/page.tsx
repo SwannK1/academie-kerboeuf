@@ -9,6 +9,7 @@ import { DifferentiationPanel } from "@/components/cm2/differentiation-panel";
 import { MissionSkillPanel } from "@/components/cm2/mission-skill-panel";
 import { OfficialReferencePanel } from "@/components/cm2/official-reference-panel";
 import { SequencePanel } from "@/components/cm2/sequence-panel";
+import { StudentProjectSheet } from "@/components/cm2/student-project-sheet";
 import { CurriculumLinkPanel } from "@/components/missions/curriculum-link-panel";
 import { DetailPanel } from "@/components/missions/detail-panel";
 import { MissionLearningFlow } from "@/components/missions/mission-learning-flow";
@@ -17,6 +18,7 @@ import { PrintBodyClass } from "@/components/print/print-body-class";
 import { cm2Missions, getCm2MissionBySlug } from "@/content/cm2";
 import { getFelixBadgesBySlugs, getFelixPlaceBySlug } from "@/content/felix-character";
 import { felixProjects, getFelixProjectBySlug } from "@/content/felix-missions";
+import type { MissionEvidence } from "@/content/felix-types";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getPublicStatusLabel } from "@/content/public-status";
 
@@ -62,16 +64,16 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
   if (felixProject) {
     const place = getFelixPlaceBySlug(felixProject.associatedPlace);
     const badges = getFelixBadgesBySlugs(felixProject.associatedBadges);
-
-    const qualityStatusStyle: Record<string, string> = {
-      validée: "border-jade/30 bg-jade/10 text-jade",
-      "en relecture": "border-gold/30 bg-gold/10 text-gold",
-      prototype: "border-sky/30 bg-sky/10 text-sky",
-      brouillon: "border-ember/30 bg-ember/10 text-ember",
-    };
+    const hasInstitutionalContent = Boolean(
+      (felixProject.sequence && felixProject.sequence.length > 0) ||
+        felixProject.officialReference ||
+        (felixProject.lsuLinks && felixProject.lsuLinks.length > 0) ||
+        (felixProject.crossCurricular && felixProject.crossCurricular.length > 0) ||
+        felixProject.accessibility,
+    );
 
     return (
-      <main className="mission-detail-page">
+      <main className="mission-detail-page felix-project-detail">
         <PrintBodyClass className="print-mission-detail" />
 
         <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
@@ -147,18 +149,6 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                     <dd className="text-sm font-bold text-foreground">{place.name}</dd>
                   </div>
                 ) : null}
-                {felixProject.qualityStatus ? (
-                  <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
-                    <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                      Qualité
-                    </dt>
-                    <dd>
-                      <span className={`rounded border px-2 py-0.5 text-xs font-bold ${qualityStatusStyle[felixProject.qualityStatus.state] ?? "border-white/15 bg-white/[0.04] text-muted"}`}>
-                        {felixProject.qualityStatus.state}
-                      </span>
-                    </dd>
-                  </div>
-                ) : null}
                 <div>
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                     Rôle de Félix
@@ -173,7 +163,9 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
         <section className="mission-detail-body px-4 pb-20 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl space-y-4">
 
-            <div className="grid gap-4 lg:grid-cols-2">
+            <StudentProjectSheet mission={felixProject} />
+
+            <div className="felix-teacher-detail grid gap-4 lg:grid-cols-2">
               <DetailPanel title="Objectifs de la mission">
                 <ol className="space-y-3" aria-label="Objectifs">
                   {felixProject.objectives.map((obj, i) => (
@@ -187,70 +179,71 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                 </ol>
               </DetailPanel>
 
-              <DetailPanel title="Supports imprimables &amp; projetables">
-                <div className="space-y-4">
-                  {felixProject.printableSupports.length > 0 ? (
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold">
-                        À imprimer
-                      </p>
-                      <ul className="mt-2 space-y-1">
-                        {felixProject.printableSupports.map((s) => (
-                          <li key={s} className="flex items-start gap-2 text-xs text-muted">
-                            <span className="mt-1.5 size-1 shrink-0 rounded-full bg-gold" aria-hidden="true" />
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                  {felixProject.projectableSupports.length > 0 ? (
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-sky">
-                        À projeter
-                      </p>
-                      <ul className="mt-2 space-y-1">
-                        {felixProject.projectableSupports.map((s) => (
-                          <li key={s} className="flex items-start gap-2 text-xs text-muted">
-                            <span className="mt-1.5 size-1 shrink-0 rounded-full bg-sky" aria-hidden="true" />
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
-                </div>
-              </DetailPanel>
+              <ExpectedProductionPanel
+                evidence={felixProject.evidence}
+                printableSupports={felixProject.printableSupports}
+                projectableSupports={felixProject.projectableSupports}
+              />
             </div>
 
-            <MissionSkillPanel
-              skills={felixProject.skills}
-              evidence={felixProject.evidence}
-            />
+            <div className="felix-teacher-detail">
+              <SuccessCriteriaPanel criteria={felixProject.successCriteria} />
+            </div>
 
-            <DifferentiationPanel differentiation={felixProject.differentiation} />
+            <div className="border-t border-white/10 pt-6">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
+                Pour l&apos;enseignant
+              </p>
+            </div>
 
-            <AssessmentPanel
-              assessment={felixProject.assessment}
-              successCriteria={felixProject.successCriteria}
-              restitution={felixProject.restitution}
-            />
+            <div className="felix-teacher-detail">
+              <MissionSkillPanel
+                skills={felixProject.skills}
+                evidence={felixProject.evidence}
+              />
+            </div>
 
-            <SequencePanel sequence={felixProject.sequence} />
+            <div className="felix-teacher-detail">
+              <DifferentiationPanel differentiation={felixProject.differentiation} />
+            </div>
 
-            <OfficialReferencePanel
-              officialReference={felixProject.officialReference}
-              lsuLinks={felixProject.lsuLinks}
-              crossCurricular={felixProject.crossCurricular}
-            />
+            <div className="felix-teacher-detail">
+              <AssessmentPanel
+                assessment={felixProject.assessment}
+                successCriteria={felixProject.successCriteria}
+                restitution={felixProject.restitution}
+              />
+            </div>
 
-            <AccessibilityPanel accessibility={felixProject.accessibility} />
+            {hasInstitutionalContent ? (
+              <div className="border-t border-white/10 pt-6">
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+                  Repères pédagogiques
+                </p>
+              </div>
+            ) : null}
+
+            <div className="felix-teacher-detail">
+              <SequencePanel sequence={felixProject.sequence} />
+            </div>
+
+            <div className="felix-teacher-detail">
+              <OfficialReferencePanel
+                officialReference={felixProject.officialReference}
+                lsuLinks={felixProject.lsuLinks}
+                crossCurricular={felixProject.crossCurricular}
+              />
+            </div>
+
+            <div className="felix-teacher-detail">
+              <AccessibilityPanel accessibility={felixProject.accessibility} />
+            </div>
 
             {badges.length > 0 ? (
-              <div className="mission-detail-card rounded-md border border-white/10 bg-white/[0.04] p-5">
-                <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+              <div className="felix-teacher-detail mission-detail-card rounded-md border border-white/10 bg-white/[0.04] p-5">
+                <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Badges associés à ce projet
-                </p>
+                </h2>
                 <BadgeGrid badges={badges} />
               </div>
             ) : null}
@@ -421,5 +414,120 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
         </div>
       </section>
     </main>
+  );
+}
+
+const evidenceTypeLabels: Record<MissionEvidence["type"], string> = {
+  écrit: "Écrit",
+  oral: "Oral",
+  production: "Production",
+  trace: "Trace",
+  numérique: "Numérique",
+};
+
+function ExpectedProductionPanel({
+  evidence,
+  printableSupports,
+  projectableSupports,
+}: {
+  evidence: MissionEvidence[];
+  printableSupports: string[];
+  projectableSupports: string[];
+}) {
+  return (
+    <DetailPanel title="Production attendue">
+      <div className="space-y-4">
+        {evidence.length > 0 ? (
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-jade">
+              Ce que les élèves doivent laisser comme trace
+            </h3>
+            <ul className="mt-2 space-y-2">
+              {evidence.map((item) => (
+                <li
+                  key={`${item.type}-${item.description}`}
+                  className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                >
+                  <span className="font-bold text-foreground">
+                    {evidenceTypeLabels[item.type]}
+                  </span>{" "}
+                  - {item.description}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {printableSupports.length > 0 ? (
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-gold">
+                À imprimer
+              </h3>
+              <ul className="mt-2 space-y-1">
+                {printableSupports.map((support) => (
+                  <li
+                    key={support}
+                    className="flex items-start gap-2 text-sm leading-6 text-muted"
+                  >
+                    <span
+                      className="mt-1.5 size-1 shrink-0 rounded-full bg-gold"
+                      aria-hidden="true"
+                    />
+                    {support}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {projectableSupports.length > 0 ? (
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-sky">
+                À projeter
+              </h3>
+              <ul className="mt-2 space-y-1">
+                {projectableSupports.map((support) => (
+                  <li
+                    key={support}
+                    className="flex items-start gap-2 text-sm leading-6 text-muted"
+                  >
+                    <span
+                      className="mt-1.5 size-1 shrink-0 rounded-full bg-sky"
+                      aria-hidden="true"
+                    />
+                    {support}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </DetailPanel>
+  );
+}
+
+function SuccessCriteriaPanel({ criteria }: { criteria: string[] }) {
+  if (criteria.length === 0) {
+    return null;
+  }
+
+  return (
+    <DetailPanel title="Critères de réussite">
+      <ul className="grid gap-3 md:grid-cols-3">
+        {criteria.map((criterion, index) => (
+          <li
+            key={criterion}
+            className="rounded border border-jade/20 bg-jade/10 p-3 text-sm leading-6 text-muted"
+          >
+            <span className="mb-2 block font-mono text-xs font-black uppercase tracking-[0.14em] text-jade">
+              Critère {index + 1}
+            </span>
+            {criterion}
+          </li>
+        ))}
+      </ul>
+    </DetailPanel>
   );
 }

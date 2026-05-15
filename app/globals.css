@@ -292,6 +292,72 @@ a {
     text-decoration: none !important;
   }
 
+  /* ── Felix student sheet: print only the short pupil-facing handout ── */
+  .felix-project-detail .mission-detail-hero,
+  .felix-project-detail .felix-teacher-detail {
+    display: none !important;
+  }
+
+  .felix-project-detail .student-project-sheet {
+    display: block !important;
+    border: 1px solid #999999 !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .felix-project-detail .student-project-sheet__header {
+    padding-bottom: 7pt !important;
+    border-bottom: 2px solid #111111 !important;
+  }
+
+  .felix-project-detail .student-project-sheet h2 {
+    font-size: 21pt !important;
+    line-height: 1.12 !important;
+  }
+
+  .felix-project-detail .student-project-sheet h3,
+  .felix-project-detail .student-project-sheet p,
+  .felix-project-detail .student-project-sheet li {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .felix-project-detail .student-project-sheet__grid,
+  .felix-project-detail .student-project-sheet__section {
+    margin-top: 8pt !important;
+  }
+
+  .felix-project-detail .student-project-sheet section,
+  .felix-project-detail .student-project-sheet__step {
+    border: 1px solid #cccccc !important;
+    padding: 7pt !important;
+    margin-bottom: 6pt !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .felix-project-detail .student-project-sheet ol,
+  .felix-project-detail .student-project-sheet ul {
+    margin-top: 6pt !important;
+  }
+
+  .felix-project-detail .student-project-sheet ol > li,
+  .felix-project-detail .student-project-sheet ul > li {
+    padding-bottom: 0 !important;
+    margin-bottom: 4pt !important;
+    border-bottom: 0 !important;
+  }
+
+  .felix-project-detail .student-project-sheet__trace {
+    min-height: 38mm;
+  }
+
+  .felix-project-detail .student-project-sheet__trace div > div {
+    border-bottom: 1px solid #999999 !important;
+  }
+
   /* ── Remove glow accents (h-1 bars, rounded-full blobs) ── */
   .mission-detail-page [class*="h-1"],
   .mission-detail-page [class*="blur-"] {
