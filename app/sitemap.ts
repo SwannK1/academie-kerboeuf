@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { cm2Missions } from "@/content/cm2";
+import { cm2Subjects } from "@/content/cm2-subjects";
 import { felixProjects } from "@/content/felix-missions";
 import { learningPaths } from "@/content/learning-paths";
 import { getElementaryPedagogicalPlaces } from "@/content/pedagogical-places";
@@ -8,6 +9,10 @@ import { getElementaryPedagogicalPlaces } from "@/content/pedagogical-places";
 const BASE_URL = "https://academie-kerboeuf.fr";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const cm2SubjectRoutes = cm2Subjects.map((subject) => ({
+    url: `${BASE_URL}/primaire/cm2/matieres/${subject.slug}`,
+    priority: 0.65,
+  }));
   const cm2MissionRoutes = [...cm2Missions, ...felixProjects].map((mission) => ({
     url: `${BASE_URL}/primaire/cm2/missions/${mission.slug}`,
     priority: 0.6,
@@ -33,6 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...elementaryPlaceRoutes,
     { url: `${BASE_URL}/primaire/cm2`, priority: 0.8 },
     { url: `${BASE_URL}/primaire/cm2/missions`, priority: 0.7 },
+    { url: `${BASE_URL}/primaire/cm2/matieres`, priority: 0.7 },
+    ...cm2SubjectRoutes,
     { url: `${BASE_URL}/primaire/cm2/parcours`, priority: 0.6 },
     ...cm2MissionRoutes,
     ...cm2LearningPathRoutes,
