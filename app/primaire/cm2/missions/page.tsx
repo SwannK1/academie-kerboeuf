@@ -118,7 +118,7 @@ export default function Cm2MissionsPage() {
   const projectionPrintMissions = cm2Missions.filter(hasProjectionAndPrint);
 
   return (
-    <main>
+    <main className="cm2-catalog-print">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -140,7 +140,7 @@ export default function Cm2MissionsPage() {
         cycle="Cycle 3 · CM2"
       />
 
-      <section className="px-4 pb-14 sm:px-6 lg:px-8">
+      <section className="cm2-print-hide px-4 pb-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-4 md:grid-cols-3">
             {audienceCards.map((card) => (
@@ -189,10 +189,12 @@ export default function Cm2MissionsPage() {
         </div>
       </section>
 
-      <TeacherDashboard missions={cm2Missions} projects={felixProjects} />
+      <div className="cm2-print-hide">
+        <TeacherDashboard missions={cm2Missions} projects={felixProjects} />
+      </div>
 
       {/* Projets Félix enrichis */}
-      <section className="px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="felix-projects-title">
+      <section className="cm2-print-section px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="felix-projects-title">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
             <div>
@@ -259,7 +261,7 @@ export default function Cm2MissionsPage() {
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-6 lg:px-8">
+      <section className="cm2-print-section px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl rounded-md border border-gold/25 bg-gold/[0.055] p-6">
           <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
             <div>
@@ -310,7 +312,7 @@ export default function Cm2MissionsPage() {
         </div>
       </section>
 
-      <section className="px-4 pb-20 sm:px-6 lg:px-8">
+      <section className="cm2-print-section px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
             <div>

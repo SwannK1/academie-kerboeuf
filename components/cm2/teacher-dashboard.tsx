@@ -224,7 +224,7 @@ function TeacherItemCard({ item }: { item: TeacherItem }) {
           </p>
           <ul className="mt-2 space-y-2">
             {formatList(item.criteria, 3).map((criterion) => (
-              <li key={criterion} className="rounded border border-jade/20 bg-jade/10 p-2 text-xs leading-6 text-muted">
+              <li key={criterion} className="rounded border border-jade/20 bg-jade/10 p-2 text-sm leading-6 text-muted">
                 {criterion}
               </li>
             ))}
@@ -254,7 +254,8 @@ function TeacherItemCard({ item }: { item: TeacherItem }) {
       <div className="mt-auto pt-5">
         <Link
           href={item.href}
-          className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold text-gold transition hover:bg-gold hover:text-ink"
+          aria-label={`Ouvrir ${item.family === "Mission courte" ? "la mission" : "le projet"} ${item.title}`}
+          className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-sm font-bold text-gold transition hover:bg-gold hover:text-ink"
         >
           Ouvrir
         </Link>
@@ -269,7 +270,7 @@ function InfoLine({ label, value }: { label: string; value: string }) {
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
         {label}
       </p>
-      <p className="mt-1 text-xs leading-6 text-foreground">{value}</p>
+      <p className="mt-1 text-sm leading-6 text-foreground">{value}</p>
     </div>
   );
 }
@@ -294,16 +295,16 @@ function TagList({ label, items }: { label: string; items: string[] }) {
 function ReferencePanel({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+      <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         {title}
-      </p>
+      </h3>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {items.map((item, index) => (
           <div key={item} className="flex items-center gap-3 rounded border border-white/10 bg-ink/35 p-3">
             <span className="grid size-7 shrink-0 place-items-center rounded bg-sky/10 font-mono text-xs font-black text-sky">
               {index + 1}
             </span>
-            <p className="text-xs font-bold text-foreground">{item}</p>
+            <p className="text-sm font-bold text-foreground">{item}</p>
           </div>
         ))}
       </div>
@@ -314,7 +315,7 @@ function ReferencePanel({ title, items }: { title: string; items: string[] }) {
 function SummaryCard({ title, lines }: { title: string; lines: string[] }) {
   return (
     <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <p className="text-sm font-black text-foreground">{title}</p>
+      <h3 className="text-sm font-black text-foreground">{title}</h3>
       <ul className="mt-3 space-y-2">
         {lines.map((line) => (
           <li key={line} className="text-sm leading-6 text-muted">
