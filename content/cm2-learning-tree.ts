@@ -5,6 +5,15 @@
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
+// Sémantique de Cm2LearningStatus par niveau de nœud :
+//   "available"   — structure exploitable, reliée à au moins une ressource ou
+//                   mission existante (la page ou le contenu peut être affiché).
+//   "in-progress" — structure partiellement préparée, visible mais incomplète.
+//   "upcoming"    — structure prévue mais pas encore exploitable
+//                   (pas de page route, pas de contenu finalisé).
+// Note : au niveau domaine/sous-domaine, "available" signifie que des missions
+// existantes y sont reliées — cela ne garantit pas encore l'existence de pages
+// leçon. La présence de pages leçon se vérifie via Cm2LessonResource.slug.
 export type Cm2LearningStatus = "available" | "in-progress" | "upcoming";
 
 export type Cm2GuideReference = {
@@ -766,7 +775,7 @@ export const cm2LearningTree: Cm2LearningTree = [
   {
     subjectSlug: "arts",
     title: "Arts",
-    place: { slug: "salle-arts", label: "La Salle des Arts" },
+    place: { slug: "salle-arts", label: "La Salle d'Arts" },
     guides: [
       { id: "felix", name: "Félix le Lynx",        role: "Guide CM2"  },
       { id: "pablo", name: "Pablo l'Orang-outan",  role: "Guide Arts" },
@@ -831,4 +840,58 @@ export const cm2LearningTree: Cm2LearningTree = [
 
 export function getCm2SubjectTree(subjectSlug: string): Cm2SubjectNode | undefined {
   return cm2LearningTree.find((s) => s.subjectSlug === subjectSlug);
+}
+
+export function getCm2DomainById(
+  subjectSlug: string,
+  domainId: string,
+): Cm2DomainNode | undefined {
+  return getCm2SubjectTree(subjectSlug)?.domains.find((d) => d.id === domainId);
+}
+
+export function getCm2SubdomainById(
+  subjectSlug: string,
+  domainId: string,
+  subdomainId: string,
+): Cm2SubdomainNode | undefined {
+  return getCm2DomainById(subjectSlug, domainId)?.subdomains.find(
+    (s) => s.id === subdomainId,
+  );
+}
+
+export function getCm2LessonById(
+  subjectSlug: string,
+  domainId: string,
+  subdomainId: string,
+  lessonId: string,
+): Cm2LessonNode | undefined {
+  return getCm2SubdomainById(subjectSlug, domainId, subdomainId)?.lessons.find(
+    (l) => l.id === lessonId,
+  );
+}
+
+export type Cm2LessonPath = {
+  subjectSlug: string;
+  domainId: string;
+  subdomainId: string;
+  lessonId: string;
+};
+
+export function getAllCm2LessonPaths(): Cm2LessonPath[] {
+  const paths: Cm2LessonPath[] = [];
+  for (const subject of cm2LearningTree) {
+    for (const domain of subject.domains) {
+      for (const subdomain of domain.subdomains) {
+        for (const lesson of subdomain.lessons) {
+          paths.push({
+            subjectSlug: subject.subjectSlug,
+            domainId: domain.id,
+            subdomainId: subdomain.id,
+            lessonId: lesson.id,
+          });
+        }
+      }
+    }
+  }
+  return paths;
 }
