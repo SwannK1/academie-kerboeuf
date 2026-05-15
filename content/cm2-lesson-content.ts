@@ -48,4 +48,51 @@ export const LESSON_CONTENT: Record<string, LessonContent> = {
       "Essaie de formuler ton inférence en une phrase complète.",
     ],
   },
+
+  "explicite-implicite": {
+    intro:
+      "Dans un texte, toutes les informations ne sont pas données de la même façon. Certaines sont écrites clairement : c'est ce qu'on appelle l'explicite. D'autres ne sont pas écrites directement : il faut les déduire grâce aux indices du texte. C'est l'implicite.",
+    retiens: [
+      {
+        heading: "L'information explicite",
+        body: "Elle est écrite dans le texte. Pour la trouver, il suffit de lire : la réponse est directement visible.",
+      },
+      {
+        heading: "L'information implicite",
+        body: "Elle n'est pas écrite directement. Il faut repérer des indices dans le texte et raisonner pour comprendre ce que l'auteur sous-entend.",
+      },
+      {
+        heading: "Comment justifier ?",
+        body: "Je cite un indice précis du texte, puis j'explique le raisonnement qui m'a conduit à ma conclusion. Je ne donne pas mon avis : je m'appuie sur le texte.",
+      },
+    ],
+    examplesTitle: "Distinguer ce qui est écrit et ce qu'il faut déduire",
+    exemples: [
+      {
+        label: "Exemple 1 — information explicite",
+        text: "\"Le renard attrapa le lapin et s'enfuit dans le bois.\"",
+        inference:
+          "→ Information explicite : le renard a attrapé le lapin. C'est écrit directement dans le texte — aucune déduction nécessaire.",
+      },
+      {
+        label: "Exemple 2 — information implicite",
+        text: "\"Elle referma son livre d'un coup sec, croisa les bras et détourna les yeux.\"",
+        inference:
+          "→ Information implicite : le personnage est en colère ou contrariée. Ce n'est pas écrit, mais les indices « referma d'un coup sec », « croisa les bras » et « détourna les yeux » permettent de le déduire.",
+      },
+      {
+        label: "Exemple 3 — distinguer les deux",
+        text: "\"Tom avait obtenu la meilleure note de la classe. Pourtant, il ne sourit pas.\"",
+        inference:
+          "→ Explicite : Tom a eu la meilleure note (c'est écrit). Implicite : malgré ce succès, quelque chose le préoccupe — l'indice est « pourtant, il ne sourit pas », qui crée un contraste avec le résultat.",
+      },
+    ],
+    entrainement: [
+      "Je lis la question et je repère ce qu'elle me demande de trouver.",
+      "Je cherche dans le texte si la réponse est écrite directement.",
+      "Si elle n'est pas écrite, je repère les indices : actions, descriptions, contrastes.",
+      "Je construis une réponse logique à partir de ces indices.",
+      "Je justifie ma réponse en citant un indice précis du texte.",
+    ],
+  },
 };

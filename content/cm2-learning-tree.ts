@@ -121,6 +121,19 @@ export const cm2LearningTree: Cm2LearningTree = [
                 linkedMissionSlugs: ["mission-inference"],
               },
               {
+                id: "francais-lecture-inferences-explicite-implicite",
+                title: "Distinguer une information explicite et une information implicite",
+                description: "Comprendre la différence entre ce qui est écrit directement dans un texte et ce qu'il faut déduire à partir d'indices.",
+                status: "available",
+                routeSlug: "explicite-implicite",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "available" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming"  },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming"  },
+                ],
+                linkedMissionSlugs: ["mission-inference"],
+              },
+              {
                 id: "francais-lecture-inferences-faire",
                 title: "Faire une inférence",
                 status: "upcoming",
