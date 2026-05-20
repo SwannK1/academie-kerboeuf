@@ -1,8 +1,13 @@
 import Link from "next/link";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import type { AcademyLevel } from "@/content/academy";
 import { publishedSubdomainPages } from "@/content/levels/published-subdomain-pages";
 import { getCurriculumSubjectsForLevel } from "@/content/curriculum-map";
+import {
+  getPublicStatusKey,
+  type PublicStatusKey,
+} from "@/content/public-status";
 
 const DOMAIN_LABELS: Record<string, string> = {
   francais: "Français",
@@ -20,23 +25,38 @@ type Props = {
   level: AcademyLevel;
 };
 
+type PrimaryPortalSubject = ReturnType<typeof getCurriculumSubjectsForLevel>[number];
+
+type PortalLink = {
+  label: string;
+  description: string;
+  href: string;
+  status: PublicStatusKey;
+};
+
 export function PrimaireLevelEntry({ level }: Props) {
   const slug = level.slug;
 
   const subjects = getCurriculumSubjectsForLevel(slug);
 
-  const secondaryLinks = [
+  const secondaryLinks: PortalLink[] = [
     {
       label: "Programme",
       href: `/primaire/${slug}/programme`,
+      description: "Vue courte des matières et des attendus du niveau.",
+      status: "available",
     },
     {
       label: "Compétences",
       href: `/primaire/${slug}/competences`,
+      description: "Repères de cycle pour vérifier ce qui est travaillé.",
+      status: "available",
     },
     {
       label: "Missions",
       href: `/primaire/${slug}/missions`,
+      description: "Entrée sobre vers les missions publiées ou prévues.",
+      status: "available",
     },
   ];
 
@@ -46,7 +66,7 @@ export function PrimaireLevelEntry({ level }: Props) {
       subject: DOMAIN_LABELS[p.domain] ?? p.domain,
       label: SUBDOMAIN_LABELS[p.subdomain] ?? p.subdomain,
       description:
-        "Index des ressources prévues : leçons, exercices et corrections PDF.",
+        "Catalogue publié des ressources prévues, sans lien PDF fictif.",
       href: p.route,
     }));
 
@@ -100,13 +120,21 @@ export function PrimaireLevelEntry({ level }: Props) {
                   key={subject.slug}
                   className="flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-6"
                 >
-                  <p className="text-lg font-black text-foreground">
-                    {subject.label}
-                  </p>
-                  <p className="mt-1 text-xs font-bold text-muted">
-                    {subject.domains.length} domaine
-                    {subject.domains.length > 1 ? "s" : ""}
-                  </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-lg font-black text-foreground">
+                        {subject.label}
+                      </p>
+                      <p className="mt-1 text-xs font-bold text-muted">
+                        {subject.domains.length} domaine
+                        {subject.domains.length > 1 ? "s" : ""}
+                      </p>
+                    </div>
+                    <PublicStatusBadge
+                      status={getSubjectPortalStatus(subject)}
+                      className="shrink-0"
+                    />
+                  </div>
                   <ul className="mt-4 flex flex-col gap-1.5">
                     {subject.domains.map((domain) => (
                       <li
@@ -144,18 +172,9 @@ export function PrimaireLevelEntry({ level }: Props) {
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-muted">
               Accès complémentaires
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {secondaryLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-bold text-muted transition hover:border-white/20 hover:bg-white/[0.06] hover:text-foreground"
-                >
-                  {link.label}
-                  <span className="transition group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </Link>
+                <PortalLinkCard key={link.href} link={link} />
               ))}
             </div>
           </div>
@@ -167,10 +186,10 @@ export function PrimaireLevelEntry({ level }: Props) {
           <div className="mx-auto max-w-7xl">
             <div className="mb-5 border-b border-white/10 pb-4">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
-                Ressources disponibles
+                Catalogues publiés
               </p>
               <h2 className="mt-1.5 text-xl font-black text-foreground">
-                Premiers contenus publiés
+                Premières pages de ressources
               </h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -218,5 +237,68 @@ export function PrimaireLevelEntry({ level }: Props) {
         </section>
       )}
     </main>
+  );
+}
+
+function getSubjectPortalStatus(subject: PrimaryPortalSubject): PublicStatusKey {
+  const statusKeys = subject.domains.flatMap((domain) =>
+    domain.subdomains.flatMap((subdomain) =>
+      subdomain.competencies.map((competency) =>
+        getPublicStatusKey(competency.status),
+      ),
+    ),
+  );
+
+  if (
+    statusKeys.some((key) => key === "available" || key === "in-progress")
+  ) {
+    return "in-progress";
+  }
+
+  return "upcoming";
+}
+
+function PortalLinkCard({ link }: { link: PortalLink }) {
+  const isAvailable = getPublicStatusKey(link.status) === "available";
+
+  const card = (
+    <article
+      className={`group flex min-h-full flex-col rounded-md border p-5 transition ${
+        isAvailable
+          ? "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]"
+          : "border-white/10 bg-white/[0.025] opacity-70"
+      }`}
+      aria-disabled={isAvailable ? undefined : true}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <p className="text-sm font-black text-foreground">{link.label}</p>
+        <PublicStatusBadge status={link.status} className="shrink-0" />
+      </div>
+      <p className="mt-3 flex-1 text-xs leading-5 text-muted">
+        {link.description}
+      </p>
+      {isAvailable ? (
+        <span className="mt-4 text-xs font-black uppercase tracking-[0.12em] text-muted transition group-hover:translate-x-1 group-hover:text-foreground">
+          Ouvrir →
+        </span>
+      ) : (
+        <span className="mt-4 text-xs font-bold uppercase tracking-[0.12em] text-muted">
+          Disponible prochainement
+        </span>
+      )}
+    </article>
+  );
+
+  if (!isAvailable) {
+    return card;
+  }
+
+  return (
+    <Link
+      href={link.href}
+      className="block focus:outline-none focus:ring-2 focus:ring-white/30"
+    >
+      {card}
+    </Link>
   );
 }

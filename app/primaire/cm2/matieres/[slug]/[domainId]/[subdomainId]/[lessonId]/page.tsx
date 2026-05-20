@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getCm2SubjectBySlug } from "@/content/cm2-subjects";
+import { getPublicStatusKey } from "@/content/public-status";
 import {
   getAllCm2LessonPaths,
   getCm2DomainById,
   getCm2LessonByRouteSlug,
   getCm2SubdomainById,
 } from "@/content/cm2-learning-tree";
+import type { LearningSession } from "@/content/elementary-learning-model";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 import { LESSON_CONTENT } from "@/content/cm2-lesson-content";
 
@@ -60,6 +63,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
 
   const t = CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold;
   const content = LESSON_CONTENT[lessonId];
+  const sessions = [...(lesson.sessions ?? [])].sort((a, b) => a.order - b.order);
 
   const subjectHref = `/primaire/cm2/matieres/${slug}`;
 
@@ -101,15 +105,63 @@ export default async function Cm2LessonPage({ params }: PageProps) {
                 {subdomain.title}
               </span>
             )}
+            <PublicStatusBadge status={lesson.status} />
           </div>
           <h1 className="mt-6 text-4xl font-black leading-tight text-foreground sm:text-5xl">
             {lesson.title}
           </h1>
-          {content && (
-            <p className="mt-6 text-lg leading-8 text-muted">{content.intro}</p>
+          {(lesson.description || content) && (
+            <p className="mt-6 text-lg leading-8 text-muted">
+              {lesson.description ?? content?.intro}
+            </p>
           )}
+          {lesson.objective ? (
+            <p className="mt-4 max-w-3xl text-sm font-semibold leading-7 text-muted">
+              Objectif : {lesson.objective}
+            </p>
+          ) : null}
         </div>
       </section>
+
+      {sessions.length > 0 ? (
+        <section className="px-4 pb-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <div className={`mb-6 border-b ${t.border} pb-4`}>
+              <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+                Séquence
+              </p>
+              <h2 className="mt-2 text-2xl font-black text-foreground">
+                5 séances pour construire la notion
+              </h2>
+            </div>
+
+            <ol className="space-y-4">
+              {sessions.map((session) => (
+                <LearningSessionItem key={session.id} session={session} accentText={t.text} />
+              ))}
+            </ol>
+
+            {lesson.successCriteria?.length ? (
+              <div className="mt-6 rounded-md border border-white/10 bg-white/[0.025] p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
+                  Critères de réussite
+                </p>
+                <ul className="mt-3 grid gap-2">
+                  {lesson.successCriteria.map((criterion) => (
+                    <li key={criterion} className="flex gap-2 text-sm text-muted">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-jade/60"
+                      />
+                      <span className="leading-6">{criterion}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       {content ? (
         <>
@@ -195,7 +247,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
             </div>
           </section>
         </>
-      ) : (
+      ) : sessions.length === 0 ? (
         /* ── Contenu à venir ──────────────────────────────────────────────── */
         <section className="px-4 pb-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
@@ -209,7 +261,7 @@ export default async function Cm2LessonPage({ params }: PageProps) {
             </div>
           </div>
         </section>
-      )}
+      ) : null}
 
       {/* ── Pied de page ──────────────────────────────────────────────────── */}
       <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
@@ -234,5 +286,73 @@ export default async function Cm2LessonPage({ params }: PageProps) {
         </div>
       </section>
     </main>
+  );
+}
+
+const sessionTypeLabels: Record<LearningSession["type"], string> = {
+  "problem-situation": "Situation-problème",
+  lesson: "Cours",
+  "guided-practice": "Initiation collective",
+  consolidation: "Consolidation",
+  assessment: "Évaluation",
+};
+
+const sessionPendingLabels: Record<LearningSession["type"], string> = {
+  "problem-situation": "Support à venir",
+  lesson: "Cours à venir",
+  "guided-practice": "Support à venir",
+  consolidation: "Support à venir",
+  assessment: "Évaluation à venir",
+};
+
+function LearningSessionItem({
+  session,
+  accentText,
+}: {
+  session: LearningSession;
+  accentText: string;
+}) {
+  const pdfHref =
+    getPublicStatusKey(session.status) === "available" ? session.pdfHref : undefined;
+
+  return (
+    <li className="rounded-md border border-white/10 bg-white/[0.025] p-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accentText}`}>
+            {session.order}. {sessionTypeLabels[session.type]}
+          </p>
+          <h3 className="mt-2 text-xl font-black text-foreground">
+            {session.title}
+          </h3>
+          <p className="mt-2 text-sm font-semibold leading-6 text-muted">
+            Objectif : {session.goal}
+          </p>
+        </div>
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
+          <span className="rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-bold text-muted">
+            {session.duration}
+          </span>
+          <PublicStatusBadge status={session.status} />
+        </div>
+      </div>
+
+      <p className="mt-4 text-sm leading-7 text-muted">{session.summary}</p>
+
+      <div className="mt-5">
+        {pdfHref ? (
+          <Link
+            href={pdfHref}
+            className="inline-flex rounded-md border border-jade/30 bg-jade/[0.06] px-3 py-2 text-sm font-bold text-jade transition hover:bg-jade/[0.1]"
+          >
+            Ouvrir le PDF
+          </Link>
+        ) : (
+          <span className="inline-flex rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm font-bold text-white/40">
+            {sessionPendingLabels[session.type]}
+          </span>
+        )}
+      </div>
+    </li>
   );
 }

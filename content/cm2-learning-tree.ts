@@ -3,6 +3,12 @@
 // Les pages de leçon/exercice/évaluation ne sont pas encore créées :
 // tous les Cm2LessonNode sont status "upcoming" dans ce premier socle.
 
+import type {
+  LearningNotion,
+  LearningSession,
+  LearningSessionType,
+} from "@/content/elementary-learning-model";
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 // Sémantique de Cm2LearningStatus par niveau de nœud :
@@ -35,16 +41,20 @@ export type Cm2LessonResource = {
   status: Cm2LearningStatus;
 };
 
-export type Cm2LessonNode = {
-  id: string;
-  title: string;
+export type Cm2LearningSessionType = LearningSessionType;
+export type Cm2LearningSession = LearningSession;
+
+export type Cm2LessonNode = Pick<LearningNotion, "id" | "title" | "status"> &
+  Partial<Pick<LearningNotion, "objective" | "successCriteria" | "sessions">> & {
   description?: string;
-  status: Cm2LearningStatus;
   /** When defined, this lesson has a routed page at `…/[lessonId]` using this slug. */
   routeSlug?: string;
   resources: Cm2LessonResource[];
   linkedMissionSlugs?: string[];
 };
+
+export type Cm2LearningNotion = Cm2LessonNode;
+export type { LearningNotion, LearningSession };
 
 export type Cm2SubdomainNode = {
   id: string;
@@ -105,14 +115,73 @@ export const cm2LearningTree: Cm2LearningTree = [
           {
             id: "francais-lecture-inferences",
             title: "Inférences",
-            description: "Repérer des indices dans le texte et en déduire ce qui n'est pas dit.",
+            description: "Comprendre l'implicite, identifier les inférences et justifier ses réponses avec des indices du texte.",
             status: "available",
             lessons: [
               {
-                id: "francais-lecture-inferences-reperer",
-                title: "Repérer les indices dans le texte",
+                id: "francais-lecture-implicite-comprendre",
+                title: "Comprendre l'implicite dans un texte",
+                description: "Apprendre à comprendre ce que le texte suggère sans le dire directement.",
+                objective: "Déduire une information implicite à partir d'indices simples.",
+                successCriteria: [
+                  "Je repère une information qui n'est pas écrite directement.",
+                  "Je cite au moins un indice du texte.",
+                  "Je formule une déduction cohérente.",
+                ],
                 status: "upcoming",
-                routeSlug: "reperer-les-indices",
+                routeSlug: "comprendre-l-implicite",
+                sessions: [
+                  {
+                    id: "francais-lecture-implicite-comprendre-s1",
+                    title: "Une phrase qui cache une information",
+                    type: "problem-situation",
+                    order: 1,
+                    duration: "30 min",
+                    goal: "Faire émerger le besoin de lire au-delà de ce qui est écrit.",
+                    summary: "Les élèves lisent un court texte volontairement incomplet, proposent ce qu'ils comprennent, puis comparent les indices utilisés.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-implicite-comprendre-s2",
+                    title: "La méthode des indices",
+                    type: "lesson",
+                    order: 2,
+                    duration: "35 min",
+                    goal: "Formaliser la différence entre information explicite et information implicite.",
+                    summary: "La classe construit une trace courte : je lis, je repère les indices, je relie les informations, je déduis.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-implicite-comprendre-s3",
+                    title: "Chercher ensemble ce qui est suggéré",
+                    type: "guided-practice",
+                    order: 3,
+                    duration: "40 min",
+                    goal: "S'entraîner collectivement à verbaliser chaque étape de la déduction.",
+                    summary: "Sur plusieurs mini-textes, les élèves repèrent les indices au tableau et formulent une déduction guidée.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-implicite-comprendre-s4",
+                    title: "Déduire avec moins d'aide",
+                    type: "consolidation",
+                    order: 4,
+                    duration: "40 min",
+                    goal: "Réinvestir la méthode sur des textes courts de difficulté progressive.",
+                    summary: "Les élèves travaillent seuls ou en binômes, avec un parcours différencié et un court défi de transfert.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-implicite-comprendre-s5",
+                    title: "Évaluation de l'implicite",
+                    type: "assessment",
+                    order: 5,
+                    duration: "25 min",
+                    goal: "Vérifier que l'élève déduit une information implicite et justifie sa réponse.",
+                    summary: "Consigne courte : lis le texte, écris ce que tu comprends sans que ce soit dit, puis entoure l'indice qui t'a aidé.",
+                    status: "upcoming",
+                  },
+                ],
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
                   { type: "exercise",   label: "Exercices",  status: "upcoming" },
@@ -121,32 +190,140 @@ export const cm2LearningTree: Cm2LearningTree = [
                 linkedMissionSlugs: ["mission-inference"],
               },
               {
-                id: "francais-lecture-inferences-explicite-implicite",
-                title: "Distinguer une information explicite et une information implicite",
-                description: "Comprendre la différence entre ce qui est écrit directement dans un texte et ce qu'il faut déduire à partir d'indices.",
-                status: "available",
-                routeSlug: "explicite-implicite",
+                id: "francais-lecture-inferences-identifier",
+                title: "Identifier les inférences",
+                description: "Reconnaître qu'une réponse peut venir d'un raisonnement entre plusieurs indices du texte.",
+                objective: "Identifier l'inférence nécessaire pour répondre à une question de lecture.",
+                successCriteria: [
+                  "Je distingue une réponse copiée du texte d'une réponse déduite.",
+                  "Je relie deux indices pour construire ma réponse.",
+                  "J'explique rapidement mon raisonnement.",
+                ],
+                status: "upcoming",
+                routeSlug: "identifier-les-inferences",
+                sessions: [
+                  {
+                    id: "francais-lecture-inferences-identifier-s1",
+                    title: "La question impossible à copier",
+                    type: "problem-situation",
+                    order: 1,
+                    duration: "30 min",
+                    goal: "Faire comprendre qu'une réponse peut demander un raisonnement.",
+                    summary: "Les élèves répondent à une question dont la réponse n'est pas copiée dans le texte, puis expliquent leurs tentatives.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-inferences-identifier-s2",
+                    title: "Reconnaître une inférence",
+                    type: "lesson",
+                    order: 2,
+                    duration: "35 min",
+                    goal: "Formaliser l'inférence comme une déduction construite avec des indices.",
+                    summary: "La classe établit une méthode guidée : question, indices, lien logique, réponse formulée.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-inferences-identifier-s3",
+                    title: "Trier les réponses",
+                    type: "guided-practice",
+                    order: 3,
+                    duration: "40 min",
+                    goal: "S'entraîner à classer les questions selon le type de réponse attendu.",
+                    summary: "Collectivement, les élèves distinguent réponses écrites dans le texte et réponses à inférer.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-inferences-identifier-s4",
+                    title: "Construire ses propres inférences",
+                    type: "consolidation",
+                    order: 4,
+                    duration: "40 min",
+                    goal: "Appliquer la méthode sur des questions de difficulté croissante.",
+                    summary: "Les élèves répondent à des questions différenciées, puis rédigent une question qui oblige à faire une inférence.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-inferences-identifier-s5",
+                    title: "Évaluation des inférences",
+                    type: "assessment",
+                    order: 5,
+                    duration: "25 min",
+                    goal: "Vérifier que l'élève identifie une inférence et la formule clairement.",
+                    summary: "Consigne courte : réponds à deux questions, puis indique si ta réponse est écrite dans le texte ou déduite.",
+                    status: "upcoming",
+                  },
+                ],
                 resources: [
-                  { type: "lesson",     label: "Leçon",      status: "available" },
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
                   { type: "exercise",   label: "Exercices",  status: "upcoming"  },
                   { type: "evaluation", label: "Évaluation", status: "upcoming"  },
                 ],
                 linkedMissionSlugs: ["mission-inference"],
               },
               {
-                id: "francais-lecture-inferences-faire",
-                title: "Faire une inférence",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                id: "francais-lecture-justifier-indices",
+                title: "Justifier sa réponse avec des indices du texte",
+                description: "Apprendre à appuyer une réponse de lecture sur des éléments précis du texte.",
+                objective: "Répondre à une question en citant ou en reformulant les indices utiles.",
+                successCriteria: [
+                  "Je donne une réponse claire.",
+                  "Je choisis un indice pertinent dans le texte.",
+                  "Je relie l'indice à ma réponse avec une phrase simple.",
                 ],
-              },
-              {
-                id: "francais-lecture-inferences-justifier",
-                title: "Justifier son interprétation",
                 status: "upcoming",
+                routeSlug: "justifier-avec-indices",
+                sessions: [
+                  {
+                    id: "francais-lecture-justifier-indices-s1",
+                    title: "Deux réponses, une seule convaincante",
+                    type: "problem-situation",
+                    order: 1,
+                    duration: "30 min",
+                    goal: "Faire émerger le besoin de prouver une réponse avec le texte.",
+                    summary: "Les élèves comparent deux réponses à la même question et cherchent celle qui s'appuie vraiment sur un indice.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-justifier-indices-s2",
+                    title: "Réponse, indice, justification",
+                    type: "lesson",
+                    order: 2,
+                    duration: "35 min",
+                    goal: "Construire une méthode courte pour justifier une réponse.",
+                    summary: "La trace écrite fixe trois étapes : je réponds, je cite ou reformule l'indice, j'explique le lien.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-justifier-indices-s3",
+                    title: "Justifier à voix haute",
+                    type: "guided-practice",
+                    order: 3,
+                    duration: "40 min",
+                    goal: "S'entraîner ensemble à choisir et verbaliser un indice pertinent.",
+                    summary: "La classe travaille sur des réponses guidées, complète des justifications et améliore des formulations.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-justifier-indices-s4",
+                    title: "Répondre et prouver seul",
+                    type: "consolidation",
+                    order: 4,
+                    duration: "40 min",
+                    goal: "Réinvestir la méthode avec moins d'aide.",
+                    summary: "Les élèves rédigent des réponses justifiées sur plusieurs textes courts, avec aides graduées selon les besoins.",
+                    status: "upcoming",
+                  },
+                  {
+                    id: "francais-lecture-justifier-indices-s5",
+                    title: "Évaluation de la justification",
+                    type: "assessment",
+                    order: 5,
+                    duration: "25 min",
+                    goal: "Vérifier que l'élève sait justifier une réponse avec un indice du texte.",
+                    summary: "Consigne courte : réponds à la question, copie ou reformule l'indice, puis écris pourquoi il prouve ta réponse.",
+                    status: "upcoming",
+                  },
+                ],
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
                   { type: "exercise",   label: "Exercices",  status: "upcoming" },

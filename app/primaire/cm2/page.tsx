@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { cm2Level, cm2Missions } from "@/content/cm2";
 import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
 import { getPublicStatusKey } from "@/content/public-status";
@@ -178,14 +179,12 @@ export default function Cm2Page() {
 function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
   const isAvailable = getPublicStatusKey(subject.status) === "available";
-
-  return (
-    <Link
-      href={`/primaire/cm2/matieres/${subject.slug}`}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${
+  const card = (
+    <article
+      className={`group flex min-h-full flex-col rounded-md border p-5 transition ${
         isAvailable
-          ? `${t.border} bg-white/[0.04] hover:bg-white/[0.07]`
-          : "border-white/10 bg-white/[0.025] hover:bg-white/[0.04]"
+          ? `${t.border} bg-white/[0.04] hover:-translate-y-0.5 hover:bg-white/[0.07]`
+          : "border-white/10 bg-white/[0.025] opacity-70"
       }`}
     >
       <p
@@ -211,22 +210,32 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
       ) : null}
 
       <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-        <span
-          className={`text-xs font-bold uppercase tracking-[0.12em] ${
-            isAvailable ? t.text : "text-white/25"
-          }`}
-        >
-          {isAvailable ? "Missions disponibles" : "À structurer"}
-        </span>
-        <span
-          className={`text-xs transition group-hover:translate-x-0.5 ${
-            isAvailable ? t.text : "text-white/20"
-          }`}
-          aria-hidden="true"
-        >
-          →
-        </span>
+        {isAvailable ? (
+          <>
+            <span className={`text-xs font-bold uppercase tracking-[0.12em] ${t.text}`}>
+              Missions disponibles
+            </span>
+            <span className={`text-xs transition group-hover:translate-x-0.5 ${t.text}`} aria-hidden="true">
+              →
+            </span>
+          </>
+        ) : (
+          <PublicStatusBadge status={subject.status} />
+        )}
       </div>
+    </article>
+  );
+
+  if (!isAvailable) {
+    return card;
+  }
+
+  return (
+    <Link
+      href={`/primaire/cm2/matieres/${subject.slug}`}
+      className="block focus:outline-none focus:ring-2 focus:ring-gold/60"
+    >
+      {card}
     </Link>
   );
 }
