@@ -383,7 +383,7 @@ export const sixiemeCurriculumLevelMap: CurriculumLevelMap = {
                 "L'élève relie ses phrases et ses idées avec des connecteurs logiques ou temporels adaptés au sens.",
               successCriteria: [
                 "J'utilise des connecteurs comme « d'abord », « ensuite », « enfin ».",
-                "Je varies mes connecteurs selon le sens (temps, cause, opposition).",
+                "Je varie mes connecteurs selon le sens (temps, cause, opposition).",
                 "Mes phrases ne commencent pas toutes par « et ».",
               ],
               status: "upcoming",
@@ -772,7 +772,7 @@ export const sixiemeCurriculumLevelMap: CurriculumLevelMap = {
               successCriteria: [
                 "J'écris les calculs dans un ordre clair.",
                 "Je sépare les étapes importantes.",
-                "Je termine par une phrase réponse.",
+                "Je termine par une phrase-réponse.",
               ],
               status: "upcoming",
             },
@@ -953,7 +953,7 @@ export const sixiemeCurriculumLevelMap: CurriculumLevelMap = {
                 "L'élève réalise un tracé simple avec règle, équerre ou compas en respectant une consigne.",
               successCriteria: [
                 "Je choisis l'instrument adapté.",
-                "Je trace avec soin.",
+                "Je maintiens l'instrument stable pour obtenir un tracé net et continu.",
                 "Je respecte les mesures ou contraintes données.",
               ],
               status: "in-progress",
