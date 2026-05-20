@@ -130,6 +130,21 @@ export default function Cm2Page() {
               </span>
             </Link>
 
+            {/* ── Accès lecture CM2 — route inexistante, non cliquable ──── */}
+            <article className="flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.025] p-5 opacity-60">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                Français · Lecture
+              </p>
+              <p className="text-lg font-black text-foreground">
+                Lecture CM2
+              </p>
+              <p className="text-sm leading-6 text-muted">
+                Comprendre l&apos;implicite, identifier les inférences,
+                justifier avec des indices du texte. 3 notions pilotes.
+              </p>
+              <PublicStatusBadge status="upcoming" className="mt-1" />
+            </article>
+
             <Link
               href="/primaire/cm2/parcours"
               className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"

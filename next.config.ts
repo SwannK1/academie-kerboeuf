@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    parallelServerBuildTraces: false,
+  },
   webpack(config, { dev }) {
     if (dev) {
       config.watchOptions = {
