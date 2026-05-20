@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "dev:clean": "rm -rf .next && next dev --webpack",
-    "local": "lsof -ti:3000 2>/dev/null | xargs kill -9 2>/dev/null; rm -rf .next && next dev --webpack",
+    "dev": "WATCHPACK_POLLING=true next dev --webpack",
+    "dev:clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true, maxRetries: 10, retryDelay: 200 })\" && WATCHPACK_POLLING=true next dev --webpack",
+    "local": "lsof -ti:3000 2>/dev/null | xargs kill -9 2>/dev/null; node -e \"require('fs').rmSync('.next', { recursive: true, force: true, maxRetries: 10, retryDelay: 200 })\" && WATCHPACK_POLLING=true next dev --webpack",
     "open": "open http://localhost:3000",
+    "prebuild": "node -e \"const fs=require('fs'); fs.rmSync('.next', { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); fs.rmSync('tsconfig.tsbuildinfo', { force: true })\"",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
     "start": "next start",
     "lint": "eslint"

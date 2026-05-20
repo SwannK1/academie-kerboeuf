@@ -1,19 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    cpus: 1,
-  },
   webpack(config, { dev }) {
     if (dev) {
       config.watchOptions = {
         ...config.watchOptions,
+        aggregateTimeout: 300,
         ignored: [
           "**/.git/**",
           "**/node_modules/**",
           "**/.next/**",
           "**/.next-*/**",
+          "**/.next*/**",
         ],
+        poll: 1000,
       };
     }
 
