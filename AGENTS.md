@@ -54,3 +54,145 @@ const availableMissions = missions.filter(
 );
 ```
 <!-- END:public-status-governance -->
+
+<!-- BEGIN:cp-pdf-resource-portal -->
+# Standard catalogue CP / CE1 / CE2 — portail de ressources PDF
+
+Les pages catalogue CP, CE1 et CE2 utilisent la route générique canonique :
+
+```
+/primaire/[level]/programmes/[domain]/[subdomain]
+```
+
+Le registre source des pages publiées est :
+
+```
+content/levels/published-subdomain-pages.ts
+```
+
+Pour CP, l'URL canonique publiée est :
+
+```
+/primaire/cp/programmes/francais/lecture-comprehension
+```
+
+## Route courte CP — redirect de compatibilité
+
+La route historique courte :
+
+```
+/primaire/cp/[domainSlug]/[subdomainSlug]
+```
+
+est conservée uniquement comme **redirect statique** vers `published.route`.
+Elle ne doit **pas** être transformée en page de rendu catalogue.
+Elle ne doit **pas** être promue dans la navigation principale.
+
+Le redirect cible toujours la valeur `route` du registre — si le registre évolue,
+le redirect suit automatiquement.
+
+## Rôle des pages catalogue de sous-domaine
+
+Ces pages sont des index de ressources PDF futures par sous-domaine. Elles listent
+les leçons et leurs ressources associées, mais ne portent pas le contenu
+pédagogique complet.
+
+Ressources attendues par leçon :
+
+- Leçon PDF ;
+- Exercices PDF ;
+- Correction PDF ;
+- Projection PDF ;
+- Fiche parent.
+
+## Contenus interdits sur les pages catalogue
+
+Les pages catalogue ne doivent jamais afficher :
+
+- `exercises` — exercices complets ;
+- `validation` — corrections ;
+- `parentGuidance` — guide parent détaillé ;
+- `printableSupport` — support imprimable détaillé ;
+- `projectableSupport` — support projetable détaillé ;
+- `successCriteria` — critères de réussite détaillés ;
+- `characterLink.roleHint` — conseil de rôle du personnage ;
+- consignes longues ou déroulé enseignant.
+
+Ces champs sont présents dans les learning trees mais réservés aux futurs PDF.
+
+## Règles de lien PDF
+
+Un lien PDF ne doit être cliquable que si les deux conditions sont vraies :
+
+- `getPublicStatusKey(resource.status) === "available"` ;
+- `resource.href` existe.
+
+Si `href` est absent, aucun lien cliquable ne doit être rendu. Ne jamais ajouter
+de `href` vers un fichier inexistant ou un PDF fictif.
+
+## Règles de statuts
+
+- Utiliser `PublicStatusBadge` pour afficher un statut.
+- Utiliser `getPublicStatusKey(status)` pour les conditions.
+- Ne pas importer directement `public-status.domain` ou `public-status.ui`.
+- Ne pas comparer directement les libellés publics ou statuts bruts dans l'UI.
+- Ne pas confondre le statut pédagogique d'une leçon avec l'existence réelle
+  d'un PDF.
+
+## Routes legacy CP — redirects de compatibilité
+
+Les routes suivantes ont été converties en **redirects statiques**.
+Elles ne sont plus des pages HTML de leçon et ne doivent pas le redevenir :
+
+- `/primaire/cp/lecons` → redirige vers `/primaire/cp/programmes/francais/lecture-comprehension`
+- `/primaire/cp/lecons/[slug]` → redirige vers la page catalogue du sous-domaine correspondant
+
+Ces routes ne doivent **pas** être remises en avant dans la navigation principale.
+Elles ne doivent **pas** être transformées en pages de rendu HTML de leçon.
+
+## Interdits catalogue
+
+- Ne pas créer de nouvelle route `[lessonSlug]` pour CP.
+- Ne pas créer de page HTML longue de leçon.
+- Ne pas créer de PDF fictif.
+- Ne pas ajouter de `href` vers un fichier inexistant.
+- Ne pas remettre `/primaire/cp/lecons` au centre de la navigation.
+- Ne pas transformer la route de redirect CP en page de rendu catalogue.
+
+## Extension future
+
+Ajouter un nouveau niveau catalogue dans la logique :
+
+```
+publishedSubdomainPages → learning tree → route générique canonique
+```
+
+Le modèle est généralisé à CP, CE1 et CE2. Pour CM1 ou d'autres niveaux, ajouter
+une entrée dans `content/levels/published-subdomain-pages.ts` et créer le
+learning tree correspondant.
+<!-- END:cp-pdf-resource-portal -->
+
+<!-- BEGIN:build-rules -->
+# Règles de build — TypeScript et Next.js
+
+## Nettoyage obligatoire avant tsc
+
+`tsconfig.json` inclut `.next/types/**/*.ts`. Des builds interrompus peuvent
+laisser des fichiers générés obsolètes qui produisent des erreurs TypeScript
+fantômes sur des lignes inexistantes.
+
+**Toujours lancer avant `npx tsc --noEmit` :**
+
+```
+rm -rf .next
+```
+
+## Ordre de validation standard
+
+```
+rm -rf .next
+npm run lint
+npx tsc --noEmit
+npx next build --webpack
+```
+<!-- END:build-rules -->

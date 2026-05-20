@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
 import {
   getLevelPath,
   getLevelsByStage,
@@ -61,36 +61,13 @@ export default function PrimairePage() {
 
   return (
     <main>
-      <div className="px-4 pt-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Primaire" }]} />
-        </div>
-      </div>
+      {/* ── Portail immersif ──────────────────────────────────────────────── */}
+      {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
+      {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
+      <PrimairePortalMap />
 
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(80,200,164,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(243,196,91,0.14),transparent_30%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
-        <div className="mx-auto max-w-7xl">
-          <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
-            Cycle 2 · Cycle 3
-          </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
-            Les Lisières<br />des Explorateurs
-          </h1>
-          <p className="mt-5 text-2xl font-black text-gold">
-            Explorer, comprendre, créer, coopérer.
-          </p>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
-            Cinq niveaux, cinq personnages repères. Chaque guide accompagne une
-            posture d&apos;explorateur différente — du premier décodage en CP à la
-            préparation du collège en CM2.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Choix du niveau / personnage ──────────────────────────────────── */}
-      <section className="px-4 pb-16 sm:px-6 lg:px-8">
+      {/* ── Choix du niveau / personnage (desktop : accès secondaire) ─────── */}
+      <section className="px-4 pb-16 pt-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 border-b border-white/10 pb-6">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">

@@ -1,6 +1,24 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    cpus: 1,
+  },
+  webpack(config, { dev }) {
+    if (dev) {
+      config.watchOptions = {
+        ...config.watchOptions,
+        ignored: [
+          "**/.git/**",
+          "**/node_modules/**",
+          "**/.next/**",
+          "**/.next-*/**",
+        ],
+      };
+    }
+
+    return config;
+  },
   async headers() {
     return [
       {

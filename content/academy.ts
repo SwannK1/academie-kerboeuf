@@ -30,7 +30,24 @@ export type AcademySubject =
   | "Production d’écrit"
   | "Étude de la langue"
   | "Calcul mental"
-  | "Résolution de problèmes";
+  | "Résolution de problèmes"
+  // — Collège —
+  | "SVT"
+  | "Physique-Chimie"
+  | "Technologie"
+  | "Langues vivantes"
+  | "Arts Plastiques"
+  | "Éducation Musicale"
+  | "EPS"
+  | "EMC"
+  | "Documentation"
+  // — Lycée —
+  | "Philosophie"
+  | "SES"
+  | "Géopolitique"
+  | "EMI"
+  | "NSI"
+  | "Orientation";
 
 export type AcademyMission = {
   slug: string;
@@ -110,6 +127,16 @@ export const academySubjects: AcademySubject[] = [
   "Étude de la langue",
   "Calcul mental",
   "Résolution de problèmes",
+  // — Collège —
+  "SVT",
+  "Physique-Chimie",
+  "Technologie",
+  "Langues vivantes",
+  "Arts Plastiques",
+  "Éducation Musicale",
+  "EPS",
+  "EMC",
+  "Documentation",
 ];
 
 export const academyThemes = {

@@ -555,6 +555,11 @@ export const cm2Missions: Cm2Mission[] = [
         "Lire un document historique court pour identifier sa nature, sa date, son contexte et ce qu’il apprend sur une époque.",
       schoolSkill:
         "Analyser un document historique simple en relevant sa nature, sa date, son auteur ou son contexte, puis en interprétant les indices.",
+      successCriteria: [
+        "J’identifie la nature, la date et le lieu du document.",
+        "Je relève des indices précis dans le texte.",
+        "J’explique ce que le document apprend sur l’époque.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
@@ -648,10 +653,10 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Document d’archive avec marge pour souligner les indices.",
+          "Une fiche recto avec le document d’archive.",
+          "Marge sobre pour souligner ou numéroter les indices.",
           "Tableau nature / date / lieu / contexte.",
-          "Questions progressives avec espace de justification.",
-          "Trace écrite courte à compléter.",
+          "Questions progressives avec trace écrite courte à compléter.",
         ],
       },
       progressStatus: {
@@ -666,7 +671,17 @@ export const cm2Missions: Cm2Mission[] = [
           "Imprimer le document avec une fiche d’analyse et une trace écrite courte.",
       },
     },
+    curriculumDomain: "Histoire · Lire et comprendre un document",
+    curriculumCompetency:
+      "Identifier la nature d’un document historique, relever des indices et les relier à un contexte.",
+    curriculumObjective:
+      "Analyser une archive courte pour comprendre ce qu’elle apprend sur une période et sur la vie quotidienne.",
+    officialLevel: "CM2",
+    cycle: "Cycle 3",
+    skillTags: ["document historique", "archive", "chronologie"],
     teacherUse: ["projection", "impression"],
+    studentUse:
+      "Lire l’archive, repérer sa nature et sa date, relever les indices, puis expliquer ce qu’elle apprend.",
   },
   {
     slug: "cartographe-du-monde",
@@ -1282,7 +1297,7 @@ export const cm2Missions: Cm2Mission[] = [
       "Utiliser les accords comme indices",
     ],
     upcomingActivities: [
-      "Phrase à indices colorés",
+      "Phrase à indices codés",
       "Enquête sur les accords",
       "Défi de transformation grammaticale",
     ],
@@ -1295,11 +1310,16 @@ export const cm2Missions: Cm2Mission[] = [
         "Identifier les groupes essentiels d’une phrase, justifier son analyse et réécrire la phrase en gardant une structure correcte.",
       schoolSkill:
         "Repérer le verbe conjugué, le groupe sujet et des compléments, puis utiliser ces repères pour analyser et transformer une phrase.",
+      successCriteria: [
+        "Je repère le verbe conjugué et le groupe sujet complet.",
+        "J’identifie au moins deux compléments et leur rôle.",
+        "Je réécris la phrase en vérifiant les accords.",
+      ],
       duration: "20 à 30 minutes",
       level: "CM2 · Cycle 3",
       materials: [
         "Phrase projetée ou imprimée",
-        "Crayons de couleur pour coder les groupes",
+        "Crayon ou stylo pour coder les groupes",
         "Fiche réponse avec tableau sujet / verbe / compléments",
         "Ardoise ou cahier pour la réécriture",
       ],
@@ -1370,7 +1390,7 @@ export const cm2Missions: Cm2Mission[] = [
         title: "Version à projeter",
         content: [
           "Afficher la phrase sans couleur pour une première lecture.",
-          "Coder collectivement le verbe, le sujet et les compléments.",
+          "Coder collectivement le verbe, le sujet et les compléments avec des lettres ou des encadrements.",
           "Faire justifier chaque choix avec une question grammaticale.",
           "Afficher la réécriture seulement après les propositions des élèves.",
         ],
@@ -1378,9 +1398,9 @@ export const cm2Missions: Cm2Mission[] = [
       printableVersion: {
         title: "Version à imprimer",
         content: [
-          "Phrase support avec espace de codage couleur.",
+          "Une fiche recto avec la phrase support.",
+          "Espace de codage sobre avec lettres ou encadrements.",
           "Tableau sujet / verbe / compléments à compléter.",
-          "Question de justification pour chaque groupe.",
           "Zone de réécriture avec vérification des accords.",
         ],
       },
@@ -1391,12 +1411,22 @@ export const cm2Missions: Cm2Mission[] = [
       },
       usage: {
         projection:
-          "Projeter la phrase et utiliser un code couleur collectif pour le verbe, le sujet, les compléments et la réécriture.",
+          "Projeter la phrase et utiliser un codage collectif simple pour le verbe, le sujet, les compléments et la réécriture.",
         printing:
-          "Imprimer la phrase avec une légende couleur, un tableau d’analyse et une zone de réécriture.",
+          "Imprimer la phrase avec une légende de codage, un tableau d’analyse et une zone de réécriture.",
       },
     },
+    curriculumDomain: "Français · Étude de la langue",
+    curriculumCompetency:
+      "Identifier les constituants de la phrase et utiliser les accords pour justifier une analyse grammaticale.",
+    curriculumObjective:
+      "Repérer verbe, sujet et compléments, puis réécrire une phrase en respectant les accords.",
+    officialLevel: "CM2",
+    cycle: "Cycle 3",
+    skillTags: ["grammaire", "fonctions", "accords"],
     teacherUse: ["projection", "impression"],
+    studentUse:
+      "Lire la phrase, repérer les groupes, justifier leur rôle, puis réécrire en vérifiant les accords.",
   },
 ];
 

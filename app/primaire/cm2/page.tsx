@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Level, cm2Missions } from "@/content/cm2";
 import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
+import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "CM2 — La Grande Classe des Explorateurs | Académie Kerboeuf",
@@ -176,7 +177,7 @@ export default function Cm2Page() {
 
 function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
-  const isAvailable = subject.status === "available";
+  const isAvailable = getPublicStatusKey(subject.status) === "available";
 
   return (
     <Link

@@ -383,7 +383,7 @@ export const felixProjects: LearningMission[] = [
       teacher:
         "L'enseignant évalue le plan, la notice écrite et la présentation orale selon la grille fournie. Une note de contribution individuelle est ajoutée.",
     },
-    associatedPlace: "carthotheque-des-lisieres",
+    associatedPlace: "cartotheque-des-lisieres",
     associatedBadges: ["cartographe", "batisseur", "allie-du-collectif"],
     officialReference: {
       cycle: "Cycle 3",
@@ -872,7 +872,7 @@ export const felixProjects: LearningMission[] = [
       teacher:
         "L'enseignant évalue la page d'atlas (carte, légende, commentaire) et le texte de position (arguments, données citées).",
     },
-    associatedPlace: "carthotheque-des-lisieres",
+    associatedPlace: "cartotheque-des-lisieres",
     associatedBadges: ["cartographe", "pisteur-des-sources"],
   },
 
