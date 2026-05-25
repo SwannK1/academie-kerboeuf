@@ -1,33 +1,32 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
+import { RestaurantJsonLd } from "@/components/RestaurantJsonLd";
+import { restaurantInfo, siteUrl } from "@/content/restaurant-info";
 import "./globals.css";
 
-// TODO: remplacer par le domaine réel avant mise en production
-const BASE_URL = "https://academie-kerboeuf.fr";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Académie Kerboeuf | Missions pédagogiques immersives",
-    template: "%s | Académie Kerboeuf",
+    default: "Chez Juju & Fifi — Restaurant français à Chelles",
+    template: "%s",
   },
   description:
-    "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+    "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    siteName: "Académie Kerboeuf",
-    title: "Académie Kerboeuf | Missions pédagogiques immersives",
+    siteName: restaurantInfo.name,
+    title: "Chez Juju & Fifi — Restaurant français à Chelles",
     description:
-      "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
-    url: BASE_URL,
+      "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
+    url: siteUrl,
   },
   twitter: {
     card: "summary",
-    title: "Académie Kerboeuf | Missions pédagogiques immersives",
+    title: "Chez Juju & Fifi — Restaurant français à Chelles",
     description:
-      "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+      "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
   },
   robots: {
     index: true,
@@ -46,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="h-full scroll-smooth antialiased">
       <body className="min-h-full bg-background text-foreground">
+        <RestaurantJsonLd />
         <SiteHeader />
         {children}
         <SiteFooter />

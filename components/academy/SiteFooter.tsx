@@ -1,26 +1,17 @@
 import Link from "next/link";
+import { mainNavigation, restaurantInfo } from "@/content/restaurant-info";
 
 const footerSections = [
   {
-    title: "Explorer",
-    links: [
-      { label: "Accueil", href: "/" },
-      { label: "Maternelle", href: "/maternelle" },
-      { label: "Primaire", href: "/primaire" },
-      { label: "Collège", href: "/college" },
-      { label: "Lycée", href: "/lycee" },
-    ],
+    title: "Restaurant",
+    links: [{ label: "Accueil", href: "/" }, ...mainNavigation],
   },
   {
-    title: "Académie",
+    title: "Infos",
     links: [
-      { label: "Élèves", href: "/eleves" },
-      { label: "Missions", href: "/missions-recentes" },
-      { label: "Ressources", href: "/ressources" },
-      { label: "Parcours", href: "/parcours" },
-      { label: "Programmes", href: "/programmes" },
-      { label: "Professeurs", href: "/professeurs" },
-      { label: "Univers", href: "/univers" },
+      { label: restaurantInfo.phoneDisplay, href: `tel:${restaurantInfo.phoneInternational}` },
+      { label: restaurantInfo.address.addressLocality, href: "/contact" },
+      { label: "Réserver une table", href: restaurantInfo.reservationPath },
     ],
   },
 ];
@@ -32,20 +23,21 @@ export function SiteFooter() {
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
             <span className="grid size-10 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold">
-              AK
+              JF
             </span>
             <span>
               <span className="block text-sm font-semibold tracking-[0.16em] text-foreground">
-                ACADEMIE
+                CHEZ JUJU
               </span>
               <span className="block text-xs font-medium tracking-[0.22em] text-gold">
-                KERBOEUF
+                & FIFI
               </span>
             </span>
           </Link>
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted">
-            Une académie secrète pédagogique pour structurer les niveaux,
-            les élèves, les matières et les missions de la maternelle à la Terminale.
+            {restaurantInfo.name} est un restaurant français situé à Chelles,
+            avec une cuisine traditionnelle, un menu du jour, une terrasse et
+            des réservations pour les repas de groupe.
           </p>
         </div>
 

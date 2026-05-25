@@ -3,15 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { mainNavigation, restaurantInfo } from "@/content/restaurant-info";
 
-const navItems = [
-  { label: "Accueil", href: "/" },
-  { label: "Maternelle", href: "/maternelle" },
-  { label: "Primaire", href: "/primaire" },
-  { label: "Collège", href: "/college" },
-  { label: "Lycée", href: "/lycee" },
-  { label: "Ressources", href: "/ressources" },
-];
+const navItems = [{ label: "Accueil", href: "/" }, ...mainNavigation];
 
 function isActivePath(pathname: string, href: string) {
   if (href === "/") {
@@ -37,14 +31,14 @@ export function SiteHeader() {
           onClick={() => setIsOpen(false)}
         >
           <span className="grid size-10 shrink-0 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold shadow-[0_0_28px_rgba(243,196,91,0.18)]">
-            AK
+            JF
           </span>
           <span className="flex min-w-0 flex-col leading-none">
             <span className="truncate text-sm font-semibold tracking-[0.16em] text-foreground">
-              ACADEMIE
+              CHEZ JUJU
             </span>
             <span className="truncate text-xs font-medium tracking-[0.22em] text-gold">
-              KERBOEUF
+              & FIFI
             </span>
           </span>
         </Link>
@@ -69,6 +63,13 @@ export function SiteHeader() {
             );
           })}
         </div>
+
+        <Link
+          href={restaurantInfo.reservationPath}
+          className="hidden h-10 items-center justify-center rounded-md bg-gold px-4 text-sm font-black text-ink transition hover:bg-[#ffd778] lg:inline-flex"
+        >
+          Réserver
+        </Link>
 
         <button
           type="button"
