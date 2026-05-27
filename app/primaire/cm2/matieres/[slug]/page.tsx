@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import { getPublicStatusKey } from "@/content/public-status";
@@ -133,7 +134,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                       Missions
                     </p>
                     <h2 className="mt-2 text-2xl font-black text-foreground">
-                      Missions disponibles en {subject.title}
+                      Missions en {subject.title}
                     </h2>
                   </div>
                   <Link
@@ -144,26 +145,48 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                   </Link>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {linkedMissions.map((mission) => (
-                    <Link
-                      key={mission.slug}
-                      href={`/primaire/cm2/missions/${mission.slug}`}
-                      className={`group flex flex-col rounded-md border ${mission.theme.ringClass ?? "border-white/10"} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
-                    >
-                      <p className={`text-xs font-bold uppercase tracking-[0.18em] ${mission.theme.textClass}`}>
-                        {mission.subject}
-                      </p>
-                      <h3 className="mt-3 text-lg font-black text-foreground">
-                        {mission.title}
-                      </h3>
-                      <p className="mt-2 flex-1 text-sm leading-6 text-muted">
-                        {mission.objective}
-                      </p>
-                      <span className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${mission.theme.textClass}`}>
-                        Ouvrir la mission →
-                      </span>
-                    </Link>
-                  ))}
+                  {linkedMissions.map((mission) => {
+                    const isMissionAvailable = getPublicStatusKey(mission.status) === "available";
+                    if (isMissionAvailable) {
+                      return (
+                        <Link
+                          key={mission.slug}
+                          href={`/primaire/cm2/missions/${mission.slug}`}
+                          className={`group flex flex-col rounded-md border ${mission.theme.ringClass ?? "border-white/10"} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
+                        >
+                          <p className={`text-xs font-bold uppercase tracking-[0.18em] ${mission.theme.textClass}`}>
+                            {mission.subject}
+                          </p>
+                          <h3 className="mt-3 text-lg font-black text-foreground">
+                            {mission.title}
+                          </h3>
+                          <p className="mt-2 flex-1 text-sm leading-6 text-muted">
+                            {mission.objective}
+                          </p>
+                          <span className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${mission.theme.textClass}`}>
+                            Ouvrir la mission →
+                          </span>
+                        </Link>
+                      );
+                    }
+                    return (
+                      <article
+                        key={mission.slug}
+                        className={`flex flex-col rounded-md border ${mission.theme.ringClass ?? "border-white/10"} bg-white/[0.025] p-5 opacity-60`}
+                      >
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                          {mission.subject}
+                        </p>
+                        <h3 className="mt-3 text-lg font-black text-foreground">
+                          {mission.title}
+                        </h3>
+                        <p className="mt-2 flex-1 text-sm leading-6 text-muted">
+                          {mission.objective}
+                        </p>
+                        <PublicStatusBadge status={mission.status} className="mt-4" />
+                      </article>
+                    );
+                  })}
                 </div>
               </div>
             </section>

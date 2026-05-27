@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/cm2/section-header";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Missions, type Cm2Mission } from "@/content/cm2";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
+import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Parcours CM2 — L’année des grands explorateurs | Académie Kerboeuf",
@@ -328,15 +329,29 @@ function DomainCard({
         {domain.description}
       </p>
       <div className="mt-5 grid gap-2">
-        {domain.missions.map((mission) => (
-          <Link
-            key={mission.slug}
-            href={`/primaire/cm2/missions/${mission.slug}`}
-            className="rounded border border-white/10 bg-ink/35 p-3 text-sm font-bold text-foreground transition hover:border-gold/30 hover:text-gold"
-          >
-            {mission.title}
-          </Link>
-        ))}
+        {domain.missions.map((mission) => {
+          const isAvailable = getPublicStatusKey(mission.status) === "available";
+          if (isAvailable) {
+            return (
+              <Link
+                key={mission.slug}
+                href={`/primaire/cm2/missions/${mission.slug}`}
+                className="rounded border border-white/10 bg-ink/35 p-3 text-sm font-bold text-foreground transition hover:border-gold/30 hover:text-gold"
+              >
+                {mission.title}
+              </Link>
+            );
+          }
+          return (
+            <div
+              key={mission.slug}
+              className="flex items-center justify-between gap-2 rounded border border-white/10 bg-ink/20 p-3 opacity-60"
+            >
+              <span className="text-sm font-bold text-muted">{mission.title}</span>
+              <PublicStatusBadge status={mission.status} />
+            </div>
+          );
+        })}
       </div>
     </article>
   );
@@ -359,26 +374,44 @@ function ProgressionStep({
       <div>
         <h3 className="text-2xl font-black text-foreground">{focus}</h3>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {missions.map((mission) => (
-            <Link
-              key={mission.slug}
-              href={`/primaire/cm2/missions/${mission.slug}`}
-              className="rounded border border-white/10 bg-ink/35 p-4 transition hover:border-gold/30 hover:bg-white/[0.06]"
-            >
-              <span
-                className={`text-xs font-bold uppercase tracking-[0.16em] ${mission.theme.textClass}`}
+          {missions.map((mission) => {
+            const isAvailable = getPublicStatusKey(mission.status) === "available";
+            const innerContent = (
+              <>
+                <span
+                  className={`text-xs font-bold uppercase tracking-[0.16em] ${isAvailable ? mission.theme.textClass : "text-muted"}`}
+                >
+                  {mission.subject}
+                </span>
+                <span className="mt-2 block font-bold text-foreground">
+                  {mission.title}
+                </span>
+                <span className="mt-2 block text-sm leading-6 text-muted">
+                  {mission.description}
+                </span>
+                <PublicStatusBadge status={mission.status} className="mt-3" />
+              </>
+            );
+            if (isAvailable) {
+              return (
+                <Link
+                  key={mission.slug}
+                  href={`/primaire/cm2/missions/${mission.slug}`}
+                  className="rounded border border-white/10 bg-ink/35 p-4 transition hover:border-gold/30 hover:bg-white/[0.06]"
+                >
+                  {innerContent}
+                </Link>
+              );
+            }
+            return (
+              <article
+                key={mission.slug}
+                className="rounded border border-white/10 bg-ink/20 p-4 opacity-60"
               >
-                {mission.subject}
-              </span>
-              <span className="mt-2 block font-bold text-foreground">
-                {mission.title}
-              </span>
-              <span className="mt-2 block text-sm leading-6 text-muted">
-                {mission.description}
-              </span>
-              <PublicStatusBadge status={mission.status} className="mt-3" />
-            </Link>
-          ))}
+                {innerContent}
+              </article>
+            );
+          })}
         </div>
       </div>
     </article>

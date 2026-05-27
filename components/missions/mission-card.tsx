@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { getPublicStatusKey } from "@/content/public-status";
 
 export type MissionCardData = {
   slug: string;
@@ -108,7 +109,9 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
     </>
   );
 
-  if (linkBasePath) {
+  const isAvailable = getPublicStatusKey(mission.status) === "available";
+
+  if (linkBasePath && isAvailable) {
     return (
       <Link
         href={`${linkBasePath}/${mission.slug}`}
@@ -123,9 +126,11 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
   return (
     <article className={staticClassName} aria-label={mission.title}>
       {content}
-      <div className="mt-4 inline-flex rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
-        Détail non disponible
-      </div>
+      {!linkBasePath ? (
+        <div className="mt-4 inline-flex rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+          Détail non disponible
+        </div>
+      ) : null}
     </article>
   );
 }

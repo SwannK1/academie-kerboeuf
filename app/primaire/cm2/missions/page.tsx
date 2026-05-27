@@ -227,35 +227,7 @@ export default function Cm2MissionsPage() {
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {felixProjects.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/primaire/cm2/missions/${project.slug}`}
-                className={`group flex min-h-full flex-col rounded-md border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${project.theme.ringClass}`}
-              >
-                <div className={`mb-4 h-1 rounded-full ${project.theme.accentClass}`} aria-hidden="true" />
-                <div className="flex items-start justify-between gap-3">
-                  <p className={`text-xs font-bold uppercase tracking-[0.18em] ${project.theme.textClass}`}>
-                    {project.mainSubject}
-                  </p>
-                  <PublicStatusBadge status={project.status} />
-                </div>
-                <h3 className="mt-3 text-xl font-black text-foreground">{project.title}</h3>
-                <p className="mt-1 text-sm font-medium text-muted">{project.subtitle}</p>
-                <p className="mt-3 flex-1 text-xs leading-6 text-muted line-clamp-3">
-                  {project.synopsis}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
-                    {project.duration}
-                  </span>
-                  <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
-                    {project.skills.length} compétences
-                  </span>
-                </div>
-                <span className={`mt-4 text-sm font-bold transition group-hover:translate-x-1 ${project.theme.textClass}`}>
-                  Ouvrir le projet →
-                </span>
-              </Link>
+              <FelixProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </div>
@@ -374,5 +346,56 @@ function Metric({ value, label }: { value: number; label: string }) {
         {label}
       </p>
     </div>
+  );
+}
+
+function FelixProjectCard({ project }: { project: (typeof felixProjects)[number] }) {
+  const isAvailable = getPublicStatusKey(project.status) === "available";
+
+  const cardContent = (
+    <>
+      <div className={`mb-4 h-1 rounded-full ${project.theme.accentClass}`} aria-hidden="true" />
+      <div className="flex items-start justify-between gap-3">
+        <p className={`text-xs font-bold uppercase tracking-[0.18em] ${isAvailable ? project.theme.textClass : "text-muted"}`}>
+          {project.mainSubject}
+        </p>
+        <PublicStatusBadge status={project.status} />
+      </div>
+      <h3 className="mt-3 text-xl font-black text-foreground">{project.title}</h3>
+      <p className="mt-1 text-sm font-medium text-muted">{project.subtitle}</p>
+      <p className="mt-3 flex-1 text-xs leading-6 text-muted line-clamp-3">
+        {project.synopsis}
+      </p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
+          {project.duration}
+        </span>
+        <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
+          {project.skills.length} compétences
+        </span>
+      </div>
+    </>
+  );
+
+  if (!isAvailable) {
+    return (
+      <article
+        className={`flex min-h-full flex-col rounded-md border bg-white/[0.025] p-5 opacity-70 ${project.theme.ringClass}`}
+      >
+        {cardContent}
+      </article>
+    );
+  }
+
+  return (
+    <Link
+      href={`/primaire/cm2/missions/${project.slug}`}
+      className={`group flex min-h-full flex-col rounded-md border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${project.theme.ringClass}`}
+    >
+      {cardContent}
+      <span className={`mt-4 text-sm font-bold transition group-hover:translate-x-1 ${project.theme.textClass}`}>
+        Ouvrir le projet →
+      </span>
+    </Link>
   );
 }
