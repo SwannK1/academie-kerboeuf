@@ -165,6 +165,24 @@ export default function Cm2Page() {
             </Link>
 
             <Link
+              href="/primaire/cm2/methode"
+              className="group flex flex-col gap-2 rounded-md border border-gold/25 bg-gold/[0.05] p-5 transition hover:border-gold/45 hover:bg-gold/[0.09]"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                Organisation pédagogique
+              </p>
+              <p className="text-lg font-black text-foreground">
+                Méthode CM2
+              </p>
+              <p className="text-sm leading-6 text-muted">
+                Séquences en 5 séances, progression des exercices et productions attendues.
+              </p>
+              <span className="mt-1 text-sm font-black text-gold transition group-hover:translate-x-1">
+                Voir la méthode →
+              </span>
+            </Link>
+
+            <Link
               href="/professeurs/felix"
               className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
