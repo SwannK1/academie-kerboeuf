@@ -55,11 +55,9 @@ kerweb-studio/
 supabase/
 app/audit-gratuit/
 app/offres/
-app/realisations/
 app/services/
 app/api/audit-request/
 app/api/audit-submit/
-components/kerweb/
 components/audit/
 content/kerweb.ts
 lib/audit/
