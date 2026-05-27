@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/content/restaurant-info";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,7 +7,5 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/api/"],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl,
   };
 }
