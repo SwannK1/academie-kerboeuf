@@ -1,33 +1,15 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
-import { RestaurantJsonLd } from "@/components/RestaurantJsonLd";
-import { restaurantInfo, siteUrl } from "@/content/restaurant-info";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
   title: {
-    default: "Chez Juju & Fifi — Restaurant français à Chelles",
-    template: "%s",
+    default: "Académie Kerboeuf — Plateforme pédagogique",
+    template: "%s | Académie Kerboeuf",
   },
   description:
-    "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    siteName: restaurantInfo.name,
-    title: "Chez Juju & Fifi — Restaurant français à Chelles",
-    description:
-      "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
-    url: siteUrl,
-  },
-  twitter: {
-    card: "summary",
-    title: "Chez Juju & Fifi — Restaurant français à Chelles",
-    description:
-      "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
-  },
+    "Académie Kerboeuf : une plateforme pédagogique structurée pour apprendre, s'entraîner et progresser, de la maternelle au lycée.",
   robots: {
     index: true,
     follow: true,
@@ -45,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="fr" className="h-full scroll-smooth antialiased">
       <body className="min-h-full bg-background text-foreground">
-        <RestaurantJsonLd />
         <SiteHeader />
         {children}
         <SiteFooter />

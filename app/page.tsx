@@ -1,106 +1,106 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { menuHighlights, restaurantInfo } from "@/content/restaurant-info";
 
 export const metadata: Metadata = {
-  title: { absolute: "Chez Juju & Fifi — Restaurant français à Chelles" },
+  title: "Académie Kerboeuf — Plateforme pédagogique",
   description:
-    "Restaurant français à Chelles, cuisine traditionnelle, menu du jour, terrasse, groupes et réservation en ligne.",
+    "Académie Kerboeuf : une plateforme pédagogique structurée pour apprendre, s'entraîner et progresser, de la maternelle au lycée.",
 };
 
-export default function Home() {
+const LEVELS = [
+  {
+    label: "Maternelle",
+    href: "/maternelle",
+    desc: "PS, MS, GS — Découvrir le monde, le langage et les premières structures.",
+    accent: "jade",
+  },
+  {
+    label: "Primaire",
+    href: "/primaire",
+    desc: "CP, CE1, CE2, CM2 — Lire, compter, comprendre et s'entraîner avec méthode.",
+    accent: "gold",
+  },
+  {
+    label: "Collège",
+    href: "/college",
+    desc: "6e à 3e — Approfondir les compétences et préparer les grandes étapes.",
+    accent: "sky",
+  },
+  {
+    label: "Lycée",
+    href: "/lycee",
+    desc: "Seconde, Première, Terminale — Maîtriser, raisonner et réinvestir.",
+    accent: "ember",
+  },
+  {
+    label: "Professeurs",
+    href: "/professeurs",
+    desc: "Guides pédagogiques, méthodes et fiches par personnage.",
+    accent: "jade",
+  },
+  {
+    label: "Ressources",
+    href: "/ressources",
+    desc: "Supports, outils et documents pour accompagner l'apprentissage.",
+    accent: "gold",
+  },
+] as const;
+
+const ACCENT = {
+  jade:  { text: "text-jade",  border: "border-jade/30",  bg: "bg-jade/[0.05]",  hover: "hover:border-jade/50 hover:bg-jade/[0.09]"  },
+  gold:  { text: "text-gold",  border: "border-gold/30",  bg: "bg-gold/[0.05]",  hover: "hover:border-gold/50 hover:bg-gold/[0.09]"  },
+  sky:   { text: "text-sky",   border: "border-sky/30",   bg: "bg-sky/[0.05]",   hover: "hover:border-sky/50 hover:bg-sky/[0.09]"   },
+  ember: { text: "text-ember", border: "border-ember/30", bg: "bg-ember/[0.05]", hover: "hover:border-ember/50 hover:bg-ember/[0.09]" },
+};
+
+export default function HomePage() {
   return (
     <main>
-      <section className="relative isolate overflow-hidden px-4 pt-28 sm:px-6 lg:px-8">
-        <div className="mission-grid absolute inset-0 -z-30 opacity-35" />
-        <div className="absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(5,8,7,0.16),rgba(9,16,15,0.96))]" />
-        <div className="mx-auto grid min-h-[calc(92svh-7rem)] max-w-7xl items-center gap-10 pb-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
-              Restaurant à Chelles
-            </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
-              Chez Juju & Fifi
-            </h1>
-            <p className="mt-5 text-2xl font-black text-jade sm:text-3xl">
-              Restaurant français, ambiance bistrot et cuisine traditionnelle.
-            </p>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-              Chez Juju & Fifi est un restaurant français situé à Chelles,
-              pensé pour les repas du midi, les dîners conviviaux et les repas
-              de groupe. Le restaurant propose un menu du jour, une carte simple
-              et une terrasse pour les beaux jours.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/reservation"
-                className="inline-flex h-12 items-center justify-center rounded-md bg-gold px-6 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
-              >
-                Réserver une table
-              </Link>
-              <Link
-                href="/carte"
-                className="inline-flex h-12 items-center justify-center rounded-md border border-white/15 bg-white/[0.05] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
-              >
-                Voir la carte
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
-            <Image
-              src="/images/restaurant/table-bistrot-terrasse.png"
-              alt="Table de bistrot en terrasse chez Chez Juju & Fifi à Chelles"
-              width={900}
-              height={720}
-              priority
-              className="aspect-[5/4] w-full object-cover"
-            />
-          </div>
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(80,200,164,0.14),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(243,196,91,0.10),transparent_34%),linear-gradient(180deg,rgba(5,8,7,0.06),rgba(9,16,15,0.95))]" />
+        <div className="mx-auto max-w-4xl">
+          <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
+            Plateforme pédagogique
+          </p>
+          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
+            Académie Kerboeuf
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
+            Une plateforme pédagogique structurée pour apprendre,
+            s&apos;entraîner et progresser — de la maternelle au lycée.
+          </p>
         </div>
       </section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-4">
-          {menuHighlights.map((item) => (
-            <div
-              key={item}
-              className="rounded-md border border-white/10 bg-white/[0.04] p-5"
-            >
-              <p className="text-sm font-black text-foreground">{item}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-y border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
-              Cuisine et accueil
-            </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-              Un bistrot français pour Chelles et les environs.
-            </h2>
-          </div>
-          <div className="space-y-5 text-base leading-8 text-muted">
-            <p>
-              La maison accueille les clients pour un déjeuner rapide, une pause
-              plus tranquille ou un repas entre collègues. La réservation en
-              ligne permet aussi de préparer les repas de groupe.
-            </p>
-            <p>
-              Le vendredi soir, le couscous complète l’offre du restaurant pour
-              les habitués et les nouveaux clients. Les informations pratiques
-              sont disponibles sur la page contact.
-            </p>
-            <p>
-              {restaurantInfo.address.streetAddress},{" "}
-              {restaurantInfo.address.postalCode}{" "}
-              {restaurantInfo.address.addressLocality} ·{" "}
-              {restaurantInfo.displayPhone}
-            </p>
+      {/* ── Niveaux ───────────────────────────────────────────────────────── */}
+      <section className="border-t border-white/10 px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.22em] text-muted">
+            Accès par niveau
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {LEVELS.map((level) => {
+              const a = ACCENT[level.accent];
+              return (
+                <Link
+                  key={level.href}
+                  href={level.href}
+                  className={`group flex flex-col gap-2 rounded-md border p-5 transition ${a.border} ${a.bg} ${a.hover}`}
+                >
+                  <p className={`text-xs font-bold uppercase tracking-[0.18em] ${a.text}`}>
+                    {level.label}
+                  </p>
+                  <p className="flex-1 text-sm leading-6 text-muted">
+                    {level.desc}
+                  </p>
+                  <span className={`mt-1 text-sm font-black transition group-hover:translate-x-1 ${a.text}`}>
+                    Accéder →
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
