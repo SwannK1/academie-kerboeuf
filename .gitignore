@@ -48,3 +48,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# fichiers hors périmètre Académie Kerboeuf — ne pas commiter
+kerweb-studio/
+.claude/
+supabase/
+app/audit-gratuit/
+app/offres/
+app/realisations/
+app/services/
+app/api/audit-request/
+app/api/audit-submit/
+components/kerweb/
+components/audit/
+content/kerweb.ts
+lib/audit/
+docs/audit-request-setup.md
+docs/audit-requests-supabase.md
