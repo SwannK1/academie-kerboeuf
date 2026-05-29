@@ -37,25 +37,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.55,
   }));
 
-  const availableLessonSlugs = (level: typeof ce1Level) =>
-    level.domains
-      .flatMap((d) => d.subdomains)
-      .flatMap((s) => s.lessons)
-      .filter((l) => getPublicStatusKey(l.status) === "available")
-      .map((l) => l.slug);
+  const ce1LessonRoutes = ce1Level.domains
+    .flatMap((d) => d.subdomains)
+    .flatMap((s) => s.lessons)
+    .filter((l) => getPublicStatusKey(l.status) === "available")
+    .map((l) => ({ url: `${BASE_URL}/primaire/ce1/lecons/${l.slug}`, priority: 0.55 }));
 
-  const ce1LessonRoutes = availableLessonSlugs(ce1Level).map((slug) => ({
-    url: `${BASE_URL}/primaire/ce1/lecons/${slug}`,
-    priority: 0.55,
-  }));
-  const ce2LessonRoutes = availableLessonSlugs(ce2Level).map((slug) => ({
-    url: `${BASE_URL}/primaire/ce2/lecons/${slug}`,
-    priority: 0.55,
-  }));
-  const cm1LessonRoutes = availableLessonSlugs(cm1Level).map((slug) => ({
-    url: `${BASE_URL}/primaire/cm1/lecons/${slug}`,
-    priority: 0.55,
-  }));
+  const ce2LessonRoutes = ce2Level.domains
+    .flatMap((d) => d.subdomains)
+    .flatMap((s) => s.lessons)
+    .filter((l) => getPublicStatusKey(l.status) === "available")
+    .map((l) => ({ url: `${BASE_URL}/primaire/ce2/lecons/${l.slug}`, priority: 0.55 }));
+
+  const cm1LessonRoutes = cm1Level.domains
+    .flatMap((d) => d.subdomains)
+    .flatMap((s) => s.lessons)
+    .filter((l) => getPublicStatusKey(l.status) === "available")
+    .map((l) => ({ url: `${BASE_URL}/primaire/cm1/lecons/${l.slug}`, priority: 0.55 }));
 
   return [
     { url: `${BASE_URL}/`, priority: 1.0 },
