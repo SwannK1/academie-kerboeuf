@@ -1325,3 +1325,9 @@ export function getCurriculumSubject(
 ) {
   return level.subjects.find((s) => s.slug === subjectSlug);
 }
+
+export function getCm2Level(): AcademyLevel {
+  const level = getAcademyLevelBySlug("elementaire", "cm2");
+  if (!level) throw new Error("CM2 level missing from academyCurriculum");
+  return level;
+}
