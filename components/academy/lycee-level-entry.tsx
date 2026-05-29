@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AcademyLevel } from "@/content/academy";
+import { getAcademyLevelBySlugOnly } from "@/content/academy-curriculum";
 import type { ProgramStatus } from "@/content/program-types";
 
 type Props = {
@@ -17,7 +18,6 @@ type Props = {
 
 // Ressources prévues — aucun href : elles n'existent pas encore.
 const COMING_SOON = [
-  "Matières et domaines par discipline",
   "Compétences et critères de réussite",
   "Ressources PDF de révision",
   "Supports de méthode et d'orientation",
@@ -26,6 +26,8 @@ const COMING_SOON = [
 export function LyceeLevelEntry({ level, status }: Props) {
   const slug = level.slug;
   const missionsHref = `/lycee/${slug}/missions`;
+  const curriculumLevel = getAcademyLevelBySlugOnly(slug);
+  const curriculumSubjects = curriculumLevel?.subjects ?? [];
 
   return (
     <main>
@@ -84,18 +86,19 @@ export function LyceeLevelEntry({ level, status }: Props) {
               </span>
             </Link>
 
-            {/* Matières — à venir, non cliquable */}
+            {/* Matières — données depuis academy-curriculum */}
             <div
-              aria-label="Matières — à venir"
-              className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60"
+              aria-label="Matières du niveau"
+              className="flex flex-col rounded-md border border-jade/20 bg-jade/[0.04] p-6"
             >
               <h2 className="text-xl font-black text-foreground">Matières</h2>
               <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                Français, Mathématiques, Sciences, Langues, Histoire-Géographie
-                et toutes les disciplines du lycée.
+                {curriculumSubjects.length > 0
+                  ? `${curriculumSubjects.length} matières — domaines et sous-domaines structurés.`
+                  : "Français, Mathématiques, Sciences, Langues et disciplines du lycée."}
               </p>
               <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                À venir
+                Voir ci-dessous ↓
               </span>
             </div>
 
@@ -116,6 +119,54 @@ export function LyceeLevelEntry({ level, status }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ── Matières et domaines (academy-curriculum) ── */}
+      {curriculumSubjects.length > 0 && (
+        <section className="px-4 pb-10 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-6 border-b border-white/10 pb-4">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
+                Programme {level.label}
+              </p>
+              <h2 className="mt-1.5 text-2xl font-black text-foreground">
+                Matières et domaines
+              </h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {curriculumSubjects.map((subject) => (
+                <div
+                  key={subject.slug}
+                  className="flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5"
+                >
+                  <p className="text-sm font-black text-foreground">
+                    {subject.label}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-muted">
+                    {subject.domains.length} domaine
+                    {subject.domains.length !== 1 ? "s" : ""}
+                  </p>
+                  {subject.domains.length > 0 && (
+                    <ul className="mt-3 flex flex-col gap-1.5">
+                      {subject.domains.map((domain) => (
+                        <li
+                          key={domain.slug}
+                          className="flex items-center gap-2 text-xs text-muted"
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="size-1.5 shrink-0 rounded-full bg-jade/40"
+                          />
+                          {domain.label}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── En préparation ── */}
       <section className="px-4 py-6 sm:px-6 lg:px-8">
