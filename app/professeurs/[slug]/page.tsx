@@ -15,6 +15,7 @@ import {
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
 import { getPublicStatusLabel } from "@/content/public-status";
+import { felixPlaces, felixBadges } from "@/content/felix-character";
 
 // ─── Système de couleurs par professeur ──────────────────────────────────────
 
@@ -155,6 +156,7 @@ export default async function ProfesseurPage({ params }: PageProps) {
       <MethodSection professor={professor} />
       <MissionsSection professor={professor} />
       <CharacterCrossLinks professor={professor} />
+      {professor.slug === "felix" ? <FelixCM2Section /> : null}
       {related.length > 0 ? <RelatedProfessorsSection professors={related} /> : null}
       <ProfessorNavigation professor={professor} />
     </main>
@@ -790,6 +792,162 @@ function RelatedProfessorsSection({ professors }: { professors: ProfessorProfile
               </Link>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Sections spécifiques Félix (CM2) ─────────────────────────────────────────
+
+const FELIX_GESTURES: { label: string; description: string }[] = [
+  { label: "Observer",           description: "Regarder avec précision, repérer les détails qui comptent." },
+  { label: "Chercher",           description: "Trouver les indices, les sources, les preuves utiles." },
+  { label: "Vérifier",           description: "Tester ses hypothèses et s'assurer que la réponse tient." },
+  { label: "Justifier",          description: "Expliquer pourquoi, s'appuyer sur une preuve concrète." },
+  { label: "Expliquer",          description: "Formuler clairement pour que quelqu'un d'autre comprenne." },
+  { label: "Créer",              description: "Produire quelque chose de nouveau à partir de ce qu'on a compris." },
+  { label: "Coopérer",           description: "Contribuer à un projet commun, écouter et ajuster." },
+  { label: "Produire une trace", description: "Garder une trace écrite exploitable de ce qu'on a découvert." },
+];
+
+const FELIX_CM2_LINKS = [
+  {
+    href: "/primaire/cm2",
+    label: "Hub CM2",
+    description: "Tableau de bord du niveau CM2 avec Félix.",
+  },
+  {
+    href: "/primaire/cm2/matieres",
+    label: "Matières CM2",
+    description: "Toutes les matières du CM2 : Français, Mathématiques, Sciences…",
+  },
+  {
+    href: "/primaire/cm2/missions",
+    label: "Missions CM2",
+    description: "Les missions pédagogiques guidées par Félix.",
+  },
+];
+
+function FelixCM2Section() {
+  return (
+    <>
+      <FelixGesturesSection />
+      <FelixPlacesSection />
+      <FelixBadgesSection />
+      <FelixCM2NavigationSection />
+    </>
+  );
+}
+
+function FelixGesturesSection() {
+  return (
+    <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle
+          eyebrow="Gestes intellectuels"
+          title="Ce que Félix aide à travailler"
+        />
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {FELIX_GESTURES.map((gesture) => (
+            <div
+              key={gesture.label}
+              className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+            >
+              <p className="text-sm font-bold text-gold">{gesture.label}</p>
+              <p className="mt-2 text-xs leading-6 text-muted">{gesture.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FelixPlacesSection() {
+  return (
+    <section className="px-4 pb-14 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle
+          eyebrow="Espaces pédagogiques CM2"
+          title="Les lieux de Félix"
+        />
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {felixPlaces.map((place) => {
+            const pa = ACCENT[place.accentColor];
+            return (
+              <div
+                key={place.slug}
+                className={`rounded-md border ${pa.borderMid} ${pa.bgDeep} p-6`}
+              >
+                <p className={`text-xs font-bold uppercase tracking-[0.18em] ${pa.text}`}>
+                  Lieu
+                </p>
+                <h3 className="mt-2 text-base font-black text-foreground">
+                  {place.name}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-muted">{place.description}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FelixBadgesSection() {
+  return (
+    <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle
+          eyebrow="Compétences reconnues"
+          title="Badges du CM2"
+        />
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {felixBadges.map((badge) => {
+            const ba = ACCENT[badge.color];
+            return (
+              <div
+                key={badge.slug}
+                className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+              >
+                <span
+                  className={`inline-flex rounded border px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] ${ba.badge}`}
+                >
+                  {badge.gesture}
+                </span>
+                <p className="mt-3 text-sm font-bold text-foreground">{badge.name}</p>
+                <p className="mt-2 text-xs leading-6 text-muted">{badge.description}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FelixCM2NavigationSection() {
+  return (
+    <section className="px-4 pb-14 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle eyebrow="Navigation CM2" title="Explorer le niveau avec Félix" />
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {FELIX_CM2_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="group rounded-md border border-white/10 bg-white/[0.035] p-6 transition hover:border-gold/30 hover:bg-white/[0.055]"
+            >
+              <p className="text-sm font-bold text-foreground transition group-hover:text-gold">
+                {link.label} →
+              </p>
+              <p className="mt-2 text-xs leading-6 text-muted">{link.description}</p>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
