@@ -147,11 +147,12 @@ export const cm2LearningTree: Cm2LearningTree = [
               {
                 id: "francais-lecture-inferences-justifier",
                 title: "Justifier son interprétation",
-                status: "upcoming",
+                status: "available",
+                routeSlug: "justifier-son-interpretation",
                 resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                  { type: "lesson",     label: "Leçon",      status: "available" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming"  },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming"  },
                 ],
               },
             ],
