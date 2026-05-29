@@ -1,3 +1,4 @@
+// Modèle opérationnel leçons CM2 — source pour les pages /matieres/[slug] et plus.
 // Arbre pédagogique CM2 : Matière → Domaine → Sous-domaine → Leçon.
 // Lieux et personnages-guides accompagnent la structure, sans la remplacer.
 // Les pages de leçon/exercice/évaluation ne sont pas encore créées :

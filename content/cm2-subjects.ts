@@ -1,3 +1,4 @@
+// Source de vérité pour les cartes UI matières CM2 (statut, accent, missions).
 // Données des matières CM2 — partagées par /primaire/cm2, /primaire/cm2/matieres
 // et /primaire/cm2/matieres/[slug].
 // missionSlugs référence des slugs existants dans content/cm2.ts.
