@@ -4,6 +4,8 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Level, cm2Missions } from "@/content/cm2";
 import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
 import { getPublicStatusKey } from "@/content/public-status";
+import { getCm2Level } from "@/content/academy-curriculum";
+import type { AcademySubject } from "@/content/academy-curriculum.types";
 
 export const metadata: Metadata = {
   title: "CM2 — La Grande Classe des Explorateurs | Académie Kerboeuf",
@@ -21,6 +23,8 @@ const ACCENT: Record<string, { text: string; border: string }> = {
 };
 
 // ── Page ───────────────────────────────────────────────────────────────────────
+
+const cm2CurriculumLevel = getCm2Level();
 
 export default function Cm2Page() {
   const missionCount = cm2Missions.length;
@@ -103,6 +107,29 @@ export default function Cm2Page() {
         </div>
       </section>
 
+      {/* ── Parcours structuré ────────────────────────────────────────────── */}
+      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+              Curriculum
+            </p>
+            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+              Le parcours CM2 structuré
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
+              Matières, domaines, sous-domaines et séquences à construire progressivement.
+              Les ressources seront disponibles au fil de l&apos;année.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {cm2CurriculumLevel.subjects.map((subject) => (
+              <CurriculumSubjectCard key={subject.slug} subject={subject} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Accès secondaires ─────────────────────────────────────────────── */}
       <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -173,7 +200,59 @@ export default function Cm2Page() {
   );
 }
 
-// ── Composant ─────────────────────────────────────────────────────────────────
+// ── Composants ────────────────────────────────────────────────────────────────
+
+const CURRICULUM_STATUS_LABEL: Record<string, string> = {
+  disponible: "Disponible",
+  "a-venir": "À venir",
+  "en-cours": "En cours",
+  brouillon: "Brouillon",
+};
+
+function CurriculumSubjectCard({ subject }: { subject: AcademySubject }) {
+  const visibleDomains = subject.domains.slice(0, 3);
+  return (
+    <div className="flex flex-col rounded-md border border-white/10 bg-white/[0.03] p-5">
+      <p className="text-sm font-black text-foreground">{subject.label}</p>
+      <p className="mt-1 text-xs leading-5 text-muted">{subject.description}</p>
+      {visibleDomains.length > 0 ? (
+        <ul className="mt-4 space-y-3 border-t border-white/[0.06] pt-4">
+          {visibleDomains.map((domain) => (
+            <li key={domain.slug}>
+              <p className="text-xs font-bold text-white/60">{domain.label}</p>
+              {domain.subdomains.slice(0, 2).map((sd) => {
+                const firstSeq = sd.sequences[0];
+                return (
+                  <div key={sd.slug} className="mt-1 flex items-start gap-2">
+                    <span className="mt-0.5 shrink-0 text-white/20" aria-hidden="true">·</span>
+                    <span className="text-xs leading-5 text-muted/70">{sd.label}</span>
+                    {firstSeq && (
+                      <span className="ml-auto shrink-0 rounded border border-white/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] text-white/30">
+                        {CURRICULUM_STATUS_LABEL[firstSeq.status] ?? firstSeq.status}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+              {domain.subdomains.length > 2 && (
+                <p className="mt-1 pl-4 text-[11px] text-white/20">
+                  +{domain.subdomains.length - 2} sous-domaine{domain.subdomains.length - 2 > 1 ? "s" : ""}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-4 text-xs italic text-white/25">Domaines à structurer</p>
+      )}
+      {subject.domains.length > 3 && (
+        <p className="mt-3 text-[11px] text-white/25">
+          +{subject.domains.length - 3} domaine{subject.domains.length - 3 > 1 ? "s" : ""}
+        </p>
+      )}
+    </div>
+  );
+}
 
 function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
