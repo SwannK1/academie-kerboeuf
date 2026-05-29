@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
+import { SITE_URL } from "@/content/site-config";
 import "./globals.css";
 
-// TODO: remplacer par le domaine réel avant mise en production
-const BASE_URL = "https://academie-kerboeuf.fr";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Académie Kerboeuf | Missions pédagogiques immersives",
     template: "%s | Académie Kerboeuf",
@@ -21,7 +19,7 @@ export const metadata: Metadata = {
     title: "Académie Kerboeuf | Missions pédagogiques immersives",
     description:
       "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
-    url: BASE_URL,
+    url: SITE_URL,
   },
   twitter: {
     card: "summary",
