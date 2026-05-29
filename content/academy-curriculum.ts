@@ -1,3 +1,4 @@
+// Référentiel global curriculum — non branché sur les pages opérationnelles.
 // Curriculum global — Académie Kerboeuf.
 // Structure : Palier → Niveau → Matière → Domaine → Sous-domaine → Séquence.
 //
