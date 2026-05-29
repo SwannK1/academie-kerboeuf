@@ -9,42 +9,44 @@
 // - characterGuide: "felix" sur les séquences CM2 pertinentes.
 // - teacherReference correspond aux slugs de content/professors.ts.
 
-import type { AcademyLevel, AcademySchoolStage } from "@/content/academy-curriculum.types";
+import type { AcademyDomain, AcademyLevel, AcademySchoolStage } from "@/content/academy-curriculum.types";
 
 // ── Maternelle ────────────────────────────────────────────────────────────────
 
-const maternelleSubjects = [
-  {
-    slug: "langage",
-    label: "Mobiliser le langage dans toutes ses dimensions",
-    description: "Oral, écrit, découverte du principe alphabétique.",
-    domains: [],
-  },
-  {
-    slug: "activite-physique",
-    label: "Agir, s'exprimer, comprendre à travers l'activité physique",
-    description: "Motricité globale, jeux collectifs, expression corporelle.",
-    domains: [],
-  },
-  {
-    slug: "activites-artistiques",
-    label: "Agir, s'exprimer, comprendre à travers les activités artistiques",
-    description: "Arts plastiques, musique, arts vivants.",
-    domains: [],
-  },
-  {
-    slug: "structurer-pensee",
-    label: "Construire les premiers outils pour structurer sa pensée",
-    description: "Nombres, formes, grandeurs, résolution de problèmes simples.",
-    domains: [],
-  },
-  {
-    slug: "explorer-monde",
-    label: "Explorer le monde",
-    description: "Espace, temps, vivant, matière, objets.",
-    domains: [],
-  },
-];
+function buildMaternelleSubjects() {
+  return [
+    {
+      slug: "langage",
+      label: "Mobiliser le langage dans toutes ses dimensions",
+      description: "Oral, écrit, découverte du principe alphabétique.",
+      domains: [] as AcademyDomain[],
+    },
+    {
+      slug: "activite-physique",
+      label: "Agir, s'exprimer, comprendre à travers l'activité physique",
+      description: "Motricité globale, jeux collectifs, expression corporelle.",
+      domains: [] as AcademyDomain[],
+    },
+    {
+      slug: "activites-artistiques",
+      label: "Agir, s'exprimer, comprendre à travers les activités artistiques",
+      description: "Arts plastiques, musique, arts vivants.",
+      domains: [] as AcademyDomain[],
+    },
+    {
+      slug: "structurer-pensee",
+      label: "Construire les premiers outils pour structurer sa pensée",
+      description: "Nombres, formes, grandeurs, résolution de problèmes simples.",
+      domains: [] as AcademyDomain[],
+    },
+    {
+      slug: "explorer-monde",
+      label: "Explorer le monde",
+      description: "Espace, temps, vivant, matière, objets.",
+      domains: [] as AcademyDomain[],
+    },
+  ];
+}
 
 const ps: AcademyLevel = {
   slug: "ps",
@@ -52,7 +54,7 @@ const ps: AcademyLevel = {
   cycle: "cycle-1",
   stage: "maternelle",
   description: "Première année de maternelle. Entrée dans le langage oral et la vie collective.",
-  subjects: maternelleSubjects,
+  subjects: buildMaternelleSubjects(),
 };
 
 const ms: AcademyLevel = {
@@ -61,7 +63,7 @@ const ms: AcademyLevel = {
   cycle: "cycle-1",
   stage: "maternelle",
   description: "Consolidation des acquis de PS. Développement de l'autonomie et du langage.",
-  subjects: maternelleSubjects,
+  subjects: buildMaternelleSubjects(),
 };
 
 const gs: AcademyLevel = {
@@ -70,7 +72,7 @@ const gs: AcademyLevel = {
   cycle: "cycle-1",
   stage: "maternelle",
   description: "Préparation au CP. Entrée dans l'écrit et le principe alphabétique.",
-  subjects: maternelleSubjects,
+  subjects: buildMaternelleSubjects(),
 };
 
 // ── Élémentaire — matières communes ──────────────────────────────────────────
