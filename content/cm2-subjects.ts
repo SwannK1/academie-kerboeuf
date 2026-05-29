@@ -3,14 +3,14 @@
 // et /primaire/cm2/matieres/[slug].
 // missionSlugs référence des slugs existants dans content/cm2.ts.
 
-export type SubjectStatus = "available" | "in-progress" | "upcoming";
+import type { PublicStatusKey } from "@/content/public-status";
 
 export type Cm2Subject = {
   slug: string;
   title: string;
   shortDescription: string;
   domains: string[];
-  status: SubjectStatus;
+  status: PublicStatusKey;
   accent: "jade" | "gold" | "sky" | "ember";
   missionSlugs?: string[];
   yearlyPathLabel?: string;

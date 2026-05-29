@@ -5,6 +5,9 @@ import { getAllCm2LessonPaths } from "@/content/cm2-learning-tree";
 import { felixProjects } from "@/content/felix-missions";
 import { learningPaths } from "@/content/learning-paths";
 import { getElementaryPedagogicalPlaces } from "@/content/pedagogical-places";
+import { ce1Level } from "@/content/levels/ce1";
+import { ce2Level } from "@/content/levels/ce2";
+import { getPublicStatusKey } from "@/content/public-status";
 
 // TODO: remplacer par le domaine réel avant mise en production
 const BASE_URL = "https://academie-kerboeuf.fr";
@@ -33,6 +36,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.55,
   }));
 
+  const availableLessonSlugs = (level: typeof ce1Level) =>
+    level.domains
+      .flatMap((d) => d.subdomains)
+      .flatMap((s) => s.lessons)
+      .filter((l) => getPublicStatusKey(l.status) === "available")
+      .map((l) => l.slug);
+
+  const ce1LessonRoutes = availableLessonSlugs(ce1Level).map((slug) => ({
+    url: `${BASE_URL}/primaire/ce1/lecons/${slug}`,
+    priority: 0.55,
+  }));
+  const ce2LessonRoutes = availableLessonSlugs(ce2Level).map((slug) => ({
+    url: `${BASE_URL}/primaire/ce2/lecons/${slug}`,
+    priority: 0.55,
+  }));
+
   return [
     { url: `${BASE_URL}/`, priority: 1.0 },
     { url: `${BASE_URL}/univers`, priority: 0.9 },
@@ -41,6 +60,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/primaire`, priority: 0.8 },
     { url: `${BASE_URL}/primaire/lieux`, priority: 0.7 },
     ...elementaryPlaceRoutes,
+    { url: `${BASE_URL}/primaire/ce1/lecons`, priority: 0.65 },
+    ...ce1LessonRoutes,
+    { url: `${BASE_URL}/primaire/ce2/lecons`, priority: 0.65 },
+    ...ce2LessonRoutes,
     { url: `${BASE_URL}/primaire/cm2`, priority: 0.8 },
     { url: `${BASE_URL}/primaire/cm2/missions`, priority: 0.7 },
     { url: `${BASE_URL}/primaire/cm2/matieres`, priority: 0.7 },

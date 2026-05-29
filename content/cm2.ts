@@ -1,7 +1,6 @@
 import type { MissionTeacherUse } from "@/content/missions";
 import type { MissionPedagogy } from "@/content/mission-types";
-
-export type MissionStatus = "disponible" | "bientôt" | "en préparation";
+import type { PublicStatusKey } from "@/content/public-status";
 
 export type MissionTheme = {
   name: string;
@@ -16,7 +15,7 @@ export type Cm2Mission = {
   title: string;
   description: string;
   subject: string;
-  status: MissionStatus;
+  status: PublicStatusKey;
   theme: MissionTheme;
   objective: string;
   competencies: string[];
@@ -82,7 +81,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Repérer les indices d’un texte pour comprendre ce qui n’est pas écrit directement.",
     subject: "Lecture",
-    status: "disponible",
+    status: "available",
     theme: themes.jade,
     objective:
       "Aider Félix à décoder les indices cachés dans un récit pour construire une réponse justifiée.",
@@ -228,7 +227,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Résoudre des calculs stratégiques en choisissant la méthode la plus efficace.",
     subject: "Mathématiques",
-    status: "disponible",
+    status: "available",
     theme: themes.gold,
     objective:
       "Choisir des stratégies rapides et fiables pour résoudre des calculs de niveau CM2.",
@@ -375,7 +374,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Observer, formuler des hypothèses et organiser les traces d’une investigation.",
     subject: "Sciences",
-    status: "bientôt",
+    status: "upcoming",
     theme: themes.sky,
     objective:
       "Faire entrer Félix dans une démarche d’investigation claire : observer, supposer, tester, conclure.",
@@ -532,7 +531,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Explorer des documents pour situer les événements et comprendre les périodes.",
     subject: "Histoire",
-    status: "en préparation",
+    status: "in-progress",
     theme: themes.ember,
     objective:
       "Utiliser des sources pour aider Félix à replacer un événement dans son contexte historique.",
@@ -689,7 +688,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Lire des cartes, localiser des repères et comprendre les grands espaces.",
     subject: "Géographie",
-    status: "bientôt",
+    status: "upcoming",
     theme: themes.sky,
     objective:
       "Guider Félix dans la lecture de cartes pour localiser, comparer et décrire des espaces.",
@@ -846,7 +845,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Planifier, rédiger et améliorer un texte avec des objectifs précis.",
     subject: "Écriture",
-    status: "disponible",
+    status: "available",
     theme: themes.ember,
     objective:
       "Accompagner Félix dans la construction d’un texte organisé, lisible et révisé.",
@@ -993,7 +992,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Choisir une stratégie de lecteur selon le document, la consigne et le but.",
     subject: "Lecture",
-    status: "disponible",
+    status: "available",
     theme: themes.jade,
     objective:
       "Développer des réflexes de lecteur autonome face à des textes et consignes variés.",
@@ -1140,7 +1139,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Affronter des problèmes courts pour entraîner logique, calcul et justification.",
     subject: "Mathématiques",
-    status: "bientôt",
+    status: "upcoming",
     theme: themes.gold,
     objective:
       "Entraîner Félix à résoudre des problèmes courts en explicitant son raisonnement.",
@@ -1287,7 +1286,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Identifier les indices de la phrase pour analyser les fonctions et les accords.",
     subject: "Français",
-    status: "en préparation",
+    status: "in-progress",
     theme: themes.jade,
     objective:
       "Transformer l’analyse grammaticale en enquête pour repérer les relations dans la phrase.",

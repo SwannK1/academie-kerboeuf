@@ -15,7 +15,7 @@
 // Note : au niveau domaine/sous-domaine, "available" signifie que des missions
 // existantes y sont reliées — cela ne garantit pas encore l'existence de pages
 // leçon. La présence de pages leçon se vérifie via Cm2LessonResource.slug.
-export type Cm2LearningStatus = "available" | "in-progress" | "upcoming";
+import type { PublicStatusKey } from "@/content/public-status";
 
 export type Cm2GuideReference = {
   id: "felix" | "chouette" | "hector" | "melina" | "max" | "naia" | "pablo" | "rosa";
@@ -33,14 +33,14 @@ export type Cm2LessonResource = {
   type: "lesson" | "exercise" | "evaluation";
   slug?: string;  // défini uniquement si la route page existe
   label: string;
-  status: Cm2LearningStatus;
+  status: PublicStatusKey;
 };
 
 export type Cm2LessonNode = {
   id: string;
   title: string;
   description?: string;
-  status: Cm2LearningStatus;
+  status: PublicStatusKey;
   /** When defined, this lesson has a routed page at `…/[lessonId]` using this slug. */
   routeSlug?: string;
   resources: Cm2LessonResource[];
@@ -51,7 +51,7 @@ export type Cm2SubdomainNode = {
   id: string;
   title: string;
   description?: string;
-  status: Cm2LearningStatus;
+  status: PublicStatusKey;
   place?: Cm2PedagogicalPlaceReference;
   lessons: Cm2LessonNode[];
 };
@@ -60,7 +60,7 @@ export type Cm2DomainNode = {
   id: string;
   title: string;
   description?: string;
-  status: Cm2LearningStatus;
+  status: PublicStatusKey;
   place?: Cm2PedagogicalPlaceReference;
   subdomains: Cm2SubdomainNode[];
   linkedMissionSlugs?: string[];
@@ -71,7 +71,7 @@ export type Cm2SubjectNode = {
   title: string;
   place: Cm2PedagogicalPlaceReference;
   guides: Cm2GuideReference[];
-  status: Cm2LearningStatus;
+  status: PublicStatusKey;
   domains: Cm2DomainNode[];
 };
 
