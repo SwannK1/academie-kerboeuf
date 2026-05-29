@@ -143,6 +143,9 @@ export default async function ProfesseurPage({ params }: PageProps) {
       {professor.quote ? <ProfessorWorldQuote professor={professor} /> : null}
       {professor.universeNarrative ? <ProfessorUniverseSection professor={professor} /> : null}
       {hasAtmosphere ? <AtmosphereSection professor={professor} /> : null}
+      {professor.intellectualGestures ? (
+        <IntellectualGesturesSection professor={professor} />
+      ) : null}
       {professor.pedagogySteps ? <ProfessorPedagogyTimeline professor={professor} /> : null}
       {professor.studentExperience || professor.missionPhilosophy ? (
         <ProfessorVisionSection professor={professor} />
@@ -391,6 +394,38 @@ function AtmosphereSection({ professor }: { professor: ProfessorProfile }) {
               <p className="mt-3 text-sm leading-7 text-muted">{professor.academyFunction}</p>
             </div>
           ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Gestes intellectuels ────────────────────────────────────────────────────
+
+function IntellectualGesturesSection({ professor }: { professor: ProfessorProfile }) {
+  if (!professor.intellectualGestures || professor.intellectualGestures.length === 0) return null;
+  const a = ac(professor);
+
+  return (
+    <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-white/[0.018]"
+      />
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle
+          eyebrow="Posture de chercheur"
+          title={`Ce que ${professor.name} aide à travailler`}
+        />
+        <div className="mt-6 flex flex-wrap gap-3">
+          {professor.intellectualGestures.map((gesture) => (
+            <span
+              key={gesture}
+              className={`rounded-md border px-4 py-2 text-sm font-bold ${a.badge}`}
+            >
+              {gesture}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -672,13 +707,27 @@ function MissionsSection({ professor }: { professor: ProfessorProfile }) {
           </div>
         )}
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href={professor.missionsPath}
             className={`inline-flex h-11 items-center justify-center rounded-md border px-8 text-sm font-bold transition ${a.badge} hover:opacity-90`}
           >
             Toutes les missions {professor.levelLabel}
           </Link>
+          <Link
+            href={professor.levelPath}
+            className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+          >
+            Espace {professor.levelLabel}
+          </Link>
+          {professor.levelPath.includes("/cm2") && (
+            <Link
+              href={`${professor.levelPath}/matieres`}
+              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+            >
+              Matières CM2
+            </Link>
+          )}
         </div>
       </div>
     </section>
