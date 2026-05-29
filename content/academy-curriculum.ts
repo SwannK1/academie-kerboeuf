@@ -19,31 +19,121 @@ function buildMaternelleSubjects() {
       slug: "langage",
       label: "Mobiliser le langage dans toutes ses dimensions",
       description: "Oral, écrit, découverte du principe alphabétique.",
-      domains: [] as AcademyDomain[],
+      domains: [
+        {
+          slug: "langage-oral",
+          label: "Langage oral",
+          description: "Écouter, comprendre, s'exprimer à l'oral.",
+          subdomains: [
+            { slug: "comprendre-communiquer", label: "Comprendre et communiquer", description: "Participer à des échanges, répondre aux questions.", sequences: [] },
+            { slug: "vocabulaire", label: "Vocabulaire", description: "Enrichir son vocabulaire en contexte.", sequences: [] },
+          ],
+        },
+        {
+          slug: "langage-ecrit",
+          label: "Langage écrit",
+          description: "Découvrir l'écrit, principe alphabétique.",
+          subdomains: [
+            { slug: "decouvrir-ecrit", label: "Découvrir l'écrit", description: "Distinguer dessin, écriture, alphabet.", sequences: [] },
+            { slug: "principe-alphabetique", label: "Principe alphabétique", description: "Comprendre que l'écrit code des sons.", sequences: [] },
+          ],
+        },
+      ] as AcademyDomain[],
     },
     {
       slug: "activite-physique",
       label: "Agir, s'exprimer, comprendre à travers l'activité physique",
       description: "Motricité globale, jeux collectifs, expression corporelle.",
-      domains: [] as AcademyDomain[],
+      domains: [
+        {
+          slug: "motricite-globale",
+          label: "Motricité globale",
+          description: "Courir, sauter, lancer, grimper.",
+          subdomains: [
+            { slug: "locomotion", label: "Locomotion", description: "Maîtriser ses déplacements.", sequences: [] },
+          ],
+        },
+        {
+          slug: "jeux-collectifs",
+          label: "Jeux collectifs",
+          description: "Coopérer, respecter des règles simples.",
+          subdomains: [
+            { slug: "regles-jeu", label: "Règles du jeu", description: "Comprendre et respecter les règles.", sequences: [] },
+          ],
+        },
+      ] as AcademyDomain[],
     },
     {
       slug: "activites-artistiques",
       label: "Agir, s'exprimer, comprendre à travers les activités artistiques",
       description: "Arts plastiques, musique, arts vivants.",
-      domains: [] as AcademyDomain[],
+      domains: [
+        {
+          slug: "arts-plastiques",
+          label: "Arts plastiques",
+          description: "Dessiner, peindre, modeler, coller.",
+          subdomains: [
+            { slug: "pratique-plastique", label: "Pratique plastique", description: "Produire des images et des objets.", sequences: [] },
+          ],
+        },
+        {
+          slug: "education-musicale",
+          label: "Éducation musicale",
+          description: "Chanter, écouter, percuter.",
+          subdomains: [
+            { slug: "chant-rythme", label: "Chant et rythme", description: "Chanter en groupe et marquer le rythme.", sequences: [] },
+          ],
+        },
+      ] as AcademyDomain[],
     },
     {
       slug: "structurer-pensee",
       label: "Construire les premiers outils pour structurer sa pensée",
       description: "Nombres, formes, grandeurs, résolution de problèmes simples.",
-      domains: [] as AcademyDomain[],
+      domains: [
+        {
+          slug: "nombres",
+          label: "Nombres",
+          description: "Compter, dénombrer, comparer des quantités.",
+          subdomains: [
+            { slug: "denombrement", label: "Dénombrement", description: "Associer un nombre à une quantité.", sequences: [] },
+            { slug: "comparaison-rangement", label: "Comparaison et rangement", description: "Ordonner des nombres et des quantités.", sequences: [] },
+          ],
+        },
+        {
+          slug: "formes-grandeurs",
+          label: "Formes et grandeurs",
+          description: "Identifier et comparer des formes géométriques simples.",
+          subdomains: [
+            { slug: "formes", label: "Formes", description: "Reconnaître cercle, carré, triangle, rectangle.", sequences: [] },
+          ],
+        },
+      ] as AcademyDomain[],
     },
     {
       slug: "explorer-monde",
       label: "Explorer le monde",
       description: "Espace, temps, vivant, matière, objets.",
-      domains: [] as AcademyDomain[],
+      domains: [
+        {
+          slug: "espace-temps",
+          label: "Espace et temps",
+          description: "Se repérer dans l'espace de la classe et dans la journée.",
+          subdomains: [
+            { slug: "reperes-temporels", label: "Repères temporels", description: "Avant/après, hier/aujourd'hui/demain.", sequences: [] },
+            { slug: "reperes-spatiaux", label: "Repères spatiaux", description: "Dessus/dessous, devant/derrière, gauche/droite.", sequences: [] },
+          ],
+        },
+        {
+          slug: "vivant-matiere",
+          label: "Le vivant et la matière",
+          description: "Observer le vivant et les propriétés de la matière.",
+          subdomains: [
+            { slug: "observer-vivant", label: "Observer le vivant", description: "Distinguer les êtres vivants.", sequences: [] },
+            { slug: "matiere-objets", label: "Matière et objets", description: "Explorer les propriétés des matières.", sequences: [] },
+          ],
+        },
+      ] as AcademyDomain[],
     },
   ];
 }
@@ -75,52 +165,120 @@ const gs: AcademyLevel = {
   subjects: buildMaternelleSubjects(),
 };
 
-// ── Élémentaire — matières communes ──────────────────────────────────────────
+// ── Élémentaire — blocs de matières réutilisables ────────────────────────────
+// Domaines alignés sur curriculum-map.ts (cp/ce1/ce2/cm1-curriculum.ts).
+// sequences: [] — pas de doublon avec curriculum-map, le modèle global est
+// une couche de référence, pas de contenu pédagogique complet.
 
-const elementaireSubjectsBase = [
+const francaisCycle2: AcademyDomain[] = [
   {
-    slug: "francais",
-    label: "Français",
-    description: "Lecture, écriture, étude de la langue, oral.",
-    domains: [],
+    slug: "lecture",
+    label: "Lecture",
+    description: "Décodage, compréhension de phrases et de textes.",
+    subdomains: [
+      { slug: "lecture-comprehension", label: "Lecture et compréhension", description: "Comprendre des phrases et des textes courts.", sequences: [] },
+      { slug: "decodage", label: "Décodage et identification des mots", description: "Maîtriser le principe alphabétique.", sequences: [] },
+    ],
   },
   {
-    slug: "mathematiques",
-    label: "Mathématiques",
-    description: "Nombres, calcul, géométrie, grandeurs et mesures.",
-    domains: [],
+    slug: "ecriture",
+    label: "Écriture",
+    description: "Encodage et production de phrases.",
+    subdomains: [
+      { slug: "encodage-production", label: "Encodage et production de phrases", description: "Écrire des phrases simples correctement.", sequences: [] },
+    ],
   },
   {
-    slug: "emc",
-    label: "Enseignement moral et civique",
-    description: "Valeurs républicaines, vie collective, citoyenneté.",
-    domains: [],
+    slug: "etude-de-la-langue",
+    label: "Étude de la langue",
+    description: "Grammaire, orthographe, vocabulaire.",
+    subdomains: [
+      { slug: "grammaire-phrase", label: "Grammaire de la phrase", description: "Identifier sujet, verbe, groupes de mots.", sequences: [] },
+    ],
   },
   {
-    slug: "langues-vivantes",
-    label: "Langues vivantes",
-    description: "Anglais et autre langue vivante selon l'école.",
-    domains: [],
-  },
-  {
-    slug: "arts-plastiques",
-    label: "Arts plastiques",
-    description: "Pratique artistique, culture artistique.",
-    domains: [],
-  },
-  {
-    slug: "education-musicale",
-    label: "Éducation musicale",
-    description: "Chant, écoute, pratique instrumentale.",
-    domains: [],
-  },
-  {
-    slug: "eps",
-    label: "EPS",
-    description: "Activités physiques, sportives et artistiques.",
-    domains: [],
+    slug: "oral",
+    label: "Oral",
+    description: "Écoute active et expression orale.",
+    subdomains: [
+      { slug: "ecoute-expression", label: "Écoute et expression", description: "Participer à des échanges, écouter l'autre.", sequences: [] },
+    ],
   },
 ];
+
+const mathematiquesCycle2: AcademyDomain[] = [
+  {
+    slug: "nombres-calcul",
+    label: "Nombres et calcul",
+    description: "Numération, calcul posé et calcul mental.",
+    subdomains: [
+      { slug: "numeration", label: "Numération", description: "Lire, écrire, comparer les entiers.", sequences: [] },
+      { slug: "calcul", label: "Calcul", description: "Addition, soustraction, multiplication.", sequences: [] },
+      { slug: "problemes", label: "Résolution de problèmes", description: "Choisir l'opération et vérifier le résultat.", sequences: [] },
+    ],
+  },
+  {
+    slug: "grandeurs-mesures",
+    label: "Grandeurs et mesures",
+    description: "Longueurs, masses, durées.",
+    subdomains: [
+      { slug: "longueurs", label: "Longueurs", description: "Mesurer et comparer des longueurs.", sequences: [] },
+      { slug: "temps", label: "Temps", description: "Lire l'heure, calculer des durées.", sequences: [] },
+    ],
+  },
+  {
+    slug: "geometrie",
+    label: "Géométrie",
+    description: "Figures planes et repérage dans l'espace.",
+    subdomains: [
+      { slug: "figures-espace", label: "Figures planes et espace", description: "Reconnaître et tracer des figures simples.", sequences: [] },
+    ],
+  },
+];
+
+const questionnerMonde: AcademyDomain[] = [
+  {
+    slug: "vivant-environnement",
+    label: "Le vivant et son environnement",
+    description: "Observer le vivant, comprendre les milieux naturels.",
+    subdomains: [
+      { slug: "observer-vivant", label: "Observer le vivant", description: "Caractériser les êtres vivants.", sequences: [] },
+    ],
+  },
+  {
+    slug: "matiere-objets",
+    label: "Matière, objets et techniques",
+    description: "Propriétés de la matière et objets du quotidien.",
+    subdomains: [
+      { slug: "objets-techniques", label: "Objets techniques", description: "Identifier la fonction et les usages d'un objet.", sequences: [] },
+    ],
+  },
+  {
+    slug: "espace-temps",
+    label: "Espace et temps",
+    description: "Se repérer dans le temps et dans l'espace.",
+    subdomains: [
+      { slug: "reperes-temporels", label: "Repères temporels", description: "Utiliser une frise chronologique simple.", sequences: [] },
+      { slug: "reperes-spatiaux", label: "Repères spatiaux", description: "Lire un plan simple, s'orienter.", sequences: [] },
+    ],
+  },
+];
+
+const subjectsMuets = (slugs: string[]): Array<{ slug: string; label: string; description: string; domains: AcademyDomain[] }> =>
+  slugs.map((s) => ({
+    slug: s,
+    label: s === "emc" ? "Enseignement moral et civique"
+      : s === "langues-vivantes" ? "Langues vivantes"
+      : s === "arts-plastiques" ? "Arts plastiques"
+      : s === "education-musicale" ? "Éducation musicale"
+      : "EPS",
+    description: s === "emc" ? "Valeurs républicaines, vie collective, citoyenneté."
+      : s === "langues-vivantes" ? "Anglais et autre langue vivante."
+      : s === "arts-plastiques" ? "Pratique artistique, culture artistique."
+      : s === "education-musicale" ? "Chant, écoute, pratique instrumentale."
+      : "Activités physiques, sportives et artistiques.",
+    domains: [] as AcademyDomain[],
+  }));
 
 const cp: AcademyLevel = {
   slug: "cp",
@@ -129,14 +287,11 @@ const cp: AcademyLevel = {
   stage: "elementaire",
   description: "Apprentissage fondamental de la lecture et du calcul.",
   subjects: [
-    ...elementaireSubjectsBase.slice(0, 3),
-    {
-      slug: "questionner-monde",
-      label: "Questionner le monde",
-      description: "Espace, temps, matière, vivant, objets techniques.",
-      domains: [],
-    },
-    ...elementaireSubjectsBase.slice(3),
+    { slug: "francais", label: "Français", description: "Lecture, écriture, étude de la langue, oral.", domains: francaisCycle2 },
+    { slug: "mathematiques", label: "Mathématiques", description: "Nombres, calcul, géométrie, grandeurs et mesures.", domains: mathematiquesCycle2 },
+    { slug: "emc", label: "Enseignement moral et civique", description: "Valeurs républicaines, vie collective, citoyenneté.", domains: [] },
+    { slug: "questionner-monde", label: "Questionner le monde", description: "Espace, temps, matière, vivant, objets techniques.", domains: questionnerMonde },
+    ...subjectsMuets(["langues-vivantes", "arts-plastiques", "education-musicale", "eps"]),
   ],
 };
 
@@ -147,14 +302,11 @@ const ce1: AcademyLevel = {
   stage: "elementaire",
   description: "Consolidation de la lecture et entrée dans la numération.",
   subjects: [
-    ...elementaireSubjectsBase.slice(0, 3),
-    {
-      slug: "questionner-monde",
-      label: "Questionner le monde",
-      description: "Espace, temps, matière, vivant, objets techniques.",
-      domains: [],
-    },
-    ...elementaireSubjectsBase.slice(3),
+    { slug: "francais", label: "Français", description: "Lecture, écriture, étude de la langue, oral.", domains: francaisCycle2 },
+    { slug: "mathematiques", label: "Mathématiques", description: "Nombres, calcul, géométrie, grandeurs et mesures.", domains: mathematiquesCycle2 },
+    { slug: "emc", label: "Enseignement moral et civique", description: "Valeurs républicaines, vie collective, citoyenneté.", domains: [] },
+    { slug: "questionner-monde", label: "Questionner le monde", description: "Espace, temps, matière, vivant, objets techniques.", domains: questionnerMonde },
+    ...subjectsMuets(["langues-vivantes", "arts-plastiques", "education-musicale", "eps"]),
   ],
 };
 
@@ -165,16 +317,79 @@ const ce2: AcademyLevel = {
   stage: "elementaire",
   description: "Fin du cycle 2. Maîtrise de la lecture courante et des opérations.",
   subjects: [
-    ...elementaireSubjectsBase.slice(0, 3),
-    {
-      slug: "questionner-monde",
-      label: "Questionner le monde",
-      description: "Espace, temps, matière, vivant, objets techniques.",
-      domains: [],
-    },
-    ...elementaireSubjectsBase.slice(3),
+    { slug: "francais", label: "Français", description: "Lecture, écriture, étude de la langue, oral.", domains: francaisCycle2 },
+    { slug: "mathematiques", label: "Mathématiques", description: "Nombres, calcul, géométrie, grandeurs et mesures.", domains: mathematiquesCycle2 },
+    { slug: "emc", label: "Enseignement moral et civique", description: "Valeurs républicaines, vie collective, citoyenneté.", domains: [] },
+    { slug: "questionner-monde", label: "Questionner le monde", description: "Espace, temps, matière, vivant, objets techniques.", domains: questionnerMonde },
+    ...subjectsMuets(["langues-vivantes", "arts-plastiques", "education-musicale", "eps"]),
   ],
 };
+
+const francaisCycle3Base: AcademyDomain[] = [
+  {
+    slug: "lecture",
+    label: "Lecture",
+    description: "Lecture de textes variés, littéraires et documentaires.",
+    subdomains: [
+      { slug: "lecture-comprehension", label: "Lecture et compréhension", description: "Comprendre et interpréter des textes complexes.", sequences: [] },
+    ],
+  },
+  {
+    slug: "ecriture",
+    label: "Écriture",
+    description: "Production de textes structurés et cohérents.",
+    subdomains: [
+      { slug: "ecriture", label: "Écriture", description: "Rédiger des textes narratifs, descriptifs et fonctionnels.", sequences: [] },
+    ],
+  },
+  {
+    slug: "etude-de-la-langue",
+    label: "Étude de la langue",
+    description: "Grammaire, conjugaison, orthographe.",
+    subdomains: [
+      { slug: "grammaire", label: "Grammaire", description: "Fonctions syntaxiques et analyse de la phrase.", sequences: [] },
+      { slug: "conjugaison", label: "Conjugaison", description: "Les temps usuels du récit et de l'énonciation.", sequences: [] },
+      { slug: "orthographe", label: "Orthographe", description: "Accords et règles orthographiques.", sequences: [] },
+    ],
+  },
+  {
+    slug: "oral",
+    label: "Oral",
+    description: "Exposé, débat, écoute active.",
+    subdomains: [
+      { slug: "langage-oral", label: "Langage oral", description: "Prendre la parole de façon organisée.", sequences: [] },
+    ],
+  },
+];
+
+const mathematiquesCycle3Base: AcademyDomain[] = [
+  {
+    slug: "nombres-calculs",
+    label: "Nombres et calculs",
+    description: "Grands nombres, fractions, opérations.",
+    subdomains: [
+      { slug: "numeration", label: "Numération", description: "Grands entiers et premiers décimaux.", sequences: [] },
+      { slug: "calcul-pose", label: "Calcul posé", description: "Les quatre opérations posées.", sequences: [] },
+      { slug: "problemes", label: "Résolution de problèmes", description: "Problèmes à une ou plusieurs étapes.", sequences: [] },
+    ],
+  },
+  {
+    slug: "grandeurs-mesures",
+    label: "Grandeurs et mesures",
+    description: "Longueurs, masses, durées, aires.",
+    subdomains: [
+      { slug: "grandeurs-mesures", label: "Mesures", description: "Calculer et convertir des mesures.", sequences: [] },
+    ],
+  },
+  {
+    slug: "geometrie",
+    label: "Géométrie",
+    description: "Figures planes, solides, symétrie.",
+    subdomains: [
+      { slug: "geometrie", label: "Figures et espace", description: "Tracer et reconnaître des figures géométriques.", sequences: [] },
+    ],
+  },
+];
 
 const cm1: AcademyLevel = {
   slug: "cm1",
@@ -183,20 +398,56 @@ const cm1: AcademyLevel = {
   stage: "elementaire",
   description: "Début du cycle 3. Approfondissement et ouverture disciplinaire.",
   subjects: [
-    ...elementaireSubjectsBase.slice(0, 3),
+    { slug: "francais", label: "Français", description: "Lecture, écriture, étude de la langue, oral.", domains: francaisCycle3Base },
+    { slug: "mathematiques", label: "Mathématiques", description: "Nombres, calcul, géométrie, grandeurs et mesures.", domains: mathematiquesCycle3Base },
+    { slug: "emc", label: "Enseignement moral et civique", description: "Valeurs républicaines, vie collective, citoyenneté.", domains: [] },
     {
       slug: "histoire-geographie",
       label: "Histoire-Géographie",
       description: "Repères chronologiques et géographiques de la France et du monde.",
-      domains: [],
+      domains: [
+        {
+          slug: "histoire",
+          label: "Histoire",
+          description: "La France de l'Antiquité au XVIIIe siècle.",
+          subdomains: [
+            { slug: "antiquite", label: "L'Antiquité", description: "Grèce, Rome et les grandes civilisations.", sequences: [] },
+          ],
+        },
+        {
+          slug: "geographie",
+          label: "Géographie",
+          description: "La France et l'Europe : territoires et paysages.",
+          subdomains: [
+            { slug: "geographie", label: "Territoires", description: "Lire des cartes, identifier des paysages.", sequences: [] },
+          ],
+        },
+      ],
     },
     {
       slug: "sciences-technologie",
       label: "Sciences et technologie",
       description: "Matière, vivant, environnement, objets techniques.",
-      domains: [],
+      domains: [
+        {
+          slug: "vivant",
+          label: "Le vivant",
+          description: "Classification, nutrition, reproduction.",
+          subdomains: [
+            { slug: "vivant", label: "Le vivant", description: "Caractéristiques des êtres vivants.", sequences: [] },
+          ],
+        },
+        {
+          slug: "matiere-energie",
+          label: "Matière et énergie",
+          description: "États de la matière, mélanges, circuits simples.",
+          subdomains: [
+            { slug: "matiere", label: "Matière", description: "Propriétés et transformations de la matière.", sequences: [] },
+          ],
+        },
+      ],
     },
-    ...elementaireSubjectsBase.slice(3),
+    ...subjectsMuets(["langues-vivantes", "arts-plastiques", "education-musicale", "eps"]),
   ],
 };
 
@@ -1198,18 +1449,126 @@ const cm2: AcademyLevel = {
 
 // ── Collège ───────────────────────────────────────────────────────────────────
 
-const collegeSubjectsBase = [
-  { slug: "francais", label: "Français", description: "Langue française, littérature, oral.", domains: [] },
-  { slug: "mathematiques", label: "Mathématiques", description: "Algèbre, géométrie, statistiques.", domains: [] },
-  { slug: "histoire-geographie-emc", label: "Histoire-Géographie-EMC", description: "Histoire, géographie, éducation morale et civique.", domains: [] },
-  { slug: "svt", label: "SVT", description: "Sciences de la vie et de la Terre.", domains: [] },
-  { slug: "physique-chimie", label: "Physique-Chimie", description: "Physique, chimie, démarche expérimentale.", domains: [] },
-  { slug: "technologie", label: "Technologie", description: "Conception, programmation, objets techniques.", domains: [] },
-  { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2.", domains: [] },
-  { slug: "arts-plastiques", label: "Arts plastiques", description: "Pratique artistique et histoire de l'art.", domains: [] },
-  { slug: "education-musicale", label: "Éducation musicale", description: "Pratique vocale et instrumentale, écoute.", domains: [] },
-  { slug: "eps", label: "EPS", description: "Activités physiques, sportives et artistiques.", domains: [] },
+const francaisCollege: AcademyDomain[] = [
+  {
+    slug: "lecture-litterature",
+    label: "Lecture et littérature",
+    description: "Textes littéraires variés, œuvres intégrales.",
+    subdomains: [
+      { slug: "comprendre-interpreter", label: "Comprendre et interpréter", description: "Lire et analyser des textes littéraires.", sequences: [] },
+      { slug: "histoire-litteraire", label: "Histoire littéraire", description: "Situer les textes dans leur contexte culturel.", sequences: [] },
+    ],
+  },
+  {
+    slug: "ecriture",
+    label: "Écriture",
+    description: "Textes narratifs, descriptifs, argumentatifs.",
+    subdomains: [
+      { slug: "ecriture-creative", label: "Écriture créative", description: "Imiter, détourner, inventer.", sequences: [] },
+      { slug: "ecriture-argumentative", label: "Écriture argumentative", description: "Rédiger une argumentation simple.", sequences: [] },
+    ],
+  },
+  {
+    slug: "etude-de-la-langue",
+    label: "Étude de la langue",
+    description: "Grammaire, lexique, orthographe.",
+    subdomains: [
+      { slug: "grammaire", label: "Grammaire", description: "Analyse syntaxique et fonctions.", sequences: [] },
+      { slug: "lexique", label: "Lexique", description: "Formation des mots, sens, registres.", sequences: [] },
+    ],
+  },
+  {
+    slug: "oral",
+    label: "Oral",
+    description: "Exposé, débat, lecture à voix haute.",
+    subdomains: [
+      { slug: "prise-de-parole", label: "Prise de parole", description: "S'exprimer avec clarté devant un auditoire.", sequences: [] },
+    ],
+  },
 ];
+
+const mathematiquesCollege: AcademyDomain[] = [
+  {
+    slug: "nombres-calcul",
+    label: "Nombres et calcul",
+    description: "Entiers, rationnels, réels, calcul littéral.",
+    subdomains: [
+      { slug: "calcul-numerique", label: "Calcul numérique", description: "Opérations sur les différents types de nombres.", sequences: [] },
+      { slug: "calcul-litteral", label: "Calcul littéral", description: "Développer, factoriser, résoudre des équations.", sequences: [] },
+    ],
+  },
+  {
+    slug: "geometrie",
+    label: "Géométrie",
+    description: "Figures planes, solides, transformations.",
+    subdomains: [
+      { slug: "figures-transformations", label: "Figures et transformations", description: "Propriétés des figures et transformations géométriques.", sequences: [] },
+      { slug: "theoremes", label: "Théorèmes", description: "Pythagore, Thalès, trigonométrie.", sequences: [] },
+    ],
+  },
+  {
+    slug: "fonctions-statistiques",
+    label: "Fonctions et statistiques",
+    description: "Introduction aux fonctions, données statistiques.",
+    subdomains: [
+      { slug: "fonctions", label: "Fonctions", description: "Notion de fonction, représentation graphique.", sequences: [] },
+      { slug: "statistiques-probabilites", label: "Statistiques et probabilités", description: "Analyser des données et calculer des fréquences.", sequences: [] },
+    ],
+  },
+];
+
+const histoireGeographieCollege: AcademyDomain[] = [
+  {
+    slug: "histoire",
+    label: "Histoire",
+    description: "De l'Antiquité au monde contemporain.",
+    subdomains: [
+      { slug: "monde-antique", label: "Le monde antique", description: "Grèce, Rome, Moyen-Orient ancien.", sequences: [] },
+      { slug: "epoque-moderne-contemporaine", label: "Époque moderne et contemporaine", description: "Révolutions, guerres mondiales, décolonisation.", sequences: [] },
+    ],
+  },
+  {
+    slug: "geographie",
+    label: "Géographie",
+    description: "Espaces, territoires, développement durable.",
+    subdomains: [
+      { slug: "territoires-mondialisation", label: "Territoires et mondialisation", description: "Flux, métropoles, inégalités mondiales.", sequences: [] },
+      { slug: "developpement-durable", label: "Développement durable", description: "Ressources, risques, environnement.", sequences: [] },
+    ],
+  },
+  {
+    slug: "emc",
+    label: "EMC",
+    description: "Droits, devoirs, citoyenneté.",
+    subdomains: [
+      { slug: "citoyennete", label: "Citoyenneté", description: "Droits de l'homme, institutions, démocratie.", sequences: [] },
+    ],
+  },
+];
+
+function buildCollegeSubjects(cycle: "3" | "4"): Array<{ slug: string; label: string; description: string; domains: AcademyDomain[] }> {
+  return [
+    { slug: "francais", label: "Français", description: "Langue française, littérature, oral.", domains: francaisCollege },
+    { slug: "mathematiques", label: "Mathématiques", description: "Algèbre, géométrie, statistiques.", domains: mathematiquesCollege },
+    { slug: "histoire-geographie-emc", label: "Histoire-Géographie-EMC", description: "Histoire, géographie, éducation morale et civique.", domains: histoireGeographieCollege },
+    { slug: "svt", label: "SVT", description: "Sciences de la vie et de la Terre.", domains: [
+      { slug: "vivant", label: "Le vivant", description: "Cellule, évolution, biodiversité, corps humain.", subdomains: [{ slug: "biodiversite", label: "Biodiversité et évolution", description: "Comprendre les mécanismes de l'évolution.", sequences: [] }] },
+      { slug: "planete-environnement", label: "Planète et environnement", description: "Géologie, écosystèmes, développement durable.", subdomains: [{ slug: "ecosystemes", label: "Écosystèmes", description: "Étudier les interactions dans un écosystème.", sequences: [] }] },
+    ] },
+    { slug: "physique-chimie", label: "Physique-Chimie", description: "Physique, chimie, démarche expérimentale.", domains: [
+      { slug: "matiere", label: "Matière", description: "Atomes, molécules, réactions chimiques.", subdomains: [{ slug: "constituants-matiere", label: "Constituants de la matière", description: "Atomes, ions, molécules.", sequences: [] }] },
+      { slug: "mouvements-forces", label: "Mouvements et forces", description: "Décrire et modéliser les mouvements.", subdomains: [{ slug: "forces", label: "Forces et mouvements", description: "Comprendre les lois du mouvement.", sequences: [] }] },
+    ] },
+    { slug: "technologie", label: "Technologie", description: "Conception, programmation, objets techniques.", domains: [
+      { slug: "systemes-techniques", label: "Systèmes techniques", description: "Analyser et concevoir des objets techniques.", subdomains: [{ slug: "conception", label: "Conception", description: "Modéliser et prototyper.", sequences: [] }] },
+      { slug: "programmation", label: "Programmation", description: cycle === "3" ? "Algorithmique et initiation au code." : "Programmation avancée et robotique.", subdomains: [{ slug: "algorithmique", label: "Algorithmique", description: "Écrire et lire des algorithmes simples.", sequences: [] }] },
+    ] },
+    { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2.", domains: [] as AcademyDomain[] },
+    { slug: "arts-plastiques", label: "Arts plastiques", description: "Pratique artistique et histoire de l'art.", domains: [] as AcademyDomain[] },
+    { slug: "education-musicale", label: "Éducation musicale", description: "Pratique vocale et instrumentale, écoute.", domains: [] as AcademyDomain[] },
+    { slug: "eps", label: "EPS", description: "Activités physiques, sportives et artistiques.", domains: [] as AcademyDomain[] },
+  ];
+}
 
 const sixieme: AcademyLevel = {
   slug: "6e",
@@ -1218,9 +1577,9 @@ const sixieme: AcademyLevel = {
   stage: "college",
   description: "Entrée au collège. Consolidation du cycle 3 et ouverture disciplinaire.",
   subjects: [
-    ...collegeSubjectsBase.slice(0, 3),
+    ...buildCollegeSubjects("3").slice(0, 3),
     { slug: "sciences-technologie", label: "Sciences et technologie", description: "Sciences expérimentales et technologie en cycle 3.", domains: [] },
-    ...collegeSubjectsBase.slice(3),
+    ...buildCollegeSubjects("3").slice(3),
   ],
 };
 
@@ -1230,7 +1589,7 @@ const cinquieme: AcademyLevel = {
   cycle: "cycle-4",
   stage: "college",
   description: "Début du cycle 4. Approfondissement disciplinaire.",
-  subjects: collegeSubjectsBase,
+  subjects: buildCollegeSubjects("4"),
 };
 
 const quatrieme: AcademyLevel = {
@@ -1239,7 +1598,7 @@ const quatrieme: AcademyLevel = {
   cycle: "cycle-4",
   stage: "college",
   description: "Milieu du cycle 4. Montée en complexité.",
-  subjects: collegeSubjectsBase,
+  subjects: buildCollegeSubjects("4"),
 };
 
 const troisieme: AcademyLevel = {
@@ -1248,19 +1607,47 @@ const troisieme: AcademyLevel = {
   cycle: "cycle-4",
   stage: "college",
   description: "Fin du cycle 4. Préparation au Brevet.",
-  subjects: collegeSubjectsBase,
+  subjects: buildCollegeSubjects("4"),
 };
 
 // ── Lycée ─────────────────────────────────────────────────────────────────────
 
+const francaisLycee: AcademyDomain[] = [
+  {
+    slug: "litterature",
+    label: "Littérature",
+    description: "Œuvres majeures des XVIIe–XXIe siècles.",
+    subdomains: [
+      { slug: "parcours-associes", label: "Parcours associés", description: "Lire une œuvre dans son contexte culturel.", sequences: [] },
+    ],
+  },
+  {
+    slug: "langue-rhetorique",
+    label: "Langue et rhétorique",
+    description: "Grammaire avancée, figures de style, argumentation.",
+    subdomains: [
+      { slug: "argumentation", label: "Argumentation", description: "Dissertation et commentaire composé.", sequences: [] },
+    ],
+  },
+];
+
+const mathematiquesLycee: AcademyDomain[] = [
+  { slug: "analyse", label: "Analyse", description: "Fonctions, dérivation, intégration.", subdomains: [{ slug: "fonctions", label: "Fonctions", description: "Étude et représentation des fonctions.", sequences: [] }] },
+  { slug: "algebre", label: "Algèbre", description: "Suites, équations, systèmes.", subdomains: [{ slug: "suites", label: "Suites", description: "Suites arithmétiques et géométriques.", sequences: [] }] },
+  { slug: "probabilites-statistiques", label: "Probabilités et statistiques", description: "Variables aléatoires, lois de probabilités.", subdomains: [{ slug: "probabilites", label: "Probabilités", description: "Calculer des probabilités et interpréter.", sequences: [] }] },
+];
+
 const lyceeSubjectsBase = [
-  { slug: "francais", label: "Français", description: "Humanités littéraires, rhétorique, EAF.", domains: [] },
-  { slug: "mathematiques", label: "Mathématiques", description: "Analyse, algèbre, probabilités.", domains: [] },
-  { slug: "histoire-geographie", label: "Histoire-Géographie", description: "Grands repères mondiaux contemporains.", domains: [] },
-  { slug: "emc", label: "EMC", description: "Éducation morale et civique.", domains: [] },
-  { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2 approfondies.", domains: [] },
-  { slug: "enseignement-scientifique", label: "Enseignement scientifique", description: "Sciences pluridisciplinaires obligatoires.", domains: [] },
-  { slug: "specialites", label: "Spécialités", description: "Parcours personnalisé selon les choix de l'élève.", domains: [] },
+  { slug: "francais", label: "Français", description: "Humanités littéraires, rhétorique, EAF.", domains: francaisLycee },
+  { slug: "mathematiques", label: "Mathématiques", description: "Analyse, algèbre, probabilités.", domains: mathematiquesLycee },
+  { slug: "histoire-geographie", label: "Histoire-Géographie", description: "Grands repères mondiaux contemporains.", domains: [
+    { slug: "histoire", label: "Histoire", description: "Du XIXe siècle au monde contemporain.", subdomains: [{ slug: "monde-contemporain", label: "Monde contemporain", description: "Guerres, décolonisation, mondialisation.", sequences: [] }] },
+    { slug: "geographie", label: "Géographie", description: "Mondialisation, territoires, développement.", subdomains: [{ slug: "mondialisation", label: "Mondialisation", description: "Flux, puissances, inégalités mondiales.", sequences: [] }] },
+  ] as AcademyDomain[] },
+  { slug: "emc", label: "EMC", description: "Éducation morale et civique.", domains: [] as AcademyDomain[] },
+  { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2 approfondies.", domains: [] as AcademyDomain[] },
+  { slug: "enseignement-scientifique", label: "Enseignement scientifique", description: "Sciences pluridisciplinaires obligatoires.", domains: [] as AcademyDomain[] },
+  { slug: "specialites", label: "Spécialités", description: "Parcours personnalisé selon les choix de l'élève.", domains: [] as AcademyDomain[] },
 ];
 
 const seconde: AcademyLevel = {
@@ -1289,7 +1676,15 @@ const terminale: AcademyLevel = {
   description: "Baccalauréat. Philosophie obligatoire.",
   subjects: [
     ...lyceeSubjectsBase,
-    { slug: "philosophie", label: "Philosophie", description: "Dissertation et explication de texte philosophique.", domains: [] },
+    {
+      slug: "philosophie",
+      label: "Philosophie",
+      description: "Dissertation et explication de texte philosophique.",
+      domains: [
+        { slug: "grands-themes", label: "Grands thèmes", description: "La liberté, la vérité, l'État, la conscience…", subdomains: [{ slug: "conscience-sujet", label: "Conscience et sujet", description: "Identité, liberté, responsabilité.", sequences: [] }] },
+        { slug: "textes-philosophiques", label: "Textes philosophiques", description: "Platon, Descartes, Kant, Nietzsche…", subdomains: [{ slug: "explication-texte", label: "Explication de texte", description: "Analyser et commenter un texte philosophique.", sequences: [] }] },
+      ] as AcademyDomain[],
+    },
   ],
 };
 
