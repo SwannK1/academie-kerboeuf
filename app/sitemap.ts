@@ -7,6 +7,7 @@ import { learningPaths } from "@/content/learning-paths";
 import { getElementaryPedagogicalPlaces } from "@/content/pedagogical-places";
 import { ce1Level } from "@/content/levels/ce1";
 import { ce2Level } from "@/content/levels/ce2";
+import { cm1Level } from "@/content/levels/cm1";
 import { getPublicStatusKey } from "@/content/public-status";
 
 // TODO: remplacer par le domaine réel avant mise en production
@@ -51,6 +52,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE_URL}/primaire/ce2/lecons/${slug}`,
     priority: 0.55,
   }));
+  const cm1LessonRoutes = availableLessonSlugs(cm1Level).map((slug) => ({
+    url: `${BASE_URL}/primaire/cm1/lecons/${slug}`,
+    priority: 0.55,
+  }));
 
   return [
     { url: `${BASE_URL}/`, priority: 1.0 },
@@ -64,6 +69,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...ce1LessonRoutes,
     { url: `${BASE_URL}/primaire/ce2/lecons`, priority: 0.65 },
     ...ce2LessonRoutes,
+    { url: `${BASE_URL}/primaire/cm1/lecons`, priority: 0.65 },
+    ...cm1LessonRoutes,
     { url: `${BASE_URL}/primaire/cm2`, priority: 0.8 },
     { url: `${BASE_URL}/primaire/cm2/missions`, priority: 0.7 },
     { url: `${BASE_URL}/primaire/cm2/matieres`, priority: 0.7 },
