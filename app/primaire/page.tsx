@@ -173,15 +173,23 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     hoverBg: "hover:bg-gold/[0.08]",
     ring: "focus:ring-gold/60",
   };
+  const isPilot = level.slug === "cm2";
 
   return (
     <Link
       href={getLevelPath(level)}
       className={`group flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-1 ${accent.hoverBorder} ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}
     >
-      <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
-        {level.cycle}
-      </p>
+      <div className="flex items-start justify-between gap-2">
+        <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
+          {level.cycle}
+        </p>
+        {isPilot && (
+          <span className="rounded border border-gold/35 bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
+            Niveau pilote
+          </span>
+        )}
+      </div>
       <p className="mt-4 text-4xl font-black text-foreground">{level.label}</p>
       <p className={`mt-1 text-sm font-bold ${accent.text}`}>
         {guide.character}
@@ -190,6 +198,11 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
         ) : null}
       </p>
       <p className="mt-4 flex-1 text-sm leading-7 text-muted">{guide.focus}</p>
+      {isPilot && (
+        <p className="mt-3 text-xs text-muted">
+          Le contenu le plus avancé de la plateforme — les autres niveaux arrivent progressivement.
+        </p>
+      )}
       <div className="mt-5 border-t border-white/10 pt-4">
         <p className="text-xs text-muted">
           {level.professor.name} · {level.professor.mainSubject}

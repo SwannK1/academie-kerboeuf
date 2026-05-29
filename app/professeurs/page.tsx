@@ -304,7 +304,7 @@ function ClosingSection() {
               href="/primaire/cm2/missions"
               className="inline-flex h-11 items-center justify-center rounded-md bg-gold px-6 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
             >
-              Voir les missions
+              Missions CM2 avec Félix
             </Link>
             <Link
               href="/primaire"

@@ -256,16 +256,16 @@ export default function MissionsRecentesPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/primaire/cm2/missions"
+                href="/primaire"
                 className="rounded-md bg-gold px-5 py-3 text-sm font-black text-ink transition hover:bg-gold/90"
               >
-                Missions CM2
+                Choisir un niveau
               </Link>
               <Link
-                href="/univers"
-                className="rounded-md border border-jade/35 bg-jade/10 px-5 py-3 text-sm font-black text-jade transition hover:bg-jade hover:text-ink"
+                href="/primaire/cm2/missions"
+                className="rounded-md border border-gold/35 bg-gold/10 px-5 py-3 text-sm font-black text-gold transition hover:bg-gold hover:text-ink"
               >
-                Comprendre l’univers
+                Catalogue CM2 — niveau pilote
               </Link>
               <Link
                 href="/professeurs"
@@ -334,10 +334,10 @@ export default function MissionsRecentesPage() {
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
-              href="/primaire/cm2/missions"
+              href="/primaire"
               className="rounded-md bg-gold px-5 py-3 text-sm font-black text-ink transition hover:bg-gold/90"
             >
-              Missions CM2
+              Choisir un niveau
             </Link>
             <Link
               href="/univers"
