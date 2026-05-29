@@ -61,6 +61,8 @@ export type ProfessorProfile = {
   famousFor?: string[];
   favoriteTools?: string[];
   coreValues?: string[];
+  // Gestes intellectuels structurés (utilisé pour l'affichage pédagogique)
+  intellectualGestures?: string[];
   // Assets futurs
   avatarImage?: string;
   bannerImage?: string;
@@ -96,6 +98,7 @@ type ProfessorExtended = {
   famousFor?: string[];
   favoriteTools?: string[];
   coreValues?: string[];
+  intellectualGestures?: string[];
   avatarImage?: string;
   bannerImage?: string;
   symbolImage?: string;
@@ -513,22 +516,31 @@ const extendedByLevelSlug: Record<string, ProfessorExtended> = {
       "Les élèves de Félix ont l'impression de participer à une véritable mission. Ils endossent un rôle — enquêteur, cartographe, scientifique — et la compétence à acquérir devient une nécessité narrative. Ils ne se souviennent pas d'avoir fait des exercices ; ils se souviennent d'avoir résolu des enquêtes.",
     missionPhilosophy:
       "Félix construit chaque mission comme un dossier d'enquête : un contexte narratif qui place l'élève dans un rôle, des questions progressives de l'indice vers la synthèse, et une correction guidée qui valide chaque étape. Le contenu pédagogique est mémorable parce qu'il est vécu, pas seulement lu.",
+    intellectualGestures: [
+      "Observer",
+      "Chercher",
+      "Vérifier",
+      "Justifier",
+      "Expliquer",
+      "Coopérer",
+      "Garder une trace",
+    ],
     pedagogySteps: [
       {
-        label: "Contexte narratif",
-        description: "L'élève entre dans un rôle : enquêteur, cartographe, scientifique.",
+        label: "J'observe",
+        description: "Je lis le document, le texte ou la situation avec attention. Je repère ce qui est important.",
       },
       {
-        label: "Questions progressives",
-        description: "Indice → raisonnement → synthèse : chaque question s'appuie sur la précédente.",
+        label: "Je cherche des indices",
+        description: "Je relève les mots, les chiffres, les détails qui me permettent de comprendre ou de répondre.",
       },
       {
-        label: "Correction guidée",
-        description: "Chaque étape est validée avant de passer à la suivante.",
+        label: "Je justifie avec une preuve",
+        description: "Je formule ma réponse et je l'appuie sur un indice précis. Je cite, je montre, j'explique.",
       },
       {
-        label: "Réinvestissement",
-        description: "La méthode utilisée est nommée et transférable à d'autres disciplines.",
+        label: "Je garde une trace",
+        description: "Je note ce que j'ai compris et comment j'ai raisonné, pour pouvoir réutiliser la méthode.",
       },
     ],
     relatedSlugs: ["noisette", "oria", "akira"],
@@ -945,6 +957,7 @@ const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
     famousFor: extended.famousFor,
     favoriteTools: extended.favoriteTools,
     coreValues: extended.coreValues,
+    intellectualGestures: extended.intellectualGestures,
     avatarImage: extended.avatarImage,
     bannerImage: extended.bannerImage,
     symbolImage: extended.symbolImage,
