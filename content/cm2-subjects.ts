@@ -46,13 +46,14 @@ export const cm2Subjects: Cm2Subject[] = [
     shortDescription:
       "Calculer avec stratégie, résoudre des défis, vérifier le résultat.",
     domains: [
-      "Nombres et calculs",
+      "Nombres et calcul",
+      "Calcul posé",
       "Résolution de problèmes",
       "Grandeurs et mesures",
       "Espace et géométrie",
       "Organisation et gestion de données",
     ],
-    status: "available",
+    status: "in-progress",
     accent: "jade",
     missionSlugs: ["mission-calcul", "defis-mathematiques"],
     teacherFocus:
@@ -63,8 +64,8 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "Histoire-Géographie",
     shortDescription:
       "Lire des documents, situer dans le temps et dans l'espace.",
-    domains: ["Histoire", "Géographie", "Repères et documents"],
-    status: "available",
+    domains: ["Histoire", "Géographie", "Lecture de documents"],
+    status: "in-progress",
     accent: "sky",
     missionSlugs: ["archives-historiques", "cartographe-du-monde"],
     teacherFocus:
@@ -75,12 +76,12 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "Sciences et technologie",
     shortDescription: "Observer, formuler une hypothèse, comparer, conclure.",
     domains: [
-      "Matière, mouvement, énergie, information",
-      "Le vivant, sa diversité et ses fonctions",
+      "Démarche scientifique",
+      "Le vivant",
       "Matériaux et objets techniques",
       "La planète Terre et les êtres vivants",
     ],
-    status: "available",
+    status: "in-progress",
     accent: "ember",
     missionSlugs: ["laboratoire-scientifique"],
     teacherFocus:
