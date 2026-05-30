@@ -8,6 +8,7 @@ import { SharedMissionDetail } from "@/components/academy/shared-mission-detail"
 import {
   getAcademyMission,
   getAcademyMissionParams,
+  isMissionPubliclyAvailable,
   isMissionReadyForDetail,
 } from "@/content/academy";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
@@ -36,18 +37,21 @@ export async function generateMetadata({
     return { title: "Mission introuvable | Académie Kerboeuf" };
   }
 
-  const levelStatus = getLyceeLevelStatus(levelSlug);
-  const isUpcoming = getPublicStatusKey(levelStatus) === "upcoming";
+  const { mission } = academyMission;
 
-  if (isUpcoming) {
+  if (!isMissionPubliclyAvailable(mission)) {
+    return { title: "Mission introuvable | Académie Kerboeuf" };
+  }
+
+  const levelStatus = getLyceeLevelStatus(levelSlug);
+
+  if (getPublicStatusKey(levelStatus) === "upcoming") {
     return {
       title: "Mission en préparation | Académie Kerboeuf",
       description:
         "Cette mission sera publiée lorsque le niveau lycée sera prêt avec ses matières, domaines et ressources associées.",
     };
   }
-
-  const { mission } = academyMission;
 
   return {
     title: `${mission.title} | Académie Kerboeuf`,
@@ -65,10 +69,13 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
 
   const { level, mission } = academyMission;
 
-  const levelStatus = getLyceeLevelStatus(levelSlug);
-  const isUpcoming = getPublicStatusKey(levelStatus) === "upcoming";
+  if (!isMissionPubliclyAvailable(mission)) {
+    notFound();
+  }
 
-  if (isUpcoming) {
+  const levelStatus = getLyceeLevelStatus(levelSlug);
+
+  if (getPublicStatusKey(levelStatus) === "upcoming") {
     const missionsHref = `/lycee/${levelSlug}/missions`;
     const levelHref = `/lycee/${levelSlug}`;
 

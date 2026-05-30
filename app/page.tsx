@@ -47,14 +47,27 @@ const WORLDS = [
   },
 ];
 
-const QUICK_LINKS = [
-  { label: "Ressources",  href: "/ressources"      },
-  { label: "Programmes",  href: "/programmes"      },
-  { label: "Parcours",    href: "/parcours"         },
-  { label: "Professeurs", href: "/professeurs"      },
-  { label: "Élèves",      href: "/eleves"           },
-  { label: "Missions",    href: "/missions-recentes"},
-  { label: "Univers",     href: "/univers"          },
+const QUICK_LINK_GROUPS = [
+  {
+    title: "Explorer",
+    links: [
+      { label: "Univers", href: "/univers" },
+      { label: "Élèves", href: "/eleves" },
+      { label: "Parcours", href: "/parcours" },
+    ],
+  },
+  {
+    title: "Apprendre",
+    links: [
+      { label: "Programmes", href: "/programmes" },
+      { label: "Ressources", href: "/ressources" },
+      { label: "Missions", href: "/missions-recentes" },
+    ],
+  },
+  {
+    title: "Accompagner",
+    links: [{ label: "Professeurs", href: "/professeurs" }],
+  },
 ];
 
 export default function Home() {
@@ -106,7 +119,7 @@ export default function Home() {
               Choisir un univers
             </p>
             <h2 className="mt-4 text-3xl font-black text-foreground sm:text-5xl">
-              De la maternelle au lycée.
+              Choisir son aile de l’Académie.
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted">
               Chaque monde a ses personnages, ses niveaux et ses missions — un
@@ -146,18 +159,30 @@ export default function Home() {
       {/* ── Accès rapides ─────────────────────────────────────────────────── */}
       <section className="border-t border-white/10 bg-panel/40 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-muted">
+          <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
             Accès rapides
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {QUICK_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
-              >
-                {link.label}
-              </Link>
+          </h2>
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {QUICK_LINK_GROUPS.map((group) => (
+              <section key={group.title} aria-labelledby={`quick-${group.title}`}>
+                <h3
+                  id={`quick-${group.title}`}
+                  className="text-sm font-black text-foreground"
+                >
+                  {group.title}
+                </h3>
+                <div className="mt-3 flex flex-wrap gap-3">
+                  {group.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </div>

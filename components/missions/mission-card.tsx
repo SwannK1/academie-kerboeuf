@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { getPublicStatusKey } from "@/content/public-status";
 
 export type MissionCardData = {
   slug: string;
@@ -29,9 +30,12 @@ type MissionCardProps = {
 };
 
 export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) {
+  const isLinked =
+    Boolean(linkBasePath) && getPublicStatusKey(mission.status) === "available";
   const cardClassName = `group relative block overflow-hidden rounded-md border bg-white/[0.045] p-5 ${mission.theme.ringClass}`;
   const linkedClassName = `${cardClassName} transition hover:-translate-y-1 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/70`;
   const staticClassName = `${cardClassName} cursor-default`;
+  const unavailableClassName = `${cardClassName} cursor-not-allowed opacity-75`;
   const content = (
     <>
       <div
@@ -108,7 +112,7 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
     </>
   );
 
-  if (linkBasePath) {
+  if (isLinked && linkBasePath) {
     return (
       <Link
         href={`${linkBasePath}/${mission.slug}`}
@@ -117,6 +121,21 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
       >
         {content}
       </Link>
+    );
+  }
+
+  if (linkBasePath) {
+    return (
+      <div
+        className={unavailableClassName}
+        aria-disabled="true"
+        aria-label={`${mission.title} — détail non disponible`}
+      >
+        {content}
+        <div className="mt-4 inline-flex rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+          Détail non disponible
+        </div>
+      </div>
     );
   }
 

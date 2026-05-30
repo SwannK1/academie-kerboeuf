@@ -80,6 +80,10 @@ export default async function EleveDetailPage({ params }: PageProps) {
   const associatedPaths = getLearningPathsWithSteps().filter(
     (path) => path.levelSlug === student.levelSlug,
   );
+  const recommendedMissionCta =
+    student.recommendedMission?.href?.endsWith("/missions")
+      ? "Voir les missions"
+      : "Ouvrir la mission";
 
   return (
     <main>
@@ -253,7 +257,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
                   href={student.recommendedMission.href}
                   className={`rounded-md border px-4 py-2 text-sm font-bold transition hover:opacity-90 ${accent.badgeClass}`}
                 >
-                  Ouvrir la mission
+                  {recommendedMissionCta}
                 </Link>
               ) : null}
               <Link

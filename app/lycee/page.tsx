@@ -96,12 +96,15 @@ export default function LyceePage() {
                       : "border-white/10 bg-white/[0.025] opacity-60"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="text-2xl font-black text-foreground">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <h3 className="text-2xl font-black text-foreground">
                       {level.label}
-                    </h2>
-                    <div className="shrink-0">
-                      <PublicStatusBadge status={status} />
+                    </h3>
+                    <div className="max-w-full sm:shrink-0">
+                      <PublicStatusBadge
+                        status={status}
+                        className="max-w-full whitespace-normal text-center leading-tight sm:whitespace-nowrap"
+                      />
                     </div>
                   </div>
                   <p className="mt-4 flex-1 text-sm leading-7 text-muted">
@@ -112,7 +115,7 @@ export default function LyceePage() {
                       {level.cta} →
                     </span>
                   ) : (
-                    <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                    <span className="mt-6 inline-flex w-full justify-center rounded border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-center text-xs font-bold leading-snug text-muted sm:w-fit">
                       Préparation en cours
                     </span>
                   )}
@@ -127,7 +130,11 @@ export default function LyceePage() {
                 );
               }
               return (
-                <div key={level.href} aria-label={`${level.label} — en préparation`}>
+                <div
+                  key={level.href}
+                  aria-disabled="true"
+                  aria-label={`${level.label} — en préparation`}
+                >
                   {cardContent}
                 </div>
               );

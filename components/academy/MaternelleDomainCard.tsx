@@ -13,8 +13,21 @@ export function MaternelleDomainCard({
   index,
 }: MaternelleDomainCardProps) {
   const observables = domain.observables.slice(0, 3);
+  const domainHref = domain.href;
+  const isInteractive =
+    Boolean(domainHref) && getPublicStatusKey(domain.status) !== "upcoming";
   const card = (
-    <article className="group flex h-full min-h-[22rem] flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-jade/30 hover:bg-white/[0.065]">
+    <div
+      aria-disabled={isInteractive ? undefined : "true"}
+      className={[
+        "group flex h-full min-h-[22rem] flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition",
+        isInteractive
+          ? "hover:border-jade/30 hover:bg-white/[0.065]"
+          : "cursor-not-allowed opacity-75",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className="flex items-start justify-between gap-3">
         <span className="flex size-8 shrink-0 items-center justify-center rounded border border-white/10 bg-ink/40 text-xs font-black text-muted">
           {index + 1}
@@ -65,20 +78,20 @@ export function MaternelleDomainCard({
         </div>
       </div>
 
-      {domain.href && (
+      {isInteractive && (
         <span className="mt-auto pt-5 text-sm font-black text-jade transition group-hover:translate-x-1">
           Ouvrir le domaine
         </span>
       )}
-    </article>
+    </div>
   );
 
-  if (!domain.href || getPublicStatusKey(domain.status) === "upcoming") {
+  if (!isInteractive || !domainHref) {
     return card;
   }
 
   return (
-    <Link href={domain.href} aria-label={`Ouvrir le domaine ${domain.label}`}>
+    <Link href={domainHref} aria-label={`Ouvrir le domaine ${domain.label}`}>
       {card}
     </Link>
   );
