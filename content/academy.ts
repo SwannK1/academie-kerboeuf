@@ -809,6 +809,12 @@ export function hasRealMissionContent(
   );
 }
 
+export function isMissionPubliclyAvailable(
+  mission: Pick<AcademyMission, "status">,
+) {
+  return getPublicStatusKey(mission.status) === "available";
+}
+
 export function isMissionReadyForDetail(
   mission: Pick<
     AcademyMission,
