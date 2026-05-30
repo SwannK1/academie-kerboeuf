@@ -22,8 +22,8 @@ Ne jamais merger :
 - une branche brouillon ;
 - une branche qui contient plusieurs sujets ;
 - une branche avec build cassé ;
-- une branche contenant des restes KerWeb/Semence/restaurant ;
-- une branche avec .env, .vercel, .next, node_modules, tsbuildinfo.
+- une branche contenant des restes KerWeb, Semence, Graines de Foi ou restaurant ;
+- une branche avec .env, .vercel, .next, node_modules ou tsbuildinfo.
 
 ## En cas de doute
 
