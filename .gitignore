@@ -23,6 +23,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -34,6 +35,7 @@ personnages:/
 
 # debug
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
@@ -47,3 +49,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# projets liés / répertoires locaux sensibles
+kerweb-studio/
+.claude/
+components/kerweb/
+supabase/
+docs/audit-request-setup.md
+docs/audit-requests-supabase.md
