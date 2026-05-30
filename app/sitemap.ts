@@ -10,7 +10,6 @@ import { ce2Level } from "@/content/levels/ce2";
 import { cm1Level } from "@/content/levels/cm1";
 import { getPublicStatusKey } from "@/content/public-status";
 
-// TODO: remplacer par le domaine réel avant mise en production
 const BASE_URL = "https://academie-kerboeuf.fr";
 
 export default function sitemap(): MetadataRoute.Sitemap {
