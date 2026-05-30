@@ -2,26 +2,51 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#f8f3e8] px-6 py-16 text-[#16213e]">
-      <div className="mx-auto max-w-3xl rounded-3xl border border-[#d8c7a3] bg-white/80 p-8 shadow-sm">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b7791f]">
-          Académie Kerboeuf
+    <main className="flex min-h-[60vh] flex-col items-center justify-center px-6 py-24">
+      <div className="mx-auto w-full max-w-xl text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
+          Académie Kerboeuf · Erreur 404
         </p>
 
-        <h1 className="mt-4 text-3xl font-bold">
+        <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
           Page introuvable
         </h1>
 
-        <p className="mt-4 text-base leading-7 text-[#334155]">
+        <p className="mt-5 text-base leading-7 text-muted">
           Cette page n&apos;existe pas ou n&apos;est pas encore publiée.
+          <br />
+          Retrouvez votre chemin depuis les sections ci-dessous.
         </p>
 
-        <Link
-          href="/"
-          className="mt-8 inline-flex rounded-full bg-[#16213e] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#24345f] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b7791f] focus-visible:ring-offset-2"
+        <nav
+          aria-label="Liens de secours"
+          className="mt-10 flex flex-wrap justify-center gap-3"
         >
-          Retour à l&apos;accueil
-        </Link>
+          <Link
+            href="/"
+            className="rounded-md border border-gold/35 bg-gold/10 px-5 py-2.5 text-sm font-bold text-gold transition hover:bg-gold/20 focus:outline-none focus:ring-2 focus:ring-gold/60"
+          >
+            Accueil
+          </Link>
+          <Link
+            href="/carte"
+            className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-2.5 text-sm font-bold text-foreground transition hover:bg-white/[0.10] focus:outline-none focus:ring-2 focus:ring-white/30"
+          >
+            Carte de l&apos;Académie
+          </Link>
+          <Link
+            href="/primaire"
+            className="rounded-md border border-jade/30 bg-jade/[0.07] px-5 py-2.5 text-sm font-bold text-jade transition hover:bg-jade/[0.14] focus:outline-none focus:ring-2 focus:ring-jade/60"
+          >
+            Primaire
+          </Link>
+          <Link
+            href="/college"
+            className="rounded-md border border-sky/30 bg-sky/[0.07] px-5 py-2.5 text-sm font-bold text-sky transition hover:bg-sky/[0.14] focus:outline-none focus:ring-2 focus:ring-sky/60"
+          >
+            Collège
+          </Link>
+        </nav>
       </div>
     </main>
   );

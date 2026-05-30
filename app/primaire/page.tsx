@@ -73,7 +73,10 @@ export default function PrimairePage() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               CP · CE1 · CE2 · CM1 · CM2
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+              Primaire — les années des fondamentaux
+            </h1>
+            <h2 className="mt-2 text-xl font-bold text-muted">
               Choisis ton guide
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
