@@ -12,7 +12,7 @@
 - [ ] Aucun autre projet n'est mélangé.
 - [ ] Aucun faux lien, faux PDF ou fausse ressource.
 - [ ] npm run lint passe.
-- [ ] npx next build --webpack passe.
+- [ ] npm run build passe.
 - [ ] La CI GitHub est verte.
 - [ ] Le working tree est propre.
 
