@@ -222,7 +222,7 @@ export const emblematicStudents: EmblematicStudent[] = [
       "Entrer dans un rituel de classe",
     ],
     recommendedMission: {
-      title: "Atelier Lecture",
+      title: "Voir les missions du niveau",
       description:
         "Commencer par une mission courte pour comprendre un texte et repérer les informations clés.",
       href: "/primaire/cp/missions",
@@ -260,7 +260,7 @@ export const emblematicStudents: EmblematicStudent[] = [
       "Expliquer à voix haute une procédure",
     ],
     recommendedMission: {
-      title: "Défi Calcul Mental",
+      title: "Voir les missions du niveau",
       description:
         "S’entraîner à choisir une stratégie et à vérifier un résultat.",
       href: "/primaire/ce1/missions",
@@ -298,7 +298,7 @@ export const emblematicStudents: EmblematicStudent[] = [
       "Réutiliser une trace de méthode",
     ],
     recommendedMission: {
-      title: "Laboratoire des Idées",
+      title: "Voir les missions du niveau",
       description:
         "Observer, organiser et garder une trace claire de ce qui a été compris.",
       href: "/primaire/ce2/missions",
@@ -336,7 +336,7 @@ export const emblematicStudents: EmblematicStudent[] = [
       "Garder la curiosité face à l’inconnu",
     ],
     recommendedMission: {
-      title: "Carte du Monde",
+      title: "Voir les missions du niveau",
       description:
         "Lire des repères, organiser une carte et construire une réponse précise.",
       href: "/primaire/cm1/missions",
