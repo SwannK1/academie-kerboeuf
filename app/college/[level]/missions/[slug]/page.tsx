@@ -5,6 +5,7 @@ import { SharedMissionDetail } from "@/components/academy/shared-mission-detail"
 import {
   getAcademyMission,
   getAcademyMissionParams,
+  isMissionPubliclyAvailable,
   isMissionReadyForDetail,
 } from "@/content/academy";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
@@ -33,6 +34,10 @@ export async function generateMetadata({
 
   const { mission } = academyMission;
 
+  if (!isMissionPubliclyAvailable(mission)) {
+    return { title: "Mission introuvable | Académie Kerboeuf" };
+  }
+
   return {
     title: `${mission.title} | Académie Kerboeuf`,
     description: mission.description,
@@ -48,6 +53,10 @@ export default async function CollegeMissionDetailPage({ params }: PageProps) {
   }
 
   const { level, mission } = academyMission;
+
+  if (!isMissionPubliclyAvailable(mission)) {
+    notFound();
+  }
 
   if (!isMissionReadyForDetail(mission)) {
     return <MissionUnavailableNotice level={level} mission={mission} />;
