@@ -181,7 +181,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
       },
     ],
     uses: ["homepage", "hub", "interactive-map"],
-    image: "/images/academie-kerboeuf/lieux/primaire/cour-des-explorateurs.png",
+    image: "/images/academie-kerboeuf/lieux/primaire/portail-primaire.png",
     altText:
       "Cour d'école immersive avec une carte des Lisières et des zones de départ de mission.",
     qualityStatus: "review",
