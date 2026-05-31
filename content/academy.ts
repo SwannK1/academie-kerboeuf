@@ -275,15 +275,12 @@ function mission({
   professor: string;
   status?: AcademyMission["status"];
 }): AcademyMission {
-  const publicSafeStatus =
-    status === "disponible" ? "en préparation" : status;
-
   return {
     slug,
     title,
     description,
     subject,
-    status: publicSafeStatus,
+    status,
     theme: academyThemes[theme],
     progress: missionProgress(
       "draft",
@@ -302,7 +299,7 @@ function missionsForLevel(professor: string): AcademyMission[] {
       subject: "Lecture",
       theme: "jade",
       professor,
-      status: "disponible",
+      status: "en préparation",
     }),
     mission({
       slug: "defi-calcul-mental",
@@ -807,6 +804,12 @@ export function hasRealMissionContent(
       mission.correction?.length &&
       contentFields.every(isRealMissionText),
   );
+}
+
+export function isMissionPubliclyAvailable(
+  mission: Pick<AcademyMission, "status">,
+) {
+  return getPublicStatusKey(mission.status) === "available";
 }
 
 export function isMissionReadyForDetail(

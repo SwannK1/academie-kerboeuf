@@ -77,10 +77,10 @@ export default function Cm2MatieresPage() {
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 border-b border-white/10 pb-5">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                Missions disponibles
+                Programmes disponibles
               </p>
               <h2 className="mt-2 text-2xl font-black text-foreground">
-                Matières structurées
+                Matières avec domaines et séquences
               </h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -120,15 +120,8 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
   const isAvailable = getPublicStatusKey(subject.status) === "available";
 
-  return (
-    <Link
-      href={`/primaire/cm2/matieres/${subject.slug}`}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${
-        isAvailable
-          ? `${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`
-          : "border-white/10 bg-white/[0.025] hover:border-white/20 hover:bg-white/[0.04]"
-      }`}
-    >
+  const cardContent = (
+    <>
       <p
         className={`text-xs font-bold uppercase tracking-[0.18em] ${
           isAvailable ? t.text : "text-muted"
@@ -162,17 +155,37 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
             isAvailable ? t.text : "text-white/25"
           }`}
         >
-          {isAvailable ? "Missions disponibles" : "À structurer"}
+          {isAvailable ? "Voir les domaines" : "En préparation"}
         </span>
-        <span
-          className={`text-xs transition group-hover:translate-x-0.5 ${
-            isAvailable ? t.text : "text-white/20"
-          }`}
-          aria-hidden="true"
-        >
-          →
-        </span>
+        {isAvailable && (
+          <span
+            className={`text-xs transition group-hover:translate-x-0.5 ${t.text}`}
+            aria-hidden="true"
+          >
+            →
+          </span>
+        )}
       </div>
-    </Link>
+    </>
+  );
+
+  if (isAvailable) {
+    return (
+      <Link
+        href={`/primaire/cm2/matieres/${subject.slug}`}
+        className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
+      >
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.025] p-5 cursor-default opacity-75"
+      aria-label={`${subject.title} — contenu en préparation`}
+    >
+      {cardContent}
+    </div>
   );
 }

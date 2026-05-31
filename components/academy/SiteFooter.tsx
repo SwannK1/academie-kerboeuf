@@ -2,25 +2,13 @@ import Link from "next/link";
 
 const footerSections = [
   {
-    title: "Explorer",
+    title: "Navigation",
     links: [
       { label: "Accueil", href: "/" },
-      { label: "Maternelle", href: "/maternelle" },
       { label: "Primaire", href: "/primaire" },
       { label: "Collège", href: "/college" },
       { label: "Lycée", href: "/lycee" },
-    ],
-  },
-  {
-    title: "Académie",
-    links: [
-      { label: "Élèves", href: "/eleves" },
-      { label: "Missions", href: "/missions-recentes" },
-      { label: "Ressources", href: "/ressources" },
-      { label: "Parcours", href: "/parcours" },
-      { label: "Programmes", href: "/programmes" },
       { label: "Professeurs", href: "/professeurs" },
-      { label: "Univers", href: "/univers" },
       { label: "Carte", href: "/carte" },
     ],
   },
@@ -29,7 +17,7 @@ const footerSections = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-ink/70 px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_auto_auto]">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_auto]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
             <span className="grid size-10 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold">
