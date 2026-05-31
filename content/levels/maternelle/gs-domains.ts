@@ -2,6 +2,9 @@ import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
 import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 import { gsLangageSubdomains } from "@/content/levels/maternelle/gs-langage-subdomains";
 import { gsActivitePhysiqueSubdomains } from "@/content/levels/maternelle/gs-activite-physique-subdomains";
+import { gsPremiersOutilsMathematiquesSubdomains } from "@/content/levels/maternelle/gs-premiers-outils-mathematiques-subdomains";
+import { gsExplorerLeMondeSubdomains } from "@/content/levels/maternelle/gs-explorer-le-monde-subdomains";
+import { gsActivitesArtistiquesSubdomains } from "@/content/levels/maternelle/gs-activites-artistiques-subdomains";
 
 export const gsDomains: MaternelleDomainEntry[] = [
   {
@@ -101,6 +104,7 @@ export const gsDomains: MaternelleDomainEntry[] = [
     description: "Productions, voix, écoute et regard sur les réalisations.",
     href: "/maternelle/gs/domaines/activites-artistiques",
     status: "upcoming",
+    subdomains: gsActivitesArtistiquesSubdomains,
     observables: [
       {
         id: "gs-artistique-trace",
@@ -140,6 +144,7 @@ export const gsDomains: MaternelleDomainEntry[] = [
     description: "Nombres, quantités, formes et suites organisées.",
     href: "/maternelle/gs/domaines/premiers-outils-mathematiques",
     status: "upcoming",
+    subdomains: gsPremiersOutilsMathematiquesSubdomains,
     observables: [
       {
         id: "gs-maths-denombrer",
@@ -183,6 +188,7 @@ export const gsDomains: MaternelleDomainEntry[] = [
     description: "Temps, vivant, objets, matières et premiers repères.",
     href: "/maternelle/gs/domaines/explorer-le-monde",
     status: "upcoming",
+    subdomains: gsExplorerLeMondeSubdomains,
     observables: [
       {
         id: "gs-monde-journee",

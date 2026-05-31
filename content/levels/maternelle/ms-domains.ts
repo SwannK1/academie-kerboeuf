@@ -1,6 +1,9 @@
 import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
 import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 import { msActivitePhysiqueSubdomains } from "@/content/levels/maternelle/ms-activite-physique-subdomains";
+import { msPremiersOutilsMathematiquesSubdomains } from "@/content/levels/maternelle/ms-premiers-outils-mathematiques-subdomains";
+import { msExplorerLeMondeSubdomains } from "@/content/levels/maternelle/ms-explorer-le-monde-subdomains";
+import { msActivitesArtistiquesSubdomains } from "@/content/levels/maternelle/ms-activites-artistiques-subdomains";
 import { msLangageSubdomains } from "@/content/levels/maternelle/ms-langage-subdomains";
 
 export const msDomains: MaternelleDomainEntry[] = [
@@ -105,6 +108,7 @@ export const msDomains: MaternelleDomainEntry[] = [
     description: "Intentions, choix d'outils, chant et description simple.",
     href: "/maternelle/ms/domaines/activites-artistiques",
     status: "upcoming",
+    subdomains: msActivitesArtistiquesSubdomains,
     observables: [
       {
         id: "ms-artistique-intention",
@@ -149,6 +153,7 @@ export const msDomains: MaternelleDomainEntry[] = [
     description: "Petites collections, comparaisons, classements et suites.",
     href: "/maternelle/ms/domaines/premiers-outils-mathematiques",
     status: "upcoming",
+    subdomains: msPremiersOutilsMathematiquesSubdomains,
     observables: [
       {
         id: "ms-maths-denombrer",
@@ -192,6 +197,7 @@ export const msDomains: MaternelleDomainEntry[] = [
     description: "Temps proche, vivant, objets et comparaisons concrètes.",
     href: "/maternelle/ms/domaines/explorer-le-monde",
     status: "upcoming",
+    subdomains: msExplorerLeMondeSubdomains,
     observables: [
       {
         id: "ms-monde-journee",
