@@ -296,7 +296,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
             </div>
             <div className="mt-5 flex justify-end">
               <Link
-                href="/primaire/cp/programme-complet"
+                href={`/primaire/${level.slug}/programme-complet`}
                 className="text-sm font-bold text-sky/70 transition hover:text-sky"
               >
                 Programme complet CP →
