@@ -124,7 +124,9 @@ const accentBg: Record<AccentKey, string> = {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function CartePage() {
-  const lieuxAvecRoute = lieuxTransversaux.filter((lieu) => lieu.route);
+  const lieuxAvecRoute = lieuxTransversaux.filter(
+    (lieu) => lieu.route && lieu.route !== "/carte",
+  );
   const lieuxSansRoute = lieuxTransversaux.filter((lieu) => !lieu.route);
 
   return (
@@ -243,8 +245,127 @@ export default function CartePage() {
         </div>
       </section>
 
-      {/* ── Navigation globale ── */}
+      {/* ── Accès directs par niveau ── */}
       <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
+              Niveaux
+            </p>
+            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+              Accès directs par classe
+            </h2>
+            <p className="mt-4 text-base leading-7 text-muted">
+              Chaque niveau possède sa propre page avec ses ressources, ses
+              missions et son professeur référent.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Maternelle */}
+            <div className={`rounded-md border ${accentBorder.jade} bg-white/[0.04] p-4`}>
+              <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.jade}`}>
+                Maternelle
+              </p>
+              <div className="grid gap-1.5">
+                {(
+                  [
+                    { label: "Petite Section (PS)", href: "/maternelle/ps" },
+                    { label: "Moyenne Section (MS)", href: "/maternelle/ms" },
+                    { label: "Grande Section (GS)", href: "/maternelle/gs" },
+                  ] as const
+                ).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`rounded px-3 py-2 text-xs font-bold transition ${accentText.jade} hover:bg-jade/10`}
+                  >
+                    {item.label} →
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Primaire */}
+            <div className={`rounded-md border ${accentBorder.gold} bg-white/[0.04] p-4`}>
+              <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.gold}`}>
+                Primaire
+              </p>
+              <div className="grid gap-1.5">
+                {(
+                  [
+                    { label: "CP", href: "/primaire/cp" },
+                    { label: "CE1", href: "/primaire/ce1" },
+                    { label: "CE2", href: "/primaire/ce2" },
+                    { label: "CM1", href: "/primaire/cm1" },
+                    { label: "CM2", href: "/primaire/cm2" },
+                  ] as const
+                ).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`rounded px-3 py-2 text-xs font-bold transition ${accentText.gold} hover:bg-gold/10`}
+                  >
+                    {item.label} →
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Collège */}
+            <div className={`rounded-md border ${accentBorder.sky} bg-white/[0.04] p-4`}>
+              <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.sky}`}>
+                Collège
+              </p>
+              <div className="grid gap-1.5">
+                {(
+                  [
+                    { label: "6e", href: "/college/6e" },
+                    { label: "5e", href: "/college/5e" },
+                    { label: "4e", href: "/college/4e" },
+                    { label: "3e", href: "/college/3e" },
+                  ] as const
+                ).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`rounded px-3 py-2 text-xs font-bold transition ${accentText.sky} hover:bg-sky/10`}
+                  >
+                    {item.label} →
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Lycée */}
+            <div className={`rounded-md border ${accentBorder.ember} bg-white/[0.04] p-4`}>
+              <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.ember}`}>
+                Lycée
+              </p>
+              <div className="grid gap-1.5">
+                {(
+                  [
+                    { label: "Seconde", href: "/lycee/seconde" },
+                    { label: "Première", href: "/lycee/premiere" },
+                    { label: "Terminale", href: "/lycee/terminale" },
+                  ] as const
+                ).map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`rounded px-3 py-2 text-xs font-bold transition ${accentText.ember} hover:bg-ember/10`}
+                  >
+                    {item.label} →
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Navigation globale ── */}
+      <section className="border-t border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
