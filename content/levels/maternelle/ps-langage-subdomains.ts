@@ -23,6 +23,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
         title: "Écouter et nommer",
         objective:
           "Développer l'attention auditive et la capacité à nommer des objets familiers.",
+        observableSkills: ["Nomme un objet familier après écoute ou manipulation."],
         periodLabel: "Période 1",
         sessionCount: 4,
         status: "in-progress",
@@ -81,6 +82,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
         title: "Écouter et frapper les syllabes",
         objective:
           "Sensibiliser l'élève aux syllabes en frappant des mots familiers dans des comptines courtes.",
+        observableSkills: ["Frappe les syllabes de son prénom avec le groupe."],
         periodLabel: "Période 2",
         sessionCount: 3,
         status: "in-progress",
@@ -143,6 +145,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
         title: "Découvrir les premières traces d'écrit",
         objective:
           "Distinguer dessin et écriture, et reconnaître son étiquette-prénom parmi quelques étiquettes.",
+        observableSkills: ["Reconnaît son étiquette-prénom parmi quelques étiquettes."],
         periodLabel: "Période 1",
         sessionCount: 3,
         status: "in-progress",

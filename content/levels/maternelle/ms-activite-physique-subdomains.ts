@@ -28,6 +28,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Varier ses déplacements dans un parcours",
         objective:
           "Adapter sa vitesse et sa trajectoire aux contraintes d'un parcours avec obstacles variés.",
+        observableSkills: ["Adapte son déplacement à une contrainte simple du parcours."],
         periodLabel: "Période 1",
         sessionCount: 4,
         status: "in-progress",
@@ -88,6 +89,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Se déplacer sur des supports instables",
         objective:
           "Construire des appuis variés pour se déplacer en hauteur ou sur des surfaces instables.",
+        observableSkills: ["Traverse un support instable en gardant son équilibre."],
         periodLabel: "Période 2",
         sessionCount: 4,
         status: "in-progress",
@@ -148,6 +150,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Coopérer pour réussir ensemble",
         objective:
           "Agir avec un partenaire pour atteindre un but commun en respectant une règle.",
+        observableSkills: ["Coopère avec un camarade pour transporter un objet."],
         periodLabel: "Période 3",
         sessionCount: 4,
         status: "in-progress",

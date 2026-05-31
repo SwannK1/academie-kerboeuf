@@ -26,6 +26,7 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Explorer un parcours simple",
         objective:
           "Oser s'engager dans un parcours court en adaptant son déplacement aux obstacles.",
+        observableSkills: ["Se déplace dans un parcours simple en franchissant ou contournant un obstacle."],
         periodLabel: "Période 1",
         sessionCount: 3,
         status: "in-progress",
@@ -82,6 +83,7 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Tenir son équilibre",
         objective:
           "Construire des appuis stables pour se déplacer lentement avec assurance.",
+        observableSkills: ["Maintient son équilibre sur un tracé simple."],
         periodLabel: "Période 2",
         sessionCount: 3,
         status: "in-progress",
@@ -133,6 +135,7 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Jouer ensemble",
         objective:
           "Participer à un jeu simple en respectant un signal commun et en tenant compte des autres.",
+        observableSkills: ["Réagit à un signal partagé dans un jeu collectif."],
         periodLabel: "Période 3",
         sessionCount: 3,
         status: "in-progress",

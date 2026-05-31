@@ -28,6 +28,7 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Mémoriser et enchaîner un parcours",
         objective:
           "Mémoriser l'ordre des actions d'un parcours et les enchaîner sans aide de l'adulte.",
+        observableSkills: ["Enchaîne les étapes d'un parcours mémorisé sans aide."],
         periodLabel: "Période 1",
         sessionCount: 5,
         status: "in-progress",
@@ -87,6 +88,7 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Contrôler son arrêt et son équilibre",
         objective:
           "Passer d'un déplacement rapide à une posture d'équilibre statique stable sur signal.",
+        observableSkills: ["S'arrête au signal et maintient une posture d'équilibre."],
         periodLabel: "Période 2",
         sessionCount: 5,
         status: "in-progress",
@@ -146,6 +148,7 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         title: "Jouer collectif avec opposition",
         objective:
           "Participer à un jeu d'opposition simple en comprenant et en respectant une règle verbalisée, et en commençant à adapter sa stratégie.",
+        observableSkills: ["Respecte une règle de jeu collectif avec opposition."],
         periodLabel: "Période 3",
         sessionCount: 5,
         status: "in-progress",

@@ -1,6 +1,9 @@
 import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
 import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 import { psActivitePhysiqueSubdomains } from "@/content/levels/maternelle/ps-activite-physique-subdomains";
+import { psPremiersOutilsMathematiquesSubdomains } from "@/content/levels/maternelle/ps-premiers-outils-mathematiques-subdomains";
+import { psExplorerLeMondeSubdomains } from "@/content/levels/maternelle/ps-explorer-le-monde-subdomains";
+import { psActivitesArtistiquesSubdomains } from "@/content/levels/maternelle/ps-activites-artistiques-subdomains";
 import { psLangageSubdomains } from "@/content/levels/maternelle/ps-langage-subdomains";
 
 export const psDomains: MaternelleDomainEntry[] = [
@@ -105,6 +108,7 @@ export const psDomains: MaternelleDomainEntry[] = [
     description: "Traces, matières, voix et observation de productions.",
     href: "/maternelle/ps/domaines/activites-artistiques",
     status: "upcoming",
+    subdomains: psActivitesArtistiquesSubdomains,
     observables: [
       {
         id: "ps-artistique-trace",
@@ -149,6 +153,7 @@ export const psDomains: MaternelleDomainEntry[] = [
     description: "Petites quantités, tris, associations et formes simples.",
     href: "/maternelle/ps/domaines/premiers-outils-mathematiques",
     status: "upcoming",
+    subdomains: psPremiersOutilsMathematiquesSubdomains,
     observables: [
       {
         id: "ps-maths-quantite",
@@ -192,6 +197,7 @@ export const psDomains: MaternelleDomainEntry[] = [
     description: "Journée, lieux de l'école, vivant et objets proches.",
     href: "/maternelle/ps/domaines/explorer-le-monde",
     status: "upcoming",
+    subdomains: psExplorerLeMondeSubdomains,
     observables: [
       {
         id: "ps-monde-journee",
