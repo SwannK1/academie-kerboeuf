@@ -177,7 +177,7 @@ const leconReconnaitrePhrase: Lesson = {
   printableSupport:   supportImprimable,
   projectableSupport: supportProjetable,
 
-  status: "available",
+  status: "in-progress",
 };
 
 // ── Compétences structurées ──────────────────────────────────────────────────

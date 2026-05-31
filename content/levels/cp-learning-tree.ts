@@ -173,7 +173,7 @@ const leconPhraseSimple: Lesson = {
   printableSupport:    supportImprimable,
   projectableSupport:  supportProjetable,
 
-  status: "available",
+  status: "in-progress",
 };
 
 const leconPhraseEcrite: Lesson = {
@@ -223,7 +223,7 @@ const competenceInformationsExplicites: LearningCompetency = {
   stage: "primaire",
   domainSlug: "francais",
   subdomainSlug: "lecture-comprehension",
-  status: "available",
+  status: "in-progress",
   lessonIds: ["cp-fr-lec-phrase-simple"],
   successCriteria: [
     "Repérer de qui ou de quoi parle la phrase.",
