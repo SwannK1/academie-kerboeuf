@@ -5,7 +5,7 @@ export const lyceeLevelSlugs = ["seconde", "premiere", "terminale"] as const;
 export type LyceeLevelSlug = (typeof lyceeLevelSlugs)[number];
 
 export const lyceeLevelStatuses: Record<LyceeLevelSlug, ProgramStatus> = {
-  seconde: "upcoming",
+  seconde: "in-progress",
   premiere: "upcoming",
   terminale: "upcoming",
 };
