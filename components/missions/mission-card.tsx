@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { getPublicStatusKey } from "@/content/public-status";
 
 export type MissionCardData = {
   slug: string;
@@ -108,7 +109,7 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
     </>
   );
 
-  if (linkBasePath) {
+  if (linkBasePath && getPublicStatusKey(mission.status) === "available") {
     return (
       <Link
         href={`${linkBasePath}/${mission.slug}`}
