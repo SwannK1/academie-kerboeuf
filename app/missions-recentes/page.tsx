@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { allMissions } from "@/content/mission-registry";
 import {
   getPublicStatusKey,
+  getPublicStatusLabel,
   type PublicStatusKey,
 } from "@/content/public-status";
 import type { Mission, ThemeKey } from "@/content/types";
@@ -281,9 +282,9 @@ export default function MissionsRecentesPage() {
               État du catalogue
             </p>
             <div className="grid grid-cols-3 gap-3">
-              <Metric value={availableCount} label="Disponibles" />
-              <Metric value={inProgressCount} label="En préparation" />
-              <Metric value={upcomingCount} label="À venir" />
+              <Metric value={availableCount} label={getPublicStatusLabel("available")} />
+              <Metric value={inProgressCount} label={getPublicStatusLabel("in-progress")} />
+              <Metric value={upcomingCount} label={getPublicStatusLabel("upcoming")} />
             </div>
             <p className="text-xs leading-6 text-muted">
               Une mission incomplète reste classée en préparation ou à venir :

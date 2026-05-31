@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import { getPublicStatusKey } from "@/content/public-status";
@@ -14,7 +15,6 @@ import { type AccentTokens, CM2_ACCENT } from "@/lib/cm2-accent";
 import {
   getCm2SequencesBySubjectSlug,
   type Cm2Sequence,
-  type Cm2SequenceStatus,
 } from "@/content/cm2-sequences";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -384,18 +384,6 @@ function SubdomainItem({
 
 // ── Séquences ─────────────────────────────────────────────────────────────────
 
-const STATUS_LABEL: Record<Cm2SequenceStatus, string> = {
-  available:   "Disponible",
-  "in-progress": "En préparation",
-  upcoming:    "À venir",
-};
-
-const STATUS_CLASS: Record<Cm2SequenceStatus, string> = {
-  available:   "border-jade/30 text-jade",
-  "in-progress": "border-gold/30 text-gold",
-  upcoming:    "border-white/10 text-white/30",
-};
-
 function SequenceRow({ seq }: { seq: Cm2Sequence }) {
   return (
     <li className="flex flex-col gap-1 rounded border border-white/10 bg-white/[0.025] px-4 py-3 sm:flex-row sm:items-start sm:gap-4">
@@ -403,11 +391,7 @@ function SequenceRow({ seq }: { seq: Cm2Sequence }) {
         <p className="text-sm font-semibold text-foreground">{seq.title}</p>
         <p className="mt-0.5 text-xs leading-5 text-muted">{seq.skill}</p>
       </div>
-      <span
-        className={`shrink-0 self-start rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] ${STATUS_CLASS[seq.status]}`}
-      >
-        {STATUS_LABEL[seq.status]}
-      </span>
+      <PublicStatusBadge status={seq.status} className="shrink-0 self-start" />
     </li>
   );
 }

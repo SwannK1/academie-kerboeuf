@@ -5,6 +5,7 @@ import { MissionCard } from "@/components/missions/mission-card";
 import type { PublicAcademyMission } from "@/content/public-academy";
 import {
   getPublicStatusKey,
+  getPublicStatusLabel,
   type PublicStatusKey,
 } from "@/content/public-status";
 
@@ -15,7 +16,7 @@ type MissionCatalogProps = {
 
 const missionStatusSections: {
   key: PublicStatusKey;
-  title: string;
+  title?: string;
   description: string;
 }[] = [
   {
@@ -25,12 +26,10 @@ const missionStatusSections: {
   },
   {
     key: "upcoming",
-    title: "À venir",
     description: "Missions visibles au catalogue, publication complète à venir.",
   },
   {
     key: "in-progress",
-    title: "En préparation",
     description: "Dossiers annoncés sans contenu pédagogique finalisé.",
   },
 ];
@@ -88,7 +87,7 @@ export function MissionCatalog({ missions, linkBasePath }: MissionCatalogProps) 
               <div className="mb-4 flex flex-col gap-1 border-b border-white/10 pb-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <h3 className="text-xl font-black text-foreground">
-                    {section.title}
+                    {section.title ?? getPublicStatusLabel(section.key)}
                   </h3>
                   <p className="mt-1 text-sm leading-6 text-muted">
                     {section.description}
