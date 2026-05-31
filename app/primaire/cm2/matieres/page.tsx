@@ -77,10 +77,10 @@ export default function Cm2MatieresPage() {
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 border-b border-white/10 pb-5">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                Missions disponibles
+                Programmes disponibles
               </p>
               <h2 className="mt-2 text-2xl font-black text-foreground">
-                Matières structurées
+                Matières avec domaines et séquences
               </h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -162,7 +162,7 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
             isAvailable ? t.text : "text-white/25"
           }`}
         >
-          {isAvailable ? "Missions disponibles" : "À structurer"}
+          {isAvailable ? "Voir les domaines" : "À structurer"}
         </span>
         <span
           className={`text-xs transition group-hover:translate-x-0.5 ${
