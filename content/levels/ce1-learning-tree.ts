@@ -1,279 +1,390 @@
-// Arbre pédagogique CE1 — Cycle 2, primaire.
-// Fichier pilote n°2 : vérifie que le modèle AcademyLevelProgram est généralisable hors CM2.
-//
-// Structure : Cycle 2 → CE1 → Français → Étude de la langue → Grammaire
-//             → Leçon : Reconnaître une phrase → 3 exercices progressifs.
-//
-// Personnage-guide : Gaston le Hérisson — donne un conseil de méthode, n'est pas la structure.
-// Règle : Leçon et exercices d'abord. Gaston ensuite.
-//
-// Route /primaire/ce1 non modifiée. Ce fichier n'est pas branché aux pages.
+// Arbre pedagogique CE1 - Cycle 2, primaire.
+// Structure de catalogue : niveau -> matieres -> domaines -> sequences-competences.
+// Une sequence correspond a une seule competence, sans lecon detaillee ni exercice.
 
 import type {
   AcademyLevelProgram,
-  Exercise,
   Lesson,
   LearningCompetency,
   ParentGuidance,
-  PedagogicalResourceRef,
   ProgramDomain,
+  ProgramStatus,
   ProgramSubdomain,
-  SupportRef,
 } from "@/content/program-types";
 
-// ── Exercices ─────────────────────────────────────────────────────────────────
-// Progression : Découverte → Entraînement → Approfondissement.
-
-const ex1Decouverte: Exercise = {
-  id:           "ce1-fr-gram-phrase-ex1",
-  slug:         "entoure-les-phrases",
-  lessonId:     "ce1-fr-gram-phrase",
-  instruction:
-    "Lis chaque proposition et entoure uniquement celles qui sont des phrases correctes.\n" +
-    "1) Le chien court dans le jardin.\n" +
-    "2) mange la pomme rouge\n" +
-    "3) La maîtresse écrit au tableau.\n" +
-    "4) beau soleil aujourd'hui\n" +
-    "5) Les enfants jouent à la récréation.",
-  difficulty:   "decouverte",
-  activityType: "reading-comprehension",
-  validation:
-    "Phrases correctes : 1, 3 et 5. " +
-    "L'élève vérifie pour chacune : est-ce que ça veut dire quelque chose ? " +
-    "Y a-t-il une majuscule au début et un point à la fin ?",
-  status: "available",
+const emptyParentGuidance: ParentGuidance = {
+  summary: "",
+  quickTips: [],
+  successSigns: [],
 };
 
-const ex2Entrainement: Exercise = {
-  id:           "ce1-fr-gram-phrase-ex2",
-  slug:         "ajoute-majuscule-et-point",
-  lessonId:     "ce1-fr-gram-phrase",
-  instruction:
-    "Récris chaque phrase en ajoutant la majuscule manquante et le point manquant.\n" +
-    "1) le chat dort sur le canapé\n" +
-    "2) ma sœur mange une orange\n" +
-    "3) les oiseaux chantent dans l'arbre",
-  difficulty:   "entrainement",
-  activityType: "free-text",
-  validation:
-    "1) Le chat dort sur le canapé. " +
-    "2) Ma sœur mange une orange. " +
-    "3) Les oiseaux chantent dans l'arbre. " +
-    "L'élève repère l'absence de majuscule initiale et de point final, puis les ajoute.",
-  status: "available",
+type CompetencyDefinition = {
+  slug: string;
+  title: string;
+  objective: string;
+  status: ProgramStatus;
 };
 
-const ex3Approfondissement: Exercise = {
-  id:           "ce1-fr-gram-phrase-ex3",
-  slug:         "classer-phrase-ou-pas",
-  lessonId:     "ce1-fr-gram-phrase",
-  instruction:
-    "Classe chaque proposition dans le bon tableau : « Phrase correcte » ou « Pas une phrase ».\n" +
-    "Puis explique en une ligne pourquoi tu l'as classée ainsi.\n\n" +
-    "Propositions :\n" +
-    "A) Le soleil brille ce matin.\n" +
-    "B) une grande forêt verte\n" +
-    "C) Les élèves lisent en silence.\n" +
-    "D) courir très vite dans",
-  difficulty:   "approfondissement",
-  activityType: "free-text",
-  validation:
-    "Phrases correctes : A et C (sens complet, majuscule, point). " +
-    "Pas des phrases : B (groupe nominal sans verbe ni ponctuation), " +
-    "D (incomplet, sans sens ni ponctuation). " +
-    "L'élève justifie son classement en citant au moins un critère : sens, majuscule ou point.",
-  status: "available",
-};
+function createCompetencySequence(
+  domainSlug: string,
+  subdomainSlug: string,
+  definition: CompetencyDefinition,
+): { lesson: Lesson; competency: LearningCompetency } {
+  const id = `ce1-${domainSlug}-${subdomainSlug}-${definition.slug}`;
 
-// ── Vue parent ────────────────────────────────────────────────────────────────
+  return {
+    lesson: {
+      id,
+      slug: definition.slug,
+      title: definition.title,
+      objective: definition.objective,
+      skill: definition.title,
+      parentGuidance: emptyParentGuidance,
+      successCriteria: [],
+      exercises: [],
+      competencyIds: [id],
+      status: definition.status,
+    },
+    competency: {
+      id,
+      slug: definition.slug,
+      title: definition.title,
+      levelSlug: "ce1",
+      cycle: "cycle-2",
+      stage: "primaire",
+      domainSlug,
+      subdomainSlug,
+      objective: definition.objective,
+      status: definition.status,
+      lessonIds: [id],
+      successCriteria: [],
+    },
+  };
+}
 
-const parentGuidancePhrase: ParentGuidance = {
-  summary:
-    "Votre enfant apprend à reconnaître une phrase complète en vérifiant " +
-    "le sens, la majuscule au début et le point à la fin.",
-  quickTips: [
-    "Ouvrez un livre avec votre enfant et montrez-lui une phrase : " +
-      "« Tu vois la majuscule ici ? Et le point là ? »",
-    "Demandez-lui : « Est-ce que ça veut dire quelque chose ? » " +
-      "C'est la première question à poser.",
-    "Faites l'exercice à l'oral : dites un groupe de mots sans verbe " +
-      "(ex. « un gros nuage gris ») et demandez si c'est une phrase.",
-  ],
-  successSigns: [
-    "Il repère la majuscule au début d'une phrase dans un texte.",
-    "Il vérifie qu'il y a un point à la fin avant de dire « c'est une phrase ».",
-    "Il explique pourquoi un groupe de mots n'est pas une phrase " +
-      "(« il n'y a pas de verbe » ou « ça ne veut rien dire »).",
-  ],
-  recommendedExerciseIds: [
-    "ce1-fr-gram-phrase-ex1",
-    "ce1-fr-gram-phrase-ex2",
-  ],
-};
+function createSubdomain(
+  domainSlug: string,
+  slug: string,
+  title: string,
+  description: string,
+  definitions: CompetencyDefinition[],
+): ProgramSubdomain {
+  const sequences = definitions.map((definition) =>
+    createCompetencySequence(domainSlug, slug, definition),
+  );
+  const hasInProgress = definitions.some(
+    (definition) => definition.status === "in-progress",
+  );
 
-// ── Supports pédagogiques ─────────────────────────────────────────────────────
+  return {
+    id: `ce1-${domainSlug}-${slug}`,
+    slug,
+    title,
+    description,
+    lessons: sequences.map((sequence) => sequence.lesson),
+    competencies: sequences.map((sequence) => sequence.competency),
+    status: hasInProgress ? "in-progress" : "upcoming",
+  };
+}
 
-const supportImprimable: SupportRef = {
-  label: "Fiche imprimable — Reconnaître une phrase",
-  hint:
-    "Liste de 8 propositions à entourer ou barrer, " +
-    "avec un tableau « phrase / pas une phrase » à compléter.",
-};
-
-const supportProjetable: SupportRef = {
-  label: "Support à projeter — Reconnaître une phrase",
-  hint:
-    "Trois exemples affichés en grands caractères : " +
-    "majuscule surlignée en vert, point cerclé en doré, " +
-    "proposition incorrecte barrée en rouge.",
-};
-
-const ressourcesReconnaitrePhrase: PedagogicalResourceRef[] = [
-  { kind: "lesson-pdf", label: "PDF de leçon", status: "planned" },
-  { kind: "exercises-pdf", label: "PDF d'exercices", status: "planned" },
-  { kind: "correction-pdf", label: "PDF de correction", status: "planned" },
-  { kind: "projectable-pdf", label: "PDF projetable", status: "planned" },
-  { kind: "parent-sheet-pdf", label: "Fiche parent", status: "planned" },
-];
-
-// ── Leçon ─────────────────────────────────────────────────────────────────────
-
-const leconReconnaitrePhrase: Lesson = {
-  id:    "ce1-fr-gram-phrase",
-  slug:  "reconnaitre-une-phrase",
-  title: "Reconnaître une phrase",
-
-  objective:
-    "Comprendre qu'une phrase a du sens, commence par une majuscule " +
-    "et se termine par un point.",
-
-  skill:
-    "Identifier les caractéristiques d'une phrase correcte " +
-    "(sens, majuscule initiale, ponctuation finale).",
-
-  successCriteria: [
-    "Je vérifie que la phrase veut dire quelque chose.",
-    "Je repère la majuscule au début de la phrase.",
-    "Je repère le point à la fin de la phrase.",
-    "Je distingue une phrase d'un simple groupe de mots.",
-  ],
-
-  parentGuidance: parentGuidancePhrase,
-
-  exercises: [ex1Decouverte, ex2Entrainement, ex3Approfondissement],
-  resources: ressourcesReconnaitrePhrase,
-  competencyIds: ["ce1-fr-etude-langue-reconnaitre-phrase"],
-
-  characterLink: {
-    characterSlug: "gaston",
-    name:          "Gaston",
-    roleHint:
-      "Gaston dit : « Pose-toi trois questions : " +
-      "Est-ce que ça veut dire quelque chose ? " +
-      "Il y a une majuscule ? Il y a un point ? " +
-      "Si tu réponds oui aux trois, c'est une phrase ! »",
-  },
-
-  printableSupport:   supportImprimable,
-  projectableSupport: supportProjetable,
-
-  status: "in-progress",
-};
-
-// ── Compétences structurées ──────────────────────────────────────────────────
-
-const competenceReconnaitrePhrase: LearningCompetency = {
-  id: "ce1-fr-etude-langue-reconnaitre-phrase",
-  slug: "reconnaitre-une-phrase-correcte",
-  title: "Reconnaître une phrase correcte",
-  levelSlug: "ce1",
-  cycle: "cycle-2",
-  stage: "primaire",
-  domainSlug: "francais",
-  subdomainSlug: "etude-de-la-langue",
-  objective:
-    "Identifier une phrase qui a du sens, commence par une majuscule " +
-    "et se termine par une ponctuation adaptée.",
-  status: "in-progress",
-  lessonIds: ["ce1-fr-gram-phrase"],
-  successCriteria: [
-    "Vérifier que la phrase a du sens.",
-    "Repérer la majuscule au début de la phrase.",
-    "Repérer la ponctuation finale.",
-  ],
-};
-
-// ── Sous-domaine : Grammaire ──────────────────────────────────────────────────
-
-const subdomainGrammaire: ProgramSubdomain = {
-  id:          "ce1-fr-gram",
-  slug:        "grammaire",
-  title:       "Grammaire",
+const domainFrancais: ProgramDomain = {
+  id: "ce1-francais",
+  slug: "francais",
+  title: "Francais",
+  officialLabel: "Francais - Cycle 2",
   description:
-    "Comprendre la structure de la phrase, identifier ses constituants " +
-    "et observer les régularités de la langue.",
-  lessons: [],
-  // À venir : Le nom et le groupe nominal, Le verbe, Le sujet du verbe
+    "Lecture fluide, comprehension, productions ecrites, grammaire et orthographe frequente.",
+  subdomains: [
+    createSubdomain(
+      "francais",
+      "lecture-fluide",
+      "Lecture fluide",
+      "Consolider le decodage et automatiser la lecture.",
+      [
+        {
+          slug: "lire-des-mots-frequents-rapidement",
+          title: "Lire des mots frequents rapidement",
+          objective:
+            "Reconnaitre et lire sans hesitation les mots frequents rencontres en classe.",
+          status: "in-progress",
+        },
+        {
+          slug: "lire-un-texte-court-avec-fluidite",
+          title: "Lire un texte court avec fluidite",
+          objective:
+            "Lire un texte court en respectant les groupes de sens et la ponctuation.",
+          status: "upcoming",
+        },
+        {
+          slug: "relire-pour-gagner-en-aisance",
+          title: "Relire pour gagner en aisance",
+          objective:
+            "Ameliorer la precision et la fluidite par des relectures courtes.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "comprehension",
+      "Comprehension",
+      "Comprendre des textes courts lus seul ou entendus.",
+      [
+        {
+          slug: "identifier-les-personnages-et-les-lieux",
+          title: "Identifier les personnages et les lieux",
+          objective:
+            "Reperer les personnages, les lieux et les informations explicites d'un texte court.",
+          status: "upcoming",
+        },
+        {
+          slug: "repondre-a-une-question-par-une-information-du-texte",
+          title: "Repondre a une question par une information du texte",
+          objective:
+            "Appuyer sa reponse sur une information lue ou entendue dans le texte.",
+          status: "upcoming",
+        },
+        {
+          slug: "remettre-les-evenements-dans-lordre",
+          title: "Remettre les evenements dans l'ordre",
+          objective: "Ordonner les principales etapes d'un recit court.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "production-ecrite",
+      "Premieres productions ecrites",
+      "Ecrire des phrases puis de courts textes avec guidage.",
+      [
+        {
+          slug: "ecrire-une-phrase-complete",
+          title: "Ecrire une phrase complete",
+          objective:
+            "Produire une phrase qui a du sens avec une majuscule et une ponctuation finale.",
+          status: "upcoming",
+        },
+        {
+          slug: "enchainer-deux-phrases-sur-un-meme-sujet",
+          title: "Enchainer deux phrases sur un meme sujet",
+          objective:
+            "Ecrire deux phrases coherentes autour d'une idee ou d'une image.",
+          status: "upcoming",
+        },
+        {
+          slug: "ameliorer-une-phrase-par-un-detail",
+          title: "Ameliorer une phrase par un detail",
+          objective:
+            "Ajouter une precision simple pour rendre une phrase plus informative.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "etude-de-la-langue",
+      "Grammaire simple",
+      "Observer la phrase et ses principaux constituants.",
+      [
+        {
+          slug: "reconnaitre-une-phrase-correcte",
+          title: "Reconnaitre une phrase correcte",
+          objective:
+            "Identifier une phrase qui a du sens, commence par une majuscule et se termine par un point.",
+          status: "in-progress",
+        },
+        {
+          slug: "identifier-le-verbe-dans-une-phrase-simple",
+          title: "Identifier le verbe dans une phrase simple",
+          objective:
+            "Reperer le mot qui indique l'action dans une phrase courte.",
+          status: "upcoming",
+        },
+        {
+          slug: "identifier-le-sujet-dun-verbe-simple",
+          title: "Identifier le sujet d'un verbe simple",
+          objective: "Trouver qui fait l'action dans une phrase courte.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "orthographe",
+      "Orthographe frequente",
+      "Stabiliser les mots frequents et les accords simples.",
+      [
+        {
+          slug: "orthographier-des-mots-outils-frequents",
+          title: "Orthographier des mots outils frequents",
+          objective:
+            "Ecrire correctement des mots outils frequents travailles en classe.",
+          status: "upcoming",
+        },
+        {
+          slug: "marquer-le-pluriel-regulier-du-nom",
+          title: "Marquer le pluriel regulier du nom",
+          objective:
+            "Ajouter la marque du pluriel sur des noms reguliers dans des groupes nominaux simples.",
+          status: "upcoming",
+        },
+        {
+          slug: "accorder-le-verbe-avec-il-ou-ils",
+          title: "Accorder le verbe avec il ou ils",
+          objective:
+            "Choisir une forme verbale simple selon un sujet singulier ou pluriel.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "in-progress",
+};
+
+const domainMathematiques: ProgramDomain = {
+  id: "ce1-mathematiques",
+  slug: "mathematiques",
+  title: "Mathematiques",
+  officialLabel: "Mathematiques - Cycle 2",
+  description: "Nombres, calculs, problemes, grandeurs, espace et geometrie.",
+  subdomains: [
+    createSubdomain(
+      "mathematiques",
+      "nombres-et-calculs",
+      "Nombres et calculs",
+      "Consolider la numeration et les calculs simples.",
+      [
+        {
+          slug: "lire-et-ecrire-les-nombres-jusqua-1000",
+          title: "Lire et ecrire les nombres jusqu'a 1000",
+          objective:
+            "Associer ecriture chiffree, nom oral et decomposition des nombres jusqu'a 1000.",
+          status: "upcoming",
+        },
+        {
+          slug: "comparer-et-ranger-des-nombres",
+          title: "Comparer et ranger des nombres",
+          objective:
+            "Comparer et ordonner des nombres entiers en utilisant la valeur des chiffres.",
+          status: "upcoming",
+        },
+        {
+          slug: "calculer-mentalement-avec-des-petits-nombres",
+          title: "Calculer mentalement avec des petits nombres",
+          objective:
+            "Mobiliser des doubles, complements et decompositions pour calculer rapidement.",
+          status: "upcoming",
+        },
+        {
+          slug: "poser-une-addition-sans-retenue",
+          title: "Poser une addition sans retenue",
+          objective:
+            "Aligner les chiffres par rang et calculer une addition posee simple.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "mathematiques",
+      "problemes",
+      "Problemes",
+      "Resoudre des problemes additifs, soustractifs et multiplicatifs tres simples.",
+      [
+        {
+          slug: "choisir-loperation-dun-probleme-additif-ou-soustractif",
+          title: "Choisir l'operation d'un probleme additif ou soustractif",
+          objective:
+            "Identifier si une situation demande d'ajouter ou de retirer.",
+          status: "upcoming",
+        },
+        {
+          slug: "resoudre-un-probleme-a-etapes-guidees",
+          title: "Resoudre un probleme a etapes guidees",
+          objective:
+            "Suivre deux etapes explicites pour resoudre un probleme court.",
+          status: "upcoming",
+        },
+        {
+          slug: "expliquer-sa-demarche-de-resolution",
+          title: "Expliquer sa demarche de resolution",
+          objective:
+            "Dire ou ecrire comment le calcul choisi repond a la question.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "mathematiques",
+      "grandeurs-et-mesures",
+      "Grandeurs et mesures",
+      "Comparer, estimer et mesurer des grandeurs usuelles.",
+      [
+        {
+          slug: "comparer-des-longueurs",
+          title: "Comparer des longueurs",
+          objective:
+            "Comparer deux longueurs directement ou avec un instrument adapte.",
+          status: "upcoming",
+        },
+        {
+          slug: "lire-une-heure-simple",
+          title: "Lire une heure simple",
+          objective:
+            "Lire l'heure pleine et la demi-heure sur une horloge a aiguilles.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "mathematiques",
+      "espace-et-geometrie",
+      "Espace et geometrie",
+      "Se reperer, reconnaitre des figures et utiliser les premiers instruments.",
+      [
+        {
+          slug: "se-reperer-sur-un-quadrillage",
+          title: "Se reperer sur un quadrillage",
+          objective:
+            "Localiser une case ou un deplacement simple sur un quadrillage.",
+          status: "upcoming",
+        },
+        {
+          slug: "reconnaitre-les-figures-usuelles",
+          title: "Reconnaitre les figures usuelles",
+          objective:
+            "Identifier carre, rectangle, triangle et cercle a partir de leurs proprietes visibles.",
+          status: "upcoming",
+        },
+        {
+          slug: "tracer-un-segment-a-la-regle",
+          title: "Tracer un segment a la regle",
+          objective:
+            "Utiliser la regle pour tracer un segment propre entre deux points.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
   status: "upcoming",
 };
 
-// ── Sous-domaine : Étude de la langue (niveau) ────────────────────────────────
-
-const subdomainEtudeLangue: ProgramSubdomain = {
-  id:          "ce1-fr-etude-langue",
-  slug:        "etude-de-la-langue",
-  title:       "Étude de la langue",
-  description:
-    "Observer et comprendre la langue : grammaire, conjugaison, orthographe.",
-  lessons: [leconReconnaitrePhrase],
-  competencies: [competenceReconnaitrePhrase],
-  // À venir : leçons de conjugaison et d'orthographe
-  status: "in-progress",
-};
-
-// ── Domaine : Français ────────────────────────────────────────────────────────
-
-const domainFrancais: ProgramDomain = {
-  id:            "ce1-francais",
-  slug:          "francais",
-  title:         "Français",
-  officialLabel: "Français — Cycle 2",
-  description:
-    "Lecture, écriture, étude de la langue et oral pour les élèves de CE1.",
-  subdomains: [
-    subdomainEtudeLangue,
-    subdomainGrammaire,
-    // À venir : Lecture compréhension, Production d'écrit, Vocabulaire, Oral
-  ],
-  status: "in-progress",
-};
-
-// ── Arbre CE1 complet ─────────────────────────────────────────────────────────
-
 export const ce1LearningTree: AcademyLevelProgram = {
   levelSlug: "ce1",
-  label:     "CE1",
-  cycle:     "cycle-2",
-  stage:     "primaire",
-
+  label: "CE1",
+  cycle: "cycle-2",
+  stage: "primaire",
   characterLink: {
     characterSlug: "gaston",
-    name:          "Gaston",
+    name: "Gaston",
     roleHint:
-      "Gaston le Hérisson aide les élèves à choisir une méthode " +
-      "et à vérifier leur réponse avant de la donner.",
+      "Gaston accompagne la consolidation de la lecture, de l'ecriture et du raisonnement.",
   },
-
-  domains: [
-    domainFrancais,
-    // À venir : Mathématiques, Questionner le monde, EMC, Arts, EPS, Langues vivantes
-  ],
+  domains: [domainFrancais, domainMathematiques],
 };
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
 export function getCe1Domain(domainSlug: string): ProgramDomain | undefined {
-  return ce1LearningTree.domains.find((d) => d.slug === domainSlug);
+  return ce1LearningTree.domains.find((domain) => domain.slug === domainSlug);
 }
 
 export function getCe1Subdomain(
@@ -281,7 +392,7 @@ export function getCe1Subdomain(
   subdomainSlug: string,
 ): ProgramSubdomain | undefined {
   return getCe1Domain(domainSlug)?.subdomains.find(
-    (sd) => sd.slug === subdomainSlug,
+    (subdomain) => subdomain.slug === subdomainSlug,
   );
 }
 
@@ -291,14 +402,14 @@ export function getCe1Lesson(
   lessonSlug: string,
 ): Lesson | undefined {
   return getCe1Subdomain(domainSlug, subdomainSlug)?.lessons.find(
-    (l) => l.slug === lessonSlug,
+    (lesson) => lesson.slug === lessonSlug,
   );
 }
 
 export function getCe1LessonById(lessonId: string): Lesson | undefined {
   for (const domain of ce1LearningTree.domains) {
     for (const subdomain of domain.subdomains) {
-      const found = subdomain.lessons.find((l) => l.id === lessonId);
+      const found = subdomain.lessons.find((lesson) => lesson.id === lessonId);
       if (found) return found;
     }
   }
