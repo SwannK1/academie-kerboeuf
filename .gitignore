@@ -47,3 +47,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dist
+dist/
+
+# logs génériques
+*.log
+
+# projets hors périmètre / répertoires de chantier
+kerweb-studio/
+components/kerweb/
+supabase/
+
+# outillage local Claude Code
+.claude/
+
+# documents internes sensibles
+docs/audit-request-setup.md
+docs/audit-requests-supabase.md
