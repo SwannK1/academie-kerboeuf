@@ -57,10 +57,10 @@ export default function Cm2Page() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/primaire/cm2/missions"
+              href="/primaire/cm2/matieres"
               className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
             >
-              Voir les {missionCount} missions CM2
+              Explorer les matières CM2
             </Link>
             <Link
               href="/primaire/cm2/parcours"
@@ -78,14 +78,14 @@ export default function Cm2Page() {
           <div className="mb-8 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                Programmes CM2
+                Programmes CM2 · Cycle 3
               </p>
               <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-                Les matières de la Grande Classe
+                Matières, domaines et séquences
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-                Chaque matière est structurée en domaines et notions.
-                Les missions s&apos;y rattachent progressivement.
+                Chaque matière est structurée en domaines et sous-domaines.
+                Les séquences s&apos;y rattachent progressivement selon les programmes.
               </p>
             </div>
             <Link
@@ -112,20 +112,20 @@ export default function Cm2Page() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link
               href="/primaire/cm2/missions"
-              className="group flex flex-col gap-2 rounded-md border border-gold/25 bg-gold/[0.05] p-5 transition hover:border-gold/45 hover:bg-gold/[0.09]"
+              className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
-                Catalogue complet
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                Ressources complémentaires
               </p>
               <p className="text-lg font-black text-foreground">
-                Toutes les missions CM2
+                Missions pédagogiques CM2
               </p>
               <p className="text-sm leading-6 text-muted">
                 {missionCount} missions organisées par domaine, avec statut et
                 supports pédagogiques.
               </p>
-              <span className="mt-1 text-sm font-black text-gold transition group-hover:translate-x-1">
-                Voir le catalogue →
+              <span className="mt-1 text-sm font-black text-muted transition group-hover:translate-x-1 group-hover:text-foreground">
+                Voir les missions →
               </span>
             </Link>
 
@@ -216,7 +216,7 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
             isAvailable ? t.text : "text-white/25"
           }`}
         >
-          {isAvailable ? "Missions disponibles" : "À structurer"}
+          {isAvailable ? "Voir les domaines" : "À structurer"}
         </span>
         <span
           className={`text-xs transition group-hover:translate-x-0.5 ${

@@ -11,6 +11,11 @@ import {
   type Cm2SubdomainNode,
 } from "@/content/cm2-learning-tree";
 import { type AccentTokens, CM2_ACCENT } from "@/lib/cm2-accent";
+import {
+  getCm2SequencesBySubjectSlug,
+  type Cm2Sequence,
+  type Cm2SequenceStatus,
+} from "@/content/cm2-sequences";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -48,6 +53,9 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
   const linkedMissions = (subject.missionSlugs ?? [])
     .map((s) => getCm2MissionBySlug(s))
     .filter((m): m is NonNullable<typeof m> => m !== undefined);
+
+  const sequences = getCm2SequencesBySubjectSlug(slug);
+  const sequencesByDomainSubdomain = groupSequences(sequences);
 
   return (
     <main>
@@ -163,6 +171,30 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
                         Ouvrir la mission →
                       </span>
                     </Link>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Séquences planifiées */}
+          {sequencesByDomainSubdomain.length > 0 && (
+            <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-7xl">
+                <div className="mb-8 border-b border-white/10 pb-5">
+                  <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+                    1 séquence = 1 compétence
+                  </p>
+                  <h2 className="mt-2 text-2xl font-black text-foreground">
+                    Séquences planifiées
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    Architecture pédagogique · Supports en cours de création.
+                  </p>
+                </div>
+                <div className="space-y-6">
+                  {sequencesByDomainSubdomain.map(({ domain, subdomains }) => (
+                    <SequenceDomainBlock key={domain} domain={domain} subdomains={subdomains} t={t} />
                   ))}
                 </div>
               </div>
@@ -348,4 +380,86 @@ function SubdomainItem({
       )}
     </li>
   );
+}
+
+// ── Séquences ─────────────────────────────────────────────────────────────────
+
+const STATUS_LABEL: Record<Cm2SequenceStatus, string> = {
+  available:   "Disponible",
+  "in-progress": "En préparation",
+  upcoming:    "À venir",
+};
+
+const STATUS_CLASS: Record<Cm2SequenceStatus, string> = {
+  available:   "border-jade/30 text-jade",
+  "in-progress": "border-gold/30 text-gold",
+  upcoming:    "border-white/10 text-white/30",
+};
+
+function SequenceRow({ seq }: { seq: Cm2Sequence }) {
+  return (
+    <li className="flex flex-col gap-1 rounded border border-white/10 bg-white/[0.025] px-4 py-3 sm:flex-row sm:items-start sm:gap-4">
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-foreground">{seq.title}</p>
+        <p className="mt-0.5 text-xs leading-5 text-muted">{seq.skill}</p>
+      </div>
+      <span
+        className={`shrink-0 self-start rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] ${STATUS_CLASS[seq.status]}`}
+      >
+        {STATUS_LABEL[seq.status]}
+      </span>
+    </li>
+  );
+}
+
+function SequenceDomainBlock({
+  domain,
+  subdomains,
+  t,
+}: {
+  domain: string;
+  subdomains: { subdomain: string; sequences: Cm2Sequence[] }[];
+  t: AccentTokens;
+}) {
+  return (
+    <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
+      <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
+        Domaine
+      </p>
+      <h3 className="mt-1 text-lg font-black text-foreground">{domain}</h3>
+      <div className="mt-4 space-y-4">
+        {subdomains.map(({ subdomain, sequences }) => (
+          <div key={subdomain}>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">
+              {subdomain}
+            </p>
+            <ul className="space-y-2">
+              {sequences.map((seq) => (
+                <SequenceRow key={seq.slug} seq={seq} />
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function groupSequences(sequences: Cm2Sequence[]) {
+  const domainMap = new Map<string, Map<string, Cm2Sequence[]>>();
+  for (const seq of sequences) {
+    if (!domainMap.has(seq.domain)) domainMap.set(seq.domain, new Map());
+    const subMap = domainMap.get(seq.domain)!;
+    if (!subMap.has(seq.subdomain)) subMap.set(seq.subdomain, []);
+    subMap.get(seq.subdomain)!.push(seq);
+  }
+  return Array.from(domainMap.entries()).map(([domain, subMap]) => ({
+    domain,
+    subdomains: Array.from(subMap.entries()).map(([subdomain, seqs]) => ({
+      subdomain,
+      sequences: seqs,
+    })),
+  }));
 }

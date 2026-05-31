@@ -71,7 +71,7 @@ export const cm2Level = {
   title: "CM2 avec Félix",
   description:
     "Un parcours d’aventure pour consolider les fondamentaux, relier les matières et préparer l’entrée au collège avec des missions lisibles et motivantes.",
-  href: "/primaire/cm2/missions",
+  href: "/primaire/cm2/matieres",
 };
 
 // Legacy source — migration vers mission-registry en cours.
