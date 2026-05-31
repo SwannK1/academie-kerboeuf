@@ -30,24 +30,7 @@ export type AcademySubject =
   | "Production d’écrit"
   | "Étude de la langue"
   | "Calcul mental"
-  | "Résolution de problèmes"
-  // — Collège —
-  | "SVT"
-  | "Physique-Chimie"
-  | "Technologie"
-  | "Langues vivantes"
-  | "Arts Plastiques"
-  | "Éducation Musicale"
-  | "EPS"
-  | "EMC"
-  | "Documentation"
-  // — Lycée —
-  | "Philosophie"
-  | "SES"
-  | "Géopolitique"
-  | "EMI"
-  | "NSI"
-  | "Orientation";
+  | "Résolution de problèmes";
 
 export type AcademyMission = {
   slug: string;
@@ -127,16 +110,6 @@ export const academySubjects: AcademySubject[] = [
   "Étude de la langue",
   "Calcul mental",
   "Résolution de problèmes",
-  // — Collège —
-  "SVT",
-  "Physique-Chimie",
-  "Technologie",
-  "Langues vivantes",
-  "Arts Plastiques",
-  "Éducation Musicale",
-  "EPS",
-  "EMC",
-  "Documentation",
 ];
 
 export const academyThemes = {
@@ -275,12 +248,15 @@ function mission({
   professor: string;
   status?: AcademyMission["status"];
 }): AcademyMission {
+  const publicSafeStatus =
+    status === "disponible" ? "en préparation" : status;
+
   return {
     slug,
     title,
     description,
     subject,
-    status,
+    status: publicSafeStatus,
     theme: academyThemes[theme],
     progress: missionProgress(
       "draft",
@@ -299,7 +275,7 @@ function missionsForLevel(professor: string): AcademyMission[] {
       subject: "Lecture",
       theme: "jade",
       professor,
-      status: "en préparation",
+      status: "disponible",
     }),
     mission({
       slug: "defi-calcul-mental",
@@ -804,12 +780,6 @@ export function hasRealMissionContent(
       mission.correction?.length &&
       contentFields.every(isRealMissionText),
   );
-}
-
-export function isMissionPubliclyAvailable(
-  mission: Pick<AcademyMission, "status">,
-) {
-  return getPublicStatusKey(mission.status) === "available";
 }
 
 export function isMissionReadyForDetail(

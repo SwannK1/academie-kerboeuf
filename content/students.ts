@@ -93,7 +93,7 @@ export const maternelleLevels = [
     universe: "Portail du Jardin",
     description:
       "Entrer dans les rituels, écouter, manipuler, nommer et explorer le monde proche.",
-    href: "/maternelle/ps",
+    href: "/maternelle",
   },
   {
     slug: "ms",
@@ -102,7 +102,7 @@ export const maternelleLevels = [
     universe: "Clairière des essais",
     description:
       "Oser chercher, comparer, raconter et construire des premiers repères plus stables.",
-    href: "/maternelle/ms",
+    href: "/eleves/malo",
   },
   {
     slug: "gs",
@@ -111,7 +111,7 @@ export const maternelleLevels = [
     universe: "Passerelle des grands",
     description:
       "Préparer le passage vers le CP avec des défis de langage, de logique et d’autonomie.",
-    href: "/maternelle/gs",
+    href: "/eleves/youri",
   },
 ];
 
@@ -121,7 +121,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     slug: "malo",
     level: "Moyenne Section",
     levelSlug: "ms",
-    levelHref: "/maternelle/ms",
+    levelHref: "/maternelle",
     cycle: "Cycle 1",
     animal: "Koala",
     dominantColor: "jade",
@@ -158,7 +158,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     slug: "youri",
     level: "Grande Section",
     levelSlug: "gs",
-    levelHref: "/maternelle/gs",
+    levelHref: "/maternelle",
     cycle: "Cycle 1",
     animal: "Ourson",
     dominantColor: "gold",

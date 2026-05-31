@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
+import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import {
   getLevelPath,
   getLevelsByStage,
@@ -61,13 +61,36 @@ export default function PrimairePage() {
 
   return (
     <main>
-      {/* ── Portail immersif ──────────────────────────────────────────────── */}
-      {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
-      {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
-      <PrimairePortalMap />
+      <div className="px-4 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Primaire" }]} />
+        </div>
+      </div>
 
-      {/* ── Choix du niveau / personnage (desktop : accès secondaire) ─────── */}
-      <section className="px-4 pb-16 pt-12 sm:px-6 lg:px-8">
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(80,200,164,0.16),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(243,196,91,0.14),transparent_30%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="mx-auto max-w-7xl">
+          <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
+            Cycle 2 · Cycle 3
+          </p>
+          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            Les Lisières<br />des Explorateurs
+          </h1>
+          <p className="mt-5 text-2xl font-black text-gold">
+            Explorer, comprendre, créer, coopérer.
+          </p>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
+            Cinq niveaux, cinq personnages repères. Chaque guide accompagne une
+            posture d&apos;explorateur différente — du premier décodage en CP à la
+            préparation du collège en CM2.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Choix du niveau / personnage ──────────────────────────────────── */}
+      <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 border-b border-white/10 pb-6">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -173,23 +196,15 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     hoverBg: "hover:bg-gold/[0.08]",
     ring: "focus:ring-gold/60",
   };
-  const isPilot = level.slug === "cm2";
 
   return (
     <Link
       href={getLevelPath(level)}
       className={`group flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-1 ${accent.hoverBorder} ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}
     >
-      <div className="flex items-start justify-between gap-2">
-        <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
-          {level.cycle}
-        </p>
-        {isPilot && (
-          <span className="rounded border border-gold/35 bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
-            Niveau pilote
-          </span>
-        )}
-      </div>
+      <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
+        {level.cycle}
+      </p>
       <p className="mt-4 text-4xl font-black text-foreground">{level.label}</p>
       <p className={`mt-1 text-sm font-bold ${accent.text}`}>
         {guide.character}
@@ -198,11 +213,6 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
         ) : null}
       </p>
       <p className="mt-4 flex-1 text-sm leading-7 text-muted">{guide.focus}</p>
-      {isPilot && (
-        <p className="mt-3 text-xs text-muted">
-          Le contenu le plus avancé de la plateforme — les autres niveaux arrivent progressivement.
-        </p>
-      )}
       <div className="mt-5 border-t border-white/10 pt-4">
         <p className="text-xs text-muted">
           {level.professor.name} · {level.professor.mainSubject}

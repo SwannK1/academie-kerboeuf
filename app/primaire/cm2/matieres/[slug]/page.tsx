@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
 import {
   getCm2SubjectTree,
   type Cm2DomainNode,
@@ -41,7 +40,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
   if (!subject) notFound();
 
   const t = CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold;
-  const isAvailable = getPublicStatusKey(subject.status) === "available";
+  const isAvailable = subject.status === "available";
 
   const tree = getCm2SubjectTree(slug);
 

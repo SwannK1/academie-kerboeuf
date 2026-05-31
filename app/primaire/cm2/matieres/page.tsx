@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Matières CM2 | Académie Kerboeuf",
@@ -21,8 +20,8 @@ const ACCENT: Record<
 };
 
 export default function Cm2MatieresPage() {
-  const available = cm2Subjects.filter((s) => getPublicStatusKey(s.status) === "available");
-  const upcoming  = cm2Subjects.filter((s) => getPublicStatusKey(s.status) !== "available");
+  const available = cm2Subjects.filter((s) => s.status === "available");
+  const upcoming  = cm2Subjects.filter((s) => s.status !== "available");
 
   return (
     <main>
@@ -118,7 +117,7 @@ export default function Cm2MatieresPage() {
 
 function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
-  const isAvailable = getPublicStatusKey(subject.status) === "available";
+  const isAvailable = subject.status === "available";
 
   return (
     <Link

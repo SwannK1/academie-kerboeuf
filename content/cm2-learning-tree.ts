@@ -1,14 +1,19 @@
-// Modèle opérationnel leçons CM2 — source pour les pages /matieres/[slug] et plus.
 // Arbre pédagogique CM2 : Matière → Domaine → Sous-domaine → Leçon.
 // Lieux et personnages-guides accompagnent la structure, sans la remplacer.
+// Les pages de leçon/exercice/évaluation ne sont pas encore créées :
+// tous les Cm2LessonNode sont status "upcoming" dans ce premier socle.
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 // Sémantique de Cm2LearningStatus par niveau de nœud :
-//   "available"   — au niveau leçon : contenu réel dans cm2-lesson-content.ts + routeSlug actif.
-//                   au niveau domaine/sous-domaine : au moins 1 leçon "available" à l'intérieur.
-//   "in-progress" — structure définie, leçons planifiées, aucune leçon "available".
-//   "upcoming"    — structure prévue, aucun contenu réel, aucune leçon planifiée.
+//   "available"   — structure exploitable, reliée à au moins une ressource ou
+//                   mission existante (la page ou le contenu peut être affiché).
+//   "in-progress" — structure partiellement préparée, visible mais incomplète.
+//   "upcoming"    — structure prévue mais pas encore exploitable
+//                   (pas de page route, pas de contenu finalisé).
+// Note : au niveau domaine/sous-domaine, "available" signifie que des missions
+// existantes y sont reliées — cela ne garantit pas encore l'existence de pages
+// leçon. La présence de pages leçon se vérifie via Cm2LessonResource.slug.
 export type Cm2LearningStatus = "available" | "in-progress" | "upcoming";
 
 export type Cm2GuideReference = {
@@ -106,12 +111,12 @@ export const cm2LearningTree: Cm2LearningTree = [
               {
                 id: "francais-lecture-inferences-reperer",
                 title: "Repérer les indices dans le texte",
-                status: "available",
+                status: "upcoming",
                 routeSlug: "reperer-les-indices",
                 resources: [
-                  { type: "lesson",     label: "Leçon",      status: "available" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming"  },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming"  },
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
                 linkedMissionSlugs: ["mission-inference"],
               },
@@ -141,25 +146,23 @@ export const cm2LearningTree: Cm2LearningTree = [
               {
                 id: "francais-lecture-inferences-justifier",
                 title: "Justifier son interprétation",
-                status: "available",
-                routeSlug: "justifier-son-interpretation",
+                status: "upcoming",
                 resources: [
-                  { type: "lesson",     label: "Leçon",      status: "available" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming"  },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming"  },
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
             ],
           },
           {
             id: "francais-lecture-implicite",
-            title: "Lecture approfondie",
-            description: "Lire un texte au-delà de la surface : stratégies de lecture, rythme et organisation narrative.",
+            title: "Comprendre l'implicite",
             status: "upcoming",
             lessons: [
               {
                 id: "francais-lecture-implicite-non-dit",
-                title: "Repérer ce que le texte ne dit pas explicitement",
+                title: "Identifier ce qui n'est pas dit directement",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -192,7 +195,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       {
         id: "francais-production",
         title: "Production d'écrit",
-        status: "in-progress",
+        status: "available",
         place: {
           slug: "bibliotheque-des-explorateurs",
           label: "La Bibliothèque des Explorateurs",
@@ -250,7 +253,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       {
         id: "francais-langue",
         title: "Étude de la langue",
-        status: "in-progress",
+        status: "available",
         linkedMissionSlugs: ["enquete-grammaticale"],
         subdomains: [
           {
@@ -317,47 +320,6 @@ export const cm2LearningTree: Cm2LearningTree = [
           },
         ],
       },
-      {
-        id: "francais-oral",
-        title: "Oral",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "francais-oral-ecoute",
-            title: "Écoute active",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "francais-oral-ecoute-prendre-notes",
-                title: "Prendre des notes à l'oral",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "francais-oral-expression",
-            title: "Expression orale",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "francais-oral-expression-exposer",
-                title: "Présenter un exposé court",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
     ],
   },
 
@@ -375,7 +337,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       {
         id: "maths-nombres",
         title: "Nombres et calcul",
-        status: "in-progress",
+        status: "available",
         place: {
           slug: "atelier-des-mathematiques",
           label: "L'Atelier des Mathématiques",
@@ -413,7 +375,7 @@ export const cm2LearningTree: Cm2LearningTree = [
           {
             id: "maths-nombres-calcul-mental",
             title: "Calcul mental",
-            status: "in-progress",
+            status: "available",
             lessons: [
               {
                 id: "maths-nombres-calcul-mental-strategies",
@@ -428,39 +390,12 @@ export const cm2LearningTree: Cm2LearningTree = [
               },
             ],
           },
-          {
-            id: "maths-nombres-calcul-pose",
-            title: "Calcul posé",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "maths-nombres-calcul-pose-multiplication",
-                title: "Poser et calculer une multiplication (2 chiffres × 2 chiffres)",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-              {
-                id: "maths-nombres-calcul-pose-division",
-                title: "Poser et calculer une division euclidienne",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
         ],
       },
       {
         id: "maths-problemes",
         title: "Résolution de problèmes",
-        status: "in-progress",
+        status: "available",
         place: {
           slug: "atelier-des-mathematiques",
           label: "L'Atelier des Mathématiques",
@@ -556,71 +491,6 @@ export const cm2LearningTree: Cm2LearningTree = [
           },
         ],
       },
-      {
-        id: "maths-geometrie",
-        title: "Espace et géométrie",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "maths-geometrie-figures",
-            title: "Figures planes",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "maths-geometrie-figures-quadrilateres",
-                title: "Reconnaître et tracer des quadrilatères",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "maths-geometrie-symetrie",
-            title: "Symétrie",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "maths-geometrie-symetrie-axiale",
-                title: "La symétrie axiale",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "maths-donnees",
-        title: "Organisation et gestion de données",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "maths-donnees-tableaux",
-            title: "Tableaux et graphiques",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "maths-donnees-tableaux-lire",
-                title: "Lire et compléter un tableau de données",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
     ],
   },
 
@@ -638,14 +508,14 @@ export const cm2LearningTree: Cm2LearningTree = [
       {
         id: "sciences-demarche",
         title: "Démarche scientifique",
-        status: "in-progress",
+        status: "available",
         place: { slug: "laboratoire", label: "Le Laboratoire", zone: "Mur des hypothèses" },
         linkedMissionSlugs: ["laboratoire-scientifique"],
         subdomains: [
           {
             id: "sciences-demarche-observer",
             title: "Observer et décrire",
-            status: "in-progress",
+            status: "available",
             lessons: [
               {
                 id: "sciences-demarche-observer-protocole",
@@ -738,88 +608,6 @@ export const cm2LearningTree: Cm2LearningTree = [
           },
         ],
       },
-      {
-        id: "sciences-technologie",
-        title: "Matériaux et objets techniques",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "sciences-technologie-objets",
-            title: "Objets techniques",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "sciences-technologie-objets-fonction",
-                title: "Identifier la fonction d'un objet technique",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "sciences-technologie-materiaux",
-            title: "Propriétés des matériaux",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "sciences-technologie-materiaux-proprietes",
-                title: "Classer des matériaux selon leurs propriétés",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "sciences-terre",
-        title: "La planète Terre et les êtres vivants",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "sciences-terre-ecosystemes",
-            title: "Les écosystèmes",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "sciences-terre-ecosystemes-chaines",
-                title: "Les chaînes alimentaires",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "sciences-terre-phenomenes",
-            title: "Phénomènes naturels",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "sciences-terre-phenomenes-meteo",
-                title: "Comprendre les phénomènes météorologiques",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
     ],
   },
 
@@ -836,7 +624,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       {
         id: "histoire-reperes",
         title: "Histoire · Repères chronologiques",
-        status: "in-progress",
+        status: "available",
         linkedMissionSlugs: ["archives-historiques"],
         subdomains: [
           {
@@ -879,7 +667,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       {
         id: "geo-espaces",
         title: "Géographie · Lire des espaces habités",
-        status: "in-progress",
+        status: "available",
         place: {
           slug: "cartotheque-des-lisieres",
           label: "La Cartothèque des Lisières",
@@ -890,7 +678,7 @@ export const cm2LearningTree: Cm2LearningTree = [
           {
             id: "geo-espaces-carte",
             title: "Lire une carte",
-            status: "in-progress",
+            status: "available",
             lessons: [
               {
                 id: "geo-espaces-carte-legende",
@@ -934,48 +722,6 @@ export const cm2LearningTree: Cm2LearningTree = [
           },
         ],
       },
-      {
-        id: "hg-documents",
-        title: "Lecture de documents",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "hg-documents-historiques",
-            title: "Documents historiques",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "hg-documents-historiques-analyser",
-                title: "Analyser un document historique",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-                linkedMissionSlugs: ["archives-historiques"],
-              },
-            ],
-          },
-          {
-            id: "hg-documents-geographiques",
-            title: "Documents géographiques",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "hg-documents-geographiques-analyser",
-                title: "Lire un paysage ou une photographie géographique",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
     ],
   },
 
@@ -994,40 +740,8 @@ export const cm2LearningTree: Cm2LearningTree = [
         title: "Vie collective",
         status: "upcoming",
         subdomains: [
-          {
-            id: "emc-vie-collective-regles",
-            title: "Règles de vie",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-vie-collective-regles-comprendre",
-                title: "Comprendre les règles de la classe et de l'école",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "emc-vie-collective-cooperer",
-            title: "Coopérer",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-vie-collective-cooperer-travail-groupe",
-                title: "Travailler en groupe et respecter les rôles",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
+          { id: "emc-vie-collective-regles",    title: "Règles de vie", status: "upcoming", lessons: [] },
+          { id: "emc-vie-collective-cooperer",  title: "Coopérer",      status: "upcoming", lessons: [] },
         ],
       },
       {
@@ -1035,140 +749,8 @@ export const cm2LearningTree: Cm2LearningTree = [
         title: "Jugement moral et civique",
         status: "upcoming",
         subdomains: [
-          {
-            id: "emc-jugement-argumenter",
-            title: "Argumenter",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-jugement-argumenter-exprimer-avis",
-                title: "Exprimer et justifier un avis",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "emc-jugement-respecter",
-            title: "Respecter l'autre",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-jugement-respecter-differences",
-                title: "Accueillir les différences et lutter contre les discriminations",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "emc-republique",
-        title: "Valeurs et institutions républicaines",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "emc-republique-laicite",
-            title: "Laïcité",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-republique-laicite-principe",
-                title: "Comprendre le principe de laïcité",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "emc-republique-droits-enfant",
-            title: "Droits de l'enfant",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-republique-droits-enfant-convention",
-                title: "La Convention internationale des droits de l'enfant",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "emc-republique-democratie",
-            title: "Vie démocratique",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-republique-democratie-vote",
-                title: "Comprendre l'élection et le vote",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: "emc-numerique",
-        title: "Vie affective et numérique",
-        status: "upcoming",
-        subdomains: [
-          {
-            id: "emc-numerique-identite",
-            title: "Identité numérique",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-numerique-identite-traces",
-                title: "Comprendre les traces numériques",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "emc-numerique-relations",
-            title: "Relations et consentement",
-            status: "upcoming",
-            lessons: [
-              {
-                id: "emc-numerique-relations-consentement",
-                title: "Le respect et le consentement dans les relations",
-                status: "upcoming",
-                resources: [
-                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
-                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
-                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
-                ],
-                linkedMissionSlugs: ["corps-relations-consentement-internet"],
-              },
-            ],
-          },
+          { id: "emc-jugement-argumenter", title: "Argumenter",        status: "upcoming", lessons: [] },
+          { id: "emc-jugement-respecter",  title: "Respecter l'autre", status: "upcoming", lessons: [] },
         ],
       },
     ],

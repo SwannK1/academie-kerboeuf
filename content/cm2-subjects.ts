@@ -1,4 +1,3 @@
-// Source de vérité pour les cartes UI matières CM2 (statut, accent, missions).
 // Données des matières CM2 — partagées par /primaire/cm2, /primaire/cm2/matieres
 // et /primaire/cm2/matieres/[slug].
 // missionSlugs référence des slugs existants dans content/cm2.ts.
@@ -22,13 +21,7 @@ export const cm2Subjects: Cm2Subject[] = [
     slug: "francais",
     title: "Français",
     shortDescription: "Lire finement, écrire avec méthode, analyser la langue.",
-    domains: [
-      "Lecture et compréhension",
-      "Écriture",
-      "Étude de la langue",
-      "Oral",
-      "Lexique",
-    ],
+    domains: ["Lecture et compréhension", "Production d'écrit", "Étude de la langue"],
     status: "available",
     accent: "gold",
     missionSlugs: [
@@ -45,15 +38,8 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "Mathématiques",
     shortDescription:
       "Calculer avec stratégie, résoudre des défis, vérifier le résultat.",
-    domains: [
-      "Nombres et calcul",
-      "Calcul posé",
-      "Résolution de problèmes",
-      "Grandeurs et mesures",
-      "Espace et géométrie",
-      "Organisation et gestion de données",
-    ],
-    status: "in-progress",
+    domains: ["Calcul mental", "Résolution de problèmes"],
+    status: "available",
     accent: "jade",
     missionSlugs: ["mission-calcul", "defis-mathematiques"],
     teacherFocus:
@@ -64,8 +50,8 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "Histoire-Géographie",
     shortDescription:
       "Lire des documents, situer dans le temps et dans l'espace.",
-    domains: ["Histoire", "Géographie", "Lecture de documents"],
-    status: "in-progress",
+    domains: ["Repères chronologiques", "Lecture de cartes et d'espaces habités"],
+    status: "available",
     accent: "sky",
     missionSlugs: ["archives-historiques", "cartographe-du-monde"],
     teacherFocus:
@@ -75,13 +61,8 @@ export const cm2Subjects: Cm2Subject[] = [
     slug: "sciences",
     title: "Sciences et technologie",
     shortDescription: "Observer, formuler une hypothèse, comparer, conclure.",
-    domains: [
-      "Démarche scientifique",
-      "Le vivant",
-      "Matériaux et objets techniques",
-      "La planète Terre et les êtres vivants",
-    ],
-    status: "in-progress",
+    domains: ["Démarche scientifique", "Observation et expérimentation"],
+    status: "available",
     accent: "ember",
     missionSlugs: ["laboratoire-scientifique"],
     teacherFocus:
@@ -92,12 +73,7 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "EMC",
     shortDescription:
       "Argumenter, écouter, coopérer et exercer un jugement responsable.",
-    domains: [
-      "Respecter autrui",
-      "Valeurs de la République",
-      "Culture civique",
-      "Vie affective et numérique",
-    ],
+    domains: ["Vie collective", "Jugement moral et civique"],
     status: "upcoming",
     accent: "sky",
   },
@@ -106,12 +82,7 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "Anglais",
     shortDescription:
       "Comprendre et s'exprimer dans une langue vivante.",
-    domains: [
-      "Comprendre à l'oral",
-      "S'exprimer à l'oral",
-      "Lire et écrire",
-      "Repères culturels",
-    ],
+    domains: [],
     status: "upcoming",
     accent: "jade",
   },
@@ -120,7 +91,7 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "Arts",
     shortDescription:
       "Créer une trace visuelle, observer et présenter un travail.",
-    domains: ["Arts plastiques", "Éducation musicale", "Histoire des arts"],
+    domains: [],
     status: "upcoming",
     accent: "ember",
   },
@@ -129,12 +100,7 @@ export const cm2Subjects: Cm2Subject[] = [
     title: "EPS",
     shortDescription:
       "Coopérer, respecter une règle, stabiliser des repères corporels.",
-    domains: [
-      "Produire une performance",
-      "Adapter ses déplacements",
-      "S'exprimer devant les autres",
-      "Conduire un affrontement",
-    ],
+    domains: [],
     status: "upcoming",
     accent: "jade",
   },

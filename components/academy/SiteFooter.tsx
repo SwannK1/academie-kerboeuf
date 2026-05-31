@@ -21,7 +21,6 @@ const footerSections = [
       { label: "Programmes", href: "/programmes" },
       { label: "Professeurs", href: "/professeurs" },
       { label: "Univers", href: "/univers" },
-      { label: "Carte", href: "/carte" },
     ],
   },
 ];

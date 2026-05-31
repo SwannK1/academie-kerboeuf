@@ -168,16 +168,16 @@ export default function Cm2MissionsPage() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/primaire/cm2"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              href="/missions-recentes"
+              className="rounded-md bg-gold px-5 py-3 text-sm font-black text-ink transition hover:bg-gold/90"
             >
-              ← Retour CM2
+              Voir toutes les missions
             </Link>
             <Link
-              href="/missions-recentes"
+              href="/univers"
               className="rounded-md border border-jade/35 bg-jade/10 px-5 py-3 text-sm font-black text-jade transition hover:bg-jade hover:text-ink"
             >
-              Catalogue global de l’Académie
+              Comprendre l’univers
             </Link>
             <Link
               href="/professeurs"

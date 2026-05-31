@@ -1,25 +1,19 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { LevelStudentSpotlight } from "@/components/academy/level-student-spotlight";
-import { AnnualPathCard } from "@/components/academy/learning-architecture-cards";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { SubjectBadges } from "@/components/academy/subject-badges";
 import { LevelHero } from "@/components/levels/level-hero";
 import { MissionGrid } from "@/components/missions/mission-grid";
-import { getAnnualPathsForLevel } from "@/content/annual-learning-paths";
 import type { AcademyLevel } from "@/content/academy";
 import { getLevelMissionsPath, stageLabels } from "@/content/academy";
-import { getCompetenciesForLevel } from "@/content/competencies";
 import { getStudentForLevelSlug } from "@/content/students";
 import { getCurriculumLevel, type CurriculumLevelSlug } from "@/content/curriculum";
-import { getCollegeMatiereCards } from "@/content/college-curriculum";
-import { getCurriculumLevelMap } from "@/content/curriculum-map";
 import { getClassroomResources } from "@/content/resources";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
 import {
   getPublicStatusDotClassName,
-  getPublicStatusKey,
   getPublicStatusLabel,
 } from "@/content/public-status";
 
@@ -47,8 +41,6 @@ export function LevelOverview({ level }: LevelOverviewProps) {
   const student = getStudentForLevelSlug(level.slug);
 
   const curriculum = getCurriculumLevel(level.slug as CurriculumLevelSlug);
-  const hasPrimaryProgramme = getCurriculumLevelMap(level.slug) !== undefined;
-  const collegeMatiereCards = getCollegeMatiereCards(level.slug);
   const validDomains = sanitizePublicPedagogicalItems(curriculum?.majorDomains ?? []);
   const validCompetencies = sanitizePublicPedagogicalItems(curriculum?.coreCompetencies ?? []);
 
@@ -59,8 +51,6 @@ export function LevelOverview({ level }: LevelOverviewProps) {
   const paths = getLearningPathsWithSteps().filter(
     (p) => p.levelSlug === level.slug,
   );
-  const observableCompetencies = getCompetenciesForLevel(level.slug);
-  const annualPaths = getAnnualPathsForLevel(level.slug);
 
   return (
     <main>
@@ -192,120 +182,6 @@ export function LevelOverview({ level }: LevelOverviewProps) {
         </div>
       </section>
 
-      {collegeMatiereCards.length > 0 ? (
-        <section className="px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-5">
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
-                Programme {level.label}
-              </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
-                Matières du niveau
-              </h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {collegeMatiereCards.map((matiere) => {
-                const isLinked =
-                  !!matiere.href &&
-                  getPublicStatusKey(matiere.status) !== "upcoming";
-                const card = (
-                  <div
-                    className={`group flex h-full flex-col rounded-md border p-5 transition ${
-                      isLinked
-                        ? "border-jade/30 bg-jade/[0.05] hover:-translate-y-0.5 hover:border-jade/45 hover:bg-jade/[0.08]"
-                        : "border-white/10 bg-white/[0.025] opacity-60"
-                    }`}
-                  >
-                    <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                      {matiere.label}
-                    </p>
-                    <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                      {matiere.description}
-                    </p>
-                    {isLinked ? (
-                      <span className="mt-4 text-sm font-black text-jade transition group-hover:translate-x-1">
-                        Accéder →
-                      </span>
-                    ) : (
-                      <span className="mt-4 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                        À venir
-                      </span>
-                    )}
-                  </div>
-                );
-
-                if (isLinked) {
-                  return (
-                    <Link key={matiere.slug} href={matiere.href!}>
-                      {card}
-                    </Link>
-                  );
-                }
-                return <div key={matiere.slug}>{card}</div>;
-              })}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {level.slug === "cp" ? (
-        <section className="px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-5">
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
-                Ressources CP par domaine
-              </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
-                Premiers portails PDF
-              </h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <Link
-                href="/primaire/cp/programmes/francais/lecture-comprehension"
-                className="group flex min-h-full flex-col rounded-md border border-jade/25 bg-jade/[0.05] p-6 transition hover:-translate-y-0.5 hover:border-jade/45 hover:bg-jade/[0.08]"
-              >
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                  Français
-                </p>
-                <h3 className="mt-2 text-2xl font-black text-foreground">
-                  Lecture compréhension
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                  Retrouver les leçons CP et les ressources PDF futures :
-                  leçon, exercices, correction, projection et fiche parent.
-                </p>
-                <span className="mt-5 text-sm font-black text-jade transition group-hover:translate-x-1">
-                  Voir les ressources →
-                </span>
-              </Link>
-              <div className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60">
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                  Français
-                </p>
-                <h3 className="mt-2 text-2xl font-black text-foreground">
-                  Écriture
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                  Préparer les futures ressources PDF pour écrire des mots et
-                  des phrases courtes en CP.
-                </p>
-                <span className="mt-5 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                  À venir
-                </span>
-              </div>
-            </div>
-            <div className="mt-5 flex justify-end">
-              <Link
-                href="/primaire/cp/programme-complet"
-                className="text-sm font-bold text-sky/70 transition hover:text-sky"
-              >
-                Programme complet CP →
-              </Link>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       {/* ── Compétences du programme ── */}
       <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -318,19 +194,9 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 Compétences du niveau
               </h2>
             </div>
-            <div className="flex items-center gap-3">
-              {curriculum?.status && (
-                <PublicStatusBadge status={curriculum.status} className="self-start" />
-              )}
-              {hasPrimaryProgramme && (
-                <Link
-                  href={`/primaire/${level.slug}/programme`}
-                  className="inline-flex self-start rounded-md border border-sky/30 bg-sky/[0.06] px-4 py-2 text-sm font-bold text-sky transition hover:bg-sky/[0.12]"
-                >
-                  Voir le programme complet
-                </Link>
-              )}
-            </div>
+            {curriculum?.status && (
+              <PublicStatusBadge status={curriculum.status} className="self-start" />
+            )}
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
@@ -380,65 +246,6 @@ export function LevelOverview({ level }: LevelOverviewProps) {
           </div>
         </div>
       </section>
-
-      {/* ── Compétences observables ── */}
-      {observableCompetencies.length > 0 ? (
-        <section className="px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
-                  Compétences observables
-                </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
-                  Ce que l&apos;élève apprend à réussir
-                </h2>
-              </div>
-              <p className="max-w-xl text-sm leading-7 text-muted">
-                Première couche de repérage : objectifs courts, critères de
-                réussite et ressources associées quand elles existent.
-              </p>
-            </div>
-
-            <div className="flex justify-start">
-              <Link
-                href={`/primaire/${level.slug}/competences`}
-                className="inline-flex rounded-md border border-sky/30 bg-sky/10 px-4 py-3 text-sm font-bold text-sky transition hover:bg-sky hover:text-ink"
-              >
-                Voir toutes les compétences
-              </Link>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {/* ── Parcours annuels ── */}
-      {annualPaths.length > 0 ? (
-        <section className="px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
-                  Parcours annuels
-                </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
-                  Progressions à installer sur l&apos;année
-                </h2>
-              </div>
-              <p className="max-w-xl text-sm leading-7 text-muted">
-                Aperçu léger des progressions prévues. Les semaines listées
-                servent à organiser le travail, pas à porter les contenus complets.
-              </p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {annualPaths.slice(0, 2).map((path) => (
-                <AnnualPathCard key={path.id} path={path} />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
 
       {/* ── Missions recommandées ── */}
       <section className="px-4 py-8 sm:px-6 lg:px-8">
