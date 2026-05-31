@@ -149,6 +149,24 @@ export default function Cm2Page() {
             </Link>
 
             <Link
+              href="/primaire/cm2/sequences"
+              className="group flex flex-col gap-2 rounded-md border border-sky/25 bg-sky/[0.05] p-5 transition hover:border-sky/45 hover:bg-sky/[0.09]"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
+                Cartographie
+              </p>
+              <p className="text-lg font-black text-foreground">
+                Séquences CM2
+              </p>
+              <p className="text-sm leading-6 text-muted">
+                Structure pédagogique par domaine et compétence. Toutes les séquences en cours de préparation.
+              </p>
+              <span className="mt-1 text-sm font-black text-sky transition group-hover:translate-x-1">
+                Voir la cartographie →
+              </span>
+            </Link>
+
+            <Link
               href="/professeurs/felix"
               className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
