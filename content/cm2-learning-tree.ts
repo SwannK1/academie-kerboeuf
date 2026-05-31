@@ -129,8 +129,8 @@ export const cm2LearningTree: Cm2LearningTree = [
                 linkedMissionSlugs: ["mission-inference"],
               },
               {
-                id: "francais-lecture-inferences-faire",
-                title: "Faire une inférence",
+                id: "francais-lecture-inferences-formuler-hypothese",
+                title: "Relier des indices pour formuler une hypothèse de lecture",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -287,8 +287,18 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "francais-langue-conjugaison-temps",
-                title: "Temps du passé et du présent",
+                id: "francais-langue-conjugaison-present",
+                title: "Conjuguer un verbe au présent de l'indicatif",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+              },
+              {
+                id: "francais-langue-conjugaison-imparfait-passe-compose",
+                title: "Distinguer imparfait et passé composé dans un récit",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -543,8 +553,18 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "maths-grandeurs-aires-calculer",
-                title: "Calculer l'aire et le périmètre d'une figure",
+                id: "maths-grandeurs-perimetre-calculer",
+                title: "Calculer le périmètre d'un polygone",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+              },
+              {
+                id: "maths-grandeurs-aire-calculer",
+                title: "Calculer l'aire d'un carré et d'un rectangle",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -584,8 +604,28 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "maths-geometrie-symetrie-axiale",
-                title: "La symétrie axiale",
+                id: "maths-geometrie-symetrie-identifier-axe",
+                title: "Identifier un axe de symétrie dans une figure",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+              },
+              {
+                id: "maths-geometrie-symetrie-reproduire",
+                title: "Reproduire une figure par symétrie axiale",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+              },
+              {
+                id: "maths-geometrie-symetrie-construire-symetrique",
+                title: "Construire le symétrique d'un point ou d'une figure",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -726,7 +766,7 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "sciences-observation-matiere-etats",
-                title: "Les états de la matière",
+                title: "Distinguer les états solide, liquide et gazeux d'un matériau",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -791,7 +831,7 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "sciences-terre-ecosystemes-chaines",
-                title: "Les chaînes alimentaires",
+                title: "Identifier les niveaux d'une chaîne alimentaire simple",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -808,7 +848,7 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "sciences-terre-phenomenes-meteo",
-                title: "Comprendre les phénomènes météorologiques",
+                title: "Décrire le cycle de l'eau comme phénomène météorologique",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -845,8 +885,8 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "histoire-reperes-revolution-causes",
-                title: "Les causes de la Révolution",
+                id: "histoire-reperes-revolution-conditions-ordres",
+                title: "Identifier les conditions de vie des différents ordres avant 1789",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -854,6 +894,16 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
                 linkedMissionSlugs: ["archives-historiques"],
+              },
+              {
+                id: "histoire-reperes-revolution-crise-monarchie",
+                title: "Relier la crise financière de la monarchie aux événements de 1789",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
               },
             ],
           },
@@ -863,8 +913,8 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "histoire-reperes-republique-valeurs",
-                title: "Les valeurs républicaines",
+                id: "histoire-reperes-republique-devise",
+                title: "Expliquer le sens des trois valeurs de la devise républicaine",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -905,7 +955,7 @@ export const cm2LearningTree: Cm2LearningTree = [
               },
               {
                 id: "geo-espaces-carte-localiser",
-                title: "Localiser et situer",
+                title: "Localiser un lieu sur une carte à l'aide des points cardinaux",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -922,7 +972,7 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "geo-espaces-territoire-ressources",
-                title: "Les ressources d'un territoire",
+                title: "Identifier les ressources d'un territoire à partir d'un document",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -945,8 +995,8 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "hg-documents-historiques-analyser",
-                title: "Analyser un document historique",
+                id: "hg-documents-historiques-identifier-nature",
+                title: "Identifier la nature, la date et l'auteur d'un document historique",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -954,6 +1004,16 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
                 linkedMissionSlugs: ["archives-historiques"],
+              },
+              {
+                id: "hg-documents-historiques-extraire-contexte",
+                title: "Extraire des informations d'un document historique et les relier à un contexte",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
               },
             ],
           },
@@ -963,8 +1023,18 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
-                id: "hg-documents-geographiques-analyser",
-                title: "Lire un paysage ou une photographie géographique",
+                id: "hg-documents-geographiques-paysage",
+                title: "Décrire et interpréter un paysage géographique",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+              },
+              {
+                id: "hg-documents-geographiques-photographie",
+                title: "Analyser une photographie aérienne ou satellitaire",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -1059,7 +1129,17 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "emc-jugement-respecter-differences",
-                title: "Accueillir les différences et lutter contre les discriminations",
+                title: "Reconnaître et respecter les différences entre les personnes",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+              },
+              {
+                id: "emc-jugement-respecter-discriminations",
+                title: "Définir une discrimination et identifier les formes qu'elle peut prendre",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -1083,7 +1163,7 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "emc-republique-laicite-principe",
-                title: "Comprendre le principe de laïcité",
+                title: "Définir la laïcité et illustrer son application à l'école",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
@@ -1100,7 +1180,7 @@ export const cm2LearningTree: Cm2LearningTree = [
             lessons: [
               {
                 id: "emc-republique-droits-enfant-convention",
-                title: "La Convention internationale des droits de l'enfant",
+                title: "Identifier les droits fondamentaux de l'enfant à partir de la CIDE",
                 status: "upcoming",
                 resources: [
                   { type: "lesson",     label: "Leçon",      status: "upcoming" },
