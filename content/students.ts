@@ -562,7 +562,6 @@ export const emblematicStudents: EmblematicStudent[] = [
     recommendedMission: {
       title: "Orientation",
       description: "Présenter un choix d’orientation avec cohérence et preuves.",
-      href: "/lycee/terminale/missions/orientation",
     },
   },
 ];
