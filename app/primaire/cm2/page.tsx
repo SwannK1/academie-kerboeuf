@@ -68,6 +68,12 @@ export default function Cm2Page() {
             >
               Parcours de l&apos;année
             </Link>
+            <Link
+              href="/primaire/cm2/sequences"
+              className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+            >
+              Cartographie des séquences
+            </Link>
           </div>
         </div>
       </section>
