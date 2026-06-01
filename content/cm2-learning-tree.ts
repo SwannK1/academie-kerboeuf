@@ -1329,6 +1329,39 @@ export const cm2LearningTree: Cm2LearningTree = [
           },
         ],
       },
+      {
+        id: "arts-education-musicale",
+        title: "Éducation musicale",
+        status: "upcoming",
+        subdomains: [
+          {
+            id: "arts-musique-ecouter",
+            title: "Écouter et identifier",
+            status: "upcoming",
+            lessons: [
+              { id: "arts-musique-ecouter-parametres", title: "Identifier des paramètres sonores (tempo, nuances, timbre)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "arts-musique-ecouter-styles", title: "Distinguer différents styles et genres musicaux", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+          {
+            id: "arts-musique-chanter",
+            title: "Chanter",
+            status: "upcoming",
+            lessons: [
+              { id: "arts-musique-chanter-ensemble", title: "Chanter en groupe en tenant sa partie avec précision", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "arts-musique-chanter-expressivite", title: "Interpréter une chanson avec expressivité et intention", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+          {
+            id: "arts-musique-histoire",
+            title: "Histoire de la musique",
+            status: "upcoming",
+            lessons: [
+              { id: "arts-musique-histoire-reperes", title: "Situer une œuvre musicale dans son contexte historique et culturel", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+        ],
+      },
     ],
   },
 
