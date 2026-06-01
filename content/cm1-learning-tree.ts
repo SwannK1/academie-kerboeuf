@@ -1,6 +1,6 @@
-// Arbre pédagogique CM1 : Matière → Domaine → Sous-domaine → Séquence-compétence.
-// Une séquence correspond à une compétence unique. Aucun contenu de leçon,
-// exercice, corrigé ou ressource PDF n'est défini ici.
+// Arbre pédagogique CM1 : Matière → Domaine → Sous-domaine → Séquence-compétence → Slots PDF.
+// Une séquence correspond à une compétence unique. Les slots PDF sont planifiés (status "upcoming").
+// Aucun contenu pédagogique détaillé, lien href ou PDF réel n'est défini ici.
 
 export type Cm1LearningStatus = "available" | "in-progress" | "upcoming";
 
@@ -16,12 +16,19 @@ export type Cm1PedagogicalPlaceReference = {
   zone?: string;
 };
 
+export type Cm1PdfSlot = {
+  type: "lesson" | "exercise" | "correction";
+  label: string;
+  status: Cm1LearningStatus;
+};
+
 export type Cm1SequenceNode = {
   id: string;
   title: string;
   competency: string;
   description?: string;
   status: Cm1LearningStatus;
+  pdfSlots: Cm1PdfSlot[];
 };
 
 export type Cm1SubdomainNode = {
@@ -53,12 +60,18 @@ export type Cm1SubjectNode = {
 
 export type Cm1LearningTree = Cm1SubjectNode[];
 
+const defaultPdfSlots: Cm1PdfSlot[] = [
+  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+  { type: "correction", label: "Correction", status: "upcoming" },
+];
+
 const sequence = (
   id: string,
   title: string,
   competency: string,
   status: Cm1LearningStatus = "upcoming",
-): Cm1SequenceNode => ({ id, title, competency, status });
+): Cm1SequenceNode => ({ id, title, competency, status, pdfSlots: defaultPdfSlots });
 
 export const cm1LearningTree: Cm1LearningTree = [
   {
