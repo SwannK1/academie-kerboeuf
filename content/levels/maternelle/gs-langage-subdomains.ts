@@ -21,28 +21,19 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-langage-oral-seq1",
-        slug: "raconter-et-expliquer",
-        title: "Raconter et expliquer",
+        slug: "raconter-un-evenement-vecu",
+        title: "Raconter un événement vécu",
         levelSlug: "gs",
         domainSlug: "langage",
         subdomainSlug: "langage-oral",
         description:
-          "Séquence centrée sur la production de récits organisés et l'explication d'une démarche simple.",
-        objective:
-          "Amener l'élève à produire un récit oral structuré et à expliquer une action en plusieurs étapes.",
-        objectives: [
-          "Utiliser des connecteurs temporels et logiques (d'abord, ensuite, parce que)",
-          "Maintenir le fil d'un récit sur plusieurs phrases",
-          "Répondre aux questions d'un auditoire",
-        ],
+          "Séquence centrée sur la production d'un récit oral organisé à partir d'un événement vécu.",
+        objective: "Amener l'élève à produire un récit oral structuré sur un événement vécu.",
+        objectives: ["Maintenir le fil d'un récit sur plusieurs phrases"],
         periodLabel: "Période 2",
         estimatedDuration: "4 séances × 25 min",
         sessionCount: 4,
-        observableSkills: [
-          "Raconte un événement vécu en 4 phrases minimum",
-          "Utilise au moins un connecteur logique",
-          "Reformule la question de l'enseignant",
-        ],
+        observableSkills: ["Raconte un événement vécu en 4 phrases cohérentes."],
         observationFocus:
           "Observer si l'élève maintient la cohérence du récit sans relance. Repérer les connecteurs spontanément produits.",
         status: "in-progress",
@@ -110,28 +101,19 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-langage-phonologie-seq1",
-        slug: "identifier-les-sons-dans-les-mots",
-        title: "Identifier les sons dans les mots",
+        slug: "identifier-le-son-initial",
+        title: "Identifier le son initial",
         levelSlug: "gs",
         domainSlug: "langage",
         subdomainSlug: "phonologie",
         description:
           "Séquence axée sur la discrimination auditive fine et la segmentation syllabique.",
-        objective:
-          "Identifier et manipuler les syllabes et les phonèmes dans des mots courants.",
-        objectives: [
-          "Segmenter un mot en syllabes oralement",
-          "Identifier le son initial d'un mot",
-          "Trouver des mots commençant par le même son",
-        ],
+        objective: "Identifier le son initial dans des mots courants.",
+        objectives: ["Identifier le son initial d'un mot"],
         periodLabel: "Période 3",
         estimatedDuration: "5 séances × 20 min",
         sessionCount: 5,
-        observableSkills: [
-          "Frappe les syllabes d'un mot de 2 ou 3 syllabes",
-          "Identifie le son initial d'un mot donné",
-          "Produit un mot commençant par un son donné",
-        ],
+        observableSkills: ["Identifie le son initial d'un mot donné."],
         observationFocus:
           "Observer si l'élève confond syllabe et phonème. Distinguer l'identification du son initial de la nomination de la lettre.",
         status: "in-progress",
@@ -200,28 +182,19 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-langage-premiers-ecrits-seq1",
-        slug: "ecrire-son-prenom-et-des-mots-reperes",
-        title: "Écrire son prénom et des mots repères",
+        slug: "ecrire-son-prenom",
+        title: "Écrire son prénom",
         levelSlug: "gs",
         domainSlug: "langage",
         subdomainSlug: "premiers-ecrits",
         description:
-          "Séquence autour du prénom et des premiers mots de la classe comme modèles d'écriture.",
-        objective:
-          "Écrire son prénom en capitales d'imprimerie de manière lisible et reconnaître quelques mots de la classe.",
-        objectives: [
-          "Tracer les lettres de son prénom dans le bon ordre",
-          "Reconnaître son prénom parmi d'autres",
-          "Copier un mot repère de la classe (ex : CHAT, LION)",
-        ],
+          "Séquence autour du prénom comme modèle stable d'entrée dans l'écrit.",
+        objective: "Écrire son prénom en capitales d'imprimerie de manière lisible.",
+        objectives: ["Tracer les lettres de son prénom dans le bon ordre"],
         periodLabel: "Période 1–2",
         estimatedDuration: "5 séances × 15 min",
         sessionCount: 5,
-        observableSkills: [
-          "Écrit son prénom lisiblement en capitales",
-          "Reconnaît et copie un mot repère de la classe",
-          "Nomme 3 lettres de l'alphabet",
-        ],
+        observableSkills: ["Écrit son prénom lisiblement en capitales."],
         observationFocus:
           "Observer la direction du tracé, la tenue de l'outil et l'organisation gauche-droite. Ne pas évaluer la vitesse.",
         status: "in-progress",
@@ -229,45 +202,43 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
         workshops: [
           {
             id: "gs-langage-premiers-ecrits-seq1-atelier1",
-            slug: "la-boite-aux-mots",
-            title: "La boîte aux mots",
+            slug: "modele-prenom",
+            title: "Modèle prénom",
             type: "manipulation",
-            objective:
-              "Associer une image à son mot écrit, puis copier le mot sur son ardoise.",
+            objective: "Copier son prénom à partir d'un modèle stable.",
             duration: "15 min",
             groupSize: "4-6 élèves",
             materials: [
-              "Boîte avec cartes image-mot (10 paires)",
+              "Étiquettes-prénoms en capitales",
               "Ardoises",
               "Feutres effaçables",
             ],
-            instruction:
-              "Prends une carte image. Trouve la carte avec le mot. Puis copie le mot sur ton ardoise.",
+            instruction: "Regarde ton modèle et écris ton prénom sur l'ardoise.",
             expectedAction:
-              "L'élève associe correctement image et mot, puis copie le mot en respectant la forme des lettres.",
+              "L'élève copie son prénom en respectant l'ordre des lettres.",
             differentiation:
-              "Allègement : mots de 3 lettres seulement. Renforcement : l'élève écrit le mot de mémoire sans la carte modèle.",
+              "Allègement : modèle placé juste au-dessus de la zone d'écriture. Renforcement : modèle éloigné puis masqué en fin d'essai.",
             status: "in-progress",
             observationGrid: {
               id: "gs-langage-premiers-ecrits-seq1-atelier1-grille",
-              title: "Grille — Copier un mot repère",
+              title: "Grille — Écrire son prénom",
               teacherUse:
-                "Observer la stratégie de copie : l'élève regarde-t-il lettre par lettre ou par groupe ?",
+                "Observer la stratégie de copie du prénom : l'élève regarde-t-il lettre par lettre ou par groupe ?",
               status: "upcoming",
               criteria: [
                 {
                   id: "crit-gs-ecrit-1",
-                  label: "Associe correctement l'image à son mot écrit",
+                  label: "Copie les lettres de son prénom dans l'ordre",
                   levelDescriptor: "Attendu GS",
                 },
                 {
                   id: "crit-gs-ecrit-2",
-                  label: "Copie le mot avec toutes les lettres dans le bon ordre",
+                  label: "Respecte la forme globale des lettres capitales",
                   levelDescriptor: "Attendu GS",
                 },
                 {
                   id: "crit-gs-ecrit-3",
-                  label: "Écrit le mot de mémoire sans modèle sous les yeux",
+                  label: "Écrit son prénom sans modèle sous les yeux",
                   levelDescriptor: "Dépassement GS",
                 },
               ],
