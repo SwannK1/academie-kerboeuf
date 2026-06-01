@@ -369,6 +369,294 @@ const domainMathematiques: ProgramDomain = {
   status: "upcoming",
 };
 
+const domainQuestionnerLeMonde: ProgramDomain = {
+  id: "ce1-questionner-le-monde",
+  slug: "questionner-le-monde",
+  title: "Questionner le monde",
+  officialLabel: "Questionner le monde - Cycle 2",
+  description:
+    "Explorer le vivant, la matiere, les objets, l'espace et le temps.",
+  subdomains: [
+    createSubdomain(
+      "questionner-le-monde",
+      "vivant",
+      "Le vivant",
+      "Observer et comprendre les etres vivants et leurs milieux.",
+      [
+        {
+          slug: "distinguer-vivant-et-non-vivant",
+          title: "Distinguer le vivant du non-vivant",
+          objective:
+            "Classer des objets ou des etres en utilisant les criteres du vivant : nutrition, croissance, reproduction.",
+          status: "upcoming",
+        },
+        {
+          slug: "decrire-un-cycle-de-vie-simple",
+          title: "Decrire un cycle de vie simple",
+          objective:
+            "Remettre en ordre les etapes de vie d'un animal ou d'une plante familier.",
+          status: "upcoming",
+        },
+        {
+          slug: "identifier-les-besoins-des-etres-vivants",
+          title: "Identifier les besoins des etres vivants",
+          objective:
+            "Nommer les besoins en eau, lumiere et nourriture d'un etre vivant observe.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "matiere-et-objets",
+      "Matiere et objets",
+      "Explorer les proprietes des materiaux et les etats de la matiere.",
+      [
+        {
+          slug: "distinguer-les-etats-de-la-matiere",
+          title: "Distinguer les etats de la matiere",
+          objective:
+            "Classer une substance comme solide, liquide ou gazeux a partir de ses proprietes observables.",
+          status: "upcoming",
+        },
+        {
+          slug: "identifier-les-materiaux-et-leurs-proprietes",
+          title: "Identifier les materiaux et leurs proprietes",
+          objective:
+            "Nommer des materiaux courants et associer une propriete utile : rigide, souple, transparent, conducteur.",
+          status: "upcoming",
+        },
+        {
+          slug: "decrire-un-changement-d-etat-simple",
+          title: "Decrire un changement d'etat simple",
+          objective:
+            "Nommer la fusion ou la solidification et les relier a une variation de temperature.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "espace-et-temps",
+      "Espace et temps",
+      "Se situer dans l'espace et dans le temps.",
+      [
+        {
+          slug: "se-situer-dans-la-journee-et-la-semaine",
+          title: "Se situer dans la journee et la semaine",
+          objective:
+            "Utiliser les notions de matin, midi, apres-midi, hier, aujourd'hui, demain pour se reperer.",
+          status: "upcoming",
+        },
+        {
+          slug: "utiliser-une-frise-chronologique-simple",
+          title: "Utiliser une frise chronologique simple",
+          objective:
+            "Placer des evenements dans l'ordre sur une frise et lire une date simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "se-reperer-sur-un-plan-simple",
+          title: "Se reperer sur un plan simple",
+          objective:
+            "Localiser un lieu sur un plan de salle de classe ou d'ecole en utilisant des reperes.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEnseignementsArtistiques: ProgramDomain = {
+  id: "ce1-arts",
+  slug: "arts",
+  title: "Enseignements artistiques",
+  officialLabel: "Enseignements artistiques - Cycle 2",
+  description:
+    "Arts plastiques et education musicale : percevoir, produire, partager.",
+  subdomains: [
+    createSubdomain(
+      "arts",
+      "arts-plastiques",
+      "Arts plastiques",
+      "Produire et observer des images, des objets et des volumes.",
+      [
+        {
+          slug: "utiliser-les-couleurs-primaires-et-secondaires",
+          title: "Utiliser les couleurs primaires et secondaires",
+          objective:
+            "Melanges et identifier les couleurs primaires et produire des couleurs secondaires simples.",
+          status: "upcoming",
+        },
+        {
+          slug: "decrire-une-oeuvre-avec-un-vocabulaire-simple",
+          title: "Decrire une oeuvre avec un vocabulaire simple",
+          objective:
+            "Nommer ce que l'on voit dans une image en utilisant les mots : couleur, forme, ligne, personnage.",
+          status: "upcoming",
+        },
+        {
+          slug: "realiser-une-composition-plastique",
+          title: "Realiser une composition plastique",
+          objective:
+            "Organiser des elements visuels dans un espace pour produire une image intentionnelle.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "arts",
+      "education-musicale",
+      "Education musicale",
+      "Ecouter, chanter et explorer les sons.",
+      [
+        {
+          slug: "distinguer-les-parametres-du-son",
+          title: "Distinguer les parametres du son",
+          objective:
+            "Identifier des differences de hauteur, de duree et d'intensite dans des sons ecoutes.",
+          status: "upcoming",
+        },
+        {
+          slug: "memoriser-et-interpreter-un-chant-simple",
+          title: "Memoriser et interpreter un chant simple",
+          objective:
+            "Chanter un chant court en respectant le texte, la melodie et le tempo.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEPS: ProgramDomain = {
+  id: "ce1-eps",
+  slug: "eps",
+  title: "EPS",
+  officialLabel: "Education physique et sportive - Cycle 2",
+  description:
+    "Developper les habiletes motrices, la cooperation et la connaissance de soi.",
+  subdomains: [
+    createSubdomain(
+      "eps",
+      "habiletes-motrices",
+      "Habiletes motrices",
+      "Maitriser des actions motrices fondamentales.",
+      [
+        {
+          slug: "courir-sauter-lancer-avec-aisance",
+          title: "Courir, sauter, lancer avec aisance",
+          objective:
+            "Realiser des actions de locomotion et de manipulation avec une technique adaptee.",
+          status: "upcoming",
+        },
+        {
+          slug: "s-equilibrer-et-se-deplacer-de-facon-variee",
+          title: "S'equilibrer et se deplacer de facon variee",
+          objective:
+            "Adapter son deplacement aux contraintes de l'espace et du rythme.",
+          status: "upcoming",
+        },
+        {
+          slug: "enchainer-deux-actions-motrices",
+          title: "Enchainer deux actions motrices",
+          objective:
+            "Realiser une sequence motrice simple en coordonnant deux gestes consecutifs.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "eps",
+      "jeux-et-sports-collectifs",
+      "Jeux et sports collectifs",
+      "Cooperer, s'opposer et respecter les regles du jeu.",
+      [
+        {
+          slug: "cooperer-avec-des-partenaires",
+          title: "Cooperer avec des partenaires",
+          objective:
+            "Jouer avec d'autres en partageant le ballon ou le role pour atteindre un but commun.",
+          status: "upcoming",
+        },
+        {
+          slug: "respecter-les-regles-d-un-jeu-collectif",
+          title: "Respecter les regles d'un jeu collectif",
+          objective:
+            "Jouer en acceptant les regles, les roles et la decision de l'arbitre.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEMC: ProgramDomain = {
+  id: "ce1-emc",
+  slug: "emc",
+  title: "EMC",
+  officialLabel: "Enseignement moral et civique - Cycle 2",
+  description:
+    "Construire le respect de soi et des autres, comprendre les regles de vie commune.",
+  subdomains: [
+    createSubdomain(
+      "emc",
+      "respect-et-regles-de-vie",
+      "Respect et regles de vie",
+      "Comprendre et appliquer les regles de vie en collectivite.",
+      [
+        {
+          slug: "identifier-et-respecter-les-regles-de-la-classe",
+          title: "Identifier et respecter les regles de la classe",
+          objective:
+            "Nommer les regles de vie de la classe et expliquer pourquoi elles existent.",
+          status: "upcoming",
+        },
+        {
+          slug: "exprimer-son-desaccord-sans-violence",
+          title: "Exprimer son desaccord sans violence",
+          objective:
+            "Dire ce qui ne va pas avec des mots plutot qu'avec des gestes.",
+          status: "upcoming",
+        },
+        {
+          slug: "participer-a-une-decision-collective-simple",
+          title: "Participer a une decision collective simple",
+          objective:
+            "Proposer, ecouter et accepter le resultat d'une decision prise en groupe.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "emc",
+      "identite-et-citoyennete",
+      "Identite et citoyennete",
+      "Se decouvrir comme membre d'un groupe et d'une communaute.",
+      [
+        {
+          slug: "decrire-ses-droits-et-ses-devoirs-d-eleve",
+          title: "Decrire ses droits et ses devoirs d'eleve",
+          objective:
+            "Associer un droit (apprendre, etre respecte) a un devoir correspondant (travailler, respecter l'autre).",
+          status: "upcoming",
+        },
+        {
+          slug: "reconnaitre-les-symboles-de-la-republique",
+          title: "Reconnaitre les symboles de la Republique",
+          objective:
+            "Nommer le drapeau, la Marseillaise et la devise et expliquer leur sens simplement.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
 export const ce1LearningTree: AcademyLevelProgram = {
   levelSlug: "ce1",
   label: "CE1",
@@ -380,7 +668,14 @@ export const ce1LearningTree: AcademyLevelProgram = {
     roleHint:
       "Gaston accompagne la consolidation de la lecture, de l'ecriture et du raisonnement.",
   },
-  domains: [domainFrancais, domainMathematiques],
+  domains: [
+    domainFrancais,
+    domainMathematiques,
+    domainQuestionnerLeMonde,
+    domainEnseignementsArtistiques,
+    domainEPS,
+    domainEMC,
+  ],
 };
 
 export function getCe1Domain(domainSlug: string): ProgramDomain | undefined {
