@@ -177,7 +177,7 @@ const domainFrancais: ProgramDomain = {
     ),
     createSubdomain(
       "francais",
-      "comprehension",
+      "lecture-comprehension",
       "Comprehension orale puis ecrite",
       "Comprendre des enonces entendus puis lus.",
       [
