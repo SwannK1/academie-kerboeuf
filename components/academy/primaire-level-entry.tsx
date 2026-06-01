@@ -38,6 +38,9 @@ export function PrimaireLevelEntry({ level }: Props) {
       label: "Missions",
       href: `/primaire/${slug}/missions`,
     },
+    ...(slug === "cp"
+      ? [{ label: "Explorer les matières CP", href: "/primaire/cp/matieres" }]
+      : []),
   ];
 
   const resources = publishedSubdomainPages

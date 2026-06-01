@@ -75,6 +75,7 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   sequences: MatterSequence[];
   linkedCards?: LinkedCard[];
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
+  cycleLabel?: string;
 };
 
 type LinkedCard = {
@@ -179,6 +180,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   sequences,
   linkedCards = [],
   footerLinks,
+  cycleLabel = "Cycle 3",
 }: SubjectDetailPageProps<TSubject>) {
   const t = accent[subject.accent] ?? accent.gold;
   const sequenceGroups = groupSequences(sequences);
@@ -207,7 +209,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
             <p
               className={`inline-flex rounded-md border ${t.border} ${t.bg} px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}
             >
-              {levelLabel} · Cycle 3
+              {levelLabel} · {cycleLabel}
             </p>
             <PublicStatusBadge status={subject.status} />
           </div>
