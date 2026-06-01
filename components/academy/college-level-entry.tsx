@@ -12,7 +12,6 @@ type Props = {
 export function CollegeLevelEntry({ level }: Props) {
   const slug = level.slug;
   const matiereCards = getCollegeMatiereCards(slug);
-  const missionsHref = `/college/${slug}/missions`;
 
   return (
     <main>
@@ -122,20 +121,6 @@ export function CollegeLevelEntry({ level }: Props) {
               </p>
             </div>
           )}
-
-          {/* ── Accès complémentaire — Missions ── */}
-          <div className="mt-8 border-t border-white/10 pt-6">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-muted">
-              Accès complémentaire
-            </p>
-            <Link
-              href={missionsHref}
-              className="group inline-flex items-center gap-3 rounded-md border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-bold text-muted transition hover:border-white/20 hover:bg-white/[0.06] hover:text-foreground"
-            >
-              Missions {level.label}
-              <span className="transition group-hover:translate-x-0.5">→</span>
-            </Link>
-          </div>
         </div>
       </section>
 

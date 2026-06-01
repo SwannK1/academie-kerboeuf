@@ -851,6 +851,10 @@ export function getLevelPath(level: Pick<AcademyLevel, "stage" | "slug">) {
 }
 
 export function getLevelMissionsPath(level: Pick<AcademyLevel, "stage" | "slug">) {
+  if (level.stage === "college") {
+    return getLevelPath(level);
+  }
+
   return `${getLevelPath(level)}/missions`;
 }
 

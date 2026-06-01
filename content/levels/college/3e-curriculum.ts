@@ -1,7 +1,6 @@
 // Programme 3e — Cycle 4, collège.
 // Structure légère : matières et sous-domaines visibles, sans contenu pédagogique.
-// Aucune page domaine 3e n'existe — tous les sous-domaines sont non cliquables.
-// Les portails matière 3e sont générés par la route dynamique [level]/[subject].
+// Aucune page matière ou domaine 3e n'est publiée.
 // Le site organise ; les PDF enseignent.
 
 import type { ProgramStatus } from "@/content/program-types";
@@ -14,14 +13,7 @@ const statusUpcoming: ProgramStatus = "upcoming";
 const statusInProgress: ProgramStatus = "in-progress";
 
 // ── Matières visibles sur le portail /college/3e ─────────────────────────────
-// Les hrefs pointent vers les portails matière générés par la route dynamique.
-// Aucune page domaine 3e n'existe — les portails s'afficheront avec des
-// sous-domaines "À venir".
-//
-// Activation intentionnelle : les 5 matières sont en status "in-progress" et
-// leurs portails /college/3e/[subject] sont générés via getCollegeSubjectStaticParams().
-// Les sous-domaines restent en "upcoming" — aucun contenu pédagogique n'est lié.
-// Décision documentée le 2026-05-18 lors de la Mission 5 (cohérence données).
+// Aucune page matière 3e n'existe — les cartes restent non cliquables.
 
 export const troisiemeMatieres: CollegeMatiereCard[] = [
   {
@@ -30,7 +22,6 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Lecture, écriture, oral et étude de la langue — préparer l'épreuve de brevet.",
     status: statusInProgress,
-    href: "/college/3e/francais",
   },
   {
     slug: "mathematiques",
@@ -38,7 +29,6 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Fonctions, probabilités, géométrie et calcul — préparer le brevet.",
     status: statusInProgress,
-    href: "/college/3e/mathematiques",
   },
   {
     slug: "histoire-geographie-emc",
@@ -46,7 +36,6 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Le monde depuis 1914 — repères chronologiques, géopolitiques et citoyens.",
     status: statusInProgress,
-    href: "/college/3e/histoire-geographie-emc",
   },
   {
     slug: "sciences-technologie",
@@ -54,7 +43,6 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     description:
       "SVT, physique-chimie et technologie — consolider et préparer le lycée.",
     status: statusInProgress,
-    href: "/college/3e/sciences-technologie",
   },
   {
     slug: "anglais",
@@ -62,7 +50,6 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
     status: statusInProgress,
-    href: "/college/3e/anglais",
   },
 ];
 

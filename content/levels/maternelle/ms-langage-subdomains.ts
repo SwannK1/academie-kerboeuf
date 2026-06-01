@@ -37,10 +37,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
         periodLabel: "Période 2",
         estimatedDuration: "3 séances × 20 min",
         sessionCount: 3,
-        observableSkills: [
-          "Raconte une action en 2 ou 3 phrases",
-          "Répond à la question : qu'est-ce que tu as fait ?",
-        ],
+        observableSkills: ["Raconte une action vécue en 2 ou 3 phrases."],
         observationFocus:
           "Observer si l'élève parle spontanément ou uniquement sur sollicitation directe.",
         status: "in-progress",
@@ -122,11 +119,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
         periodLabel: "Période 1",
         estimatedDuration: "4 séances × 25 min",
         sessionCount: 4,
-        observableSkills: [
-          "Nomme les personnages de l'histoire",
-          "Répond à la question : que s'est-il passé ?",
-          "Réutilise un mot nouveau dans une phrase",
-        ],
+        observableSkills: ["Nomme les personnages principaux d'une histoire courte."],
         observationFocus:
           "Observer si l'élève comprend implicitement ou seulement explicitement. Repérer les mots réinvestis.",
         status: "in-progress",
@@ -196,25 +189,18 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
       {
         id: "ms-langage-premiers-ecrits-seq1",
         slug: "reconnaitre-son-prenom",
-        title: "Reconnaître et tracer son prénom",
+        title: "Reconnaître son prénom",
         levelSlug: "ms",
         domainSlug: "langage",
         subdomainSlug: "premiers-ecrits",
         description:
           "Séquence autour du prénom comme premier support d'entrée dans l'écrit.",
-        objective:
-          "Reconnaître son prénom écrit en capitales et en tracer les premières lettres.",
-        objectives: [
-          "Identifier son étiquette-prénom parmi d'autres",
-          "Reproduire les lettres de son prénom avec un outil scripteur",
-        ],
+        objective: "Reconnaître son prénom écrit en capitales parmi d'autres étiquettes.",
+        objectives: ["Identifier son étiquette-prénom parmi d'autres"],
         periodLabel: "Période 1",
         estimatedDuration: "4 séances × 15 min",
         sessionCount: 4,
-        observableSkills: [
-          "Reconnaît son prénom écrit parmi 4 étiquettes",
-          "Trace les premières lettres de son prénom en capitales",
-        ],
+        observableSkills: ["Reconnaît son prénom écrit parmi 4 étiquettes."],
         observationFocus:
           "Observer la prise d'outil et la direction du tracé. Repérer si l'élève identifie une lettre significative (initiale).",
         status: "in-progress",
@@ -234,12 +220,11 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
               "Plateau de tri",
               "Ardoise ou feuille vierge",
             ],
-            instruction:
-              "Trouve ton prénom dans la pile et pose-le devant toi. Ensuite, essaie d'écrire la première lettre.",
+            instruction: "Trouve ton prénom dans la pile et pose-le devant toi.",
             expectedAction:
-              "L'élève sélectionne sa propre étiquette et trace une lettre lisible sur l'ardoise.",
+              "L'élève sélectionne sa propre étiquette parmi des étiquettes proches.",
             differentiation:
-              "Allègement : 3 étiquettes seulement. Renforcement : l'élève classe ensuite les prénoms de ses camarades par première lettre.",
+              "Allègement : 3 étiquettes seulement. Renforcement : l'élève retrouve son prénom parmi davantage d'étiquettes proches.",
             status: "in-progress",
             observationGrid: {
               id: "ms-langage-premiers-ecrits-seq1-atelier1-grille",
@@ -255,12 +240,12 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
                 },
                 {
                   id: "crit-ms-ecrit-2",
-                  label: "Nomme au moins une lettre de son prénom",
+                  label: "Retrouve son prénom parmi des étiquettes proches",
                   levelDescriptor: "Attendu MS",
                 },
                 {
                   id: "crit-ms-ecrit-3",
-                  label: "Trace la première lettre de son prénom de manière lisible",
+                  label: "Retrouve son prénom dans un ensemble élargi",
                   levelDescriptor: "Dépassement MS",
                 },
               ],

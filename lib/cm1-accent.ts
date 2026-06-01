@@ -1,12 +1,6 @@
-export type AccentTokens = {
-  text: string;
-  border: string;
-  bg: string;
-  hoverBorder: string;
-  hoverBg: string;
-};
+import type { AccentTokens } from "@/lib/cm2-accent";
 
-export const CM2_ACCENT: Record<string, AccentTokens> = {
+export const CM1_ACCENT: Record<string, AccentTokens> = {
   jade: {
     text: "text-jade",
     border: "border-jade/30",
