@@ -26,6 +26,9 @@ export function PrimaireLevelEntry({ level }: Props) {
   const subjects = getCurriculumSubjectsForLevel(slug);
 
   const secondaryLinks = [
+    ...(slug === "cm1"
+      ? [{ label: "Explorer les matières CM1", href: "/primaire/cm1/matieres" }]
+      : []),
     {
       label: "Programme",
       href: `/primaire/${slug}/programme`,
