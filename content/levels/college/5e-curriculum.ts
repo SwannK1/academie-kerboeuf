@@ -1,7 +1,6 @@
 // Programme 5e — Cycle 4, collège.
 // Structure légère : matières et sous-domaines visibles, sans contenu pédagogique.
-// Aucune page domaine 5e n'existe — tous les sous-domaines sont non cliquables.
-// Les portails matière 5e sont générés par la route dynamique [level]/[subject].
+// Aucune page matière ou domaine 5e n'est publiée.
 // Le site organise ; les PDF enseignent.
 
 import type { ProgramStatus } from "@/content/program-types";
@@ -11,9 +10,7 @@ import type {
 } from "@/content/levels/college/6e-curriculum";
 
 // ── Matières visibles sur le portail /college/5e ─────────────────────────────
-// Les hrefs pointent vers les portails matière générés par la route dynamique.
-// Aucune page domaine 5e n'existe — les portails s'afficheront avec des
-// sous-domaines "À venir".
+// Aucune page matière 5e n'existe — les cartes restent non cliquables.
 
 const statusUpcoming: ProgramStatus = "upcoming";
 const statusInProgress: ProgramStatus = "in-progress";
@@ -25,7 +22,6 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Approfondir la lecture, l'écriture, l'étude de la langue et l'oral au cycle 4.",
     status: statusInProgress,
-    href: "/college/5e/francais",
   },
   {
     slug: "mathematiques",
@@ -33,7 +29,6 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Consolider les nombres, la géométrie et la résolution de problèmes en cycle 4.",
     status: statusInProgress,
-    href: "/college/5e/mathematiques",
   },
   {
     slug: "histoire-geographie-emc",
@@ -41,7 +36,6 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Comprendre les sociétés, les espaces et les règles de vie commune au Moyen Âge et dans le monde.",
     status: statusInProgress,
-    href: "/college/5e/histoire-geographie-emc",
   },
   {
     slug: "sciences-technologie",
@@ -49,7 +43,6 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Observer, expérimenter et construire : SVT, physique-chimie et technologie réunis.",
     status: statusInProgress,
-    href: "/college/5e/sciences-technologie",
   },
   {
     slug: "anglais",
@@ -57,7 +50,6 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau A2 vers B1.",
     status: statusInProgress,
-    href: "/college/5e/anglais",
   },
 ];
 

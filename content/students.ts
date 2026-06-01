@@ -386,7 +386,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     level: "6e",
     levelSlug: "6e",
     levelHref: "/college/6e",
-    missionsHref: "/college/6e/missions",
+    missionsHref: "/college/6e",
     cycle: "Cycle 3",
     animal: "Créatrice",
     dominantColor: "jade",
@@ -414,7 +414,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     recommendedMission: {
       title: "Lecture de Carte",
       description: "Lire un support et organiser une réponse de collégien.",
-      href: "/college/6e/missions/lecture-de-carte",
+      href: "/college/6e",
     },
   },
   {
@@ -423,7 +423,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     level: "5e",
     levelSlug: "5e",
     levelHref: "/college/5e",
-    missionsHref: "/college/5e/missions",
+    missionsHref: "/college/5e",
     cycle: "Cycle 4",
     animal: "Explorateur d’énergie",
     dominantColor: "sky",
@@ -451,7 +451,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     recommendedMission: {
       title: "Raisonnement Logique",
       description: "Tester des hypothèses et justifier une conclusion.",
-      href: "/college/5e/missions/raisonnement-logique",
+      href: "/college/5e",
     },
   },
   {
@@ -460,7 +460,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     level: "3e",
     levelSlug: "3e",
     levelHref: "/college/3e",
-    missionsHref: "/college/3e/missions",
+    missionsHref: "/college/3e",
     cycle: "Cycle 4",
     animal: "Stratège",
     dominantColor: "gold",
@@ -488,7 +488,7 @@ export const emblematicStudents: EmblematicStudent[] = [
     recommendedMission: {
       title: "Mission Brevet",
       description: "Lire un sujet et organiser une réponse attendue.",
-      href: "/college/3e/missions/brevet",
+      href: "/college/3e",
     },
   },
   {

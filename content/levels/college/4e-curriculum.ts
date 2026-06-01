@@ -1,7 +1,6 @@
 // Programme 4e — Cycle 4, collège.
 // Structure légère : matières et sous-domaines visibles, sans contenu pédagogique.
-// Aucune page domaine 4e n'existe — tous les sous-domaines sont non cliquables.
-// Les portails matière 4e sont générés par la route dynamique [level]/[subject].
+// Aucune page matière ou domaine 4e n'est publiée.
 // Le site organise ; les PDF enseignent.
 
 import type { ProgramStatus } from "@/content/program-types";
@@ -14,14 +13,7 @@ const statusUpcoming: ProgramStatus = "upcoming";
 const statusInProgress: ProgramStatus = "in-progress";
 
 // ── Matières visibles sur le portail /college/4e ─────────────────────────────
-// Les hrefs pointent vers les portails matière générés par la route dynamique.
-// Aucune page domaine 4e n'existe — les portails s'afficheront avec des
-// sous-domaines "À venir".
-//
-// Activation intentionnelle : les 5 matières sont en status "in-progress" et
-// leurs portails /college/4e/[subject] sont générés via getCollegeSubjectStaticParams().
-// Les sous-domaines restent en "upcoming" — aucun contenu pédagogique n'est lié.
-// Décision documentée le 2026-05-18 lors de la Mission 5 (cohérence données).
+// Aucune page matière 4e n'existe — les cartes restent non cliquables.
 
 export const quatriemeMatieres: CollegeMatiereCard[] = [
   {
@@ -30,7 +22,6 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     description:
       "Approfondir la lecture littéraire, l'écriture et l'étude de la langue en cycle 4.",
     status: statusInProgress,
-    href: "/college/4e/francais",
   },
   {
     slug: "mathematiques",
@@ -38,7 +29,6 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     description:
       "Nombres relatifs, proportionnalité, géométrie dans l'espace et premières fonctions.",
     status: statusInProgress,
-    href: "/college/4e/mathematiques",
   },
   {
     slug: "histoire-geographie-emc",
@@ -46,7 +36,6 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     description:
       "Du XVIIIe siècle aux débuts de la mondialisation — repères et méthodes.",
     status: statusInProgress,
-    href: "/college/4e/histoire-geographie-emc",
   },
   {
     slug: "sciences-technologie",
@@ -54,7 +43,6 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     description:
       "SVT, physique-chimie et technologie — observer, mesurer, modéliser.",
     status: statusInProgress,
-    href: "/college/4e/sciences-technologie",
   },
   {
     slug: "anglais",
@@ -62,7 +50,6 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
     status: statusInProgress,
-    href: "/college/4e/anglais",
   },
 ];
 

@@ -7,7 +7,7 @@ import type { CurriculumLevelMap } from "@/content/curriculum-map-types";
 import type { ProgramStatus } from "@/content/program-types";
 
 // ── Métadonnées d'affichage des sous-domaines Français ────────────────────────
-// Utilisées par la page portail matière /college/6e/francais.
+// Conservées comme données d'affichage du portail 6e.
 
 export type CollegeSubdomainCard = {
   subdomainSlug: string;
@@ -18,7 +18,7 @@ export type CollegeSubdomainCard = {
 };
 
 // ── Cartes matières du portail /college/6e ─────────────────────────────────────
-// Affichées sur la page 6e. Seules les matières avec href ont une page existante.
+// Affichées sur la page 6e. Les routes matière collège ne sont pas publiées.
 
 export type CollegeMatiereCard = {
   slug: string;
@@ -34,21 +34,18 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description: "Lecture, écriture, étude de la langue et oral.",
     status: "in-progress",
-    href: "/college/6e/francais",
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description: "Nombres, calcul, géométrie et résolution de problèmes.",
     status: "in-progress",
-    href: "/college/6e/mathematiques",
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description: "Repères chronologiques, géographiques et éducation civique.",
     status: "in-progress",
-    href: "/college/6e/histoire-geographie-emc",
   },
   {
     slug: "sciences",
@@ -74,7 +71,6 @@ export const sixiemeMathematiquesSubdomains: CollegeSubdomainCard[] = [
     description:
       "Lire, écrire, comparer et calculer avec des nombres entiers et des fractions simples.",
     status: "in-progress",
-    href: "/college/6e/mathematiques/nombres-calcul",
   },
   {
     subdomainSlug: "resolution-problemes",
@@ -82,7 +78,6 @@ export const sixiemeMathematiquesSubdomains: CollegeSubdomainCard[] = [
     description:
       "Analyser un problème, choisir une procédure et vérifier la vraisemblance du résultat.",
     status: "upcoming",
-    href: "/college/6e/mathematiques/resolution-problemes",
   },
   {
     subdomainSlug: "grandeurs-mesures",
@@ -90,7 +85,6 @@ export const sixiemeMathematiquesSubdomains: CollegeSubdomainCard[] = [
     description:
       "Longueurs, masses, durées, aires et volumes — utiliser les unités et convertir.",
     status: "upcoming",
-    href: "/college/6e/mathematiques/grandeurs-mesures",
   },
   {
     subdomainSlug: "geometrie",
@@ -98,7 +92,6 @@ export const sixiemeMathematiquesSubdomains: CollegeSubdomainCard[] = [
     description:
       "Figures planes, constructions et transformations géométriques dans le plan.",
     status: "upcoming",
-    href: "/college/6e/mathematiques/geometrie",
   },
   {
     subdomainSlug: "organisation-donnees",
@@ -106,7 +99,6 @@ export const sixiemeMathematiquesSubdomains: CollegeSubdomainCard[] = [
     description:
       "Lire, interpréter et construire des tableaux et des graphiques simples.",
     status: "in-progress",
-    href: "/college/6e/mathematiques/organisation-donnees",
   },
 ];
 
@@ -120,7 +112,6 @@ export const sixiemeHistoireGeographieEmcSubdomains: CollegeSubdomainCard[] = [
     description:
       "Construire les premiers repères chronologiques, lire une frise et interroger des documents historiques simples.",
     status: "in-progress",
-    href: "/college/6e/histoire-geographie-emc/histoire",
   },
   {
     subdomainSlug: "geographie",
@@ -128,7 +119,6 @@ export const sixiemeHistoireGeographieEmcSubdomains: CollegeSubdomainCard[] = [
     description:
       "Observer les espaces habités, lire des cartes simples et décrire l'organisation d'un territoire.",
     status: "in-progress",
-    href: "/college/6e/histoire-geographie-emc/geographie",
   },
   {
     subdomainSlug: "emc",
@@ -153,7 +143,6 @@ export const sixiemeFrancaisSubdomains: CollegeSubdomainCard[] = [
     description:
       "Comprendre des textes narratifs et documentaires, repérer les informations explicites, inférer un sens implicite, identifier le point de vue d'un personnage.",
     status: "in-progress",
-    href: "/college/6e/francais/lecture",
   },
   {
     subdomainSlug: "ecriture",
@@ -161,7 +150,6 @@ export const sixiemeFrancaisSubdomains: CollegeSubdomainCard[] = [
     description:
       "Produire un texte court organisé, argumenter une réponse et réviser sa copie avec méthode.",
     status: "in-progress",
-    href: "/college/6e/francais/ecriture",
   },
   {
     subdomainSlug: "etude-de-la-langue",
@@ -169,7 +157,6 @@ export const sixiemeFrancaisSubdomains: CollegeSubdomainCard[] = [
     description:
       "Grammaire, conjugaison, orthographe et vocabulaire mis au service de la lecture et de l'écriture.",
     status: "in-progress",
-    href: "/college/6e/francais/etude-de-la-langue",
   },
   {
     subdomainSlug: "oral",
@@ -177,7 +164,6 @@ export const sixiemeFrancaisSubdomains: CollegeSubdomainCard[] = [
     description:
       "Prendre la parole, écouter, reformuler une information et débattre avec des arguments simples.",
     status: "in-progress",
-    href: "/college/6e/francais/oral",
   },
 ];
 

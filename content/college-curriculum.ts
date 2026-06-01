@@ -1903,8 +1903,8 @@ export function getCollegeDomainMeta(
     description: subdomain.description,
     status: subdomain.status,
     entries,
-    backHref: `/college/${levelSlug}/${subjectSlug}`,
-    backLabel: `Retour ${subjectMeta.label} ${levelSlug}`,
+    backHref: `/college/${levelSlug}`,
+    backLabel: `Retour ${levelSlug}`,
     levelHref: `/college/${levelSlug}`,
     levelLabel: `Tableau de bord ${levelSlug}`,
   };
