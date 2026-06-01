@@ -129,12 +129,13 @@ export const cm2Subjects: Cm2Subject[] = [
     slug: "arts",
     title: "Arts",
     shortDescription:
-      "Créer une trace visuelle, observer et présenter un travail.",
+      "Créer, observer, écouter et présenter des réalisations plastiques et musicales.",
     domains: [
       "Observer une œuvre",
       "Expérimenter des techniques",
       "Produire avec une intention",
       "Présenter sa production",
+      "Éducation musicale",
     ],
     status: "upcoming",
     accent: "ember",
