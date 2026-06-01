@@ -65,9 +65,29 @@ export function MaternelleDomainCard({
         </div>
       </div>
 
-      {domain.href && (
+      {domain.subdomains && domain.subdomains.length > 0 && (
+        <div className="mt-3 flex items-center gap-2">
+          <span className="rounded border border-jade/20 bg-jade/[0.07] px-2 py-0.5 text-xs font-bold text-jade">
+            {domain.subdomains.length} sous-domaine
+            {domain.subdomains.length > 1 ? "s" : ""}
+          </span>
+          <span className="text-xs text-muted">
+            {domain.subdomains.reduce(
+              (n, sd) => n + sd.sequences.length,
+              0,
+            )}{" "}
+            séquence
+            {domain.subdomains.reduce((n, sd) => n + sd.sequences.length, 0) >
+            1
+              ? "s"
+              : ""}
+          </span>
+        </div>
+      )}
+
+      {domain.href && getPublicStatusKey(domain.status) !== "upcoming" && (
         <span className="mt-auto pt-5 text-sm font-black text-jade transition group-hover:translate-x-1">
-          Ouvrir le domaine
+          Ouvrir le domaine →
         </span>
       )}
     </article>
