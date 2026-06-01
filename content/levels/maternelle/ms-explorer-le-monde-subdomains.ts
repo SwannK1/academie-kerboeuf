@@ -1,4 +1,5 @@
 import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 
 export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
   {
@@ -14,7 +15,9 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
         title: "Ordonner deux moments vécus",
         objective: "Dire ce qui s'est passé avant ou après une activité.",
         observableSkills: ["Ordonne deux moments vécus de la journée."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-monde-temps-atelier1",
@@ -23,6 +26,7 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
             objective:
               "Choisir l'image qui vient avant ou après une activité connue.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -41,7 +45,9 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
         title: "Observer un changement du vivant",
         objective: "Repérer un changement visible chez une plante ou un animal.",
         observableSkills: ["Repère un changement visible chez une plante ou un animal."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-monde-vivant-atelier1",
@@ -50,6 +56,7 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
             objective:
               "Comparer deux observations successives d'une plante de la classe.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -68,7 +75,9 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
         title: "Comparer deux objets",
         objective: "Comparer deux objets selon une propriété observable.",
         observableSkills: ["Compare deux objets selon une propriété observable."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-monde-objets-matieres-atelier1",
@@ -77,6 +86,7 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
             objective:
               "Manipuler deux objets et dire s'ils sont pareils ou différents.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },

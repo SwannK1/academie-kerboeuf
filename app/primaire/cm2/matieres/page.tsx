@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Matières CM2 | Académie Kerboeuf",
@@ -21,9 +21,6 @@ const ACCENT: Record<
 };
 
 export default function Cm2MatieresPage() {
-  const available = cm2Subjects.filter((s) => getPublicStatusKey(s.status) === "available");
-  const upcoming  = cm2Subjects.filter((s) => getPublicStatusKey(s.status) !== "available");
-
   return (
     <main>
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
@@ -71,64 +68,43 @@ export default function Cm2MatieresPage() {
         </div>
       </section>
 
-      {/* ── Matières disponibles ──────────────────────────────────────────── */}
-      {available.length > 0 ? (
+      {/* ── Matières ──────────────────────────────────────────────────────── */}
         <section className="px-4 pb-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 border-b border-white/10 pb-5">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                Programmes disponibles
+                Structure CM2
               </p>
               <h2 className="mt-2 text-2xl font-black text-foreground">
-                Matières avec domaines et séquences
+                Matières, domaines et séquences-compétences
               </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                Toutes les matières restent au statut à venir : les pages sont
+                des catalogues de planification sans PDF réel ni contenu détaillé.
+              </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {available.map((subject) => (
+              {cm2Subjects.map((subject) => (
                 <SubjectCard key={subject.slug} subject={subject} />
               ))}
             </div>
           </div>
         </section>
-      ) : null}
-
-      {/* ── Matières à venir ──────────────────────────────────────────────── */}
-      {upcoming.length > 0 ? (
-        <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-6 pb-5">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
-                À structurer
-              </p>
-              <h2 className="mt-2 text-2xl font-black text-foreground">
-                Matières en attente de missions
-              </h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {upcoming.map((subject) => (
-                <SubjectCard key={subject.slug} subject={subject} />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
     </main>
   );
 }
 
 function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
-  const isAvailable = getPublicStatusKey(subject.status) === "available";
 
   const cardContent = (
     <>
-      <p
-        className={`text-xs font-bold uppercase tracking-[0.18em] ${
-          isAvailable ? t.text : "text-muted"
-        }`}
-      >
-        {subject.title}
-      </p>
+      <div className="flex items-start justify-between gap-3">
+        <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
+          {subject.title}
+        </p>
+        <PublicStatusBadge status={subject.status} className="shrink-0" />
+      </div>
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">
         {subject.shortDescription}
       </p>
@@ -150,42 +126,25 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
       ) : null}
 
       <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-        <span
-          className={`text-xs font-bold uppercase tracking-[0.12em] ${
-            isAvailable ? t.text : "text-white/25"
-          }`}
-        >
-          {isAvailable ? "Voir les domaines" : "En préparation"}
+        <span className={`text-xs font-bold uppercase tracking-[0.12em] ${t.text}`}>
+          Voir la structure
         </span>
-        {isAvailable && (
-          <span
-            className={`text-xs transition group-hover:translate-x-0.5 ${t.text}`}
-            aria-hidden="true"
-          >
-            →
-          </span>
-        )}
+        <span
+          className={`text-xs transition group-hover:translate-x-0.5 ${t.text}`}
+          aria-hidden="true"
+        >
+          →
+        </span>
       </div>
     </>
   );
 
-  if (isAvailable) {
-    return (
-      <Link
-        href={`/primaire/cm2/matieres/${subject.slug}`}
-        className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
-      >
-        {cardContent}
-      </Link>
-    );
-  }
-
   return (
-    <div
-      className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.025] p-5 cursor-default opacity-75"
-      aria-label={`${subject.title} — contenu en préparation`}
+    <Link
+      href={`/primaire/cm2/matieres/${subject.slug}`}
+      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
     >
       {cardContent}
-    </div>
+    </Link>
   );
 }

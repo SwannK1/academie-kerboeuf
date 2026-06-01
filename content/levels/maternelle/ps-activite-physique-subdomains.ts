@@ -23,20 +23,20 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ps-physique-espace-objets-seq1",
-        title: "Explorer un parcours simple",
+        title: "Franchir un obstacle simple",
         objective:
-          "Oser s'engager dans un parcours court en adaptant son déplacement aux obstacles.",
-        observableSkills: ["Se déplace dans un parcours simple en franchissant ou contournant un obstacle."],
+          "Franchir un obstacle bas dans un parcours court.",
+        observableSkills: ["Franchit un obstacle bas dans un parcours simple."],
         periodLabel: "Période 1",
         sessionCount: 3,
         status: "in-progress",
         workshops: [
           {
             id: "ps-physique-espace-objets-seq1-atelier1",
-            title: "Se déplacer, franchir, contourner",
+            title: "Passer les obstacles",
             type: "manipulation",
             objective:
-              "Se déplacer dans un espace balisé en franchissant ou contournant des obstacles simples.",
+              "Franchir un obstacle simple dans un espace balisé.",
             duration: "15 min",
             groupSize: "4-6 élèves",
             materials: ["Plots", "Tapis", "Cerceaux au sol"],
@@ -53,12 +53,12 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
                 },
                 {
                   id: "crit-ps-physique-espace-2",
-                  label: "Adapte son déplacement face à un obstacle simple (franchit ou contourne)",
+                  label: "Franchit un obstacle bas",
                   levelDescriptor: "Attendu PS",
                 },
                 {
                   id: "crit-ps-physique-espace-3",
-                  label: "Enchaîne deux actions différentes sans s'arrêter",
+                  label: "Franchit deux obstacles bas à la suite",
                   levelDescriptor: "Dépassement PS",
                 },
               ],
@@ -132,9 +132,9 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ps-physique-cooperation-seq1",
-        title: "Jouer ensemble",
+        title: "Réagir à un signal",
         objective:
-          "Participer à un jeu simple en respectant un signal commun et en tenant compte des autres.",
+          "Réagir à un signal commun dans un jeu simple.",
         observableSkills: ["Réagit à un signal partagé dans un jeu collectif."],
         periodLabel: "Période 3",
         sessionCount: 3,
@@ -145,7 +145,7 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
             title: "Suivre le signal",
             type: "jeu",
             objective:
-              "Démarrer, s'arrêter ou rejoindre un espace commun sur le signal donné par l'enseignant.",
+              "Démarrer ou s'arrêter sur le signal donné par l'enseignant.",
             duration: "15 min",
             groupSize: "Demi-classe",
             materials: ["Tambourin", "Cerceaux au sol (espaces cibles)"],
@@ -162,7 +162,7 @@ export const psActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
                 },
                 {
                   id: "crit-ps-physique-coop-2",
-                  label: "Accepte la présence des autres dans l'espace de jeu",
+                  label: "Attend le signal avant de repartir",
                   levelDescriptor: "Attendu PS",
                 },
               ],

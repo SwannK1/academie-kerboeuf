@@ -1,4 +1,5 @@
 import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 
 export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
   {
@@ -14,7 +15,9 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
         title: "Produire une trace avec une intention",
         objective: "Choisir un outil pour produire une trace attendue.",
         observableSkills: ["Choisit un outil pour produire une trace attendue."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-artistiques-productions-plastiques-atelier1",
@@ -23,6 +26,7 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
             objective:
               "Utiliser un outil choisi pour tracer un chemin visible sur un support.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -41,7 +45,9 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
         title: "Reprendre un chant court",
         objective: "Reprendre une phrase chantée avec le groupe.",
         observableSkills: ["Reprend une phrase chantée avec le groupe."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-artistiques-voix-ecoute-atelier1",
@@ -50,6 +56,7 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
             objective:
               "Écouter une phrase courte puis la reprendre collectivement.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -68,7 +75,9 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
         title: "Décrire une production",
         objective: "Nommer un élément visible dans une production.",
         observableSkills: ["Nomme un élément visible dans une production."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-artistiques-regarder-productions-atelier1",
@@ -77,6 +86,7 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
             objective:
               "Observer une production et nommer une couleur, une forme ou une trace.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },

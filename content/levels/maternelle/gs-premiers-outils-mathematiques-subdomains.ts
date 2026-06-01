@@ -1,4 +1,25 @@
-import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import type {
+  MaternelleResourceRef,
+  MaternelleSubdomain,
+} from "@/content/levels/maternelle/types";
+
+const gsMathsResourceSlots: MaternelleResourceRef[] = [
+  {
+    kind: "grille-observation",
+    label: "Grille d'observation de la compétence",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-atelier",
+    label: "Fiche atelier",
+    status: "upcoming",
+  },
+  {
+    kind: "support-projetable",
+    label: "Support de manipulation projetable",
+    status: "upcoming",
+  },
+];
 
 export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
   {
@@ -11,10 +32,26 @@ export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-maths-nombres-quantites-seq1",
-        title: "Composer une petite quantité",
-        objective: "Composer une quantité demandée avec deux collections.",
-        observableSkills: ["Compose une quantité demandée avec deux collections."],
+        slug: "composer-decomposer-cinq",
+        title: "Composer et décomposer cinq",
+        levelSlug: "gs",
+        domainSlug: "premiers-outils-mathematiques",
+        subdomainSlug: "nombres-quantites",
+        description:
+          "Séquence-compétence de préparation au CP autour de la construction du nombre.",
+        objective: "Composer et décomposer la quantité cinq avec deux collections.",
+        periodLabel: "Période 2",
+        estimatedDuration: "4 séances × 20 min",
+        sessionCount: 4,
+        observableSkills: [
+          "Compose cinq avec deux collections",
+          "Explique une décomposition simple de cinq",
+          "Vérifie la quantité obtenue par dénombrement",
+        ],
+        observationFocus:
+          "Observer si l'élève conserve la quantité totale malgré deux parties séparées.",
         status: "upcoming",
+        resources: gsMathsResourceSlots,
         workshops: [
           {
             id: "gs-maths-nombres-quantites-atelier1",
@@ -22,7 +59,11 @@ export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
             type: "manipulation",
             objective:
               "Réunir deux collections pour atteindre une quantité demandée.",
+            duration: "20 min",
+            groupSize: "4-6 élèves",
+            materials: ["Deux paniers", "Jetons ou petits objets à dénombrer"],
             status: "upcoming",
+            resources: gsMathsResourceSlots,
           },
         ],
       },
@@ -38,10 +79,27 @@ export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-maths-formes-grandeurs-seq1",
-        title: "Décrire une forme",
-        objective: "Décrire une forme simple avec un vocabulaire spatial.",
-        observableSkills: ["Décrit une forme simple avec un vocabulaire spatial."],
+        slug: "decrire-une-forme",
+        title: "Décrire une forme pour la faire retrouver",
+        levelSlug: "gs",
+        domainSlug: "premiers-outils-mathematiques",
+        subdomainSlug: "formes-grandeurs",
+        description:
+          "Séquence-compétence centrée sur le vocabulaire des formes et des propriétés visibles.",
+        objective:
+          "Décrire une forme simple avec un vocabulaire géométrique adapté.",
+        periodLabel: "Période 3",
+        estimatedDuration: "3 séances × 20 min",
+        sessionCount: 3,
+        observableSkills: [
+          "Nomme une forme simple",
+          "Décrit une propriété visible",
+          "Fait retrouver une forme par un indice pertinent",
+        ],
+        observationFocus:
+          "Observer la précision du vocabulaire sans exiger de définition géométrique formelle.",
         status: "upcoming",
+        resources: gsMathsResourceSlots,
         workshops: [
           {
             id: "gs-maths-formes-grandeurs-atelier1",
@@ -49,7 +107,11 @@ export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
             type: "jeu",
             objective:
               "Faire retrouver une forme en donnant un indice observable.",
+            duration: "15 min",
+            groupSize: "4-6 élèves",
+            materials: ["Formes planes manipulables", "Sac opaque"],
             status: "upcoming",
+            resources: gsMathsResourceSlots,
           },
         ],
       },
@@ -65,10 +127,27 @@ export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-maths-organisation-espace-seq1",
-        title: "Reproduire une organisation",
-        objective: "Reproduire une organisation simple d'objets.",
-        observableSkills: ["Reproduit une organisation simple d'objets."],
+        slug: "reproduire-une-organisation-spatiale",
+        title: "Reproduire une organisation spatiale",
+        levelSlug: "gs",
+        domainSlug: "premiers-outils-mathematiques",
+        subdomainSlug: "organisation-espace",
+        description:
+          "Séquence-compétence centrée sur le repérage de positions et l'organisation d'objets.",
+        objective:
+          "Reproduire une organisation simple d'objets en respectant les positions relatives.",
+        periodLabel: "Période 4",
+        estimatedDuration: "4 séances × 20 min",
+        sessionCount: 4,
+        observableSkills: [
+          "Place un objet par rapport à un autre",
+          "Reproduit une organisation simple",
+          "Utilise un vocabulaire spatial courant",
+        ],
+        observationFocus:
+          "Observer les repères utilisés par l'élève : devant, derrière, entre, à côté.",
         status: "upcoming",
+        resources: gsMathsResourceSlots,
         workshops: [
           {
             id: "gs-maths-organisation-espace-atelier1",
@@ -76,7 +155,11 @@ export const gsPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
             type: "manipulation",
             objective:
               "Replacer des objets pour obtenir la même organisation qu'un modèle.",
+            duration: "20 min",
+            groupSize: "4 élèves",
+            materials: ["Objets identiques en double", "Cartes modèles simples"],
             status: "upcoming",
+            resources: gsMathsResourceSlots,
           },
         ],
       },

@@ -30,7 +30,7 @@ export const cm2Subjects: Cm2Subject[] = [
       "Lexique",
       "Oral",
     ],
-    status: "available",
+    status: "upcoming",
     accent: "gold",
     missionSlugs: [
       "mission-inference",
@@ -53,7 +53,7 @@ export const cm2Subjects: Cm2Subject[] = [
       "Espace et géométrie",
       "Organisation et gestion de données",
     ],
-    status: "in-progress",
+    status: "upcoming",
     accent: "jade",
     missionSlugs: ["mission-calcul", "defis-mathematiques"],
     teacherFocus:
@@ -75,7 +75,7 @@ export const cm2Subjects: Cm2Subject[] = [
       "Mieux habiter",
       "Lire et produire des cartes",
     ],
-    status: "in-progress",
+    status: "upcoming",
     accent: "sky",
     missionSlugs: ["archives-historiques", "cartographe-du-monde"],
     teacherFocus:
@@ -91,7 +91,7 @@ export const cm2Subjects: Cm2Subject[] = [
       "Matériaux et objets techniques",
       "La planète Terre et l'environnement",
     ],
-    status: "in-progress",
+    status: "upcoming",
     accent: "ember",
     missionSlugs: ["laboratoire-scientifique"],
     teacherFocus:

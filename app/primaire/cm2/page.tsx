@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Level, cm2Missions } from "@/content/cm2";
+import { cm2Sequences } from "@/content/cm2-sequences";
 import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "CM2 — La Grande Classe des Explorateurs | Académie Kerboeuf",
@@ -24,6 +25,8 @@ const ACCENT: Record<string, { text: string; border: string }> = {
 
 export default function Cm2Page() {
   const missionCount = cm2Missions.length;
+  const sequenceCount = cm2Sequences.length;
+  const notionCount = new Set(cm2Sequences.map((sequence) => sequence.priorityNotion)).size;
 
   return (
     <main className="cm2-catalog-print">
@@ -55,6 +58,11 @@ export default function Cm2Page() {
             lire avec précision, calculer avec stratégie, enquêter dans les
             documents et préparer l&apos;entrée au collège.
           </p>
+          <div className="mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+            <Metric value={cm2Subjects.length} label="matières" />
+            <Metric value={notionCount} label="notions prioritaires" />
+            <Metric value={sequenceCount} label="séquences-compétences" />
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/primaire/cm2/matieres"
@@ -183,24 +191,20 @@ export default function Cm2Page() {
 
 function SubjectCard({ subject }: { subject: Cm2Subject }) {
   const t = ACCENT[subject.accent];
-  const isAvailable = getPublicStatusKey(subject.status) === "available";
 
   return (
     <Link
       href={`/primaire/cm2/matieres/${subject.slug}`}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${
-        isAvailable
-          ? `${t.border} bg-white/[0.04] hover:bg-white/[0.07]`
-          : "border-white/10 bg-white/[0.025] hover:bg-white/[0.04]"
-      }`}
+      className={`group flex min-h-full flex-col rounded-md border ${t.border} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
     >
-      <p
-        className={`text-xs font-bold uppercase tracking-[0.18em] ${
-          isAvailable ? t.text : "text-muted"
-        }`}
-      >
-        {subject.title}
-      </p>
+      <div className="flex items-start justify-between gap-3">
+        <p
+          className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}
+        >
+          {subject.title}
+        </p>
+        <PublicStatusBadge status={subject.status} className="shrink-0" />
+      </div>
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">
         {subject.shortDescription}
       </p>
@@ -218,21 +222,28 @@ function SubjectCard({ subject }: { subject: Cm2Subject }) {
 
       <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
         <span
-          className={`text-xs font-bold uppercase tracking-[0.12em] ${
-            isAvailable ? t.text : "text-white/25"
-          }`}
+          className={`text-xs font-bold uppercase tracking-[0.12em] ${t.text}`}
         >
-          {isAvailable ? "Voir les domaines" : "À structurer"}
+          Voir la structure
         </span>
         <span
-          className={`text-xs transition group-hover:translate-x-0.5 ${
-            isAvailable ? t.text : "text-white/20"
-          }`}
+          className={`text-xs transition group-hover:translate-x-0.5 ${t.text}`}
           aria-hidden="true"
         >
           →
         </span>
       </div>
     </Link>
+  );
+}
+
+function Metric({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="rounded-md border border-white/10 bg-white/[0.04] p-4">
+      <p className="font-mono text-3xl font-black text-foreground">{value}</p>
+      <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-muted">
+        {label}
+      </p>
+    </div>
   );
 }

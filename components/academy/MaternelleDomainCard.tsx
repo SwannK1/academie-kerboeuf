@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
-import { getPublicStatusKey } from "@/content/public-status";
 import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
 
 type MaternelleDomainCardProps = {
@@ -73,7 +72,7 @@ export function MaternelleDomainCard({
     </article>
   );
 
-  if (!domain.href || getPublicStatusKey(domain.status) === "upcoming") {
+  if (!domain.href) {
     return card;
   }
 

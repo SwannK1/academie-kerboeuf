@@ -1,6 +1,112 @@
-import type { LearningCompetency } from "@/content/learning-architecture-types";
+import type {
+  LearningCompetency,
+  ResourceSlot,
+  TeachingSequenceStep,
+} from "@/content/learning-architecture-types";
 
-export const cm1Competencies = [
+const PLANNED_PDF_RESOURCE_SLOTS: ResourceSlot[] = [
+  {
+    kind: "lesson-pdf",
+    label: "Leçon PDF",
+    resource: { kind: "lesson-pdf", label: "Leçon PDF", status: "planned" },
+  },
+  {
+    kind: "exercises-pdf",
+    label: "Exercices PDF",
+    resource: { kind: "exercises-pdf", label: "Exercices PDF", status: "planned" },
+  },
+  {
+    kind: "correction-pdf",
+    label: "Correction PDF",
+    resource: { kind: "correction-pdf", label: "Correction PDF", status: "planned" },
+  },
+  {
+    kind: "projectable-pdf",
+    label: "Projection PDF",
+    resource: { kind: "projectable-pdf", label: "Projection PDF", status: "planned" },
+  },
+  {
+    kind: "parent-sheet-pdf",
+    label: "Fiche parent",
+    resource: { kind: "parent-sheet-pdf", label: "Fiche parent", status: "planned" },
+  },
+];
+
+function buildCm1SequenceSteps(competency: LearningCompetency): TeachingSequenceStep[] {
+  const baseSteps = competency.sequence.steps;
+  const fallbackSteps: TeachingSequenceStep[] = [
+    {
+      id: `${competency.sequence.id}-1`,
+      order: 1,
+      kind: "discovery",
+      title: "Découvrir la compétence",
+      objective: "Identifier ce qui est attendu et les premiers repères.",
+      status: competency.status,
+    },
+    {
+      id: `${competency.sequence.id}-2`,
+      order: 2,
+      kind: "explicit-lesson",
+      title: "Structurer la méthode",
+      objective: "Nommer la démarche et les points d'attention.",
+      status: competency.status,
+    },
+    {
+      id: `${competency.sequence.id}-3`,
+      order: 3,
+      kind: "guided-practice",
+      title: "S'entraîner avec guidage",
+      objective: "Appliquer la compétence avec des repères fournis.",
+      status: competency.status,
+    },
+    {
+      id: `${competency.sequence.id}-4`,
+      order: 4,
+      kind: "consolidation",
+      title: "Consolider",
+      objective: "Réutiliser la compétence dans une situation proche.",
+      status: competency.status,
+    },
+    {
+      id: `${competency.sequence.id}-5`,
+      order: 5,
+      kind: "assessment",
+      title: "Vérifier la maîtrise",
+      objective: "Montrer la compétence de manière autonome.",
+      status: competency.status,
+    },
+  ];
+
+  return fallbackSteps.map((fallback) => {
+    const existing = baseSteps.find((step) => step.order === fallback.order);
+    return {
+      ...fallback,
+      ...existing,
+      id: existing?.id ?? fallback.id,
+      resourceSlots: clonePlannedPdfResourceSlots(),
+    };
+  });
+}
+
+function clonePlannedPdfResourceSlots(): ResourceSlot[] {
+  return PLANNED_PDF_RESOURCE_SLOTS.map((slot) => ({
+    ...slot,
+    resource: slot.resource ? { ...slot.resource } : undefined,
+  }));
+}
+
+function withCm1PlannedSequence(competency: LearningCompetency): LearningCompetency {
+  return {
+    ...competency,
+    resourceSlots: clonePlannedPdfResourceSlots(),
+    sequence: {
+      ...competency.sequence,
+      steps: buildCm1SequenceSteps(competency),
+    },
+  };
+}
+
+const cm1CompetencySource = [
   {
     id: "cm1-fr-lc-intentions-personnage",
     slug: "comprendre-les-intentions-dun-personnage",
@@ -481,3 +587,7 @@ export const cm1Competencies = [
     },
   },
 ] as const satisfies LearningCompetency[];
+
+export const cm1Competencies: LearningCompetency[] = cm1CompetencySource.map(
+  withCm1PlannedSequence,
+);

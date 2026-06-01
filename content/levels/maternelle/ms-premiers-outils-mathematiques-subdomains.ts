@@ -1,4 +1,5 @@
 import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 
 export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
   {
@@ -14,7 +15,9 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
         title: "Dénombrer une petite collection",
         objective: "Dénombrer une collection jusqu'à trois objets.",
         observableSkills: ["Dénombre une collection jusqu'à trois objets."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-maths-nombres-quantites-atelier1",
@@ -23,6 +26,7 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
             objective:
               "Mettre le nombre demandé d'objets dans un panier.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -41,7 +45,9 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
         title: "Nommer une forme simple",
         objective: "Nommer une forme simple rencontrée en manipulation.",
         observableSkills: ["Nomme une forme simple en manipulation."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-maths-formes-grandeurs-atelier1",
@@ -50,6 +56,7 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
             objective:
               "Retrouver puis nommer une forme simple dans un lot d'objets.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -68,7 +75,9 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
         title: "Poursuivre une suite simple",
         objective: "Poursuivre une suite alternée de deux éléments.",
         observableSkills: ["Poursuit une suite alternée de deux éléments."],
+        sessionCount: 3,
         status: "upcoming",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-maths-tris-suites-atelier1",
@@ -77,6 +86,7 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
             objective:
               "Continuer une alternance de deux couleurs avec du matériel.",
             status: "upcoming",
+            resources: commonResourceSlots,
           },
         ],
       },

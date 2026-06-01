@@ -12,6 +12,7 @@
  * Le site organise — les PDF enseignent.
  */
 import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 
 export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
   // ── 1. Agir dans l'espace et sur les objets ──────────────────────────────
@@ -32,6 +33,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         periodLabel: "Période 1",
         sessionCount: 4,
         status: "in-progress",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-physique-espace-objets-seq1-atelier1",
@@ -47,6 +49,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
               "Cerceaux",
             ],
             status: "in-progress",
+            resources: commonResourceSlots,
             observationGrid: {
               id: "ms-physique-espace-objets-seq1-atelier1-grille",
               title: "Grille — Varier ses déplacements (MS)",
@@ -93,6 +96,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         periodLabel: "Période 2",
         sessionCount: 4,
         status: "in-progress",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-physique-equilibres-seq1-atelier1",
@@ -108,6 +112,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
               "Plots délimitant les bords",
             ],
             status: "in-progress",
+            resources: commonResourceSlots,
             observationGrid: {
               id: "ms-physique-equilibres-seq1-atelier1-grille",
               title: "Grille — Traverser le marécage (MS)",
@@ -154,6 +159,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
         periodLabel: "Période 3",
         sessionCount: 4,
         status: "in-progress",
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-physique-cooperation-seq1-atelier1",
@@ -169,6 +175,7 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
               "Plots délimitant la zone",
             ],
             status: "in-progress",
+            resources: commonResourceSlots,
             observationGrid: {
               id: "ms-physique-cooperation-seq1-atelier1-grille",
               title: "Grille — Coopérer en binôme (MS)",

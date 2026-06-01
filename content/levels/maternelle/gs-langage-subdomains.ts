@@ -2,12 +2,34 @@
  * GS · Domaine Langage · Sous-domaines structurés
  *
  * Intégration Mission K — réutilise le composant MaternelleSubdomainList.
- * Contient 3 sous-domaines, chacun avec 1 séquence légère et 1 atelier minimal.
+ * Contient 3 sous-domaines, chacun avec 1 séquence-compétence légère
+ * et 1 atelier minimal.
  *
  * Règle centrale : Le site organise. Les PDF enseignent.
  * Aucun contenu pédagogique complet — titres, objectifs et structure seulement.
  */
-import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import type {
+  MaternelleResourceRef,
+  MaternelleSubdomain,
+} from "@/content/levels/maternelle/types";
+
+const gsLanguageSequenceResources: MaternelleResourceRef[] = [
+  {
+    kind: "grille-observation",
+    label: "Grille d'observation de la compétence",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-atelier",
+    label: "Fiche atelier",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-parent",
+    label: "Repère famille",
+    status: "upcoming",
+  },
+];
 
 export const gsLangageSubdomains: MaternelleSubdomain[] = [
   // ── 1. Langage oral ────────────────────────────────────────────────────────
@@ -21,32 +43,27 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-langage-oral-seq1",
-        slug: "raconter-et-expliquer",
-        title: "Raconter et expliquer",
+        slug: "raconter-un-evenement-vecu",
+        title: "Raconter un événement vécu avec précision",
         levelSlug: "gs",
         domainSlug: "langage",
         subdomainSlug: "langage-oral",
         description:
-          "Séquence centrée sur la production de récits organisés et l'explication d'une démarche simple.",
+          "Séquence-compétence centrée sur un récit oral organisé et compréhensible.",
         objective:
-          "Amener l'élève à produire un récit oral structuré et à expliquer une action en plusieurs étapes.",
-        objectives: [
-          "Utiliser des connecteurs temporels et logiques (d'abord, ensuite, parce que)",
-          "Maintenir le fil d'un récit sur plusieurs phrases",
-          "Répondre aux questions d'un auditoire",
-        ],
+          "Raconter un événement vécu en enchaînant plusieurs phrases compréhensibles.",
         periodLabel: "Période 2",
         estimatedDuration: "4 séances × 25 min",
         sessionCount: 4,
         observableSkills: [
-          "Raconte un événement vécu en 4 phrases minimum",
-          "Utilise au moins un connecteur logique",
-          "Reformule la question de l'enseignant",
+          "Raconte un événement vécu en plusieurs phrases",
+          "Situe les personnes, les actions et le moment",
+          "Répond à une question de précision",
         ],
         observationFocus:
-          "Observer si l'élève maintient la cohérence du récit sans relance. Repérer les connecteurs spontanément produits.",
+          "Observer si l'élève maintient le fil du récit et ajoute une précision sur sollicitation.",
         status: "in-progress",
-        resources: [],
+        resources: gsLanguageSequenceResources,
         workshops: [
           {
             id: "gs-langage-oral-seq1-atelier1",
@@ -54,19 +71,13 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
             title: "Le journal du matin",
             type: "dirige",
             objective:
-              "Raconter à un petit groupe un événement vécu la veille en répondant aux questions : qui, quoi, quand, comment.",
+              "Raconter à un petit groupe un événement vécu récent.",
             duration: "20 min",
             groupSize: "4 élèves",
             materials: [
               "Cartes questions illustrées (Qui ? Quoi ? Quand ? Comment ?)",
               "Jetons de parole",
             ],
-            instruction:
-              "Raconte quelque chose que tu as fait hier. Tes camarades vont te poser des questions.",
-            expectedAction:
-              "L'élève produit un récit d'au moins 3 phrases et répond à au moins 2 questions.",
-            differentiation:
-              "Allègement : l'enseignant pose lui-même les questions. Renforcement : l'élève pose les questions à son tour.",
             status: "in-progress",
             observationGrid: {
               id: "gs-langage-oral-seq1-atelier1-grille",
@@ -92,7 +103,7 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
                 },
               ],
             },
-            resources: [],
+            resources: gsLanguageSequenceResources,
           },
         ],
       },
@@ -110,32 +121,26 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-langage-phonologie-seq1",
-        slug: "identifier-les-sons-dans-les-mots",
-        title: "Identifier les sons dans les mots",
+        slug: "identifier-le-son-initial",
+        title: "Identifier le son initial d'un mot",
         levelSlug: "gs",
         domainSlug: "langage",
         subdomainSlug: "phonologie",
         description:
-          "Séquence axée sur la discrimination auditive fine et la segmentation syllabique.",
-        objective:
-          "Identifier et manipuler les syllabes et les phonèmes dans des mots courants.",
-        objectives: [
-          "Segmenter un mot en syllabes oralement",
-          "Identifier le son initial d'un mot",
-          "Trouver des mots commençant par le même son",
-        ],
+          "Séquence-compétence centrée sur l'écoute du premier son dans des mots familiers.",
+        objective: "Identifier le son initial d'un mot courant à l'oral.",
         periodLabel: "Période 3",
         estimatedDuration: "5 séances × 20 min",
         sessionCount: 5,
         observableSkills: [
-          "Frappe les syllabes d'un mot de 2 ou 3 syllabes",
           "Identifie le son initial d'un mot donné",
-          "Produit un mot commençant par un son donné",
+          "Trie des images selon leur son initial",
+          "Produit un autre mot commençant par le même son",
         ],
         observationFocus:
-          "Observer si l'élève confond syllabe et phonème. Distinguer l'identification du son initial de la nomination de la lettre.",
+          "Distinguer l'écoute du son initial de la nomination d'une lettre.",
         status: "in-progress",
-        resources: [],
+        resources: gsLanguageSequenceResources,
         workshops: [
           {
             id: "gs-langage-phonologie-seq1-atelier1",
@@ -151,12 +156,6 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
               "Plateau de tri avec 2 colonnes",
               "Étiquettes sons (ex : [s] et [m])",
             ],
-            instruction:
-              "Dis le nom de l'image tout bas. Écoute bien le premier son. Place la carte dans la bonne colonne.",
-            expectedAction:
-              "L'élève nomme l'image, identifie le son initial et place la carte correctement dans au moins 3 cas sur 4.",
-            differentiation:
-              "Allègement : ne trier que des images dont le son initial est très contrasté. Renforcement : nommer d'autres mots commençant par ce son.",
             status: "in-progress",
             observationGrid: {
               id: "gs-langage-phonologie-seq1-atelier1-grille",
@@ -182,7 +181,7 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
                 },
               ],
             },
-            resources: [],
+            resources: gsLanguageSequenceResources,
           },
         ],
       },
@@ -193,86 +192,74 @@ export const gsLangageSubdomains: MaternelleSubdomain[] = [
   {
     id: "gs-langage-premiers-ecrits",
     slug: "premiers-ecrits",
-    label: "Premiers écrits",
+    label: "Premiers gestes d'écriture",
     description:
-      "Lettres, mots repères, premières tentatives d'écriture autonome. Entrée dans la culture de l'écrit.",
+      "Lettres, mots repères et premiers gestes d'écriture. Entrée progressive dans la culture de l'écrit.",
     status: "in-progress",
     sequences: [
       {
         id: "gs-langage-premiers-ecrits-seq1",
-        slug: "ecrire-son-prenom-et-des-mots-reperes",
-        title: "Écrire son prénom et des mots repères",
+        slug: "ecrire-son-prenom-en-capitales",
+        title: "Écrire son prénom en capitales",
         levelSlug: "gs",
         domainSlug: "langage",
         subdomainSlug: "premiers-ecrits",
         description:
-          "Séquence autour du prénom et des premiers mots de la classe comme modèles d'écriture.",
+          "Séquence-compétence autour du prénom comme premier support d'écriture stabilisée.",
         objective:
-          "Écrire son prénom en capitales d'imprimerie de manière lisible et reconnaître quelques mots de la classe.",
-        objectives: [
-          "Tracer les lettres de son prénom dans le bon ordre",
-          "Reconnaître son prénom parmi d'autres",
-          "Copier un mot repère de la classe (ex : CHAT, LION)",
-        ],
+          "Écrire son prénom en capitales d'imprimerie de manière lisible.",
         periodLabel: "Période 1–2",
         estimatedDuration: "5 séances × 15 min",
         sessionCount: 5,
         observableSkills: [
           "Écrit son prénom lisiblement en capitales",
-          "Reconnaît et copie un mot repère de la classe",
-          "Nomme 3 lettres de l'alphabet",
+          "Respecte l'ordre des lettres de son prénom",
+          "Adapte la tenue de l'outil et l'espace d'écriture",
         ],
         observationFocus:
           "Observer la direction du tracé, la tenue de l'outil et l'organisation gauche-droite. Ne pas évaluer la vitesse.",
         status: "in-progress",
-        resources: [],
+        resources: gsLanguageSequenceResources,
         workshops: [
           {
             id: "gs-langage-premiers-ecrits-seq1-atelier1",
-            slug: "la-boite-aux-mots",
-            title: "La boîte aux mots",
+            slug: "atelier-prenom",
+            title: "Atelier prénom",
             type: "manipulation",
-            objective:
-              "Associer une image à son mot écrit, puis copier le mot sur son ardoise.",
+            objective: "Copier son prénom à partir d'un modèle stable.",
             duration: "15 min",
             groupSize: "4-6 élèves",
             materials: [
-              "Boîte avec cartes image-mot (10 paires)",
+              "Étiquettes-prénoms",
               "Ardoises",
               "Feutres effaçables",
             ],
-            instruction:
-              "Prends une carte image. Trouve la carte avec le mot. Puis copie le mot sur ton ardoise.",
-            expectedAction:
-              "L'élève associe correctement image et mot, puis copie le mot en respectant la forme des lettres.",
-            differentiation:
-              "Allègement : mots de 3 lettres seulement. Renforcement : l'élève écrit le mot de mémoire sans la carte modèle.",
             status: "in-progress",
             observationGrid: {
               id: "gs-langage-premiers-ecrits-seq1-atelier1-grille",
-              title: "Grille — Copier un mot repère",
+              title: "Grille — Écrire son prénom en capitales",
               teacherUse:
-                "Observer la stratégie de copie : l'élève regarde-t-il lettre par lettre ou par groupe ?",
+                "Observer la tenue de l'outil, l'ordre des lettres et la lisibilité globale.",
               status: "upcoming",
               criteria: [
                 {
                   id: "crit-gs-ecrit-1",
-                  label: "Associe correctement l'image à son mot écrit",
+                  label: "Trace toutes les lettres de son prénom",
                   levelDescriptor: "Attendu GS",
                 },
                 {
                   id: "crit-gs-ecrit-2",
-                  label: "Copie le mot avec toutes les lettres dans le bon ordre",
+                  label: "Respecte l'ordre des lettres",
                   levelDescriptor: "Attendu GS",
                 },
                 {
                   id: "crit-gs-ecrit-3",
-                  label: "Écrit le mot de mémoire sans modèle sous les yeux",
+                  label: "Écrit son prénom sans modèle immédiat",
                   levelDescriptor: "Dépassement GS",
                 },
               ],
             },
-            resources: [],
+            resources: gsLanguageSequenceResources,
           },
         ],
       },

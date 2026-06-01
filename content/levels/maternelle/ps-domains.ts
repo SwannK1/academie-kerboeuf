@@ -1,10 +1,27 @@
 import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
-import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 import { psActivitePhysiqueSubdomains } from "@/content/levels/maternelle/ps-activite-physique-subdomains";
 import { psPremiersOutilsMathematiquesSubdomains } from "@/content/levels/maternelle/ps-premiers-outils-mathematiques-subdomains";
 import { psExplorerLeMondeSubdomains } from "@/content/levels/maternelle/ps-explorer-le-monde-subdomains";
 import { psActivitesArtistiquesSubdomains } from "@/content/levels/maternelle/ps-activites-artistiques-subdomains";
 import { psLangageSubdomains } from "@/content/levels/maternelle/ps-langage-subdomains";
+
+const psResourceSlots: MaternelleDomainEntry["resourceSlots"] = [
+  {
+    kind: "grille-observation",
+    label: "Grille d'observation",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-atelier",
+    label: "Fiche atelier",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-parent",
+    label: "Fiche parent",
+    status: "upcoming",
+  },
+];
 
 export const psDomains: MaternelleDomainEntry[] = [
   {
@@ -33,12 +50,12 @@ export const psDomains: MaternelleDomainEntry[] = [
       {
         id: "ps-langage-repondre",
         title: "Répondre par un mot ou une phrase courte",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-langage-consigne",
         title: "Comprendre une consigne simple",
-        status: "upcoming",
+        status: "in-progress",
       },
     ],
     situations: [
@@ -50,7 +67,7 @@ export const psDomains: MaternelleDomainEntry[] = [
       { label: "Repères d'écoute" },
       { label: "Photos d'objets nommés" },
     ],
-    resourceSlots: commonResourceSlots,
+    resourceSlots: psResourceSlots,
   },
   {
     id: "ps-activite-physique",
@@ -68,22 +85,22 @@ export const psDomains: MaternelleDomainEntry[] = [
       {
         id: "ps-physique-espace",
         title: "Se déplacer dans un espace aménagé",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-physique-jeu",
         title: "Participer à un jeu simple",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-physique-materiel",
         title: "Manipuler un petit matériel",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-physique-regle",
         title: "Accepter une règle courte",
-        status: "upcoming",
+        status: "in-progress",
       },
     ],
     situations: [
@@ -95,7 +112,7 @@ export const psDomains: MaternelleDomainEntry[] = [
       { label: "Repères de participation" },
       { label: "Photo de parcours" },
     ],
-    resourceSlots: commonResourceSlots,
+    resourceSlots: psResourceSlots,
   },
   {
     id: "ps-activites-artistiques",
@@ -107,28 +124,28 @@ export const psDomains: MaternelleDomainEntry[] = [
       "Cycle 1 - Domaine 3 : Agir, s'exprimer, comprendre à travers les activités artistiques",
     description: "Traces, matières, voix et observation de productions.",
     href: "/maternelle/ps/domaines/activites-artistiques",
-    status: "upcoming",
+    status: "in-progress",
     subdomains: psActivitesArtistiquesSubdomains,
     observables: [
       {
         id: "ps-artistique-trace",
         title: "Laisser une trace avec un outil",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-artistique-matiere",
         title: "Explorer une matière",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-artistique-chanter",
         title: "Chanter avec le groupe",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-artistique-observer",
         title: "Observer une production",
-        status: "upcoming",
+        status: "in-progress",
       },
     ],
     situations: [
@@ -140,7 +157,7 @@ export const psDomains: MaternelleDomainEntry[] = [
       { label: "Production datée" },
       { label: "Photo d'atelier" },
     ],
-    resourceSlots: commonResourceSlots,
+    resourceSlots: psResourceSlots,
   },
   {
     id: "ps-premiers-outils-mathematiques",
@@ -152,28 +169,28 @@ export const psDomains: MaternelleDomainEntry[] = [
       "Cycle 1 - Domaine 4 : Acquérir les premiers outils mathématiques",
     description: "Petites quantités, tris, associations et formes simples.",
     href: "/maternelle/ps/domaines/premiers-outils-mathematiques",
-    status: "upcoming",
+    status: "in-progress",
     subdomains: psPremiersOutilsMathematiquesSubdomains,
     observables: [
       {
         id: "ps-maths-quantite",
         title: "Reconnaître une petite quantité",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-maths-trier",
         title: "Trier selon une propriété",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-maths-associer",
         title: "Associer deux objets identiques",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-maths-formes",
         title: "Manipuler des formes simples",
-        status: "upcoming",
+        status: "in-progress",
       },
     ],
     situations: [
@@ -185,7 +202,7 @@ export const psDomains: MaternelleDomainEntry[] = [
       { label: "Photo de tri réalisé" },
       { label: "Repères de manipulation" },
     ],
-    resourceSlots: commonResourceSlots,
+    resourceSlots: psResourceSlots,
   },
   {
     id: "ps-explorer-le-monde",
@@ -196,28 +213,28 @@ export const psDomains: MaternelleDomainEntry[] = [
     officialReference: "Cycle 1 - Domaine 5 : Explorer le monde",
     description: "Journée, lieux de l'école, vivant et objets proches.",
     href: "/maternelle/ps/domaines/explorer-le-monde",
-    status: "upcoming",
+    status: "in-progress",
     subdomains: psExplorerLeMondeSubdomains,
     observables: [
       {
         id: "ps-monde-journee",
         title: "Repérer un moment de la journée",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-monde-vivant",
         title: "Observer un animal ou une plante",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-monde-objet",
         title: "Manipuler un objet simple",
-        status: "upcoming",
+        status: "in-progress",
       },
       {
         id: "ps-monde-lieu",
         title: "Identifier un lieu de l'école",
-        status: "upcoming",
+        status: "in-progress",
       },
     ],
     situations: [
@@ -229,7 +246,7 @@ export const psDomains: MaternelleDomainEntry[] = [
       { label: "Photos des lieux repérés" },
       { label: "Carnet d'observation simple" },
     ],
-    resourceSlots: commonResourceSlots,
+    resourceSlots: psResourceSlots,
   },
 ];
 

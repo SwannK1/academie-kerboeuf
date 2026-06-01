@@ -1,4 +1,25 @@
-import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import type {
+  MaternelleResourceRef,
+  MaternelleSubdomain,
+} from "@/content/levels/maternelle/types";
+
+const gsArtsResourceSlots: MaternelleResourceRef[] = [
+  {
+    kind: "grille-observation",
+    label: "Grille d'observation de la compétence",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-atelier",
+    label: "Fiche atelier",
+    status: "upcoming",
+  },
+  {
+    kind: "support-projetable",
+    label: "Support de présentation projetable",
+    status: "upcoming",
+  },
+];
 
 export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
   {
@@ -11,10 +32,26 @@ export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-artistiques-productions-plastiques-seq1",
+        slug: "composer-avec-plusieurs-traces",
         title: "Composer avec plusieurs traces",
+        levelSlug: "gs",
+        domainSlug: "activites-artistiques",
+        subdomainSlug: "productions-plastiques",
+        description:
+          "Séquence-compétence centrée sur l'organisation intentionnelle d'une production.",
         objective: "Organiser plusieurs traces pour obtenir une production intentionnelle.",
-        observableSkills: ["Organise plusieurs traces dans une production intentionnelle."],
+        periodLabel: "Période 2",
+        estimatedDuration: "3 ateliers × 25 min",
+        sessionCount: 3,
+        observableSkills: [
+          "Choisit deux gestes ou outils",
+          "Organise plusieurs traces dans l'espace",
+          "Dit une intention simple liée à sa production",
+        ],
+        observationFocus:
+          "Observer l'intention et l'organisation sans détailler le procédé plastique.",
         status: "upcoming",
+        resources: gsArtsResourceSlots,
         workshops: [
           {
             id: "gs-artistiques-productions-plastiques-atelier1",
@@ -22,7 +59,11 @@ export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
             type: "manipulation",
             objective:
               "Combiner deux gestes ou outils pour organiser une production.",
+            duration: "25 min",
+            groupSize: "6 élèves",
+            materials: ["Outils traceurs variés", "Supports papier"],
             status: "upcoming",
+            resources: gsArtsResourceSlots,
           },
         ],
       },
@@ -38,10 +79,26 @@ export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-artistiques-voix-ecoute-seq1",
+        slug: "chanter-en-respectant-un-depart",
         title: "Chanter en respectant un départ",
+        levelSlug: "gs",
+        domainSlug: "activites-artistiques",
+        subdomainSlug: "voix-ecoute",
+        description:
+          "Séquence-compétence centrée sur l'écoute du signal et l'ajustement au groupe.",
         objective: "Démarrer un chant avec le groupe au signal donné.",
-        observableSkills: ["Démarre un chant avec le groupe au signal donné."],
+        periodLabel: "Période 1",
+        estimatedDuration: "3 séances × 15 min",
+        sessionCount: 3,
+        observableSkills: [
+          "Attend le signal de départ",
+          "Démarre avec le groupe",
+          "Maintient sa voix dans le chant collectif",
+        ],
+        observationFocus:
+          "Observer l'écoute du signal et l'ajustement au groupe, pas la performance vocale.",
         status: "upcoming",
+        resources: gsArtsResourceSlots,
         workshops: [
           {
             id: "gs-artistiques-voix-ecoute-atelier1",
@@ -49,7 +106,11 @@ export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
             type: "collectif",
             objective:
               "Attendre le signal puis commencer un chant connu avec le groupe.",
+            duration: "15 min",
+            groupSize: "Groupe classe",
+            materials: ["Chant connu", "Signal visuel ou sonore"],
             status: "upcoming",
+            resources: gsArtsResourceSlots,
           },
         ],
       },
@@ -65,10 +126,26 @@ export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-artistiques-regarder-productions-seq1",
+        slug: "decrire-un-choix-artistique",
         title: "Décrire un choix artistique",
+        levelSlug: "gs",
+        domainSlug: "activites-artistiques",
+        subdomainSlug: "regarder-productions",
+        description:
+          "Séquence-compétence centrée sur la verbalisation d'un choix visible.",
         objective: "Dire un choix réalisé dans sa production.",
-        observableSkills: ["Dit un choix réalisé dans sa production."],
+        periodLabel: "Période 4",
+        estimatedDuration: "2 ateliers × 20 min",
+        sessionCount: 2,
+        observableSkills: [
+          "Montre un élément de sa production",
+          "Nomme un choix de couleur, d'outil ou d'organisation",
+          "Écoute un choix formulé par un camarade",
+        ],
+        observationFocus:
+          "Observer la capacité à nommer un choix personnel en phrase courte.",
         status: "upcoming",
+        resources: gsArtsResourceSlots,
         workshops: [
           {
             id: "gs-artistiques-regarder-productions-atelier1",
@@ -76,7 +153,11 @@ export const gsActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
             type: "collectif",
             objective:
               "Présenter un choix de couleur, d'outil ou d'organisation.",
+            duration: "20 min",
+            groupSize: "6-8 élèves",
+            materials: ["Productions des élèves"],
             status: "upcoming",
+            resources: gsArtsResourceSlots,
           },
         ],
       },

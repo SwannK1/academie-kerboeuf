@@ -50,12 +50,12 @@ export default function PsPage() {
               </h1>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
                 Accès rapide aux domaines, premiers observables, situations et
-                ressources prévues. Le site organise ; les PDF enseigneront.
+                ressources prévues. Le site organise les repères essentiels.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-2 sm:min-w-[24rem]">
               <QuickMetric label="Domaines" value={psDomains.length} />
-              <QuickMetric label="Pilote" value={statusCounts["in-progress"]} />
+              <QuickMetric label="Structurés" value={statusCounts["in-progress"]} />
               <QuickMetric label="À venir" value={statusCounts.upcoming} />
             </div>
           </div>
@@ -99,9 +99,8 @@ export default function PsPage() {
                   Ressources prévues
                 </p>
                 <p className="mt-1 text-sm leading-6 text-muted">
-                  Grilles d&apos;observation, fiches atelier, supports projetables et
-                  fiches parent. Aucun lien n&apos;est affiché tant que la ressource
-                  n&apos;existe pas.
+                  Grilles d&apos;observation, fiches atelier et fiches parent.
+                  Aucun lien n&apos;est affiché tant que la ressource n&apos;existe pas.
                 </p>
               </div>
               <PublicStatusBadge status="upcoming" />

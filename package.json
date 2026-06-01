@@ -7,7 +7,7 @@
     "dev:clean": "rm -rf .next && next dev --webpack",
     "local": "lsof -ti:3000 2>/dev/null | xargs kill -9 2>/dev/null; rm -rf .next && next dev --webpack",
     "open": "open http://localhost:3000",
-    "build": "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
+    "build": "NODE_ENV=production NEXT_PRIVATE_BUILD_WORKER=1 NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
     "start": "next start",
     "lint": "eslint"
   },

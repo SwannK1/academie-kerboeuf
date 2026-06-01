@@ -8,6 +8,7 @@
  * Aucun contenu pédagogique complet ici — titres, objectifs et structure seulement.
  */
 import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import { maternelleCommonResourceSlots as commonResourceSlots } from "@/content/levels/maternelle/common-resource-slots";
 
 export const msLangageSubdomains: MaternelleSubdomain[] = [
   // ── 1. Langage oral ────────────────────────────────────────────────────────
@@ -30,21 +31,14 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
           "Séquence centrée sur la capacité à raconter un événement vécu en phrases courtes.",
         objective:
           "Amener l'élève à produire un récit oral court sur une action récente.",
-        objectives: [
-          "Utiliser des connecteurs temporels simples (d'abord, après)",
-          "Reformuler la consigne de l'enseignant avec ses propres mots",
-        ],
         periodLabel: "Période 2",
         estimatedDuration: "3 séances × 20 min",
         sessionCount: 3,
-        observableSkills: [
-          "Raconte une action en 2 ou 3 phrases",
-          "Répond à la question : qu'est-ce que tu as fait ?",
-        ],
+        observableSkills: ["Raconte une action vécue en 2 ou 3 phrases."],
         observationFocus:
           "Observer si l'élève parle spontanément ou uniquement sur sollicitation directe.",
         status: "in-progress",
-        resources: [],
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-langage-oral-seq1-atelier1",
@@ -87,7 +81,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
                 },
               ],
             },
-            resources: [],
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -113,24 +107,15 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
         description:
           "Séquence autour d'un album court : écoute, compréhension globale et mots clés.",
         objective:
-          "Construire une compréhension fine d'une histoire lue en grand groupe.",
-        objectives: [
-          "Identifier les personnages principaux",
-          "Replacer les événements dans l'ordre",
-          "S'approprier 5 mots nouveaux liés à l'histoire",
-        ],
+          "Identifier les personnages principaux d'une histoire courte lue en classe.",
         periodLabel: "Période 1",
         estimatedDuration: "4 séances × 25 min",
         sessionCount: 4,
-        observableSkills: [
-          "Nomme les personnages de l'histoire",
-          "Répond à la question : que s'est-il passé ?",
-          "Réutilise un mot nouveau dans une phrase",
-        ],
+        observableSkills: ["Nomme les personnages principaux de l'histoire."],
         observationFocus:
-          "Observer si l'élève comprend implicitement ou seulement explicitement. Repérer les mots réinvestis.",
+          "Observer si l'élève nomme les personnages spontanément ou à partir d'un support.",
         status: "in-progress",
-        resources: [],
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-langage-comprehension-seq1-atelier1",
@@ -177,7 +162,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
                 },
               ],
             },
-            resources: [],
+            resources: commonResourceSlots,
           },
         ],
       },
@@ -204,21 +189,16 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
           "Séquence autour du prénom comme premier support d'entrée dans l'écrit.",
         objective:
           "Reconnaître son prénom écrit en capitales et en tracer les premières lettres.",
-        objectives: [
-          "Identifier son étiquette-prénom parmi d'autres",
-          "Reproduire les lettres de son prénom avec un outil scripteur",
-        ],
         periodLabel: "Période 1",
         estimatedDuration: "4 séances × 15 min",
         sessionCount: 4,
         observableSkills: [
-          "Reconnaît son prénom écrit parmi 4 étiquettes",
-          "Trace les premières lettres de son prénom en capitales",
+          "Reconnaît son prénom écrit en capitales et trace une première lettre.",
         ],
         observationFocus:
           "Observer la prise d'outil et la direction du tracé. Repérer si l'élève identifie une lettre significative (initiale).",
         status: "in-progress",
-        resources: [],
+        resources: commonResourceSlots,
         workshops: [
           {
             id: "ms-langage-premiers-ecrits-seq1-atelier1",
@@ -265,7 +245,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
                 },
               ],
             },
-            resources: [],
+            resources: commonResourceSlots,
           },
         ],
       },

@@ -11,7 +11,28 @@
  *
  * Le site organise — les PDF enseignent.
  */
-import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import type {
+  MaternelleResourceRef,
+  MaternelleSubdomain,
+} from "@/content/levels/maternelle/types";
+
+const gsPhysicalResourceSlots: MaternelleResourceRef[] = [
+  {
+    kind: "grille-observation",
+    label: "Grille d'observation de la compétence",
+    status: "upcoming",
+  },
+  {
+    kind: "fiche-atelier",
+    label: "Fiche atelier",
+    status: "upcoming",
+  },
+  {
+    kind: "support-projetable",
+    label: "Plan de parcours projetable",
+    status: "upcoming",
+  },
+];
 
 export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
   // ── 1. Agir dans l'espace et sur les objets ──────────────────────────────
@@ -25,13 +46,23 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-physique-espace-objets-seq1",
+        slug: "memoriser-enchainer-parcours",
         title: "Mémoriser et enchaîner un parcours",
+        levelSlug: "gs",
+        domainSlug: "activite-physique",
+        subdomainSlug: "agir-espace-objets",
+        description:
+          "Séquence-compétence centrée sur l'enchaînement autonome d'un parcours.",
         objective:
           "Mémoriser l'ordre des actions d'un parcours et les enchaîner sans aide de l'adulte.",
         observableSkills: ["Enchaîne les étapes d'un parcours mémorisé sans aide."],
         periodLabel: "Période 1",
+        estimatedDuration: "5 séances × 25 min",
         sessionCount: 5,
+        observationFocus:
+          "Observer la mémorisation de l'ordre et la continuité de l'enchaînement.",
         status: "in-progress",
+        resources: gsPhysicalResourceSlots,
         workshops: [
           {
             id: "gs-physique-espace-objets-seq1-atelier1",
@@ -46,6 +77,7 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
               "Tableau effacé après la présentation",
             ],
             status: "in-progress",
+            resources: gsPhysicalResourceSlots,
             observationGrid: {
               id: "gs-physique-espace-objets-seq1-atelier1-grille",
               title: "Grille — Mémoriser et enchaîner un parcours (GS)",
@@ -85,13 +117,23 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-physique-equilibres-seq1",
+        slug: "controler-arret-equilibre",
         title: "Contrôler son arrêt et son équilibre",
+        levelSlug: "gs",
+        domainSlug: "activite-physique",
+        subdomainSlug: "equilibres-deplacements",
+        description:
+          "Séquence-compétence centrée sur l'arrêt au signal et la stabilisation du corps.",
         objective:
           "Passer d'un déplacement rapide à une posture d'équilibre statique stable sur signal.",
         observableSkills: ["S'arrête au signal et maintient une posture d'équilibre."],
         periodLabel: "Période 2",
+        estimatedDuration: "5 séances × 20 min",
         sessionCount: 5,
+        observationFocus:
+          "Observer la réponse au signal et la stabilité de la posture.",
         status: "in-progress",
+        resources: gsPhysicalResourceSlots,
         workshops: [
           {
             id: "gs-physique-equilibres-seq1-atelier1",
@@ -106,6 +148,7 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
               "Espace dégagé délimité par des plots",
             ],
             status: "in-progress",
+            resources: gsPhysicalResourceSlots,
             observationGrid: {
               id: "gs-physique-equilibres-seq1-atelier1-grille",
               title: "Grille — Statues en équilibre (GS)",
@@ -145,20 +188,29 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "gs-physique-cooperation-seq1",
-        title: "Jouer collectif avec opposition",
-        objective:
-          "Participer à un jeu d'opposition simple en comprenant et en respectant une règle verbalisée, et en commençant à adapter sa stratégie.",
+        slug: "respecter-une-regle-jeu-collectif",
+        title: "Respecter une règle de jeu collectif",
+        levelSlug: "gs",
+        domainSlug: "activite-physique",
+        subdomainSlug: "collaborer-cooperer",
+        description:
+          "Séquence-compétence centrée sur la règle partagée dans un jeu collectif avec opposition.",
+        objective: "Respecter une règle verbalisée dans un jeu collectif.",
         observableSkills: ["Respecte une règle de jeu collectif avec opposition."],
         periodLabel: "Période 3",
+        estimatedDuration: "5 séances × 25 min",
         sessionCount: 5,
+        observationFocus:
+          "Observer le respect de la règle et l'ajustement au rôle tenu.",
         status: "in-progress",
+        resources: gsPhysicalResourceSlots,
         workshops: [
           {
             id: "gs-physique-cooperation-seq1-atelier1",
             title: "Les chasseurs et les proies",
             type: "jeu",
             objective:
-              "Dans un espace délimité, les chasseurs tentent de toucher les proies ; les proies peuvent se protéger en rejoignant une zone refuge. Les rôles s'inversent à mi-temps.",
+              "Tenir un rôle dans un jeu collectif simple avec zone refuge.",
             duration: "20 min",
             groupSize: "Classe entière (deux équipes)",
             materials: [
@@ -167,6 +219,7 @@ export const gsActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
               "Plots de délimitation du terrain",
             ],
             status: "in-progress",
+            resources: gsPhysicalResourceSlots,
             observationGrid: {
               id: "gs-physique-cooperation-seq1-atelier1-grille",
               title: "Grille — Chasseurs et proies (GS)",

@@ -4,7 +4,7 @@
  * Ce fichier illustre le modèle complet :
  *   MaternelleSubdomain → MaternelleSequence → MaternelleWorkshop → MaternelleObservationGrid
  *
- * Il ne contient qu'un sous-domaine et une séquence minimaliste.
+ * Chaque sous-domaine contient une séquence-compétence minimaliste.
  * Les contenus pédagogiques complets seront produits hors code (PDF).
  */
 import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
@@ -15,15 +15,15 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
     slug: "langage-oral",
     label: "Langage oral",
     description:
-      "Premiers échanges, écoute active et enrichissement du vocabulaire de base.",
+      "Premiers échanges et enrichissement du vocabulaire de base.",
     status: "in-progress",
     sequences: [
       {
         id: "ps-langage-oral-seq1",
-        title: "Écouter et nommer",
+        title: "Nommer un objet familier",
         objective:
-          "Développer l'attention auditive et la capacité à nommer des objets familiers.",
-        observableSkills: ["Nomme un objet familier après écoute ou manipulation."],
+          "Nommer un objet familier présenté par l'enseignant.",
+        observableSkills: ["Nomme un objet familier."],
         periodLabel: "Période 1",
         sessionCount: 4,
         status: "in-progress",
@@ -32,7 +32,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
             id: "ps-langage-oral-seq1-atelier1",
             title: "Le sac mystère",
             objective:
-              "Nommer un objet extrait d'un sac sans le voir, guidé par l'enseignant.",
+              "Nommer un objet extrait d'un sac, avec aide si besoin.",
             duration: "15 min",
             groupSize: "4-6 élèves",
             materials: [
@@ -45,10 +45,6 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
               title: "Grille — Nommer un objet (sac mystère)",
               status: "upcoming",
               criteria: [
-                {
-                  id: "crit-reconnait-sans-nommer",
-                  label: "Reconnaît l'objet sans le nommer (geste ou regard)",
-                },
                 {
                   id: "crit-nomme-un-mot",
                   label: "Nomme l'objet avec un seul mot",
@@ -79,9 +75,9 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ps-langage-phonologie-seq1",
-        title: "Écouter et frapper les syllabes",
+        title: "Frapper son prénom en syllabes",
         objective:
-          "Sensibiliser l'élève aux syllabes en frappant des mots familiers dans des comptines courtes.",
+          "Frapper les syllabes de son prénom avec le groupe.",
         observableSkills: ["Frappe les syllabes de son prénom avec le groupe."],
         periodLabel: "Période 2",
         sessionCount: 3,
@@ -92,7 +88,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
             title: "La comptine des prénoms",
             type: "collectif",
             objective:
-              "Frapper les syllabes de son prénom et de ceux des camarades en suivant le rythme.",
+              "Frapper les syllabes de son prénom en suivant le rythme du groupe.",
             duration: "15 min",
             groupSize: "6-8 élèves",
             materials: [
@@ -109,7 +105,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
               criteria: [
                 {
                   id: "crit-ps-phono-1",
-                  label: "Participe au frappé collectif sans se décaler",
+                  label: "Participe au frappé collectif",
                   levelDescriptor: "Attendu PS",
                 },
                 {
@@ -119,7 +115,7 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
                 },
                 {
                   id: "crit-ps-phono-3",
-                  label: "Frappe spontanément les syllabes d'un autre mot proposé",
+                  label: "Recommence seul le frappé de son prénom",
                   levelDescriptor: "Dépassement PS",
                 },
               ],
@@ -142,9 +138,9 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ps-langage-premiers-ecrits-seq1",
-        title: "Découvrir les premières traces d'écrit",
+        title: "Reconnaître son étiquette-prénom",
         objective:
-          "Distinguer dessin et écriture, et reconnaître son étiquette-prénom parmi quelques étiquettes.",
+          "Reconnaître son étiquette-prénom parmi quelques étiquettes.",
         observableSkills: ["Reconnaît son étiquette-prénom parmi quelques étiquettes."],
         periodLabel: "Période 1",
         sessionCount: 3,
@@ -177,12 +173,12 @@ export const psLangageSubdomains: MaternelleSubdomain[] = [
                 },
                 {
                   id: "crit-ps-ecrit-2",
-                  label: "Nomme ou montre la première lettre de son prénom",
+                  label: "Retrouve son étiquette après mélange",
                   levelDescriptor: "Attendu PS",
                 },
                 {
                   id: "crit-ps-ecrit-3",
-                  label: "Distingue une étiquette-écriture d'un dessin sans aide",
+                  label: "Reconnaît son étiquette dans un autre lieu de la classe",
                   levelDescriptor: "Dépassement PS",
                 },
               ],
