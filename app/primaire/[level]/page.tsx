@@ -9,7 +9,7 @@ type PageProps = {
 
 export function generateStaticParams() {
   return getLevelsByStage("primaire")
-    .filter((level) => level.slug !== "cm2")
+    .filter((level) => level.slug !== "cm2" && level.slug !== "cp")
     .map((level) => ({ level: level.slug }));
 }
 
@@ -33,7 +33,7 @@ export default async function PrimaireLevelPage({ params }: PageProps) {
   const { level: levelSlug } = await params;
   const level = getAcademyLevel("primaire", levelSlug);
 
-  if (!level || level.slug === "cm2") {
+  if (!level || level.slug === "cm2" || level.slug === "cp") {
     notFound();
   }
 
