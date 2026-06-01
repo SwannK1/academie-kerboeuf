@@ -415,3 +415,74 @@ export function getCe1LessonById(lessonId: string): Lesson | undefined {
   }
   return undefined;
 }
+
+export type Ce1SubjectTree = {
+  place: { label: string };
+  guides: { id: string; name: string }[];
+  domains: {
+    id: string;
+    title: string;
+    subdomains: {
+      id: string;
+      title: string;
+      items: {
+        id: string;
+        title: string;
+        description?: string;
+        status: ProgramStatus;
+        href?: string;
+      }[];
+    }[];
+  }[];
+};
+
+export type Ce1SequenceEntry = {
+  id: string;
+  title: string;
+  domain: string;
+  subdomain: string;
+  skill: string;
+  status: ProgramStatus;
+};
+
+export function getCe1SubjectTree(subjectSlug: string): Ce1SubjectTree | undefined {
+  const domain = ce1LearningTree.domains.find((d) => d.slug === subjectSlug);
+  if (!domain) return undefined;
+
+  return {
+    place: { label: "Cycle 2 · Primaire" },
+    guides: [],
+    domains: [
+      {
+        id: domain.id,
+        title: domain.title,
+        subdomains: domain.subdomains.map((subdomain) => ({
+          id: subdomain.id,
+          title: subdomain.title,
+          items: subdomain.lessons.map((lesson) => ({
+            id: lesson.id,
+            title: lesson.title,
+            description: lesson.objective,
+            status: lesson.status,
+          })),
+        })),
+      },
+    ],
+  };
+}
+
+export function getCe1Sequences(subjectSlug: string): Ce1SequenceEntry[] {
+  const domain = ce1LearningTree.domains.find((d) => d.slug === subjectSlug);
+  if (!domain) return [];
+
+  return domain.subdomains.flatMap((subdomain) =>
+    subdomain.lessons.map((lesson) => ({
+      id: lesson.id,
+      title: lesson.title,
+      domain: domain.title,
+      subdomain: subdomain.title,
+      skill: lesson.objective,
+      status: lesson.status,
+    })),
+  );
+}
