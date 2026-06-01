@@ -57,6 +57,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       tree={tree ? mapCm2Tree(tree, slug) : undefined}
       accent={CM2_ACCENT}
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
+      cycleLabel="Cycle 3"
       linkedCards={linkedCards}
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },

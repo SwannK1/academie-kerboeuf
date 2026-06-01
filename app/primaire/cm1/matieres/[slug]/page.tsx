@@ -41,6 +41,7 @@ export default async function Cm1SubjectPage({ params }: PageProps) {
       tree={tree ? mapCm1Tree(tree) : undefined}
       accent={CM1_ACCENT}
       sequences={tree ? mapCm1Sequences(tree) : []}
+      cycleLabel="Cycle 3"
       footerLinks={[{ href: "/primaire/cm1/lecons", label: "Leçons CM1" }]}
     />
   );
