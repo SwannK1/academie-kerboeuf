@@ -369,6 +369,270 @@ const domainMathematiques: ProgramDomain = {
   status: "upcoming",
 };
 
+const domainQuestionnerLeMonde: ProgramDomain = {
+  id: "ce1-questionner-le-monde",
+  slug: "questionner-le-monde",
+  title: "Questionner le monde",
+  officialLabel: "Questionner le monde - Cycle 2",
+  description: "Observer le vivant, explorer la matiere, se reperer dans le temps et l'espace.",
+  subdomains: [
+    createSubdomain(
+      "questionner-le-monde",
+      "monde-vivant",
+      "Le monde vivant",
+      "Decrire les cycles de vie et les relations entre etres vivants.",
+      [
+        {
+          slug: "decrire-le-cycle-dun-etre-vivant",
+          title: "Decrire le cycle d'un etre vivant",
+          objective:
+            "L'eleve ordonne les etapes du developpement d'un etre vivant et les justifie.",
+          status: "upcoming",
+        },
+        {
+          slug: "observer-une-chaine-alimentaire-simple",
+          title: "Observer une chaine alimentaire simple",
+          objective:
+            "L'eleve identifie producteurs et consommateurs dans une chaine alimentaire courte.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "espace-et-temps",
+      "Espace et temps",
+      "Lire une frise, situer des evenements et se reperer sur une carte simple.",
+      [
+        {
+          slug: "lire-une-frise-chronologique",
+          title: "Lire une frise chronologique",
+          objective:
+            "L'eleve place des evenements sur une frise et utilise un vocabulaire temporel adapte.",
+          status: "upcoming",
+        },
+        {
+          slug: "se-reperer-sur-une-carte-simple",
+          title: "Se reperer sur une carte simple",
+          objective:
+            "L'eleve localise un lieu en utilisant la legende et les reperes d'une carte.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "matiere-et-energie",
+      "Matiere et energie",
+      "Classer des matieres et explorer des circuits simples.",
+      [
+        {
+          slug: "classer-des-matieres-selon-leurs-proprietes",
+          title: "Classer des matieres selon leurs proprietes",
+          objective:
+            "L'eleve observe et classe des matieres en s'appuyant sur des proprietes testees.",
+          status: "upcoming",
+        },
+        {
+          slug: "observer-un-circuit-electrique-simple",
+          title: "Observer un circuit electrique simple",
+          objective:
+            "L'eleve identifie les elements d'un circuit simple et comprend pourquoi une lampe s'allume.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEnseignementsArtistiques: ProgramDomain = {
+  id: "ce1-enseignements-artistiques",
+  slug: "enseignements-artistiques",
+  title: "Enseignements artistiques",
+  officialLabel: "Enseignements artistiques - Cycle 2",
+  description: "Composer avec des formes et des couleurs, chanter et ecouter de la musique.",
+  subdomains: [
+    createSubdomain(
+      "enseignements-artistiques",
+      "arts-plastiques",
+      "Arts plastiques",
+      "Composer avec des formes et des couleurs, decrire une oeuvre.",
+      [
+        {
+          slug: "composer-avec-formes-et-couleurs",
+          title: "Composer avec des formes et des couleurs",
+          objective:
+            "L'eleve organise des formes et des couleurs pour donner une intention a sa production.",
+          status: "upcoming",
+        },
+        {
+          slug: "decrire-une-oeuvre-plastique",
+          title: "Decrire une oeuvre plastique",
+          objective:
+            "L'eleve decrit ce qu'il voit dans une oeuvre en distinguant observation et ressenti.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "enseignements-artistiques",
+      "education-musicale",
+      "Education musicale",
+      "Chanter avec precision et ecouter des extraits musicaux.",
+      [
+        {
+          slug: "chanter-en-groupe-avec-precision",
+          title: "Chanter en groupe avec precision",
+          objective:
+            "L'eleve chante en respectant le tempo, les paroles et l'intensite collective.",
+          status: "upcoming",
+        },
+        {
+          slug: "ecouter-et-decrire-un-extrait-musical",
+          title: "Ecouter et decrire un extrait musical",
+          objective:
+            "L'eleve identifie des elements sonores dans un extrait et les decrit avec des mots simples.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEPS: ProgramDomain = {
+  id: "ce1-eps",
+  slug: "eps",
+  title: "EPS",
+  officialLabel: "Education physique et sportive - Cycle 2",
+  description: "Activites physiques, jeux collectifs et premiere expression corporelle.",
+  subdomains: [
+    createSubdomain(
+      "eps",
+      "activites-physiques",
+      "Activites physiques",
+      "Ameliorer une performance et adapter son effort.",
+      [
+        {
+          slug: "ameliorer-une-performance-mesuree",
+          title: "Ameliorer une performance mesuree",
+          objective:
+            "L'eleve realise une performance simple et cherche a progresser d'une seance a l'autre.",
+          status: "upcoming",
+        },
+        {
+          slug: "adapter-son-effort-a-la-duree",
+          title: "Adapter son effort a la duree",
+          objective:
+            "L'eleve maintient un effort regulier sur une duree adaptee sans s'epuiser.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "eps",
+      "jeux-collectifs",
+      "Jeux collectifs",
+      "Cooperer et assumer des roles varies dans un jeu collectif.",
+      [
+        {
+          slug: "cooperer-dans-un-jeu-collectif",
+          title: "Cooperer dans un jeu collectif",
+          objective:
+            "L'eleve agit avec ses partenaires et tient compte des adversaires.",
+          status: "upcoming",
+        },
+        {
+          slug: "respecter-des-roles-varies",
+          title: "Respecter des roles varies",
+          objective:
+            "L'eleve assume les roles de joueur, d'arbitre ou d'observateur selon la situation.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "eps",
+      "expression-corporelle",
+      "Expression corporelle",
+      "Enchainer des actions pour communiquer et presenter une production.",
+      [
+        {
+          slug: "enchainer-des-actions-pour-communiquer",
+          title: "Enchainer des actions pour communiquer",
+          objective:
+            "L'eleve compose une courte phrase corporelle avec un debut, un milieu et une fin.",
+          status: "upcoming",
+        },
+        {
+          slug: "presenter-une-production-corporelle",
+          title: "Presenter une production corporelle",
+          objective:
+            "L'eleve presente sa production devant un groupe et accepte le regard des autres.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEMC: ProgramDomain = {
+  id: "ce1-emc",
+  slug: "emc",
+  title: "EMC",
+  officialLabel: "Enseignement moral et civique - Cycle 2",
+  description: "Comprendre les regles, les droits, les devoirs et participer a la vie collective.",
+  subdomains: [
+    createSubdomain(
+      "emc",
+      "vie-collective",
+      "Vie collective",
+      "Comprendre l'utilite des regles et participer aux decisions collectives.",
+      [
+        {
+          slug: "comprendre-l-utilite-d-une-regle",
+          title: "Comprendre l'utilite d'une regle",
+          objective:
+            "L'eleve explique pourquoi une regle existe et ce qui se passerait sans elle.",
+          status: "upcoming",
+        },
+        {
+          slug: "participer-a-une-decision-collective",
+          title: "Participer a une decision collective",
+          objective:
+            "L'eleve exprime son avis et prend part a une vote ou un choix de groupe.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "emc",
+      "droits-et-devoirs",
+      "Droits et devoirs",
+      "Distinguer droits et devoirs et identifier des actions responsables.",
+      [
+        {
+          slug: "distinguer-droit-et-devoir",
+          title: "Distinguer un droit d'un devoir",
+          objective:
+            "L'eleve donne des exemples de droits et de devoirs dans la vie de la classe.",
+          status: "upcoming",
+        },
+        {
+          slug: "identifier-des-actions-responsables",
+          title: "Identifier des actions responsables",
+          objective:
+            "L'eleve propose une action concrete utile au groupe ou a l'environnement proche.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
 export const ce1LearningTree: AcademyLevelProgram = {
   levelSlug: "ce1",
   label: "CE1",
@@ -380,7 +644,14 @@ export const ce1LearningTree: AcademyLevelProgram = {
     roleHint:
       "Gaston accompagne la consolidation de la lecture, de l'ecriture et du raisonnement.",
   },
-  domains: [domainFrancais, domainMathematiques],
+  domains: [
+    domainFrancais,
+    domainMathematiques,
+    domainQuestionnerLeMonde,
+    domainEnseignementsArtistiques,
+    domainEPS,
+    domainEMC,
+  ],
 };
 
 export function getCe1Domain(domainSlug: string): ProgramDomain | undefined {
