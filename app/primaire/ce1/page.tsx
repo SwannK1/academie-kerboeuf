@@ -72,12 +72,6 @@ export default function Ce1Page() {
             >
               Matières CE1
             </Link>
-            <Link
-              href="/primaire/ce1/lecons"
-              className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
-            >
-              Leçons disponibles
-            </Link>
           </div>
         </div>
       </section>

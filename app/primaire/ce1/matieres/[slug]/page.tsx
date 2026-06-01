@@ -44,7 +44,7 @@ export default async function Ce1SubjectPage({ params }: PageProps) {
       tree={tree}
       accent={CE1_ACCENT}
       sequences={sequences}
-      footerLinks={[{ href: "/primaire/ce1/lecons", label: "Leçons CE1" }]}
+      footerLinks={[{ href: "/primaire/ce1/matieres", label: "Matières CE1" }]}
     />
   );
 }
