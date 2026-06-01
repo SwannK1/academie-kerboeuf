@@ -59,6 +59,8 @@ export type PedagogicalResourceKind =
   | "correction-pdf"
   | "assessment-pdf"
   | "projectable-pdf"
+  | "printable-pdf"       // support imprimable élève (hors fiche parent)
+  | "teacher-guide-pdf"   // guide enseignant / grille d'observation
   | "parent-sheet-pdf";
 
 export type ResourceAudience =
