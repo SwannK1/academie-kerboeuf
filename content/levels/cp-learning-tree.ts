@@ -320,6 +320,255 @@ const domainMathematiques: ProgramDomain = {
   status: "upcoming",
 };
 
+const domainQuestionnerLeMonde: ProgramDomain = {
+  id: "cp-questionner-le-monde",
+  slug: "questionner-le-monde",
+  title: "Questionner le monde",
+  officialLabel: "Questionner le monde - Cycle 2",
+  description: "Premiers questionnements sur le vivant, la matiere, le temps et l'espace.",
+  subdomains: [
+    createSubdomain(
+      "questionner-le-monde",
+      "monde-vivant",
+      "Le monde vivant",
+      "Observer et distinguer le vivant du non-vivant.",
+      [
+        {
+          slug: "distinguer-vivant-et-non-vivant",
+          title: "Distinguer le vivant du non-vivant",
+          objective:
+            "L'eleve classe des elements en vivants ou non-vivants en s'appuyant sur des criteres simples.",
+          status: "upcoming",
+        },
+        {
+          slug: "observer-une-croissance-vegetale",
+          title: "Observer une croissance vegetale",
+          objective:
+            "L'eleve observe et decrit les etapes de la pousse d'une plante au fil du temps.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "matiere-et-objets",
+      "Matiere et objets",
+      "Explorer les proprietes simples des matieres et des objets.",
+      [
+        {
+          slug: "classer-des-matieres",
+          title: "Classer des matieres selon leurs proprietes",
+          objective:
+            "L'eleve observe des matieres et les classe selon un critere simple (dur, souple, transparent...).",
+          status: "upcoming",
+        },
+        {
+          slug: "decrire-un-objet-technique",
+          title: "Decrire un objet technique simple",
+          objective:
+            "L'eleve nomme les parties d'un objet simple et explique a quoi chacune sert.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "temps-et-espace",
+      "Temps et espace",
+      "Se reperer dans le temps de la semaine et dans l'espace proche.",
+      [
+        {
+          slug: "se-reperer-dans-la-semaine",
+          title: "Se reperer dans la semaine",
+          objective:
+            "L'eleve nomme les jours de la semaine dans l'ordre et situe une activite dans la journee.",
+          status: "upcoming",
+        },
+        {
+          slug: "situer-son-ecole-dans-l-espace",
+          title: "Situer son ecole dans l'espace proche",
+          objective:
+            "L'eleve indique ou se trouve son ecole par rapport a des reperes connus.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEnseignementsArtistiques: ProgramDomain = {
+  id: "cp-enseignements-artistiques",
+  slug: "enseignements-artistiques",
+  title: "Enseignements artistiques",
+  officialLabel: "Enseignements artistiques - Cycle 2",
+  description: "Premiers gestes artistiques : arts plastiques et education musicale.",
+  subdomains: [
+    createSubdomain(
+      "enseignements-artistiques",
+      "arts-plastiques",
+      "Arts plastiques",
+      "Explorer les couleurs, les matieres et les outils pour creer.",
+      [
+        {
+          slug: "explorer-couleurs-et-matieres",
+          title: "Explorer les couleurs et les matieres",
+          objective:
+            "L'eleve experimente differents outils et matieres pour produire des effets plastiques varies.",
+          status: "upcoming",
+        },
+        {
+          slug: "creer-une-composition-simple",
+          title: "Creer une composition simple",
+          objective:
+            "L'eleve organise des formes et des couleurs dans un espace de production.",
+          status: "upcoming",
+        },
+        {
+          slug: "decrire-une-production",
+          title: "Decrire une production plastique",
+          objective:
+            "L'eleve dit ce qu'il voit dans une image ou une production en utilisant des mots simples.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "enseignements-artistiques",
+      "education-musicale",
+      "Education musicale",
+      "Chanter et ecouter des extraits musicaux.",
+      [
+        {
+          slug: "chanter-en-respectant-le-tempo",
+          title: "Chanter en respectant le tempo",
+          objective:
+            "L'eleve chante une chanson apprise en respectant le rythme et le tempo collectif.",
+          status: "upcoming",
+        },
+        {
+          slug: "memoriser-une-courte-chanson",
+          title: "Memoriser une courte chanson",
+          objective:
+            "L'eleve retient les paroles et la melodie d'une chanson courte.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEPS: ProgramDomain = {
+  id: "cp-eps",
+  slug: "eps",
+  title: "EPS",
+  officialLabel: "Education physique et sportive - Cycle 2",
+  description: "Premiers apprentissages moteurs : courir, lancer, jouer ensemble.",
+  subdomains: [
+    createSubdomain(
+      "eps",
+      "activites-motrices",
+      "Activites motrices de base",
+      "Courir, lancer et sauter en securite.",
+      [
+        {
+          slug: "courir-et-sarreter-en-securite",
+          title: "Courir et s'arreter en securite",
+          objective:
+            "L'eleve court, change de direction et s'arrete sur un signal sans mettre en danger.",
+          status: "upcoming",
+        },
+        {
+          slug: "lancer-et-attraper",
+          title: "Lancer et attraper un engin",
+          objective:
+            "L'eleve lance un engin vers une cible et tente de l'attraper.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "eps",
+      "jeux-collectifs",
+      "Jeux collectifs",
+      "Jouer ensemble en respectant des regles simples.",
+      [
+        {
+          slug: "respecter-les-regles-d-un-jeu",
+          title: "Respecter les regles d'un jeu simple",
+          objective:
+            "L'eleve comprend et applique les regles d'un jeu collectif simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "agir-avec-ses-partenaires",
+          title: "Agir avec ses partenaires",
+          objective:
+            "L'eleve aide ses partenaires et cherche a cooperer pour reussir le jeu.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
+const domainEMC: ProgramDomain = {
+  id: "cp-emc",
+  slug: "emc",
+  title: "EMC",
+  officialLabel: "Enseignement moral et civique - Cycle 2",
+  description: "Premiers reperes pour vivre ensemble et connaitre la Republique.",
+  subdomains: [
+    createSubdomain(
+      "emc",
+      "vie-collective",
+      "Vie collective",
+      "Comprendre et respecter les regles de la vie de classe.",
+      [
+        {
+          slug: "respecter-les-regles-de-classe",
+          title: "Respecter les regles de la classe",
+          objective:
+            "L'eleve connait les regles de la classe et les applique en situation.",
+          status: "upcoming",
+        },
+        {
+          slug: "ecouter-et-attendre-son-tour",
+          title: "Ecouter et attendre son tour",
+          objective:
+            "L'eleve ecoute sans couper la parole et attend son tour pour s'exprimer.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "emc",
+      "premiers-reperes-civiques",
+      "Premiers reperes civiques",
+      "Connaitre quelques symboles et valeurs de la Republique.",
+      [
+        {
+          slug: "reconnaitre-les-symboles-de-la-republique",
+          title: "Reconnaitre les symboles de la Republique",
+          objective:
+            "L'eleve nomme quelques symboles de la Republique francaise (drapeau, hymne, devise).",
+          status: "upcoming",
+        },
+        {
+          slug: "distinguer-droits-et-devoirs-simples",
+          title: "Distinguer droits et devoirs simples",
+          objective:
+            "L'eleve donne un exemple de droit et un exemple de devoir dans la vie de classe.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
 export const cpLearningTree: AcademyLevelProgram = {
   levelSlug: "cp",
   label: "CP",
@@ -331,7 +580,14 @@ export const cpLearningTree: AcademyLevelProgram = {
     roleHint:
       "Kiwi accompagne les premiers pas dans le decodage, l'ecriture et les nombres.",
   },
-  domains: [domainFrancais, domainMathematiques],
+  domains: [
+    domainFrancais,
+    domainMathematiques,
+    domainQuestionnerLeMonde,
+    domainEnseignementsArtistiques,
+    domainEPS,
+    domainEMC,
+  ],
 };
 
 export function getCpDomain(domainSlug: string): ProgramDomain | undefined {
@@ -365,4 +621,75 @@ export function getCpLessonById(lessonId: string): Lesson | undefined {
     }
   }
   return undefined;
+}
+
+export type CpSubjectTree = {
+  place: { label: string };
+  guides: { id: string; name: string }[];
+  domains: {
+    id: string;
+    title: string;
+    subdomains: {
+      id: string;
+      title: string;
+      items: {
+        id: string;
+        title: string;
+        description?: string;
+        status: ProgramStatus;
+        href?: string;
+      }[];
+    }[];
+  }[];
+};
+
+export type CpSequenceEntry = {
+  id: string;
+  title: string;
+  domain: string;
+  subdomain: string;
+  skill: string;
+  status: ProgramStatus;
+};
+
+export function getCpSubjectTree(subjectSlug: string): CpSubjectTree | undefined {
+  const domain = cpLearningTree.domains.find((d) => d.slug === subjectSlug);
+  if (!domain) return undefined;
+
+  return {
+    place: { label: "Cycle 2 · Primaire" },
+    guides: [],
+    domains: [
+      {
+        id: domain.id,
+        title: domain.title,
+        subdomains: domain.subdomains.map((subdomain) => ({
+          id: subdomain.id,
+          title: subdomain.title,
+          items: subdomain.lessons.map((lesson) => ({
+            id: lesson.id,
+            title: lesson.title,
+            description: lesson.objective,
+            status: lesson.status,
+          })),
+        })),
+      },
+    ],
+  };
+}
+
+export function getCpSequences(subjectSlug: string): CpSequenceEntry[] {
+  const domain = cpLearningTree.domains.find((d) => d.slug === subjectSlug);
+  if (!domain) return [];
+
+  return domain.subdomains.flatMap((subdomain) =>
+    subdomain.lessons.map((lesson) => ({
+      id: lesson.id,
+      title: lesson.title,
+      domain: domain.title,
+      subdomain: subdomain.title,
+      skill: lesson.objective,
+      status: lesson.status,
+    })),
+  );
 }
