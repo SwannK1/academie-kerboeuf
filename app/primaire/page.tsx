@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import {
   getLevelPath,
   getLevelsByStage,
@@ -43,6 +44,22 @@ const LEVEL_GUIDES: Record<
     species: "le Lynx",
     focus: "Justifier, transférer, préparer le collège",
   },
+};
+
+// Conservative statuses — updated as content is published
+const LEVEL_STATUS: Record<string, string> = {
+  cp: "en construction",
+  ce1: "bientôt",
+  ce2: "bientôt",
+  cm1: "en construction",
+  cm2: "disponible",
+};
+
+// Routes that actually exist — no fictitious links
+const LEVEL_MATIERES: Record<string, string> = {
+  cp: "/primaire/cp/matieres",
+  cm1: "/primaire/cm1/matieres",
+  cm2: "/primaire/cm2/matieres",
 };
 
 const LEVEL_ACCENT: Record<
@@ -173,22 +190,18 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     hoverBg: "hover:bg-gold/[0.08]",
     ring: "focus:ring-gold/60",
   };
-  const isPilot = level.slug === "cm2";
+  const status = LEVEL_STATUS[level.slug] ?? "bientôt";
+  const matieresHref = LEVEL_MATIERES[level.slug] ?? null;
 
   return (
-    <Link
-      href={getLevelPath(level)}
-      className={`group flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-1 ${accent.hoverBorder} ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}
+    <div
+      className={`flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5`}
     >
       <div className="flex items-start justify-between gap-2">
         <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
           {level.cycle}
         </p>
-        {isPilot && (
-          <span className="rounded border border-gold/35 bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
-            Niveau pilote
-          </span>
-        )}
+        <PublicStatusBadge status={status} />
       </div>
       <p className="mt-4 text-4xl font-black text-foreground">{level.label}</p>
       <p className={`mt-1 text-sm font-bold ${accent.text}`}>
@@ -198,16 +211,22 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
         ) : null}
       </p>
       <p className="mt-4 flex-1 text-sm leading-7 text-muted">{guide.focus}</p>
-      {isPilot && (
-        <p className="mt-3 text-xs text-muted">
-          Le contenu le plus avancé de la plateforme — les autres niveaux arrivent progressivement.
-        </p>
-      )}
-      <div className="mt-5 border-t border-white/10 pt-4">
-        <p className="text-xs text-muted">
-          {level.professor.name} · {level.professor.mainSubject}
-        </p>
+      <div className="mt-5 flex flex-wrap gap-2 border-t border-white/10 pt-4">
+        <Link
+          href={getLevelPath(level)}
+          className={`inline-flex items-center gap-1.5 rounded border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-foreground transition hover:bg-white/[0.08] focus:outline-none focus:ring-2 ${accent.ring}`}
+        >
+          Portail {level.label} →
+        </Link>
+        {matieresHref && (
+          <Link
+            href={matieresHref}
+            className={`inline-flex items-center gap-1.5 rounded border ${accent.border} bg-transparent px-3 py-1.5 text-xs font-bold ${accent.text} transition ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}
+          >
+            Matières →
+          </Link>
+        )}
       </div>
-    </Link>
+    </div>
   );
 }
