@@ -101,6 +101,25 @@ export type LessonResourceSet = {
   parentSheet?: PedagogicalResourceRef;
 };
 
+// ── Séances pédagogiques ─────────────────────────────────────────────────────
+// Subdivision légère d'une séquence-compétence en étapes d'enseignement.
+// Une séance ne porte pas le contenu complet ; les PDF sont au niveau Lesson.
+
+export type LessonSessionPhase =
+  | "découvrir"
+  | "s'entraîner"
+  | "réinvestir"
+  | "consolider"
+  | "évaluer";
+
+export type LessonSession = {
+  id: string;
+  title: string;
+  phase: LessonSessionPhase;
+  objective: string;
+  status: ProgramStatus;
+};
+
 // ── Compétences observables ──────────────────────────────────────────────────
 // Le site organise les compétences et leurs ressources ; les PDF portent les
 // contenus complets d'enseignement, d'exercices et de correction.
@@ -221,6 +240,7 @@ export type Lesson = {
   // getPedagogicalResourceSlots() les normalise en slots d'affichage.
   // Le site affiche statuts et liens, sans embarquer les contenus pédagogiques.
   resources?: PedagogicalResourceRef[];
+  sessions?: LessonSession[];
   missionLink?: LearningMissionLink;
   linkedMissionSlugs?: string[];
   competencyIds?: string[];
