@@ -1,6 +1,118 @@
-import type { LearningCompetency } from "@/content/learning-architecture-types";
+import type {
+  LearningCompetency,
+  ResourceSlot,
+} from "@/content/learning-architecture-types";
+
+// ── Slots PDF réutilisables par type de séance ───────────────────────────────
+
+const discoverySlots: ResourceSlot[] = [
+  {
+    kind: "lesson-pdf",
+    label: "Leçon PDF",
+    resource: { kind: "lesson-pdf", label: "Leçon PDF", status: "planned" },
+  },
+  {
+    kind: "projectable-pdf",
+    label: "Support projetable",
+    resource: {
+      kind: "projectable-pdf",
+      label: "Support projetable",
+      status: "planned",
+    },
+  },
+];
+
+const practiceSlots: ResourceSlot[] = [
+  {
+    kind: "exercises-pdf",
+    label: "Exercices PDF",
+    resource: {
+      kind: "exercises-pdf",
+      label: "Exercices PDF",
+      status: "planned",
+    },
+  },
+  {
+    kind: "correction-pdf",
+    label: "Correction PDF",
+    resource: {
+      kind: "correction-pdf",
+      label: "Correction PDF",
+      status: "planned",
+    },
+  },
+];
+
+const assessmentSlots: ResourceSlot[] = [
+  {
+    kind: "assessment-pdf",
+    label: "Évaluation PDF",
+    resource: {
+      kind: "assessment-pdf",
+      label: "Évaluation PDF",
+      status: "planned",
+    },
+  },
+  {
+    kind: "correction-pdf",
+    label: "Correction PDF",
+    resource: {
+      kind: "correction-pdf",
+      label: "Correction PDF",
+      status: "planned",
+    },
+  },
+];
+
+const fullCompetencySlots: ResourceSlot[] = [
+  {
+    kind: "lesson-pdf",
+    label: "Leçon PDF",
+    resource: { kind: "lesson-pdf", label: "Leçon PDF", status: "planned" },
+  },
+  {
+    kind: "exercises-pdf",
+    label: "Exercices PDF",
+    resource: {
+      kind: "exercises-pdf",
+      label: "Exercices PDF",
+      status: "planned",
+    },
+  },
+  {
+    kind: "correction-pdf",
+    label: "Correction PDF",
+    resource: {
+      kind: "correction-pdf",
+      label: "Correction PDF",
+      status: "planned",
+    },
+  },
+  {
+    kind: "assessment-pdf",
+    label: "Évaluation PDF",
+    resource: {
+      kind: "assessment-pdf",
+      label: "Évaluation PDF",
+      status: "planned",
+    },
+  },
+  {
+    kind: "projectable-pdf",
+    label: "Support projetable",
+    resource: {
+      kind: "projectable-pdf",
+      label: "Support projetable",
+      status: "planned",
+    },
+  },
+];
 
 export const cm1Competencies = [
+  // ══════════════════════════════════════════════════════════════════════════
+  // FRANÇAIS — 5 notions prioritaires
+  // ══════════════════════════════════════════════════════════════════════════
+
   {
     id: "cm1-fr-lc-intentions-personnage",
     slug: "comprendre-les-intentions-dun-personnage",
@@ -17,6 +129,7 @@ export const cm1Competencies = [
       "Je formule une intention et je la justifie.",
     ],
     lessonIds: ["cm1-fr-lc-intentions"],
+    resourceSlots: fullCompetencySlots,
     guideCharacter: {
       characterSlug: "noisette",
       name: "Noisette",
@@ -32,29 +145,42 @@ export const cm1Competencies = [
           id: "seq-cm1-fr-lc-intentions-personnage-1",
           order: 1,
           kind: "discovery",
-          title: "Repérer paroles et actions",
-          objective: "Séparer ce qui est dit de ce qui est fait.",
+          title: "Découvrir : paroles et actions",
+          objective: "Séparer ce que le personnage dit de ce qu'il fait.",
+          resourceSlots: discoverySlots,
           status: "in-progress",
+        },
+        {
+          id: "seq-cm1-fr-lc-intentions-personnage-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : déduire une intention",
+          objective: "Choisir l'intention la plus probable et citer un indice.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-intentions-personnage-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : justifier l'inférence",
+          objective: "Appuyer une interprétation sur plusieurs indices.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
         },
         {
           id: "seq-cm1-fr-lc-intentions-personnage-4",
           order: 4,
-          kind: "consolidation",
-          title: "Justifier l'inférence",
-          objective: "Appuyer une interprétation sur plusieurs indices.",
-          status: "upcoming",
-        },
-        {
-          id: "seq-cm1-fr-lc-intentions-personnage-5",
-          order: 5,
           kind: "assessment",
-          title: "Lire entre les lignes",
+          title: "Évaluer : lire entre les lignes",
           objective: "Formuler une intention probable et citer un indice.",
+          resourceSlots: assessmentSlots,
           status: "upcoming",
         },
       ],
     },
   },
+
   {
     id: "cm1-fr-lc-inference-simple",
     slug: "inferer-un-sens-implicite-simple",
@@ -71,15 +197,574 @@ export const cm1Competencies = [
       "Je justifie mon inférence brièvement.",
     ],
     lessonIds: [],
+    resourceSlots: fullCompetencySlots,
     status: "upcoming",
     sequence: {
       id: "seq-cm1-fr-lc-inference-simple",
       competencyId: "cm1-fr-lc-inference-simple",
       title: "Lire les indices implicites",
       status: "upcoming",
-      steps: [],
+      steps: [
+        {
+          id: "seq-cm1-fr-lc-inference-simple-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : le texte ne dit pas tout",
+          objective: "Distinguer ce qui est écrit de ce qui est déduit.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-inference-simple-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : choisir la bonne inférence",
+          objective: "Sélectionner l'inférence correcte et citer l'indice.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-inference-simple-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : formuler et justifier",
+          objective: "Formuler une inférence et l'appuyer sur deux indices.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-inference-simple-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : lire l'implicite",
+          objective: "Produire une inférence justifiée sur un texte nouveau.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
     },
   },
+
+  {
+    id: "cm1-fr-lc-texte-informatif",
+    slug: "lire-et-comprendre-un-texte-documentaire",
+    levelSlug: "cm1",
+    subject: "Français",
+    domainSlug: "francais",
+    subdomainSlug: "lecture-comprehension",
+    title: "Lire et comprendre un texte documentaire",
+    observableObjective:
+      "Repérer l'organisation et les informations principales d'un texte informatif.",
+    successCriteria: [
+      "Je repère le thème général du texte.",
+      "J'identifie l'organisation du texte (titres, paragraphes).",
+      "Je retrouve les informations principales sans recopier le texte.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-fr-lc-texte-informatif",
+      competencyId: "cm1-fr-lc-texte-informatif",
+      title: "Lire pour comprendre et informer",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-fr-lc-texte-informatif-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : structure d'un texte documentaire",
+          objective: "Repérer le sujet et l'organisation (titres, paragraphes).",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-texte-informatif-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : extraire les informations",
+          objective: "Retrouver les informations principales sans recopier.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-texte-informatif-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : résumer en deux phrases",
+          objective: "Produire un résumé bref et fidèle sur un texte nouveau.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-lc-texte-informatif-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : lire et restituer",
+          objective: "Répondre à des questions sur un texte documentaire inédit.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  {
+    id: "cm1-fr-edl-sujet-verbe-accord",
+    slug: "identifier-sujet-verbe-et-accords",
+    levelSlug: "cm1",
+    subject: "Français",
+    domainSlug: "francais",
+    subdomainSlug: "etude-de-la-langue",
+    title: "Identifier sujet, verbe et accords",
+    observableObjective:
+      "Repérer le sujet et le verbe pour contrôler un accord simple.",
+    successCriteria: [
+      "Je repère le verbe conjugué.",
+      "Je retrouve son sujet.",
+      "Je vérifie l'accord sujet-verbe.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-fr-edl-sujet-verbe-accord",
+      competencyId: "cm1-fr-edl-sujet-verbe-accord",
+      title: "Relier sujet et verbe",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-fr-edl-sujet-verbe-accord-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : repérer le verbe conjugué",
+          objective: "Identifier le verbe dans une phrase simple.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-edl-sujet-verbe-accord-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : trouver le sujet",
+          objective: "Retrouver le sujet en posant la question « Qui est-ce qui ? »",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-edl-sujet-verbe-accord-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : contrôler l'accord",
+          objective: "Vérifier et corriger l'accord sujet-verbe dans un texte.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-edl-sujet-verbe-accord-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : accord dans la phrase",
+          objective: "Identifier et corriger des erreurs d'accord sur un texte nouveau.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  {
+    id: "cm1-fr-ecr-planifier",
+    slug: "planifier-son-ecrit-avant-de-rediger",
+    levelSlug: "cm1",
+    subject: "Français",
+    domainSlug: "francais",
+    subdomainSlug: "ecriture",
+    title: "Planifier son écrit avant de rédiger",
+    observableObjective:
+      "Organiser ses idées en liste ou en plan avant d'écrire.",
+    successCriteria: [
+      "Je note mes idées principales avant d'écrire.",
+      "Je les ordonne dans un plan ou une liste.",
+      "Je m'appuie sur ce plan pendant la rédaction.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-fr-ecr-planifier",
+      competencyId: "cm1-fr-ecr-planifier",
+      title: "Préparer avant d'écrire",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-fr-ecr-planifier-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : pourquoi planifier ?",
+          objective: "Comprendre l'utilité d'un plan avant de rédiger.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-ecr-planifier-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : noter et ordonner ses idées",
+          objective: "Produire une liste d'idées ordonnée sur un sujet donné.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-ecr-planifier-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : écrire à partir du plan",
+          objective: "Rédiger un texte court en suivant le plan préparé.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-fr-ecr-planifier-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : planifier et rédiger",
+          objective: "Construire un plan et rédiger un texte sur un sujet nouveau.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // MATHÉMATIQUES — 5 notions prioritaires
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    id: "cm1-ma-num-grands-nombres",
+    slug: "lire-ecrire-et-comparer-les-grands-nombres",
+    levelSlug: "cm1",
+    subject: "Mathématiques",
+    domainSlug: "mathematiques",
+    subdomainSlug: "numeration",
+    title: "Lire, écrire et comparer les grands nombres",
+    observableObjective:
+      "Lire, écrire et comparer des nombres jusqu'au million en s'appuyant sur les classes.",
+    successCriteria: [
+      "Je lis un nombre en repérant les classes (unités, milliers, millions).",
+      "J'écris en chiffres un nombre dicté à l'oral.",
+      "Je compare deux grands nombres et je justifie ma réponse.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-ma-num-grands-nombres",
+      competencyId: "cm1-ma-num-grands-nombres",
+      title: "Lire et écrire jusqu'au million",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-ma-num-grands-nombres-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : les classes de nombres",
+          objective: "Identifier unités, dizaines, centaines, milliers, millions.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-num-grands-nombres-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : lire et écrire",
+          objective: "Lire un nombre en lettres et l'écrire en chiffres.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-num-grands-nombres-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : comparer et ordonner",
+          objective: "Placer des nombres sur une droite graduée et les comparer.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-num-grands-nombres-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : grands nombres",
+          objective: "Lire, écrire, comparer et placer des grands nombres.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  {
+    id: "cm1-ma-num-fractions",
+    slug: "comprendre-la-notion-de-fraction",
+    levelSlug: "cm1",
+    subject: "Mathématiques",
+    domainSlug: "mathematiques",
+    subdomainSlug: "numeration",
+    title: "Comprendre la notion de fraction",
+    observableObjective:
+      "Partager en parties égales et lire ou écrire une fraction simple.",
+    successCriteria: [
+      "Je reconnais que les parties doivent être égales.",
+      "Je lis une fraction (numérateur et dénominateur).",
+      "Je représente une fraction simple sur un dessin ou une droite graduée.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-ma-num-fractions",
+      competencyId: "cm1-ma-num-fractions",
+      title: "Partager et nommer",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-ma-num-fractions-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : partager en parties égales",
+          objective: "Comprendre que les parties d'une fraction sont toujours égales.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-num-fractions-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : lire et écrire une fraction",
+          objective: "Lire numérateur et dénominateur et les associer à un dessin.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-num-fractions-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : représenter sur une droite",
+          objective: "Placer une fraction simple sur une droite graduée.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-num-fractions-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : fractions simples",
+          objective: "Lire, écrire et représenter des fractions sur une situation nouvelle.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  {
+    id: "cm1-ma-cal-multiplication",
+    slug: "poser-et-calculer-une-multiplication",
+    levelSlug: "cm1",
+    subject: "Mathématiques",
+    domainSlug: "mathematiques",
+    subdomainSlug: "calcul-pose",
+    title: "Poser et calculer une multiplication",
+    observableObjective:
+      "Calculer le produit de deux entiers par l'algorithme de la multiplication.",
+    successCriteria: [
+      "Je pose la multiplication en colonnes.",
+      "Je multiplie chiffre par chiffre en gérant les retenues.",
+      "Je vérifie le résultat par une estimation.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-ma-cal-multiplication",
+      competencyId: "cm1-ma-cal-multiplication",
+      title: "Poser et calculer",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-ma-cal-multiplication-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : l'algorithme en colonnes",
+          objective: "Comprendre le principe de la multiplication posée (1 chiffre).",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-cal-multiplication-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : gérer les retenues",
+          objective: "Calculer un produit avec retenues, chiffre par chiffre.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-cal-multiplication-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : estimer et vérifier",
+          objective: "Vérifier le résultat par un arrondi avant de conclure.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-cal-multiplication-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : multiplication posée",
+          objective: "Poser, calculer et vérifier une multiplication sur un problème.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  {
+    id: "cm1-ma-cal-division",
+    slug: "poser-et-calculer-une-division-euclidienne",
+    levelSlug: "cm1",
+    subject: "Mathématiques",
+    domainSlug: "mathematiques",
+    subdomainSlug: "calcul-pose",
+    title: "Poser et calculer une division euclidienne",
+    observableObjective:
+      "Calculer le quotient et le reste d'une division posée et interpréter le résultat.",
+    successCriteria: [
+      "Je pose la division en identifiant dividende et diviseur.",
+      "Je calcule le quotient et le reste étape par étape.",
+      "Je vérifie que le reste est strictement inférieur au diviseur.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-ma-cal-division",
+      competencyId: "cm1-ma-cal-division",
+      title: "Poser et interpréter la division",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-ma-cal-division-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : dividende, diviseur, quotient",
+          objective: "Nommer les termes d'une division et comprendre leur rôle.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-cal-division-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : poser et calculer",
+          objective: "Calculer quotient et reste étape par étape.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-cal-division-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : vérifier et interpréter",
+          objective: "Contrôler le reste et interpréter le résultat dans un problème.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-cal-division-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : division euclidienne",
+          objective: "Poser, calculer et interpréter une division sur un problème nouveau.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  {
+    id: "cm1-ma-gm-aires-perimetres",
+    slug: "distinguer-aire-et-perimetre",
+    levelSlug: "cm1",
+    subject: "Mathématiques",
+    domainSlug: "mathematiques",
+    subdomainSlug: "grandeurs-mesures",
+    title: "Distinguer aire et périmètre",
+    observableObjective:
+      "Choisir la grandeur adaptée selon la question posée.",
+    successCriteria: [
+      "Je reconnais si l'on cherche un contour ou une surface.",
+      "Je choisis l'unité adaptée.",
+      "J'explique mon choix en une phrase.",
+    ],
+    lessonIds: [],
+    resourceSlots: fullCompetencySlots,
+    status: "upcoming",
+    sequence: {
+      id: "seq-cm1-ma-gm-aires-perimetres",
+      competencyId: "cm1-ma-gm-aires-perimetres",
+      title: "Contour ou surface",
+      status: "upcoming",
+      steps: [
+        {
+          id: "seq-cm1-ma-gm-aires-perimetres-1",
+          order: 1,
+          kind: "discovery",
+          title: "Découvrir : contour contre surface",
+          objective: "Distinguer périmètre (contour) et aire (surface) par des situations concrètes.",
+          resourceSlots: discoverySlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-gm-aires-perimetres-2",
+          order: 2,
+          kind: "guided-practice",
+          title: "S'entraîner : calculer périmètre et aire",
+          objective: "Calculer périmètre et aire de figures simples avec les unités adaptées.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-gm-aires-perimetres-3",
+          order: 3,
+          kind: "consolidation",
+          title: "Réinvestir : choisir la bonne grandeur",
+          objective: "Identifier quelle grandeur calculer selon la question posée.",
+          resourceSlots: practiceSlots,
+          status: "upcoming",
+        },
+        {
+          id: "seq-cm1-ma-gm-aires-perimetres-4",
+          order: 4,
+          kind: "assessment",
+          title: "Évaluer : aires et périmètres",
+          objective: "Calculer et distinguer aire et périmètre sur des figures nouvelles.",
+          resourceSlots: assessmentSlots,
+          status: "upcoming",
+        },
+      ],
+    },
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // Compétences secondaires (conservées, séquences sans étapes actives)
+  // ══════════════════════════════════════════════════════════════════════════
+
   {
     id: "cm1-fr-ecr-texte-structure",
     slug: "produire-un-texte-structure",
@@ -105,31 +790,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
-  {
-    id: "cm1-fr-edl-sujet-verbe-accord",
-    slug: "identifier-sujet-verbe-et-accords",
-    levelSlug: "cm1",
-    subject: "Français",
-    domainSlug: "francais",
-    subdomainSlug: "etude-de-la-langue",
-    title: "Identifier sujet, verbe et accords",
-    observableObjective:
-      "Repérer le sujet et le verbe pour contrôler un accord simple.",
-    successCriteria: [
-      "Je repère le verbe conjugué.",
-      "Je retrouve son sujet.",
-      "Je vérifie l'accord sujet-verbe.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-fr-edl-sujet-verbe-accord",
-      competencyId: "cm1-fr-edl-sujet-verbe-accord",
-      title: "Relier sujet et verbe",
-      status: "upcoming",
-      steps: [],
-    },
-  },
+
   {
     id: "cm1-fr-oral-avis-argumente",
     slug: "presenter-un-avis-argumente",
@@ -155,6 +816,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
+
   {
     id: "cm1-ma-prob-etapes",
     slug: "resoudre-un-probleme-a-etapes",
@@ -180,6 +842,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
+
   {
     id: "cm1-hi-ant-situer-civilisation",
     slug: "situer-une-civilisation-dans-le-temps",
@@ -205,6 +868,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
+
   {
     id: "cm1-geo-decrire-territoire",
     slug: "decrire-un-espace-de-vie-ou-un-territoire",
@@ -230,31 +894,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
-  {
-    id: "cm1-ma-gm-aires-perimetres",
-    slug: "distinguer-aire-et-perimetre",
-    levelSlug: "cm1",
-    subject: "Mathématiques",
-    domainSlug: "mathematiques",
-    subdomainSlug: "grandeurs-mesures",
-    title: "Distinguer aire et périmètre",
-    observableObjective:
-      "Choisir la grandeur adaptée selon la question posée.",
-    successCriteria: [
-      "Je reconnais si l'on cherche un contour ou une surface.",
-      "Je choisis l'unité adaptée.",
-      "J'explique mon choix en une phrase.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-ma-gm-aires-perimetres",
-      competencyId: "cm1-ma-gm-aires-perimetres",
-      title: "Contour ou surface",
-      status: "upcoming",
-      steps: [],
-    },
-  },
+
   {
     id: "cm1-ma-geo-decrire-construire-figures",
     slug: "decrire-et-construire-des-figures",
@@ -280,6 +920,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
+
   {
     id: "cm1-sc-vivant-besoins",
     slug: "decrire-les-besoins-du-vivant",
@@ -305,31 +946,7 @@ export const cm1Competencies = [
       steps: [],
     },
   },
-  {
-    id: "cm1-fr-lc-texte-informatif",
-    slug: "lire-et-comprendre-un-texte-documentaire",
-    levelSlug: "cm1",
-    subject: "Français",
-    domainSlug: "francais",
-    subdomainSlug: "lecture-comprehension",
-    title: "Lire et comprendre un texte documentaire",
-    observableObjective:
-      "Repérer l'organisation et les informations principales d'un texte informatif.",
-    successCriteria: [
-      "Je repère le thème général du texte.",
-      "J'identifie l'organisation du texte (titres, paragraphes).",
-      "Je retrouve les informations principales sans recopier le texte.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-fr-lc-texte-informatif",
-      competencyId: "cm1-fr-lc-texte-informatif",
-      title: "Lire pour comprendre et informer",
-      status: "upcoming",
-      steps: [],
-    },
-  },
+
   {
     id: "cm1-geo-lire-paysage",
     slug: "lire-un-paysage-et-identifier-ses-composantes",
@@ -351,131 +968,6 @@ export const cm1Competencies = [
       id: "seq-cm1-geo-lire-paysage",
       competencyId: "cm1-geo-lire-paysage",
       title: "Lire et décrire un paysage",
-      status: "upcoming",
-      steps: [],
-    },
-  },
-  {
-    id: "cm1-ma-num-fractions",
-    slug: "comprendre-la-notion-de-fraction",
-    levelSlug: "cm1",
-    subject: "Mathématiques",
-    domainSlug: "mathematiques",
-    subdomainSlug: "numeration",
-    title: "Comprendre la notion de fraction",
-    observableObjective:
-      "Partager en parties égales et lire ou écrire une fraction simple.",
-    successCriteria: [
-      "Je reconnais que les parties doivent être égales.",
-      "Je lis une fraction (numérateur et dénominateur).",
-      "Je représente une fraction simple sur un dessin ou une droite graduée.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-ma-num-fractions",
-      competencyId: "cm1-ma-num-fractions",
-      title: "Partager et nommer",
-      status: "upcoming",
-      steps: [],
-    },
-  },
-  {
-    id: "cm1-ma-cal-multiplication",
-    slug: "poser-et-calculer-une-multiplication",
-    levelSlug: "cm1",
-    subject: "Mathématiques",
-    domainSlug: "mathematiques",
-    subdomainSlug: "calcul-pose",
-    title: "Poser et calculer une multiplication",
-    observableObjective:
-      "Calculer le produit de deux entiers par l'algorithme de la multiplication.",
-    successCriteria: [
-      "Je pose la multiplication en colonnes.",
-      "Je multiplie chiffre par chiffre en gérant les retenues.",
-      "Je vérifie le résultat par une estimation.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-ma-cal-multiplication",
-      competencyId: "cm1-ma-cal-multiplication",
-      title: "Poser et calculer",
-      status: "upcoming",
-      steps: [],
-    },
-  },
-  {
-    id: "cm1-fr-ecr-planifier",
-    slug: "planifier-son-ecrit-avant-de-rediger",
-    levelSlug: "cm1",
-    subject: "Français",
-    domainSlug: "francais",
-    subdomainSlug: "ecriture",
-    title: "Planifier son écrit avant de rédiger",
-    observableObjective:
-      "Organiser ses idées en liste ou en plan avant d'écrire.",
-    successCriteria: [
-      "Je note mes idées principales avant d'écrire.",
-      "Je les ordonne dans un plan ou une liste.",
-      "Je m'appuie sur ce plan pendant la rédaction.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-fr-ecr-planifier",
-      competencyId: "cm1-fr-ecr-planifier",
-      title: "Préparer avant d'écrire",
-      status: "upcoming",
-      steps: [],
-    },
-  },
-  {
-    id: "cm1-ma-num-grands-nombres",
-    slug: "lire-ecrire-et-comparer-les-grands-nombres",
-    levelSlug: "cm1",
-    subject: "Mathématiques",
-    domainSlug: "mathematiques",
-    subdomainSlug: "numeration",
-    title: "Lire, écrire et comparer les grands nombres",
-    observableObjective:
-      "Lire, écrire et comparer des nombres jusqu'au million en s'appuyant sur les classes.",
-    successCriteria: [
-      "Je lis un nombre en repérant les classes (unités, milliers, millions).",
-      "J'écris en chiffres un nombre dicté à l'oral.",
-      "Je compare deux grands nombres et je justifie ma réponse.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-ma-num-grands-nombres",
-      competencyId: "cm1-ma-num-grands-nombres",
-      title: "Lire et écrire jusqu'au million",
-      status: "upcoming",
-      steps: [],
-    },
-  },
-  {
-    id: "cm1-ma-cal-division",
-    slug: "poser-et-calculer-une-division-euclidienne",
-    levelSlug: "cm1",
-    subject: "Mathématiques",
-    domainSlug: "mathematiques",
-    subdomainSlug: "calcul-pose",
-    title: "Poser et calculer une division euclidienne",
-    observableObjective:
-      "Calculer le quotient et le reste d'une division posée et interpréter le résultat.",
-    successCriteria: [
-      "Je pose la division en identifiant dividende et diviseur.",
-      "Je calcule le quotient et le reste étape par étape.",
-      "Je vérifie que le reste est strictement inférieur au diviseur.",
-    ],
-    lessonIds: [],
-    status: "upcoming",
-    sequence: {
-      id: "seq-cm1-ma-cal-division",
-      competencyId: "cm1-ma-cal-division",
-      title: "Poser et interpréter la division",
       status: "upcoming",
       steps: [],
     },
