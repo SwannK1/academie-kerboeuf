@@ -44,11 +44,6 @@ export function MaternelleSubdomainList({
 // ── Carte sous-domaine ────────────────────────────────────────────────────────
 
 function SubdomainCard({ subdomain }: { subdomain: MaternelleSubdomain }) {
-  const sequence: MaternelleSequence | undefined = subdomain.sequences[0];
-  const workshop: MaternelleWorkshop | undefined = sequence?.workshops[0];
-  const grid: MaternelleObservationGrid | undefined =
-    workshop?.observationGrid;
-
   return (
     <article className="flex flex-col rounded-md border border-white/10 bg-white/[0.035] p-5">
       {/* En-tête */}
@@ -63,58 +58,88 @@ function SubdomainCard({ subdomain }: { subdomain: MaternelleSubdomain }) {
       </h3>
       <p className="mt-2 text-xs leading-5 text-muted">{subdomain.description}</p>
 
-      {/* Séquence */}
-      {sequence && (
+      {/* Séquences */}
+      {subdomain.sequences.length > 0 && (
         <div className="mt-4 border-t border-white/10 pt-4">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
-            Séquence prévue
+            {subdomain.sequences.length === 1
+              ? "Séquence prévue"
+              : `${subdomain.sequences.length} séquences prévues`}
           </p>
-          <p className="mt-1.5 text-sm font-bold text-foreground">
-            {sequence.title}
-          </p>
-          <SequenceMeta
-            periodLabel={sequence.periodLabel}
-            estimatedDuration={sequence.estimatedDuration}
-          />
-          <PublicStatusBadge status={sequence.status} className="mt-2" />
+          <div className="mt-2 grid gap-3">
+            {subdomain.sequences.map((sequence) => (
+              <SequenceRow key={sequence.id} sequence={sequence} />
+            ))}
+          </div>
         </div>
       )}
+    </article>
+  );
+}
 
-      {/* Atelier */}
+function SequenceRow({ sequence }: { sequence: MaternelleSequence }) {
+  const workshop: MaternelleWorkshop | undefined = sequence.workshops[0];
+  const grid: MaternelleObservationGrid | undefined =
+    workshop?.observationGrid;
+
+  return (
+    <div className="rounded border border-white/10 bg-ink/20 p-3">
+      <div className="flex items-start justify-between gap-2">
+        <p className="text-sm font-bold leading-snug text-foreground">
+          {sequence.title}
+        </p>
+        <PublicStatusBadge status={sequence.status} className="mt-0.5 shrink-0" />
+      </div>
+      <SequenceMeta
+        periodLabel={sequence.periodLabel}
+        sessionCount={sequence.sessionCount}
+        estimatedDuration={sequence.estimatedDuration}
+      />
+      {sequence.observableSkills && sequence.observableSkills.length > 0 && (
+        <p className="mt-1.5 text-xs leading-5 text-muted">
+          {sequence.observableSkills[0]}
+        </p>
+      )}
+
+      {/* Atelier principal */}
       {workshop && (
-        <div className="mt-4 border-t border-white/10 pt-4">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
-            Atelier prévu
+        <div className="mt-2 border-t border-white/10 pt-2">
+          <p className="text-xs font-bold uppercase tracking-[0.1em] text-muted">
+            Atelier
           </p>
-          <p className="mt-1.5 text-sm font-bold text-foreground">
+          <p className="mt-1 text-xs font-bold text-foreground">
             {workshop.title}
           </p>
           <WorkshopMeta
             duration={workshop.duration}
             groupSize={workshop.groupSize}
           />
-          <PublicStatusBadge status={workshop.status} className="mt-2" />
+          {sequence.workshops.length > 1 && (
+            <p className="mt-1 text-xs text-muted">
+              +{sequence.workshops.length - 1} autre
+              {sequence.workshops.length > 2 ? "s" : ""} atelier
+              {sequence.workshops.length > 2 ? "s" : ""}
+            </p>
+          )}
         </div>
       )}
 
       {/* Grille d'observation */}
       {grid && (
-        <div className="mt-4 border-t border-white/10 pt-4">
-          <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
-            Grille d&apos;observation
-          </p>
-          <p className="mt-1.5 text-xs text-foreground">{grid.title}</p>
+        <div className="mt-2 border-t border-white/10 pt-2">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs text-muted">{grid.title}</p>
+            <PublicStatusBadge status={grid.status} />
+          </div>
           {grid.criteria.length > 0 && (
-            <p className="mt-1 text-xs text-muted">
+            <p className="mt-0.5 text-xs text-muted">
               {grid.criteria.length} critère
-              {grid.criteria.length > 1 ? "s" : ""} prévu
               {grid.criteria.length > 1 ? "s" : ""}
             </p>
           )}
-          <PublicStatusBadge status={grid.status} className="mt-2" />
         </div>
       )}
-    </article>
+    </div>
   );
 }
 
@@ -122,16 +147,21 @@ function SubdomainCard({ subdomain }: { subdomain: MaternelleSubdomain }) {
 
 function SequenceMeta({
   periodLabel,
+  sessionCount,
   estimatedDuration,
 }: {
   periodLabel?: string;
+  sessionCount?: number;
   estimatedDuration?: string;
 }) {
-  if (!periodLabel && !estimatedDuration) return null;
+  const parts = [
+    periodLabel,
+    sessionCount != null ? `${sessionCount} séance${sessionCount > 1 ? "s" : ""}` : undefined,
+    estimatedDuration,
+  ].filter(Boolean);
+  if (parts.length === 0) return null;
   return (
-    <p className="mt-0.5 text-xs text-muted">
-      {[periodLabel, estimatedDuration].filter(Boolean).join(" · ")}
-    </p>
+    <p className="mt-0.5 text-xs text-muted">{parts.join(" · ")}</p>
   );
 }
 

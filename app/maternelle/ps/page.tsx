@@ -20,6 +20,12 @@ export default function PsPage() {
     },
     { available: 0, "in-progress": 0, upcoming: 0 },
   );
+  const sequenceCount = psDomains.reduce(
+    (total, domain) =>
+      total +
+      (domain.subdomains?.reduce((n, sd) => n + sd.sequences.length, 0) ?? 0),
+    0,
+  );
 
   return (
     <main>
@@ -53,8 +59,9 @@ export default function PsPage() {
                 ressources prévues. Le site organise ; les PDF enseigneront.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 sm:min-w-[24rem]">
+            <div className="grid grid-cols-4 gap-2 sm:min-w-[28rem]">
               <QuickMetric label="Domaines" value={psDomains.length} />
+              <QuickMetric label="Séquences" value={sequenceCount} />
               <QuickMetric label="Pilote" value={statusCounts["in-progress"]} />
               <QuickMetric label="À venir" value={statusCounts.upcoming} />
             </div>
