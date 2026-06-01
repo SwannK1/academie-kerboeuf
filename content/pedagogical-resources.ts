@@ -17,6 +17,7 @@ const resourceSlots: Array<{
   { kind: "lesson-pdf", label: "Leçon PDF" },
   { kind: "exercises-pdf", label: "Exercices PDF" },
   { kind: "correction-pdf", label: "Correction PDF" },
+  { kind: "assessment-pdf", label: "Évaluation PDF" },
   { kind: "projectable-pdf", label: "Projection PDF" },
   { kind: "parent-sheet-pdf", label: "Fiche parent" },
 ];

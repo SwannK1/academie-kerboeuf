@@ -31,6 +31,15 @@ const PLANNED_PDF_RESOURCES: ResourceSlot[] = [
     },
   },
   {
+    kind: "assessment-pdf",
+    label: "Évaluation PDF",
+    resource: {
+      kind: "assessment-pdf",
+      label: "Évaluation PDF",
+      status: "planned",
+    },
+  },
+  {
     kind: "projectable-pdf",
     label: "Support projetable",
     resource: {

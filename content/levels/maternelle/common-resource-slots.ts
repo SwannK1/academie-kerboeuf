@@ -26,4 +26,19 @@ export const maternelleCommonResourceSlots: MaternelleDomainEntry["resourceSlots
       label: "Fiche parent",
       status: "upcoming",
     },
+    {
+      kind: "fiche-enseignant",
+      label: "Fiche enseignant",
+      status: "upcoming",
+    },
+    {
+      kind: "materiel",
+      label: "Matériel",
+      status: "upcoming",
+    },
+    {
+      kind: "trace",
+      label: "Trace écrite",
+      status: "upcoming",
+    },
   ];

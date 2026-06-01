@@ -56,6 +56,7 @@ const ressourcesTexteNarratif: PedagogicalResourceRef[] = [
   { kind: "lesson-pdf", label: "PDF de leçon", status: "planned" },
   { kind: "exercises-pdf", label: "PDF d'exercices", status: "planned" },
   { kind: "correction-pdf", label: "PDF de correction", status: "planned" },
+  { kind: "assessment-pdf", label: "PDF d'évaluation", status: "planned" },
   { kind: "projectable-pdf", label: "PDF projetable", status: "planned" },
   { kind: "parent-sheet-pdf", label: "Fiche parent", status: "planned" },
 ];

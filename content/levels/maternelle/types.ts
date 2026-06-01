@@ -41,6 +41,9 @@ export type MaternelleResourceKind =
   | "fiche-atelier"
   | "support-projetable"
   | "fiche-parent"
+  | "fiche-enseignant"
+  | "materiel"
+  | "trace"
   | "dictee-adulte";
 
 /** Emplacement pour une ressource PDF future. href uniquement si le fichier existe réellement. */
