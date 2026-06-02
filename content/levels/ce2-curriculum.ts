@@ -119,6 +119,54 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               ],
               status: "upcoming",
             },
+            {
+              id: "ce2-fr-lc-lire-texte-documentaire",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-comprehension",
+              title: "Lire un texte documentaire court",
+              observableObjective:
+                "L'élève lit un texte documentaire court et identifie son organisation et ses informations principales.",
+              successCriteria: [
+                "Je repère le titre et les sous-titres.",
+                "Je comprends l'organisation du texte.",
+                "Je retrouve les informations principales.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-lc-prelever-information-precise",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-comprehension",
+              title: "Prélever une information précise",
+              observableObjective:
+                "L'élève retrouve une information explicitement écrite dans un texte en citant le passage correspondant.",
+              successCriteria: [
+                "Je lis la question avec attention.",
+                "Je retrouve l'information dans le texte.",
+                "Je cite le passage correspondant.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-lc-resumer-paragraphe",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-comprehension",
+              title: "Résumer un court paragraphe",
+              observableObjective:
+                "L'élève reformule l'idée principale d'un paragraphe en une ou deux phrases.",
+              successCriteria: [
+                "Je lis le paragraphe en entier.",
+                "Je repère l'idée principale.",
+                "Je la reformule dans mes propres mots.",
+              ],
+              status: "upcoming",
+            },
           ],
         },
         {
@@ -173,6 +221,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               ],
               status: "upcoming",
             },
+            {
+              id: "ce2-fr-ec-utiliser-connecteurs-temporels",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "ecriture",
+              title: "Utiliser les connecteurs temporels",
+              observableObjective:
+                "L'élève organise les actions d'un texte avec des connecteurs comme d'abord, puis, ensuite, enfin.",
+              successCriteria: [
+                "J'utilise au moins deux connecteurs différents.",
+                "Les actions se suivent dans un ordre logique.",
+                "Mon texte se comprend facilement.",
+              ],
+              status: "upcoming",
+            },
           ],
         },
         {
@@ -208,6 +272,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je choisis la terminaison selon le sujet.",
                 "Je forme le passé composé avec un auxiliaire.",
                 "Je distingue présent et passé composé.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-edl-conjuguer-present-verbes-frequents",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "etude-de-la-langue",
+              title: "Conjuguer au présent les verbes fréquents",
+              observableObjective:
+                "L'élève conjugue des verbes fréquents au présent en utilisant les terminaisons régulières.",
+              successCriteria: [
+                "Je connais les terminaisons du présent.",
+                "Je choisis la terminaison selon le sujet.",
+                "Je conjugue sans faute les verbes fréquents.",
               ],
               status: "upcoming",
             },
@@ -284,6 +364,38 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               successCriteria: [
                 "J'aligne les chiffres par rang.",
                 "Je calcule étape par étape.",
+                "Je vérifie la vraisemblance du résultat.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-ma-nc-multiplier-2-5-10",
+              levelSlug: "ce2",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "nombres-calcul",
+              title: "Multiplier par 2, 5 et 10",
+              observableObjective:
+                "L'élève utilise des faits numériques mémorisés pour multiplier rapidement par 2, 5 et 10.",
+              successCriteria: [
+                "Je connais les tables de 2, 5 et 10.",
+                "Je calcule un produit par 2, 5 ou 10 de tête.",
+                "Je vérifie mon résultat.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-ma-nc-poser-multiplication",
+              levelSlug: "ce2",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "nombres-calcul",
+              title: "Poser une multiplication simple",
+              observableObjective:
+                "L'élève organise et calcule une multiplication posée à un chiffre.",
+              successCriteria: [
+                "J'aligne les chiffres correctement.",
+                "Je calcule les produits partiels.",
                 "Je vérifie la vraisemblance du résultat.",
               ],
               status: "upcoming",
@@ -511,6 +623,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               ],
               status: "upcoming",
             },
+            {
+              id: "ce2-qlm-tp-classer-documents",
+              levelSlug: "ce2",
+              subject: "Questionner le monde",
+              domainSlug: "questionner-le-monde",
+              subdomainSlug: "temps",
+              title: "Classer des documents",
+              observableObjective:
+                "L'élève regroupe des documents selon leur nature ou leur thème.",
+              successCriteria: [
+                "Je repère la nature du document.",
+                "Je choisis un critère de classement.",
+                "Je justifie mon classement.",
+              ],
+              status: "upcoming",
+            },
           ],
         },
         {
@@ -600,6 +728,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "J'observe une propriété.",
                 "Je compare plusieurs objets.",
                 "Je justifie mon classement.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-qlm-vmo-garder-trace-observation",
+              levelSlug: "ce2",
+              subject: "Questionner le monde",
+              domainSlug: "questionner-le-monde",
+              subdomainSlug: "vivant-matiere-objets",
+              title: "Garder une trace d'observation",
+              observableObjective:
+                "L'élève note ou dessine une observation avec précision pour en garder une trace réutilisable.",
+              successCriteria: [
+                "Je note ce que j'observe au moment de l'observation.",
+                "Je décris avec précision.",
+                "Ma trace est lisible et réutilisable.",
               ],
               status: "upcoming",
             },
