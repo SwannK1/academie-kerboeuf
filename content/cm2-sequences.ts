@@ -5,6 +5,12 @@
 
 export type Cm2SequenceStatus = "available" | "in-progress" | "upcoming";
 
+export type Cm2SequencePdfSlot = {
+  kind: "lesson" | "exercises" | "correction" | "assessment" | "projectable";
+  label: string;
+  status: "planned" | "available";
+};
+
 export type Cm2Sequence = {
   slug: string;
   title: string;
@@ -15,8 +21,12 @@ export type Cm2Sequence = {
   level: "CM2";
   shortDescription?: string;
   teacherReference?: string;
+  teacherSlug?: string;
   felixRole?: string;
   visualToCreate?: string;
+  observableObjective?: string;
+  successCriteria?: string[];
+  pdfSlots?: Cm2SequencePdfSlot[];
 };
 
 // ── Français ──────────────────────────────────────────────────────────────────
@@ -28,24 +38,54 @@ const francaisSequences: Cm2Sequence[] = [
     title: "Repérer les indices dans un texte",
     domain: "Lecture et compréhension",
     subdomain: "Inférences",
-    skill: "Prélever des indices explicites et implicites dans un texte court.",
+    skill: "Identifier les mots, expressions ou détails qui permettent de comprendre l'implicite.",
     status: "in-progress",
     level: "CM2",
-    shortDescription: "Identifier les mots et groupes qui portent une information utile.",
+    shortDescription: "Félix reçoit une lettre mystérieuse sans signature. Il surligne chaque indice pour deviner qui l'a écrite.",
+    teacherSlug: "rosa",
+    teacherReference: "Rosa",
     felixRole: "Enquêteur qui surligne les indices sur un document.",
     visualToCreate: "Fiche méthode : texte + zone d'indices",
+    observableObjective: "L'élève surligne des indices dans un texte et explique ce que chacun lui apprend.",
+    successCriteria: [
+      "Je peux repérer au moins trois indices dans un texte court.",
+      "Je peux expliquer ce qu'un indice m'apprend sur un personnage ou une situation.",
+      "Je peux distinguer un indice utile d'un détail sans importance.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "fr-lc-explicite-implicite",
     title: "Distinguer information explicite et information implicite",
     domain: "Lecture et compréhension",
     subdomain: "Inférences",
-    skill: "Différencier ce qui est dit directement de ce qui est à déduire.",
+    skill: "Différencier ce qui est écrit directement de ce qu'il faut déduire.",
     status: "in-progress",
     level: "CM2",
-    shortDescription: "Classer les informations selon leur nature dans un tableau.",
+    shortDescription: "Félix lit un carnet de voyage : certains faits sont écrits noir sur blanc, d'autres doivent être déduits. Il construit un tableau pour les classer.",
+    teacherSlug: "rosa",
+    teacherReference: "Rosa",
     felixRole: "Lecteur qui trie les indices avant de conclure.",
     visualToCreate: "Tableau deux colonnes : explicite / implicite",
+    observableObjective: "L'élève identifie et classe des informations en explicites et implicites dans un texte.",
+    successCriteria: [
+      "Je peux expliquer avec mes mots ce qu'est une information explicite.",
+      "Je peux expliquer avec mes mots ce qu'est une information implicite.",
+      "Je peux classer des informations dans un tableau en deux colonnes.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "fr-lc-faire-inference",
@@ -60,15 +100,30 @@ const francaisSequences: Cm2Sequence[] = [
   },
   {
     slug: "fr-lc-justifier-reponse",
-    title: "Justifier une réponse par un passage du texte",
+    title: "Justifier une réponse avec une preuve du texte",
     domain: "Lecture et compréhension",
     subdomain: "Justification par le texte",
-    skill: "Appuyer une réponse sur un extrait précis du texte.",
-    status: "upcoming",
+    skill: "Appuyer sa réponse sur un passage précis du texte.",
+    status: "in-progress",
     level: "CM2",
-    shortDescription: "Rédiger une phrase-réponse avec ancrage textuel.",
+    shortDescription: "Félix doit convaincre son équipe d'une déduction : il relit le texte, souligne le passage clé et construit sa phrase-preuve.",
+    teacherSlug: "rosa",
+    teacherReference: "Rosa",
     felixRole: "Guide qui vérifie que chaque réponse cite sa source.",
     visualToCreate: "Modèle de phrase : « Je pense que… parce que dans le texte… »",
+    observableObjective: "L'élève formule une réponse complète en citant le passage du texte qui la justifie.",
+    successCriteria: [
+      "Je peux surligner dans le texte le passage qui justifie ma réponse.",
+      "Je peux écrire une réponse en utilisant la structure : « Je pense que… parce que dans le texte… »",
+      "Je peux vérifier que ma preuve est bien dans le texte et non inventée.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "fr-lc-idee-principale",
@@ -262,12 +317,27 @@ const mathematiquesSequences: Cm2Sequence[] = [
     title: "Identifier les données utiles dans un problème",
     domain: "Résolution de problèmes",
     subdomain: "Lecture de l'énoncé",
-    skill: "Séparer les données nécessaires des données inutiles ou pièges.",
+    skill: "Trier les informations utiles et inutiles pour résoudre un problème.",
     status: "in-progress",
     level: "CM2",
-    shortDescription: "Lire un énoncé en ciblant la question et les informations nécessaires.",
+    shortDescription: "Félix reçoit un message avec trop d'informations. Il doit encadrer ce qui lui sert vraiment et barrer ce qui le distrait.",
+    teacherSlug: "hector",
+    teacherReference: "Hector",
     felixRole: "Détective qui trie les indices avant d'enquêter.",
     visualToCreate: "Fiche : données utiles / données inutiles / question",
+    observableObjective: "L'élève entoure les données utiles et barre les données inutiles dans un énoncé.",
+    successCriteria: [
+      "Je peux lire un énoncé et repérer la question posée.",
+      "Je peux entourer les données dont j'ai besoin pour répondre.",
+      "Je peux barrer une information qui ne sert pas à résoudre le problème.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "ma-pb-choisir-operation",
@@ -283,14 +353,30 @@ const mathematiquesSequences: Cm2Sequence[] = [
   },
   {
     slug: "ma-pb-resoudre-etapes",
-    title: "Résoudre un problème à plusieurs étapes",
+    title: "Résoudre un problème à étapes",
     domain: "Résolution de problèmes",
     subdomain: "Problèmes complexes",
-    skill: "Décomposer un problème en sous-questions pour l'aborder étape par étape.",
-    status: "upcoming",
+    skill: "Organiser plusieurs calculs dans une démarche cohérente.",
+    status: "in-progress",
     level: "CM2",
+    shortDescription: "Félix doit préparer des rations pour son équipe : il ne peut pas tout calculer d'un coup, il décompose le problème en étapes numérotées.",
+    teacherSlug: "hector",
+    teacherReference: "Hector",
     felixRole: "Explorateur qui avance étape par étape vers la solution.",
     visualToCreate: "Fiche : étape 1 / étape 2 / résultat final",
+    observableObjective: "L'élève écrit et numérote chaque étape de calcul avant d'écrire la réponse finale.",
+    successCriteria: [
+      "Je peux identifier combien d'étapes de calcul un problème nécessite.",
+      "Je peux écrire chaque étape dans l'ordre, avec son résultat intermédiaire.",
+      "Je peux vérifier que mon résultat final répond bien à la question posée.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "ma-pb-verifier-coherence",
@@ -387,12 +473,27 @@ const histoireGeoSequences: Cm2Sequence[] = [
     title: "Lire une carte avec sa légende",
     domain: "Géographie",
     subdomain: "Lecture de cartes",
-    skill: "Utiliser le titre, l'orientation et la légende pour comprendre une carte.",
+    skill: "Comprendre les informations données par une carte, sa légende et ses symboles.",
     status: "in-progress",
     level: "CM2",
-    shortDescription: "Identifier les éléments d'une carte avant de localiser les lieux.",
+    shortDescription: "Félix reçoit une carte de l'Académie sans explications. Il identifie le titre, la légende, l'échelle et la rose des vents avant de pouvoir s'orienter.",
+    teacherSlug: "elian",
+    teacherReference: "Elian",
     felixRole: "Explorateur qui déchiffre une carte avant de tracer son itinéraire.",
     visualToCreate: "Carte annotée : titre / rose des vents / légende / échelle",
+    observableObjective: "L'élève lit une carte inconnue et répond à des questions en s'appuyant sur sa légende.",
+    successCriteria: [
+      "Je peux nommer les éléments obligatoires d'une carte (titre, légende, orientation, échelle).",
+      "Je peux expliquer ce que représente un symbole de la légende.",
+      "Je peux localiser un lieu sur une carte en utilisant les informations disponibles.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "hg-ge-localiser-points-cardinaux",
@@ -424,15 +525,30 @@ const sciencesSequences: Cm2Sequence[] = [
   // Démarche d'investigation
   {
     slug: "sc-di-observer-decrire",
-    title: "Observer et décrire sans interpréter",
+    title: "Observer comme un scientifique",
     domain: "Sciences et technologie",
     subdomain: "Démarche d'investigation",
-    skill: "Formuler une observation factuelle sans l'expliquer prématurément.",
+    skill: "Distinguer ce que l'on observe de ce que l'on interprète.",
     status: "in-progress",
     level: "CM2",
-    shortDescription: "Distinguer ce qu'on voit de ce qu'on suppose.",
+    shortDescription: "Félix examine une graine germée. Il note séparément ce qu'il voit réellement et ce qu'il pense que cela signifie.",
+    teacherSlug: "melina",
+    teacherReference: "Mélina",
     felixRole: "Scientifique qui consigne ses observations avant de conclure.",
     visualToCreate: "Tableau : observation / hypothèse / conclusion",
+    observableObjective: "L'élève écrit une observation factuelle sans y mélanger une explication ou une supposition.",
+    successCriteria: [
+      "Je peux écrire ce que j'observe en utilisant uniquement mes sens.",
+      "Je peux distinguer une phrase d'observation (ce que je vois) d'une phrase d'interprétation (ce que je pense).",
+      "Je peux corriger une phrase qui mélange observation et interprétation.",
+    ],
+    pdfSlots: [
+      { kind: "lesson",      label: "Leçon",              status: "planned" },
+      { kind: "exercises",   label: "Exercices",           status: "planned" },
+      { kind: "correction",  label: "Corrigé",             status: "planned" },
+      { kind: "assessment",  label: "Évaluation",          status: "planned" },
+      { kind: "projectable", label: "Version projetable",  status: "planned" },
+    ],
   },
   {
     slug: "sc-di-formuler-hypothese",
