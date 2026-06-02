@@ -21,8 +21,8 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-langage-oral-seq1",
-        slug: "raconter-une-action-vecue",
-        title: "Raconter une action vécue",
+        slug: "raconter-un-evenement-vecu",
+        title: "Raconter un événement vécu",
         levelSlug: "ms",
         domainSlug: "langage",
         subdomainSlug: "langage-oral",
@@ -80,6 +80,81 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
                 {
                   id: "crit-ms-oral-3",
                   label: "Raconte sans support photo sur sollicitation",
+                  levelDescriptor: "Dépassement MS",
+                },
+              ],
+            },
+            resources: [],
+          },
+        ],
+      },
+      {
+        id: "ms-langage-oral-seq2",
+        slug: "enrichir-son-vocabulaire-de-la-classe",
+        title: "Enrichir son vocabulaire de la classe",
+        levelSlug: "ms",
+        domainSlug: "langage",
+        subdomainSlug: "langage-oral",
+        description:
+          "Séquence de catégorisation et de réemploi des mots liés aux espaces, objets et actions de la classe.",
+        objective:
+          "Amener l'élève à nommer et réutiliser un vocabulaire précis de la vie de classe.",
+        objectives: [
+          "Nommer des objets et espaces de la classe",
+          "Utiliser le mot attendu dans une phrase courte",
+        ],
+        periodLabel: "Période 1",
+        estimatedDuration: "3 séances × 20 min",
+        sessionCount: 3,
+        observableSkills: [
+          "Nomme plusieurs objets usuels de la classe avec un mot précis.",
+        ],
+        observationFocus:
+          "Observer les mots réemployés spontanément dans une phrase courte.",
+        status: "in-progress",
+        resources: [],
+        workshops: [
+          {
+            id: "ms-langage-oral-seq2-atelier1",
+            slug: "les-objets-de-la-classe",
+            title: "Les objets de la classe",
+            type: "dirige",
+            objective:
+              "Nommer et classer des objets familiers de la classe selon leur usage.",
+            duration: "20 min",
+            groupSize: "4-6 élèves",
+            materials: [
+              "Objets usuels de la classe",
+              "Images d'espaces de classe",
+              "Plateaux de tri",
+            ],
+            instruction:
+              "Choisis un objet, nomme-le, puis place-le avec les objets qui servent à la même chose.",
+            expectedAction:
+              "L'élève nomme l'objet et le classe selon son usage en contexte scolaire.",
+            differentiation:
+              "Allègement : proposer deux choix de mots. Renforcement : demander une phrase avec le mot choisi.",
+            status: "in-progress",
+            observationGrid: {
+              id: "ms-langage-oral-seq2-atelier1-grille",
+              title: "Grille — Vocabulaire de la classe",
+              teacherUse:
+                "Cocher les mots nommés précisément et noter les réemplois spontanés.",
+              status: "upcoming",
+              criteria: [
+                {
+                  id: "crit-ms-vocab-classe-1",
+                  label: "Nomme un objet usuel de la classe",
+                  levelDescriptor: "Attendu MS",
+                },
+                {
+                  id: "crit-ms-vocab-classe-2",
+                  label: "Classe l'objet selon son usage",
+                  levelDescriptor: "Attendu MS",
+                },
+                {
+                  id: "crit-ms-vocab-classe-3",
+                  label: "Réemploie le mot dans une phrase courte",
                   levelDescriptor: "Dépassement MS",
                 },
               ],
@@ -188,8 +263,8 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-langage-premiers-ecrits-seq1",
-        slug: "reconnaitre-son-prenom",
-        title: "Reconnaître son prénom",
+        slug: "reconnaitre-son-prenom-en-capitales",
+        title: "Reconnaître son prénom en capitales",
         levelSlug: "ms",
         domainSlug: "langage",
         subdomainSlug: "premiers-ecrits",

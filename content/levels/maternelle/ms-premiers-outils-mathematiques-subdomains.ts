@@ -11,17 +11,41 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-maths-nombres-quantites-seq1",
-        title: "Dénombrer une petite collection",
-        objective: "Dénombrer une collection jusqu'à trois objets.",
-        observableSkills: ["Dénombre une collection jusqu'à trois objets."],
+        slug: "denombrer-une-collection-jusqua-5",
+        title: "Dénombrer une collection jusqu’à 5",
+        objective: "Dénombrer une collection jusqu'à cinq objets.",
+        observableSkills: ["Dénombre une collection jusqu'à cinq objets."],
         status: "upcoming",
         workshops: [
           {
             id: "ms-maths-nombres-quantites-atelier1",
+            slug: "petits-paniers",
             title: "Petits paniers",
             type: "manipulation",
             objective:
               "Mettre le nombre demandé d'objets dans un panier.",
+            status: "upcoming",
+          },
+        ],
+      },
+      {
+        id: "ms-maths-nombres-quantites-seq2",
+        slug: "comparer-deux-collections",
+        title: "Comparer deux collections",
+        objective:
+          "Comparer deux petites collections manipulables pour dire où il y en a plus, moins ou autant.",
+        observableSkills: [
+          "Compare deux collections en utilisant un vocabulaire quantitatif simple.",
+        ],
+        status: "upcoming",
+        workshops: [
+          {
+            id: "ms-maths-nombres-quantites-atelier2",
+            slug: "deux-collections-a-comparer",
+            title: "Deux collections à comparer",
+            type: "manipulation",
+            objective:
+              "Associer ou déplacer des objets pour comparer deux petites collections.",
             status: "upcoming",
           },
         ],
@@ -65,17 +89,22 @@ export const msPremiersOutilsMathematiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-maths-tris-suites-seq1",
-        title: "Poursuivre une suite simple",
-        objective: "Poursuivre une suite alternée de deux éléments.",
-        observableSkills: ["Poursuit une suite alternée de deux éléments."],
+        slug: "classer-selon-deux-criteres-simples",
+        title: "Classer selon deux critères simples",
+        objective:
+          "Classer des objets selon deux critères simples successifs ou combinés.",
+        observableSkills: [
+          "Classe des objets selon deux critères simples, par exemple forme et couleur.",
+        ],
         status: "upcoming",
         workshops: [
           {
             id: "ms-maths-tris-suites-atelier1",
-            title: "Perles en alternance",
+            slug: "boites-de-tri",
+            title: "Boîtes de tri",
             type: "manipulation",
             objective:
-              "Continuer une alternance de deux couleurs avec du matériel.",
+              "Trier des objets selon leur couleur puis leur forme.",
             status: "upcoming",
           },
         ],

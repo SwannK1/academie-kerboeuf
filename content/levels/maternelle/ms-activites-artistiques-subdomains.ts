@@ -11,17 +11,54 @@ export const msActivitesArtistiquesSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-artistiques-productions-plastiques-seq1",
-        title: "Produire une trace avec une intention",
-        objective: "Choisir un outil pour produire une trace attendue.",
-        observableSkills: ["Choisit un outil pour produire une trace attendue."],
+        slug: "realiser-une-composition-avec-formes-et-couleurs",
+        title: "Réaliser une composition avec formes et couleurs",
+        objective:
+          "Organiser des formes et des couleurs sur un support avec une intention simple.",
+        observableSkills: [
+          "Choisit et place des formes ou couleurs pour produire une composition.",
+        ],
         status: "upcoming",
         workshops: [
           {
             id: "ms-artistiques-productions-plastiques-atelier1",
-            title: "Outils et chemins",
+            slug: "formes-et-couleurs",
+            title: "Formes et couleurs",
             type: "manipulation",
             objective:
-              "Utiliser un outil choisi pour tracer un chemin visible sur un support.",
+              "Assembler des formes découpées et des couleurs choisies sur un support.",
+            status: "upcoming",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "ms-artistiques-graphisme",
+    slug: "graphisme-decoratif",
+    label: "Graphisme décoratif",
+    description:
+      "Premiers rythmes graphiques simples, répétitions de signes et alternances visuelles.",
+    status: "upcoming",
+    sequences: [
+      {
+        id: "ms-artistiques-graphisme-seq1",
+        slug: "reproduire-un-rythme-graphique-simple",
+        title: "Reproduire un rythme graphique simple",
+        objective:
+          "Reproduire une alternance graphique simple à partir d'un modèle visible.",
+        observableSkills: [
+          "Poursuit un rythme graphique simple avec deux signes alternés.",
+        ],
+        status: "upcoming",
+        workshops: [
+          {
+            id: "ms-artistiques-graphisme-atelier1",
+            slug: "signes-en-alternance",
+            title: "Signes en alternance",
+            type: "manipulation",
+            objective:
+              "Continuer une alternance de deux signes graphiques sur une bande.",
             status: "upcoming",
           },
         ],

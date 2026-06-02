@@ -25,9 +25,10 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-physique-espace-objets-seq1",
-        title: "Varier ses déplacements dans un parcours",
+        slug: "realiser-un-parcours-moteur-avec-intention",
+        title: "Réaliser un parcours moteur avec intention",
         objective:
-          "Adapter sa vitesse et sa trajectoire aux contraintes d'un parcours avec obstacles variés.",
+          "Adapter sa vitesse, sa trajectoire et ses appuis aux contraintes d'un parcours avec obstacles variés.",
         observableSkills: ["Adapte son déplacement à une contrainte simple du parcours."],
         periodLabel: "Période 1",
         sessionCount: 4,
@@ -65,6 +66,58 @@ export const msActivitePhysiqueSubdomains: MaternelleSubdomain[] = [
                 {
                   id: "crit-ms-physique-espace-3",
                   label: "Enchaîne trois zones différentes sans aide",
+                  levelDescriptor: "Dépassement MS",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: "ms-physique-espace-objets-seq2",
+        slug: "lancer-vers-une-cible",
+        title: "Lancer vers une cible",
+        objective:
+          "Ajuster son geste pour lancer un objet vers une cible visible et proche.",
+        observableSkills: ["Lance un objet en direction d'une cible proche."],
+        periodLabel: "Période 2",
+        sessionCount: 4,
+        status: "in-progress",
+        workshops: [
+          {
+            id: "ms-physique-espace-objets-seq2-atelier1",
+            slug: "viser-les-cerceaux",
+            title: "Viser les cerceaux",
+            type: "jeu",
+            objective:
+              "Lancer différents objets souples vers des cibles matérialisées au sol.",
+            duration: "20 min",
+            groupSize: "6-8 élèves",
+            materials: [
+              "Sacs de graines",
+              "Balles souples",
+              "Cerceaux",
+              "Plots de départ",
+            ],
+            status: "in-progress",
+            observationGrid: {
+              id: "ms-physique-espace-objets-seq2-atelier1-grille",
+              title: "Grille — Lancer vers une cible (MS)",
+              status: "upcoming",
+              criteria: [
+                {
+                  id: "crit-ms-physique-lancer-1",
+                  label: "Lance depuis la zone de départ",
+                  levelDescriptor: "Attendu MS",
+                },
+                {
+                  id: "crit-ms-physique-lancer-2",
+                  label: "Oriente son lancer vers la cible",
+                  levelDescriptor: "Attendu MS",
+                },
+                {
+                  id: "crit-ms-physique-lancer-3",
+                  label: "Ajuste son geste après un premier essai",
                   levelDescriptor: "Dépassement MS",
                 },
               ],

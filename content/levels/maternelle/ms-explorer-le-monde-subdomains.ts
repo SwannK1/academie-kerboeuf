@@ -11,13 +11,16 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-monde-temps-seq1",
-        title: "Ordonner deux moments vécus",
-        objective: "Dire ce qui s'est passé avant ou après une activité.",
-        observableSkills: ["Ordonne deux moments vécus de la journée."],
+        slug: "se-reperer-dans-la-journee",
+        title: "Se repérer dans la journée",
+        objective:
+          "Situer quelques moments réguliers de la journée de classe les uns par rapport aux autres.",
+        observableSkills: ["Replace deux moments vécus dans l'ordre de la journée."],
         status: "upcoming",
         workshops: [
           {
             id: "ms-monde-temps-atelier1",
+            slug: "avant-ou-apres",
             title: "Avant ou après",
             type: "collectif",
             objective:
@@ -38,13 +41,16 @@ export const msExplorerLeMondeSubdomains: MaternelleSubdomain[] = [
     sequences: [
       {
         id: "ms-monde-vivant-seq1",
-        title: "Observer un changement du vivant",
-        objective: "Repérer un changement visible chez une plante ou un animal.",
-        observableSkills: ["Repère un changement visible chez une plante ou un animal."],
+        slug: "observer-et-decrire-une-transformation",
+        title: "Observer et décrire une transformation",
+        objective:
+          "Observer une transformation visible et la décrire avec des mots simples.",
+        observableSkills: ["Décrit un changement visible après deux observations."],
         status: "upcoming",
         workshops: [
           {
             id: "ms-monde-vivant-atelier1",
+            slug: "ca-pousse",
             title: "Ça pousse",
             type: "collectif",
             objective:
