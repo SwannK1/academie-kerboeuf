@@ -342,6 +342,20 @@ const domainMathematiques: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "poser-une-addition-avec-retenue",
+          title: "Additionner avec retenue",
+          objective:
+            "Poser une addition a deux chiffres en gerant la retenue et verifier le resultat.",
+          status: "upcoming",
+        },
+        {
+          slug: "soustraire-avec-methode",
+          title: "Soustraire avec methode",
+          objective:
+            "Poser une soustraction simple et calculer le reste en suivant les etapes de l'algorithme.",
+          status: "upcoming",
+        },
+        {
           slug: "comprendre-la-multiplication-comme-addition-repetee",
           title: "Comprendre la multiplication comme addition repetee",
           objective:

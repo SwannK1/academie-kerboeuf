@@ -107,6 +107,8 @@ export const cm1LearningTree: Cm1LearningTree = [
             sequences: [
               sequence("francais-lecture-documentaire-informations", "Repérer les informations principales", "Identifier le thème et les informations essentielles d'un texte documentaire court."),
               sequence("francais-lecture-documentaire-organisation", "Utiliser l'organisation du texte", "S'appuyer sur titres, paragraphes et mots-clés pour comprendre un document."),
+              sequence("francais-lecture-documentaire-deux-documents", "Lire deux documents pour répondre à une question", "Croiser les informations de deux documents courts pour répondre à une même question."),
+              sequence("francais-lecture-documentaire-justifier-preuve", "Justifier une réponse par une preuve", "Appuyer sa réponse sur un extrait précis du texte en le citant ou le paraphrasant."),
             ],
           },
           {
@@ -141,6 +143,7 @@ export const cm1LearningTree: Cm1LearningTree = [
             status: "upcoming",
             sequences: [
               sequence("francais-ecriture-rediger-texte-structure", "Produire un texte structuré", "Rédiger un texte organisé avec un début, un développement et une fin."),
+              sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Rédiger un paragraphe court qui énonce une idée et l'appuie par un exemple ou une raison."),
               sequence("francais-ecriture-rediger-reviser", "Relire pour améliorer la clarté", "Repérer une maladresse de sens ou d'organisation et proposer une correction."),
               sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Donner une idée, une raison et un exemple."),
               sequence("francais-ecriture-rediger-reviser-grille", "Réviser un texte avec une grille", "Améliorer un texte à partir de critères simples."),

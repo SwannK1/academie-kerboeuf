@@ -102,6 +102,20 @@ const domainFrancais: ProgramDomain = {
       "Entrer progressivement dans le code alphabetique.",
       [
         {
+          slug: "reconnaitre-les-lettres-en-differentes-ecritures",
+          title: "Reconnaitre les lettres dans differentes ecritures",
+          objective:
+            "Identifier une meme lettre ecrite en script, cursive, majuscule et minuscule.",
+          status: "upcoming",
+        },
+        {
+          slug: "associer-une-lettre-et-son-son",
+          title: "Associer une lettre et son son",
+          objective:
+            "Dire le son correspondant a une lettre isolee ou a une graphie etudiee.",
+          status: "upcoming",
+        },
+        {
           slug: "identifier-les-lettres-de-l-alphabet",
           title: "Identifier les lettres de l'alphabet",
           objective:

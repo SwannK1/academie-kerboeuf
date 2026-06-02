@@ -104,6 +104,38 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               status: "upcoming",
             },
             {
+              id: "ce2-fr-lc-prelever-information-precise",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-comprehension",
+              title: "Prélever une information précise dans un texte",
+              observableObjective:
+                "L'élève localise et relève une information précise demandée dans un texte court.",
+              successCriteria: [
+                "Je relis le texte pour chercher l'information.",
+                "Je repère la phrase ou le passage utile.",
+                "Je formule la réponse avec mes mots.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-lc-resumer-paragraphe",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-comprehension",
+              title: "Résumer un court paragraphe",
+              observableObjective:
+                "L'élève dit en une ou deux phrases l'idée principale d'un paragraphe lu.",
+              successCriteria: [
+                "Je repère l'idée principale.",
+                "Je résume sans copier le texte.",
+                "Je n'ajoute pas d'informations absentes.",
+              ],
+              status: "upcoming",
+            },
+            {
               id: "ce2-fr-lc-distinguer-types-textes",
               levelSlug: "ce2",
               subject: "Français",
