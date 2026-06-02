@@ -16,6 +16,8 @@ export const ce1Subjects: Ce1Subject[] = [
       "Premières productions écrites",
       "Grammaire simple",
       "Orthographe fréquente",
+      "Vocabulaire",
+      "Langage oral",
     ],
     status: "in-progress",
     accent: "sky",
@@ -43,7 +45,7 @@ export const ce1Subjects: Ce1Subject[] = [
     title: "Questionner le monde",
     shortDescription:
       "Observer le vivant, explorer la matière, se repérer dans le temps et l'espace.",
-    domains: ["Le monde vivant", "Espace et temps", "Matière et énergie"],
+    domains: ["Le monde vivant", "Espace et temps", "Matière et énergie", "Comportements responsables"],
     status: "upcoming",
     accent: "sky",
     teacherFocus:
@@ -76,7 +78,7 @@ export const ce1Subjects: Ce1Subject[] = [
     title: "EMC",
     shortDescription:
       "Comprendre les règles collectives, distinguer droits et devoirs, identifier des actions responsables.",
-    domains: ["Vie collective", "Droits et devoirs"],
+    domains: ["Vie collective", "Vie intérieure et altérité", "Droits et devoirs"],
     status: "upcoming",
     accent: "gold",
     teacherFocus:
