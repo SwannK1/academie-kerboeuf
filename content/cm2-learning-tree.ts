@@ -187,6 +187,44 @@ export const cm2LearningTree: Cm2LearningTree = [
               },
             ],
           },
+          {
+            id: "francais-lecture-fluidite",
+            title: "Fluidité de lecture",
+            description: "Lire un texte long à voix haute avec fluidité et expression.",
+            status: "upcoming",
+            lessons: [
+              { id: "francais-lecture-fluidite-texte-long", title: "Lire avec fluidité un texte long", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-lecture-fluidite-expression", title: "Adapter sa voix au sens du texte", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+          {
+            id: "francais-lecture-documentaire",
+            title: "Textes documentaires",
+            description: "Lire et comprendre un texte documentaire en repérant ses spécificités.",
+            status: "upcoming",
+            lessons: [
+              { id: "francais-lecture-doc-identifier", title: "Identifier les caractéristiques d'un texte documentaire", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-lecture-doc-comprendre", title: "Comprendre un texte documentaire et en dégager les informations clés", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+          {
+            id: "francais-lecture-resume-comparaison",
+            title: "Résumer et comparer des textes",
+            status: "upcoming",
+            lessons: [
+              { id: "francais-lecture-resumer", title: "Résumer un texte narratif ou documentaire", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-lecture-comparer-documents", title: "Comparer plusieurs documents sur un même sujet", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+          {
+            id: "francais-lecture-intentions-auteur",
+            title: "Intentions de l'auteur",
+            status: "upcoming",
+            lessons: [
+              { id: "francais-lecture-auteur-point-de-vue", title: "Identifier le point de vue de l'auteur dans un texte", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-lecture-auteur-intention", title: "Interpréter les intentions d'un auteur à partir de ses choix d'écriture", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
         ],
       },
       {
@@ -245,6 +283,17 @@ export const cm2LearningTree: Cm2LearningTree = [
               },
             ],
           },
+          {
+            id: "francais-production-types-textes",
+            title: "Types de textes",
+            status: "upcoming",
+            lessons: [
+              { id: "francais-production-recit", title: "Produire un récit structuré (début, péripétie, fin)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-production-argumentatif", title: "Produire un texte argumentatif simple (opinion + arguments)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-production-explicatif", title: "Produire un texte explicatif (explication d'un phénomène)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-production-enrichir-reviser", title: "Enrichir et réviser son texte définitif", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
         ],
       },
       {
@@ -279,6 +328,8 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+              { id: "francais-grammaire-phrase-simple-complexe", title: "Distinguer une phrase simple et une phrase complexe", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-grammaire-phrase-fonctions", title: "Identifier les fonctions dans la phrase (sujet, COD, COI, CC)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
           {
@@ -296,6 +347,7 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+              { id: "francais-grammaire-conjugaison-passe-compose", title: "Conjuguer au passé composé (auxiliaires être et avoir)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
           {
@@ -313,6 +365,8 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+              { id: "francais-lexique-sens-antonymes", title: "Trouver et utiliser des antonymes", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "francais-lexique-sens-champs", title: "Identifier et constituer un champ lexical", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
         ],
@@ -408,6 +462,8 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+              { id: "maths-nombres-fractions-droite", title: "Placer des fractions sur une droite graduée", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-nombres-fractions-decimales", title: "Passer d'une fraction décimale à un nombre décimal", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
           {
@@ -453,6 +509,27 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+            ],
+          },
+          {
+            id: "maths-nombres-grands-nombres",
+            title: "Grands nombres",
+            status: "upcoming",
+            lessons: [
+              { id: "maths-nombres-grands-lire", title: "Lire et écrire les grands nombres (jusqu'au milliard)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-nombres-grands-comparer", title: "Comparer et ranger des grands nombres", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-nombres-grands-encadrer", title: "Encadrer un nombre entre deux valeurs connues", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+            ],
+          },
+          {
+            id: "maths-nombres-decimaux",
+            title: "Nombres décimaux",
+            status: "upcoming",
+            lessons: [
+              { id: "maths-decimaux-lire-ecrire", title: "Lire et écrire des nombres décimaux", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-decimaux-comparer", title: "Comparer et ranger des nombres décimaux", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-decimaux-additionner-soustraire", title: "Additionner et soustraire des nombres décimaux", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-decimaux-multiplier", title: "Multiplier un nombre décimal par un entier", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
         ],
@@ -511,6 +588,15 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+            ],
+          },
+          {
+            id: "maths-problemes-proportionnalite",
+            title: "Proportionnalité et pourcentages",
+            status: "upcoming",
+            lessons: [
+              { id: "maths-proportionnalite-reconnaitre", title: "Reconnaître et utiliser une situation de proportionnalité", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-pourcentages-simples", title: "Calculer un pourcentage simple (50 %, 25 %, 10 %)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
         ],
@@ -593,6 +679,15 @@ export const cm2LearningTree: Cm2LearningTree = [
                   { type: "evaluation", label: "Évaluation", status: "upcoming" },
                 ],
               },
+            ],
+          },
+          {
+            id: "maths-geometrie-angles",
+            title: "Angles",
+            status: "upcoming",
+            lessons: [
+              { id: "maths-geometrie-angles-identifier", title: "Identifier et nommer différents types d'angles (droit, aigu, obtus)", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
+              { id: "maths-geometrie-angles-mesurer", title: "Mesurer et comparer des angles avec un rapporteur", status: "upcoming", resources: [{ type: "lesson", label: "Leçon", status: "upcoming" }, { type: "exercise", label: "Exercices", status: "upcoming" }, { type: "evaluation", label: "Évaluation", status: "upcoming" }] },
             ],
           },
         ],
