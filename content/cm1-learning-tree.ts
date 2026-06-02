@@ -109,6 +109,16 @@ export const cm1LearningTree: Cm1LearningTree = [
               sequence("francais-lecture-documentaire-organisation", "Utiliser l'organisation du texte", "S'appuyer sur titres, paragraphes et mots-clés pour comprendre un document."),
             ],
           },
+          {
+            id: "francais-lecture-croiser-sources",
+            title: "Croiser des sources",
+            status: "upcoming",
+            sequences: [
+              sequence("francais-lecture-croiser-sources-deux-documents", "Lire deux documents pour répondre à une question", "Croiser deux sources pour construire une réponse."),
+              sequence("francais-lecture-croiser-sources-comparer-textes", "Comparer deux textes", "Identifier ressemblances et différences entre deux textes."),
+              sequence("francais-lecture-croiser-sources-justifier-preuve", "Justifier une réponse par une preuve", "Appuyer sa réponse sur un élément précis du document."),
+            ],
+          },
         ],
       },
       {
@@ -132,6 +142,8 @@ export const cm1LearningTree: Cm1LearningTree = [
             sequences: [
               sequence("francais-ecriture-rediger-texte-structure", "Produire un texte structuré", "Rédiger un texte organisé avec un début, un développement et une fin."),
               sequence("francais-ecriture-rediger-reviser", "Relire pour améliorer la clarté", "Repérer une maladresse de sens ou d'organisation et proposer une correction."),
+              sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Donner une idée, une raison et un exemple."),
+              sequence("francais-ecriture-rediger-reviser-grille", "Réviser un texte avec une grille", "Améliorer un texte à partir de critères simples."),
             ],
           },
         ],
@@ -148,6 +160,8 @@ export const cm1LearningTree: Cm1LearningTree = [
             sequences: [
               sequence("francais-etude-langue-grammaire-sujet-verbe", "Identifier sujet, verbe et accords", "Repérer le sujet et le verbe conjugué pour contrôler un accord simple."),
               sequence("francais-etude-langue-grammaire-complements", "Identifier les compléments essentiels", "Distinguer les compléments nécessaires au sens du verbe dans une phrase simple."),
+              sequence("francais-etude-langue-grammaire-fonctions-phrase", "Identifier les fonctions dans la phrase", "Repérer sujet, verbe, complément du verbe et complément de phrase."),
+              sequence("francais-etude-langue-grammaire-accord-sujet-verbe", "Accorder sujet-verbe dans des phrases simples enrichies", "Justifier l'accord du verbe avec son sujet."),
             ],
           },
           {
@@ -201,6 +215,7 @@ export const cm1LearningTree: Cm1LearningTree = [
             sequences: [
               sequence("mathematiques-nombres-calculs-numeration-grands-nombres", "Lire, écrire et comparer les grands nombres", "Lire, écrire, décomposer et comparer des nombres entiers jusqu'au million."),
               sequence("mathematiques-nombres-calculs-numeration-fractions", "Comprendre la notion de fraction", "Représenter une fraction simple comme partage équitable ou position sur une droite graduée."),
+              sequence("mathematiques-nombres-calculs-numeration-comparer-fractions", "Comparer des fractions simples", "Comparer des fractions avec un même dénominateur ou des représentations."),
               sequence("mathematiques-nombres-calculs-numeration-decimaux", "Découvrir les nombres décimaux", "Lire et écrire des nombres décimaux simples en lien avec les fractions décimales."),
             ],
           },
@@ -235,6 +250,15 @@ export const cm1LearningTree: Cm1LearningTree = [
             sequences: [
               sequence("mathematiques-problemes-demarche-donnees-utiles", "Sélectionner les données utiles", "Identifier les informations nécessaires et écarter les données inutiles d'un énoncé."),
               sequence("mathematiques-problemes-demarche-etapes", "Résoudre un problème à étapes", "Organiser deux calculs successifs pour répondre à une question."),
+              sequence("mathematiques-problemes-demarche-multiplicatif", "Résoudre un problème multiplicatif", "Choisir et organiser une multiplication dans une situation problème."),
+            ],
+          },
+          {
+            id: "mathematiques-problemes-donnees",
+            title: "Lire et interpréter des données",
+            status: "upcoming",
+            sequences: [
+              sequence("mathematiques-problemes-donnees-graphique", "Lire un graphique simple", "Prélever et interpréter une donnée dans un graphique."),
             ],
           },
         ],
@@ -361,7 +385,7 @@ export const cm1LearningTree: Cm1LearningTree = [
         id: "sciences-demarche",
         title: "Démarche scientifique",
         status: "upcoming",
-        subdomains: [{ id: "sciences-demarche-investigation", title: "Observer et questionner", status: "upcoming", sequences: [sequence("sciences-demarche-investigation-observation", "Distinguer observation et interprétation", "Séparer ce qui est observé de ce qui est supposé lors d'une investigation."), sequence("sciences-demarche-investigation-hypothese", "Formuler une hypothèse testable", "Proposer une hypothèse simple qui peut être vérifiée par une observation ou une expérience.")] }],
+        subdomains: [{ id: "sciences-demarche-investigation", title: "Observer et questionner", status: "upcoming", sequences: [sequence("sciences-demarche-investigation-observation", "Distinguer observation et interprétation", "Séparer ce qui est observé de ce qui est supposé lors d'une investigation."), sequence("sciences-demarche-investigation-hypothese", "Formuler une hypothèse testable", "Proposer une hypothèse simple qui peut être vérifiée par une observation ou une expérience."), sequence("sciences-demarche-investigation-comparer-observations", "Comparer des observations scientifiques", "Repérer ce qui est identique, différent ou évolutif.")] }],
       },
       {
         id: "sciences-vivant",
