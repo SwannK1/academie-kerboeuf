@@ -7,6 +7,7 @@ import type {
   Lesson,
   LearningCompetency,
   ParentGuidance,
+  PedagogicalResourceRef,
   ProgramDomain,
   ProgramStatus,
   ProgramSubdomain,
@@ -18,11 +19,31 @@ const emptyParentGuidance: ParentGuidance = {
   successSigns: [],
 };
 
+// Trois feuilles plannees par sequence : lecon, exercices, evaluation.
+const plannedSequenceResources: PedagogicalResourceRef[] = [
+  {
+    kind: "lesson-pdf",
+    label: "Feuille 1/3 — Decouverte et automatismes",
+    status: "planned",
+  },
+  {
+    kind: "exercises-pdf",
+    label: "Feuille 2/3 — Application et consolidation",
+    status: "planned",
+  },
+  {
+    kind: "assessment-pdf",
+    label: "Feuille 3/3 — Evaluation courte",
+    status: "planned",
+  },
+];
+
 type CompetencyDefinition = {
   slug: string;
   title: string;
   objective: string;
   status: ProgramStatus;
+  successCriteria?: string[];
 };
 
 function createCompetencySequence(
@@ -40,8 +61,9 @@ function createCompetencySequence(
       objective: definition.objective,
       skill: definition.title,
       parentGuidance: emptyParentGuidance,
-      successCriteria: [],
+      successCriteria: definition.successCriteria ?? [],
       exercises: [],
+      resources: plannedSequenceResources,
       competencyIds: [id],
       status: definition.status,
     },
@@ -57,7 +79,7 @@ function createCompetencySequence(
       objective: definition.objective,
       status: definition.status,
       lessonIds: [id],
-      successCriteria: [],
+      successCriteria: definition.successCriteria ?? [],
     },
   };
 }
@@ -107,6 +129,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Associer les lettres et graphies etudiees a leur son le plus frequent.",
           status: "in-progress",
+          successCriteria: [
+            "Associe chaque lettre etudiee a son son dans un mot donne.",
+            "Classe des images selon leur son initial.",
+          ],
         },
         {
           slug: "lire-des-syllabes-simples",
@@ -114,6 +140,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Decoder des syllabes consonne-voyelle et voyelle-consonne avec appui oral.",
           status: "upcoming",
+          successCriteria: [
+            "Lit une syllabe CV sans hesitation apres entrainement.",
+            "Distingue deux syllabes proches a l'oral et a l'ecrit.",
+          ],
         },
         {
           slug: "lire-des-mots-reguliers-courts",
@@ -121,6 +151,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Assembler les syllabes pour lire des mots reguliers d'une ou deux syllabes.",
           status: "upcoming",
+          successCriteria: [
+            "Lit un mot regulier de deux syllabes en pointant chaque syllabe.",
+            "Reconnait le mot lu dans une liste de trois propositions.",
+          ],
         },
       ],
     ),
@@ -136,6 +170,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Former et lire des syllabes en combinant une consonne et une voyelle connues.",
           status: "upcoming",
+          successCriteria: [
+            "Forme une syllabe CV avec des lettres decoupees et la lit.",
+            "Complete une syllabe a trou en choisissant la lettre manquante.",
+          ],
         },
         {
           slug: "lire-des-mots-avec-digraphes-frequents",
@@ -143,6 +181,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Decoder des mots contenant des graphemes frequents comme ou, on, an ou ch.",
           status: "upcoming",
+          successCriteria: [
+            "Entoure le grapheme cible dans une liste de mots.",
+            "Lit un mot contenant le grapheme etudie sans l'aide de l'enseignant.",
+          ],
         },
         {
           slug: "encoder-des-syllabes-entendues",
@@ -150,6 +192,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Ecrire une syllabe simple en choisissant les lettres correspondant aux sons entendus.",
           status: "upcoming",
+          successCriteria: [
+            "Ecrit les lettres du son entendu dans le bon ordre.",
+            "Controle son ecriture en relisant la syllabe a voix haute.",
+          ],
         },
       ],
     ),
@@ -165,6 +211,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Reconnaitre rapidement des mots tres frequents deja rencontres.",
           status: "upcoming",
+          successCriteria: [
+            "Lit le mot flash en moins de deux secondes.",
+            "Retrouve le mot dans une phrase ecrite sans hésitation visible.",
+          ],
         },
         {
           slug: "lire-une-phrase-courte-avec-fluidite",
@@ -172,6 +222,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Lire une phrase courte en respectant l'ordre des mots et une prosodie simple.",
           status: "upcoming",
+          successCriteria: [
+            "Lit la phrase sans revenir en arriere plus d'une fois.",
+            "Respecte la ponctuation de fin de phrase a l'oral.",
+          ],
         },
       ],
     ),
@@ -187,6 +241,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Reformuler ou executer une consigne courte donnee oralement.",
           status: "upcoming",
+          successCriteria: [
+            "Execute la consigne sans demander de repetition.",
+            "Reformule la consigne avec ses propres mots.",
+          ],
         },
         {
           slug: "identifier-les-personnages-dun-texte-entendu",
@@ -194,6 +252,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Nommer les personnages principaux apres l'ecoute d'un recit court.",
           status: "upcoming",
+          successCriteria: [
+            "Nomme au moins deux personnages du recit entendu.",
+            "Relie un personnage a une action dans l'histoire.",
+          ],
         },
         {
           slug: "prelever-une-information-dans-une-phrase-lue",
@@ -201,6 +263,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Repondre a une question simple a partir d'une phrase decodee.",
           status: "upcoming",
+          successCriteria: [
+            "Repond correctement a une question en relevant un mot cle dans la phrase.",
+            "Pointe le mot ou groupe de mots qui apporte la reponse.",
+          ],
         },
       ],
     ),
@@ -216,12 +282,20 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Copier des mots courts en respectant l'ordre des lettres et la lisibilite.",
           status: "upcoming",
+          successCriteria: [
+            "Copie un mot de trois lettres sans erreur d'ordre ni lettre manquante.",
+            "Forme des lettres lisibles distinctes les unes des autres.",
+          ],
         },
         {
           slug: "encoder-un-mot-simple-entendu",
           title: "Encoder un mot simple entendu",
           objective: "Ecrire un mot regulier court a partir des sons entendus.",
           status: "upcoming",
+          successCriteria: [
+            "Ecrit un mot regulier de deux syllabes en segmentant les sons.",
+            "Relit le mot ecrit pour verifier chaque son.",
+          ],
         },
         {
           slug: "ecrire-une-phrase-simple-guidee",
@@ -229,6 +303,10 @@ const domainFrancais: ProgramDomain = {
           objective:
             "Produire une phrase courte avec une structure donnee et un sens clair.",
           status: "upcoming",
+          successCriteria: [
+            "Complete une phrase a trou avec un mot adapte au sens.",
+            "Met une majuscule en debut et un point en fin de phrase.",
+          ],
         },
       ],
     ),
@@ -255,6 +333,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Compter une collection en pointant chaque element une seule fois.",
           status: "upcoming",
+          successCriteria: [
+            "Compte une collection d'objets en pointant chaque element une seule fois.",
+            "Donne le cardinal final sans recommencer depuis le debut.",
+          ],
         },
         {
           slug: "lire-et-ecrire-les-nombres-jusqua-100",
@@ -262,6 +344,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Associer l'ecriture chiffree, le nom oral et la quantite representee.",
           status: "upcoming",
+          successCriteria: [
+            "Associe l'ecriture chiffree d'un nombre a son nom oral.",
+            "Ecrit sans erreur les nombres de 1 a 30 dictes oralement.",
+          ],
         },
       ],
     ),
@@ -277,6 +363,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Decomposer un nombre jusqu'a 10 en deux parties complementaires.",
           status: "upcoming",
+          successCriteria: [
+            "Trouve toutes les decompositions d'un nombre jusqu'a 10.",
+            "Complete une decomposition a trou (ex. 7 = 4 + __).",
+          ],
         },
         {
           slug: "calculer-une-addition-simple",
@@ -284,6 +374,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Trouver la somme de deux petits nombres avec dessin, materiel ou surcomptage.",
           status: "upcoming",
+          successCriteria: [
+            "Calcule la somme de deux nombres inferieurs a 10 avec du materiel.",
+            "Pose et complete une addition verticale guidee.",
+          ],
         },
         {
           slug: "calculer-une-soustraction-simple",
@@ -291,6 +385,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Resoudre un retrait simple avec dessin, materiel ou comptage en arriere.",
           status: "upcoming",
+          successCriteria: [
+            "Calcule un retrait simple en barrant des dessins ou des jetons.",
+            "Choisit le signe - dans une operation a completer.",
+          ],
         },
       ],
     ),
@@ -306,6 +404,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Identifier une situation ou l'on ajoute et choisir un calcul adapte.",
           status: "upcoming",
+          successCriteria: [
+            "Repere les donnees numeriques utiles dans un enonce court.",
+            "Ecrit et calcule l'addition correspondant a la situation.",
+          ],
         },
         {
           slug: "resoudre-un-probleme-de-retrait-guide",
@@ -313,6 +415,10 @@ const domainMathematiques: ProgramDomain = {
           objective:
             "Identifier une situation ou l'on enleve et choisir un calcul adapte.",
           status: "upcoming",
+          successCriteria: [
+            "Identifie qu'une situation est une soustraction (il en reste combien).",
+            "Ecrit et calcule la soustraction correspondant a la situation.",
+          ],
         },
       ],
     ),
@@ -339,6 +445,10 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           objective:
             "L'eleve classe des elements en vivants ou non-vivants en s'appuyant sur des criteres simples.",
           status: "upcoming",
+          successCriteria: [
+            "Classe des images en deux categories vivant / non-vivant.",
+            "Justifie son choix avec un critere simple (ca grandit, ca respire...).",
+          ],
         },
         {
           slug: "observer-une-croissance-vegetale",
@@ -346,6 +456,10 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           objective:
             "L'eleve observe et decrit les etapes de la pousse d'une plante au fil du temps.",
           status: "upcoming",
+          successCriteria: [
+            "Decrit ce qu'il observe en utilisant les mots graine, tige, feuille.",
+            "Remet dans l'ordre des images representant la croissance d'une plante.",
+          ],
         },
       ],
     ),
@@ -361,6 +475,10 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           objective:
             "L'eleve observe des matieres et les classe selon un critere simple (dur, souple, transparent...).",
           status: "upcoming",
+          successCriteria: [
+            "Classe des objets selon un critere donne (dur ou souple, transparent ou opaque).",
+            "Nomme le critere utilise pour classer.",
+          ],
         },
         {
           slug: "decrire-un-objet-technique",
@@ -368,6 +486,10 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           objective:
             "L'eleve nomme les parties d'un objet simple et explique a quoi chacune sert.",
           status: "upcoming",
+          successCriteria: [
+            "Legender un dessin simple d'objet avec les mots donnes.",
+            "Dit a quoi sert une partie de l'objet en une phrase courte.",
+          ],
         },
       ],
     ),
@@ -383,6 +505,10 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           objective:
             "L'eleve nomme les jours de la semaine dans l'ordre et situe une activite dans la journee.",
           status: "upcoming",
+          successCriteria: [
+            "Recite les sept jours de la semaine dans l'ordre.",
+            "Situe une activite scolaire en disant quel jour elle a lieu.",
+          ],
         },
         {
           slug: "situer-son-ecole-dans-l-espace",
@@ -390,6 +516,10 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           objective:
             "L'eleve indique ou se trouve son ecole par rapport a des reperes connus.",
           status: "upcoming",
+          successCriteria: [
+            "Repere l'ecole sur un plan tres simple du quartier.",
+            "Dit ce qu'il y a pres de l'ecole en utilisant les mots a cote, en face, loin.",
+          ],
         },
       ],
     ),
@@ -416,6 +546,10 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           objective:
             "L'eleve experimente differents outils et matieres pour produire des effets plastiques varies.",
           status: "upcoming",
+          successCriteria: [
+            "Utilise au moins deux outils differents et decrit l'effet obtenu.",
+            "Nomme les couleurs primaires et une couleur obtenue par melange.",
+          ],
         },
         {
           slug: "creer-une-composition-simple",
@@ -423,6 +557,10 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           objective:
             "L'eleve organise des formes et des couleurs dans un espace de production.",
           status: "upcoming",
+          successCriteria: [
+            "Remplit l'espace de la feuille de maniere intentionnelle.",
+            "Explique un choix de couleur ou de forme dans sa production.",
+          ],
         },
         {
           slug: "decrire-une-production",
@@ -430,6 +568,10 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           objective:
             "L'eleve dit ce qu'il voit dans une image ou une production en utilisant des mots simples.",
           status: "upcoming",
+          successCriteria: [
+            "Nomme deux elements visibles dans une oeuvre ou une production.",
+            "Dit ce que l'image lui evoque avec une phrase courte.",
+          ],
         },
       ],
     ),
@@ -445,6 +587,10 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           objective:
             "L'eleve chante une chanson apprise en respectant le rythme et le tempo collectif.",
           status: "upcoming",
+          successCriteria: [
+            "Chante avec le groupe sans decaler les paroles.",
+            "Marque le tempo avec un frappement regulier tout en chantant.",
+          ],
         },
         {
           slug: "memoriser-une-courte-chanson",
@@ -452,6 +598,10 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           objective:
             "L'eleve retient les paroles et la melodie d'une chanson courte.",
           status: "upcoming",
+          successCriteria: [
+            "Chante les deux premiers couplets sans support ecrit.",
+            "Reconnait la chanson au premier refrain entendu.",
+          ],
         },
       ],
     ),
@@ -478,6 +628,10 @@ const domainEPS: ProgramDomain = {
           objective:
             "L'eleve court, change de direction et s'arrete sur un signal sans mettre en danger.",
           status: "upcoming",
+          successCriteria: [
+            "S'arrete completement sur le signal sonore.",
+            "Change de direction sans bousculer ses camarades.",
+          ],
         },
         {
           slug: "lancer-et-attraper",
@@ -485,6 +639,10 @@ const domainEPS: ProgramDomain = {
           objective:
             "L'eleve lance un engin vers une cible et tente de l'attraper.",
           status: "upcoming",
+          successCriteria: [
+            "Atteint la cible sur au moins trois lancers sur cinq.",
+            "Attrape un engin lance doucement par un camarade.",
+          ],
         },
       ],
     ),
@@ -500,6 +658,10 @@ const domainEPS: ProgramDomain = {
           objective:
             "L'eleve comprend et applique les regles d'un jeu collectif simple.",
           status: "upcoming",
+          successCriteria: [
+            "Reformule une regle du jeu dans ses propres mots.",
+            "Joue sans tricher et accepte le resultat.",
+          ],
         },
         {
           slug: "agir-avec-ses-partenaires",
@@ -507,6 +669,10 @@ const domainEPS: ProgramDomain = {
           objective:
             "L'eleve aide ses partenaires et cherche a cooperer pour reussir le jeu.",
           status: "upcoming",
+          successCriteria: [
+            "Passe l'engin a un partenaire libre plutot que d'agir seul.",
+            "Encourage un camarade pendant le jeu.",
+          ],
         },
       ],
     ),
@@ -533,6 +699,10 @@ const domainEMC: ProgramDomain = {
           objective:
             "L'eleve connait les regles de la classe et les applique en situation.",
           status: "upcoming",
+          successCriteria: [
+            "Cite deux regles de vie de classe sans aide.",
+            "Explique pourquoi une regle est utile pour tout le monde.",
+          ],
         },
         {
           slug: "ecouter-et-attendre-son-tour",
@@ -540,6 +710,10 @@ const domainEMC: ProgramDomain = {
           objective:
             "L'eleve ecoute sans couper la parole et attend son tour pour s'exprimer.",
           status: "upcoming",
+          successCriteria: [
+            "Leve la main avant de prendre la parole.",
+            "Reformule ce qu'un camarade vient de dire avant d'ajouter son avis.",
+          ],
         },
       ],
     ),
@@ -555,6 +729,10 @@ const domainEMC: ProgramDomain = {
           objective:
             "L'eleve nomme quelques symboles de la Republique francaise (drapeau, hymne, devise).",
           status: "upcoming",
+          successCriteria: [
+            "Nomme les trois couleurs du drapeau francais.",
+            "Associe chaque symbole (drapeau, Marianne, hymne) a la Republique.",
+          ],
         },
         {
           slug: "distinguer-droits-et-devoirs-simples",
@@ -562,6 +740,10 @@ const domainEMC: ProgramDomain = {
           objective:
             "L'eleve donne un exemple de droit et un exemple de devoir dans la vie de classe.",
           status: "upcoming",
+          successCriteria: [
+            "Cite un droit et un devoir de l'eleve a l'ecole.",
+            "Classe des situations proposees en droit ou devoir.",
+          ],
         },
       ],
     ),
