@@ -263,6 +263,13 @@ const domainMathematiques: ProgramDomain = {
             "Associer l'ecriture chiffree, le nom oral et la quantite representee.",
           status: "upcoming",
         },
+        {
+          slug: "comparer-deux-quantites",
+          title: "Comparer deux quantites",
+          objective:
+            "Dire quelle collection contient le plus ou le moins d'objets.",
+          status: "upcoming",
+        },
       ],
     ),
     createSubdomain(
@@ -312,6 +319,20 @@ const domainMathematiques: ProgramDomain = {
           title: "Resoudre un probleme de retrait guide",
           objective:
             "Identifier une situation ou l'on enleve et choisir un calcul adapte.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "mathematiques",
+      "geometrie",
+      "Geometrie",
+      "Se reperer dans l'espace et reconnaitre les premieres figures.",
+      [
+        {
+          slug: "se-reperer-dans-lespace-de-la-feuille",
+          title: "Se reperer dans l'espace de la feuille",
+          objective: "Utiliser haut, bas, gauche, droite, milieu.",
           status: "upcoming",
         },
       ],
@@ -578,7 +599,7 @@ export const cpLearningTree: AcademyLevelProgram = {
     characterSlug: "kiwi",
     name: "Kiwi",
     roleHint:
-      "Kiwi accompagne les premiers pas dans le decodage, l'ecriture et les nombres.",
+      "Kiwi accompagne les premiers pas dans le decodage, l'ecriture, les nombres et le reperage.",
   },
   domains: [
     domainFrancais,
