@@ -1,6 +1,7 @@
 import type { ProgramStatus } from "@/content/program-types";
+import type { LyceeLevelSlug } from "@/content/levels/lycee-statuses";
 
-export type LyceeLevelSlug = "seconde" | "premiere" | "terminale";
+export type { LyceeLevelSlug };
 export type LyceeParcoursKind = "tronc-commun" | "specialites" | "options";
 
 export type LyceeSequenceCompetence = {
