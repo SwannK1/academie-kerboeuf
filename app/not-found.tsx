@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default function NotFound() {
   return (
     <main className="min-h-screen bg-[#f8f3e8] px-6 py-16 text-[#16213e]">

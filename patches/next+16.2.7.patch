@@ -1,0 +1,25 @@
+diff --git a/node_modules/next/dist/build/utils.js b/node_modules/next/dist/build/utils.js
+index 82b6eb4..f1aecb1 100644
+--- a/node_modules/next/dist/build/utils.js
++++ b/node_modules/next/dist/build/utils.js
+@@ -567,9 +567,10 @@ function printCustomRoutes({ redirects, rewrites, headers, onMatchHeaders }) {
+ }
+ async function isPageStatic({ dir, page, distDir, configFileName, httpAgentOptions, locales, defaultLocale, parentId, pageRuntime, edgeInfo, pageType, cacheComponents, authInterrupts, originalAppPath, isrFlushToDisk, cacheMaxMemorySize, nextConfigOutput, cacheHandler, cacheHandlers, cacheLifeProfiles, pprConfig, partialFallbacksEnabled, buildId, deploymentId, clientAssetToken, sriEnabled }) {
+     // Skip page data collection for synthetic _global-error routes
++    // Note: appConfig.revalidate=0 prevents static prerendering which fails at runtime
+     if (page === _constants1.UNDERSCORE_GLOBAL_ERROR_ROUTE) {
+         return {
+-            isStatic: true,
++            isStatic: false,
+             isRoutePPREnabled: false,
+             prerenderFallbackMode: undefined,
+             prerenderedRoutes: undefined,
+@@ -577,7 +578,7 @@ async function isPageStatic({ dir, page, distDir, configFileName, httpAgentOptio
+             hasStaticProps: false,
+             hasServerProps: false,
+             isNextImageImported: false,
+-            appConfig: {}
++            appConfig: { revalidate: 0 }
+         };
+     }
+     await (0, _createincrementalcache.createIncrementalCache)({

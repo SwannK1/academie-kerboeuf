@@ -3,6 +3,10 @@ import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
 import "./globals.css";
 
+// SiteHeader uses usePathname (client hook) which is incompatible with
+// static prerendering in Next.js 16 — force dynamic rendering site-wide.
+export const dynamic = "force-dynamic";
+
 // TODO: remplacer par le domaine réel avant mise en production
 const BASE_URL = "https://academie-kerboeuf.fr";
 
