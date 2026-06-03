@@ -27,6 +27,10 @@ export function PrimaireLevelEntry({ level }: Props) {
 
   const secondaryLinks = [
     {
+      label: "Matières",
+      href: `/primaire/${slug}/matieres`,
+    },
+    {
       label: "Programme",
       href: `/primaire/${slug}/programme`,
     },
@@ -96,9 +100,10 @@ export function PrimaireLevelEntry({ level }: Props) {
           {subjects.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {subjects.map((subject) => (
-                <div
+                <Link
                   key={subject.slug}
-                  className="flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-6"
+                  href={`/primaire/${slug}/matieres`}
+                  className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-jade/40"
                 >
                   <p className="text-lg font-black text-foreground">
                     {subject.label}
@@ -121,7 +126,10 @@ export function PrimaireLevelEntry({ level }: Props) {
                       </li>
                     ))}
                   </ul>
-                </div>
+                  <p className="mt-4 text-xs font-bold text-jade opacity-0 transition group-hover:opacity-100">
+                    Voir les matières →
+                  </p>
+                </Link>
               ))}
             </div>
           ) : (
@@ -145,11 +153,15 @@ export function PrimaireLevelEntry({ level }: Props) {
               Accès complémentaires
             </p>
             <div className="flex flex-wrap gap-3">
-              {secondaryLinks.map((link) => (
+              {secondaryLinks.map((link, i) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-bold text-muted transition hover:border-white/20 hover:bg-white/[0.06] hover:text-foreground"
+                  className={`group inline-flex items-center gap-2 rounded-md border px-5 py-3 text-sm font-bold transition ${
+                    i === 0
+                      ? "border-jade/35 bg-jade/[0.06] text-jade hover:bg-jade/[0.10]"
+                      : "border-white/10 bg-white/[0.03] text-muted hover:border-white/20 hover:bg-white/[0.06] hover:text-foreground"
+                  }`}
                 >
                   {link.label}
                   <span className="transition group-hover:translate-x-0.5">
