@@ -384,7 +384,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       { id: "felix",  name: "Félix le Lynx",     role: "Guide CM2"          },
       { id: "hector", name: "Hector le Castor",  role: "Guide Mathématiques" },
     ],
-    status: "available",
+    status: "in-progress",
     domains: [
       {
         id: "maths-nombres",
@@ -633,7 +633,7 @@ export const cm2LearningTree: Cm2LearningTree = [
       { id: "felix",  name: "Félix le Lynx",    role: "Guide CM2"     },
       { id: "melina", name: "Mélina l'Abeille", role: "Guide Sciences" },
     ],
-    status: "available",
+    status: "in-progress",
     domains: [
       {
         id: "sciences-demarche",
@@ -824,7 +824,7 @@ export const cm2LearningTree: Cm2LearningTree = [
     guides: [
       { id: "felix", name: "Félix le Lynx", role: "Guide CM2" },
     ],
-    status: "available",
+    status: "in-progress",
     domains: [
       {
         id: "histoire-reperes",
