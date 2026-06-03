@@ -1,3 +1,5 @@
+// Route parallèle à /primaire/lieux — utilise elementary-places.ts (Felix/Lisières).
+// Hors navigation principale. À arbitrer : fusionner avec /primaire/lieux ou conserver comme hub narratif séparé.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
