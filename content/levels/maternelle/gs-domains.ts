@@ -103,7 +103,7 @@ export const gsDomains: MaternelleDomainEntry[] = [
       "Cycle 1 - Domaine 3 : Agir, s'exprimer, comprendre à travers les activités artistiques",
     description: "Productions, voix, écoute et regard sur les réalisations.",
     href: "/maternelle/gs/domaines/activites-artistiques",
-    status: "upcoming",
+    status: "in-progress",
     subdomains: gsActivitesArtistiquesSubdomains,
     observables: [
       {
@@ -143,7 +143,7 @@ export const gsDomains: MaternelleDomainEntry[] = [
       "Cycle 1 - Domaine 4 : Acquérir les premiers outils mathématiques",
     description: "Nombres, quantités, formes et suites organisées.",
     href: "/maternelle/gs/domaines/premiers-outils-mathematiques",
-    status: "upcoming",
+    status: "in-progress",
     subdomains: gsPremiersOutilsMathematiquesSubdomains,
     observables: [
       {
@@ -187,7 +187,7 @@ export const gsDomains: MaternelleDomainEntry[] = [
     officialReference: "Cycle 1 - Domaine 5 : Explorer le monde",
     description: "Temps, vivant, objets, matières et premiers repères.",
     href: "/maternelle/gs/domaines/explorer-le-monde",
-    status: "upcoming",
+    status: "in-progress",
     subdomains: gsExplorerLeMondeSubdomains,
     observables: [
       {
