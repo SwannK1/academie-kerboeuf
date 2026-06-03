@@ -102,6 +102,13 @@ const domainFrancais: ProgramDomain = {
       "Entrer progressivement dans le code alphabetique.",
       [
         {
+          slug: "identifier-les-lettres-de-l-alphabet",
+          title: "Identifier les lettres de l'alphabet",
+          objective:
+            "Nommer les lettres de l'alphabet et les distinguer en minuscules et majuscules.",
+          status: "upcoming",
+        },
+        {
           slug: "reconnaitre-les-lettres-et-les-sons-frequents",
           title: "Reconnaitre les lettres et les sons frequents",
           objective:
@@ -232,6 +239,50 @@ const domainFrancais: ProgramDomain = {
         },
       ],
     ),
+    createSubdomain(
+      "francais",
+      "vocabulaire",
+      "Vocabulaire",
+      "Enrichir le lexique courant et comprendre les mots nouveaux.",
+      [
+        {
+          slug: "enrichir-le-vocabulaire-courant",
+          title: "Enrichir le vocabulaire courant",
+          objective:
+            "Comprendre et utiliser des mots nouveaux rencontres dans des textes ou des situations de classe.",
+          status: "upcoming",
+        },
+        {
+          slug: "categoriser-des-mots-par-theme",
+          title: "Categoriser des mots par theme",
+          objective:
+            "Regrouper des mots appartenant a un meme domaine semantique (animaux, aliments, vetements...).",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "oral",
+      "Langage oral",
+      "S'exprimer clairement et ecouter les autres.",
+      [
+        {
+          slug: "dire-clairement-une-phrase-a-l-oral",
+          title: "Dire clairement une phrase a l'oral",
+          objective:
+            "Prononcer une phrase complete, audible et comprehensible devant la classe.",
+          status: "upcoming",
+        },
+        {
+          slug: "ecouter-et-comprendre-un-enonce-oral",
+          title: "Ecouter et comprendre un enonce oral",
+          objective:
+            "Executer une consigne ou reformuler une information entendue sans demander repetition.",
+          status: "upcoming",
+        },
+      ],
+    ),
   ],
   status: "in-progress",
 };
@@ -261,6 +312,20 @@ const domainMathematiques: ProgramDomain = {
           title: "Lire et ecrire les nombres jusqu'a 100",
           objective:
             "Associer l'ecriture chiffree, le nom oral et la quantite representee.",
+          status: "upcoming",
+        },
+        {
+          slug: "comparer-des-nombres",
+          title: "Comparer des nombres",
+          objective:
+            "Dire lequel de deux nombres est le plus grand ou le plus petit en justifiant.",
+          status: "upcoming",
+        },
+        {
+          slug: "ranger-des-nombres",
+          title: "Ranger des nombres dans l'ordre",
+          objective:
+            "Placer une liste de nombres dans l'ordre croissant ou decroissant.",
           status: "upcoming",
         },
       ],
@@ -316,6 +381,64 @@ const domainMathematiques: ProgramDomain = {
         },
       ],
     ),
+    createSubdomain(
+      "mathematiques",
+      "geometrie",
+      "Geometrie",
+      "Reconnaitre des formes et se reperer dans l'espace.",
+      [
+        {
+          slug: "reconnaitre-des-formes-simples",
+          title: "Reconnaitre des formes simples",
+          objective:
+            "Nommer et identifier le carre, le rectangle, le triangle et le cercle dans son environnement.",
+          status: "upcoming",
+        },
+        {
+          slug: "se-reperer-sur-un-quadrillage",
+          title: "Se reperer sur un quadrillage",
+          objective:
+            "Localiser une case ou decrire un deplacement sur un quadrillage simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "utiliser-le-vocabulaire-spatial",
+          title: "Utiliser le vocabulaire spatial",
+          objective:
+            "Decrire la position d'un objet avec les mots devant, derriere, a gauche, a droite, dessus, dessous.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "mathematiques",
+      "grandeurs-mesures",
+      "Grandeurs et mesures",
+      "Comparer des longueurs, utiliser la monnaie et lire l'heure.",
+      [
+        {
+          slug: "comparer-des-longueurs",
+          title: "Comparer des longueurs",
+          objective:
+            "Dire lequel de deux objets est le plus long en utilisant une bande ou une regle.",
+          status: "upcoming",
+        },
+        {
+          slug: "utiliser-la-monnaie-simplement",
+          title: "Utiliser la monnaie simplement",
+          objective:
+            "Reconnaitre les pieces et les billets courants et calculer un total tres simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "lire-l-heure-exacte",
+          title: "Lire l'heure exacte",
+          objective:
+            "Lire l'heure juste sur une horloge analogique et numerique.",
+          status: "upcoming",
+        },
+      ],
+    ),
   ],
   status: "upcoming",
 };
@@ -341,10 +464,24 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "connaitre-les-besoins-des-etres-vivants",
+          title: "Connaitre les besoins des etres vivants",
+          objective:
+            "L'eleve nomme les besoins essentiels d'un animal ou d'une plante : nourriture, eau, lumiere.",
+          status: "upcoming",
+        },
+        {
           slug: "observer-une-croissance-vegetale",
           title: "Observer une croissance vegetale",
           objective:
             "L'eleve observe et decrit les etapes de la pousse d'une plante au fil du temps.",
+          status: "upcoming",
+        },
+        {
+          slug: "observer-les-saisons",
+          title: "Observer les saisons",
+          objective:
+            "L'eleve associe des caracteristiques observables de la nature a chacune des quatre saisons.",
           status: "upcoming",
         },
       ],
@@ -378,6 +515,13 @@ const domainQuestionnerLeMonde: ProgramDomain = {
       "Se reperer dans le temps de la semaine et dans l'espace proche.",
       [
         {
+          slug: "se-reperer-dans-la-journee",
+          title: "Se reperer dans la journee",
+          objective:
+            "L'eleve distingue le matin, l'apres-midi et le soir et situe ses activites dans la journee.",
+          status: "upcoming",
+        },
+        {
           slug: "se-reperer-dans-la-semaine",
           title: "Se reperer dans la semaine",
           objective:
@@ -385,10 +529,39 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "identifier-les-espaces-proches",
+          title: "Identifier les espaces proches",
+          objective:
+            "L'eleve decrit les espaces qu'il frequente (ecole, quartier, maison) et les situe les uns par rapport aux autres.",
+          status: "upcoming",
+        },
+        {
           slug: "situer-son-ecole-dans-l-espace",
           title: "Situer son ecole dans l'espace proche",
           objective:
             "L'eleve indique ou se trouve son ecole par rapport a des reperes connus.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "questionner-le-monde",
+      "hygiene-securite",
+      "Hygiene et securite",
+      "Adopter des gestes simples pour sa sante et sa securite.",
+      [
+        {
+          slug: "adopter-des-gestes-d-hygiene",
+          title: "Adopter des gestes d'hygiene",
+          objective:
+            "L'eleve applique les regles d'hygiene corporelle de base : se laver les mains, se moucher, tousser dans son coude.",
+          status: "upcoming",
+        },
+        {
+          slug: "reconnaitre-les-situations-de-danger",
+          title: "Reconnaitre des situations de danger",
+          objective:
+            "L'eleve identifie des situations dangereuses simples et dit ce qu'il faut faire ou ne pas faire.",
           status: "upcoming",
         },
       ],
@@ -411,6 +584,13 @@ const domainEnseignementsArtistiques: ProgramDomain = {
       "Explorer les couleurs, les matieres et les outils pour creer.",
       [
         {
+          slug: "utiliser-differents-outils-pour-tracer",
+          title: "Utiliser differents outils pour tracer",
+          objective:
+            "L'eleve trace des lignes et des formes avec des outils varies : crayon, pinceau, feutre, doigt.",
+          status: "upcoming",
+        },
+        {
           slug: "explorer-couleurs-et-matieres",
           title: "Explorer les couleurs et les matieres",
           objective:
@@ -418,17 +598,17 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           status: "upcoming",
         },
         {
-          slug: "creer-une-composition-simple",
-          title: "Creer une composition simple",
+          slug: "composer-une-image-simple",
+          title: "Composer une image simple",
           objective:
             "L'eleve organise des formes et des couleurs dans un espace de production.",
           status: "upcoming",
         },
         {
-          slug: "decrire-une-production",
-          title: "Decrire une production plastique",
+          slug: "observer-une-oeuvre",
+          title: "Observer une oeuvre",
           objective:
-            "L'eleve dit ce qu'il voit dans une image ou une production en utilisant des mots simples.",
+            "L'eleve regarde une oeuvre d'art, la decrit avec ses mots et dit ce qu'elle lui evoque.",
           status: "upcoming",
         },
       ],
@@ -437,13 +617,27 @@ const domainEnseignementsArtistiques: ProgramDomain = {
       "enseignements-artistiques",
       "education-musicale",
       "Education musicale",
-      "Chanter et ecouter des extraits musicaux.",
+      "Chanter, ecouter et reproduire des rythmes simples.",
       [
         {
-          slug: "chanter-en-respectant-le-tempo",
-          title: "Chanter en respectant le tempo",
+          slug: "chanter-avec-le-groupe",
+          title: "Chanter avec le groupe",
           objective:
             "L'eleve chante une chanson apprise en respectant le rythme et le tempo collectif.",
+          status: "upcoming",
+        },
+        {
+          slug: "ecouter-un-extrait-musical",
+          title: "Ecouter un extrait musical",
+          objective:
+            "L'eleve ecoute un extrait musical court et exprime ce qu'il ressent ou ce qu'il entend.",
+          status: "upcoming",
+        },
+        {
+          slug: "reproduire-un-rythme-simple",
+          title: "Reproduire un rythme simple",
+          objective:
+            "L'eleve reproduit par frapper dans les mains ou sur une table un rythme entendu.",
           status: "upcoming",
         },
         {
@@ -470,13 +664,27 @@ const domainEPS: ProgramDomain = {
       "eps",
       "activites-motrices",
       "Activites motrices de base",
-      "Courir, lancer et sauter en securite.",
+      "Courir, lancer, sauter et realiser un parcours en securite.",
       [
+        {
+          slug: "courir-sauter-lancer",
+          title: "Courir, sauter et lancer",
+          objective:
+            "L'eleve court, saute et lance un engin en controlant ses deplacements.",
+          status: "upcoming",
+        },
         {
           slug: "courir-et-sarreter-en-securite",
           title: "Courir et s'arreter en securite",
           objective:
             "L'eleve court, change de direction et s'arrete sur un signal sans mettre en danger.",
+          status: "upcoming",
+        },
+        {
+          slug: "realiser-un-parcours-moteur",
+          title: "Realiser un parcours moteur",
+          objective:
+            "L'eleve enchaine plusieurs actions motrices dans un parcours en respectant l'ordre des obstacles.",
           status: "upcoming",
         },
         {
@@ -502,10 +710,25 @@ const domainEPS: ProgramDomain = {
           status: "upcoming",
         },
         {
-          slug: "agir-avec-ses-partenaires",
-          title: "Agir avec ses partenaires",
+          slug: "cooperer-dans-un-jeu-collectif",
+          title: "Cooperer dans un jeu collectif",
           objective:
             "L'eleve aide ses partenaires et cherche a cooperer pour reussir le jeu.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "eps",
+      "expression-corporelle",
+      "Expression corporelle",
+      "S'exprimer et communiquer avec son corps.",
+      [
+        {
+          slug: "s-exprimer-avec-son-corps",
+          title: "S'exprimer avec son corps",
+          objective:
+            "L'eleve utilise des gestes et des postures pour communiquer une emotion ou raconter une situation simple.",
           status: "upcoming",
         },
       ],
@@ -535,10 +758,31 @@ const domainEMC: ProgramDomain = {
           status: "upcoming",
         },
         {
-          slug: "ecouter-et-attendre-son-tour",
-          title: "Ecouter et attendre son tour",
+          slug: "ecouter-les-autres",
+          title: "Ecouter les autres",
           objective:
             "L'eleve ecoute sans couper la parole et attend son tour pour s'exprimer.",
+          status: "upcoming",
+        },
+        {
+          slug: "cooperer-dans-une-activite",
+          title: "Cooperer dans une activite",
+          objective:
+            "L'eleve participe a une tache commune en partageant le travail et en aidant ses camarades.",
+          status: "upcoming",
+        },
+        {
+          slug: "identifier-une-emotion",
+          title: "Identifier une emotion",
+          objective:
+            "L'eleve nomme ce qu'il ressent et reconnait les emotions de ses camarades dans une situation simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "respecter-le-materiel-commun",
+          title: "Respecter le materiel commun",
+          objective:
+            "L'eleve utilise et range le materiel collectif avec soin et le restitue en bon etat.",
           status: "upcoming",
         },
       ],
