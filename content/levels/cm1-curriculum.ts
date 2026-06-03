@@ -1,4 +1,5 @@
 // Carte du programme CM1 — Cycle 3, primaire.
+// Structure : matière → domaine → sous-domaine → séquence-compétence.
 // Le site organise ; les PDF enseignent.
 // Aucun contenu pédagogique complet : uniquement objectifs observables,
 // critères courts et ressources PDF prévues sans href.
@@ -490,6 +491,353 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
               status: "upcoming",
               resourceSlots: PLANNED_PDF_RESOURCES,
               competencyId: "cm1-sc-vivant-besoins",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "matiere-energie",
+          label: "Matière et énergie",
+          entries: [
+            {
+              id: "cm1-sc-me-distinguer-melanges-entry",
+              levelSlug: "cm1",
+              subject: "Sciences",
+              domainSlug: "sciences",
+              subdomainSlug: "matiere-energie",
+              title: "Distinguer mélange et corps pur",
+              officialReference: "Cycle 3 — Sciences et technologie",
+              observableObjective:
+                "L'élève différencie un corps pur d'un mélange à partir de critères observables.",
+              successCriteria: [
+                "Je donne un exemple de corps pur.",
+                "Je donne un exemple de mélange.",
+                "Je justifie la différence observée.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-sc-me-distinguer-melanges",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "technologie",
+          label: "Technologie",
+          entries: [
+            {
+              id: "cm1-sc-tech-decrire-objet-technique-entry",
+              levelSlug: "cm1",
+              subject: "Sciences",
+              domainSlug: "sciences",
+              subdomainSlug: "technologie",
+              title: "Décrire la fonction d'un objet technique simple",
+              officialReference: "Cycle 3 — Sciences et technologie",
+              observableObjective:
+                "L'élève identifie à quoi sert un objet technique et comment il fonctionne globalement.",
+              successCriteria: [
+                "Je nomme la fonction principale de l'objet.",
+                "Je décris son fonctionnement simplement.",
+                "Je repère les éléments constitutifs principaux.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-sc-tech-decrire-objet-technique",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      domainSlug: "enseignements-artistiques",
+      subject: "Enseignements artistiques",
+      label: "Enseignements artistiques",
+      subdomains: [
+        {
+          subdomainSlug: "arts-plastiques",
+          label: "Arts plastiques",
+          entries: [
+            {
+              id: "cm1-art-ap-questionner-espace-entry",
+              levelSlug: "cm1",
+              subject: "Enseignements artistiques",
+              domainSlug: "enseignements-artistiques",
+              subdomainSlug: "arts-plastiques",
+              title: "Questionner l'espace dans une production plastique",
+              officialReference: "Cycle 3 — Arts plastiques",
+              observableObjective:
+                "L'élève organise intentionnellement l'espace d'une production avec des choix justifiés.",
+              successCriteria: [
+                "Je fais des choix de composition.",
+                "Je joue avec l'espace (plein, vide, avant-plan, arrière-plan).",
+                "Je peux expliquer mes intentions.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-art-ap-questionner-espace",
+            },
+            {
+              id: "cm1-art-ap-analyser-oeuvre-entry",
+              levelSlug: "cm1",
+              subject: "Enseignements artistiques",
+              domainSlug: "enseignements-artistiques",
+              subdomainSlug: "arts-plastiques",
+              title: "Analyser une œuvre d'art avec un vocabulaire adapté",
+              officialReference: "Cycle 3 — Arts plastiques",
+              observableObjective:
+                "L'élève décrit et interprète une œuvre en utilisant un vocabulaire artistique précis.",
+              successCriteria: [
+                "Je nomme la technique utilisée.",
+                "Je décris la composition avec le vocabulaire appris.",
+                "Je formule une interprétation justifiée.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-art-ap-analyser-oeuvre",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "education-musicale",
+          label: "Éducation musicale",
+          entries: [
+            {
+              id: "cm1-art-mus-chanter-justesse-entry",
+              levelSlug: "cm1",
+              subject: "Enseignements artistiques",
+              domainSlug: "enseignements-artistiques",
+              subdomainSlug: "education-musicale",
+              title: "Chanter avec justesse et contrôler sa voix",
+              officialReference: "Cycle 3 — Éducation musicale",
+              observableObjective:
+                "L'élève chante une mélodie connue avec une intonation correcte.",
+              successCriteria: [
+                "Je respecte la hauteur des notes.",
+                "J'ajuste ma voix si je déraille.",
+                "Je chante en tenant la ligne mélodique.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-art-mus-chanter-justesse",
+            },
+            {
+              id: "cm1-art-mus-analyser-extrait-entry",
+              levelSlug: "cm1",
+              subject: "Enseignements artistiques",
+              domainSlug: "enseignements-artistiques",
+              subdomainSlug: "education-musicale",
+              title: "Analyser un extrait musical avec des paramètres du son",
+              officialReference: "Cycle 3 — Éducation musicale",
+              observableObjective:
+                "L'élève repère des paramètres sonores (tempo, intensité, timbre) dans un extrait.",
+              successCriteria: [
+                "Je nomme au moins deux paramètres entendus.",
+                "Je justifie mes observations.",
+                "Je compare deux extraits sur ces paramètres.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-art-mus-analyser-extrait",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      domainSlug: "eps",
+      subject: "EPS",
+      label: "EPS",
+      subdomains: [
+        {
+          subdomainSlug: "performance",
+          label: "Produire une performance",
+          entries: [
+            {
+              id: "cm1-eps-perf-ameliorer-performance-entry",
+              levelSlug: "cm1",
+              subject: "EPS",
+              domainSlug: "eps",
+              subdomainSlug: "performance",
+              title: "Améliorer sa performance et mesurer ses progrès",
+              officialReference: "Cycle 3 — EPS",
+              observableObjective:
+                "L'élève se fixe un objectif, mesure sa performance et la compare à une précédente.",
+              successCriteria: [
+                "Je note ma performance de départ.",
+                "Je m'entraîne avec une intention.",
+                "Je compare avec ma performance précédente.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-eps-perf-ameliorer-performance",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "jeux-collectifs",
+          label: "Jeux collectifs et sports",
+          entries: [
+            {
+              id: "cm1-eps-jeux-strategie-collective-entry",
+              levelSlug: "cm1",
+              subject: "EPS",
+              domainSlug: "eps",
+              subdomainSlug: "jeux-collectifs",
+              title: "Adopter une stratégie collective dans un jeu",
+              officialReference: "Cycle 3 — EPS",
+              observableObjective:
+                "L'élève ajuste ses actions en fonction des partenaires et des adversaires.",
+              successCriteria: [
+                "Je perçois le jeu collectif.",
+                "Je prends une décision adaptée au jeu.",
+                "Je coordonne mes actions avec mes partenaires.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-eps-jeux-strategie-collective",
+            },
+            {
+              id: "cm1-eps-jeux-arbitrer-entry",
+              levelSlug: "cm1",
+              subject: "EPS",
+              domainSlug: "eps",
+              subdomainSlug: "jeux-collectifs",
+              title: "Arbitrer un jeu simple en appliquant les règles",
+              officialReference: "Cycle 3 — EPS",
+              observableObjective:
+                "L'élève applique le règlement d'un jeu en tant qu'arbitre de manière impartiale.",
+              successCriteria: [
+                "Je connais les règles à arbitrer.",
+                "Je siffle et annonce la décision clairement.",
+                "Je reste impartial.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-eps-jeux-arbitrer",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "bien-etre-sante",
+          label: "Bien-être et santé",
+          entries: [
+            {
+              id: "cm1-eps-ss-gerer-effort-entry",
+              levelSlug: "cm1",
+              subject: "EPS",
+              domainSlug: "eps",
+              subdomainSlug: "bien-etre-sante",
+              title: "Gérer son effort sur une durée prolongée",
+              officialReference: "Cycle 3 — EPS",
+              observableObjective:
+                "L'élève adapte son allure pour tenir sur une durée donnée.",
+              successCriteria: [
+                "Je pars sans me dépenser trop vite.",
+                "Je maintiens l'effort jusqu'à la fin.",
+                "Je récupère calmement après l'effort.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-eps-ss-gerer-effort",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      domainSlug: "emc",
+      subject: "EMC",
+      label: "EMC",
+      subdomains: [
+        {
+          subdomainSlug: "regles-droit-justice",
+          label: "Règles, droit et justice",
+          entries: [
+            {
+              id: "cm1-emc-rdj-comprendre-loi-entry",
+              levelSlug: "cm1",
+              subject: "EMC",
+              domainSlug: "emc",
+              subdomainSlug: "regles-droit-justice",
+              title: "Comprendre pourquoi des lois régissent la société",
+              officialReference: "Cycle 3 — EMC",
+              observableObjective:
+                "L'élève explique à quoi servent les lois dans une société démocratique.",
+              successCriteria: [
+                "Je donne un exemple de loi.",
+                "J'explique son utilité pour vivre ensemble.",
+                "Je comprends la différence entre règle et loi.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-emc-rdj-comprendre-loi",
+            },
+            {
+              id: "cm1-emc-rdj-distinguer-droits-devoirs-entry",
+              levelSlug: "cm1",
+              subject: "EMC",
+              domainSlug: "emc",
+              subdomainSlug: "regles-droit-justice",
+              title: "Distinguer droits et devoirs du citoyen",
+              officialReference: "Cycle 3 — EMC",
+              observableObjective:
+                "L'élève cite des droits et des devoirs et comprend leur complémentarité.",
+              successCriteria: [
+                "Je cite deux droits.",
+                "Je cite deux devoirs.",
+                "J'explique leur lien.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-emc-rdj-distinguer-droits-devoirs",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "jugement-engagement",
+          label: "Jugement et engagement",
+          entries: [
+            {
+              id: "cm1-emc-je-argumenter-debat-entry",
+              levelSlug: "cm1",
+              subject: "EMC",
+              domainSlug: "emc",
+              subdomainSlug: "jugement-engagement",
+              title: "Argumenter dans un débat en respectant les règles",
+              officialReference: "Cycle 3 — EMC",
+              observableObjective:
+                "L'élève prend position et argumente en respectant les règles du débat.",
+              successCriteria: [
+                "Je présente mon point de vue clairement.",
+                "Je donne un argument à l'appui.",
+                "Je respecte le temps de parole et les autres opinions.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-emc-je-argumenter-debat",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "identite-alterite",
+          label: "Identité et altérité",
+          entries: [
+            {
+              id: "cm1-emc-ia-respecter-diversite-entry",
+              levelSlug: "cm1",
+              subject: "EMC",
+              domainSlug: "emc",
+              subdomainSlug: "identite-alterite",
+              title: "Respecter et valoriser la diversité des personnes",
+              officialReference: "Cycle 3 — EMC",
+              observableObjective:
+                "L'élève explique pourquoi les différences entre individus sont une richesse.",
+              successCriteria: [
+                "Je repère une différence culturelle ou personnelle.",
+                "Je l'accueille positivement.",
+                "Je donne un exemple de ce qu'elle apporte.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-emc-ia-respecter-diversite",
             },
           ],
         },
