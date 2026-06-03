@@ -286,6 +286,70 @@ const CE2_SESSIONS: Record<string, LessonSession[]> = {
     },
   ],
 
+  // ── Français — Lecture à voix haute ─────────────────────────────────────
+
+  "ce2-fr-lvh-lire-fluidement": [
+    {
+      id: "ce2-fr-lvh-lire-fluidement-s1",
+      title: "Repérer les signes de ponctuation pour guider la lecture",
+      phase: "découvrir",
+      objective: "L'élève comprend comment la ponctuation guide la voix et les pauses.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lvh-lire-fluidement-s2",
+      title: "Lire un court passage avec les pauses adaptées",
+      phase: "s'entraîner",
+      objective: "L'élève lit en respectant les virgules, points et points d'exclamation.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lvh-lire-fluidement-s3",
+      title: "Lire avec expression selon le type de texte",
+      phase: "réinvestir",
+      objective: "L'élève adapte le ton de sa voix au contenu (dialogue, récit, poème).",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lvh-lire-fluidement-s4",
+      title: "Lire à voix haute un texte préparé",
+      phase: "évaluer",
+      objective: "L'élève lit un court texte de façon fluide et expressive devant la classe.",
+      status: "upcoming",
+    },
+  ],
+
+  "ce2-fr-lvh-preparer-lecture": [
+    {
+      id: "ce2-fr-lvh-preparer-lecture-s1",
+      title: "Comprendre ce qu'est une lecture préparée",
+      phase: "découvrir",
+      objective: "L'élève observe la différence entre une lecture improvisée et une lecture préparée.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lvh-preparer-lecture-s2",
+      title: "Préparer un passage en marquant les pauses",
+      phase: "s'entraîner",
+      objective: "L'élève annoter son texte et s'entraîne plusieurs fois avant de lire.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lvh-preparer-lecture-s3",
+      title: "Présenter en regardant ponctuellement les auditeurs",
+      phase: "réinvestir",
+      objective: "L'élève alterne regard sur le texte et contact visuel avec le public.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lvh-preparer-lecture-s4",
+      title: "Présenter une lecture préparée devant la classe",
+      phase: "évaluer",
+      objective: "L'élève présente seul un passage préparé avec clarté, volume et expression.",
+      status: "upcoming",
+    },
+  ],
+
   // ── Français — Langage oral ───────────────────────────────────────────────
 
   "ce2-fr-or-presenter-sujet-organise": [
@@ -410,6 +474,39 @@ const CE2_SESSIONS: Record<string, LessonSession[]> = {
       title: "Classer des textes selon leur type",
       phase: "évaluer",
       objective: "L'élève trie plusieurs textes courts et justifie chacun de ses choix.",
+      status: "upcoming",
+    },
+  ],
+
+  // ── Français — Lecture et compréhension (entrées supplémentaires) ────────
+
+  "ce2-fr-lc-resumer-texte": [
+    {
+      id: "ce2-fr-lc-resumer-texte-s1",
+      title: "Identifier les idées principales d'un texte",
+      phase: "découvrir",
+      objective: "L'élève lit un texte et relève deux ou trois idées essentielles.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lc-resumer-texte-s2",
+      title: "Reformuler les idées dans ses propres mots",
+      phase: "s'entraîner",
+      objective: "L'élève écrit les idées principales sans recopier les phrases du texte.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lc-resumer-texte-s3",
+      title: "Relier les idées pour former un résumé cohérent",
+      phase: "réinvestir",
+      objective: "L'élève ordonne les idées et les relie pour produire un court résumé fluide.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-lc-resumer-texte-s4",
+      title: "Résumer seul un texte court",
+      phase: "évaluer",
+      objective: "L'élève produit un résumé autonome de 3-4 phrases qui se comprend sans lire le texte.",
       status: "upcoming",
     },
   ],
@@ -542,6 +639,134 @@ const CE2_SESSIONS: Record<string, LessonSession[]> = {
     },
   ],
 
+  // ── Français — Étude de la langue (entrées supplémentaires) ─────────────
+
+  "ce2-fr-edl-orthographier-mots-frequents": [
+    {
+      id: "ce2-fr-edl-orthographier-mots-frequents-s1",
+      title: "Observer les mots fréquents et leurs difficultés",
+      phase: "découvrir",
+      objective: "L'élève repère les mots souvent mal orthographiés et en comprend les particularités.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-edl-orthographier-mots-frequents-s2",
+      title: "Mémoriser un groupe de mots fréquents",
+      phase: "s'entraîner",
+      objective: "L'élève apprend par cœur un lot de mots outils en utilisant des stratégies de mémorisation.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-edl-orthographier-mots-frequents-s3",
+      title: "Appliquer des régularités orthographiques simples",
+      phase: "réinvestir",
+      objective: "L'élève utilise une règle orthographique apprise pour écrire correctement des mots nouveaux.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-edl-orthographier-mots-frequents-s4",
+      title: "Orthographier les mots fréquents sous la dictée",
+      phase: "évaluer",
+      objective: "L'élève écrit sans faute les mots fréquents lors d'une courte dictée.",
+      status: "upcoming",
+    },
+  ],
+
+  // ── Français — Vocabulaire ────────────────────────────────────────────────
+
+  "ce2-fr-voc-enrichir-vocabulaire": [
+    {
+      id: "ce2-fr-voc-enrichir-vocabulaire-s1",
+      title: "Deviner le sens d'un mot grâce au contexte",
+      phase: "découvrir",
+      objective: "L'élève observe les mots autour d'un mot inconnu pour en déduire le sens.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-enrichir-vocabulaire-s2",
+      title: "Associer un mot nouveau à un mot connu de sens proche",
+      phase: "s'entraîner",
+      objective: "L'élève trouve un synonyme simple pour un mot rencontré dans un texte.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-enrichir-vocabulaire-s3",
+      title: "Utiliser le nouveau mot dans une phrase",
+      phase: "réinvestir",
+      objective: "L'élève emploie un mot nouvellement appris dans une phrase correcte.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-enrichir-vocabulaire-s4",
+      title: "Montrer qu'on a compris un mot en le réutilisant",
+      phase: "évaluer",
+      objective: "L'élève explique le sens d'un mot et l'utilise seul dans un contexte nouveau.",
+      status: "upcoming",
+    },
+  ],
+
+  "ce2-fr-voc-utiliser-dictionnaire": [
+    {
+      id: "ce2-fr-voc-utiliser-dictionnaire-s1",
+      title: "Comprendre l'organisation du dictionnaire",
+      phase: "découvrir",
+      objective: "L'élève comprend que le dictionnaire est classé par ordre alphabétique et lit un article-exemple.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-utiliser-dictionnaire-s2",
+      title: "Chercher un mot par ordre alphabétique",
+      phase: "s'entraîner",
+      objective: "L'élève trouve rapidement un mot en utilisant les mots-repères en haut de page.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-utiliser-dictionnaire-s3",
+      title: "Lire et comprendre une définition",
+      phase: "réinvestir",
+      objective: "L'élève lit la définition d'un mot, repère sa nature et comprend l'exemple donné.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-utiliser-dictionnaire-s4",
+      title: "Trouver un mot inconnu dans le dictionnaire de façon autonome",
+      phase: "évaluer",
+      objective: "L'élève cherche seul un mot et explique son sens à partir de la définition trouvée.",
+      status: "upcoming",
+    },
+  ],
+
+  "ce2-fr-voc-familles-de-mots": [
+    {
+      id: "ce2-fr-voc-familles-de-mots-s1",
+      title: "Observer des mots de la même famille",
+      phase: "découvrir",
+      objective: "L'élève repère des mots ayant une même racine et comprend leur lien de sens.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-familles-de-mots-s2",
+      title: "Former des mots avec des préfixes et suffixes connus",
+      phase: "s'entraîner",
+      objective: "L'élève utilise des préfixes (re-, dé-, in-) et suffixes (-eur, -tion, -ment) pour créer des mots.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-familles-de-mots-s3",
+      title: "Regrouper des mots par famille",
+      phase: "réinvestir",
+      objective: "L'élève classe un ensemble de mots en familles en identifiant la racine commune.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-fr-voc-familles-de-mots-s4",
+      title: "Reconnaître et compléter une famille de mots",
+      phase: "évaluer",
+      objective: "L'élève identifie la racine et trouve des mots de la même famille pour compléter un tableau.",
+      status: "upcoming",
+    },
+  ],
+
   // ── Mathématiques — Nombres et calculs ───────────────────────────────────
 
   "ce2-ma-nc-poser-operations": [
@@ -571,6 +796,37 @@ const CE2_SESSIONS: Record<string, LessonSession[]> = {
       title: "Poser une multiplication simple",
       phase: "consolider",
       objective: "L'élève pose une multiplication à un chiffre et vérifie la vraisemblance du résultat.",
+      status: "upcoming",
+    },
+  ],
+
+  "ce2-ma-nc-memoriser-tables-multiplication": [
+    {
+      id: "ce2-ma-nc-memoriser-tables-multiplication-s1",
+      title: "Comprendre la structure d'une table de multiplication",
+      phase: "découvrir",
+      objective: "L'élève comprend qu'une table est une suite d'additions répétées et la visualise.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-nc-memoriser-tables-multiplication-s2",
+      title: "Mémoriser les tables par petits groupes",
+      phase: "s'entraîner",
+      objective: "L'élève apprend deux ou trois tables à la fois en utilisant des répétitions et des jeux.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-nc-memoriser-tables-multiplication-s3",
+      title: "Réciter et retrouver rapidement un produit",
+      phase: "réinvestir",
+      objective: "L'élève répond en moins de 5 secondes à une multiplication tirée des tables apprises.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-nc-memoriser-tables-multiplication-s4",
+      title: "Évaluation rapide des tables",
+      phase: "évaluer",
+      objective: "L'élève répond seul à une série de multiplications issues des tables de 2 à 9.",
       status: "upcoming",
     },
   ],
@@ -734,6 +990,68 @@ const CE2_SESSIONS: Record<string, LessonSession[]> = {
     },
   ],
 
+  "ce2-ma-gm-mesurer-masses": [
+    {
+      id: "ce2-ma-gm-mesurer-masses-s1",
+      title: "Découvrir les unités de masse et la balance",
+      phase: "découvrir",
+      objective: "L'élève manipule une balance et comprend la différence entre gramme et kilogramme.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-gm-mesurer-masses-s2",
+      title: "Lire une masse sur une balance",
+      phase: "s'entraîner",
+      objective: "L'élève lit le résultat indiqué par une balance à aiguille ou numérique.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-gm-mesurer-masses-s3",
+      title: "Convertir entre grammes et kilogrammes",
+      phase: "réinvestir",
+      objective: "L'élève convertit des masses dans des cas simples (500 g = 0,5 kg).",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-gm-mesurer-masses-s4",
+      title: "Résoudre des problèmes de masses simples",
+      phase: "évaluer",
+      objective: "L'élève compare et calcule des masses en utilisant les unités adaptées.",
+      status: "upcoming",
+    },
+  ],
+
+  "ce2-ma-gm-mesurer-contenances": [
+    {
+      id: "ce2-ma-gm-mesurer-contenances-s1",
+      title: "Découvrir le litre et les récipients gradués",
+      phase: "découvrir",
+      objective: "L'élève observe des récipients gradués et comprend ce que mesure la contenance.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-gm-mesurer-contenances-s2",
+      title: "Lire et comparer des contenances",
+      phase: "s'entraîner",
+      objective: "L'élève lit le niveau d'un liquide et compare deux contenances mesurées.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-gm-mesurer-contenances-s3",
+      title: "Utiliser litre et centilitre dans des situations simples",
+      phase: "réinvestir",
+      objective: "L'élève utilise les unités litre et centilitre pour résoudre une situation de la vie quotidienne.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-gm-mesurer-contenances-s4",
+      title: "Résoudre des problèmes de contenance",
+      phase: "évaluer",
+      objective: "L'élève compare et calcule des contenances en choisissant l'unité adaptée.",
+      status: "upcoming",
+    },
+  ],
+
   // ── Mathématiques — Espace et géométrie ──────────────────────────────────
 
   "ce2-ma-eg-se-reperer-decrire-deplacement": [
@@ -794,6 +1112,37 @@ const CE2_SESSIONS: Record<string, LessonSession[]> = {
       title: "Réaliser un tracé géométrique complet",
       phase: "évaluer",
       objective: "L'élève réalise une figure simple imposée en choisissant et utilisant les bons instruments.",
+      status: "upcoming",
+    },
+  ],
+
+  "ce2-ma-eg-reconnaitre-symetrie": [
+    {
+      id: "ce2-ma-eg-reconnaitre-symetrie-s1",
+      title: "Observer des figures symétriques autour de soi",
+      phase: "découvrir",
+      objective: "L'élève repère des objets ou figures symétriques et identifie l'axe de symétrie.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-eg-reconnaitre-symetrie-s2",
+      title: "Vérifier une symétrie avec du papier calque ou un miroir",
+      phase: "s'entraîner",
+      objective: "L'élève plie ou utilise un miroir pour vérifier si une figure est symétrique.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-eg-reconnaitre-symetrie-s3",
+      title: "Compléter une figure par symétrie sur quadrillage",
+      phase: "réinvestir",
+      objective: "L'élève complète la partie manquante d'une figure symétrique sur papier quadrillé.",
+      status: "upcoming",
+    },
+    {
+      id: "ce2-ma-eg-reconnaitre-symetrie-s4",
+      title: "Construire une figure symétrique",
+      phase: "évaluer",
+      objective: "L'élève construit seul la figure symétrique d'une forme donnée par rapport à un axe.",
       status: "upcoming",
     },
   ],

@@ -27,6 +27,13 @@ export const publishedSubdomainPages = [
   {
     level: "ce2",
     domain: "francais",
+    subdomain: "lecture-voix-haute",
+    route: "/primaire/ce2/programmes/francais/lecture-voix-haute",
+    label: "CE2 — Français — Lecture à voix haute",
+  },
+  {
+    level: "ce2",
+    domain: "francais",
     subdomain: "langage-oral",
     route: "/primaire/ce2/programmes/francais/langage-oral",
     label: "CE2 — Français — Langage oral",
@@ -51,6 +58,13 @@ export const publishedSubdomainPages = [
     subdomain: "etude-de-la-langue",
     route: "/primaire/ce2/programmes/francais/etude-de-la-langue",
     label: "CE2 — Français — Étude de la langue",
+  },
+  {
+    level: "ce2",
+    domain: "francais",
+    subdomain: "vocabulaire",
+    route: "/primaire/ce2/programmes/francais/vocabulaire",
+    label: "CE2 — Français — Vocabulaire",
   },
   // ── CE2 — Mathématiques ─────────────────────────────────────────────────────
   {

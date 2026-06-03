@@ -68,6 +68,44 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
           ],
         },
         {
+          subdomainSlug: "lecture-voix-haute",
+          label: "Lecture à voix haute",
+          entries: [
+            {
+              id: "ce2-fr-lvh-lire-fluidement",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-voix-haute",
+              title: "Lire à voix haute avec fluidité",
+              observableObjective:
+                "L'élève lit un texte à voix haute de façon fluide, respectant la ponctuation et l'expression.",
+              successCriteria: [
+                "Je lis sans épeler les mots.",
+                "Je respecte la ponctuation pour faire les pauses.",
+                "Je lis avec une expression adaptée au texte.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-lvh-preparer-lecture",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-voix-haute",
+              title: "Préparer et présenter une lecture",
+              observableObjective:
+                "L'élève prépare un passage à lire et le présente devant la classe avec clarté.",
+              successCriteria: [
+                "Je prépare ma lecture à l'avance.",
+                "Je lis assez fort pour être entendu.",
+                "Je regarde les auditeurs de temps en temps.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
           subdomainSlug: "lecture-comprehension",
           label: "Lecture et compréhension",
           entries: [
@@ -116,6 +154,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je repère les indices de mise en page.",
                 "Je dis à quoi sert le texte.",
                 "Je justifie mon choix avec un exemple.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-lc-resumer-texte",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "lecture-comprehension",
+              title: "Résumer un texte lu",
+              observableObjective:
+                "L'élève reformule en quelques phrases l'essentiel d'un texte lu.",
+              successCriteria: [
+                "Je retiens les idées principales.",
+                "Je résume sans recopier mot à mot.",
+                "Mon résumé se comprend sans avoir lu le texte.",
               ],
               status: "upcoming",
             },
@@ -227,6 +281,76 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               ],
               status: "upcoming",
             },
+            {
+              id: "ce2-fr-edl-orthographier-mots-frequents",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "etude-de-la-langue",
+              title: "Orthographier les mots fréquents",
+              observableObjective:
+                "L'élève écrit sans erreur les mots fréquents du CE2 et applique les régularités orthographiques connues.",
+              successCriteria: [
+                "J'écris les mots outils sans faute.",
+                "J'applique une règle orthographique simple.",
+                "Je vérifie l'orthographe en relecture.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "vocabulaire",
+          label: "Vocabulaire",
+          entries: [
+            {
+              id: "ce2-fr-voc-enrichir-vocabulaire",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "vocabulaire",
+              title: "Enrichir son vocabulaire par le contexte",
+              observableObjective:
+                "L'élève déduit le sens d'un mot inconnu en s'appuyant sur le contexte de la phrase ou du texte.",
+              successCriteria: [
+                "Je repère les mots voisins pour comprendre.",
+                "Je propose un mot de sens proche.",
+                "Je vérifie ma déduction dans le contexte.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-voc-utiliser-dictionnaire",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "vocabulaire",
+              title: "Utiliser le dictionnaire",
+              observableObjective:
+                "L'élève cherche un mot dans le dictionnaire en utilisant l'ordre alphabétique et comprend sa définition.",
+              successCriteria: [
+                "Je cherche un mot en utilisant l'ordre alphabétique.",
+                "Je lis la définition pour vérifier le sens.",
+                "Je repère la nature grammaticale du mot.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-fr-voc-familles-de-mots",
+              levelSlug: "ce2",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "vocabulaire",
+              title: "Reconnaître et utiliser les familles de mots",
+              observableObjective:
+                "L'élève identifie des mots de même famille et comprend leur lien de sens avec la racine.",
+              successCriteria: [
+                "Je retrouve le mot racine.",
+                "Je forme de nouveaux mots avec des préfixes ou suffixes.",
+                "Je vérifie que les mots formés ont un sens.",
+              ],
+              status: "upcoming",
+            },
           ],
         },
       ],
@@ -285,6 +409,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "J'aligne les chiffres par rang.",
                 "Je calcule étape par étape.",
                 "Je vérifie la vraisemblance du résultat.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-ma-nc-memoriser-tables-multiplication",
+              levelSlug: "ce2",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "nombres-calcul",
+              title: "Mémoriser et utiliser les tables de multiplication",
+              observableObjective:
+                "L'élève restitue rapidement les résultats des tables de 2 à 9 et les utilise pour calculer.",
+              successCriteria: [
+                "Je récite une table demandée.",
+                "Je retrouve rapidement un produit.",
+                "J'utilise les tables pour calculer une multiplication.",
               ],
               status: "upcoming",
             },
@@ -396,6 +536,38 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               ],
               status: "upcoming",
             },
+            {
+              id: "ce2-ma-gm-mesurer-masses",
+              levelSlug: "ce2",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "grandeurs-mesures",
+              title: "Mesurer et comparer des masses",
+              observableObjective:
+                "L'élève mesure des masses avec une balance et convertit entre grammes et kilogrammes.",
+              successCriteria: [
+                "Je lis une masse sur une balance.",
+                "Je convertis g et kg dans des cas simples.",
+                "Je compare deux masses mesurées.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-ma-gm-mesurer-contenances",
+              levelSlug: "ce2",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "grandeurs-mesures",
+              title: "Estimer et comparer des contenances",
+              observableObjective:
+                "L'élève compare des contenances et utilise les unités litre et centilitre.",
+              successCriteria: [
+                "Je lis une contenance sur un récipient gradué.",
+                "Je compare deux contenances.",
+                "J'utilise litre et centilitre dans un problème simple.",
+              ],
+              status: "upcoming",
+            },
           ],
         },
         {
@@ -447,6 +619,22 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je choisis l'instrument demandé.",
                 "Je trace proprement.",
                 "Je vérifie la propriété attendue.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-ma-eg-reconnaitre-symetrie",
+              levelSlug: "ce2",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "espace-geometrie",
+              title: "Reconnaître et construire une figure symétrique",
+              observableObjective:
+                "L'élève identifie un axe de symétrie et complète ou construit une figure symétrique.",
+              successCriteria: [
+                "Je repère un axe de symétrie.",
+                "Je complète une figure par symétrie.",
+                "Je vérifie la symétrie avec un miroir ou du papier calque.",
               ],
               status: "upcoming",
             },
