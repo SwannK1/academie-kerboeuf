@@ -193,6 +193,15 @@ const francaisSequences: Cm2Sequence[] = [
 
   // Lecture — types de textes et stratégies
   {
+    slug: "fr-lc-recit-complexe",
+    title: "Comprendre un récit complexe",
+    domain: "Lecture et compréhension",
+    subdomain: "Compréhension globale",
+    skill: "Comprendre un texte narratif long avec plusieurs personnages, lieux et rebondissements.",
+    status: "upcoming",
+    level: "CM2",
+  },
+  {
     slug: "fr-lc-fluidite",
     title: "Lire avec fluidité un texte long",
     domain: "Lecture et compréhension",

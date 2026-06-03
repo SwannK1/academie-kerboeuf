@@ -158,6 +158,17 @@ export const cm2LearningTree: Cm2LearningTree = [
             status: "upcoming",
             lessons: [
               {
+                id: "francais-lecture-recit-complexe",
+                title: "Comprendre un récit complexe",
+                status: "upcoming",
+                resources: [
+                  { type: "lesson",     label: "Leçon",      status: "upcoming" },
+                  { type: "exercise",   label: "Exercices",  status: "upcoming" },
+                  { type: "evaluation", label: "Évaluation", status: "upcoming" },
+                ],
+                linkedMissionSlugs: ["lecture-strategique"],
+              },
+              {
                 id: "francais-lecture-implicite-non-dit",
                 title: "Repérer ce que le texte ne dit pas explicitement",
                 status: "upcoming",
