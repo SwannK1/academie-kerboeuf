@@ -1,12 +1,15 @@
 import Link from "next/link";
 import type { AcademyLevel } from "@/content/academy";
 import { getLevelPath } from "@/content/academy";
+import type { ProgramStatus } from "@/content/program-types";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 type LevelCardProps = {
   level: AcademyLevel;
+  status?: ProgramStatus;
 };
 
-export function LevelCard({ level }: LevelCardProps) {
+export function LevelCard({ level, status }: LevelCardProps) {
   return (
     <Link
       href={getLevelPath(level)}
@@ -22,9 +25,12 @@ export function LevelCard({ level }: LevelCardProps) {
             {level.label}
           </h2>
         </div>
-        <span aria-hidden="true" className="grid size-11 place-items-center rounded-md border border-gold/35 bg-gold/10 text-lg font-black text-gold">
-          {level.professor.initial}
-        </span>
+        <div className="flex flex-col items-end gap-2">
+          {status !== undefined && <PublicStatusBadge status={status} />}
+          <span aria-hidden="true" className="grid size-11 place-items-center rounded-md border border-gold/35 bg-gold/10 text-lg font-black text-gold">
+            {level.professor.initial}
+          </span>
+        </div>
       </div>
       <p className="mt-5 text-sm leading-7 text-muted">{level.description}</p>
       <div className="mt-6 border-t border-white/10 pt-4">
