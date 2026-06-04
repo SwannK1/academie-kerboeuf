@@ -193,6 +193,14 @@ rm -rf .next
 rm -rf .next
 npm run lint
 npx tsc --noEmit
-npx next build --webpack
+npm run build
 ```
+
+## Attention — NODE_ENV
+
+`npm run build` doit toujours être utilisé à la place de `npx next build --webpack`.
+Le script `build` dans `package.json` force `NODE_ENV=production`, indispensable pour
+que le runtime React SSR s'initialise correctement. Sans cette variable, le build
+échoue avec `TypeError: Cannot read properties of null (reading 'useContext')` lors
+du prerendering des pages `/_not-found` et `/_global-error`.
 <!-- END:build-rules -->
