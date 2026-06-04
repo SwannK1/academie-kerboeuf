@@ -16,12 +16,47 @@ const SUBDOMAIN_LABELS: Record<string, string> = {
   "nombres-calcul": "Nombres et calcul",
 };
 
+const LEVEL_ACCENT: Record<
+  string,
+  { text: string; border: string; bg: string; gradient: string }
+> = {
+  cp: {
+    text: "text-jade",
+    border: "border-jade/35",
+    bg: "bg-jade/10",
+    gradient:
+      "radial-gradient(circle_at_top_left,rgba(80,200,164,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.10),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))",
+  },
+  ce1: {
+    text: "text-sky",
+    border: "border-sky/35",
+    bg: "bg-sky/10",
+    gradient:
+      "radial-gradient(circle_at_top_left,rgba(96,165,250,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.10),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))",
+  },
+  ce2: {
+    text: "text-ember",
+    border: "border-ember/35",
+    bg: "bg-ember/10",
+    gradient:
+      "radial-gradient(circle_at_top_left,rgba(239,129,74,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(239,129,74,0.10),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))",
+  },
+  cm1: {
+    text: "text-gold",
+    border: "border-gold/35",
+    bg: "bg-gold/10",
+    gradient:
+      "radial-gradient(circle_at_top_left,rgba(243,196,91,0.17),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.12),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))",
+  },
+};
+
 type Props = {
   level: AcademyLevel;
 };
 
 export function PrimaireLevelEntry({ level }: Props) {
   const slug = level.slug;
+  const accent = LEVEL_ACCENT[slug] ?? LEVEL_ACCENT["cp"];
 
   const subjects = getCurriculumSubjectsForLevel(slug);
 
@@ -68,20 +103,48 @@ export function PrimaireLevelEntry({ level }: Props) {
         </div>
       </div>
 
-      <section className="px-4 pb-8 pt-10 sm:px-6 lg:px-8">
+      <section className="relative isolate overflow-hidden px-4 pb-12 pt-10 sm:px-6 lg:px-8">
+        <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
+        <div
+          className="absolute inset-0 -z-10"
+          style={{ background: accent.gradient }}
+        />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-jade">
-              {level.cycle} · {level.label}
+            <span
+              className={`inline-flex rounded-md border ${accent.border} ${accent.bg} px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] ${accent.text}`}
+            >
+              {level.cycle} · Guide : {level.professor.name}
             </span>
           </div>
-          <h1 className="mt-5 text-5xl font-black leading-none text-foreground sm:text-6xl">
-            {level.label}
+          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            {level.heroTitle}
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">
-            Retrouvez les matières, les compétences et les missions du{" "}
-            {level.label}. Le site organise&nbsp;; les PDF enseigneront.
+          <p
+            className={`mt-3 text-sm font-bold uppercase tracking-[0.16em] ${accent.text}`}
+          >
+            {level.professor.role} · {level.mood.name}
           </p>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
+            {level.description}
+          </p>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-muted/70">
+            {level.professor.specialty}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href={`/primaire/${slug}/matieres`}
+              className={`rounded-md border ${accent.border} ${accent.bg} px-5 py-3 text-sm font-bold ${accent.text} transition hover:opacity-80`}
+            >
+              Explorer les matières {level.label}
+            </Link>
+            <Link
+              href="/primaire"
+              className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+            >
+              ← Primaire
+            </Link>
+          </div>
         </div>
       </section>
 
