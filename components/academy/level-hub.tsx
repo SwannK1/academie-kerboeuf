@@ -3,15 +3,17 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { LevelCard } from "@/components/academy/level-card";
 import type { AcademyLevel, AcademyStage } from "@/content/academy";
 import { stageLabels } from "@/content/academy";
+import type { ProgramStatus } from "@/content/program-types";
 
 type LevelHubProps = {
   stage: AcademyStage;
   title: string;
   description: string;
   levels: AcademyLevel[];
+  getStatus?: (slug: string) => ProgramStatus;
 };
 
-export function LevelHub({ stage, title, description, levels }: LevelHubProps) {
+export function LevelHub({ stage, title, description, levels, getStatus }: LevelHubProps) {
   return (
     <main>
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
@@ -41,7 +43,7 @@ export function LevelHub({ stage, title, description, levels }: LevelHubProps) {
       <section className="px-4 pb-12 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-2 xl:grid-cols-3">
           {levels.map((level) => (
-            <LevelCard key={level.slug} level={level} />
+            <LevelCard key={level.slug} level={level} status={getStatus?.(level.slug)} />
           ))}
         </div>
       </section>
