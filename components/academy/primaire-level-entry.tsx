@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AcademyLevel } from "@/content/academy";
 import { publishedSubdomainPages } from "@/content/levels/published-subdomain-pages";
 import { getCurriculumSubjectsForLevel } from "@/content/curriculum-map";
@@ -29,18 +30,22 @@ export function PrimaireLevelEntry({ level }: Props) {
     {
       label: "Matières",
       href: `/primaire/${slug}/matieres`,
+      status: "disponible",
     },
     {
       label: "Programme",
       href: `/primaire/${slug}/programme`,
+      status: "disponible",
     },
     {
       label: "Compétences",
       href: `/primaire/${slug}/competences`,
+      status: "disponible",
     },
     {
       label: "Missions",
       href: `/primaire/${slug}/missions`,
+      status: "disponible",
     },
   ];
 
@@ -164,6 +169,7 @@ export function PrimaireLevelEntry({ level }: Props) {
                   }`}
                 >
                   {link.label}
+                  <PublicStatusBadge status={link.status} />
                   <span className="transition group-hover:translate-x-0.5">
                     →
                   </span>
