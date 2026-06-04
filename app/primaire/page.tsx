@@ -49,8 +49,8 @@ const LEVEL_GUIDES: Record<
 // Conservative statuses — updated as content is published
 const LEVEL_STATUS: Record<string, string> = {
   cp: "en construction",
-  ce1: "bientôt",
-  ce2: "bientôt",
+  ce1: "en construction",
+  ce2: "en construction",
   cm1: "en construction",
   cm2: "disponible",
 };
@@ -58,6 +58,8 @@ const LEVEL_STATUS: Record<string, string> = {
 // Routes that actually exist — no fictitious links
 const LEVEL_MATIERES: Record<string, string> = {
   cp: "/primaire/cp/matieres",
+  ce1: "/primaire/ce1/matieres",
+  ce2: "/primaire/ce2/matieres",
   cm1: "/primaire/cm1/matieres",
   cm2: "/primaire/cm2/matieres",
 };
