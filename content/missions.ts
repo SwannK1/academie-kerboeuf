@@ -423,48 +423,51 @@ export const sharedMissions: SharedMission[] = [
   {
     levelSlug: "seconde",
     slug: "methode-lycee",
-    title: "Méthode Lycée",
+    title: "Organiser son travail personnel",
     subject: "Méthodologie",
     description:
-      "Installer les premiers réflexes de prise de notes, relecture et travail personnel.",
-    objective: "Comprendre ce qui change entre collège et lycée.",
-    skill: "Organiser son travail avec des routines simples et régulières.",
+      "Comprendre ce qui change à l’entrée au lycée et installer trois réflexes durables : planifier, activer, vérifier.",
+    objective:
+      "Identifier les exigences propres au lycée et construire une méthode personnelle d’organisation du travail.",
+    skill:
+      "Planifier un travail hebdomadaire en distinguant urgence, régularité et vérification.",
     difficulty: "lycée",
     status: "disponible",
     professorSlug: "oria",
     professorName: "Oria",
     theme: "sky",
     introduction:
-      "Oria accueille les nouveaux lycéens dans la grande passerelle : le défi n’est plus seulement de faire, mais de s’organiser.",
+      "Oria accueille les nouveaux lycéens dans la grande passerelle. Au lycée, le travail s’allonge, les délais s’espacent et les professeurs annoncent — mais n’accompagnent plus chaque étape. Trois choses changent vraiment : la quantité (plus de matières, plus de contenu par séance), la profondeur (il ne suffit plus de réciter, il faut comprendre et relier) et l’autonomie (c’est à toi de décider quand et comment travailler). La méthode en quatre étapes ci-dessous répond à ces trois défis.",
     support: {
-      label: "Situation de rentrée",
+      label: "Exemple guidé — La semaine de Camille",
       content:
-        "Un élève de Seconde reçoit trois devoirs longs, deux leçons à relire et un contrôle annoncé dans huit jours. Il note tout dans son agenda, mais ne sait pas par quoi commencer.",
+        "Camille est en Seconde. Lundi matin, elle note dans son agenda : un devoir de Français à rendre jeudi (rédaction d’un paragraphe d’analyse), un contrôle de Mathématiques annoncé pour vendredi (fonctions affines, chapitre 2), deux leçons d’Histoire-Géographie à relire avant mercredi, et un exposé d’SVT à préparer pour la semaine suivante. Camille ne sait pas par quoi commencer. Elle ouvre son agenda et applique la méthode en quatre étapes. Étape 1 — Recenser : elle liste toutes les tâches sur une seule page. Étape 2 — Évaluer : elle estime le temps de chaque tâche (rédaction : 45 min, contrôle maths : 3 × 20 min de révision répartie, leçons HG : 2 × 15 min, exposé SVT : reporté à la semaine prochaine). Étape 3 — Planifier : lundi soir → leçon HG (15 min) ; mardi soir → révision maths (20 min) + début rédaction (30 min) ; mercredi soir → fin rédaction (15 min) + leçon HG (15 min) + révision maths (20 min) ; jeudi soir → révision maths (20 min) avant contrôle du vendredi. Étape 4 — Vérifier : jeudi soir, Camille coche chaque tâche et note ce qui lui a demandé plus de temps que prévu.",
     },
     questions: [
-      "Quels éléments sont urgents ? Lesquels demandent un travail régulier ?",
-      "Comment répartir le travail sur trois jours sans tout faire d’un coup ?",
-      "Quelle trace peut aider l’élève à vérifier qu’il progresse ?",
+      "Exercice 1 — Trier les tâches. Dans la situation de Camille, classe chaque tâche dans l’une des deux catégories : « délai fixe » (date précise imposée) ou « travail régulier » (à répartir dans la semaine). Laquelle de ces deux catégories demande d’agir dès aujourd’hui ?",
+      "Exercice 2 — Construire un mini planning. Imagine que tu reçois lundi matin : un contrôle de Physique annoncé pour jeudi, une fiche de vocabulaire d’Anglais à apprendre pour mercredi, et un devoir maison de Français à rendre vendredi. Répartis ces trois tâches sur trois soirs (lundi, mardi, mercredi) en justifiant ton choix.",
+      "Exercice 3 — Auto-évaluation. À la fin d’une semaine, comment peux-tu vérifier que ta méthode a fonctionné ? Propose deux indicateurs concrets (des traces que tu peux regarder, pas des impressions) et explique pourquoi chacun te renseigne réellement sur ton organisation.",
     ],
     correction: [
-      "Le contrôle dans huit jours demande une révision régulière ; les devoirs longs doivent être découpés.",
-      "Une bonne organisation répartit lecture, rédaction et entraînement sur plusieurs moments courts.",
-      "Une liste de tâches ou un tableau de suivi permet de vérifier ce qui est fait.",
+      "Exercice 1 — Catégories : rédaction Français (jeudi) = délai fixe ; contrôle Maths (vendredi) = délai fixe ; leçons HG (mercredi) = délai fixe ; exposé SVT (semaine suivante) = travail régulier à anticiper. Les tâches à délai fixe doivent être planifiées immédiatement car une date butoir ne se déplace pas. La règle : ne jamais laisser une date fixe sans action programmée le soir même ou le lendemain.",
+      "Exercice 2 — Exemple de planning justifié : lundi soir → fiche vocabulaire Anglais (15 min, premier passage) ; mardi soir → révision Physique (20 min, premier passage) + début devoir Français (30 min) ; mercredi soir → révision Physique (20 min, second passage) + fin devoir Français (20 min). Justification : le contrôle de Physique le jeudi oblige à commencer les révisions mardi au plus tard, avec deux passages courts plutôt qu’un long bloc (espacement = meilleure mémorisation). L’Anglais se mémorise mieux en deux temps courts ; commencer lundi libère mercredi pour la Physique.",
+      "Exercice 3 — Deux indicateurs possibles : (1) le nombre de tâches cochées dans l’agenda à la fin de la semaine — si toutes les cases sont cochées à la date prévue, l’organisation a fonctionné ; si plusieurs ont glissé au dernier soir, c’est un signal d’alerte. (2) le temps réel comparé au temps estimé — si chaque tâche a pris à peu près le temps prévu, tes estimations sont fiables ; si tu dépasses systématiquement, tu dois revoir tes prévisions à la hausse. Ces deux indicateurs sont des traces concrètes : une coche ou un chiffre, pas un ressenti.",
     ],
     methodTip:
-      "Au lycée, transforme une grosse tâche en trois petites actions datées.",
+      "La méthode en 4 étapes : (1) Recenser — note toutes les tâches sur une seule page dès le lundi matin ; (2) Évaluer — estime honnêtement le temps de chaque tâche en minutes ; (3) Planifier — place chaque tâche sur un soir précis de la semaine, les délais fixes en priorité ; (4) Vérifier — coche chaque tâche accomplie et note ce qui a pris plus de temps que prévu. Répété chaque semaine, ce cycle devient automatique en trois semaines.",
     projectionHint:
-      "Projeter la situation et construire un mini planning collectif.",
+      "Projeter la situation de Camille et construire le planning collectivement au tableau : une colonne par soir, une ligne par tâche. Demander aux élèves de justifier chaque placement.",
     printHint:
-      "Imprimer une grille jour / tâche / durée / vérification.",
+      "Imprimer une grille à quatre colonnes : tâche / délai / temps estimé / soir choisi. Laisser une ligne vide en bas pour la vérification de fin de semaine.",
     curriculumDomain: "Méthodologie",
     curriculumCompetency: "Organiser son travail",
-    curriculumObjective: "à vérifier",
+    curriculumObjective: "Planifier, activer et vérifier le travail personnel hebdomadaire",
     officialLevel: "Seconde",
     cycle: "Lycée",
-    skillTags: ["organisation", "planning", "lycée"],
-    teacherUse: ["projection", "impression"],
-    studentUse: "Analyser la situation et construire un mini planning sur trois jours.",
+    skillTags: ["organisation", "planning", "lycée", "autonomie", "vérification"],
+    teacherUse: ["projection", "impression", "entraînement"],
+    studentUse:
+      "Lire l’exemple guidé (Camille), répondre aux trois exercices dans l’ordre, puis cocher l’auto-évaluation de l’exercice 3 à la fin de la prochaine semaine réelle.",
   },
   {
     levelSlug: "seconde",
