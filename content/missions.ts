@@ -468,6 +468,55 @@ export const sharedMissions: SharedMission[] = [
   },
   {
     levelSlug: "seconde",
+    slug: "prise-de-notes",
+    title: "Prendre des notes efficacement",
+    subject: "Méthodologie",
+    description:
+      "Apprendre à sélectionner, organiser et reformuler les informations importantes pendant un cours.",
+    objective:
+      "Comprendre que prendre des notes ne consiste pas à tout recopier, mais à repérer les idées importantes, les exemples utiles et les mots-clés.",
+    skill:
+      "Produire des notes claires, courtes, organisées et réutilisables à partir d'un cours.",
+    difficulty: "lycée",
+    status: "disponible",
+    professorSlug: "oria",
+    professorName: "Oria",
+    theme: "sky",
+    introduction:
+      "Oria ouvre un nouveau carnet : prendre des notes au lycée, ce n'est pas tout écrire — c'est choisir, organiser, et garder une trace utile.",
+    support: {
+      label: "Extrait de cours",
+      content:
+        "La Révolution française de 1789 est une rupture majeure dans l'histoire de France. Elle met fin à la monarchie absolue et à la société d'Ancien Régime fondée sur trois ordres : le clergé, la noblesse et le tiers-état. Les causes sont multiples : une crise financière grave, des récoltes catastrophiques en 1788, et une profonde inégalité sociale. Le peuple de Paris prend la Bastille le 14 juillet 1789, symbole du pouvoir royal. En août, l'Assemblée nationale adopte la Déclaration des droits de l'homme et du citoyen.",
+    },
+    questions: [
+      "Quelles sont les idées principales de cet extrait ?",
+      "Quels mots-clés résument chaque idée importante ?",
+      "Comment organiser ces informations avec des titres, des tirets et des flèches ?",
+    ],
+    correction: [
+      "Idées principales : fin de la monarchie absolue, causes multiples (économiques, sociales), événements clés (prise de la Bastille, Déclaration des droits).",
+      "Mots-clés : Révolution 1789, Ancien Régime, 3 ordres, crise financière, mauvaises récoltes, Bastille 14 juil., Déclaration droits.",
+      "Organisation possible : titre 'Révolution française', sous-titres 'Causes' et 'Événements', tirets pour chaque point, flèche entre 'crise sociale → prise de la Bastille'.",
+    ],
+    methodTip:
+      "Écoute d'abord pour comprendre l'idée principale, puis note seulement les mots-clés et exemples utiles — jamais des phrases entières.",
+    projectionHint:
+      "Projeter l'extrait de cours et construire collectivement les notes en repérant ce qui est essentiel.",
+    printHint:
+      "Imprimer la fiche méthode en 4 étapes et la grille d'auto-évaluation des notes.",
+    curriculumDomain: "Méthodologie",
+    curriculumCompetency: "Prendre des notes",
+    curriculumObjective: "Sélectionner et organiser l'information",
+    officialLevel: "Seconde",
+    cycle: "Lycée",
+    skillTags: ["notes", "organisation", "reformulation", "lycée"],
+    teacherUse: ["projection", "impression"],
+    studentUse:
+      "Repérer les idées importantes d'un extrait de cours et les transformer en notes organisées.",
+  },
+  {
+    levelSlug: "seconde",
     slug: "lecture-analytique",
     title: "Lecture Analytique",
     subject: "Français",
