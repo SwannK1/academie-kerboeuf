@@ -17,6 +17,8 @@ import {
   universePathways,
   type AccentKey,
 } from "@/content/universe";
+import { lieuxAcademie } from "@/content/lieux-academie";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 export const metadata: Metadata = {
   title: "Univers | Académie Kerboeuf",
@@ -252,6 +254,55 @@ export default function UniversPage() {
             </div>
           );
         })}
+
+        {/* Salles et ateliers de l'Académie */}
+        <div className="mt-4 border-t border-white/10 pt-10">
+          <p className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+            Salles &amp; ateliers de l&apos;Académie
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {lieuxAcademie.map((lieu) => (
+              <article
+                key={lieu.id}
+                className={`rounded-md border p-5 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <p
+                    className={`text-xs font-bold uppercase tracking-[0.16em] ${accentText[lieu.accentColor]}`}
+                  >
+                    {lieu.niveaux.join(" · ")}
+                  </p>
+                  <PublicStatusBadge status={lieu.statut} />
+                </div>
+                <h3 className="mt-3 text-base font-black text-foreground">
+                  {lieu.nom}
+                </h3>
+                <p className="mt-2 text-xs leading-6 text-muted">
+                  {lieu.fonctionPedagogique}
+                </p>
+                <div className="mt-4 border-t border-white/10 pt-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                    Matières
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {lieu.matieresAssociees.map((m) => (
+                      <span
+                        key={m}
+                        className={`rounded px-2 py-0.5 text-xs font-semibold ${accentBg[lieu.accentColor]} ${accentText[lieu.accentColor]}`}
+                      >
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="mt-4 text-xs leading-6 text-muted">
+                    <span className="font-semibold text-foreground/70">Usage :</span>{" "}
+                    {lieu.usageDansContenus}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </Section>
 
       {/* ── 4. PROFESSEURS RÉFÉRENTS ─────────────────────────────────────────── */}
