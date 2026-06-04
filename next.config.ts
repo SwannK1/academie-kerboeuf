@@ -19,6 +19,20 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/primaire/elementaire",
+        destination: "/primaire/lieux",
+        permanent: true,
+      },
+      {
+        source: "/primaire/elementaire/lieux/:slug*",
+        destination: "/primaire/lieux",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
