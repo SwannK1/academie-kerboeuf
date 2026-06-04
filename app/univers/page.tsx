@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { UniversHero } from "@/components/academy/univers-hero";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { academyLevels, academySubjects } from "@/content/academy";
 import { cm2Missions } from "@/content/cm2";
 import { maternelleWorld, emblematicStudents } from "@/content/students";
 import { professorProfiles } from "@/content/professors";
 import { learningPaths } from "@/content/learning-paths";
 import { getPublicStatusKey } from "@/content/public-status";
+import { academyCharacters } from "@/content/academy-characters";
+import { lieuxAcademie } from "@/content/lieux-academie";
 import {
   historyChapters,
   educationalValues,
@@ -606,6 +609,96 @@ export default function UniversPage() {
           >
             Voir tous les professeurs →
           </Link>
+        </div>
+      </Section>
+
+      {/* ── X. PERSONNAGES RÉFÉRENTS ─────────────────────────────────────────── */}
+      <Section
+        eyebrow="Chapitre X"
+        title="Les personnages référents"
+        text="Guides et professeurs qui accompagnent les élèves à chaque niveau du primaire."
+        band
+      >
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {academyCharacters.map((char) => {
+            const color = getPublicStatusKey(char.publicStatus) === "available"
+              ? "gold"
+              : "sky";
+            return (
+              <article
+                key={char.slug}
+                className={`rounded-md border p-5 ${accentBorder[color as AccentKey]} bg-white/[0.04]`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <p
+                    className={`text-xs font-bold uppercase tracking-[0.16em] ${accentText[color as AccentKey]}`}
+                  >
+                    {char.species}
+                  </p>
+                  <PublicStatusBadge status={char.publicStatus} />
+                </div>
+                <h3 className="mt-2 text-base font-black text-foreground">
+                  {char.name}
+                </h3>
+                <p className={`mt-1 text-xs font-semibold italic ${accentText[color as AccentKey]}`}>
+                  {char.mainSubject}
+                </p>
+                <p className="mt-3 text-xs leading-6 text-muted">
+                  {char.shortDescription}
+                </p>
+                {char.learningFunction.length > 0 && (
+                  <ul className="mt-3 space-y-1">
+                    {char.learningFunction.slice(0, 2).map((fn) => (
+                      <li key={fn} className="text-xs text-muted before:mr-2 before:content-['·']">
+                        {fn}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* ── XI. LIEUX PÉDAGOGIQUES ───────────────────────────────────────────── */}
+      <Section
+        eyebrow="Chapitre XI"
+        title="Les lieux pédagogiques"
+        text="Les espaces de l'Académie structurent les apprentissages — chaque lieu a une fonction claire."
+      >
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {lieuxAcademie.map((lieu) => (
+            <article
+              key={lieu.id}
+              className={`rounded-md border p-5 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <p
+                  className={`text-xs font-bold uppercase tracking-[0.16em] ${accentText[lieu.accentColor]}`}
+                >
+                  {lieu.niveaux.join(" · ")}
+                </p>
+                <PublicStatusBadge status={lieu.statut} />
+              </div>
+              <h3 className="mt-2 text-base font-black text-foreground">
+                {lieu.nom}
+              </h3>
+              <p className="mt-3 text-xs leading-6 text-muted">
+                {lieu.fonctionPedagogique}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1">
+                {lieu.matieresAssociees.slice(0, 3).map((matiere) => (
+                  <span
+                    key={matiere}
+                    className={`rounded px-2 py-0.5 text-xs font-semibold ${accentBg[lieu.accentColor]} ${accentText[lieu.accentColor]}`}
+                  >
+                    {matiere}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </Section>
 
