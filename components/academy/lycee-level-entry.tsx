@@ -87,20 +87,35 @@ export function LyceeLevelEntry({ level, status }: Props) {
             </Link>
 
             {/* Matières — données depuis academy-curriculum */}
-            <div
-              aria-label="Matières du niveau"
-              className="flex flex-col rounded-md border border-jade/20 bg-jade/[0.04] p-6"
-            >
-              <h2 className="text-xl font-black text-foreground">Matières</h2>
-              <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                {curriculumSubjects.length > 0
-                  ? `${curriculumSubjects.length} matières — domaines et sous-domaines structurés.`
-                  : "Français, Mathématiques, Sciences, Langues et disciplines du lycée."}
-              </p>
-              <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                Voir ci-dessous ↓
-              </span>
-            </div>
+            {curriculumSubjects.length > 0 ? (
+              <a
+                href="#matieres"
+                className="group flex flex-col rounded-md border border-jade/20 bg-jade/[0.04] p-6 transition hover:-translate-y-0.5 hover:border-jade/40 hover:bg-jade/[0.07]"
+              >
+                <h2 className="text-xl font-black text-foreground">Matières</h2>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted">
+                  {curriculumSubjects.length} matières — domaines et
+                  sous-domaines structurés.
+                </p>
+                <span className="mt-6 inline-flex text-sm font-black text-jade transition group-hover:translate-x-1">
+                  Voir les matières ↓
+                </span>
+              </a>
+            ) : (
+              <div
+                aria-label="Matières du niveau"
+                className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60"
+              >
+                <h2 className="text-xl font-black text-foreground">Matières</h2>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted">
+                  Français, Mathématiques, Sciences, Langues et disciplines du
+                  lycée.
+                </p>
+                <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                  À venir
+                </span>
+              </div>
+            )}
 
             {/* Ressources — à venir, non cliquable */}
             <div
@@ -122,7 +137,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
 
       {/* ── Matières et domaines (academy-curriculum) ── */}
       {curriculumSubjects.length > 0 && (
-        <section className="px-4 pb-10 sm:px-6 lg:px-8">
+        <section id="matieres" className="px-4 pb-10 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 border-b border-white/10 pb-4">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
