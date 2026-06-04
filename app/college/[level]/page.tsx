@@ -36,7 +36,7 @@ export default async function CollegeLevelPage({ params }: PageProps) {
     notFound();
   }
 
-  const COLLEGE_ENTRY_PORTAL_SLUGS = ["5e", "4e", "3e"];
+  const COLLEGE_ENTRY_PORTAL_SLUGS = ["6e", "5e", "4e", "3e"];
   if (COLLEGE_ENTRY_PORTAL_SLUGS.includes(levelSlug)) {
     return <CollegeLevelEntry level={level} />;
   }
