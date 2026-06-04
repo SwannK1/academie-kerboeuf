@@ -78,6 +78,15 @@ const subject = (
 ): LyceeSubject => ({ id, slug: id, title, status, domains });
 
 const secondeTroncCommun: LyceeSubject[] = [
+  subject("methodologie", "Méthodologie lycée", [
+    domain("methodes-travail", "Méthodes de travail", [
+      subdomain("organisation", "Organisation et autonomie", [
+        competence("prendre-notes-efficacement", "Prendre des notes efficacement", "in-progress"),
+        competence("organiser-travail-personnel", "Organiser son travail personnel", "in-progress"),
+        competence("gerer-temps-revisions", "Gérer son temps et ses révisions", "in-progress"),
+      ], "in-progress"),
+    ], "in-progress"),
+  ], "in-progress"),
   subject("francais", "Français", [
     domain("litterature", "Littérature", [
       subdomain("roman-recit", "Roman et récit", [
@@ -96,24 +105,24 @@ const secondeTroncCommun: LyceeSubject[] = [
       ]),
       subdomain("argumentation-oral", "Argumentation et oral", [
         competence("formuler-une-these", "Formuler une thèse claire", "in-progress"),
-        competence("organiser-un-paragraphe-argumente", "Organiser un paragraphe argumenté"),
+        competence("organiser-un-paragraphe-argumente", "Organiser un paragraphe argumenté", "in-progress"),
       ]),
     ]),
   ], "in-progress"),
   subject("mathematiques", "Mathématiques", [
     domain("nombres-calculs", "Nombres et calculs", [
       subdomain("calcul-litteral", "Calcul littéral", [
-        competence("developper-factoriser", "Développer et factoriser une expression"),
-        competence("resoudre-equation-premier-degre", "Résoudre une équation du premier degré"),
-      ]),
+        competence("developper-factoriser", "Développer et factoriser une expression", "in-progress"),
+        competence("resoudre-equation-premier-degre", "Résoudre une équation du premier degré", "in-progress"),
+      ], "in-progress"),
       subdomain("ensembles-de-nombres", "Ensembles de nombres", [
         competence("identifier-ensemble-nombre", "Identifier l'ensemble d'appartenance d'un nombre"),
         competence("utiliser-valeurs-approchees", "Utiliser les valeurs approchées avec discernement"),
       ]),
-    ]),
+    ], "in-progress"),
     domain("fonctions-geometrie", "Fonctions et géométrie", [
       subdomain("fonctions", "Fonctions", [
-        competence("lire-image-antecedent", "Lire une image et un antécédent"),
+        competence("lire-image-antecedent", "Lire une image et un antécédent", "in-progress"),
         competence("decrire-variations-fonction", "Décrire les variations d'une fonction"),
       ]),
       subdomain("vecteurs-reperage", "Vecteurs et repérage", [
@@ -127,7 +136,7 @@ const secondeTroncCommun: LyceeSubject[] = [
         competence("calculer-probabilite-simple", "Calculer une probabilité simple"),
       ]),
     ]),
-  ]),
+  ], "in-progress"),
   subject("histoire-geographie", "Histoire-Géographie", [
     domain("histoire", "Histoire", [
       subdomain("chronologie-documents", "Chronologie et documents", [
