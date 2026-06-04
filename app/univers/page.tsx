@@ -17,6 +17,8 @@ import {
   universePathways,
   type AccentKey,
 } from "@/content/universe";
+import { academyCharacters } from "@/content/academy-characters";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 export const metadata: Metadata = {
   title: "Univers | Académie Kerboeuf",
@@ -609,6 +611,46 @@ export default function UniversPage() {
         </div>
       </Section>
 
+      {/* ── 10. PERSONNAGES ACADÉMIE ─────────────────────────────────────────── */}
+      <Section
+        eyebrow="Chapitre X"
+        title="Les personnages de l'Académie"
+        text="Professeurs référents et guide — chacun porte une matière et accompagne les apprentissages à sa façon."
+      >
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {academyCharacters.map((character) => (
+            <article
+              key={character.slug}
+              className="rounded-md border border-white/10 bg-white/[0.04] p-5"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="text-base font-black text-foreground">
+                    {character.name}
+                  </h3>
+                  <p className="mt-0.5 text-xs text-muted">{character.species}</p>
+                </div>
+                <PublicStatusBadge status={character.publicStatus} />
+              </div>
+              <p className="mt-3 rounded bg-gold/10 px-2 py-0.5 font-mono text-xs font-bold text-gold w-fit">
+                {character.mainSubject}
+              </p>
+              <p className="mt-3 text-xs leading-6 text-muted line-clamp-3">
+                {character.shortDescription}
+              </p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-6">
+          <Link
+            href="/univers/personnages"
+            className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
+          >
+            Voir tous les personnages →
+          </Link>
+        </div>
+      </Section>
+
       {/* ── CTA FINAL ────────────────────────────────────────────────────────── */}
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl rounded-md border border-white/12 bg-[linear-gradient(135deg,rgba(243,196,91,0.1),rgba(80,200,164,0.07),rgba(255,255,255,0.03))] p-8 sm:p-10">
@@ -635,6 +677,7 @@ export default function UniversPage() {
               <CtaLink href="/professeurs" color="ember">Professeurs</CtaLink>
               <CtaLink href="/eleves" color="jade">Élèves</CtaLink>
               <CtaLink href="/parcours" color="jade">Parcours</CtaLink>
+              <CtaLink href="/univers/personnages" color="jade">Personnages</CtaLink>
             </div>
           </div>
         </div>
