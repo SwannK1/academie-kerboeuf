@@ -185,7 +185,7 @@ export const courDesExplorateursHero: PedagogicalImageHero = {
       discipline: "Mathématiques",
       professor: "Félix",
       href: "/primaire/cm2/missions/defis-mathematiques",
-      status: getPublicStatus("disponible"),
+      status: getPublicStatus("bientôt"),
     },
     {
       title: "Observatoire",
