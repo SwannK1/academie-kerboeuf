@@ -106,9 +106,8 @@ export default function GsPage() {
                   Ressources prévues
                 </p>
                 <p className="mt-1 text-sm leading-6 text-muted">
-                  Grilles d&apos;observation, fiches atelier, supports projetables et
-                  fiches parent. Aucun lien n&apos;est affiché tant que la ressource
-                  n&apos;existe pas.
+                  Grilles d&apos;observation, fiches atelier et fiches parent.
+                  Aucun lien n&apos;est affiché tant que la ressource n&apos;existe pas.
                 </p>
               </div>
               <PublicStatusBadge status="upcoming" />
