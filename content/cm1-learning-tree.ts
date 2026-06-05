@@ -145,7 +145,6 @@ export const cm1LearningTree: Cm1LearningTree = [
               sequence("francais-ecriture-rediger-texte-structure", "Produire un texte structuré", "Rédiger un texte organisé avec un début, un développement et une fin."),
               sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Rédiger un paragraphe court qui énonce une idée et l'appuie par un exemple ou une raison."),
               sequence("francais-ecriture-rediger-reviser", "Relire pour améliorer la clarté", "Repérer une maladresse de sens ou d'organisation et proposer une correction."),
-              sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Donner une idée, une raison et un exemple."),
               sequence("francais-ecriture-rediger-reviser-grille", "Réviser un texte avec une grille", "Améliorer un texte à partir de critères simples."),
             ],
           },
@@ -204,12 +203,12 @@ export const cm1LearningTree: Cm1LearningTree = [
       { id: "noisette", name: "Noisette", role: "Guide CM1" },
       { id: "hector", name: "Hector", role: "Guide Mathématiques" },
     ],
-    status: "upcoming",
+    status: "in-progress",
     domains: [
       {
         id: "mathematiques-nombres-calculs",
         title: "Nombres et calculs",
-        status: "upcoming",
+        status: "in-progress",
         subdomains: [
           {
             id: "mathematiques-nombres-calculs-numeration",
@@ -225,9 +224,9 @@ export const cm1LearningTree: Cm1LearningTree = [
           {
             id: "mathematiques-nombres-calculs-calcul-pose",
             title: "Calcul posé",
-            status: "upcoming",
+            status: "in-progress",
             sequences: [
-              sequence("mathematiques-nombres-calculs-calcul-pose-multiplication", "Poser et calculer une multiplication", "Calculer le produit de deux nombres entiers en utilisant l'algorithme posé."),
+              sequence("mathematiques-nombres-calculs-calcul-pose-multiplication", "Poser et calculer une multiplication", "Calculer le produit de deux nombres entiers en utilisant l'algorithme posé.", "in-progress"),
               sequence("mathematiques-nombres-calculs-calcul-pose-division", "Poser et calculer une division euclidienne", "Déterminer quotient et reste dans une division euclidienne simple."),
             ],
           },

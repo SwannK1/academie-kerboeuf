@@ -33,7 +33,7 @@ export const cm1Subjects: Cm1Subject[] = [
     shortDescription:
       "Structurer les grands nombres, entrer dans les fractions et résoudre avec méthode.",
     domains: ["Nombres et calculs", "Résolution de problèmes", "Grandeurs et mesures", "Espace et géométrie"],
-    status: "upcoming",
+    status: "in-progress",
     accent: "jade",
     yearlyPathLabel: "Consolider les bases du cycle 3",
     teacherFocus:
