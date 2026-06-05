@@ -541,12 +541,12 @@ export const collegeLearningTree = [
   {
     levelSlug: "5e",
     label: "5e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
         label: "Français",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "recits-poesie-langue",
@@ -589,7 +589,7 @@ export const collegeLearningTree = [
       {
         slug: "mathematiques",
         label: "Mathématiques",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "nombres-proportionnalite-geometrie",
@@ -644,7 +644,7 @@ export const collegeLearningTree = [
       {
         slug: "histoire-geographie-emc",
         label: "Histoire-Géographie-EMC",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "moyen-age-monde",
@@ -694,7 +694,7 @@ export const collegeLearningTree = [
       {
         slug: "sciences-technologie",
         label: "Sciences et technologie",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "svt-physique-technologie",
@@ -744,7 +744,7 @@ export const collegeLearningTree = [
       {
         slug: "langues-vivantes",
         label: "Langues vivantes",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "niveau-a2-b1",
@@ -855,12 +855,12 @@ export const collegeLearningTree = [
   {
     levelSlug: "4e",
     label: "4e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
         label: "Français",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "litterature-argumentation-langue",
@@ -903,7 +903,7 @@ export const collegeLearningTree = [
       {
         slug: "mathematiques",
         label: "Mathématiques",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "calcul-geometrie-fonctions",
@@ -958,7 +958,7 @@ export const collegeLearningTree = [
       {
         slug: "histoire-geographie-emc",
         label: "Histoire-Géographie-EMC",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "revolutions-mondialisation-droits",
@@ -1098,7 +1098,7 @@ export const collegeLearningTree = [
       {
         slug: "langues-vivantes",
         label: "Langues vivantes",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "niveau-b1",
@@ -1209,12 +1209,12 @@ export const collegeLearningTree = [
   {
     levelSlug: "3e",
     label: "3e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
         label: "Français",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "brevet-litterature-argumentation",
@@ -1257,7 +1257,7 @@ export const collegeLearningTree = [
       {
         slug: "mathematiques",
         label: "Mathématiques",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "fonctions-calcul-geometrie-statistiques",
@@ -1312,7 +1312,7 @@ export const collegeLearningTree = [
       {
         slug: "histoire-geographie-emc",
         label: "Histoire-Géographie-EMC",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "monde-contemporain-citoyennete",
@@ -1464,7 +1464,7 @@ export const collegeLearningTree = [
       {
         slug: "langues-vivantes",
         label: "Langues vivantes",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "niveau-b1-brevet",
