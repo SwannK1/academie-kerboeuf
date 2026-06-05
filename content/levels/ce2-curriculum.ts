@@ -167,38 +167,6 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               ],
               status: "upcoming",
             },
-            {
-              id: "ce2-fr-lc-prelever-information-precise",
-              levelSlug: "ce2",
-              subject: "Français",
-              domainSlug: "francais",
-              subdomainSlug: "lecture-comprehension",
-              title: "Prélever une information précise",
-              observableObjective:
-                "L'élève retrouve une information explicitement écrite dans un texte en citant le passage correspondant.",
-              successCriteria: [
-                "Je lis la question avec attention.",
-                "Je retrouve l'information dans le texte.",
-                "Je cite le passage correspondant.",
-              ],
-              status: "upcoming",
-            },
-            {
-              id: "ce2-fr-lc-resumer-paragraphe",
-              levelSlug: "ce2",
-              subject: "Français",
-              domainSlug: "francais",
-              subdomainSlug: "lecture-comprehension",
-              title: "Résumer un court paragraphe",
-              observableObjective:
-                "L'élève reformule l'idée principale d'un paragraphe en une ou deux phrases.",
-              successCriteria: [
-                "Je lis le paragraphe en entier.",
-                "Je repère l'idée principale.",
-                "Je la reformule dans mes propres mots.",
-              ],
-              status: "upcoming",
-            },
           ],
         },
         {
@@ -390,9 +358,9 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
               subject: "Mathématiques",
               domainSlug: "mathematiques",
               subdomainSlug: "nombres-calcul",
-              title: "Poser et calculer des opérations",
+              title: "Poser et calculer une addition ou une soustraction",
               observableObjective:
-                "L'élève pose une addition, une soustraction ou une multiplication simple en respectant les rangs.",
+                "L'élève pose une addition ou une soustraction en respectant l'alignement des rangs.",
               successCriteria: [
                 "J'aligne les chiffres par rang.",
                 "Je calcule étape par étape.",
