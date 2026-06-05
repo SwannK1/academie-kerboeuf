@@ -1287,7 +1287,7 @@ export const cm2Missions: Cm2Mission[] = [
     description:
       "Identifier les indices de la phrase pour analyser les fonctions et les accords.",
     subject: "Français",
-    status: "en préparation",
+    status: "disponible",
     theme: themes.jade,
     objective:
       "Transformer l’analyse grammaticale en enquête pour repérer les relations dans la phrase.",
