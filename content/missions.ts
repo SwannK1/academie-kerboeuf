@@ -574,6 +574,67 @@ export const sharedMissions: SharedMission[] = [
     studentUse: "Relier les données à l'hypothèse et formuler une conclusion.",
   },
   {
+    levelSlug: "seconde",
+    slug: "equation-premier-degre",
+    title: "Résoudre une équation du premier degré",
+    subject: "Mathématiques",
+    description:
+      "Comprendre ce qu'est une équation du premier degré, apprendre la méthode en 4 étapes et s'entraîner sur trois exercices progressifs.",
+    objective:
+      "Résoudre une équation du premier degré en isolant l'inconnue de façon rigoureuse.",
+    skill:
+      "Appliquer les opérations inverses pour isoler x et vérifier la solution.",
+    difficulty: "lycée",
+    status: "disponible",
+    professorSlug: "oria",
+    professorName: "Oria",
+    theme: "gold",
+    introduction:
+      "Oria pose une question à ses élèves : « Si je double un nombre et j'ajoute 5, j'obtiens 17. Quel est ce nombre ? » Voici comment la mathématique transforme cette énigme en équation.",
+    support: {
+      label: "Mini-leçon — Équation du premier degré",
+      content: `Une équation du premier degré est une égalité de la forme ax + b = c (ou équivalente), où x est l'inconnue et a ≠ 0.
+
+Méthode en 4 étapes :
+1. Simplifier chaque membre si nécessaire (développer, réduire).
+2. Rassembler les termes en x d'un même côté (en faisant passer les termes de l'autre côté avec le signe opposé).
+3. Rassembler les constantes de l'autre côté.
+4. Diviser par le coefficient de x pour isoler x. Vérifier en remplaçant x par la valeur trouvée.
+
+Exemple guidé : 2x + 5 = 17
+Étape 1 — déjà simplifié.
+Étape 2 — x seul à gauche : 2x = 17 − 5
+Étape 3 — calculer la constante : 2x = 12
+Étape 4 — diviser par 2 : x = 6
+Vérification : 2 × 6 + 5 = 12 + 5 = 17 ✓`,
+    },
+    questions: [
+      "Exercice 1 (guidé) — Résoudre : 3x − 4 = 11",
+      "Exercice 2 (intermédiaire) — Résoudre : 5x + 3 = 2x + 12",
+      "Exercice 3 (approfondissement) — Résoudre : 2(x + 3) = x + 10",
+    ],
+    correction: [
+      "Exercice 1 : 3x − 4 = 11 → 3x = 11 + 4 = 15 → x = 5. Vérification : 3 × 5 − 4 = 15 − 4 = 11 ✓",
+      "Exercice 2 : 5x + 3 = 2x + 12 → 5x − 2x = 12 − 3 → 3x = 9 → x = 3. Vérification : 5 × 3 + 3 = 18 ; 2 × 3 + 12 = 18 ✓",
+      "Exercice 3 : développer → 2x + 6 = x + 10 → 2x − x = 10 − 6 → x = 4. Vérification : 2(4 + 3) = 14 ; 4 + 10 = 14 ✓",
+    ],
+    methodTip:
+      "Faire passer un terme d'un membre à l'autre revient à appliquer l'opération inverse : si +5 est à droite, on soustrait 5 des deux côtés.",
+    projectionHint:
+      "Projeter l'exemple guidé étape par étape ; masquer la suite avant que les élèves anticipent chaque étape.",
+    printHint:
+      "Imprimer les 3 exercices avec un cadre de réponse par étape (simplifier / rassembler x / rassembler constantes / isoler / vérifier).",
+    curriculumDomain: "Mathématiques",
+    curriculumCompetency: "Nombres et calculs — résolution d'équations",
+    curriculumObjective: "Résoudre une équation du premier degré à une inconnue",
+    officialLevel: "Seconde",
+    cycle: "Lycée",
+    skillTags: ["équation", "algèbre", "premier degré", "inconnue"],
+    teacherUse: ["projection", "impression", "entraînement"],
+    studentUse:
+      "Lire la mini-leçon, appliquer la méthode sur l'exemple guidé, puis résoudre les trois exercices de façon autonome.",
+  },
+  {
     levelSlug: "premiere",
     slug: "dissertation",
     title: "Dissertation",
