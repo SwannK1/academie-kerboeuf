@@ -513,6 +513,55 @@ export const sharedMissions: SharedMission[] = [
     studentUse: "Relier les données à l'hypothèse et formuler une conclusion.",
   },
   {
+    levelSlug: "seconde",
+    slug: "paragraphe-argumente",
+    title: "Organiser un paragraphe argumenté",
+    subject: "Français",
+    description:
+      "Construire un paragraphe argumenté structuré en quatre étapes : affirmation, explication, exemple, conclusion partielle.",
+    objective:
+      "Maîtriser la méthode AEEC pour rédiger un paragraphe argumenté cohérent et autonome.",
+    skill:
+      "Rédiger un paragraphe argumenté en distinguant affirmation, explication, exemple et conclusion partielle.",
+    difficulty: "lycée",
+    status: "disponible",
+    professorSlug: "oria",
+    professorName: "Oria",
+    theme: "jade",
+    introduction:
+      "Oria pose une question simple : sais-tu pourquoi un argument seul ne convainc personne ? Parce qu'un argument sans structure glisse sans laisser de trace. Aujourd'hui tu construis la charpente d'un paragraphe.",
+    support: {
+      label: "Mini-leçon",
+      content:
+        "Un paragraphe argumenté repose sur quatre étapes enchaînées. 1. Affirmation : tu poses ta thèse en une phrase courte. 2. Explication : tu développes le raisonnement qui justifie cette affirmation. 3. Exemple : tu ancres l'argument dans un texte, un fait ou une situation précise. 4. Conclusion partielle : tu reformules brièvement ce que l'exemple prouve, en ouvrant vers la suite. Sans ces quatre étapes, le lecteur reste à la porte de ta pensée.",
+    },
+    questions: [
+      "Exercice 1 — Identifier les étapes. Lis ce paragraphe et indique pour chaque phrase sa fonction (A, E, Ex ou C) : « La littérature permet de développer l'empathie. En lisant, le lecteur adopte le point de vue d'un personnage étranger à sa propre expérience. Dans Le Rouge et le Noir, Stendhal conduit le lecteur dans l'intériorité de Julien Sorel, lui faisant ressentir des aspirations sociales que rien dans sa vie ne lui prépare. Ainsi, lire, c'est s'exercer à comprendre ce qu'on n'a pas vécu. »",
+      "Exercice 2 — Compléter le paragraphe. Une affirmation et une explication te sont données ; rédige l'exemple et la conclusion partielle. Affirmation : « Le théâtre classique impose des contraintes qui stimulent la création. » Explication : « En limitant l'action à un jour, un lieu et une intrigue principale, la règle des trois unités oblige l'auteur à concentrer le conflit dramatique. »",
+      "Exercice 3 — Rédiger en autonomie. Construis un paragraphe argumenté complet (quatre étapes) à partir de cette affirmation : « L'incipit d'un roman conditionne l'engagement du lecteur. » Appuie-toi sur un texte étudié en classe.",
+    ],
+    correction: [
+      "Exercice 1 — Corrigé enseignant. « La littérature permet de développer l'empathie » → A (Affirmation). « En lisant, le lecteur adopte le point de vue d'un personnage étranger à sa propre expérience » → E (Explication). « Dans Le Rouge et le Noir… » → Ex (Exemple). « Ainsi, lire, c'est s'exercer… » → C (Conclusion partielle).",
+      "Exercice 2 — Exemple attendu : référence précise à une pièce classique (Racine, Corneille, Molière) montrant comment la contrainte produit une tension dramatique concentrée. Conclusion partielle attendue : reformulation du lien contrainte → intensité créatrice, sans répéter mot pour mot l'affirmation.",
+      "Exercice 3 — Critères de réussite : affirmation en une phrase ; explication en deux à trois phrases qui développent le raisonnement ; exemple nommé avec titre, auteur et passage précis ; conclusion partielle qui reformule l'apport de l'exemple. Longueur cible : dix à quinze lignes.",
+    ],
+    methodTip:
+      "Vérifie les quatre initiales : A-E-Ex-C. Si l'une manque, ton paragraphe est incomplet. L'exemple doit toujours citer un texte ou un fait précis, jamais une généralité.",
+    projectionHint:
+      "Projeter le paragraphe de l'exercice 1 au tableau et demander à la classe d'identifier les étapes à voix haute avant de valider collectivement.",
+    printHint:
+      "Imprimer la grille A-E-Ex-C avec les espaces de rédaction pour les exercices 2 et 3.",
+    curriculumDomain: "Français",
+    curriculumCompetency: "Argumentation et oral",
+    curriculumObjective: "Rédiger un paragraphe argumenté structuré",
+    officialLevel: "Seconde",
+    cycle: "Lycée",
+    skillTags: ["argumentation", "paragraphe", "rédaction", "méthode"],
+    teacherUse: ["projection", "impression", "entraînement"],
+    studentUse:
+      "Identifier les étapes d'un paragraphe argumenté, compléter un paragraphe et en rédiger un en autonomie.",
+  },
+  {
     levelSlug: "premiere",
     slug: "dissertation",
     title: "Dissertation",
