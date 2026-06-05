@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { academyCharacters } from "@/content/academy-characters";
 import { lieuxAcademie } from "@/content/lieux-academie";
@@ -99,6 +100,14 @@ export default function UniversPage() {
                 </div>
               </article>
             ))}
+          </div>
+          <div className="mt-6">
+            <Link
+              href="/univers/personnages"
+              className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
+            >
+              Voir tous les personnages →
+            </Link>
           </div>
         </div>
       </section>
