@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { academyCharacters } from "@/content/academy-characters";
@@ -49,7 +50,12 @@ export default function PersonnagesPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-xl font-black text-foreground">
-                      {character.name}
+                      <Link
+                        href={`/univers/personnages/${character.slug}`}
+                        className="hover:text-jade transition-colors"
+                      >
+                        {character.name}
+                      </Link>
                     </h2>
                     <p className="mt-0.5 text-xs font-semibold text-muted">
                       {character.species}
