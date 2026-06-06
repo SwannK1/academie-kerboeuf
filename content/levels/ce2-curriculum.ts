@@ -1042,6 +1042,146 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
       ],
     },
     {
+      domainSlug: "anglais",
+      subject: "Anglais",
+      label: "Anglais",
+      subdomains: [
+        {
+          subdomainSlug: "comprendre-oral",
+          label: "Compréhension orale",
+          entries: [
+            {
+              id: "ce2-anglais-co-identifier-informations",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "comprendre-oral",
+              title: "Identifier des informations dans un court document oral",
+              observableObjective:
+                "L'élève repère des mots et expressions familiers dans un court enregistrement ou un échange simple.",
+              successCriteria: [
+                "Je reconnais les mots connus.",
+                "Je comprends l'idée générale.",
+                "Je peux répondre à une question simple sur ce que j'ai entendu.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-anglais-co-comprendre-consignes",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "comprendre-oral",
+              title: "Comprendre des consignes et messages de classe",
+              observableObjective:
+                "L'élève réagit correctement à des instructions orales ritualisées et en comprend le sens.",
+              successCriteria: [
+                "Je suis la consigne sans traduction.",
+                "Je peux reformuler ce qui m'a été dit.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "s-exprimer-oral",
+          label: "Expression orale",
+          entries: [
+            {
+              id: "ce2-anglais-eo-se-presenter",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "s-exprimer-oral",
+              title: "Se présenter et parler de ses goûts",
+              observableObjective:
+                "L'élève produit un court discours oral pour donner des informations personnelles simples.",
+              successCriteria: [
+                "Je dis mon prénom, mon âge et ma ville.",
+                "Je dis au moins deux goûts personnels.",
+                "Je suis compris sans l'aide d'un traducteur.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-anglais-eo-decrire-image",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "s-exprimer-oral",
+              title: "Décrire une image ou une scène simple",
+              observableObjective:
+                "L'élève utilise des formules simples pour nommer des personnes, objets et lieux dans une image.",
+              successCriteria: [
+                "Je nomme ce que je vois.",
+                "J'utilise There is / There are.",
+                "Je décris une couleur ou une action.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "comprendre-ecrit",
+          label: "Compréhension écrite",
+          entries: [
+            {
+              id: "ce2-anglais-ce-lire-phrases-simples",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "comprendre-ecrit",
+              title: "Lire et comprendre des phrases simples",
+              observableObjective:
+                "L'élève comprend des phrases courtes formées de mots connus sans aide du dictionnaire.",
+              successCriteria: [
+                "Je lis la phrase sans la traduire mot à mot.",
+                "Je comprends l'idée principale.",
+                "Je peux associer la phrase à une image.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "vocabulaire-culture",
+          label: "Vocabulaire et repères culturels",
+          entries: [
+            {
+              id: "ce2-anglais-vc-champs-lexicaux",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "vocabulaire-culture",
+              title: "Mémoriser le vocabulaire de champs thématiques",
+              observableObjective:
+                "L'élève réutilise des mots de champs lexicaux travaillés (école, maison, nourriture, animaux).",
+              successCriteria: [
+                "Je connais au moins 10 mots par champ.",
+                "Je les place dans une phrase simple.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce2-anglais-vc-reperes-culturels",
+              levelSlug: "ce2",
+              subject: "Anglais",
+              domainSlug: "anglais",
+              subdomainSlug: "vocabulaire-culture",
+              title: "Repérer quelques éléments de la culture anglophone",
+              observableObjective:
+                "L'élève cite un ou deux éléments culturels d'un pays anglophone (fête, personnage, lieu).",
+              successCriteria: [
+                "Je nomme un pays anglophone.",
+                "Je cite une habitude ou un élément culturel.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+      ],
+    },
+    {
       domainSlug: "emc",
       subject: "EMC",
       label: "EMC",

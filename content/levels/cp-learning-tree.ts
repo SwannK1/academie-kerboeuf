@@ -827,6 +827,76 @@ const domainEMC: ProgramDomain = {
   status: "upcoming",
 };
 
+const domainAnglais: ProgramDomain = {
+  id: "cp-anglais",
+  slug: "anglais",
+  title: "Anglais",
+  officialLabel: "Langue vivante etrangere - Cycle 2",
+  description: "Premiers contacts avec la langue anglaise : comptines, mots du quotidien et consignes simples.",
+  subdomains: [
+    createSubdomain(
+      "anglais",
+      "comprendre-oral",
+      "Comprendre a l'oral",
+      "Reagir a des consignes simples et reconnaitre des mots familiers.",
+      [
+        {
+          slug: "reagir-a-une-consigne-simple",
+          title: "Reagir a une consigne simple",
+          objective:
+            "L'eleve comprend et execute une consigne rituelle entendue en classe (stand up, sit down, listen…).",
+          status: "upcoming",
+        },
+        {
+          slug: "reconnaitre-des-mots-familiers",
+          title: "Reconnaitre des mots familiers",
+          objective:
+            "L'eleve identifie quelques mots courants (couleurs, chiffres, animaux) entendus dans une comptine ou un court message.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "anglais",
+      "s-exprimer-oral",
+      "S'exprimer a l'oral",
+      "Reproduire des sons, des mots et de courtes formules en anglais.",
+      [
+        {
+          slug: "prononcer-des-mots-simples",
+          title: "Prononcer des mots simples",
+          objective:
+            "L'eleve repete des mots courts en respectant approximativement la prononciation entendue.",
+          status: "upcoming",
+        },
+        {
+          slug: "se-presenter-en-anglais",
+          title: "Se presenter en anglais",
+          objective:
+            "L'eleve dit son prenom et son age dans un court echange ritualise (My name is… I am… years old.).",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "anglais",
+      "decouvrir-la-langue",
+      "Decouvrir la langue",
+      "Prendre conscience que d'autres langues existent et entrer dans la culture anglophone.",
+      [
+        {
+          slug: "distinguer-l-anglais-du-francais",
+          title: "Distinguer l'anglais du francais",
+          objective:
+            "L'eleve reconnait qu'une langue etrangere a des sons et des mots differents du francais.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
 export const cpLearningTree: AcademyLevelProgram = {
   levelSlug: "cp",
   label: "CP",
@@ -845,6 +915,7 @@ export const cpLearningTree: AcademyLevelProgram = {
     domainEnseignementsArtistiques,
     domainEPS,
     domainEMC,
+    domainAnglais,
   ],
 };
 

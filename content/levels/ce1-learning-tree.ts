@@ -888,6 +888,83 @@ const domainEMC: ProgramDomain = {
   status: "upcoming",
 };
 
+const domainAnglais: ProgramDomain = {
+  id: "ce1-anglais",
+  slug: "anglais",
+  title: "Anglais",
+  officialLabel: "Langue vivante etrangere - Cycle 2",
+  description: "Consolidation des premiers acquis et elargissement du vocabulaire thematique.",
+  subdomains: [
+    createSubdomain(
+      "anglais",
+      "comprendre-oral",
+      "Comprendre a l'oral",
+      "Comprendre des messages courts et identifier des informations simples.",
+      [
+        {
+          slug: "comprendre-un-message-court",
+          title: "Comprendre un message court",
+          objective:
+            "L'eleve identifie des informations dans un message oral simple (presentation, description d'image).",
+          status: "upcoming",
+        },
+        {
+          slug: "reagir-a-des-consignes-ritualisees",
+          title: "Reagir a des consignes ritualisees",
+          objective:
+            "L'eleve reagit de facon adequate a des consignes orales courantes de classe.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "anglais",
+      "s-exprimer-oral",
+      "S'exprimer a l'oral",
+      "Produire de courtes phrases pour se presenter et echanger.",
+      [
+        {
+          slug: "se-presenter-et-parler-de-soi",
+          title: "Se presenter et parler de soi",
+          objective:
+            "L'eleve produit un court texte oral pour donner son prenom, son age, sa famille et ses gouts simples.",
+          status: "upcoming",
+        },
+        {
+          slug: "participer-a-un-echange-simple",
+          title: "Participer a un echange simple",
+          objective:
+            "L'eleve pose une question simple et y repond dans un court dialogue prepare.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "anglais",
+      "vocabulaire-thematique",
+      "Vocabulaire thematique",
+      "Memoriser et reutiliser des mots appartenant a des champs lexicaux familiers.",
+      [
+        {
+          slug: "utiliser-le-vocabulaire-des-couleurs-et-nombres",
+          title: "Utiliser le vocabulaire des couleurs et des nombres",
+          objective:
+            "L'eleve nomme les couleurs et les nombres de 1 a 20 dans des activites ritualisees.",
+          status: "upcoming",
+        },
+        {
+          slug: "nommer-les-membres-de-la-famille",
+          title: "Nommer les membres de la famille",
+          objective:
+            "L'eleve utilise le vocabulaire de la famille (mother, father, sister, brother…) dans une presentation.",
+          status: "upcoming",
+        },
+      ],
+    ),
+  ],
+  status: "upcoming",
+};
+
 export const ce1LearningTree: AcademyLevelProgram = {
   levelSlug: "ce1",
   label: "CE1",
@@ -906,6 +983,7 @@ export const ce1LearningTree: AcademyLevelProgram = {
     domainEnseignementsArtistiques,
     domainEPS,
     domainEMC,
+    domainAnglais,
   ],
 };
 
