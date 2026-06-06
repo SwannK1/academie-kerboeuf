@@ -2050,17 +2050,92 @@ const mathematiquesLycee: AcademyDomain[] = [
   { slug: "probabilites-statistiques", label: "Probabilités et statistiques", description: "Variables aléatoires, lois de probabilités.", subdomains: [{ slug: "probabilites", label: "Probabilités", description: "Calculer des probabilités et interpréter.", sequences: [] }] },
 ];
 
-const lyceeSubjectsBase = [
-  { slug: "francais", label: "Français", description: "Humanités littéraires, rhétorique, EAF.", domains: francaisLycee },
-  { slug: "mathematiques", label: "Mathématiques", description: "Analyse, algèbre, probabilités.", domains: mathematiquesLycee },
-  { slug: "histoire-geographie", label: "Histoire-Géographie", description: "Grands repères mondiaux contemporains.", domains: [
-    { slug: "histoire", label: "Histoire", description: "Du XIXe siècle au monde contemporain.", subdomains: [{ slug: "monde-contemporain", label: "Monde contemporain", description: "Guerres, décolonisation, mondialisation.", sequences: [] }] },
-    { slug: "geographie", label: "Géographie", description: "Mondialisation, territoires, développement.", subdomains: [{ slug: "mondialisation", label: "Mondialisation", description: "Flux, puissances, inégalités mondiales.", sequences: [] }] },
-  ] as AcademyDomain[] },
-  { slug: "emc", label: "EMC", description: "Éducation morale et civique.", domains: emcLycee },
+const sciencesSecondeDomainsLycee: AcademyDomain[] = [
+  {
+    slug: "physique-chimie",
+    label: "Physique-Chimie",
+    description: "Mesures, transformations et énergie.",
+    subdomains: [
+      { slug: "mesures-matiere", label: "Mesures et matière", description: "Grandeurs physiques et transformations chimiques.", sequences: [] },
+    ],
+  },
+  {
+    slug: "svt",
+    label: "SVT",
+    description: "Vivant, environnement et géologie.",
+    subdomains: [
+      { slug: "vivant-environnement", label: "Vivant et environnement", description: "Biodiversité, écosystèmes et géologie.", sequences: [] },
+    ],
+  },
+];
+
+const methodologieLyceeDomainsSeconde: AcademyDomain[] = [
+  {
+    slug: "organisation-travail",
+    label: "Organisation du travail",
+    description: "Planification, prise de notes et révisions.",
+    subdomains: [
+      { slug: "planification", label: "Planification", description: "Organiser son temps et ses priorités.", sequences: [] },
+      { slug: "prise-de-notes", label: "Prise de notes", description: "Techniques de prise de notes efficaces.", sequences: [] },
+    ],
+  },
+  {
+    slug: "techniques-epreuve",
+    label: "Techniques d'épreuve",
+    description: "Préparation aux écrits et aux oraux.",
+    subdomains: [
+      { slug: "ecrits-lycee", label: "Écrits du lycée", description: "Commentaire, dissertation, synthèse.", sequences: [] },
+    ],
+  },
+];
+
+const grandOralDomainsLycee: AcademyDomain[] = [
+  {
+    slug: "preparation-grand-oral",
+    label: "Préparation au Grand Oral",
+    description: "Question, exposé et entretien avec le jury.",
+    subdomains: [
+      { slug: "question-expose", label: "Question et exposé", description: "Formuler et soutenir une question problématisée.", sequences: [] },
+      { slug: "entretien-jury", label: "Entretien avec le jury", description: "Argumenter et échanger face à un jury.", sequences: [] },
+    ],
+  },
+];
+
+const histoireGeoDomains: AcademyDomain[] = [
+  { slug: "histoire", label: "Histoire", description: "Du monde contemporain à l'histoire récente.", subdomains: [{ slug: "monde-contemporain", label: "Monde contemporain", description: "Guerres, décolonisation, mondialisation.", sequences: [] }] },
+  { slug: "geographie", label: "Géographie", description: "Mondialisation, territoires, développement.", subdomains: [{ slug: "mondialisation", label: "Mondialisation", description: "Flux, puissances, inégalités mondiales.", sequences: [] }] },
+];
+
+const lyceeSecondeSubjects = [
+  { slug: "methodologie-lycee", label: "Méthodologie lycée", description: "S'organiser et développer les méthodes du lycée.", domains: methodologieLyceeDomainsSeconde },
+  { slug: "francais", label: "Français", description: "Lecture, écriture et expression littéraire.", domains: francaisLycee },
+  { slug: "mathematiques", label: "Mathématiques", description: "Calcul, fonctions, statistiques et probabilités.", domains: mathematiquesLycee },
+  { slug: "histoire-geographie", label: "Histoire-Géographie", description: "Repères chronologiques, espaces et enjeux contemporains.", domains: histoireGeoDomains },
+  { slug: "emc", label: "EMC", description: "Droits, libertés et engagement citoyen.", domains: emcLycee },
+  { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2 en Seconde.", domains: languesVivantesLycee },
+  { slug: "sciences", label: "Sciences", description: "Physique-Chimie et SVT — tronc commun.", domains: sciencesSecondeDomainsLycee },
+];
+
+const lyceePremiereSubjects = [
+  { slug: "francais", label: "Français (EAF)", description: "Épreuves anticipées de Français — littérature et langue.", domains: francaisLycee },
+  { slug: "histoire-geographie", label: "Histoire-Géographie", description: "Documents, compositions et méthodes d'analyse.", domains: histoireGeoDomains },
+  { slug: "emc", label: "EMC", description: "Engagement, démocratie et société.", domains: emcLycee },
   { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2 approfondies.", domains: languesVivantesLycee },
   { slug: "enseignement-scientifique", label: "Enseignement scientifique", description: "Sciences pluridisciplinaires obligatoires.", domains: enseignementScientifiqueLycee },
-  { slug: "specialites", label: "Spécialités", description: "Parcours personnalisé selon les choix de l'élève.", domains: specialitesLycee },
+  { slug: "specialites", label: "Spécialités (3 au choix)", description: "Trois spécialités choisies selon le projet de l'élève.", domains: specialitesLycee },
+];
+
+const lyceeTerminaleSubjects = [
+  { slug: "philosophie", label: "Philosophie", description: "Dissertation et explication de texte philosophique.", domains: [
+    { slug: "grands-themes", label: "Grands thèmes", description: "La liberté, la vérité, l'État, la conscience…", subdomains: [{ slug: "conscience-sujet", label: "Conscience et sujet", description: "Identité, liberté, responsabilité.", sequences: [] }] },
+    { slug: "textes-philosophiques", label: "Textes philosophiques", description: "Platon, Descartes, Kant, Nietzsche…", subdomains: [{ slug: "explication-texte", label: "Explication de texte", description: "Analyser et commenter un texte philosophique.", sequences: [] }] },
+  ] as AcademyDomain[] },
+  { slug: "histoire-geographie", label: "Histoire-Géographie", description: "Composition et analyse de documents complexes.", domains: histoireGeoDomains },
+  { slug: "emc", label: "EMC", description: "République, délibération et citoyenneté.", domains: emcLycee },
+  { slug: "langues-vivantes", label: "Langues vivantes", description: "LV1 et LV2 niveau avancé.", domains: languesVivantesLycee },
+  { slug: "enseignement-scientifique", label: "Enseignement scientifique", description: "Sciences pluridisciplinaires obligatoires.", domains: enseignementScientifiqueLycee },
+  { slug: "specialites", label: "Spécialités (2 maintenues)", description: "Deux spécialités conservées jusqu'au baccalauréat.", domains: specialitesLycee },
+  { slug: "grand-oral", label: "Grand Oral", description: "Épreuve terminale orale — question et exposé argumenté.", domains: grandOralDomainsLycee },
 ];
 
 const seconde: AcademyLevel = {
@@ -2069,7 +2144,7 @@ const seconde: AcademyLevel = {
   cycle: "lycee",
   stage: "lycee",
   description: "Année de détermination. Tronc commun et exploration des spécialités.",
-  subjects: lyceeSubjectsBase,
+  subjects: lyceeSecondeSubjects,
 };
 
 const premiere: AcademyLevel = {
@@ -2078,7 +2153,7 @@ const premiere: AcademyLevel = {
   cycle: "lycee",
   stage: "lycee",
   description: "Spécialités confirmées. Épreuve anticipée de Français.",
-  subjects: lyceeSubjectsBase,
+  subjects: lyceePremiereSubjects,
 };
 
 const terminale: AcademyLevel = {
@@ -2087,18 +2162,7 @@ const terminale: AcademyLevel = {
   cycle: "lycee",
   stage: "lycee",
   description: "Baccalauréat. Philosophie obligatoire.",
-  subjects: [
-    ...lyceeSubjectsBase,
-    {
-      slug: "philosophie",
-      label: "Philosophie",
-      description: "Dissertation et explication de texte philosophique.",
-      domains: [
-        { slug: "grands-themes", label: "Grands thèmes", description: "La liberté, la vérité, l'État, la conscience…", subdomains: [{ slug: "conscience-sujet", label: "Conscience et sujet", description: "Identité, liberté, responsabilité.", sequences: [] }] },
-        { slug: "textes-philosophiques", label: "Textes philosophiques", description: "Platon, Descartes, Kant, Nietzsche…", subdomains: [{ slug: "explication-texte", label: "Explication de texte", description: "Analyser et commenter un texte philosophique.", sequences: [] }] },
-      ] as AcademyDomain[],
-    },
-  ],
+  subjects: lyceeTerminaleSubjects,
 };
 
 // ── Curriculum global ─────────────────────────────────────────────────────────

@@ -79,6 +79,24 @@ const subject = (
 ): LyceeSubject => ({ id, slug: id, title, status, domains });
 
 const secondeTroncCommun: LyceeSubject[] = [
+  subject("methodologie-lycee", "Méthodologie lycée", [
+    domain("organisation-travail", "Organisation du travail", [
+      subdomain("planification-notes", "Planification et prise de notes", [
+        competence("planifier-travail-semaine", "Planifier son travail sur la semaine", "in-progress"),
+        competence("prendre-notes-cours", "Prendre des notes efficacement en cours", "in-progress"),
+      ]),
+      subdomain("techniques-revision", "Techniques de révision", [
+        competence("preparer-epreuve-ecrite", "Préparer une épreuve écrite", "in-progress"),
+        competence("memoriser-vocabulaire-definitions", "Mémoriser du vocabulaire et des définitions"),
+      ]),
+    ], "in-progress"),
+    domain("methodes-redaction", "Méthodes de rédaction", [
+      subdomain("ecrits-lycee", "Écrits du lycée", [
+        competence("construire-paragraphe-argumente", "Construire un paragraphe argumenté"),
+        competence("utiliser-connecteurs-logiques", "Utiliser les connecteurs logiques"),
+      ]),
+    ]),
+  ], "in-progress"),
   subject("francais", "Français", [
     domain("litterature", "Littérature", [
       subdomain("roman-recit", "Roman et récit", [
@@ -235,6 +253,14 @@ const premiereTroncCommun: LyceeSubject[] = [
       ]),
     ]),
   ]),
+  subject("enseignement-scientifique", "Enseignement scientifique", [
+    domain("univers-vie-matiere", "Univers, vie et matière", [
+      subdomain("physique-vivant", "Physique et vivant", [
+        competence("relier-concepts-physique-biologie", "Relier des concepts de physique et de biologie"),
+        competence("exploiter-modele-scientifique", "Exploiter un modèle scientifique"),
+      ]),
+    ]),
+  ]),
 ];
 
 const premiereSpecialites: LyceeSubject[] = [
@@ -298,6 +324,14 @@ const terminaleTroncCommun: LyceeSubject[] = [
     domain("projet-personnel", "Projet personnel", [
       subdomain("performance", "Performance", [
         competence("analyser-performance-progresser", "Analyser sa performance pour progresser"),
+      ]),
+    ]),
+  ]),
+  subject("enseignement-scientifique", "Enseignement scientifique", [
+    domain("corps-sante-univers", "Corps, santé et univers", [
+      subdomain("immunologie-cosmologie", "Immunologie et cosmologie", [
+        competence("expliquer-reponse-immunitaire", "Expliquer une réponse immunitaire"),
+        competence("decrire-structure-univers", "Décrire la structure de l'univers observable"),
       ]),
     ]),
   ]),
