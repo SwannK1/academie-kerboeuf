@@ -98,8 +98,8 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
   },
   {
     slug: "rosa",
-    name: "Rosa la chouette",
-    species: "Chouette effraie",
+    name: "Rosa le Flamant rose",
+    species: "Flamant rose",
     role: "professeur",
     mainSubject: "Français",
     shortDescription:
@@ -183,8 +183,8 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
   },
   {
     slug: "pablo",
-    name: "Pablo le singe",
-    species: "Capucin brun",
+    name: "Pablo l'Orang-outan",
+    species: "Orang-outan",
     role: "professeur",
     mainSubject: "Arts plastiques",
     shortDescription:
