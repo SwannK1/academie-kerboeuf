@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { academyCharacters } from "@/content/academy-characters";
@@ -44,8 +45,14 @@ export default function PersonnagesPage() {
             {academyCharacters.map((character) => (
               <article
                 key={character.slug}
-                className="rounded-md border border-white/10 bg-white/[0.04] p-6"
+                className="relative rounded-md border border-white/10 bg-white/[0.04] p-6"
               >
+                <Link
+                  href={`/univers/personnages/${character.slug}`}
+                  className="absolute inset-0 rounded-md"
+                  aria-label={character.name}
+                />
+
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-xl font-black text-foreground">
