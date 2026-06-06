@@ -516,7 +516,7 @@ export const academyLevels: AcademyLevel[] = [
     professor: {
       slug: "felix",
       name: "Félix",
-      role: "Explorateur référent",
+      role: "Guide de fin de cycle primaire",
       initial: "F",
       mainSubject: "Lecture",
       symbol: "Carnet d’exploration",

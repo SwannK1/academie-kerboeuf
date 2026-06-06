@@ -12,7 +12,7 @@ export type ProfessorCardData = {
   slug: string;
   profileHref: string;
   name: string;
-  characterType: "professeur référent" | "personnalité officielle";
+  characterType: "guide de cycle" | "professeur référent" | "professeur de matière" | "accompagnateur méthodologique";
   role: string;
   initial: string;
   mainSubject: string;

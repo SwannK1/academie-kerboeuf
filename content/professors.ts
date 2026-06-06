@@ -17,7 +17,7 @@ export type ProfessorProfile = {
   slug: string;
   profileHref: string;
   name: string;
-  characterType?: "professeur référent" | "personnalité officielle";
+  characterType?: "guide de cycle" | "professeur référent" | "professeur de matière" | "accompagnateur méthodologique";
   role: string;
   initial: string;
   mainSubject: string;
@@ -918,7 +918,7 @@ const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
     slug: level.professor.slug,
     profileHref: `/professeurs/${level.professor.slug}`,
     name: level.professor.name,
-    characterType: "professeur référent",
+    characterType: level.professor.slug === "felix" ? "guide de cycle" : "professeur référent",
     role: level.professor.role,
     initial: level.professor.initial,
     mainSubject: level.professor.mainSubject,
@@ -973,6 +973,7 @@ const officialPersonalities: {
   levelLabel: string;
   cycle: string;
   accentColor: AccentColor;
+  characterType?: "professeur de matière" | "accompagnateur méthodologique";
   universe: string;
   personalityProfile: CharacterPersonalityProfile;
 }[] = [
@@ -983,7 +984,7 @@ const officialPersonalities: {
     mainSubject: "Lecture",
     symbol: "Plume nocturne",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
     universe: "Bibliothèque des récits",
     personalityProfile: {
@@ -1002,7 +1003,7 @@ const officialPersonalities: {
     mainSubject: "Mathématiques",
     symbol: "Règle de pierre",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "jade",
     universe: "Salle des preuves",
     personalityProfile: {
@@ -1021,7 +1022,7 @@ const officialPersonalities: {
     mainSubject: "Sciences",
     symbol: "Loupe verte",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "jade",
     universe: "Serre des observations",
     personalityProfile: {
@@ -1040,7 +1041,7 @@ const officialPersonalities: {
     mainSubject: "Oral",
     symbol: "Micro doré",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
     universe: "Agora lumineuse",
     personalityProfile: {
@@ -1059,7 +1060,7 @@ const officialPersonalities: {
     mainSubject: "Histoire",
     symbol: "Carte ancienne",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
     universe: "Archives des civilisations",
     personalityProfile: {
@@ -1078,7 +1079,7 @@ const officialPersonalities: {
     mainSubject: "Arts",
     symbol: "Carnet libre",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
     universe: "Atelier des formes",
     personalityProfile: {
@@ -1097,7 +1098,7 @@ const officialPersonalities: {
     mainSubject: "Arts",
     symbol: "Onde claire",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "sky",
     universe: "Galerie des songes",
     personalityProfile: {
@@ -1116,8 +1117,9 @@ const officialPersonalities: {
     mainSubject: "Méthodologie",
     symbol: "Élan",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
+    characterType: "accompagnateur méthodologique",
     universe: "Terrain des défis",
     personalityProfile: {
       dominantTraits: ["Énergique", "Bienveillant", "Motivant", "Protecteur", "Enthousiaste", "Courageux"],
@@ -1135,8 +1137,9 @@ const officialPersonalities: {
     mainSubject: "Technologie",
     symbol: "Plan de construction",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "jade",
+    characterType: "accompagnateur méthodologique",
     universe: "Atelier des prototypes",
     personalityProfile: {
       dominantTraits: ["Ingénieux", "Méthodique", "Constructeur", "Créatif", "Pratique", "Patient", "Organisé"],
@@ -1154,7 +1157,7 @@ const officialPersonalities: {
     mainSubject: "Sciences",
     symbol: "Alvéole",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
     universe: "Ruche des observations",
     personalityProfile: {
@@ -1173,7 +1176,7 @@ const officialPersonalities: {
     mainSubject: "Français",
     symbol: "Griffe d’encre",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
     universe: "Salon des intrigues",
     personalityProfile: {
@@ -1192,7 +1195,7 @@ const officialPersonalities: {
     mainSubject: "Mathématiques",
     symbol: "Bloc de preuve",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "jade",
     universe: "Salle de concentration",
     personalityProfile: {
@@ -1211,7 +1214,7 @@ const officialPersonalities: {
     mainSubject: "Géographie",
     symbol: "Boussole fine",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "sky",
     universe: "Cartothèque mobile",
     personalityProfile: {
@@ -1230,7 +1233,7 @@ const officialPersonalities: {
     mainSubject: "Sciences",
     symbol: "Éprouvette astucieuse",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "sky",
     universe: "Laboratoire des idées",
     personalityProfile: {
@@ -1249,7 +1252,7 @@ const officialPersonalities: {
     mainSubject: "Musique",
     symbol: "Note noire",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
     universe: "Auditorium des ombres",
     personalityProfile: {
@@ -1268,7 +1271,7 @@ const officialPersonalities: {
     mainSubject: "EPS",
     symbol: "Trace de course",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
     universe: "Piste des équilibres",
     personalityProfile: {
@@ -1287,7 +1290,7 @@ const officialPersonalities: {
     mainSubject: "Mathématiques",
     symbol: "Couronne logique",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
     universe: "Salle des stratégies",
     personalityProfile: {
@@ -1306,7 +1309,7 @@ const officialPersonalities: {
     mainSubject: "Histoire",
     symbol: "Mémoire monumentale",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "jade",
     universe: "Grande mémoire",
     personalityProfile: {
@@ -1325,7 +1328,7 @@ const officialPersonalities: {
     mainSubject: "Sciences",
     symbol: "Prisme d’observation",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "sky",
     universe: "Laboratoire discret",
     personalityProfile: {
@@ -1344,7 +1347,7 @@ const officialPersonalities: {
     mainSubject: "Technologie",
     symbol: "Mécanisme rouge",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
     universe: "Forge des prototypes",
     personalityProfile: {
@@ -1363,7 +1366,7 @@ const officialPersonalities: {
     mainSubject: "Français",
     symbol: "Livre haut",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "gold",
     universe: "Salon des œuvres",
     personalityProfile: {
@@ -1382,7 +1385,7 @@ const officialPersonalities: {
     mainSubject: "Philosophie",
     symbol: "Clé noire",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
     universe: "Cabinet des questions",
     personalityProfile: {
@@ -1401,8 +1404,9 @@ const officialPersonalities: {
     mainSubject: "Méthodologie",
     symbol: "Défi scellé",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "ember",
+    characterType: "accompagnateur méthodologique",
     universe: "Salle des défis instables",
     personalityProfile: {
       dominantTraits: ["Charismatique", "Imprévisible", "Intelligent", "Stratège", "Exigeant", "Mystérieux"],
@@ -1420,8 +1424,9 @@ const officialPersonalities: {
     mainSubject: "Vie de classe",
     symbol: "Bouclier commun",
     levelLabel: "Académie",
-    cycle: "Personnalité officielle",
+    cycle: "Académie",
     accentColor: "jade",
+    characterType: "accompagnateur méthodologique",
     universe: "Hall des alliances",
     personalityProfile: {
       dominantTraits: ["Protecteur", "Loyal", "Stable", "Courageux", "Puissant mais calme", "Bienveillant", "Solidaire"],
@@ -1439,7 +1444,7 @@ function toOfficialProfile(profile: (typeof officialPersonalities)[number]): Pro
     slug: profile.slug,
     profileHref: `/professeurs/${profile.slug}`,
     name: profile.name,
-    characterType: "personnalité officielle",
+    characterType: profile.characterType ?? "professeur de matière",
     role: profile.role,
     initial: profile.name.charAt(0),
     mainSubject: profile.mainSubject,

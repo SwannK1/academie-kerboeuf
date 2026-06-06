@@ -20,7 +20,7 @@ function toCardData(profiles: typeof professorProfiles): ProfessorCardData[] {
     slug: p.slug,
     profileHref: p.profileHref,
     name: p.name,
-    characterType: p.characterType ?? "professeur référent",
+    characterType: p.characterType ?? "professeur de matière",
     role: p.role,
     initial: p.initial,
     mainSubject: p.mainSubject,
@@ -292,11 +292,12 @@ function ClosingSection() {
           </h2>
 
           <p className="mt-5 max-w-2xl text-sm leading-7 text-muted">
-            Les neuf professeurs de l&rsquo;Académie Kerboeuf ne sont pas des fiches
-            de présentation — ils sont les gardiens de neuf méthodes distinctes,
-            neuf atmosphères de travail, neuf façons d&rsquo;entrer dans l&rsquo;apprentissage.
-            Ensemble, ils donnent une continuité lisible du CP à la 3e, puis
-            certains prolongent leur rôle dans les pages lycée.
+            Les professeurs de l&rsquo;Académie Kerboeuf ne sont pas des fiches
+            de présentation — chacun est le gardien d&rsquo;une méthode distincte,
+            d&rsquo;une atmosphère de travail, d&rsquo;une façon d&rsquo;entrer dans l&rsquo;apprentissage.
+            Un guide de cycle, des professeurs référents du CP à la 3e, des
+            professeurs de matière et des accompagnateurs méthodologiques donnent
+            à l&rsquo;Académie sa cohérence pédagogique.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
