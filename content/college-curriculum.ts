@@ -19,6 +19,12 @@ import {
   sixiemeFrancaisSubdomains,
   sixiemeMathematiquesSubdomains,
   sixiemeHistoireGeographieEmcSubdomains,
+  sixiemeSciencesTechnoSubdomains,
+  sixiemeAnglaisSubdomains,
+  sixiemeArtsPlastiquesSubdomains,
+  sixiemeEducationMusicaleSubdomains,
+  sixiemeEpsSubdomains,
+  sixiemeMethodologieCollegeSubdomains,
   type CollegeMatiereCard,
   type CollegeSubdomainCard,
 } from "@/content/levels/college/6e-curriculum";
@@ -29,6 +35,10 @@ import {
   cinqiemeHistoireGeographieEmcSubdomains,
   cinqiemeSciencesTechnoSubdomains,
   cinqiemeAnglaisSubdomains,
+  cinqiemeArtsPlastiquesSubdomains,
+  cinqiemeEducationMusicaleSubdomains,
+  cinqiemeEpsSubdomains,
+  cinqiemeMethodologieSubdomains,
 } from "@/content/levels/college/5e-curriculum";
 import {
   quatriemeMatieres,
@@ -37,6 +47,10 @@ import {
   quatriemeHistoireGeographieEmcSubdomains,
   quatriemeSciencesTechnoSubdomains,
   quatriemeAnglaisSubdomains,
+  quatriemeArtsPlastiquesSubdomains,
+  quatriemeEducationMusicaleSubdomains,
+  quatriemeEpsSubdomains,
+  quatriemeMethodologieSubdomains,
 } from "@/content/levels/college/4e-curriculum";
 import {
   troisiemeMatieres,
@@ -45,6 +59,10 @@ import {
   troisiemeHistoireGeographieEmcSubdomains,
   troisiemeSciencesTechnoSubdomains,
   troisiemeAnglaisSubdomains,
+  troisiemeArtsPlastiquesSubdomains,
+  troisiemeEducationMusicaleSubdomains,
+  troisiemeEpsSubdomains,
+  troisiemeMethodologieSubdomains,
 } from "@/content/levels/college/3e-curriculum";
 
 export type { CollegeSubdomainCard };
@@ -536,17 +554,48 @@ export const collegeLearningTree = [
           },
         ],
       },
+      {
+        slug: "methodologie-college",
+        label: "Méthodologie collège",
+        status: "upcoming",
+        domains: [
+          {
+            slug: "organisation-apprentissage",
+            label: "Organisation et apprentissage",
+            status: "upcoming",
+            subdomains: [
+              {
+                slug: "outils-methodes",
+                label: "Outils et méthodes",
+                status: "upcoming",
+                sequences: [
+                  {
+                    slug: "organiser-agenda-college",
+                    title: "Organiser son agenda et ses révisions au collège",
+                    status: "upcoming",
+                  },
+                  {
+                    slug: "prendre-notes-efficacement",
+                    title: "Prendre des notes efficaces en cours",
+                    status: "upcoming",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
     levelSlug: "5e",
     label: "5e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
         label: "Français",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "recits-poesie-langue",
@@ -589,7 +638,7 @@ export const collegeLearningTree = [
       {
         slug: "mathematiques",
         label: "Mathématiques",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "nombres-proportionnalite-geometrie",
@@ -644,7 +693,7 @@ export const collegeLearningTree = [
       {
         slug: "histoire-geographie-emc",
         label: "Histoire-Géographie-EMC",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "moyen-age-monde",
@@ -694,7 +743,7 @@ export const collegeLearningTree = [
       {
         slug: "sciences-technologie",
         label: "Sciences et technologie",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "svt-physique-technologie",
@@ -744,7 +793,7 @@ export const collegeLearningTree = [
       {
         slug: "langues-vivantes",
         label: "Langues vivantes",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "niveau-a2-b1",
@@ -850,17 +899,43 @@ export const collegeLearningTree = [
           },
         ],
       },
+      {
+        slug: "methodologie-college",
+        label: "Méthodologie collège",
+        status: "upcoming",
+        domains: [
+          {
+            slug: "organisation-apprentissage",
+            label: "Organisation et apprentissage",
+            status: "upcoming",
+            subdomains: [
+              {
+                slug: "strategies-revision",
+                label: "Stratégies de révision",
+                status: "upcoming",
+                sequences: [
+                  {
+                    slug: "planifier-revisions-5e",
+                    title: "Planifier ses révisions sur plusieurs semaines",
+                    status: "upcoming",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
     levelSlug: "4e",
     label: "4e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
         label: "Français",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "litterature-argumentation-langue",
@@ -903,7 +978,7 @@ export const collegeLearningTree = [
       {
         slug: "mathematiques",
         label: "Mathématiques",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "calcul-geometrie-fonctions",
@@ -958,7 +1033,7 @@ export const collegeLearningTree = [
       {
         slug: "histoire-geographie-emc",
         label: "Histoire-Géographie-EMC",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "revolutions-mondialisation-droits",
@@ -1098,7 +1173,7 @@ export const collegeLearningTree = [
       {
         slug: "langues-vivantes",
         label: "Langues vivantes",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "niveau-b1",
@@ -1204,17 +1279,43 @@ export const collegeLearningTree = [
           },
         ],
       },
+      {
+        slug: "methodologie-college",
+        label: "Méthodologie collège",
+        status: "upcoming",
+        domains: [
+          {
+            slug: "autonomie-methodes",
+            label: "Autonomie et méthodes",
+            status: "upcoming",
+            subdomains: [
+              {
+                slug: "strategies-apprentissage",
+                label: "Stratégies d'apprentissage",
+                status: "upcoming",
+                sequences: [
+                  {
+                    slug: "identifier-difficultes-progresser",
+                    title: "Identifier ses difficultés et adapter ses stratégies d'apprentissage",
+                    status: "upcoming",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
     levelSlug: "3e",
     label: "3e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
         label: "Français",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "brevet-litterature-argumentation",
@@ -1257,7 +1358,7 @@ export const collegeLearningTree = [
       {
         slug: "mathematiques",
         label: "Mathématiques",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "fonctions-calcul-geometrie-statistiques",
@@ -1312,7 +1413,7 @@ export const collegeLearningTree = [
       {
         slug: "histoire-geographie-emc",
         label: "Histoire-Géographie-EMC",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "monde-contemporain-citoyennete",
@@ -1464,7 +1565,7 @@ export const collegeLearningTree = [
       {
         slug: "langues-vivantes",
         label: "Langues vivantes",
-        status: "in-progress",
+        status: "upcoming",
         domains: [
           {
             slug: "niveau-b1-brevet",
@@ -1570,6 +1671,32 @@ export const collegeLearningTree = [
           },
         ],
       },
+      {
+        slug: "methodologie-college",
+        label: "Méthodologie collège",
+        status: "upcoming",
+        domains: [
+          {
+            slug: "brevet-methodes",
+            label: "Brevet et méthodes",
+            status: "upcoming",
+            subdomains: [
+              {
+                slug: "preparer-epreuves",
+                label: "Préparer les épreuves",
+                status: "upcoming",
+                sequences: [
+                  {
+                    slug: "planifier-revisions-brevet",
+                    title: "Planifier ses révisions et gérer le stress du brevet",
+                    status: "upcoming",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 ] satisfies CollegeLearningTreeLevel[];
@@ -1645,6 +1772,66 @@ const sixiemeSubjectsMeta: Record<string, CollegeSubjectMeta> = {
     domainsHeading: "Quatre domaines du programme",
     subdomains: sixiemeHistoireGeographieEmcSubdomains,
   },
+  "sciences-technologie": {
+    slug: "sciences-technologie",
+    label: "Sciences et technologie",
+    cycleLabel: "Cycle 3 · 6e · Sciences et technologie",
+    subtitle: "6e — Vivant, matière et objets",
+    description:
+      "SVT, physique-chimie et technologie réunis — premiers repères scientifiques du collège.",
+    domainsHeading: "Quatre domaines du programme",
+    subdomains: sixiemeSciencesTechnoSubdomains,
+  },
+  anglais: {
+    slug: "anglais",
+    label: "Anglais",
+    cycleLabel: "Cycle 3 · 6e · Anglais",
+    subtitle: "6e — Niveau A1 vers A2",
+    description:
+      "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — premiers repères de la langue vivante.",
+    domainsHeading: "Cinq activités langagières",
+    subdomains: sixiemeAnglaisSubdomains,
+  },
+  "arts-plastiques": {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    cycleLabel: "Cycle 3 · 6e · Arts plastiques",
+    subtitle: "6e — Expérimenter et créer",
+    description:
+      "Explorer des outils et des techniques plastiques pour produire, s'exprimer et analyser.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: sixiemeArtsPlastiquesSubdomains,
+  },
+  "education-musicale": {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    cycleLabel: "Cycle 3 · 6e · Éducation musicale",
+    subtitle: "6e — Chanter, écouter, créer",
+    description:
+      "Développer la voix, l'oreille musicale et une première culture musicale.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: sixiemeEducationMusicaleSubdomains,
+  },
+  eps: {
+    slug: "eps",
+    label: "EPS",
+    cycleLabel: "Cycle 3 · 6e · EPS",
+    subtitle: "6e — Agir et coopérer",
+    description:
+      "Développer les habiletés motrices, apprendre à coopérer et découvrir des activités physiques variées.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: sixiemeEpsSubdomains,
+  },
+  "methodologie-college": {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    cycleLabel: "Cycle 3 · 6e · Méthodologie",
+    subtitle: "6e — S'organiser au collège",
+    description:
+      "Installer les méthodes de travail indispensables pour réussir au collège.",
+    domainsHeading: "Quatre outils méthodologiques",
+    subdomains: sixiemeMethodologieCollegeSubdomains,
+  },
 };
 
 // ── Registre des portails matière 5e ─────────────────────────────────────────
@@ -1700,6 +1887,46 @@ const cinqiemeSubjectsMeta: Record<string, CollegeSubjectMeta> = {
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau A2 vers B1.",
     domainsHeading: "Cinq activités langagières",
     subdomains: cinqiemeAnglaisSubdomains,
+  },
+  "arts-plastiques": {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    cycleLabel: "Cycle 4 · 5e · Arts plastiques",
+    subtitle: "5e — Image, objet et espace",
+    description:
+      "Explorer les relations entre image, objet et espace dans des productions plastiques.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: cinqiemeArtsPlastiquesSubdomains,
+  },
+  "education-musicale": {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    cycleLabel: "Cycle 4 · 5e · Éducation musicale",
+    subtitle: "5e — Chanter, analyser, créer",
+    description:
+      "Approfondir la pratique vocale, l'écoute et la création musicale en cycle 4.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: cinqiemeEducationMusicaleSubdomains,
+  },
+  eps: {
+    slug: "eps",
+    label: "EPS",
+    cycleLabel: "Cycle 4 · 5e · EPS",
+    subtitle: "5e — Agir, coopérer, s'exprimer",
+    description:
+      "Diversifier les activités physiques, développer la coopération et l'expression corporelle.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: cinqiemeEpsSubdomains,
+  },
+  "methodologie-college": {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    cycleLabel: "Cycle 4 · 5e · Méthodologie",
+    subtitle: "5e — Consolider son organisation",
+    description:
+      "Renforcer les méthodes de travail et développer l'autonomie dans les apprentissages.",
+    domainsHeading: "Trois outils méthodologiques",
+    subdomains: cinqiemeMethodologieSubdomains,
   },
 };
 
@@ -1757,6 +1984,46 @@ const quatriemeSubjectsMeta: Record<string, CollegeSubjectMeta> = {
     domainsHeading: "Cinq activités langagières",
     subdomains: quatriemeAnglaisSubdomains,
   },
+  "arts-plastiques": {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    cycleLabel: "Cycle 4 · 4e · Arts plastiques",
+    subtitle: "4e — Représentation et dispositif",
+    description:
+      "Utiliser le cadrage, le point de vue et les dispositifs au service d'une intention plastique.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: quatriemeArtsPlastiquesSubdomains,
+  },
+  "education-musicale": {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    cycleLabel: "Cycle 4 · 4e · Éducation musicale",
+    subtitle: "4e — Interpréter et analyser",
+    description:
+      "Comparer des œuvres musicales de styles variés et approfondir la pratique d'interprétation.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: quatriemeEducationMusicaleSubdomains,
+  },
+  eps: {
+    slug: "eps",
+    label: "EPS",
+    cycleLabel: "Cycle 4 · 4e · EPS",
+    subtitle: "4e — Performance et affrontement",
+    description:
+      "Développer des stratégies d'affrontement, améliorer les performances et s'exprimer corporellement.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: quatriemeEpsSubdomains,
+  },
+  "methodologie-college": {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    cycleLabel: "Cycle 4 · 4e · Méthodologie",
+    subtitle: "4e — Renforcer l'autonomie",
+    description:
+      "Développer l'autonomie, la rigueur et les stratégies d'apprentissage au cycle 4.",
+    domainsHeading: "Trois outils méthodologiques",
+    subdomains: quatriemeMethodologieSubdomains,
+  },
 };
 
 // ── Registre des portails matière 3e ─────────────────────────────────────────
@@ -1812,6 +2079,46 @@ const troisiemeSubjectsMeta: Record<string, CollegeSubjectMeta> = {
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
     domainsHeading: "Cinq activités langagières",
     subdomains: troisiemeAnglaisSubdomains,
+  },
+  "arts-plastiques": {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    cycleLabel: "Cycle 4 · 3e · Arts plastiques",
+    subtitle: "3e — Démarche et intention",
+    description:
+      "Présenter une démarche artistique, situer des œuvres et préparer l'épreuve d'histoire des arts.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: troisiemeArtsPlastiquesSubdomains,
+  },
+  "education-musicale": {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    cycleLabel: "Cycle 4 · 3e · Éducation musicale",
+    subtitle: "3e — Projet musical et culture",
+    description:
+      "Conduire un projet musical collectif et préparer la présentation orale du brevet.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: troisiemeEducationMusicaleSubdomains,
+  },
+  eps: {
+    slug: "eps",
+    label: "EPS",
+    cycleLabel: "Cycle 4 · 3e · EPS",
+    subtitle: "3e — Autonomie et projet collectif",
+    description:
+      "Construire un projet personnel d'entraînement et tenir un rôle dans un projet collectif.",
+    domainsHeading: "Trois domaines du programme",
+    subdomains: troisiemeEpsSubdomains,
+  },
+  "methodologie-college": {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    cycleLabel: "Cycle 4 · 3e · Méthodologie",
+    subtitle: "3e — Préparer le brevet",
+    description:
+      "Organiser ses révisions, maîtriser les méthodes d'examen et préparer l'oral du brevet.",
+    domainsHeading: "Trois outils méthodologiques",
+    subdomains: troisiemeMethodologieSubdomains,
   },
 };
 

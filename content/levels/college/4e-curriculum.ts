@@ -10,7 +10,6 @@ import type {
 } from "@/content/levels/college/6e-curriculum";
 
 const statusUpcoming: ProgramStatus = "upcoming";
-const statusInProgress: ProgramStatus = "in-progress";
 
 // ── Matières visibles sur le portail /college/4e ─────────────────────────────
 // Aucune page matière 4e n'existe — les cartes restent non cliquables.
@@ -21,35 +20,63 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description:
       "Approfondir la lecture littéraire, l'écriture et l'étude de la langue en cycle 4.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description:
       "Nombres relatifs, proportionnalité, géométrie dans l'espace et premières fonctions.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description:
       "Du XVIIIe siècle aux débuts de la mondialisation — repères et méthodes.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "sciences-technologie",
     label: "Sciences et technologie",
     description:
       "SVT, physique-chimie et technologie — observer, mesurer, modéliser.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "anglais",
     label: "Anglais",
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
-    status: statusInProgress,
+    status: statusUpcoming,
+  },
+  {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    description:
+      "Représentation, dispositif et regard — approfondir la pratique plastique.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    description:
+      "Interpréter, écouter et comparer des œuvres musicales de styles variés.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "eps",
+    label: "EPS",
+    description:
+      "Performance, affrontement et expression — diversifier les activités physiques.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    description:
+      "Renforcer l'autonomie, la rigueur et les stratégies d'apprentissage.",
+    status: statusUpcoming,
   },
 ];
 
@@ -229,6 +256,110 @@ export const quatriemeAnglaisSubdomains: CollegeSubdomainCard[] = [
     label: "Culture",
     description:
       "Découvrir les pays anglophones, leurs histoires et leurs enjeux contemporains.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Arts plastiques 4e ─────────────────────────────────────────
+
+export const quatriemeArtsPlastiquesSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "representation-dispositif",
+    label: "Représentation et dispositif",
+    description:
+      "Utiliser le point de vue, le cadrage et les dispositifs au service d'une intention.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "materiaux-outils",
+    label: "Matériaux et outils",
+    description:
+      "Expérimenter des matériaux et des procédés plastiques variés.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "culture-artistique",
+    label: "Culture artistique",
+    description:
+      "Analyser des œuvres en lien avec leur contexte historique et culturel.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Éducation musicale 4e ───────────────────────────────────────
+
+export const quatriemeEducationMusicaleSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "interpretation",
+    label: "Interprétation",
+    description:
+      "Interpréter un répertoire varié avec expressivité et justesse.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "ecoute-analyse",
+    label: "Écoute et analyse",
+    description:
+      "Comparer des œuvres musicales selon des critères d'écoute précis.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "creation",
+    label: "Création",
+    description:
+      "Composer et arranger des séquences musicales en groupe.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines EPS 4e ──────────────────────────────────────────────────────
+
+export const quatriemeEpsSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "performance",
+    label: "Performance",
+    description:
+      "Mesurer et améliorer ses performances dans des activités athlétiques.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "affrontement",
+    label: "Affrontement",
+    description:
+      "Développer des stratégies d'affrontement individuel et collectif.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "expression-corporelle",
+    label: "Expression corporelle",
+    description:
+      "Composer et interpréter des formes corporelles avec une intention artistique.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Méthodologie collège 4e ─────────────────────────────────────
+
+export const quatriemeMethodologieSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "autonomie-organisation",
+    label: "Autonomie et organisation",
+    description:
+      "Gérer son travail de façon autonome et anticiper les échéances.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "strategies-apprentissage",
+    label: "Stratégies d'apprentissage",
+    description:
+      "Identifier ses points forts, ses difficultés et adapter ses méthodes.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "rediger-argumenter",
+    label: "Rédiger et argumenter",
+    description:
+      "Construire une réponse argumentée dans toutes les disciplines.",
     status: statusUpcoming,
   },
 ];

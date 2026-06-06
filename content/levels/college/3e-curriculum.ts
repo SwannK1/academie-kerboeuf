@@ -10,7 +10,6 @@ import type {
 } from "@/content/levels/college/6e-curriculum";
 
 const statusUpcoming: ProgramStatus = "upcoming";
-const statusInProgress: ProgramStatus = "in-progress";
 
 // ── Matières visibles sur le portail /college/3e ─────────────────────────────
 // Aucune page matière 3e n'existe — les cartes restent non cliquables.
@@ -21,35 +20,63 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description:
       "Lecture, écriture, oral et étude de la langue — préparer l'épreuve de brevet.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description:
       "Fonctions, probabilités, géométrie et calcul — préparer le brevet.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description:
       "Le monde depuis 1914 — repères chronologiques, géopolitiques et citoyens.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "sciences-technologie",
     label: "Sciences et technologie",
     description:
       "SVT, physique-chimie et technologie — consolider et préparer le lycée.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "anglais",
     label: "Anglais",
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
-    status: statusInProgress,
+    status: statusUpcoming,
+  },
+  {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    description:
+      "Démarche artistique, intention et regard — préparer l'épreuve d'histoire des arts.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    description:
+      "Projet musical et culture — interpréter, argumenter et préparer le brevet.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "eps",
+    label: "EPS",
+    description:
+      "Autonomie, performance et projet collectif — construire ses compétences physiques.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    description:
+      "Préparer le brevet : organiser ses révisions et maîtriser les méthodes d'examen.",
+    status: statusUpcoming,
   },
 ];
 
@@ -250,6 +277,110 @@ export const troisiemeAnglaisSubdomains: CollegeSubdomainCard[] = [
     label: "Culture",
     description:
       "Approfondir la connaissance des pays anglophones et des enjeux du monde anglophone.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Arts plastiques 3e ─────────────────────────────────────────
+
+export const troisiemeArtsPlastiquesSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "projet-oeuvre-spectateur",
+    label: "Projet, œuvre et spectateur",
+    description:
+      "Présenter une démarche plastique, expliciter une intention et accueillir le regard du spectateur.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "histoire-des-arts",
+    label: "Histoire des arts",
+    description:
+      "Situer des œuvres dans leur contexte historique, social et culturel.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "creation-argumentee",
+    label: "Création argumentée",
+    description:
+      "Justifier ses choix plastiques à l'oral et à l'écrit.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Éducation musicale 3e ───────────────────────────────────────
+
+export const troisiemeEducationMusicaleSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "projet-musical",
+    label: "Projet musical",
+    description:
+      "Concevoir et réaliser un projet musical collectif avec une intention artistique.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "interpretation-brevet",
+    label: "Interprétation brevet",
+    description:
+      "Présenter une interprétation musicale en justifiant ses choix.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "culture-musicale",
+    label: "Culture musicale",
+    description:
+      "Approfondir la culture musicale — œuvres, artistes et courants du XXe siècle.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines EPS 3e ──────────────────────────────────────────────────────
+
+export const troisiemeEpsSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "performance-autonomie",
+    label: "Performance et autonomie",
+    description:
+      "Mesurer ses progrès et construire un projet personnel d'entraînement.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "projet-collectif",
+    label: "Projet collectif",
+    description:
+      "Assumer un rôle défini dans un projet collectif — joueur, arbitre, coach.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "sante-engagement",
+    label: "Santé et engagement",
+    description:
+      "Comprendre les bénéfices de l'activité physique et adopter un mode de vie actif.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Méthodologie collège 3e ─────────────────────────────────────
+
+export const troisiemeMethodologieSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "preparer-brevet",
+    label: "Préparer le brevet",
+    description:
+      "Planifier les révisions, gérer le stress et s'entraîner aux épreuves du brevet.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "strategies-revision",
+    label: "Stratégies de révision",
+    description:
+      "Utiliser des techniques de mémorisation efficaces pour les épreuves du brevet.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "oral-brevet",
+    label: "Oral du brevet",
+    description:
+      "Préparer et réussir la présentation orale du projet de 3e.",
     status: statusUpcoming,
   },
 ];

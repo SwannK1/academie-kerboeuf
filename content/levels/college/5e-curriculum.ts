@@ -13,7 +13,6 @@ import type {
 // Aucune page matière 5e n'existe — les cartes restent non cliquables.
 
 const statusUpcoming: ProgramStatus = "upcoming";
-const statusInProgress: ProgramStatus = "in-progress";
 
 export const cinqiemeMatieres: CollegeMatiereCard[] = [
   {
@@ -21,35 +20,63 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description:
       "Approfondir la lecture, l'écriture, l'étude de la langue et l'oral au cycle 4.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description:
       "Consolider les nombres, la géométrie et la résolution de problèmes en cycle 4.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description:
       "Comprendre les sociétés, les espaces et les règles de vie commune au Moyen Âge et dans le monde.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "sciences-technologie",
     label: "Sciences et technologie",
     description:
       "Observer, expérimenter et construire : SVT, physique-chimie et technologie réunis.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "anglais",
     label: "Anglais",
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau A2 vers B1.",
-    status: statusInProgress,
+    status: statusUpcoming,
+  },
+  {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    description:
+      "Expérimenter, produire et analyser des œuvres plastiques en cycle 4.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    description:
+      "Chanter, écouter et construire sa culture musicale en cycle 4.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "eps",
+    label: "EPS",
+    description:
+      "Agir, coopérer et progresser dans des activités physiques variées.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    description:
+      "S'organiser, apprendre à apprendre et développer son autonomie au collège.",
+    status: statusUpcoming,
   },
 ];
 
@@ -229,6 +256,110 @@ export const cinqiemeAnglaisSubdomains: CollegeSubdomainCard[] = [
     label: "Culture",
     description:
       "Découvrir les pays anglophones, leurs traditions et leurs modes de vie.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Arts plastiques 5e ─────────────────────────────────────────
+
+export const cinqiemeArtsPlastiquesSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "image-objet-espace",
+    label: "Image, objet et espace",
+    description:
+      "Explorer les relations entre image, objet et espace dans une production plastique.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "materiaux-outils",
+    label: "Matériaux et outils",
+    description:
+      "Choisir et utiliser des matériaux et des outils adaptés à un projet plastique.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "culture-artistique",
+    label: "Culture artistique",
+    description:
+      "Relier des productions à des œuvres de référence et développer un regard critique.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Éducation musicale 5e ───────────────────────────────────────
+
+export const cinqiemeEducationMusicaleSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "chanter",
+    label: "Chanter",
+    description:
+      "Interpréter un répertoire varié en travaillant la justesse et l'expressivité.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "ecouter-analyser",
+    label: "Écouter et analyser",
+    description:
+      "Repérer la forme et les paramètres du son dans des œuvres variées.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "pratiquer-creer",
+    label: "Pratiquer et créer",
+    description:
+      "Improviser, arranger et créer en groupe à partir de contraintes musicales.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines EPS 5e ──────────────────────────────────────────────────────
+
+export const cinqiemeEpsSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "activites-physiques",
+    label: "Activités physiques",
+    description:
+      "Courir, nager, sauter et lancer — développer les capacités motrices.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "sports-collectifs",
+    label: "Sports collectifs",
+    description:
+      "Choisir des actions collectives efficaces dans un sport d'équipe.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "activites-physiques-artistiques",
+    label: "Activités physiques artistiques",
+    description:
+      "Composer et interpréter des formes corporelles expressives.",
+    status: statusUpcoming,
+  },
+];
+
+// ── Sous-domaines Méthodologie collège 5e ─────────────────────────────────────
+
+export const cinqiemeMethodologieSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "organisation-travail",
+    label: "Organisation du travail",
+    description:
+      "Planifier les révisions et gérer les échéances sur plusieurs semaines.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "comprendre-memoriser",
+    label: "Comprendre et mémoriser",
+    description:
+      "Utiliser des stratégies variées pour comprendre en profondeur et mémoriser durablement.",
+    status: statusUpcoming,
+  },
+  {
+    subdomainSlug: "rediger-structurer",
+    label: "Rédiger et structurer",
+    description:
+      "Construire une réponse organisée et soignée dans toutes les matières.",
     status: statusUpcoming,
   },
 ];

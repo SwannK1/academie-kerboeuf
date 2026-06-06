@@ -48,7 +48,7 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     status: "in-progress",
   },
   {
-    slug: "sciences",
+    slug: "sciences-technologie",
     label: "Sciences et technologie",
     description: "SVT, physique-chimie et technologie — regroupés pour la 6e.",
     status: "upcoming",
@@ -57,6 +57,30 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     slug: "anglais",
     label: "Anglais",
     description: "Compréhension, expression et interaction en langue vivante.",
+    status: "upcoming",
+  },
+  {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    description: "Expérimenter, produire et analyser des œuvres plastiques.",
+    status: "upcoming",
+  },
+  {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    description: "Chanter, écouter et construire sa culture musicale.",
+    status: "upcoming",
+  },
+  {
+    slug: "eps",
+    label: "EPS",
+    description: "Agir, coopérer et progresser dans des activités physiques variées.",
+    status: "upcoming",
+  },
+  {
+    slug: "methodologie-college",
+    label: "Méthodologie collège",
+    description: "S'organiser, apprendre à apprendre et réussir au collège.",
     status: "upcoming",
   },
 ];
@@ -164,6 +188,190 @@ export const sixiemeFrancaisSubdomains: CollegeSubdomainCard[] = [
     description:
       "Prendre la parole, écouter, reformuler une information et débattre avec des arguments simples.",
     status: "in-progress",
+  },
+];
+
+// ── Métadonnées d'affichage des sous-domaines Sciences et technologie 6e ──────
+
+export const sixiemeSciencesTechnoSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "vivant",
+    label: "Vivant",
+    description:
+      "Classification du vivant, cellule et biodiversité — premiers repères SVT.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "matiere-energie",
+    label: "Matière et énergie",
+    description:
+      "États de la matière, propriétés et premières notions d'énergie.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "objets-techniques",
+    label: "Objets techniques",
+    description:
+      "Identifier la fonction et le fonctionnement d'objets techniques simples.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "terre-univers",
+    label: "Terre et Univers",
+    description:
+      "Le système solaire, la Terre et les grandes enveloppes terrestres.",
+    status: "upcoming",
+  },
+];
+
+// ── Métadonnées d'affichage des sous-domaines Anglais 6e ─────────────────────
+
+export const sixiemeAnglaisSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "comprehension-orale",
+    label: "Compréhension orale",
+    description:
+      "Comprendre des messages simples et des consignes en anglais.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "comprehension-ecrite",
+    label: "Compréhension écrite",
+    description:
+      "Lire des textes courts et dégager les informations essentielles.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "expression-orale",
+    label: "Expression orale",
+    description:
+      "Se présenter, décrire et interagir dans des situations quotidiennes.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "expression-ecrite",
+    label: "Expression écrite",
+    description:
+      "Écrire des messages courts et des textes simples sur des thèmes familiers.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "culture",
+    label: "Culture",
+    description:
+      "Découvrir les pays anglophones et quelques repères culturels fondamentaux.",
+    status: "upcoming",
+  },
+];
+
+// ── Métadonnées d'affichage des sous-domaines Arts plastiques 6e ──────────────
+
+export const sixiemeArtsPlastiquesSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "experimenter-produire",
+    label: "Expérimenter et produire",
+    description:
+      "Explorer des outils, des supports et des techniques plastiques pour créer.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "mettre-en-oeuvre",
+    label: "Mettre en œuvre",
+    description:
+      "Réaliser une production plastique en faisant des choix et en les justifiant.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "s-exprimer-analyser",
+    label: "S'exprimer et analyser",
+    description:
+      "Parler de sa production et de celle des autres avec un vocabulaire adapté.",
+    status: "upcoming",
+  },
+];
+
+// ── Métadonnées d'affichage des sous-domaines Éducation musicale 6e ───────────
+
+export const sixiemeEducationMusicaleSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "chanter",
+    label: "Chanter",
+    description:
+      "Tenir une partie vocale dans un chant collectif, maîtriser sa voix et son souffle.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "ecouter",
+    label: "Écouter",
+    description:
+      "Identifier des paramètres sonores et décrire une œuvre musicale.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "pratiquer",
+    label: "Pratiquer",
+    description:
+      "Jouer d'un instrument simple, improviser et créer en groupe.",
+    status: "upcoming",
+  },
+];
+
+// ── Métadonnées d'affichage des sous-domaines EPS 6e ─────────────────────────
+
+export const sixiemeEpsSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "activites-physiques",
+    label: "Activités physiques",
+    description:
+      "Courir, sauter, lancer — développer les habiletés motrices fondamentales.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "sports-collectifs",
+    label: "Sports collectifs",
+    description:
+      "Coopérer, s'opposer et respecter les règles dans des jeux d'équipe.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "bien-etre-sante",
+    label: "Bien-être et santé",
+    description:
+      "Comprendre les effets de l'activité physique sur la santé.",
+    status: "upcoming",
+  },
+];
+
+// ── Métadonnées d'affichage des sous-domaines Méthodologie collège 6e ─────────
+
+export const sixiemeMethodologieCollegeSubdomains: CollegeSubdomainCard[] = [
+  {
+    subdomainSlug: "organisation-travail",
+    label: "Organisation du travail",
+    description:
+      "Gérer son agenda, planifier ses révisions et tenir un classeur organisé.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "prendre-des-notes",
+    label: "Prendre des notes",
+    description:
+      "Prendre des notes efficaces en cours et les réutiliser pour réviser.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "apprendre-une-lecon",
+    label: "Apprendre une leçon",
+    description:
+      "Mémoriser avec méthode et auto-évaluer sa compréhension.",
+    status: "upcoming",
+  },
+  {
+    subdomainSlug: "chercher-documenter",
+    label: "Chercher et se documenter",
+    description:
+      "Identifier des sources fiables et sélectionner l'information utile.",
+    status: "upcoming",
   },
 ];
 
