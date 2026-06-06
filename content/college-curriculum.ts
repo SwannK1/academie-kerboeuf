@@ -541,7 +541,7 @@ export const collegeLearningTree = [
   {
     levelSlug: "5e",
     label: "5e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
@@ -855,7 +855,7 @@ export const collegeLearningTree = [
   {
     levelSlug: "4e",
     label: "4e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",
@@ -1209,7 +1209,7 @@ export const collegeLearningTree = [
   {
     levelSlug: "3e",
     label: "3e",
-    status: "in-progress",
+    status: "upcoming",
     subjects: [
       {
         slug: "francais",

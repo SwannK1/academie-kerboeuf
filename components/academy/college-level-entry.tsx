@@ -125,13 +125,21 @@ export function CollegeLevelEntry({ level }: Props) {
       </section>
 
       <section className="px-4 pb-20 pt-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3">
           <Link
             href="/college"
             className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
           >
             ← Retour Collège
           </Link>
+          {slug === "6e" && (
+            <Link
+              href="/college/6e/ressources"
+              className="rounded-md border border-jade/30 bg-jade/[0.07] px-4 py-3 text-sm font-bold text-jade transition hover:bg-jade/[0.12]"
+            >
+              Ressources de 6e →
+            </Link>
+          )}
         </div>
       </section>
     </main>
