@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { academyCharacters } from "@/content/academy-characters";
+import { academyStudents } from "@/content/academy-students";
 
 export const metadata: Metadata = {
   title: "Personnages | Académie Kerboeuf",
@@ -103,6 +104,62 @@ export default function PersonnagesPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl font-black text-foreground sm:text-3xl">
+              Les élèves
+            </h2>
+            <p className="mt-3 text-base leading-7 text-muted">
+              Personnages élèves de l&apos;Académie — chacun représente un
+              niveau scolaire et une façon d&apos;apprendre.
+            </p>
+          </div>
+
+          {academyStudents.length === 0 ? (
+            <p className="mt-8 text-sm text-muted">
+              Aucun élève disponible pour l&apos;instant.
+            </p>
+          ) : (
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {academyStudents.map((student) => (
+                <article
+                  key={student.slug}
+                  className="rounded-md border border-white/10 bg-white/[0.04] p-6"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-xl font-black text-foreground">
+                        {student.name}
+                      </h3>
+                      <p className="mt-0.5 text-xs font-semibold text-muted">
+                        {student.species}
+                      </p>
+                    </div>
+                    <PublicStatusBadge status={student.publicStatus} />
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {student.schoolLevel && (
+                      <span className="rounded bg-gold/10 px-2 py-0.5 font-mono text-xs font-bold text-gold">
+                        {student.schoolLevel}
+                      </span>
+                    )}
+                    <span className="rounded bg-white/[0.07] px-2 py-0.5 font-mono text-xs font-semibold capitalize text-muted">
+                      {student.role}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 text-xs leading-6 text-muted">
+                    {student.shortDescription}
+                  </p>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
