@@ -43,6 +43,7 @@ export default async function CpSubjectPage({ params }: PageProps) {
       accent={CP_ACCENT}
       sequences={sequences}
       cycleLabel="Cycle 2"
+      referentProfessor={{ name: "Zoé", role: "Guide des premiers codes", href: "/professeurs/zoe" }}
       footerLinks={[
         { href: "/primaire/cp/programmes/francais/lecture-comprehension", label: "Lecture-compréhension CP", tone: "gold" },
       ]}

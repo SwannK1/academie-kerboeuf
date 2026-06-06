@@ -59,6 +59,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
       linkedCards={linkedCards}
+      referentProfessor={{ name: "Félix", role: "Explorateur référent", href: "/professeurs/felix" }}
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },

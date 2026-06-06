@@ -55,6 +55,7 @@ export default async function Ce1SubjectPage({ params }: PageProps) {
       tree={tree}
       accent={CE1_ACCENT}
       sequences={sequences}
+      referentProfessor={{ name: "Gaston", role: "Gardien des stratégies", href: "/professeurs/gaston" }}
       footerLinks={footerLinks}
     />
   );

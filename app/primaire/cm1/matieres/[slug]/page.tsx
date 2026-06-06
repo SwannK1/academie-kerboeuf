@@ -42,6 +42,7 @@ export default async function Cm1SubjectPage({ params }: PageProps) {
       accent={CM1_ACCENT}
       sequences={tree ? mapCm1Sequences(tree) : []}
       cycleLabel="Cycle 3"
+      referentProfessor={{ name: "Noisette", role: "Maître des cartes", href: "/professeurs/noisette" }}
       footerLinks={[{ href: "/primaire/cm1/lecons", label: "Leçons CM1" }]}
     />
   );

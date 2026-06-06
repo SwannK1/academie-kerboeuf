@@ -4,6 +4,12 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatusKey } from "@/content/public-status";
 import type { AccentTokens } from "@/lib/cm2-accent";
 
+export type SubjectReferentProfessor = {
+  name: string;
+  role: string;
+  href: string;
+};
+
 export type MatterSubject = {
   slug: string;
   title: string;
@@ -76,6 +82,7 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   linkedCards?: LinkedCard[];
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
+  referentProfessor?: SubjectReferentProfessor;
 };
 
 type LinkedCard = {
@@ -181,6 +188,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   linkedCards = [],
   footerLinks,
   cycleLabel = "Cycle 3",
+  referentProfessor,
 }: SubjectDetailPageProps<TSubject>) {
   const t = accent[subject.accent] ?? accent.gold;
   const sequenceGroups = groupSequences(sequences);
@@ -219,6 +227,26 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
             {subject.shortDescription}
           </p>
+
+          {referentProfessor ? (
+            <div className="mt-4">
+              {getPublicStatusKey(subject.status) === "available" ||
+              getPublicStatusKey(subject.status) === "in-progress" ? (
+                <Link
+                  href={referentProfessor.href}
+                  className="inline-flex items-center gap-1.5 rounded border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+                >
+                  <span className="text-white/30" aria-hidden="true">◈</span>
+                  <span>Référent · {referentProfessor.name}</span>
+                </Link>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 rounded border border-white/8 bg-white/[0.025] px-3 py-1.5 text-xs text-white/30">
+                  <span aria-hidden="true">◈</span>
+                  <span>Référent prévu · {referentProfessor.name}</span>
+                </span>
+              )}
+            </div>
+          ) : null}
 
           {tree ? (
             <div className="mt-6 flex flex-wrap gap-2">

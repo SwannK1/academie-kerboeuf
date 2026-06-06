@@ -44,6 +44,7 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
       accent={CE2_ACCENT}
       sequences={sequences}
       cycleLabel="Cycle 2"
+      referentProfessor={{ name: "Esteban", role: "Architecte des savoirs", href: "/professeurs/esteban" }}
       footerLinks={[
         { href: "/primaire/ce2/lecons", label: "Leçons CE2" },
       ]}
