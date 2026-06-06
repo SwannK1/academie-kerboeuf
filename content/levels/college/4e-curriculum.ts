@@ -10,7 +10,6 @@ import type {
 } from "@/content/levels/college/6e-curriculum";
 
 const statusUpcoming: ProgramStatus = "upcoming";
-const statusInProgress: ProgramStatus = "in-progress";
 
 // ── Matières visibles sur le portail /college/4e ─────────────────────────────
 // Aucune page matière 4e n'existe — les cartes restent non cliquables.
@@ -21,35 +20,35 @@ export const quatriemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description:
       "Approfondir la lecture littéraire, l'écriture et l'étude de la langue en cycle 4.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description:
       "Nombres relatifs, proportionnalité, géométrie dans l'espace et premières fonctions.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description:
       "Du XVIIIe siècle aux débuts de la mondialisation — repères et méthodes.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "sciences-technologie",
     label: "Sciences et technologie",
     description:
       "SVT, physique-chimie et technologie — observer, mesurer, modéliser.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "anglais",
     label: "Anglais",
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
 ];
 

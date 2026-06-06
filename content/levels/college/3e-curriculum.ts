@@ -10,7 +10,6 @@ import type {
 } from "@/content/levels/college/6e-curriculum";
 
 const statusUpcoming: ProgramStatus = "upcoming";
-const statusInProgress: ProgramStatus = "in-progress";
 
 // ── Matières visibles sur le portail /college/3e ─────────────────────────────
 // Aucune page matière 3e n'existe — les cartes restent non cliquables.
@@ -21,35 +20,35 @@ export const troisiemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description:
       "Lecture, écriture, oral et étude de la langue — préparer l'épreuve de brevet.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description:
       "Fonctions, probabilités, géométrie et calcul — préparer le brevet.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description:
       "Le monde depuis 1914 — repères chronologiques, géopolitiques et citoyens.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "sciences-technologie",
     label: "Sciences et technologie",
     description:
       "SVT, physique-chimie et technologie — consolider et préparer le lycée.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "anglais",
     label: "Anglais",
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau B1.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
 ];
 

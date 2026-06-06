@@ -13,7 +13,6 @@ import type {
 // Aucune page matière 5e n'existe — les cartes restent non cliquables.
 
 const statusUpcoming: ProgramStatus = "upcoming";
-const statusInProgress: ProgramStatus = "in-progress";
 
 export const cinqiemeMatieres: CollegeMatiereCard[] = [
   {
@@ -21,35 +20,35 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
     label: "Français",
     description:
       "Approfondir la lecture, l'écriture, l'étude de la langue et l'oral au cycle 4.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "mathematiques",
     label: "Mathématiques",
     description:
       "Consolider les nombres, la géométrie et la résolution de problèmes en cycle 4.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "histoire-geographie-emc",
     label: "Histoire-Géographie-EMC",
     description:
       "Comprendre les sociétés, les espaces et les règles de vie commune au Moyen Âge et dans le monde.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "sciences-technologie",
     label: "Sciences et technologie",
     description:
       "Observer, expérimenter et construire : SVT, physique-chimie et technologie réunis.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
   {
     slug: "anglais",
     label: "Anglais",
     description:
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau A2 vers B1.",
-    status: statusInProgress,
+    status: statusUpcoming,
   },
 ];
 
