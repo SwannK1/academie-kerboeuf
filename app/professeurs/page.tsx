@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { professorProfiles } from "@/content/professors";
+import { getProfessorCharacters } from "@/content/academy-characters";
 import {
   ProfessorGallery,
   type ProfessorCardData,
@@ -11,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "Professeurs | Académie Kerboeuf",
   description:
-    "Les professeurs référents de l'Académie Kerboeuf — du CP à la 3e, avec des relais au lycée. Chaque profil porte une méthode, une atmosphère et un rôle pédagogique distinct.",
+    "Les guides pédagogiques et professeurs de matière de l'Académie Kerboeuf — du CP à la 3e. Chaque guide accompagne un niveau, chaque professeur porte une discipline.",
 };
 
 // Projection allégée : on ne passe pas les missions ni la méthode au client
@@ -40,11 +42,11 @@ function toCardData(profiles: typeof professorProfiles): ProfessorCardData[] {
 
 export default function ProfesseursPage() {
   const cardData = toCardData(professorProfiles);
+  const subjectTeachers = getProfessorCharacters();
 
-  // Stats dynamiques
+  // Stats dynamiques — guides de niveau uniquement
   const primaire = professorProfiles.filter((p) => p.stage === "primaire").length;
   const college = professorProfiles.filter((p) => p.stage === "college").length;
-  const cycles = [...new Set(professorProfiles.map((p) => p.cycle))].length;
 
   return (
     <main>
@@ -57,11 +59,24 @@ export default function ProfesseursPage() {
         </div>
       </div>
 
-      {/* Hero cinématique */}
-      <Hero professors={cardData} stats={{ primaire, college, cycles }} />
+      {/* Hero */}
+      <Hero professors={cardData} stats={{ primaire, college }} />
 
-      {/* Galerie filtrée (client) */}
+      {/* Section 1 : Guides pédagogiques */}
+      <SectionHeader
+        tag="Guides pédagogiques"
+        title="Guides de niveau"
+        description="Chaque niveau scolaire est accompagné d'un guide pédagogique. Ces personnages structurent la méthode de travail propre à chaque étape — du CP à la 3e."
+      />
       <ProfessorGallery professors={cardData} />
+
+      {/* Section 2 : Professeurs de matière — Élémentaire */}
+      <SectionHeader
+        tag="Professeurs de matière"
+        title="Professeurs élémentaires"
+        description="Ces professeurs sont les référents disciplinaires du primaire. Chaque matière a son professeur attitré, reconnaissable à son animal emblématique."
+      />
+      <SubjectTeachersGrid teachers={subjectTeachers} />
 
       {/* Section narrative finale */}
       <ClosingSection />
@@ -69,15 +84,104 @@ export default function ProfesseursPage() {
   );
 }
 
+// ─── SectionHeader ────────────────────────────────────────────────────────────
+
+function SectionHeader({
+  tag,
+  title,
+  description,
+}: {
+  tag: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="px-4 pb-6 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl border-t border-white/10 pt-10">
+        <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-gold">
+          {tag}
+        </p>
+        <h2 className="mt-3 text-2xl font-black text-foreground sm:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-7 text-muted">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── SubjectTeachersGrid ──────────────────────────────────────────────────────
+
+type SubjectTeacher = ReturnType<typeof getProfessorCharacters>[number];
+
+function SubjectTeachersGrid({ teachers }: { teachers: SubjectTeacher[] }) {
+  return (
+    <section className="px-4 pb-20 sm:px-6 lg:px-8" aria-label="Professeurs de matière — Élémentaire">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {teachers.map((teacher) => (
+            <SubjectTeacherCard key={teacher.slug} teacher={teacher} />
+          ))}
+        </div>
+        <p className="mt-6 text-xs text-muted/60">
+          Les statuts indiquent la disponibilité des ressources pédagogiques associées, pas le personnage lui-même.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function SubjectTeacherCard({ teacher }: { teacher: SubjectTeacher }) {
+  return (
+    <div className="flex flex-col gap-4 rounded-md border border-white/10 bg-white/[0.03] p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="grid size-12 shrink-0 place-items-center rounded-md border border-white/15 bg-white/[0.04]">
+          <span className="text-lg font-black text-foreground/60">
+            {teacher.name.charAt(0)}
+          </span>
+        </div>
+        <PublicStatusBadge status={teacher.publicStatus} />
+      </div>
+
+      <div>
+        <p className="text-base font-black text-foreground">{teacher.name}</p>
+        <p className="mt-0.5 text-xs font-bold text-gold">{teacher.mainSubject}</p>
+        <p className="mt-0.5 text-xs text-muted/60">{teacher.species}</p>
+      </div>
+
+      <p className="text-xs leading-5 text-muted line-clamp-3">
+        {teacher.shortDescription}
+      </p>
+
+      <div className="flex flex-wrap gap-1 border-t border-white/8 pt-3">
+        {teacher.levels.map((level) => (
+          <span
+            key={level}
+            className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] text-muted"
+          >
+            {level}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 type HeroProps = {
   professors: ProfessorCardData[];
-  stats: { primaire: number; college: number; cycles: number };
+  stats: { primaire: number; college: number };
 };
 
-
 function Hero({ professors, stats }: HeroProps) {
+  // Uniquement les guides de niveau pour les avatars de preview
+  const guideAvatars = professors.filter(
+    (p) => p.stage === "primaire" || p.stage === "college",
+  );
+
   return (
     <section className="relative isolate overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
       {/* Fond grid */}
@@ -117,24 +221,26 @@ function Hero({ professors, stats }: HeroProps) {
           {/* Colonne principale */}
           <div>
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.28em] text-gold">
-              Galerie officielle
+              Équipe pédagogique
             </p>
 
             <h1 className="mt-5 text-5xl font-black leading-[0.92] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Les Professeurs
+              Guides et
               <br />
-              <span className="text-foreground/50">de l&rsquo;Académie</span>
+              <span className="text-foreground/50">Professeurs</span>
             </h1>
 
             <p className="mt-7 max-w-xl text-base leading-8 text-muted">
-              Chaque professeur est un univers. Chaque univers a sa méthode.
-              Chaque méthode laisse une trace — des premiers apprentissages
-              jusqu&rsquo;aux synthèses avancées.
+              L&rsquo;Académie Kerboeuf compte deux types de personnages
+              pédagogiques : les <strong className="font-bold text-foreground/80">guides de niveau</strong>{" "}
+              qui accompagnent chaque étape scolaire, et les{" "}
+              <strong className="font-bold text-foreground/80">professeurs de matière</strong>{" "}
+              référents pour chaque discipline du primaire.
             </p>
 
-            {/* Avatars preview */}
+            {/* Avatars preview — guides de niveau */}
             <div className="mt-8 flex flex-wrap gap-2">
-              {professors.map((p) => {
+              {guideAvatars.map((p) => {
                 const glowRgb =
                   p.accentColor === "jade"
                     ? "80,200,164"
@@ -198,18 +304,18 @@ function Hero({ professors, stats }: HeroProps) {
             </p>
 
             <div className="mt-5 grid grid-cols-2 gap-4">
-              <StatBlock value={String(professors.length)} label="Professeurs" />
-              <StatBlock value={String(stats.cycles)} label="Cycles" />
-              <StatBlock value={String(stats.primaire)} label="Niveau primaire" />
-              <StatBlock value={String(stats.college)} label="Niveau collège" />
+              <StatBlock value={String(stats.primaire)} label="Guides primaire" />
+              <StatBlock value={String(stats.college)} label="Guides collège" />
+              <StatBlock value="7" label="Profs de matière" />
+              <StatBlock value="3" label="Cycles couverts" />
             </div>
 
             <div className="mt-5 border-t border-white/10 pt-5">
               <p className="text-xs leading-6 text-muted">
-                Chaque professeur est un repère visuel et méthodologique, pas un
-                compte ou une progression sauvegardée. Ils structurent l&rsquo;univers
-                pédagogique de l&rsquo;Académie Kerboeuf du CP à la 3e, avec des
-                relais au lycée.
+                Les guides de niveau structurent la méthode de travail étape par
+                étape. Les professeurs de matière sont les référents disciplinaires
+                du primaire — Français, Maths, Sciences, Histoire-Géo, Arts,
+                Musique, EPS.
               </p>
             </div>
 
@@ -227,10 +333,10 @@ function Hero({ professors, stats }: HeroProps) {
                 Niveaux Collège
               </Link>
               <Link
-                href="/lycee"
+                href="/univers/personnages"
                 className="inline-flex h-9 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-white/[0.08]"
               >
-                Niveaux Lycée
+                Tous les personnages
               </Link>
             </div>
           </aside>
@@ -292,11 +398,12 @@ function ClosingSection() {
           </h2>
 
           <p className="mt-5 max-w-2xl text-sm leading-7 text-muted">
-            Les neuf professeurs de l&rsquo;Académie Kerboeuf ne sont pas des fiches
-            de présentation — ils sont les gardiens de neuf méthodes distinctes,
-            neuf atmosphères de travail, neuf façons d&rsquo;entrer dans l&rsquo;apprentissage.
-            Ensemble, ils donnent une continuité lisible du CP à la 3e, puis
-            certains prolongent leur rôle dans les pages lycée.
+            Les guides de niveau accompagnent les élèves du CP à la 3e, chacun
+            avec sa méthode et son atmosphère propres. Les professeurs de matière
+            — Hector, Rosa, Mélina, Elian, Pablo, Naïa et Max — sont les référents
+            disciplinaires du primaire, présents de façon transversale sur
+            l&rsquo;ensemble des niveaux élémentaires. Félix, guide CM2, prépare
+            la transition vers le collège.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
