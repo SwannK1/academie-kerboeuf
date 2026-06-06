@@ -13,31 +13,31 @@ const blocks = [
     title: "Méthodologie collège",
     description:
       "Apprendre à s'organiser, prendre des notes et travailler en autonomie au collège.",
-    status: "bientôt",
+    status: "upcoming",
   },
   {
     title: "Français",
     description:
       "Lecture, compréhension de texte, grammaire, orthographe et expression écrite.",
-    status: "bientôt",
+    status: "upcoming",
   },
   {
     title: "Mathématiques",
     description:
       "Nombres et calculs, géométrie, grandeurs et mesures adaptés au programme de 6e.",
-    status: "bientôt",
+    status: "upcoming",
   },
   {
     title: "Histoire-Géographie",
     description:
       "Les grandes périodes historiques et l'organisation du monde au programme de 6e.",
-    status: "bientôt",
+    status: "upcoming",
   },
   {
     title: "Sciences",
     description:
       "Découverte des sciences de la vie et de la Terre ainsi que des sciences physiques.",
-    status: "bientôt",
+    status: "upcoming",
   },
 ] as const;
 
