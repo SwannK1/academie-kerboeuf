@@ -51,6 +51,34 @@ export const cinqiemeMatieres: CollegeMatiereCard[] = [
       "Comprendre et s'exprimer en anglais à l'écrit et à l'oral — niveau A2 vers B1.",
     status: statusInProgress,
   },
+  {
+    slug: "espagnol",
+    label: "Espagnol LV2",
+    description:
+      "Premiers pas en espagnol : compréhension, expression et découverte des cultures hispanophones.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    description:
+      "Observer, expérimenter et créer : dessin, peinture, volume et arts numériques.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    description:
+      "Écouter, chanter et interpréter : développer la culture musicale et la voix.",
+    status: statusUpcoming,
+  },
+  {
+    slug: "eps",
+    label: "EPS",
+    description:
+      "Courir, nager, jouer : s'engager dans des activités physiques, sportives et artistiques.",
+    status: statusUpcoming,
+  },
 ];
 
 // ── Sous-domaines Français 5e ─────────────────────────────────────────────────

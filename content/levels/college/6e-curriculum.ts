@@ -59,6 +59,30 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     description: "Compréhension, expression et interaction en langue vivante.",
     status: "upcoming",
   },
+  {
+    slug: "arts-plastiques",
+    label: "Arts plastiques",
+    description: "Observer, expérimenter et créer : dessin, peinture, volume et arts numériques.",
+    status: "upcoming",
+  },
+  {
+    slug: "education-musicale",
+    label: "Éducation musicale",
+    description: "Écouter, chanter et interpréter : développer la culture musicale et la voix.",
+    status: "upcoming",
+  },
+  {
+    slug: "eps",
+    label: "EPS",
+    description: "Courir, nager, jouer : s'engager dans des activités physiques, sportives et artistiques.",
+    status: "upcoming",
+  },
+  {
+    slug: "latin",
+    label: "Latin (option)",
+    description: "Lire des textes latins simples, explorer les racines du français et de l'histoire romaine.",
+    status: "upcoming",
+  },
 ];
 
 // ── Métadonnées d'affichage des sous-domaines Mathématiques ──────────────────

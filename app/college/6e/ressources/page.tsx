@@ -5,38 +5,43 @@ import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Ressources de 6e | Académie Kerboeuf",
-  description: "Des ressources pour réussir l'entrée au collège.",
+  description: "Cinq compétences prioritaires pour réussir l'entrée au collège.",
 };
 
-const blocks = [
+const ressources = [
   {
-    title: "Méthodologie collège",
+    slug: "lire-consigne-complexe",
+    title: "Lire une consigne complexe",
     description:
-      "Apprendre à s'organiser, prendre des notes et travailler en autonomie au collège.",
+      "Repérer les mots-clés d'une consigne, identifier ce qui est demandé et reformuler l'attendu avant de commencer.",
     status: "bientôt",
   },
   {
-    title: "Français",
+    slug: "organiser-cahier-classeur",
+    title: "Organiser son cahier et son classeur",
     description:
-      "Lecture, compréhension de texte, grammaire, orthographe et expression écrite.",
+      "Mettre en place un système de rangement efficace : intercalaires, codes couleur, dates et numéros de page.",
     status: "bientôt",
   },
   {
-    title: "Mathématiques",
+    slug: "repondre-phrase-complete",
+    title: "Répondre avec une phrase complète",
     description:
-      "Nombres et calculs, géométrie, grandeurs et mesures adaptés au programme de 6e.",
+      "Construire une réponse organisée : reprendre l'information de la question, formuler une phrase sujet-verbe-complément et vérifier la cohérence.",
     status: "bientôt",
   },
   {
-    title: "Histoire-Géographie",
+    slug: "apprendre-lecon-efficacement",
+    title: "Apprendre une leçon efficacement",
     description:
-      "Les grandes périodes historiques et l'organisation du monde au programme de 6e.",
+      "Utiliser des stratégies de mémorisation active : relecture espacée, auto-questionnement, fiches de résumé et mind maps.",
     status: "bientôt",
   },
   {
-    title: "Sciences",
+    slug: "resoudre-probleme-etapes",
+    title: "Résoudre un problème en plusieurs étapes",
     description:
-      "Découverte des sciences de la vie et de la Terre ainsi que des sciences physiques.",
+      "Décomposer un problème complexe : comprendre l'énoncé, identifier les étapes, choisir les outils adaptés et vérifier la vraisemblance du résultat.",
     status: "bientôt",
   },
 ] as const;
@@ -55,24 +60,24 @@ export default function Page() {
           Ressources de 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">
-          Des ressources pour réussir l&apos;entrée au collège.
+          Cinq compétences prioritaires pour réussir l&apos;entrée au collège.
         </p>
       </div>
 
       <div className="flex flex-col gap-4">
-        {blocks.map((block) => (
+        {ressources.map((ressource) => (
           <div
-            key={block.title}
+            key={ressource.slug}
             className="rounded-xl border border-gray-200 bg-white p-6"
           >
             <div className="mb-3 flex items-center gap-3">
               <h2 className="text-lg font-semibold text-gray-900">
-                {block.title}
+                {ressource.title}
               </h2>
-              <PublicStatusBadge status={getPublicStatus(block.status)} />
+              <PublicStatusBadge status={getPublicStatus(ressource.status)} />
             </div>
-            <p className="mb-3 text-sm text-gray-600">{block.description}</p>
-            <p className="text-xs text-gray-400">Ressources en préparation</p>
+            <p className="mb-3 text-sm text-gray-600">{ressource.description}</p>
+            <p className="text-xs text-gray-400">Ressource en préparation</p>
           </div>
         ))}
       </div>
