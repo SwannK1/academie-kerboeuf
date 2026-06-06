@@ -59,6 +59,13 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     description: "Compréhension, expression et interaction en langue vivante.",
     status: "upcoming",
   },
+  {
+    slug: "ressources",
+    label: "Ressources 6e",
+    description: "Méthodologie, fiches de révision et supports par matière pour réussir l'entrée au collège.",
+    status: "in-progress",
+    href: "/college/6e/ressources",
+  },
 ];
 
 // ── Métadonnées d'affichage des sous-domaines Mathématiques ──────────────────

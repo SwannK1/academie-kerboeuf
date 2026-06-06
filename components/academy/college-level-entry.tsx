@@ -52,9 +52,8 @@ export function CollegeLevelEntry({ level }: Props) {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {matiereCards.map((matiere) => {
-              const isLinked =
-                !!matiere.href &&
-                getPublicStatusKey(matiere.status) !== "upcoming";
+              const statusKey = getPublicStatusKey(matiere.status);
+              const isLinked = !!matiere.href && statusKey !== "upcoming";
 
               const cardContent = (
                 <div
@@ -79,9 +78,13 @@ export function CollegeLevelEntry({ level }: Props) {
                     <span className="mt-6 inline-flex text-sm font-black text-jade transition group-hover:translate-x-1">
                       Entrer →
                     </span>
-                  ) : (
+                  ) : statusKey === "upcoming" ? (
                     <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
                       À venir
+                    </span>
+                  ) : (
+                    <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                      En préparation
                     </span>
                   )}
                 </div>
