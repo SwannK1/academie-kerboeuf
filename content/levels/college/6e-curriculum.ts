@@ -48,6 +48,13 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     status: "in-progress",
   },
   {
+    slug: "ressources",
+    label: "Ressources méthodologiques",
+    description: "S'organiser, prendre des notes et travailler en autonomie au collège.",
+    status: "in-progress",
+    href: "/college/6e/ressources",
+  },
+  {
     slug: "sciences",
     label: "Sciences et technologie",
     description: "SVT, physique-chimie et technologie — regroupés pour la 6e.",
