@@ -59,6 +59,14 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     description: "Compréhension, expression et interaction en langue vivante.",
     status: "upcoming",
   },
+  {
+    slug: "methodes",
+    label: "Méthodes de travail",
+    description:
+      "Préparer son cartable, noter les devoirs, relire une leçon et s'organiser au collège.",
+    status: "in-progress",
+    href: "/college/6e/methodes",
+  },
 ];
 
 // ── Métadonnées d'affichage des sous-domaines Mathématiques ──────────────────
