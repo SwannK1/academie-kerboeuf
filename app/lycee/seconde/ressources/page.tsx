@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import type { ProgramStatus } from "@/content/program-types";
 
 export const metadata: Metadata = {
   title: "Ressources de Seconde | Académie Kerboeuf",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 
 type Block = {
   title: string;
-  status: string;
+  status: ProgramStatus;
   sequences: string[];
 };
 
