@@ -5,38 +5,21 @@ import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Ressources de 6e | Académie Kerboeuf",
-  description: "Des ressources pour réussir l'entrée au collège.",
+  description:
+    "Méthodologie et ressources par matière pour réussir l'entrée au collège.",
 };
 
 const blocks = [
   {
     title: "Méthodologie collège",
     description:
-      "Apprendre à s'organiser, prendre des notes et travailler en autonomie au collège.",
+      "S'organiser, prendre des notes et travailler en autonomie dès la rentrée.",
     status: "bientôt",
   },
   {
-    title: "Français",
+    title: "Ressources par matière",
     description:
-      "Lecture, compréhension de texte, grammaire, orthographe et expression écrite.",
-    status: "bientôt",
-  },
-  {
-    title: "Mathématiques",
-    description:
-      "Nombres et calculs, géométrie, grandeurs et mesures adaptés au programme de 6e.",
-    status: "bientôt",
-  },
-  {
-    title: "Histoire-Géographie",
-    description:
-      "Les grandes périodes historiques et l'organisation du monde au programme de 6e.",
-    status: "bientôt",
-  },
-  {
-    title: "Sciences",
-    description:
-      "Découverte des sciences de la vie et de la Terre ainsi que des sciences physiques.",
+      "Fiches de révision et supports PDF pour le Français, les Mathématiques, l'Histoire-Géographie et les Sciences.",
     status: "bientôt",
   },
 ] as const;
@@ -55,7 +38,8 @@ export default function Page() {
           Ressources de 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">
-          Des ressources pour réussir l&apos;entrée au collège.
+          Méthodologie et ressources par matière pour réussir l&apos;entrée au
+          collège.
         </p>
       </div>
 
