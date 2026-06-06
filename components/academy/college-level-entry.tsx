@@ -124,6 +124,31 @@ export function CollegeLevelEntry({ level }: Props) {
         </div>
       </section>
 
+      {slug === "6e" && (
+        <section className="px-4 pb-8 pt-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <p className="mb-6 text-sm font-bold uppercase tracking-[0.22em] text-jade">
+              Accompagnement
+            </p>
+            <Link
+              href="/college/6e/accompagnement"
+              className="group inline-flex flex-col rounded-md border border-jade/30 bg-jade/[0.05] p-6 transition hover:-translate-y-0.5 hover:border-jade/50 hover:bg-jade/[0.09]"
+            >
+              <span className="text-xl font-black text-foreground">
+                Accompagnement 6e
+              </span>
+              <span className="mt-3 text-sm leading-7 text-muted">
+                Accéder aux ressources, méthodes et parcours pour réussir
+                l&apos;entrée au collège.
+              </span>
+              <span className="mt-6 inline-flex text-sm font-black text-jade transition group-hover:translate-x-1">
+                Entrer →
+              </span>
+            </Link>
+          </div>
+        </section>
+      )}
+
       <section className="px-4 pb-20 pt-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Link
