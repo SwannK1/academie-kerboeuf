@@ -4,39 +4,40 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Ressources de 6e | Académie Kerboeuf",
-  description: "Des ressources pour réussir l'entrée au collège.",
+  title: "Ressources prioritaires 6e | Académie Kerboeuf",
+  description:
+    "Cinq compétences transversales pour réussir l'entrée au collège.",
 };
 
-const blocks = [
+const ressourcesPrioritaires = [
   {
-    title: "Méthodologie collège",
+    title: "Lire une consigne complexe",
     description:
-      "Apprendre à s'organiser, prendre des notes et travailler en autonomie au collège.",
+      "Identifier les verbes de consigne, repérer ce qui est attendu et organiser sa réponse.",
     status: "bientôt",
   },
   {
-    title: "Français",
+    title: "Organiser son cahier et son classeur",
     description:
-      "Lecture, compréhension de texte, grammaire, orthographe et expression écrite.",
+      "Structurer ses documents par matière, dater les cours et retrouver facilement ses notes.",
     status: "bientôt",
   },
   {
-    title: "Mathématiques",
+    title: "Répondre avec une phrase complète",
     description:
-      "Nombres et calculs, géométrie, grandeurs et mesures adaptés au programme de 6e.",
+      "Reformuler la question dans sa réponse et construire une phrase grammaticalement correcte.",
     status: "bientôt",
   },
   {
-    title: "Histoire-Géographie",
+    title: "Apprendre une leçon efficacement",
     description:
-      "Les grandes périodes historiques et l'organisation du monde au programme de 6e.",
+      "Utiliser la relecture active, les schémas et la répétition espacée pour mémoriser.",
     status: "bientôt",
   },
   {
-    title: "Sciences",
+    title: "Résoudre un problème en plusieurs étapes",
     description:
-      "Découverte des sciences de la vie et de la Terre ainsi que des sciences physiques.",
+      "Lire l'énoncé, identifier les données, choisir une méthode et vérifier le résultat.",
     status: "bientôt",
   },
 ] as const;
@@ -52,27 +53,27 @@ export default function Page() {
           ← Retour à la 6e
         </Link>
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-          Ressources de 6e
+          Ressources prioritaires 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">
-          Des ressources pour réussir l&apos;entrée au collège.
+          Cinq compétences transversales pour réussir l&apos;entrée au collège.
         </p>
       </div>
 
       <div className="flex flex-col gap-4">
-        {blocks.map((block) => (
+        {ressourcesPrioritaires.map((ressource) => (
           <div
-            key={block.title}
+            key={ressource.title}
             className="rounded-xl border border-gray-200 bg-white p-6"
           >
             <div className="mb-3 flex items-center gap-3">
               <h2 className="text-lg font-semibold text-gray-900">
-                {block.title}
+                {ressource.title}
               </h2>
-              <PublicStatusBadge status={getPublicStatus(block.status)} />
+              <PublicStatusBadge status={getPublicStatus(ressource.status)} />
             </div>
-            <p className="mb-3 text-sm text-gray-600">{block.description}</p>
-            <p className="text-xs text-gray-400">Ressources en préparation</p>
+            <p className="mb-3 text-sm text-gray-600">{ressource.description}</p>
+            <p className="text-xs text-gray-400">Ressource en préparation</p>
           </div>
         ))}
       </div>
