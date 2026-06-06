@@ -8,7 +8,7 @@ const footerSections = [
       { label: "Primaire", href: "/primaire" },
       { label: "Collège", href: "/college" },
       { label: "Lycée", href: "/lycee" },
-      { label: "Professeurs", href: "/professeurs" },
+      { label: "Personnages", href: "/personnages" },
       { label: "Carte", href: "/carte" },
     ],
   },

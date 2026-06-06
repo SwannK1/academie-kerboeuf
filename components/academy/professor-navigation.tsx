@@ -93,7 +93,7 @@ export function ProfessorNavigation({ professor }: { professor: ProfessorProfile
               Niveau {professor.levelLabel}
             </Link>
             <Link
-              href="/professeurs"
+              href="/personnages"
               className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
             >
               Galerie

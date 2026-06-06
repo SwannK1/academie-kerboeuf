@@ -916,7 +916,7 @@ const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
 
   return {
     slug: level.professor.slug,
-    profileHref: `/professeurs/${level.professor.slug}`,
+    profileHref: `/personnages/${level.professor.slug}`,
     name: level.professor.name,
     characterType: "professeur référent",
     role: level.professor.role,
@@ -1437,7 +1437,7 @@ const officialPersonalities: {
 function toOfficialProfile(profile: (typeof officialPersonalities)[number]): ProfessorProfile {
   return {
     slug: profile.slug,
-    profileHref: `/professeurs/${profile.slug}`,
+    profileHref: `/personnages/${profile.slug}`,
     name: profile.name,
     characterType: "personnalité officielle",
     role: profile.role,

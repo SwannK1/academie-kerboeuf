@@ -873,7 +873,7 @@ export function getRecentMissions() {
 
 const rawAcademyProfessors = academyLevels.map((level) => ({
   ...level.professor,
-  profileHref: `/professeurs/${level.professor.slug}`,
+  profileHref: `/personnages/${level.professor.slug}`,
   level: level.label,
   cycle: level.cycle,
   stage: level.stage,
