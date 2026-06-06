@@ -2,44 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
+import { sixiemeResources } from "@/content/levels/college/6e-resources";
 
 export const metadata: Metadata = {
   title: "Ressources de 6e | Académie Kerboeuf",
-  description: "Des ressources pour réussir l'entrée au collège.",
+  description: "Méthodes de travail prioritaires pour réussir l'entrée en 6e.",
 };
-
-const blocks = [
-  {
-    title: "Méthodologie collège",
-    description:
-      "Apprendre à s'organiser, prendre des notes et travailler en autonomie au collège.",
-    status: "bientôt",
-  },
-  {
-    title: "Français",
-    description:
-      "Lecture, compréhension de texte, grammaire, orthographe et expression écrite.",
-    status: "bientôt",
-  },
-  {
-    title: "Mathématiques",
-    description:
-      "Nombres et calculs, géométrie, grandeurs et mesures adaptés au programme de 6e.",
-    status: "bientôt",
-  },
-  {
-    title: "Histoire-Géographie",
-    description:
-      "Les grandes périodes historiques et l'organisation du monde au programme de 6e.",
-    status: "bientôt",
-  },
-  {
-    title: "Sciences",
-    description:
-      "Découverte des sciences de la vie et de la Terre ainsi que des sciences physiques.",
-    status: "bientôt",
-  },
-] as const;
 
 export default function Page() {
   return (
@@ -55,24 +23,24 @@ export default function Page() {
           Ressources de 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">
-          Des ressources pour réussir l&apos;entrée au collège.
+          Méthodes de travail prioritaires pour réussir l&apos;entrée en 6e.
         </p>
       </div>
 
       <div className="flex flex-col gap-4">
-        {blocks.map((block) => (
+        {sixiemeResources.map((resource) => (
           <div
-            key={block.title}
+            key={resource.slug}
             className="rounded-xl border border-gray-200 bg-white p-6"
           >
             <div className="mb-3 flex items-center gap-3">
               <h2 className="text-lg font-semibold text-gray-900">
-                {block.title}
+                {resource.title}
               </h2>
-              <PublicStatusBadge status={getPublicStatus(block.status)} />
+              <PublicStatusBadge status={getPublicStatus(resource.status)} />
             </div>
-            <p className="mb-3 text-sm text-gray-600">{block.description}</p>
-            <p className="text-xs text-gray-400">Ressources en préparation</p>
+            <p className="mb-3 text-sm text-gray-600">{resource.description}</p>
+            <p className="text-xs text-gray-400">Ressource en préparation</p>
           </div>
         ))}
       </div>
