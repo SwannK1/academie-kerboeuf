@@ -155,14 +155,14 @@ export default function Cm2Page() {
             </Link>
 
             <Link
-              href="/professeurs/felix"
+              href="/personnages/felix"
               className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                 Guide pédagogique
               </p>
               <p className="text-lg font-black text-foreground">
-                {cm2Level.character} le Lynx
+                {cm2Level.character} le lynx, guide du CM2
               </p>
               <p className="text-sm leading-6 text-muted">
                 Méthodes, compétences observables et conseils de mise en œuvre

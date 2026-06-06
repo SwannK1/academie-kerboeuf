@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/professeurs/felix",
+        destination: "/personnages/felix",
+        permanent: true,
+      },
+      {
         source: "/primaire/elementaire",
         destination: "/primaire/lieux",
         permanent: true,

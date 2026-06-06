@@ -53,9 +53,9 @@ const defaultAccessibility: MissionAccessibility = {
 
 const professorRefs = {
   felix: {
-    name: "Félix",
-    href: "/professeurs/felix",
-    role: "Explorateur référent du CM2",
+    name: "Félix le lynx, guide du CM2",
+    href: "/personnages/felix",
+    role: "Guide du CM2",
   },
   noisette: {
     name: "Noisette",
