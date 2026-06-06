@@ -59,6 +59,14 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
     description: "Compréhension, expression et interaction en langue vivante.",
     status: "upcoming",
   },
+  {
+    slug: "reussir-son-entree-en-6e",
+    label: "Réussir son entrée en 6e",
+    description:
+      "Six repères pour aborder le collège avec sérénité : emploi du temps, matériel, devoirs et méthodes d'apprentissage.",
+    status: "in-progress",
+    href: "/college/6e/reussir-son-entree-en-6e",
+  },
 ];
 
 // ── Métadonnées d'affichage des sous-domaines Mathématiques ──────────────────
