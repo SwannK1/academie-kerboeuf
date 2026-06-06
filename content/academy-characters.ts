@@ -183,8 +183,8 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
   },
   {
     slug: "pablo",
-    name: "Pablo le singe",
-    species: "Capucin brun",
+    name: "Pablo l'Orang-outan",
+    species: "Orang-outan de Bornéo",
     role: "professeur",
     mainSubject: "Arts plastiques",
     shortDescription:

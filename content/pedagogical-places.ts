@@ -715,7 +715,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
       "Mettre en voix ou en geste un récit",
     ],
     professors: [
-      { slug: "rosa", name: "Rosa le Flamant Rose" },
+      { slug: "rosa", name: "Rosa la Chouette" },
       { slug: "max", name: "Max le Kangourou" },
     ],
     students: [

@@ -98,7 +98,7 @@ const professorRefs = {
     role: "Coach des défis positifs",
   },
   rosa: {
-    name: "Rosa le Flamant Rose",
+    name: "Rosa la Chouette",
     href: "/professeurs/rosa",
     role: "Guide de la parole claire",
   },
