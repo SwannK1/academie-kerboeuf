@@ -5,6 +5,14 @@ import type { PublicStatus } from "@/content/public-status";
 
 export type CharacterRole = "guide" | "professeur";
 
+export type LevelGroup =
+  | "maternelle"
+  | "primaire"
+  | "collège"
+  | "lycée"
+  | "transversal"
+  | "guide";
+
 export type AcademyProfessorCharacter = {
   /** Identifiant interne, correspond à ElementaryProfessorId ou "felix" */
   slug: string;
@@ -12,6 +20,8 @@ export type AcademyProfessorCharacter = {
   name: string;
   species: string;
   role: CharacterRole;
+  /** Groupe de niveau scolaire pour le classement sur /univers/personnages */
+  levelGroup: LevelGroup;
   /** Matière principale enseignée */
   mainSubject: string;
   /** Courte description pédagogique (1-2 phrases) */
@@ -40,6 +50,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Félix le lynx",
     species: "Lynx boréal",
     role: "guide",
+    levelGroup: "guide",
     mainSubject: "Méthode et gestes intellectuels",
     shortDescription:
       "Félix guide les élèves de CM2 dans leurs missions. Il structure la démarche : observer, chercher, vérifier, justifier, produire une trace.",
@@ -72,6 +83,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Hector le castor",
     species: "Castor d'Europe",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Mathématiques",
     shortDescription:
       "Hector enseigne les mathématiques avec rigueur et méthode. Il aime construire, mesurer et vérifier.",
@@ -101,6 +113,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Rosa la chouette",
     species: "Chouette effraie",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Français",
     shortDescription:
       "Rosa enseigne la langue française : lecture, compréhension, écriture et structuration.",
@@ -128,6 +141,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Mélina l'abeille",
     species: "Abeille domestique",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Sciences",
     shortDescription:
       "Mélina enseigne les sciences en partant du réel : observer, expérimenter, comprendre le vivant et la matière.",
@@ -157,6 +171,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Elian le dromadaire",
     species: "Dromadaire",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Histoire-Géographie",
     shortDescription:
       "Elian enseigne l'histoire et la géographie : lire des cartes, comprendre les traces du passé, se repérer dans le temps et l'espace.",
@@ -186,6 +201,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Pablo le singe",
     species: "Capucin brun",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Arts plastiques",
     shortDescription:
       "Pablo enseigne les arts plastiques : créer, observer, composer, expérimenter des techniques artistiques.",
@@ -215,6 +231,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Naïa l'hippocampe",
     species: "Hippocampe moucheté",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Musique",
     shortDescription:
       "Naïa enseigne la musique : écouter, chanter, créer, reconnaître sons et rythmes.",
@@ -243,6 +260,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     name: "Max le kangourou",
     species: "Kangourou roux",
     role: "professeur",
+    levelGroup: "primaire",
     mainSubject: "Éducation physique et sportive",
     shortDescription:
       "Max enseigne l'EPS : bouger, coopérer, progresser et respecter les règles.",
