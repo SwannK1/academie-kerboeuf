@@ -13,7 +13,7 @@ const DOMAINS = [
   "Mobiliser le langage dans toutes ses dimensions",
   "Agir, s'exprimer, comprendre à travers l'activité physique",
   "Agir, s'exprimer, comprendre à travers les activités artistiques",
-  "Construire les premiers outils pour structurer sa pensée",
+  "Acquérir les premiers outils mathématiques",
   "Explorer le monde",
 ];
 

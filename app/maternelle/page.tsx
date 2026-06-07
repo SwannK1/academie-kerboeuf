@@ -47,6 +47,12 @@ export default function MaternellePage() {
           <p className="mt-3 max-w-2xl text-sm text-muted">
             Choisissez un niveau pour accéder aux domaines et aux séquences à venir.
           </p>
+          <Link
+            href="/maternelle/ressources"
+            className="mt-4 inline-flex text-sm font-black text-jade transition hover:translate-x-1"
+          >
+            Voir les ressources par niveau →
+          </Link>
         </div>
       </section>
 
