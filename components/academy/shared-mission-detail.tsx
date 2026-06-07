@@ -124,7 +124,7 @@ export function SharedMissionDetail({
               <MissionMeta label="Matière" value={mission.subject} />
               <MissionMeta label="Statut" value={<PublicStatusBadge status={mission.status} />} />
               <MissionMeta label="Difficulté" value={mission.difficulty ?? level.cycle} />
-              <MissionMeta label="Professeur" value={professorName} href={`/professeurs/${professorSlug}`} />
+              <MissionMeta label="Professeur" value={professorName} href={`/univers/personnages/${professorSlug}`} />
             </div>
           </aside>
         </div>

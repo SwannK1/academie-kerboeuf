@@ -54,62 +54,62 @@ const defaultAccessibility: MissionAccessibility = {
 const professorRefs = {
   felix: {
     name: "Félix",
-    href: "/professeurs/felix",
+    href: "/univers/personnages/felix",
     role: "Explorateur référent du CM2",
   },
   noisette: {
     name: "Noisette",
-    href: "/professeurs/noisette",
+    href: "/univers/personnages/noisette",
     role: "Maître des cartes",
   },
   esteban: {
     name: "Esteban",
-    href: "/professeurs/esteban",
+    href: "/univers/personnages/esteban",
     role: "Architecte des savoirs",
   },
   agathe: {
     name: "Agathe la Chouette",
-    href: "/professeurs/agathe",
+    href: "/univers/personnages/agathe",
     role: "Gardienne des récits",
   },
   leo: {
     name: "Léo le Zébu",
-    href: "/professeurs/leo",
+    href: "/univers/personnages/leo",
     role: "Maître des raisonnements stables",
   },
   soa: {
     name: "Soa le Caméléon",
-    href: "/professeurs/soa",
+    href: "/univers/personnages/soa",
     role: "Exploratrice du vivant",
   },
   pablo: {
     name: "Pablo l'Orang-outan",
-    href: "/professeurs/pablo",
+    href: "/univers/personnages/pablo",
     role: "Atelier de création expressive",
   },
   naia: {
     name: "Naïa l'Hippocampe",
-    href: "/professeurs/naia",
+    href: "/univers/personnages/naia",
     role: "Gardienne des harmonies",
   },
   max: {
     name: "Max le Kangourou",
-    href: "/professeurs/max",
+    href: "/univers/personnages/max",
     role: "Coach des défis positifs",
   },
   rosa: {
     name: "Rosa le Flamant Rose",
-    href: "/professeurs/rosa",
+    href: "/univers/personnages/rosa",
     role: "Guide de la parole claire",
   },
   hector: {
     name: "Hector le Castor",
-    href: "/professeurs/hector",
+    href: "/univers/personnages/hector",
     role: "Constructeur de méthodes",
   },
   melina: {
     name: "Mélina l'Abeille",
-    href: "/professeurs/melina",
+    href: "/univers/personnages/melina",
     role: "Coordinatrice du vivant",
   },
 } satisfies Record<string, PlacePersonRef>;

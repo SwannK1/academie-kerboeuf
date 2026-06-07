@@ -509,7 +509,7 @@ function LinksPanel({ links }: { links: PedagogicalPlaceActivityLink[] }) {
 
 function getProfessorHref(person: PedagogicalPlacePersonRef) {
   return getProfessorBySlug(person.slug)
-    ? `/professeurs/${person.slug}`
+    ? `/univers/personnages/${person.slug}`
     : undefined;
 }
 

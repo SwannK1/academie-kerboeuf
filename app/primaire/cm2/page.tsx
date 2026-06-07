@@ -155,7 +155,7 @@ export default function Cm2Page() {
             </Link>
 
             <Link
-              href="/professeurs/felix"
+              href="/univers/personnages/felix"
               className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">

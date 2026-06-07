@@ -123,7 +123,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
 
           <div className="grid gap-5 sm:grid-cols-2">
             <Link
-              href={`/professeurs/${level.professor.slug}`}
+              href={`/univers/personnages/${level.professor.slug}`}
               aria-label={`Voir la fiche du professeur ${level.professor.name}`}
               className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
             >

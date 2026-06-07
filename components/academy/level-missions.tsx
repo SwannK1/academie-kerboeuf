@@ -13,7 +13,7 @@ type LevelMissionsProps = {
 
 export function LevelMissions({ level }: LevelMissionsProps) {
   const missionsPath = getLevelMissionsPath(level);
-  const professorPath = `/professeurs/${level.professor.slug}`;
+  const professorPath = `/univers/personnages/${level.professor.slug}`;
   const linkBasePath =
     level.stage === "college" || level.stage === "lycee" || level.slug === "cm2"
       ? missionsPath
