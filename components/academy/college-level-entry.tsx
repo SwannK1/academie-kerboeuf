@@ -38,7 +38,7 @@ export function CollegeLevelEntry({ level }: Props) {
             {level.label}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
-            Un espace pour retrouver les matières, les missions et les ressources
+            Un espace pour retrouver les matières et les ressources
             du niveau {level.label}.
           </p>
         </div>
