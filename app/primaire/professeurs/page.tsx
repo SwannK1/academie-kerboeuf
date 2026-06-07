@@ -126,7 +126,7 @@ export default function ProfesseursPage() {
 
       <nav className="mt-12 flex flex-wrap gap-4" aria-label="Liens connexes">
         <Link
-          href="/univers/personnages"
+          href="/professeurs"
           className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium text-foreground transition hover:border-gold hover:text-gold"
         >
           Découvrir les personnages de l&apos;univers →

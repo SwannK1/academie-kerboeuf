@@ -31,6 +31,16 @@ const nextConfig: NextConfig = {
         destination: "/primaire/lieux",
         permanent: true,
       },
+      {
+        source: "/univers/personnages",
+        destination: "/professeurs",
+        permanent: true,
+      },
+      {
+        source: "/univers/personnages/:slug",
+        destination: "/professeurs/:slug",
+        permanent: true,
+      },
     ];
   },
   async headers() {

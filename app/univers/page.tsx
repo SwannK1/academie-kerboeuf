@@ -103,7 +103,7 @@ export default function UniversPage() {
           </div>
           <div className="mt-6">
             <Link
-              href="/univers/personnages"
+              href="/professeurs"
               className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
             >
               Voir tous les personnages →
