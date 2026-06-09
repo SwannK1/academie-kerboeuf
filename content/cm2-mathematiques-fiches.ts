@@ -499,6 +499,82 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
     "Utiliser les pourcentages dans des situations-problèmes",
     ["f1", "f2", "f3"],
   ),
+  // Bilans, missions finales et séquences entières
+  buildNotion(
+    "bilan-final-de-mathematiques-cm2",
+    "Bilan final de mathématiques CM2",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "comparer-les-fractions-sequence-entiere",
+    "Comparer les fractions — séquence entière",
+    ["f1"],
+  ),
+  buildNotion(
+    "derniere-mission-de-geometrie-cm2",
+    "Dernière mission de géométrie CM2",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "les-fractions-simples-sequence-entiere",
+    "Les fractions simples — séquence entière",
+    ["f1"],
+  ),
+  buildNotion(
+    "mission-finale-mathematique-avec-felix",
+    "Mission finale mathématique avec Félix",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "placer-des-fractions-sur-une-droite-graduee-sequence-entiere",
+    "Placer des fractions sur une droite graduée — séquence entière",
+    ["f1"],
+  ),
+  buildNotion(
+    "preparer-l-entree-en-6e",
+    "Préparer l'entrée en 6e",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "resoudre-des-problemes-de-synthese",
+    "Résoudre des problèmes de synthèse",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "resoudre-une-enquete-mathematique",
+    "Résoudre une enquête mathématique",
+    ["f2", "f3"],
+  ),
+  buildNotion(
+    "resoudre-une-mission-geometrique-complete",
+    "Résoudre une mission géométrique complète",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reviser-les-grandeurs-et-mesures",
+    "Réviser les grandeurs et mesures",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reviser-les-nombres-et-les-calculs",
+    "Réviser les nombres et les calculs",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reviser-les-notions-essentielles-de-geometrie",
+    "Réviser les notions essentielles de géométrie",
+    ["f2"],
+  ),
+  buildNotion(
+    "sequence-cm2-utiliser-les-pourcentages-dans-des-situations-problemes",
+    "Séquence CM2 — Utiliser les pourcentages dans des situations-problèmes",
+    ["f2"],
+  ),
+  buildNotion(
+    "sequence-construire-un-graphique-en-barres",
+    "Séquence — Construire un graphique en barres",
+    ["f1"],
+  ),
 ];
 
 export function getCm2MathFicheBySlug(slug: string): Cm2MathFicheNotion | undefined {
