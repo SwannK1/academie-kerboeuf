@@ -52,7 +52,7 @@ function buildNotion(
 // déclarée : elle ne doit pas apparaître dans le catalogue.
 export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   // ── Nombres et calcul ─────────────────────────────────────────────────────
-  buildNotion("additionner-des-decimaux", "Additionner des nombres décimaux", ["f1"]),
+  buildNotion("additionner-des-decimaux", "Additionner des nombres décimaux", ["f1", "f2"]),
   buildNotion("arrondir-des-nombres-decimaux", "Arrondir des nombres décimaux", ["f1", "f2"]),
   buildNotion("decomposer-une-fraction", "Décomposer une fraction", ["f1", "f2", "f3"]),
   buildNotion("encadrer-des-nombres-decimaux", "Encadrer des nombres décimaux", ["f1", "f2", "f3"]),
@@ -60,7 +60,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion("placer-des-fractions-sur-une-droite-graduee", "Placer des fractions sur une droite graduée", ["f1", "f2", "f3"]),
   buildNotion("ranger-des-nombres-decimaux", "Ranger des nombres décimaux", ["f1", "f2", "f3"]),
   buildNotion("comparer-des-nombres-decimaux", "Comparer des nombres décimaux", ["f1"]),
-  buildNotion("passage-a-l-unite", "Passage à l'unité", ["f2"]),
+  buildNotion("passage-a-l-unite", "Passage à l'unité", ["f2", "f3"]),
   buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f1", "f2", "f3"]),
 
   // ── Grandeurs et mesures ──────────────────────────────────────────────────
@@ -262,7 +262,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "agrandir-ou-reduire-une-figure",
     "Agrandir ou réduire une figure",
-    ["f1"],
+    ["f1", "f2"],
   ),
   buildNotion(
     "construire-un-graphique-a-partir-d-un-tableau",
@@ -341,7 +341,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "perimetre-du-carre-et-du-rectangle",
     "Périmètre du carré et du rectangle",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "resoudre-des-problemes-de-mesures",
