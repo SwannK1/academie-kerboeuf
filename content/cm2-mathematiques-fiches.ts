@@ -51,57 +51,30 @@ function buildNotion(
 // (audit visuel + structurel) figurent ici. Aucune notion à 0 feuille n'est
 // déclarée : elle ne doit pas apparaître dans le catalogue.
 export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
+  // ── Nombres et calcul ─────────────────────────────────────────────────────
   buildNotion("additionner-des-decimaux", "Additionner des nombres décimaux", ["f1"]),
   buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f3"]),
-  buildNotion(
-    "construire-un-angle-avec-un-rapporteur",
-    "Construire un angle avec un rapporteur",
-    ["f1"],
-  ),
+
+  // ── Grandeurs et mesures ──────────────────────────────────────────────────
   buildNotion(
     "convertir-des-unites-de-contenance",
     "Convertir des unités de contenance",
     ["f1"],
   ),
   buildNotion(
-    "construire-un-triangle-a-partir-de-mesures",
-    "Construire un triangle à partir de mesures données",
-    ["f1"],
+    "convertir-des-unites-de-duree",
+    "Convertir des unités de durée",
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
-    "reproduire-une-figure-geometrique",
-    "Reproduire une figure géométrique",
-    ["f1", "f3"],
+    "convertir-des-unites-de-longueur",
+    "Convertir des unités de longueur",
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
-    "reconnaitre-une-situation-de-symetrie-axiale",
-    "Reconnaître une situation de symétrie axiale",
-    ["f1"],
-  ),
-  buildNotion(
-    "construire-un-cercle-avec-un-compas",
-    "Construire un cercle avec un compas",
-    ["f3"],
-  ),
-  buildNotion(
-    "construire-un-carre-et-un-rectangle",
-    "Construire un carré et un rectangle",
-    ["f3"],
-  ),
-  buildNotion(
-    "reconnaitre-et-decrire-des-triangles",
-    "Reconnaître et décrire des triangles",
-    ["f2"],
-  ),
-  buildNotion(
-    "tracer-des-droites-perpendiculaires",
-    "Tracer des droites perpendiculaires",
-    ["f3"],
-  ),
-  buildNotion(
-    "utiliser-un-schema-pour-resoudre-un-probleme",
-    "Utiliser un schéma pour résoudre un problème",
-    ["f3"],
+    "convertir-des-unites-de-masse",
+    "Convertir des unités de masse",
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "convertir-des-unites-daire-simples",
@@ -112,6 +85,68 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
     "verifier-la-vraisemblance-dun-resultat",
     "Vérifier la vraisemblance d'un résultat",
     ["f3"],
+  ),
+  buildNotion(
+    "utiliser-un-schema-pour-resoudre-un-probleme",
+    "Utiliser un schéma pour résoudre un problème",
+    ["f3"],
+  ),
+
+  // ── Géométrie ─────────────────────────────────────────────────────────────
+  buildNotion(
+    "construire-un-angle-avec-un-rapporteur",
+    "Construire un angle avec un rapporteur",
+    ["f1"],
+  ),
+  buildNotion(
+    "construire-un-carre-et-un-rectangle",
+    "Construire un carré et un rectangle",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "construire-un-cercle-avec-un-compas",
+    "Construire un cercle avec un compas",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "construire-un-triangle-a-partir-de-mesures",
+    "Construire un triangle à partir de mesures données",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "completer-une-figure-par-symetrie-axiale",
+    "Compléter une figure par symétrie axiale",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reconnaitre-une-situation-de-symetrie-axiale",
+    "Reconnaître une situation de symétrie axiale",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reconnaitre-et-decrire-des-triangles",
+    "Reconnaître et décrire des triangles",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "reproduire-une-figure-geometrique",
+    "Reproduire une figure géométrique",
+    ["f1", "f3"],
+  ),
+  buildNotion(
+    "tracer-des-droites-perpendiculaires",
+    "Tracer des droites perpendiculaires",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "identifier-et-comparer-des-angles",
+    "Identifier et comparer des angles",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "mesurer-un-angle-avec-un-rapporteur",
+    "Mesurer un angle avec un rapporteur",
+    ["f1", "f2", "f3"],
   ),
 ];
 
