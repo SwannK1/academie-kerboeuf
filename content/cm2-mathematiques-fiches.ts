@@ -53,7 +53,7 @@ function buildNotion(
 export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   // ── Nombres et calcul ─────────────────────────────────────────────────────
   buildNotion("additionner-des-decimaux", "Additionner des nombres décimaux", ["f1"]),
-  buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f3"]),
+  buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f2", "f3"]),
 
   // ── Grandeurs et mesures ──────────────────────────────────────────────────
   buildNotion(
@@ -84,12 +84,12 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "verifier-la-vraisemblance-dun-resultat",
     "Vérifier la vraisemblance d'un résultat",
-    ["f3"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "utiliser-un-schema-pour-resoudre-un-probleme",
     "Utiliser un schéma pour résoudre un problème",
-    ["f3"],
+    ["f2", "f3"],
   ),
 
   // ── Géométrie ─────────────────────────────────────────────────────────────
@@ -203,6 +203,104 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "organiser-des-donnees-dans-un-tableau",
     "Organiser des données dans un tableau",
+    ["f1", "f2"],
+  ),
+
+  // ── Grandeurs et mesures (compléments) ───────────────────────────────────
+  buildNotion(
+    "lire-l-heure-et-comprendre-les-durees",
+    "Lire l'heure et comprendre les durées",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "resoudre-des-problemes-de-durees",
+    "Résoudre des problèmes de durées",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "problemes-d-aire-avec-conversions-simples",
+    "Problèmes d'aire avec conversions simples",
+    ["f1", "f2"],
+  ),
+
+  // ── Nombres et calcul (compléments) ──────────────────────────────────────
+  buildNotion(
+    "comprendre-la-moyenne-simple",
+    "Comprendre la moyenne simple",
+    ["f1"],
+  ),
+  buildNotion(
+    "resoudre-des-problemes-avec-une-moyenne-simple",
+    "Résoudre des problèmes avec une moyenne simple",
+    ["f1"],
+  ),
+  buildNotion(
+    "resoudre-un-probleme-de-proportionnalite",
+    "Résoudre un problème de proportionnalité",
+    ["f1"],
+  ),
+  buildNotion(
+    "resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees",
+    "Résoudre des problèmes à plusieurs étapes avec des données",
+    ["f1"],
+  ),
+  buildNotion(
+    "utiliser-un-tableau-pour-resoudre-un-probleme",
+    "Utiliser un tableau pour résoudre un problème",
+    ["f1", "f2"],
+  ),
+
+  // ── Géométrie (compléments) ───────────────────────────────────────────────
+  buildNotion(
+    "agrandir-ou-reduire-une-figure",
+    "Agrandir ou réduire une figure",
+    ["f1"],
+  ),
+  buildNotion(
+    "construire-un-graphique-a-partir-d-un-tableau",
+    "Construire un graphique à partir d'un tableau",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "rediger-un-programme-de-construction",
+    "Rédiger un programme de construction",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "se-reperer-dans-un-espace-reel",
+    "Se repérer dans un espace réel",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "se-reperer-sur-un-plan-quadrille",
+    "Se repérer sur un plan quadrillé",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "choisir-le-bon-outil-geometrique",
+    "Choisir le bon outil géométrique",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "choisir-la-bonne-methode-en-geometrie",
+    "Choisir la bonne méthode en géométrie",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "rediger-une-reponse-mathematique-complete",
+    "Rédiger une réponse mathématique complète",
+    ["f1", "f2", "f3"],
+  ),
+
+  // ── Organisation et gestion de données (compléments) ─────────────────────
+  buildNotion(
+    "lire-et-construire-des-graphiques-simples",
+    "Lire et construire des graphiques simples",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "interpreter-des-donnees",
+    "Interpréter des données",
     ["f1", "f2"],
   ),
 ];
