@@ -59,13 +59,15 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion("passer-une-fraction-a-un-nombre-decimal", "Passer d'une fraction à un nombre décimal", ["f1", "f2", "f3"]),
   buildNotion("placer-des-fractions-sur-une-droite-graduee", "Placer des fractions sur une droite graduée", ["f1", "f2", "f3"]),
   buildNotion("ranger-des-nombres-decimaux", "Ranger des nombres décimaux", ["f1", "f2", "f3"]),
-  buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f2", "f3"]),
+  buildNotion("comparer-des-nombres-decimaux", "Comparer des nombres décimaux", ["f1"]),
+  buildNotion("passage-a-l-unite", "Passage à l'unité", ["f2"]),
+  buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f1", "f2", "f3"]),
 
   // ── Grandeurs et mesures ──────────────────────────────────────────────────
   buildNotion(
     "convertir-des-unites-de-contenance",
     "Convertir des unités de contenance",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "convertir-des-unites-de-duree",
@@ -85,7 +87,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "convertir-des-unites-daire-simples",
     "Convertir des unités d'aire simples",
-    ["f2"],
+    ["f2", "f3"],
   ),
   buildNotion(
     "verifier-la-vraisemblance-dun-resultat",
@@ -209,31 +211,31 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "organiser-des-donnees-dans-un-tableau",
     "Organiser des données dans un tableau",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Grandeurs et mesures (compléments) ───────────────────────────────────
   buildNotion(
     "lire-l-heure-et-comprendre-les-durees",
     "Lire l'heure et comprendre les durées",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "resoudre-des-problemes-de-durees",
     "Résoudre des problèmes de durées",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "problemes-d-aire-avec-conversions-simples",
     "Problèmes d'aire avec conversions simples",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Nombres et calcul (compléments) ──────────────────────────────────────
   buildNotion(
     "comprendre-la-moyenne-simple",
     "Comprendre la moyenne simple",
-    ["f1"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "resoudre-des-problemes-avec-une-moyenne-simple",
@@ -253,7 +255,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "utiliser-un-tableau-pour-resoudre-un-probleme",
     "Utiliser un tableau pour résoudre un problème",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Géométrie (compléments) ───────────────────────────────────────────────
@@ -265,12 +267,12 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "construire-un-graphique-a-partir-d-un-tableau",
     "Construire un graphique à partir d'un tableau",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "rediger-un-programme-de-construction",
     "Rédiger un programme de construction",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "se-reperer-dans-un-espace-reel",
@@ -280,17 +282,17 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "se-reperer-sur-un-plan-quadrille",
     "Se repérer sur un plan quadrillé",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "choisir-le-bon-outil-geometrique",
     "Choisir le bon outil géométrique",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "choisir-la-bonne-methode-en-geometrie",
     "Choisir la bonne méthode en géométrie",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "rediger-une-reponse-mathematique-complete",
@@ -314,27 +316,27 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "estimer-l-ordre-de-grandeur-d-un-resultat",
     "Estimer l'ordre de grandeur d'un résultat",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "aire-du-carre-et-du-rectangle",
     "Aire du carré et du rectangle",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "comprendre-la-notion-d-aire",
     "Comprendre la notion d'aire",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "distinguer-aire-et-perimetre",
     "Distinguer aire et périmètre",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "connaitre-les-unites-d-aire",
     "Connaître les unités d'aire",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "perimetre-du-carre-et-du-rectangle",
@@ -344,19 +346,19 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "resoudre-des-problemes-de-mesures",
     "Résoudre des problèmes de mesures",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Nombres et calcul (lot 4) ─────────────────────────────────────────────
   buildNotion(
     "multiplier-un-nombre-decimal-par-un-entier",
     "Multiplier un nombre décimal par un entier",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "diviser-un-nombre-decimal-par-un-entier",
     "Diviser un nombre décimal par un entier",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "resoudre-un-probleme-avec-des-fractions-simples",
@@ -371,69 +373,69 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "problemes-avec-des-fractions-simples",
     "Problèmes avec des fractions simples",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "problemes-avec-des-nombres-decimaux",
     "Problèmes avec des nombres décimaux",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "problemes-avec-une-moyenne-simple",
     "Problèmes avec une moyenne simple",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "problemes-a-plusieurs-etapes-avec-des-donnees",
     "Problèmes à plusieurs étapes avec des données",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "resoudre-des-problemes-avec-des-nombres-decimaux",
     "Résoudre des problèmes avec des nombres décimaux",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "comprendre-les-pourcentages-simples",
     "Comprendre les pourcentages simples",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "reconnaitre-une-situation-de-proportionnalite",
     "Reconnaître une situation de proportionnalité",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "utiliser-un-tableau-de-proportionnalite",
     "Utiliser un tableau de proportionnalité",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "utiliser-fractions-et-decimaux",
     "Utiliser fractions et décimaux",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Géométrie (lot 4) ─────────────────────────────────────────────────────
   buildNotion(
     "reconnaitre-et-decrire-des-solides",
     "Reconnaître et décrire des solides",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "reconnaitre-et-decrire-un-cercle",
     "Reconnaître et décrire un cercle",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "construire-un-graphique-en-barres",
     "Construire un graphique en barres",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "utiliser-plusieurs-outils-geometriques",
     "Utiliser plusieurs outils géométriques",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "utiliser-le-vocabulaire-de-position",
@@ -443,24 +445,24 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "utiliser-un-schema-en-barres",
     "Utiliser un schéma en barres",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Lot 5 — nouvelles notions ──────────────────────────────────────────────
   buildNotion(
     "calculer-le-perimetre-d-un-polygone",
     "Calculer le périmètre d'un polygone",
-    ["f2", "f3"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "calculer-un-pourcentage-simple-d-une-quantite",
     "Calculer un pourcentage simple d'une quantité",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "choisir-les-bonnes-operations",
     "Choisir les bonnes opérations",
-    ["f2", "f3"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "choisir-les-bonnes-operations-dans-un-probleme",
@@ -470,7 +472,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "comprendre-les-echelles-simples",
     "Comprendre les échelles simples",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "droites-perpendiculaires-et-paralleles",
@@ -480,22 +482,22 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "lire-un-programme-de-construction",
     "Lire un programme de construction",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "presenter-clairement-sa-demarche",
     "Présenter clairement sa démarche",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "problemes-de-proportionnalite",
     "Problèmes de proportionnalité",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "utiliser-les-pourcentages-dans-des-situations-problemes",
     "Utiliser les pourcentages dans des situations-problèmes",
-    ["f2"],
+    ["f1", "f2", "f3"],
   ),
 ];
 
