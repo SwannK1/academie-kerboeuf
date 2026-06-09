@@ -131,7 +131,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "reproduire-une-figure-geometrique",
     "Reproduire une figure géométrique",
-    ["f1", "f3"],
+    ["f1", "f2", "f3"],
   ),
   buildNotion(
     "tracer-des-droites-perpendiculaires",
@@ -147,6 +147,63 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
     "mesurer-un-angle-avec-un-rapporteur",
     "Mesurer un angle avec un rapporteur",
     ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "tracer-des-droites-paralleles",
+    "Tracer des droites parallèles",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reconnaitre-et-decrire-des-polygones",
+    "Reconnaître et décrire des polygones",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "reconnaitre-le-patron-dun-solide",
+    "Reconnaître le patron d'un solide",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "decrire-un-deplacement-sur-quadrillage",
+    "Décrire un déplacement sur quadrillage",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "se-reperer-sur-un-plan",
+    "Se repérer sur un plan",
+    ["f1", "f2", "f3"],
+  ),
+
+  // ── Organisation et gestion de données ───────────────────────────────────
+  buildNotion(
+    "lire-et-organiser-des-donnees",
+    "Lire et organiser des données",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "lire-et-utiliser-un-tableau-de-donnees",
+    "Lire et utiliser un tableau de données",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "lire-un-graphique-simple",
+    "Lire un graphique simple",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "lire-un-tableau-a-double-entree",
+    "Lire un tableau à double entrée",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "lire-une-maquette-ou-un-plan-simplifie",
+    "Lire une maquette ou un plan simplifié",
+    ["f1", "f2", "f3"],
+  ),
+  buildNotion(
+    "organiser-des-donnees-dans-un-tableau",
+    "Organiser des données dans un tableau",
+    ["f1", "f2"],
   ),
 ];
 
