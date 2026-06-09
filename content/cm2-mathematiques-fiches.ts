@@ -53,6 +53,12 @@ function buildNotion(
 export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   // ── Nombres et calcul ─────────────────────────────────────────────────────
   buildNotion("additionner-des-decimaux", "Additionner des nombres décimaux", ["f1"]),
+  buildNotion("arrondir-des-nombres-decimaux", "Arrondir des nombres décimaux", ["f1", "f2"]),
+  buildNotion("decomposer-une-fraction", "Décomposer une fraction", ["f1", "f2", "f3"]),
+  buildNotion("encadrer-des-nombres-decimaux", "Encadrer des nombres décimaux", ["f1", "f2", "f3"]),
+  buildNotion("passer-une-fraction-a-un-nombre-decimal", "Passer d'une fraction à un nombre décimal", ["f1", "f2", "f3"]),
+  buildNotion("placer-des-fractions-sur-une-droite-graduee", "Placer des fractions sur une droite graduée", ["f1", "f2", "f3"]),
+  buildNotion("ranger-des-nombres-decimaux", "Ranger des nombres décimaux", ["f1", "f2", "f3"]),
   buildNotion("soustraire-des-nombres-decimaux", "Soustraire des nombres décimaux", ["f2", "f3"]),
 
   // ── Grandeurs et mesures ──────────────────────────────────────────────────
