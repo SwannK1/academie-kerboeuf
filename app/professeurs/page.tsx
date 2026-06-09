@@ -60,6 +60,9 @@ export default function ProfesseursPage() {
       {/* Hero cinématique */}
       <Hero professors={cardData} stats={{ primaire, college, cycles }} />
 
+      {/* Section Maternelle */}
+      <MaternelleSection />
+
       {/* Galerie filtrée (client) */}
       <ProfessorGallery professors={cardData} />
 
@@ -248,6 +251,161 @@ function StatBlock({ value, label }: { value: string; label: string }) {
         {label}
       </p>
     </div>
+  );
+}
+
+// ─── Section Maternelle ───────────────────────────────────────────────────────
+
+const maternelleLevels = [
+  {
+    slug: "ps",
+    label: "Petite Section",
+    short: "PS",
+    href: "/maternelle/ps",
+    age: "3 ans",
+  },
+  {
+    slug: "ms",
+    label: "Moyenne Section",
+    short: "MS",
+    href: "/maternelle/ms",
+    age: "4 ans",
+  },
+  {
+    slug: "gs",
+    label: "Grande Section",
+    short: "GS",
+    href: "/maternelle/gs",
+    age: "5 ans",
+  },
+] as const;
+
+const maternelleDomains = [
+  {
+    number: "1",
+    label: "Mobiliser le langage dans toutes ses dimensions",
+    icon: "◎",
+  },
+  {
+    number: "2",
+    label: "Agir, s’exprimer, comprendre à travers l’activité physique",
+    icon: "◎",
+  },
+  {
+    number: "3",
+    label: "Agir, s’exprimer, comprendre à travers les activités artistiques",
+    icon: "◎",
+  },
+  {
+    number: "4",
+    label: "Construire les premiers outils pour structurer sa pensée",
+    icon: "◎",
+  },
+  {
+    number: "5",
+    label: "Explorer le monde",
+    icon: "◎",
+  },
+] as const;
+
+function MaternelleSection() {
+  return (
+    <section className="px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        {/* En-tête de section */}
+        <div className="mb-10">
+          <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.28em] text-jade">
+            Maternelle
+          </p>
+          <h2 className="mt-4 text-3xl font-black leading-tight text-foreground sm:text-4xl">
+            Les repères de la maternelle
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">
+            En maternelle, les personnages et enseignants-guides accompagnent
+            les enfants dans les 5 grands domaines d&rsquo;apprentissage, avec
+            une approche douce, concrète, orale, motrice et manipulatoire.
+            Chaque niveau a son propre rythme et ses propres repères.
+          </p>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+          {/* Colonne gauche : niveaux + statut */}
+          <div className="space-y-6">
+            {/* Niveaux PS / MS / GS */}
+            <div className="grid gap-3 sm:grid-cols-3">
+              {maternelleLevels.map((level) => (
+                <Link
+                  key={level.slug}
+                  href={level.href}
+                  className="group relative overflow-hidden rounded-md border border-jade/20 bg-jade/[0.04] p-4 transition hover:border-jade/40 hover:bg-jade/[0.08]"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-jade/70">
+                    {level.age}
+                  </p>
+                  <p className="mt-1 text-2xl font-black text-foreground">
+                    {level.short}
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted">{level.label}</p>
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute right-3 top-3 text-[10px] font-bold text-jade/30 transition group-hover:text-jade/60"
+                  >
+                    →
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Statut des personnages maternelle */}
+            <div className="rounded-md border border-white/10 bg-white/[0.025] p-5">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md border border-gold/30 bg-gold/10">
+                  <span className="text-[10px] font-black text-gold">~</span>
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-foreground">
+                    Personnages maternelle — en préparation
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-muted">
+                    Les guides-personnages dédiés à la maternelle (PS, MS, GS)
+                    ne sont pas encore définis. Cette section accueillera leurs
+                    profils dès qu&rsquo;ils seront créés.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Colonne droite : 5 domaines */}
+          <div className="rounded-md border border-white/10 bg-white/[0.02] p-6">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-jade">
+              5 domaines d&rsquo;apprentissage
+            </p>
+            <ul className="mt-4 space-y-3">
+              {maternelleDomains.map((domain) => (
+                <li key={domain.number} className="flex gap-3">
+                  <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded text-[10px] font-black text-jade/60">
+                    {domain.number}
+                  </span>
+                  <span className="text-xs leading-5 text-muted">
+                    {domain.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 border-t border-white/8 pt-5">
+              <Link
+                href="/maternelle"
+                className="inline-flex h-9 items-center justify-center rounded-md border border-jade/25 bg-jade/[0.06] px-4 text-xs font-bold text-jade transition hover:bg-jade/[0.12]"
+              >
+                Explorer la maternelle
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
