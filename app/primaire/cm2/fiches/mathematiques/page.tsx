@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import {
   cm2MathDomains,
   getCm2MathNotionsByDomain,
@@ -21,6 +20,8 @@ const SHEET_SHORT: Record<string, string> = {
   f2: "Feuille 2",
   f3: "Feuille 3",
 };
+
+const BASE = "/primaire/cm2/fiches/mathematiques";
 
 export default function Cm2FichesMathematiquesPage() {
   const totalNotions = cm2MathDomains.reduce(
@@ -123,12 +124,29 @@ function DomainSection({ domain }: { domain: Cm2MathDomain }) {
 function NotionCard({ notion }: { notion: Cm2MathFicheNotion }) {
   const isComplete = notion.completeness === "complete";
 
+  const availableSheets = notion.sheets.filter(
+    (s) => getPublicStatusKey(s.status) === "available" && s.href,
+  );
+  const firstSheet = availableSheets[0];
+  const notionDetailHref = firstSheet
+    ? `${BASE}/${notion.slug}/${firstSheet.sheet}`
+    : null;
+
   return (
     <article className="flex flex-col gap-3 rounded-md border border-white/10 bg-white/[0.04] p-4 transition hover:border-white/20 hover:bg-white/[0.06]">
       <div className="flex items-start justify-between gap-2">
-        <h3 className="text-sm font-bold leading-5 text-foreground">
-          {notion.title}
-        </h3>
+        {notionDetailHref ? (
+          <Link
+            href={notionDetailHref}
+            className="text-sm font-bold leading-5 text-foreground underline-offset-2 hover:underline"
+          >
+            {notion.title}
+          </Link>
+        ) : (
+          <h3 className="text-sm font-bold leading-5 text-foreground">
+            {notion.title}
+          </h3>
+        )}
         {!isComplete && (
           <span className="shrink-0 rounded border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-400">
             Partielle
@@ -141,28 +159,15 @@ function NotionCard({ notion }: { notion: Cm2MathFicheNotion }) {
           const isAvailable =
             getPublicStatusKey(sheet.status) === "available" && sheet.href;
           return isAvailable ? (
-            <a
+            <Link
               key={sheet.sheet}
-              href={sheet.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`${BASE}/${notion.slug}/${sheet.sheet}`}
               title={sheet.label}
               className="inline-flex items-center gap-1.5 rounded border border-gold/30 bg-gold/10 px-2.5 py-1 text-xs font-bold text-gold transition hover:border-gold/60 hover:bg-gold/20"
             >
-              <span aria-hidden="true">↓</span>
               {SHEET_SHORT[sheet.sheet]}
-            </a>
-          ) : (
-            <span
-              key={sheet.sheet}
-              title={sheet.label}
-              className="inline-flex items-center gap-1.5 rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-bold text-white/25"
-              aria-label={`${sheet.label} — non disponible`}
-            >
-              <PublicStatusBadge status={sheet.status} />
-              {SHEET_SHORT[sheet.sheet]}
-            </span>
-          );
+            </Link>
+          ) : null;
         })}
       </div>
     </article>
