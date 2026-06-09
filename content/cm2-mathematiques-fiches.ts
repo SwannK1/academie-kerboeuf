@@ -59,7 +59,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "convertir-des-unites-de-contenance",
     "Convertir des unités de contenance",
-    ["f1"],
+    ["f1", "f2"],
   ),
   buildNotion(
     "convertir-des-unites-de-duree",
@@ -89,7 +89,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "utiliser-un-schema-pour-resoudre-un-probleme",
     "Utiliser un schéma pour résoudre un problème",
-    ["f2", "f3"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Géométrie ─────────────────────────────────────────────────────────────
@@ -438,6 +438,58 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
     "utiliser-un-schema-en-barres",
     "Utiliser un schéma en barres",
     ["f1", "f2"],
+  ),
+
+  // ── Lot 5 — nouvelles notions ──────────────────────────────────────────────
+  buildNotion(
+    "calculer-le-perimetre-d-un-polygone",
+    "Calculer le périmètre d'un polygone",
+    ["f2"],
+  ),
+  buildNotion(
+    "calculer-un-pourcentage-simple-d-une-quantite",
+    "Calculer un pourcentage simple d'une quantité",
+    ["f2"],
+  ),
+  buildNotion(
+    "choisir-les-bonnes-operations",
+    "Choisir les bonnes opérations",
+    ["f2", "f3"],
+  ),
+  buildNotion(
+    "choisir-les-bonnes-operations-dans-un-probleme",
+    "Choisir les bonnes opérations dans un problème",
+    ["f1"],
+  ),
+  buildNotion(
+    "comprendre-les-echelles-simples",
+    "Comprendre les échelles simples",
+    ["f2"],
+  ),
+  buildNotion(
+    "droites-perpendiculaires-et-paralleles",
+    "Droites perpendiculaires et parallèles",
+    ["f2"],
+  ),
+  buildNotion(
+    "lire-un-programme-de-construction",
+    "Lire un programme de construction",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "presenter-clairement-sa-demarche",
+    "Présenter clairement sa démarche",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "problemes-de-proportionnalite",
+    "Problèmes de proportionnalité",
+    ["f2"],
+  ),
+  buildNotion(
+    "utiliser-les-pourcentages-dans-des-situations-problemes",
+    "Utiliser les pourcentages dans des situations-problèmes",
+    ["f2"],
   ),
 ];
 
