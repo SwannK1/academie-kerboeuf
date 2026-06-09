@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { AccentColor } from "@/content/professors";
@@ -92,8 +91,9 @@ function ac(professor: ProfessorCardData) {
 
 // ─── Avatar de galerie ────────────────────────────────────────────────────────
 
-function GalleryAvatar({ professor }: { professor: ProfessorCardData }) {
+export function GalleryAvatar({ professor, size = "md" }: { professor: ProfessorCardData; size?: "sm" | "md" }) {
   const a = ac(professor);
+  const dims = size === "sm" ? "h-12 w-16" : "h-16 w-24";
 
   const style = {
     background: `linear-gradient(135deg, rgba(${a.glowRgb},0.20), rgba(${a.glowRgb},0.05))`,
@@ -102,7 +102,7 @@ function GalleryAvatar({ professor }: { professor: ProfessorCardData }) {
   if (professor.avatarImage) {
     return (
       <div
-        className={`grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded-md border ${a.border}`}
+        className={`grid ${dims} shrink-0 place-items-center overflow-hidden rounded-md border ${a.border}`}
         style={style}
       >
         <Image
@@ -118,17 +118,17 @@ function GalleryAvatar({ professor }: { professor: ProfessorCardData }) {
 
   return (
     <div
-      className={`grid h-16 w-24 shrink-0 place-items-center rounded-md border ${a.border}`}
+      className={`grid ${dims} shrink-0 place-items-center rounded-md border ${a.border}`}
       style={style}
     >
-      <span className={`text-2xl font-black ${a.text}`}>{professor.initial}</span>
+      <span className={`${size === "sm" ? "text-xl" : "text-2xl"} font-black ${a.text}`}>{professor.initial}</span>
     </div>
   );
 }
 
 // ─── Carte professeur ─────────────────────────────────────────────────────────
 
-function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
+export function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
   const a = ac(professor);
 
   return (
@@ -151,62 +151,49 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
       />
 
       {/* Contenu principal */}
-      <div className="flex flex-1 flex-col gap-5 p-6 pt-7">
-        {/* Avatar + badges */}
+      <div className="flex flex-1 flex-col gap-4 p-5 pt-6">
+        {/* Avatar + identité */}
         <div className="flex items-start gap-4">
           <GalleryAvatar professor={professor} />
-          <div className="flex flex-col gap-1.5">
-            <span className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${a.badge}`}>
-              {professor.mainSubject}
-            </span>
-            <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
-              {professor.levelLabel} · {professor.cycle}
-            </span>
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <h3 className="text-lg font-black leading-tight text-foreground">
+              {professor.name}
+            </h3>
+            <p className={`text-xs font-bold ${a.text}`}>{professor.role}</p>
           </div>
         </div>
 
+        {/* Badges matière + niveau */}
         <div className="flex flex-wrap gap-2">
-          {professor.dominantTraits.slice(0, 3).map((trait) => (
-            <span
-              key={trait}
-              className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-muted"
-            >
-              {trait}
-            </span>
-          ))}
+          <span className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${a.badge}`}>
+            {professor.mainSubject}
+          </span>
+          <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
+            {professor.levelLabel}
+          </span>
         </div>
 
-        {/* Nom et rôle */}
-        <div>
-          <h2 className="text-2xl font-black leading-tight text-foreground transition group-hover:text-foreground">
-            {professor.name}
-          </h2>
-          <p className={`mt-1 text-sm font-bold ${a.text}`}>{professor.role}</p>
-        </div>
-
-        {/* Lieu */}
-        {professor.headquarters ? (
-          <p className="flex items-center gap-1.5 text-xs text-muted">
-            <span aria-hidden="true" className={`text-[10px] font-bold ${a.textDim}`}>⌖</span>
-            {professor.headquarters}
-          </p>
-        ) : (
-          <p className="flex items-center gap-1.5 text-xs text-muted">
-            <span aria-hidden="true" className={`text-[10px] font-bold ${a.textDim}`}>⌖</span>
-            {professor.moodName}
-          </p>
+        {/* Traits de personnalité (2 max) */}
+        {professor.dominantTraits.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {professor.dominantTraits.slice(0, 2).map((trait) => (
+              <span
+                key={trait}
+                className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.1em] text-muted"
+              >
+                {trait}
+              </span>
+            ))}
+          </div>
         )}
 
-        {/* Description */}
-        <p className="line-clamp-3 text-sm leading-6 text-muted">{professor.description}</p>
-
-        {/* Spécialité */}
-        <p className="line-clamp-2 text-xs italic leading-5 text-muted/60">{professor.specialty}</p>
+        {/* Description courte */}
+        <p className="line-clamp-2 text-sm leading-6 text-muted">{professor.description}</p>
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between border-t border-white/[0.07] px-6 py-4">
-        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted/60">
+      <div className="flex items-center justify-between border-t border-white/[0.07] px-5 py-3">
+        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted/50">
           {professor.symbol}
         </span>
         <span className={`flex items-center gap-1.5 text-xs font-bold ${a.text} transition-transform group-hover:translate-x-0.5`}>
@@ -218,18 +205,21 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
   );
 }
 
-// ─── Galerie avec filtre ──────────────────────────────────────────────────────
+// ─── Galerie avec filtres collapsibles ────────────────────────────────────────
 
 type FilterValue = "Tous";
 
 const allLabel: FilterValue = "Tous";
 
 export function ProfessorGallery({ professors }: { professors: ProfessorCardData[] }) {
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [cycle, setCycle] = useState<FilterValue | string>(allLabel);
   const [level, setLevel] = useState<FilterValue | string>(allLabel);
   const [subject, setSubject] = useState<FilterValue | string>(allLabel);
   const [type, setType] = useState<FilterValue | string>(allLabel);
   const [trait, setTrait] = useState<FilterValue | string>(allLabel);
+
+  const hasActiveFilters = cycle !== allLabel || level !== allLabel || subject !== allLabel || type !== allLabel || trait !== allLabel;
 
   const cycles = useMemo(
     () => [allLabel, ...Array.from(new Set(professors.map((p) => p.cycle)))],
@@ -265,44 +255,87 @@ export function ProfessorGallery({ professors }: { professors: ProfessorCardData
     return matchesCycle && matchesLevel && matchesSubject && matchesType && matchesTrait;
   });
 
+  function resetFilters() {
+    setCycle(allLabel);
+    setLevel(allLabel);
+    setSubject(allLabel);
+    setType(allLabel);
+    setTrait(allLabel);
+  }
+
   return (
-    <section className="px-4 pb-20 sm:px-6 lg:px-8">
+    <section aria-labelledby="gallery-heading" className="px-4 pb-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
-            <SelectFilter label="Cycle" value={cycle} options={cycles} onChange={setCycle} />
-            <SelectFilter label="Niveau" value={level} options={levels} onChange={setLevel} />
-            <SelectFilter label="Matière" value={subject} options={subjects} onChange={setSubject} />
-            <SelectFilter label="Type" value={type} options={types} onChange={setType} />
-            <SelectFilter label="Personnalité" value={trait} options={traits} onChange={setTrait} />
+        {/* En-tête de section */}
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted">
+              Galerie complète
+            </p>
+            <h2
+              id="gallery-heading"
+              className="mt-1 text-2xl font-black text-foreground"
+            >
+              Tous les professeurs
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {hasActiveFilters && (
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="text-xs font-bold text-muted underline underline-offset-2 transition hover:text-foreground"
+              >
+                Réinitialiser
+              </button>
+            )}
             <button
               type="button"
-              onClick={() => {
-                setCycle(allLabel);
-                setLevel(allLabel);
-                setSubject(allLabel);
-                setType(allLabel);
-                setTrait(allLabel);
-              }}
-              className="h-11 self-end rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+              onClick={() => setFiltersOpen((v) => !v)}
+              aria-expanded={filtersOpen}
+              aria-controls="filter-panel"
+              className={`inline-flex h-9 items-center gap-2 rounded-md border px-4 text-xs font-bold transition ${
+                filtersOpen || hasActiveFilters
+                  ? "border-gold/40 bg-gold/10 text-gold"
+                  : "border-white/15 bg-white/[0.04] text-foreground hover:bg-white/[0.08]"
+              }`}
             >
-              Réinitialiser
+              <span aria-hidden="true">⊞</span>
+              Filtrer la galerie
+              {hasActiveFilters && (
+                <span className="rounded bg-gold/20 px-1.5 py-0.5 text-[10px] font-black text-gold">
+                  actif
+                </span>
+              )}
             </button>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-            Galerie filtrée
-          </p>
+        {/* Panneau de filtres collapsible */}
+        {filtersOpen && (
+          <div
+            id="filter-panel"
+            className="mb-6 rounded-md border border-white/10 bg-white/[0.035] p-5"
+          >
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+              <SelectFilter label="Cycle" value={cycle} options={cycles} onChange={setCycle} />
+              <SelectFilter label="Niveau" value={level} options={levels} onChange={setLevel} />
+              <SelectFilter label="Matière" value={subject} options={subjects} onChange={setSubject} />
+              <SelectFilter label="Type" value={type} options={types} onChange={setType} />
+              <SelectFilter label="Personnalité" value={trait} options={traits} onChange={setTrait} />
+            </div>
+          </div>
+        )}
 
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-            {filtered.length} professeur{filtered.length > 1 ? "s" : ""}
-          </p>
-        </div>
+        {/* Compteur */}
+        <p className="mb-6 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+          {filtered.length} professeur{filtered.length > 1 ? "s" : ""}
+          {hasActiveFilters && " (filtré)"}
+        </p>
 
         {/* Grille */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((professor) => (
             <ProfessorCard key={professor.slug} professor={professor} />
           ))}
