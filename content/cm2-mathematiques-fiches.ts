@@ -303,6 +303,142 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
     "Interpréter des données",
     ["f1", "f2"],
   ),
+
+  // ── Grandeurs et mesures (lot 4) ─────────────────────────────────────────
+  buildNotion(
+    "estimer-l-ordre-de-grandeur-d-un-resultat",
+    "Estimer l'ordre de grandeur d'un résultat",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "aire-du-carre-et-du-rectangle",
+    "Aire du carré et du rectangle",
+    ["f2"],
+  ),
+  buildNotion(
+    "comprendre-la-notion-d-aire",
+    "Comprendre la notion d'aire",
+    ["f2"],
+  ),
+  buildNotion(
+    "distinguer-aire-et-perimetre",
+    "Distinguer aire et périmètre",
+    ["f2"],
+  ),
+  buildNotion(
+    "connaitre-les-unites-d-aire",
+    "Connaître les unités d'aire",
+    ["f2"],
+  ),
+  buildNotion(
+    "perimetre-du-carre-et-du-rectangle",
+    "Périmètre du carré et du rectangle",
+    ["f2"],
+  ),
+  buildNotion(
+    "resoudre-des-problemes-de-mesures",
+    "Résoudre des problèmes de mesures",
+    ["f2"],
+  ),
+
+  // ── Nombres et calcul (lot 4) ─────────────────────────────────────────────
+  buildNotion(
+    "multiplier-un-nombre-decimal-par-un-entier",
+    "Multiplier un nombre décimal par un entier",
+    ["f2"],
+  ),
+  buildNotion(
+    "diviser-un-nombre-decimal-par-un-entier",
+    "Diviser un nombre décimal par un entier",
+    ["f2"],
+  ),
+  buildNotion(
+    "resoudre-un-probleme-avec-des-fractions-simples",
+    "Résoudre un problème avec des fractions simples",
+    ["f1"],
+  ),
+  buildNotion(
+    "resoudre-un-probleme-avec-des-nombres-decimaux",
+    "Résoudre un problème avec des nombres décimaux",
+    ["f1"],
+  ),
+  buildNotion(
+    "problemes-avec-des-fractions-simples",
+    "Problèmes avec des fractions simples",
+    ["f2"],
+  ),
+  buildNotion(
+    "problemes-avec-des-nombres-decimaux",
+    "Problèmes avec des nombres décimaux",
+    ["f2"],
+  ),
+  buildNotion(
+    "problemes-avec-une-moyenne-simple",
+    "Problèmes avec une moyenne simple",
+    ["f2"],
+  ),
+  buildNotion(
+    "problemes-a-plusieurs-etapes-avec-des-donnees",
+    "Problèmes à plusieurs étapes avec des données",
+    ["f2"],
+  ),
+  buildNotion(
+    "resoudre-des-problemes-avec-des-nombres-decimaux",
+    "Résoudre des problèmes avec des nombres décimaux",
+    ["f2"],
+  ),
+  buildNotion(
+    "comprendre-les-pourcentages-simples",
+    "Comprendre les pourcentages simples",
+    ["f2"],
+  ),
+  buildNotion(
+    "reconnaitre-une-situation-de-proportionnalite",
+    "Reconnaître une situation de proportionnalité",
+    ["f2"],
+  ),
+  buildNotion(
+    "utiliser-un-tableau-de-proportionnalite",
+    "Utiliser un tableau de proportionnalité",
+    ["f2"],
+  ),
+  buildNotion(
+    "utiliser-fractions-et-decimaux",
+    "Utiliser fractions et décimaux",
+    ["f2"],
+  ),
+
+  // ── Géométrie (lot 4) ─────────────────────────────────────────────────────
+  buildNotion(
+    "reconnaitre-et-decrire-des-solides",
+    "Reconnaître et décrire des solides",
+    ["f2"],
+  ),
+  buildNotion(
+    "reconnaitre-et-decrire-un-cercle",
+    "Reconnaître et décrire un cercle",
+    ["f2"],
+  ),
+  buildNotion(
+    "construire-un-graphique-en-barres",
+    "Construire un graphique en barres",
+    ["f2"],
+  ),
+  buildNotion(
+    "utiliser-plusieurs-outils-geometriques",
+    "Utiliser plusieurs outils géométriques",
+    ["f1", "f2"],
+  ),
+  buildNotion(
+    "utiliser-le-vocabulaire-de-position",
+    "Utiliser le vocabulaire de position",
+    ["f2"],
+  ),
+  buildNotion(
+    "utiliser-un-schema-en-barres",
+    "Utiliser un schéma en barres",
+    ["f1", "f2"],
+  ),
 ];
 
 export function getCm2MathFicheBySlug(slug: string): Cm2MathFicheNotion | undefined {
