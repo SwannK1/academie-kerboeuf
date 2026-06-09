@@ -4,10 +4,8 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import {
   cm2MathDomains,
   getCm2MathNotionsByDomain,
-  type Cm2MathFicheNotion,
-  type Cm2MathDomain,
 } from "@/content/cm2-mathematiques-fiches";
-import { getPublicStatusKey } from "@/content/public-status";
+import { FichesCatalogue } from "./_components/FichesCatalogue";
 
 export const metadata: Metadata = {
   title: "Fiches mathématiques CM2 | Académie Kerboeuf",
@@ -15,17 +13,14 @@ export const metadata: Metadata = {
     "108 fiches imprimables CM2 mathématiques organisées par domaine : nombres et calcul, géométrie, grandeurs et mesures, données.",
 };
 
-const SHEET_SHORT: Record<string, string> = {
-  f1: "Feuille 1",
-  f2: "Feuille 2",
-  f3: "Feuille 3",
-};
-
-const BASE = "/primaire/cm2/fiches/mathematiques";
-
 export default function Cm2FichesMathematiquesPage() {
-  const totalNotions = cm2MathDomains.reduce(
-    (acc, d) => acc + getCm2MathNotionsByDomain(d).length,
+  // Build the notions-by-domain map in the server component
+  const notionsByDomain = Object.fromEntries(
+    cm2MathDomains.map((d) => [d.slug, getCm2MathNotionsByDomain(d)]),
+  );
+
+  const totalNotions = Object.values(notionsByDomain).reduce(
+    (acc, notions) => acc + notions.length,
     0,
   );
 
@@ -77,99 +72,12 @@ export default function Cm2FichesMathematiquesPage() {
         </div>
       </section>
 
-      {/* ── Domaines ──────────────────────────────────────────────────────── */}
+      {/* ── Catalogue avec filtres ─────────────────────────────────────────── */}
       <section className="px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl space-y-16">
-          {cm2MathDomains.map((domain) => (
-            <DomainSection key={domain.slug} domain={domain} />
-          ))}
+        <div className="mx-auto max-w-7xl">
+          <FichesCatalogue domains={cm2MathDomains} notionsByDomain={notionsByDomain} />
         </div>
       </section>
     </main>
-  );
-}
-
-// ── Domaine ───────────────────────────────────────────────────────────────────
-
-function DomainSection({ domain }: { domain: Cm2MathDomain }) {
-  const notions = getCm2MathNotionsByDomain(domain);
-  if (notions.length === 0) return null;
-
-  const completeCount = notions.filter((n) => n.completeness === "complete").length;
-
-  return (
-    <div id={domain.slug}>
-      <div className="mb-6 flex flex-col gap-2 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
-            {domain.title}
-          </p>
-          <p className="mt-1 text-sm text-muted">
-            {notions.length} notion{notions.length > 1 ? "s" : ""} —{" "}
-            {completeCount} complète{completeCount > 1 ? "s" : ""}
-          </p>
-        </div>
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {notions.map((notion) => (
-          <NotionCard key={notion.slug} notion={notion} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ── Carte notion ──────────────────────────────────────────────────────────────
-
-function NotionCard({ notion }: { notion: Cm2MathFicheNotion }) {
-  const isComplete = notion.completeness === "complete";
-
-  const availableSheets = notion.sheets.filter(
-    (s) => getPublicStatusKey(s.status) === "available" && s.href,
-  );
-  const firstSheet = availableSheets[0];
-  const notionDetailHref = firstSheet
-    ? `${BASE}/${notion.slug}/${firstSheet.sheet}`
-    : null;
-
-  return (
-    <article className="flex flex-col gap-3 rounded-md border border-white/10 bg-white/[0.04] p-4 transition hover:border-white/20 hover:bg-white/[0.06]">
-      <div className="flex items-start justify-between gap-2">
-        {notionDetailHref ? (
-          <Link
-            href={notionDetailHref}
-            className="text-sm font-bold leading-5 text-foreground underline-offset-2 hover:underline"
-          >
-            {notion.title}
-          </Link>
-        ) : (
-          <h3 className="text-sm font-bold leading-5 text-foreground">
-            {notion.title}
-          </h3>
-        )}
-        {!isComplete && (
-          <span className="shrink-0 rounded border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-400">
-            Partielle
-          </span>
-        )}
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {notion.sheets.map((sheet) => {
-          const isAvailable =
-            getPublicStatusKey(sheet.status) === "available" && sheet.href;
-          return isAvailable ? (
-            <Link
-              key={sheet.sheet}
-              href={`${BASE}/${notion.slug}/${sheet.sheet}`}
-              title={sheet.label}
-              className="inline-flex items-center gap-1.5 rounded border border-gold/30 bg-gold/10 px-2.5 py-1 text-xs font-bold text-gold transition hover:border-gold/60 hover:bg-gold/20"
-            >
-              {SHEET_SHORT[sheet.sheet]}
-            </Link>
-          ) : null;
-        })}
-      </div>
-    </article>
   );
 }
