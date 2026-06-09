@@ -307,7 +307,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "interpreter-des-donnees",
     "Interpréter des données",
-    ["f1", "f2"],
+    ["f1", "f2", "f3"],
   ),
 
   // ── Grandeurs et mesures (lot 4) ─────────────────────────────────────────
@@ -450,7 +450,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "calculer-le-perimetre-d-un-polygone",
     "Calculer le périmètre d'un polygone",
-    ["f2"],
+    ["f2", "f3"],
   ),
   buildNotion(
     "calculer-un-pourcentage-simple-d-une-quantite",
@@ -475,7 +475,7 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
   buildNotion(
     "droites-perpendiculaires-et-paralleles",
     "Droites perpendiculaires et parallèles",
-    ["f2"],
+    ["f2", "f3"],
   ),
   buildNotion(
     "lire-un-programme-de-construction",
