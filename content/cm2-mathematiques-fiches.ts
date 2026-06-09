@@ -580,3 +580,166 @@ export const cm2MathematiquesFiches: Cm2MathFicheNotion[] = [
 export function getCm2MathFicheBySlug(slug: string): Cm2MathFicheNotion | undefined {
   return cm2MathematiquesFiches.find((notion) => notion.slug === slug);
 }
+
+// ── Groupement par domaine ─────────────────────────────────────────────────
+
+export type Cm2MathDomain = {
+  slug: string;
+  title: string;
+  notionSlugs: string[];
+};
+
+export const cm2MathDomains: Cm2MathDomain[] = [
+  {
+    slug: "nombres-et-calcul",
+    title: "Nombres et calcul",
+    notionSlugs: [
+      "additionner-des-decimaux",
+      "arrondir-des-nombres-decimaux",
+      "comparer-des-nombres-decimaux",
+      "comprendre-la-moyenne-simple",
+      "comprendre-les-pourcentages-simples",
+      "decomposer-une-fraction",
+      "diviser-un-nombre-decimal-par-un-entier",
+      "encadrer-des-nombres-decimaux",
+      "multiplier-un-nombre-decimal-par-un-entier",
+      "passage-a-l-unite",
+      "passer-une-fraction-a-un-nombre-decimal",
+      "placer-des-fractions-sur-une-droite-graduee",
+      "problemes-a-plusieurs-etapes-avec-des-donnees",
+      "problemes-avec-des-fractions-simples",
+      "problemes-avec-des-nombres-decimaux",
+      "problemes-avec-une-moyenne-simple",
+      "problemes-de-proportionnalite",
+      "ranger-des-nombres-decimaux",
+      "reconnaitre-une-situation-de-proportionnalite",
+      "resoudre-des-problemes-avec-des-nombres-decimaux",
+      "resoudre-des-problemes-avec-une-moyenne-simple",
+      "resoudre-un-probleme-avec-des-fractions-simples",
+      "resoudre-un-probleme-avec-des-nombres-decimaux",
+      "resoudre-un-probleme-de-proportionnalite",
+      "soustraire-des-nombres-decimaux",
+      "utiliser-fractions-et-decimaux",
+      "utiliser-les-pourcentages-dans-des-situations-problemes",
+      "utiliser-un-tableau-de-proportionnalite",
+      "calculer-un-pourcentage-simple-d-une-quantite",
+      "choisir-les-bonnes-operations",
+      "choisir-les-bonnes-operations-dans-un-probleme",
+    ],
+  },
+  {
+    slug: "grandeurs-et-mesures",
+    title: "Grandeurs et mesures",
+    notionSlugs: [
+      "aire-du-carre-et-du-rectangle",
+      "comprendre-la-notion-d-aire",
+      "connaitre-les-unites-d-aire",
+      "convertir-des-unites-de-contenance",
+      "convertir-des-unites-de-duree",
+      "convertir-des-unites-de-longueur",
+      "convertir-des-unites-de-masse",
+      "convertir-des-unites-daire-simples",
+      "distinguer-aire-et-perimetre",
+      "estimer-l-ordre-de-grandeur-d-un-resultat",
+      "lire-l-heure-et-comprendre-les-durees",
+      "perimetre-du-carre-et-du-rectangle",
+      "problemes-d-aire-avec-conversions-simples",
+      "resoudre-des-problemes-de-durees",
+      "resoudre-des-problemes-de-mesures",
+      "calculer-le-perimetre-d-un-polygone",
+    ],
+  },
+  {
+    slug: "geometrie",
+    title: "Géométrie",
+    notionSlugs: [
+      "agrandir-ou-reduire-une-figure",
+      "choisir-la-bonne-methode-en-geometrie",
+      "choisir-le-bon-outil-geometrique",
+      "completer-une-figure-par-symetrie-axiale",
+      "comprendre-les-echelles-simples",
+      "construire-un-angle-avec-un-rapporteur",
+      "construire-un-carre-et-un-rectangle",
+      "construire-un-cercle-avec-un-compas",
+      "construire-un-graphique-a-partir-d-un-tableau",
+      "construire-un-graphique-en-barres",
+      "construire-un-triangle-a-partir-de-mesures",
+      "decrire-un-deplacement-sur-quadrillage",
+      "droites-perpendiculaires-et-paralleles",
+      "identifier-et-comparer-des-angles",
+      "lire-un-programme-de-construction",
+      "mesurer-un-angle-avec-un-rapporteur",
+      "reconnaitre-et-decrire-des-polygones",
+      "reconnaitre-et-decrire-des-solides",
+      "reconnaitre-et-decrire-des-triangles",
+      "reconnaitre-et-decrire-un-cercle",
+      "reconnaitre-le-patron-dun-solide",
+      "reconnaitre-une-situation-de-symetrie-axiale",
+      "rediger-un-programme-de-construction",
+      "reproduire-une-figure-geometrique",
+      "se-reperer-dans-un-espace-reel",
+      "se-reperer-sur-un-plan",
+      "se-reperer-sur-un-plan-quadrille",
+      "tracer-des-droites-paralleles",
+      "tracer-des-droites-perpendiculaires",
+      "utiliser-le-vocabulaire-de-position",
+      "utiliser-plusieurs-outils-geometriques",
+    ],
+  },
+  {
+    slug: "organisation-et-donnees",
+    title: "Organisation et gestion de données",
+    notionSlugs: [
+      "interpreter-des-donnees",
+      "lire-et-construire-des-graphiques-simples",
+      "lire-et-organiser-des-donnees",
+      "lire-et-utiliser-un-tableau-de-donnees",
+      "lire-un-graphique-simple",
+      "lire-un-tableau-a-double-entree",
+      "lire-une-maquette-ou-un-plan-simplifie",
+      "organiser-des-donnees-dans-un-tableau",
+      "sequence-construire-un-graphique-en-barres",
+      "utiliser-un-schema-en-barres",
+    ],
+  },
+  {
+    slug: "demarche-et-resolution",
+    title: "Démarche et résolution de problèmes",
+    notionSlugs: [
+      "presenter-clairement-sa-demarche",
+      "rediger-une-reponse-mathematique-complete",
+      "resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees",
+      "utiliser-un-schema-pour-resoudre-un-probleme",
+      "utiliser-un-tableau-pour-resoudre-un-probleme",
+      "verifier-la-vraisemblance-dun-resultat",
+    ],
+  },
+  {
+    slug: "bilans-et-sequences",
+    title: "Bilans et séquences entières",
+    notionSlugs: [
+      "bilan-final-de-mathematiques-cm2",
+      "comparer-les-fractions-sequence-entiere",
+      "derniere-mission-de-geometrie-cm2",
+      "les-fractions-simples-sequence-entiere",
+      "mission-finale-mathematique-avec-felix",
+      "placer-des-fractions-sur-une-droite-graduee-sequence-entiere",
+      "preparer-l-entree-en-6e",
+      "resoudre-des-problemes-de-synthese",
+      "resoudre-une-enquete-mathematique",
+      "resoudre-une-mission-geometrique-complete",
+      "reviser-les-grandeurs-et-mesures",
+      "reviser-les-nombres-et-les-calculs",
+      "reviser-les-notions-essentielles-de-geometrie",
+      "sequence-cm2-utiliser-les-pourcentages-dans-des-situations-problemes",
+    ],
+  },
+];
+
+export function getCm2MathNotionsByDomain(
+  domain: Cm2MathDomain,
+): Cm2MathFicheNotion[] {
+  return domain.notionSlugs
+    .map((slug) => getCm2MathFicheBySlug(slug))
+    .filter((n): n is Cm2MathFicheNotion => n !== undefined);
+}
