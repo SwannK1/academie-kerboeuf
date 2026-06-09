@@ -131,6 +131,15 @@ export default async function FicheDetailPage({ params }: Props) {
             >
               Ouvrir l&apos;image en grand ↗
             </a>
+            {sheet.pdfHref && (
+              <a
+                href={sheet.pdfHref}
+                download
+                className="rounded-md border border-gold/35 bg-gold/10 px-4 py-2.5 text-sm font-bold text-gold transition hover:bg-gold/20"
+              >
+                Télécharger le PDF ↓
+              </a>
+            )}
           </div>
 
           {/* Navigation feuilles */}
