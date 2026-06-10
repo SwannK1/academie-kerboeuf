@@ -65,10 +65,10 @@ const UNIVERSES: Array<{
   {
     label: "Personnages",
     text: "Les guides qui accompagnent chaque niveau.",
-    href: "/univers",
+    href: "/personnages",
     cta: "Découvrir",
     accent: "gold",
-    status: "in-progress",
+    status: "available",
   },
   {
     label: "Carte",
