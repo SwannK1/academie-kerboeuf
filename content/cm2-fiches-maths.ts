@@ -830,6 +830,144 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
       },
     ],
   },
+  {
+    notionSlug: "resoudre-un-probleme-avec-des-fractions-simples",
+    title: "Résoudre un problème avec des fractions simples",
+    domain: "Nombres et calcul",
+    skill: "Résoudre des problèmes faisant intervenir des fractions simples.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-avec-des-fractions-simples/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-avec-des-fractions-simples/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-avec-des-fractions-simples/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-avec-des-fractions-simples/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-avec-des-fractions-simples/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-avec-des-fractions-simples/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "resoudre-un-probleme-avec-des-nombres-decimaux",
+    title: "Résoudre un problème avec des nombres décimaux",
+    domain: "Nombres et calcul",
+    skill: "Résoudre des problèmes faisant intervenir des nombres décimaux.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-avec-des-nombres-decimaux/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-avec-des-nombres-decimaux/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-avec-des-nombres-decimaux/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-avec-des-nombres-decimaux/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-avec-des-nombres-decimaux/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-avec-des-nombres-decimaux/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "resoudre-un-probleme-de-proportionnalite",
+    title: "Résoudre un problème de proportionnalité",
+    domain: "Nombres et calcul",
+    skill: "Résoudre des problèmes simples de proportionnalité.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-de-proportionnalite/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-de-proportionnalite/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-de-proportionnalite/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-de-proportionnalite/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-un-probleme-de-proportionnalite/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-un-probleme-de-proportionnalite/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "distinguer-aire-et-perimetre",
+    title: "Distinguer aire et périmètre",
+    domain: "Grandeurs et mesures",
+    skill: "Différencier les notions d'aire et de périmètre d'une figure.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/distinguer-aire-et-perimetre/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/distinguer-aire-et-perimetre/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/distinguer-aire-et-perimetre/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/distinguer-aire-et-perimetre/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/distinguer-aire-et-perimetre/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/distinguer-aire-et-perimetre/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "encadrer-des-nombres-decimaux",
+    title: "Encadrer des nombres décimaux",
+    domain: "Nombres et calcul",
+    skill: "Encadrer un nombre décimal entre deux nombres entiers ou décimaux.",
+    sheets: [
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/encadrer-des-nombres-decimaux/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/encadrer-des-nombres-decimaux/f2.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "convertir-des-unites-daire-simples",
+    title: "Convertir des unités d'aire simples",
+    domain: "Grandeurs et mesures",
+    skill: "Convertir des unités d'aire simples entre cm², dm² et m².",
+    sheets: [
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-daire-simples/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-daire-simples/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-daire-simples/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-daire-simples/f3.pdf",
+      },
+    ],
+  },
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
