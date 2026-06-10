@@ -471,6 +471,58 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
     ],
   },
   {
+    notionSlug: "lire-un-programme-de-construction",
+    title: "Lire un programme de construction",
+    domain: "Géométrie",
+    skill: "Suivre les étapes d'un programme de construction pour réaliser une figure.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-programme-de-construction/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-programme-de-construction/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-programme-de-construction/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-programme-de-construction/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-programme-de-construction/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-programme-de-construction/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reproduire-une-figure-geometrique",
+    title: "Reproduire une figure géométrique",
+    domain: "Géométrie",
+    skill: "Reproduire une figure à l'identique sur un quadrillage ou en utilisant les instruments de géométrie.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reproduire-une-figure-geometrique/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reproduire-une-figure-geometrique/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reproduire-une-figure-geometrique/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reproduire-une-figure-geometrique/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reproduire-une-figure-geometrique/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reproduire-une-figure-geometrique/f3.pdf",
+      },
+    ],
+  },
+  {
     notionSlug: "mesurer-un-angle-avec-un-rapporteur",
     title: "Mesurer un angle avec un rapporteur",
     domain: "Géométrie",
