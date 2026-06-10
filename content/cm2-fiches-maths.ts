@@ -1254,6 +1254,190 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
       },
     ],
   },
+  {
+    notionSlug: "resoudre-des-problemes-avec-une-moyenne-simple",
+    title: "Résoudre des problèmes avec une moyenne simple",
+    domain: "Organisation et gestion de données",
+    skill: "Résoudre des problèmes faisant intervenir le calcul d'une moyenne simple.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-avec-une-moyenne-simple/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-avec-une-moyenne-simple/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-avec-une-moyenne-simple/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-avec-une-moyenne-simple/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-avec-une-moyenne-simple/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-avec-une-moyenne-simple/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "comprendre-la-moyenne-simple",
+    title: "Comprendre la moyenne simple",
+    domain: "Organisation et gestion de données",
+    skill: "Comprendre la notion de moyenne et savoir la calculer dans des cas simples.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/comprendre-la-moyenne-simple/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/comprendre-la-moyenne-simple/f1.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/comprendre-la-moyenne-simple/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/comprendre-la-moyenne-simple/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "utiliser-un-schema-pour-resoudre-un-probleme",
+    title: "Utiliser un schéma pour résoudre un problème",
+    domain: "Résolution de problèmes",
+    skill: "Représenter une situation par un schéma pour résoudre un problème.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-schema-pour-resoudre-un-probleme/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-schema-pour-resoudre-un-probleme/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-schema-pour-resoudre-un-probleme/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-schema-pour-resoudre-un-probleme/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-schema-pour-resoudre-un-probleme/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-schema-pour-resoudre-un-probleme/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "utiliser-un-schema-en-barres",
+    title: "Utiliser un schéma en barres",
+    domain: "Résolution de problèmes",
+    skill: "Représenter une situation par un schéma en barres pour résoudre un problème.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-schema-en-barres/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-schema-en-barres/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-schema-en-barres/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-schema-en-barres/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-schema-en-barres/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-schema-en-barres/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "lire-un-graphique-simple",
+    title: "Lire un graphique simple",
+    domain: "Organisation et gestion de données",
+    skill: "Lire et interpréter les informations d'un graphique simple.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-graphique-simple/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-graphique-simple/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-graphique-simple/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-graphique-simple/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-graphique-simple/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-graphique-simple/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "construire-un-graphique-en-barres",
+    title: "Construire un graphique en barres",
+    domain: "Organisation et gestion de données",
+    skill: "Construire un graphique en barres à partir de données.",
+    sheets: [
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-graphique-en-barres/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-graphique-en-barres/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-graphique-en-barres/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-graphique-en-barres/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "lire-et-construire-des-graphiques-simples",
+    title: "Lire et construire des graphiques simples",
+    domain: "Organisation et gestion de données",
+    skill: "Lire et construire des graphiques simples à partir de données.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-construire-des-graphiques-simples/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-construire-des-graphiques-simples/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-construire-des-graphiques-simples/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-construire-des-graphiques-simples/f2.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "connaitre-les-unites-daire",
+    title: "Connaître les unités d'aire",
+    domain: "Grandeurs et mesures",
+    skill: "Connaître les unités d'aire usuelles (cm², dm², m²).",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/connaitre-les-unites-daire/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/connaitre-les-unites-daire/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/connaitre-les-unites-daire/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/connaitre-les-unites-daire/f2.pdf",
+      },
+    ],
+  },
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
