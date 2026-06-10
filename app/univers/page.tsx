@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { academyCharacters } from "@/content/academy-characters";
 import { lieuxAcademie } from "@/content/lieux-academie";
+import { emblematicStudents } from "@/content/students";
 import { universePathways, type AccentKey } from "@/content/universe";
 
 export const metadata: Metadata = {
@@ -152,6 +153,76 @@ export default function UniversPage() {
                 </p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Élèves / guides de niveau ───────────────────────────────────────── */}
+      <section className="border-y border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 max-w-2xl">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
+              Élèves &amp; guides de niveau
+            </p>
+            <h2 className="mt-4 text-3xl font-black text-foreground">
+              Les élèves emblématiques
+            </h2>
+            <p className="mt-4 text-base leading-7 text-muted">
+              Un élève référent accompagne chaque niveau et incarne sa
+              progression dans l&apos;Académie.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {emblematicStudents.map((student) => (
+              <Link
+                key={student.slug}
+                href={student.levelHref}
+                className="rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-jade/40"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                  {student.level}
+                </p>
+                <h3 className="mt-2 text-lg font-black text-foreground">
+                  {student.name}
+                </h3>
+                <p className="mt-3 text-xs leading-6 text-muted">
+                  {student.shortDescription}
+                </p>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-6">
+            <Link
+              href="/personnages"
+              className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
+            >
+              Voir tous les personnages →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Carte de l'Académie ─────────────────────────────────────────────── */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
+            Carte de l&apos;Académie
+          </p>
+          <h2 className="mt-4 text-3xl font-black text-foreground">
+            Explorer la carte interactive
+          </h2>
+          <p className="mt-4 text-base leading-7 text-muted">
+            Repérez les lieux de l&apos;Académie et leurs liens avec les
+            apprentissages sur la carte de l&apos;établissement.
+          </p>
+          <div className="mt-6">
+            <Link
+              href="/carte"
+              className="inline-flex items-center gap-2 rounded-md border border-sky/35 bg-white/[0.04] px-4 py-2 text-sm font-bold text-sky transition hover:text-foreground"
+            >
+              Voir la carte de l&apos;Académie →
+            </Link>
           </div>
         </div>
       </section>
