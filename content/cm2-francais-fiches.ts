@@ -407,7 +407,7 @@ export function isNotionComplete(notion: FicheNotion): boolean {
 }
 
 export const SHEET_LABELS: Record<"f1" | "f2" | "f3", string> = {
-  f1: "Feuille 1",
-  f2: "Feuille 2",
-  f3: "Feuille 3",
+  f1: "1. Leçon",
+  f2: "2. Consolidation",
+  f3: "3. Évaluation",
 };
