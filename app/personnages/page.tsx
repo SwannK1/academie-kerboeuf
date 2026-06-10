@@ -19,12 +19,14 @@ type CharacterCard = {
 
 type Group = {
   title: string;
+  description: string;
   characters: CharacterCard[];
 };
 
 const GROUPS: Group[] = [
   {
     title: "Professeurs",
+    description: "Un référent par matière, présent du CP à la Terminale.",
     characters: [
       { name: "Hector", level: "Mathématiques", href: "/professeurs/hector", status: "available" },
       { name: "Rosa", level: "Français", href: "/professeurs/rosa", status: "available" },
@@ -37,6 +39,7 @@ const GROUPS: Group[] = [
   },
   {
     title: "Élèves-guides",
+    description: "Un personnage par niveau pour accompagner les élèves dans leurs apprentissages.",
     characters: [
       { name: "À venir", level: "PS · MS · GS", status: "in-progress" },
       { name: "Zoé", level: "CP", status: "in-progress" },
@@ -69,9 +72,10 @@ export default function PersonnagesPage() {
         <div className="mt-12 space-y-12">
           {GROUPS.map((group) => (
             <section key={group.title}>
-              <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-jade">
+              <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
                 {group.title}
               </h2>
+              <p className="mb-4 mt-1 text-sm text-muted">{group.description}</p>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {group.characters.map((character) => (
                   <CharacterTile key={`${group.title}-${character.name}`} character={character} />
