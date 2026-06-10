@@ -7,6 +7,7 @@ import {
   ProfessorGallery,
   type ProfessorCardData,
 } from "./_components/gallery";
+import { TeamSections } from "./_components/team-sections";
 
 export const metadata: Metadata = {
   title: "Professeurs | Académie Kerboeuf",
@@ -59,6 +60,9 @@ export default function ProfesseursPage() {
 
       {/* Hero cinématique */}
       <Hero professors={cardData} stats={{ primaire, college, cycles }} />
+
+      {/* Sections par équipe pédagogique */}
+      <TeamSections professors={cardData} />
 
       {/* Galerie filtrée (client) */}
       <ProfessorGallery professors={cardData} />
