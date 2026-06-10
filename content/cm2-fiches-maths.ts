@@ -968,6 +968,136 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
       },
     ],
   },
+  {
+    notionSlug: "construire-un-graphique-a-partir-dun-tableau",
+    title: "Construire un graphique à partir d'un tableau",
+    domain: "Organisation et gestion de données",
+    skill: "Construire un graphique à partir des données d'un tableau.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-graphique-a-partir-dun-tableau/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-graphique-a-partir-dun-tableau/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-graphique-a-partir-dun-tableau/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-graphique-a-partir-dun-tableau/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-graphique-a-partir-dun-tableau/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-graphique-a-partir-dun-tableau/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "interpreter-des-donnees",
+    title: "Interpréter des données",
+    domain: "Organisation et gestion de données",
+    skill: "Interpréter des données présentées sous différentes formes.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/interpreter-des-donnees/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/interpreter-des-donnees/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/interpreter-des-donnees/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/interpreter-des-donnees/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/interpreter-des-donnees/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/interpreter-des-donnees/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "lire-et-organiser-des-donnees",
+    title: "Lire et organiser des données",
+    domain: "Organisation et gestion de données",
+    skill: "Lire des données et les organiser de manière pertinente.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-organiser-des-donnees/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-organiser-des-donnees/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-organiser-des-donnees/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-organiser-des-donnees/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-organiser-des-donnees/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-organiser-des-donnees/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "organiser-des-donnees-dans-un-tableau",
+    title: "Organiser des données dans un tableau",
+    domain: "Organisation et gestion de données",
+    skill: "Organiser des données dans un tableau pour faciliter leur lecture.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/organiser-des-donnees-dans-un-tableau/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/organiser-des-donnees-dans-un-tableau/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/organiser-des-donnees-dans-un-tableau/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/organiser-des-donnees-dans-un-tableau/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/organiser-des-donnees-dans-un-tableau/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/organiser-des-donnees-dans-un-tableau/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "lire-un-tableau-a-double-entree",
+    title: "Lire un tableau à double entrée",
+    domain: "Organisation et gestion de données",
+    skill: "Lire et exploiter les informations d'un tableau à double entrée.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-tableau-a-double-entree/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-tableau-a-double-entree/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-tableau-a-double-entree/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-tableau-a-double-entree/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-un-tableau-a-double-entree/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-un-tableau-a-double-entree/f3.pdf",
+      },
+    ],
+  },
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
