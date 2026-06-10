@@ -101,12 +101,18 @@ export default function UniversPage() {
               </article>
             ))}
           </div>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-6">
             <Link
               href="/professeurs"
               className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
             >
               Voir tous les personnages →
+            </Link>
+            <Link
+              href="/personnages"
+              className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
+            >
+              Découvrir les héros des élèves →
             </Link>
           </div>
         </div>
@@ -152,6 +158,14 @@ export default function UniversPage() {
                 </p>
               </article>
             ))}
+          </div>
+          <div className="mt-6">
+            <Link
+              href="/carte"
+              className="inline-flex items-center gap-2 text-sm font-bold text-sky transition hover:text-foreground"
+            >
+              Voir la carte de l&apos;Académie →
+            </Link>
           </div>
         </div>
       </section>
