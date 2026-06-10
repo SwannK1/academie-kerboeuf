@@ -174,6 +174,25 @@ export default function Cm2Page() {
             </Link>
 
             <Link
+              href="/primaire/cm2/fiches/francais"
+              className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
+                Fiches imprimables
+              </p>
+              <p className="text-lg font-black text-foreground">
+                Fiches Français CM2
+              </p>
+              <p className="text-sm leading-6 text-muted">
+                37 notions : conjugaison, grammaire, orthographe, vocabulaire
+                et lecture. Feuilles découverte, entraînement et évaluation.
+              </p>
+              <span className="mt-1 text-sm font-black text-jade transition group-hover:translate-x-1">
+                Voir les fiches →
+              </span>
+            </Link>
+
+            <Link
               href="/professeurs/felix"
               className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
             >
