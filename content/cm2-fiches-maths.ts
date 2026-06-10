@@ -1098,6 +1098,162 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
       },
     ],
   },
+  {
+    notionSlug: "lire-et-utiliser-un-tableau-de-donnees",
+    title: "Lire et utiliser un tableau de données",
+    domain: "Organisation et gestion de données",
+    skill: "Lire un tableau de données et l'utiliser pour répondre à des questions.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-utiliser-un-tableau-de-donnees/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-utiliser-un-tableau-de-donnees/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-utiliser-un-tableau-de-donnees/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-utiliser-un-tableau-de-donnees/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-et-utiliser-un-tableau-de-donnees/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-et-utiliser-un-tableau-de-donnees/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "utiliser-un-tableau-pour-resoudre-un-probleme",
+    title: "Utiliser un tableau pour résoudre un problème",
+    domain: "Organisation et gestion de données",
+    skill: "Organiser des informations dans un tableau pour résoudre un problème.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-tableau-pour-resoudre-un-probleme/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-tableau-pour-resoudre-un-probleme/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-tableau-pour-resoudre-un-probleme/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-tableau-pour-resoudre-un-probleme/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-un-tableau-pour-resoudre-un-probleme/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-un-tableau-pour-resoudre-un-probleme/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees",
+    title: "Résoudre des problèmes à plusieurs étapes avec des données",
+    domain: "Organisation et gestion de données",
+    skill: "Résoudre des problèmes nécessitant plusieurs étapes à partir de données.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-a-plusieurs-etapes-avec-des-donnees/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reviser-les-nombres-et-les-calculs",
+    title: "Réviser les nombres et les calculs",
+    domain: "Nombres et calcul",
+    skill: "Réviser l'ensemble des notions de nombres et calculs vues dans l'année.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reviser-les-nombres-et-les-calculs/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reviser-les-nombres-et-les-calculs/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reviser-les-nombres-et-les-calculs/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reviser-les-nombres-et-les-calculs/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reviser-les-nombres-et-les-calculs/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reviser-les-nombres-et-les-calculs/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reviser-les-grandeurs-et-mesures",
+    title: "Réviser les grandeurs et mesures",
+    domain: "Grandeurs et mesures",
+    skill: "Réviser l'ensemble des notions de grandeurs et mesures vues dans l'année.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reviser-les-grandeurs-et-mesures/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reviser-les-grandeurs-et-mesures/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reviser-les-grandeurs-et-mesures/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reviser-les-grandeurs-et-mesures/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reviser-les-grandeurs-et-mesures/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reviser-les-grandeurs-et-mesures/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "bilan-final-de-mathematiques-cm2",
+    title: "Bilan final de mathématiques CM2",
+    domain: "Résolution de problèmes",
+    skill: "Faire le bilan des compétences mathématiques travaillées en CM2.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/bilan-final-de-mathematiques-cm2/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/bilan-final-de-mathematiques-cm2/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/bilan-final-de-mathematiques-cm2/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/bilan-final-de-mathematiques-cm2/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/bilan-final-de-mathematiques-cm2/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/bilan-final-de-mathematiques-cm2/f3.pdf",
+      },
+    ],
+  },
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
