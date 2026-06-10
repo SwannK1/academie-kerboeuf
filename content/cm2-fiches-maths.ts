@@ -548,6 +548,164 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
       },
     ],
   },
+
+  // ── Grandeurs et mesures ───────────────────────────────────────────────────
+  {
+    notionSlug: "convertir-des-unites-de-duree",
+    title: "Convertir des unités de durée",
+    domain: "Grandeurs et mesures",
+    skill: "Passer d'une unité de durée à une autre (secondes, minutes, heures, jours).",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-duree/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-duree/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-duree/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-duree/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-duree/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-duree/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "convertir-des-unites-de-masse",
+    title: "Convertir des unités de masse",
+    domain: "Grandeurs et mesures",
+    skill: "Passer d'une unité de masse à une autre dans le système métrique.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-masse/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-masse/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-masse/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-masse/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-masse/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-masse/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "convertir-des-unites-de-longueur",
+    title: "Convertir des unités de longueur",
+    domain: "Grandeurs et mesures",
+    skill: "Passer d'une unité à une autre dans le système métrique des longueurs.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-longueur/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-longueur/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-longueur/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-longueur/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-longueur/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-longueur/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "convertir-des-unites-de-contenance",
+    title: "Convertir des unités de contenance",
+    domain: "Grandeurs et mesures",
+    skill: "Passer d'une unité de contenance à une autre dans le système métrique.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-contenance/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-contenance/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-contenance/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-contenance/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/convertir-des-unites-de-contenance/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/convertir-des-unites-de-contenance/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "lire-lheure-et-comprendre-les-durees",
+    title: "Lire l'heure et comprendre les durées",
+    domain: "Grandeurs et mesures",
+    skill: "Lire l'heure sur différents types de cadrans et calculer des durées.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-lheure-et-comprendre-les-durees/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-lheure-et-comprendre-les-durees/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-lheure-et-comprendre-les-durees/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-lheure-et-comprendre-les-durees/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-lheure-et-comprendre-les-durees/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-lheure-et-comprendre-les-durees/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "resoudre-des-problemes-de-durees",
+    title: "Résoudre des problèmes de durées",
+    domain: "Grandeurs et mesures",
+    skill: "Calculer des durées et résoudre des problèmes impliquant des horaires.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-de-durees/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-de-durees/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-de-durees/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-de-durees/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-de-durees/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-de-durees/f3.pdf",
+      },
+    ],
+  },
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
