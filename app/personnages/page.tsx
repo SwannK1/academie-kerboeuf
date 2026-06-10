@@ -24,30 +24,27 @@ type Group = {
 
 const GROUPS: Group[] = [
   {
-    title: "Personnages maternelle",
+    title: "Professeurs",
     characters: [
-      { name: "À venir", level: "PS · MS · GS", status: "in-progress" },
+      { name: "Hector", level: "Mathématiques", href: "/professeurs/hector", status: "available" },
+      { name: "Rosa", level: "Français", href: "/professeurs/rosa", status: "available" },
+      { name: "Mélina", level: "Sciences", href: "/professeurs/melina", status: "available" },
+      { name: "Élias", level: "Histoire-géographie", href: "/professeurs/elias", status: "available" },
+      { name: "Max", level: "EPS", href: "/professeurs/max", status: "available" },
+      { name: "Pablo", level: "Arts", href: "/professeurs/pablo", status: "available" },
+      { name: "Naïa", level: "Musique", href: "/professeurs/naia", status: "available" },
     ],
   },
   {
-    title: "Personnages primaire",
+    title: "Élèves-guides",
     characters: [
+      { name: "À venir", level: "PS · MS · GS", status: "in-progress" },
       { name: "Zoé", level: "CP", status: "in-progress" },
       { name: "Gaston", level: "CE1", status: "in-progress" },
       { name: "Esteban", level: "CE2", status: "in-progress" },
       { name: "Noisette", level: "CM1", status: "in-progress" },
       { name: "Félix", level: "CM2", href: "/personnages/felix", status: "available" },
-    ],
-  },
-  {
-    title: "Personnages collège",
-    characters: [
       { name: "À venir", level: "6e · 5e · 4e · 3e", status: "in-progress" },
-    ],
-  },
-  {
-    title: "Personnages lycée",
-    characters: [
       { name: "À venir", level: "Seconde · Première · Terminale", status: "in-progress" },
     ],
   },
@@ -65,7 +62,8 @@ export default function PersonnagesPage() {
           Personnages
         </h1>
         <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">
-          Les guides qui accompagnent chaque niveau de l&apos;Académie.
+          Les professeurs référents de matière et les élèves-guides qui accompagnent
+          chaque niveau de l&apos;Académie.
         </p>
 
         <div className="mt-12 space-y-12">
