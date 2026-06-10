@@ -155,6 +155,25 @@ export default function Cm2Page() {
             </Link>
 
             <Link
+              href="/primaire/cm2/fiches/mathematiques"
+              className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
+                Fiches pédagogiques
+              </p>
+              <p className="text-lg font-black text-foreground">
+                Compétences et fiches CM2 Mathématiques
+              </p>
+              <p className="text-sm leading-6 text-muted">
+                Pour chaque compétence : leçon, consolidation et évaluation.
+                Un parcours clair par domaine mathématique.
+              </p>
+              <span className="mt-1 text-sm font-black text-jade transition group-hover:translate-x-1">
+                Voir les compétences →
+              </span>
+            </Link>
+
+            <Link
               href="/primaire/cm2/fiches/francais"
               className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
             >
