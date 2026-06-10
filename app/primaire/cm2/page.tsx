@@ -44,9 +44,12 @@ export default function Cm2Page() {
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(243,196,91,0.17),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.12),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
         <div className="mx-auto max-w-7xl">
-          <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
-            Cycle 3 · Guide : {cm2Level.character} le Lynx
-          </p>
+          <Link
+            href="/personnages/felix"
+            className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold transition hover:bg-gold/20"
+          >
+            Cycle 3 · {cm2Level.character}, guide du CM2
+          </Link>
           <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             CM2 — La Grande Classe<br className="hidden sm:block" /> des Explorateurs
           </h1>
