@@ -185,7 +185,7 @@ function SheetRow({
   const clickable = isSheetClickable(sheet);
   const label = `${index}. ${SHEET_LABELS[sheetId]}`;
   const href = clickable
-    ? (sheet.href ?? `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}`)
+    ? `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}`
     : undefined;
 
   const inner = (

@@ -112,19 +112,33 @@ export default async function FicheDetailPage({ params }: PageProps) {
 
         {/* ── Contenu ──────────────────────────────────────────────────────── */}
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.03] p-8">
-          {clickable && sheet.href ? (
+          {clickable && sheet.imageHref ? (
             <div className="flex flex-col items-start gap-4">
-              <p className="text-sm text-muted">
-                La feuille est disponible au format PDF.
-              </p>
-              <Link
-                href={sheet.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-md bg-jade px-5 py-3 text-sm font-extrabold text-ink transition hover:brightness-110"
-              >
-                Ouvrir la fiche PDF →
-              </Link>
+              <img
+                src={sheet.imageHref}
+                alt={`${notion.title} — ${label}`}
+                className="w-full rounded-md border border-white/10"
+              />
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href={sheet.imageHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-md border border-jade/35 bg-jade/10 px-5 py-3 text-sm font-bold text-jade transition hover:bg-jade hover:text-ink"
+                >
+                  Ouvrir l&apos;image en grand →
+                </Link>
+                {sheet.pdfHref ? (
+                  <Link
+                    href={sheet.pdfHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-md bg-jade px-5 py-3 text-sm font-extrabold text-ink transition hover:brightness-110"
+                  >
+                    Télécharger le PDF →
+                  </Link>
+                ) : null}
+              </div>
             </div>
           ) : (
             <div className="flex flex-col gap-3">

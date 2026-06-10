@@ -2,6 +2,7 @@
 // Chaque notion correspond à une compétence et comporte 3 feuilles :
 //   f1 → Leçon · f2 → Consolidation · f3 → Évaluation
 // Les feuilles sans href réel restent non-cliquables côté UI.
+// imageHref pointe vers le PNG source, pdfHref vers le PDF généré à partir du PNG.
 
 export type SheetId = "f1" | "f2" | "f3";
 
@@ -16,7 +17,8 @@ export const SHEET_IDS: SheetId[] = ["f1", "f2", "f3"];
 export type FicheSheet = {
   id: SheetId;
   status: "available" | "upcoming";
-  href?: string;
+  imageHref?: string;
+  pdfHref?: string;
 };
 
 export type Cm2FicheMath = {
@@ -30,130 +32,156 @@ export type Cm2FicheMath = {
 // ── Données ───────────────────────────────────────────────────────────────────
 
 export const cm2FichesMaths: Cm2FicheMath[] = [
-  // ── Nombres et calcul ──────────────────────────────────────────────────────
+  // ── Géométrie ──────────────────────────────────────────────────────────────
   {
-    notionSlug: "ma-nc-calcul-mental-strategies",
-    title: "Choisir une stratégie de calcul mental",
-    domain: "Nombres et calcul",
-    skill: "Sélectionner la stratégie la plus efficace selon les nombres en jeu.",
+    notionSlug: "choisir-le-bon-outil-geometrique",
+    title: "Choisir le bon outil géométrique",
+    domain: "Géométrie",
+    skill: "Sélectionner l'outil adapté (règle, équerre, compas, rapporteur) selon la tâche géométrique.",
     sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/choisir-le-bon-outil-geometrique/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/choisir-le-bon-outil-geometrique/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/choisir-le-bon-outil-geometrique/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/choisir-le-bon-outil-geometrique/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/choisir-le-bon-outil-geometrique/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/choisir-le-bon-outil-geometrique/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reconnaitre-et-decrire-des-triangles",
+    title: "Reconnaître et décrire des triangles",
+    domain: "Géométrie",
+    skill: "Identifier et nommer les différents types de triangles selon leurs propriétés.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-et-decrire-des-triangles/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-et-decrire-des-triangles/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-et-decrire-des-triangles/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-et-decrire-des-triangles/f2.pdf",
+      },
       { id: "f3", status: "upcoming" },
     ],
   },
   {
-    notionSlug: "ma-nc-calcul-mental-expliquer",
-    title: "Expliquer sa procédure de calcul mental",
-    domain: "Nombres et calcul",
-    skill: "Verbaliser les étapes d'un calcul mental pour le rendre communicable.",
+    notionSlug: "construire-un-cercle-avec-un-compas",
+    title: "Construire un cercle avec un compas",
+    domain: "Géométrie",
+    skill: "Tracer un cercle de rayon donné en utilisant un compas.",
     sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-cercle-avec-un-compas/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-cercle-avec-un-compas/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-cercle-avec-un-compas/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-cercle-avec-un-compas/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-cercle-avec-un-compas/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-cercle-avec-un-compas/f3.pdf",
+      },
     ],
   },
   {
-    notionSlug: "ma-nc-multiplier-grands-nombres",
-    title: "Multiplier des nombres entiers",
-    domain: "Nombres et calcul",
-    skill: "Poser et effectuer une multiplication avec des nombres à plusieurs chiffres.",
+    notionSlug: "completer-une-figure-par-symetrie-axiale",
+    title: "Compléter une figure par symétrie axiale",
+    domain: "Géométrie",
+    skill: "Construire le symétrique d'une figure par rapport à un axe donné.",
     sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/completer-une-figure-par-symetrie-axiale/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/completer-une-figure-par-symetrie-axiale/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/completer-une-figure-par-symetrie-axiale/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/completer-une-figure-par-symetrie-axiale/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/completer-une-figure-par-symetrie-axiale/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/completer-une-figure-par-symetrie-axiale/f3.pdf",
+      },
     ],
   },
   {
-    notionSlug: "ma-nc-diviser-entiers",
-    title: "Diviser un entier par un entier",
-    domain: "Nombres et calcul",
-    skill: "Poser une division euclidienne et interpréter quotient et reste.",
+    notionSlug: "tracer-des-droites-perpendiculaires",
+    title: "Tracer des droites perpendiculaires",
+    domain: "Géométrie",
+    skill: "Construire deux droites perpendiculaires à l'aide d'une équerre.",
     sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/tracer-des-droites-perpendiculaires/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/tracer-des-droites-perpendiculaires/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/tracer-des-droites-perpendiculaires/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/tracer-des-droites-perpendiculaires/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/tracer-des-droites-perpendiculaires/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/tracer-des-droites-perpendiculaires/f3.pdf",
+      },
     ],
   },
   {
-    notionSlug: "ma-nc-comparer-fractions",
-    title: "Comparer des fractions simples",
-    domain: "Nombres et calcul",
-    skill: "Ordonner des fractions en utilisant le même dénominateur ou la droite graduée.",
+    notionSlug: "mesurer-un-angle-avec-un-rapporteur",
+    title: "Mesurer un angle avec un rapporteur",
+    domain: "Géométrie",
+    skill: "Utiliser un rapporteur pour mesurer et tracer des angles de valeur donnée.",
     sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
-    ],
-  },
-
-  // ── Résolution de problèmes ────────────────────────────────────────────────
-  {
-    notionSlug: "ma-pb-identifier-donnees",
-    title: "Identifier les données utiles dans un problème",
-    domain: "Résolution de problèmes",
-    skill: "Séparer les données nécessaires des données inutiles ou pièges.",
-    sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
-    ],
-  },
-  {
-    notionSlug: "ma-pb-choisir-operation",
-    title: "Choisir l'opération adaptée à la situation",
-    domain: "Résolution de problèmes",
-    skill: "Relier la situation mathématique à l'opération qui la modélise.",
-    sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
-    ],
-  },
-  {
-    notionSlug: "ma-pb-resoudre-etapes",
-    title: "Résoudre un problème à plusieurs étapes",
-    domain: "Résolution de problèmes",
-    skill: "Décomposer un problème en sous-questions pour l'aborder étape par étape.",
-    sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
-    ],
-  },
-  {
-    notionSlug: "ma-pb-verifier-coherence",
-    title: "Vérifier la cohérence d'un résultat",
-    domain: "Résolution de problèmes",
-    skill: "Estimer si un résultat est plausible et en vérifier la cohérence.",
-    sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
-    ],
-  },
-
-  // ── Grandeurs et mesures ───────────────────────────────────────────────────
-  {
-    notionSlug: "ma-gm-conversions-longueurs",
-    title: "Convertir des unités de longueur",
-    domain: "Grandeurs et mesures",
-    skill: "Passer d'une unité à une autre dans le système métrique des longueurs.",
-    sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
-    ],
-  },
-  {
-    notionSlug: "ma-gm-perimetre-aire",
-    title: "Distinguer périmètre et aire",
-    domain: "Grandeurs et mesures",
-    skill: "Différencier le contour d'une figure de la surface qu'elle occupe.",
-    sheets: [
-      { id: "f1", status: "upcoming" },
-      { id: "f2", status: "upcoming" },
-      { id: "f3", status: "upcoming" },
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/mesurer-un-angle-avec-un-rapporteur/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/mesurer-un-angle-avec-un-rapporteur/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/mesurer-un-angle-avec-un-rapporteur/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/mesurer-un-angle-avec-un-rapporteur/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/mesurer-un-angle-avec-un-rapporteur/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/mesurer-un-angle-avec-un-rapporteur/f3.pdf",
+      },
     ],
   },
 ];
@@ -169,7 +197,7 @@ export function getSheet(notion: Cm2FicheMath, sheetId: SheetId): FicheSheet | u
 }
 
 export function isSheetClickable(sheet: FicheSheet): boolean {
-  return sheet.status === "available" && Boolean(sheet.href);
+  return sheet.status === "available" && Boolean(sheet.imageHref);
 }
 
 export function getNotionCompleteness(notion: Cm2FicheMath): "complete" | "partial" | "upcoming" {
