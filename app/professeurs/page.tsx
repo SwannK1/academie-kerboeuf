@@ -38,13 +38,19 @@ function toCardData(profiles: typeof professorProfiles): ProfessorCardData[] {
   }));
 }
 
+// Personnages-guides de niveau (présentés sur /personnages, pas comme professeurs de matière)
+const LEVEL_GUIDE_SLUGS = new Set(["zoe", "gaston", "esteban", "noisette", "felix"]);
+
 export default function ProfesseursPage() {
-  const cardData = toCardData(professorProfiles);
+  const subjectProfessors = professorProfiles.filter(
+    (p) => !LEVEL_GUIDE_SLUGS.has(p.slug),
+  );
+  const cardData = toCardData(subjectProfessors);
 
   // Stats dynamiques
-  const primaire = professorProfiles.filter((p) => p.stage === "primaire").length;
-  const college = professorProfiles.filter((p) => p.stage === "college").length;
-  const cycles = [...new Set(professorProfiles.map((p) => p.cycle))].length;
+  const primaire = subjectProfessors.filter((p) => p.stage === "primaire").length;
+  const college = subjectProfessors.filter((p) => p.stage === "college").length;
+  const cycles = [...new Set(subjectProfessors.map((p) => p.cycle))].length;
 
   return (
     <main>
