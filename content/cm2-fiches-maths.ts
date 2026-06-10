@@ -159,6 +159,162 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
     ],
   },
   {
+    notionSlug: "utiliser-plusieurs-outils-geometriques",
+    title: "Utiliser plusieurs outils géométriques",
+    domain: "Géométrie",
+    skill: "Combiner règle, équerre et compas pour réaliser une construction géométrique.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-plusieurs-outils-geometriques/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-plusieurs-outils-geometriques/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-plusieurs-outils-geometriques/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-plusieurs-outils-geometriques/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/utiliser-plusieurs-outils-geometriques/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/utiliser-plusieurs-outils-geometriques/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "choisir-la-bonne-methode-en-geometrie",
+    title: "Choisir la bonne méthode en géométrie",
+    domain: "Géométrie",
+    skill: "Identifier la démarche géométrique la plus adaptée à une situation donnée.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/choisir-la-bonne-methode-en-geometrie/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/choisir-la-bonne-methode-en-geometrie/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/choisir-la-bonne-methode-en-geometrie/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/choisir-la-bonne-methode-en-geometrie/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/choisir-la-bonne-methode-en-geometrie/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/choisir-la-bonne-methode-en-geometrie/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "lire-une-maquette-ou-un-plan-simplifie",
+    title: "Lire une maquette ou un plan simplifié",
+    domain: "Géométrie",
+    skill: "Interpréter une représentation simplifiée d'un espace réel (maquette, plan).",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-une-maquette-ou-un-plan-simplifie/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-une-maquette-ou-un-plan-simplifie/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-une-maquette-ou-un-plan-simplifie/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-une-maquette-ou-un-plan-simplifie/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/lire-une-maquette-ou-un-plan-simplifie/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/lire-une-maquette-ou-un-plan-simplifie/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "resoudre-une-mission-geometrique-complete",
+    title: "Résoudre une mission géométrique complète",
+    domain: "Géométrie",
+    skill: "Mobiliser plusieurs notions géométriques pour mener à bien une mission complexe.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-une-mission-geometrique-complete/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-une-mission-geometrique-complete/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-une-mission-geometrique-complete/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-une-mission-geometrique-complete/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-une-mission-geometrique-complete/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-une-mission-geometrique-complete/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reconnaitre-le-patron-dun-solide",
+    title: "Reconnaître le patron d'un solide",
+    domain: "Géométrie",
+    skill: "Associer un patron à plat au solide qu'il permet de construire par pliage.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-le-patron-dun-solide/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-le-patron-dun-solide/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-le-patron-dun-solide/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-le-patron-dun-solide/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-le-patron-dun-solide/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-le-patron-dun-solide/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reconnaitre-et-decrire-des-polygones",
+    title: "Reconnaître et décrire des polygones",
+    domain: "Géométrie",
+    skill: "Identifier et nommer des polygones selon leur nombre de côtés et leurs propriétés.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-et-decrire-des-polygones/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-et-decrire-des-polygones/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-et-decrire-des-polygones/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-et-decrire-des-polygones/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-et-decrire-des-polygones/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-et-decrire-des-polygones/f3.pdf",
+      },
+    ],
+  },
+  {
     notionSlug: "mesurer-un-angle-avec-un-rapporteur",
     title: "Mesurer un angle avec un rapporteur",
     domain: "Géométrie",
