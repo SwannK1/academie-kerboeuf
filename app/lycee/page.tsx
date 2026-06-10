@@ -6,7 +6,6 @@ import {
   getLyceeLevelStatus,
   type LyceeLevelSlug,
 } from "@/content/levels/lycee-statuses";
-import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Lycée | Académie Kerboeuf",
@@ -86,50 +85,26 @@ export default function LyceePage() {
           <div className="grid gap-4 md:grid-cols-3">
             {lyceeLevels.map((level) => {
               const status = getLyceeLevelStatus(level.slug);
-              const isLinked = getPublicStatusKey(status) !== "upcoming";
 
-              const cardContent = (
-                <div
-                  className={`flex h-full flex-col rounded-md border p-6 transition ${
-                    isLinked
-                      ? "group border-white/10 bg-white/[0.045] hover:-translate-y-0.5 hover:border-jade/30 hover:bg-white/[0.065]"
-                      : "border-white/10 bg-white/[0.025] opacity-60"
-                  }`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="text-2xl font-black text-foreground">
-                      {level.label}
-                    </h2>
-                    <div className="shrink-0">
-                      <PublicStatusBadge status={status} />
+              return (
+                <Link key={level.href} href={level.href}>
+                  <div className="group flex h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-6 transition hover:-translate-y-0.5 hover:border-jade/30 hover:bg-white/[0.065]">
+                    <div className="flex items-start justify-between gap-3">
+                      <h2 className="text-2xl font-black text-foreground">
+                        {level.label}
+                      </h2>
+                      <div className="shrink-0">
+                        <PublicStatusBadge status={status} />
+                      </div>
                     </div>
-                  </div>
-                  <p className="mt-4 flex-1 text-sm leading-7 text-muted">
-                    {level.description}
-                  </p>
-                  {isLinked ? (
+                    <p className="mt-4 flex-1 text-sm leading-7 text-muted">
+                      {level.description}
+                    </p>
                     <span className="mt-6 text-sm font-black text-jade transition group-hover:translate-x-1">
                       {level.cta} →
                     </span>
-                  ) : (
-                    <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                      Préparation en cours
-                    </span>
-                  )}
-                </div>
-              );
-
-              if (isLinked) {
-                return (
-                  <Link key={level.href} href={level.href}>
-                    {cardContent}
-                  </Link>
-                );
-              }
-              return (
-                <div key={level.href} aria-label={`${level.label} — en préparation`}>
-                  {cardContent}
-                </div>
+                  </div>
+                </Link>
               );
             })}
           </div>
