@@ -11,12 +11,17 @@ import {
 export const metadata: Metadata = {
   title: "Professeurs | Académie Kerboeuf",
   description:
-    "Les professeurs référents de l'Académie Kerboeuf — du CP à la 3e, avec des relais au lycée. Chaque profil porte une méthode, une atmosphère et un rôle pédagogique distinct.",
+    "Les professeurs de matière de l'Académie Kerboeuf — du CP au lycée. Chaque profil porte une méthode, une atmosphère et un rôle pédagogique distinct. Les guides pédagogiques de niveau sont présentés sur la page Personnages.",
 };
+
+// Guides pédagogiques de niveau (CP à CM2) : présentés sur /personnages, pas ici.
+const LEVEL_GUIDE_SLUGS = ["zoe", "gaston", "esteban", "noisette", "felix"];
 
 // Projection allégée : on ne passe pas les missions ni la méthode au client
 function toCardData(profiles: typeof professorProfiles): ProfessorCardData[] {
-  return profiles.map((p) => ({
+  return profiles
+    .filter((p) => !LEVEL_GUIDE_SLUGS.includes(p.slug))
+    .map((p) => ({
     slug: p.slug,
     profileHref: p.profileHref,
     name: p.name,
@@ -42,9 +47,9 @@ export default function ProfesseursPage() {
   const cardData = toCardData(professorProfiles);
 
   // Stats dynamiques
-  const primaire = professorProfiles.filter((p) => p.stage === "primaire").length;
-  const college = professorProfiles.filter((p) => p.stage === "college").length;
-  const cycles = [...new Set(professorProfiles.map((p) => p.cycle))].length;
+  const primaire = cardData.filter((p) => p.stage === "primaire").length;
+  const college = cardData.filter((p) => p.stage === "college").length;
+  const cycles = [...new Set(cardData.map((p) => p.cycle))].length;
 
   return (
     <main>
