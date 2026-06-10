@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { academyCharacters } from "@/content/academy-characters";
 import { lieuxAcademie } from "@/content/lieux-academie";
 import { universePathways, type AccentKey } from "@/content/universe";
 
@@ -70,43 +69,18 @@ export default function UniversPage() {
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {academyCharacters.map((character) => (
-              <article
-                key={character.slug}
-                className="rounded-md border border-white/10 bg-white/[0.04] p-5"
-              >
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
-                  {character.species}
-                </p>
-                <h3 className="mt-2 text-lg font-black text-foreground">
-                  {character.name}
-                </h3>
-                <p className="mt-1 text-xs font-semibold text-gold">
-                  {character.mainSubject}
-                </p>
-                <p className="mt-3 text-xs leading-6 text-muted">
-                  {character.shortDescription}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-1">
-                  {character.levels.map((level) => (
-                    <span
-                      key={level}
-                      className="rounded bg-white/[0.06] px-2 py-0.5 font-mono text-xs font-bold text-muted"
-                    >
-                      {level}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-6">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <Link
               href="/professeurs"
               className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
             >
-              Voir tous les personnages →
+              Voir les professeurs de matière →
+            </Link>
+            <Link
+              href="/personnages"
+              className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
+            >
+              Voir les personnages-guides →
             </Link>
           </div>
         </div>
