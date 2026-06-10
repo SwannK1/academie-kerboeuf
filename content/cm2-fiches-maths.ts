@@ -315,6 +315,162 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
     ],
   },
   {
+    notionSlug: "se-reperer-sur-un-plan",
+    title: "Se repérer sur un plan",
+    domain: "Géométrie",
+    skill: "Localiser et décrire la position d'un élément sur un plan.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/se-reperer-sur-un-plan/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/se-reperer-sur-un-plan/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/se-reperer-sur-un-plan/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/se-reperer-sur-un-plan/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/se-reperer-sur-un-plan/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/se-reperer-sur-un-plan/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "construire-un-carre-et-un-rectangle",
+    title: "Construire un carré et un rectangle",
+    domain: "Géométrie",
+    skill: "Tracer un carré ou un rectangle de dimensions données avec les instruments adaptés.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-carre-et-un-rectangle/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-carre-et-un-rectangle/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-carre-et-un-rectangle/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-carre-et-un-rectangle/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-carre-et-un-rectangle/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-carre-et-un-rectangle/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "construire-un-triangle-a-partir-de-mesures",
+    title: "Construire un triangle à partir de mesures",
+    domain: "Géométrie",
+    skill: "Tracer un triangle dont les longueurs des côtés ou les angles sont donnés.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-triangle-a-partir-de-mesures/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-triangle-a-partir-de-mesures/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-triangle-a-partir-de-mesures/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-triangle-a-partir-de-mesures/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/construire-un-triangle-a-partir-de-mesures/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/construire-un-triangle-a-partir-de-mesures/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "rediger-un-programme-de-construction",
+    title: "Rédiger un programme de construction",
+    domain: "Géométrie",
+    skill: "Rédiger les étapes permettant de reproduire une figure géométrique donnée.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/rediger-un-programme-de-construction/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/rediger-un-programme-de-construction/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/rediger-un-programme-de-construction/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/rediger-un-programme-de-construction/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/rediger-un-programme-de-construction/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/rediger-un-programme-de-construction/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "reconnaitre-une-situation-de-symetrie-axiale",
+    title: "Reconnaître une situation de symétrie axiale",
+    domain: "Géométrie",
+    skill: "Identifier si une figure ou une situation présente un axe de symétrie.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-une-situation-de-symetrie-axiale/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-une-situation-de-symetrie-axiale/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-une-situation-de-symetrie-axiale/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-une-situation-de-symetrie-axiale/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/reconnaitre-une-situation-de-symetrie-axiale/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/reconnaitre-une-situation-de-symetrie-axiale/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "identifier-et-comparer-des-angles",
+    title: "Identifier et comparer des angles",
+    domain: "Géométrie",
+    skill: "Reconnaître les types d'angles (aigu, droit, obtus) et les comparer.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/identifier-et-comparer-des-angles/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/identifier-et-comparer-des-angles/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/identifier-et-comparer-des-angles/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/identifier-et-comparer-des-angles/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/identifier-et-comparer-des-angles/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/identifier-et-comparer-des-angles/f3.pdf",
+      },
+    ],
+  },
+  {
     notionSlug: "mesurer-un-angle-avec-un-rapporteur",
     title: "Mesurer un angle avec un rapporteur",
     domain: "Géométrie",
