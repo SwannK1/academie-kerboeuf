@@ -706,6 +706,130 @@ export const cm2FichesMaths: Cm2FicheMath[] = [
       },
     ],
   },
+  {
+    notionSlug: "problemes-daire-avec-conversions-simples",
+    title: "Problèmes d'aire avec conversions simples",
+    domain: "Grandeurs et mesures",
+    skill: "Résoudre des problèmes d'aire en convertissant des unités simples.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/problemes-daire-avec-conversions-simples/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/problemes-daire-avec-conversions-simples/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/problemes-daire-avec-conversions-simples/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/problemes-daire-avec-conversions-simples/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/problemes-daire-avec-conversions-simples/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/problemes-daire-avec-conversions-simples/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "resoudre-des-problemes-de-mesures",
+    title: "Résoudre des problèmes de mesures",
+    domain: "Grandeurs et mesures",
+    skill: "Résoudre des problèmes mobilisant des grandeurs et mesures variées.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-de-mesures/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-de-mesures/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-de-mesures/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-de-mesures/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/resoudre-des-problemes-de-mesures/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/resoudre-des-problemes-de-mesures/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "estimer-lordre-de-grandeur-dun-resultat",
+    title: "Estimer l'ordre de grandeur d'un résultat",
+    domain: "Résolution de problèmes",
+    skill: "Estimer un ordre de grandeur avant de calculer pour anticiper le résultat.",
+    sheets: [
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/estimer-lordre-de-grandeur-dun-resultat/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/estimer-lordre-de-grandeur-dun-resultat/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/estimer-lordre-de-grandeur-dun-resultat/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/estimer-lordre-de-grandeur-dun-resultat/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "verifier-la-vraisemblance-dun-resultat",
+    title: "Vérifier la vraisemblance d'un résultat",
+    domain: "Résolution de problèmes",
+    skill: "Vérifier si un résultat obtenu est cohérent avec la situation de départ.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/verifier-la-vraisemblance-dun-resultat/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/verifier-la-vraisemblance-dun-resultat/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/verifier-la-vraisemblance-dun-resultat/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/verifier-la-vraisemblance-dun-resultat/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/verifier-la-vraisemblance-dun-resultat/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/verifier-la-vraisemblance-dun-resultat/f3.pdf",
+      },
+    ],
+  },
+  {
+    notionSlug: "presenter-clairement-sa-demarche",
+    title: "Présenter clairement sa démarche",
+    domain: "Résolution de problèmes",
+    skill: "Rédiger et présenter clairement les étapes de sa démarche de résolution.",
+    sheets: [
+      {
+        id: "f1",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/presenter-clairement-sa-demarche/f1.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/presenter-clairement-sa-demarche/f1.pdf",
+      },
+      {
+        id: "f2",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/presenter-clairement-sa-demarche/f2.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/presenter-clairement-sa-demarche/f2.pdf",
+      },
+      {
+        id: "f3",
+        status: "available",
+        imageHref: "/fiches/cm2/mathematiques/presenter-clairement-sa-demarche/f3.png",
+        pdfHref: "/fiches/cm2/mathematiques-pdf/presenter-clairement-sa-demarche/f3.pdf",
+      },
+    ],
+  },
 ];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
