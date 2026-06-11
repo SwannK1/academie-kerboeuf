@@ -199,20 +199,29 @@ function SheetRow({
     </span>
   );
 
-  if (href) {
-    return (
-      <Link
-        href={href}
-        className="block rounded-sm border border-jade/20 bg-jade/[0.04] px-3 py-2 text-foreground transition hover:border-jade/40 hover:bg-jade/[0.08]"
-      >
-        {inner}
-      </Link>
-    );
-  }
-
   return (
-    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
-      {inner}
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
+      {href ? (
+        <Link
+          href={href}
+          className="block flex-1 rounded-sm border border-jade/20 bg-jade/[0.04] px-3 py-2 text-foreground transition hover:border-jade/40 hover:bg-jade/[0.08]"
+        >
+          {inner}
+        </Link>
+      ) : (
+        <div className="block flex-1 rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
+          {inner}
+        </div>
+      )}
+      {sheet.pdfHref && (
+        <a
+          href={sheet.pdfHref}
+          download
+          className="flex shrink-0 items-center justify-center rounded-sm border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold text-gold transition hover:bg-gold/20"
+        >
+          Télécharger le PDF
+        </a>
+      )}
     </div>
   );
 }
