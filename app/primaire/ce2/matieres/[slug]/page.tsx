@@ -34,6 +34,17 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
   const tree = getCe2SubjectTree(slug);
   const sequences = getCe2Sequences(slug);
 
+  const footerLinks: { href: string; label: string }[] = [
+    { href: "/primaire/ce2/lecons", label: "Leçons CE2" },
+  ];
+
+  if (slug === "mathematiques") {
+    footerLinks.push({
+      href: "/primaire/ce2/programmes/mathematiques/nombres-calcul",
+      label: "Nombres et calculs — séquences publiées",
+    });
+  }
+
   return (
     <SubjectDetailPage
       levelLabel="CE2"
@@ -44,9 +55,7 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
       accent={CE2_ACCENT}
       sequences={sequences}
       cycleLabel="Cycle 2"
-      footerLinks={[
-        { href: "/primaire/ce2/lecons", label: "Leçons CE2" },
-      ]}
+      footerLinks={footerLinks}
     />
   );
 }
