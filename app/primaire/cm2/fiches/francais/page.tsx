@@ -122,15 +122,28 @@ function NotionCard({ notion }: { notion: FicheNotion }) {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {sheetKeys.map((key) => (
-          <Link
-            key={key}
-            href={`/primaire/cm2/fiches/francais/${notion.slug}/${key}`}
-            className="rounded-md border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-bold text-foreground transition hover:border-white/30 hover:bg-white/10"
-          >
-            {SHEET_LABELS[key]}
-          </Link>
-        ))}
+        {sheetKeys.map((key) => {
+          const pdfHref = notion.sheets[key]?.pdfHref;
+          return (
+            <div key={key} className="flex flex-wrap gap-2">
+              <Link
+                href={`/primaire/cm2/fiches/francais/${notion.slug}/${key}`}
+                className="rounded-md border border-white/15 bg-white/[0.05] px-3 py-1.5 text-xs font-bold text-foreground transition hover:border-white/30 hover:bg-white/10"
+              >
+                {SHEET_LABELS[key]}
+              </Link>
+              {pdfHref && (
+                <a
+                  href={pdfHref}
+                  download
+                  className="rounded-md border border-gold/35 bg-gold/10 px-3 py-1.5 text-xs font-bold text-gold transition hover:bg-gold/20"
+                >
+                  Télécharger le PDF ({SHEET_LABELS[key]})
+                </a>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
