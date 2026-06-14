@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { getCm2MissionBySlug } from "@/content/cm2";
@@ -12,6 +13,20 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
+import {
+  cm2FrancaisFiches,
+  FICHE_DOMAIN_LABELS,
+  SHEET_LABELS,
+  type FicheDomain,
+} from "@/content/cm2-francais-fiches";
+
+const FRANCAIS_DOMAIN_ORDER: FicheDomain[] = [
+  "conjugaison",
+  "grammaire",
+  "orthographe",
+  "vocabulaire",
+  "lecture-comprehension",
+];
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -59,14 +74,76 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
       linkedCards={linkedCards}
+      extraSection={slug === "francais" ? <FrancaisFichesSection /> : undefined}
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
         ...(slug === "mathematiques"
           ? [{ href: "/primaire/cm2/fiches/mathematiques", label: "Compétences et fiches Mathématiques", tone: "jade" as const }]
           : []),
+        ...(slug === "francais"
+          ? [{ href: "/primaire/cm2/fiches/francais", label: "Voir le catalogue complet", tone: "jade" as const }]
+          : []),
       ]}
     />
+  );
+}
+
+function FrancaisFichesSection() {
+  return (
+    <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-8 border-b border-white/10 pb-5">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
+            Fiches Français
+          </p>
+          <h2 className="mt-2 text-2xl font-black text-foreground">
+            Notions et fiches par domaine
+          </h2>
+        </div>
+        <div className="space-y-6">
+          {FRANCAIS_DOMAIN_ORDER.map((domain) => {
+            const notions = cm2FrancaisFiches.filter((n) => n.domain === domain);
+            if (notions.length === 0) return null;
+            return (
+              <div key={domain} className="rounded-md border border-white/10 bg-white/[0.025] p-5">
+                <h3 className="text-lg font-black text-foreground">
+                  {FICHE_DOMAIN_LABELS[domain]}
+                </h3>
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {notions.map((notion) => {
+                    const sheetKeys = (["f1", "f2", "f3"] as const).filter(
+                      (key) => notion.sheets[key],
+                    );
+                    return (
+                      <li
+                        key={notion.slug}
+                        className="rounded border border-white/10 bg-white/[0.03] px-3 py-3"
+                      >
+                        <p className="text-sm font-semibold text-foreground">
+                          {notion.title}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {sheetKeys.map((key) => (
+                            <Link
+                              key={key}
+                              href={`/primaire/cm2/fiches/francais/${notion.slug}/${key}`}
+                              className="rounded-md border border-white/15 bg-white/[0.05] px-2.5 py-1 text-xs font-bold text-foreground transition hover:border-white/30 hover:bg-white/10"
+                            >
+                              {SHEET_LABELS[key]}
+                            </Link>
+                          ))}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
