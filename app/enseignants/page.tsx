@@ -82,15 +82,21 @@ export default function EnseignantsPage() {
         <div className="mt-10 border-t border-[var(--border)] pt-6">
           <h2 className="text-xl font-semibold">Fiches par matière</h2>
           <p className="mt-2 text-sm text-[var(--muted-foreground)]">
-            Catalogues complets des fiches imprimables, classées par
-            sous-domaine et compétence.
+            Niveau → Matière → Sous-domaine → Compétence → Fiches.
+          </p>
+          <p className="mt-2 text-sm text-[var(--muted-foreground)]">
+            Les catalogues complets restent disponibles depuis chaque matière,
+            mais l&apos;entrée principale se fait par la page matière.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
-            <Link href="/primaire/cm2/fiches/mathematiques" className="text-[var(--primary)] underline">
-              Fiches Mathématiques CM2 →
+            <Link href="/primaire/cm2/matieres/mathematiques" className="text-[var(--primary)] underline">
+              Mathématiques CM2 →
             </Link>
-            <Link href="/primaire/cm2/fiches/francais" className="text-[var(--primary)] underline">
-              Fiches Français CM2 →
+            <Link href="/primaire/cm2/matieres/francais" className="text-[var(--primary)] underline">
+              Français CM2 →
+            </Link>
+            <Link href="/primaire/cm2/matieres/sciences" className="text-[var(--primary)] underline">
+              Sciences CM2 →
             </Link>
           </div>
         </div>
