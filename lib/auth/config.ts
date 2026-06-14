@@ -1,18 +1,21 @@
 /**
- * Fondations pour l'authentification enseignant (V1).
+ * Fondations pour l'authentification enseignant (Supabase Auth).
  *
- * Aucun fournisseur n'est branché tant que les variables d'environnement
- * ne sont pas définies. Tant que `isAuthConfigured()` retourne `false`,
- * les pages /connexion et /enseignants/tableau-de-bord affichent un état
- * "configuration manquante" plutôt que de simuler une connexion.
+ * Tant que `isAuthConfigured()` retourne `false`, les pages /connexion et
+ * /enseignants/tableau-de-bord affichent un état "configuration manquante"
+ * plutôt que de simuler une connexion.
  *
- * Variables attendues pour activer l'authentification (Auth.js) :
- * - AUTH_SECRET
- * - AUTH_URL (en production)
- * - + variables du fournisseur choisi (ex: AUTH_GOOGLE_ID / AUTH_GOOGLE_SECRET,
- *   ou identifiants email/magic link)
+ * Variables d'environnement nécessaires pour activer l'authentification :
+ * - NEXT_PUBLIC_SUPABASE_URL
+ * - NEXT_PUBLIC_SUPABASE_ANON_KEY
+ *
+ * SUPABASE_SERVICE_ROLE_KEY n'est volontairement pas utilisée ici : la
+ * session enseignant repose uniquement sur les cookies + la clé anonyme.
  */
 
 export function isAuthConfigured(): boolean {
-  return Boolean(process.env.AUTH_SECRET);
+  return Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { isAuthConfigured } from "@/lib/auth/config";
+import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
   title: "Connexion enseignant | Académie Kerboeuf",
@@ -28,60 +29,16 @@ export default function ConnexionPage() {
           </p>
 
           {configured ? (
-            <form className="mt-8 space-y-5">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-foreground"
-                >
-                  Adresse e-mail
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="mt-1 w-full rounded-lg border border-panel-soft bg-background px-3 py-2 text-foreground focus:border-gold focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-foreground"
-                >
-                  Mot de passe
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="mt-1 w-full rounded-lg border border-panel-soft bg-background px-3 py-2 text-foreground focus:border-gold focus:outline-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-gold px-4 py-2.5 font-semibold text-ink transition hover:opacity-90"
-              >
-                Se connecter
-              </button>
-            </form>
+            <LoginForm />
           ) : (
             <div
               role="status"
               className="mt-8 rounded-lg border border-panel-soft bg-background p-4 text-sm text-muted"
             >
               <p className="font-medium text-foreground">
-                Configuration auth manquante
+                La connexion enseignant n&apos;est pas encore configurée.
               </p>
-              <p className="mt-1">
-                La connexion enseignant n&apos;est pas encore activée sur cet
-                environnement. Revenez bientôt.
-              </p>
+              <p className="mt-1">Revenez bientôt.</p>
             </div>
           )}
 

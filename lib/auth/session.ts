@@ -1,3 +1,4 @@
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { isAuthConfigured } from "./config";
 
 export type EnseignantSession = {
@@ -6,16 +7,34 @@ export type EnseignantSession = {
 };
 
 /**
- * Stub V1 : retourne toujours `null` tant qu'aucun fournisseur d'auth
- * n'est branché. Ne lit ni cookie ni localStorage — pas de faux token.
+ * Point d'entrée unique pour récupérer l'enseignant connecté côté serveur.
  *
- * Quand un fournisseur (Auth.js, Supabase…) sera branché, cette fonction
- * sera remplacée par un appel à la session réelle du fournisseur.
+ * Retourne `null` :
+ * - si Supabase n'est pas configuré (pas de variables d'env) ;
+ * - si aucune session valide n'existe.
+ *
+ * Pas de token ni de mot de passe en localStorage : la session est
+ * gérée par Supabase via les cookies.
  */
 export async function getEnseignantSession(): Promise<EnseignantSession | null> {
   if (!isAuthConfigured()) {
     return null;
   }
 
-  return null;
+  const supabase = await createSupabaseServerClient();
+
+  if (!supabase) {
+    return null;
+  }
+
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data.user?.email) {
+    return null;
+  }
+
+  return {
+    email: data.user.email,
+    name: data.user.user_metadata?.full_name as string | undefined,
+  };
 }
