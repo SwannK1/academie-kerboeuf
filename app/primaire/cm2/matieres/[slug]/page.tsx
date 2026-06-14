@@ -12,6 +12,7 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
+import { Cm2SciencesFichesPreview } from "@/components/academy/Cm2SciencesFichesPreview";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -59,6 +60,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
       linkedCards={linkedCards}
+      extraSection={slug === "sciences" ? <Cm2SciencesFichesPreview /> : undefined}
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
