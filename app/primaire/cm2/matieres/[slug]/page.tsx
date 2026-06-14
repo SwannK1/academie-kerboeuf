@@ -62,6 +62,12 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
+        ...(slug === "mathematiques"
+          ? [{ href: "/primaire/cm2/fiches/mathematiques", label: "Compétences et fiches Mathématiques", tone: "jade" as const }]
+          : []),
+        ...(slug === "francais"
+          ? [{ href: "/primaire/cm2/fiches/francais", label: "Compétences et fiches Français", tone: "jade" as const }]
+          : []),
       ]}
     />
   );
