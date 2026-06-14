@@ -174,3 +174,4 @@ export default function FichesMathematiquesPage() {
       </section>
     </main>
   );
+}
