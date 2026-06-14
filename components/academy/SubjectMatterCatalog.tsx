@@ -75,9 +75,9 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   accent: Record<string, AccentTokens>;
   sequences: MatterSequence[];
   linkedCards?: LinkedCard[];
-  extraSection?: ReactNode;
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
+  extraSection?: ReactNode;
 };
 
 type LinkedCard = {
@@ -181,9 +181,9 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   accent,
   sequences,
   linkedCards = [],
-  extraSection,
   footerLinks,
   cycleLabel = "Cycle 3",
+  extraSection,
 }: SubjectDetailPageProps<TSubject>) {
   const t = accent[subject.accent] ?? accent.gold;
   const sequenceGroups = groupSequences(sequences);
@@ -277,8 +277,6 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
         </section>
       )}
 
-      {extraSection}
-
       {linkedCards.length > 0 ? (
         <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
@@ -360,6 +358,8 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
           </div>
         </section>
       ) : null}
+
+      {extraSection}
 
       <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

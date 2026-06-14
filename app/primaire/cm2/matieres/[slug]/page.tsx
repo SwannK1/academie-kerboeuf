@@ -14,6 +14,7 @@ import {
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 import { Cm2MathFichesPreview } from "@/components/academy/Cm2MathFichesPreview";
 import { Cm2FrancaisFichesPreview } from "@/components/academy/Cm2FrancaisFichesPreview";
+import { Cm2SciencesFichesPreview } from "@/components/academy/Cm2SciencesFichesPreview";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -66,6 +67,8 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
           <Cm2MathFichesPreview t={CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold} />
         ) : slug === "francais" ? (
           <Cm2FrancaisFichesPreview t={CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold} />
+        ) : slug === "sciences" ? (
+          <Cm2SciencesFichesPreview />
         ) : undefined
       }
       footerLinks={[
