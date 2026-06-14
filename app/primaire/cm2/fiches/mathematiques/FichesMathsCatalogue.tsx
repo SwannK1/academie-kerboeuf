@@ -56,12 +56,22 @@ export function FichesMathsCatalogue() {
             CM2 · Mathématiques · Cycle 3
           </p>
           <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
-            Compétences CM2<br className="hidden sm:block" /> Mathématiques
+            Catalogue complet des fiches<br className="hidden sm:block" /> Mathématiques CM2
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
             Pour chaque compétence, retrouve la leçon, la consolidation et
             l&apos;évaluation.
           </p>
+          <p className="mt-4 max-w-2xl rounded-md border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-6 text-muted">
+            Les fiches sont accessibles directement depuis la page matière, classées
+            par sous-domaine et compétence.
+          </p>
+          <Link
+            href="/primaire/cm2/matieres/mathematiques"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-jade hover:underline"
+          >
+            ← Retour à la page Mathématiques CM2
+          </Link>
         </div>
       </section>
 

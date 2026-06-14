@@ -10,7 +10,7 @@ import {
 } from "@/content/cm2-mathematiques-fiches";
 
 export const metadata: Metadata = {
-  title: "Fiches Mathématiques CM2 | Académie Kerboeuf",
+  title: "Catalogue complet des fiches Mathématiques CM2 | Académie Kerboeuf",
   description:
     "Toutes les fiches pédagogiques Mathématiques CM2 : nombres, calcul, grandeurs et mesures, espace et géométrie, données.",
 };
