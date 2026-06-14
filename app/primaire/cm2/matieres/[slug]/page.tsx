@@ -13,6 +13,7 @@ import {
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 import { Cm2MathFichesPreview } from "@/components/academy/Cm2MathFichesPreview";
+import { Cm2FrancaisFichesPreview } from "@/components/academy/Cm2FrancaisFichesPreview";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -60,7 +61,13 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
       linkedCards={linkedCards}
-      extraSection={slug === "mathematiques" ? <Cm2MathFichesPreview t={CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold} /> : undefined}
+      extraSection={
+        slug === "mathematiques" ? (
+          <Cm2MathFichesPreview t={CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold} />
+        ) : slug === "francais" ? (
+          <Cm2FrancaisFichesPreview t={CM2_ACCENT[subject.accent] ?? CM2_ACCENT.gold} />
+        ) : undefined
+      }
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
