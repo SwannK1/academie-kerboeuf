@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { academyCharacters } from "@/content/academy-characters";
-import { lieuxAcademie } from "@/content/lieux-academie";
-import { universePathways, type AccentKey } from "@/content/universe";
 
 export const metadata: Metadata = {
   title: "Univers | Académie Kerboeuf",
@@ -11,18 +8,31 @@ export const metadata: Metadata = {
     "L'Académie Kerboeuf — un univers pédagogique où personnages et lieux servent les apprentissages.",
 };
 
-const accentText: Record<AccentKey, string> = {
-  gold: "text-gold",
-  jade: "text-jade",
-  sky: "text-sky",
-  ember: "text-ember",
-};
-const accentBorder: Record<AccentKey, string> = {
-  gold: "border-gold/35",
-  jade: "border-jade/35",
-  sky: "border-sky/35",
-  ember: "border-ember/35",
-};
+const portalCards = [
+  {
+    title: "Personnages",
+    description:
+      "Les héros et figures que les élèves rencontrent dans leurs missions.",
+    href: "/personnages",
+    accent: "text-jade",
+    border: "border-jade/35",
+  },
+  {
+    title: "Professeurs",
+    description:
+      "Les personnages référents de l'Académie, chacun lié à une matière.",
+    href: "/professeurs",
+    accent: "text-gold",
+    border: "border-gold/35",
+  },
+  {
+    title: "Carte de l'Académie",
+    description: "Les lieux pédagogiques et leur fonction dans les apprentissages.",
+    href: "/carte",
+    accent: "text-sky",
+    border: "border-sky/35",
+  },
+];
 
 export default function UniversPage() {
   return (
@@ -43,168 +53,49 @@ export default function UniversPage() {
             Académie Kerboeuf
           </p>
           <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
-            Un univers au service des apprentissages
+            L&apos;univers Académie Kerboeuf
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">
             L&apos;Académie Kerboeuf est un univers pédagogique fictif. Les
             personnages et les lieux ne sont pas une fin en soi — ils donnent
-            du sens aux apprentissages, structurent les démarches et motivent
-            l&apos;entrée dans les tâches scolaires.
+            du sens aux apprentissages et motivent l&apos;entrée dans les
+            tâches scolaires.
           </p>
         </div>
       </section>
 
-      {/* ── Personnages référents ────────────────────────────────────────────── */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
-              Personnages référents
-            </p>
-            <h2 className="mt-4 text-3xl font-black text-foreground">
-              Les professeurs de l&apos;Académie
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              Chaque personnage porte une matière et une posture d&apos;enseignement.
-              Ils servent de fil conducteur dans les séquences et les missions.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {academyCharacters.map((character) => (
-              <article
-                key={character.slug}
-                className="rounded-md border border-white/10 bg-white/[0.04] p-5"
-              >
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
-                  {character.species}
-                </p>
-                <h3 className="mt-2 text-lg font-black text-foreground">
-                  {character.name}
-                </h3>
-                <p className="mt-1 text-xs font-semibold text-gold">
-                  {character.mainSubject}
-                </p>
-                <p className="mt-3 text-xs leading-6 text-muted">
-                  {character.shortDescription}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-1">
-                  {character.levels.map((level) => (
-                    <span
-                      key={level}
-                      className="rounded bg-white/[0.06] px-2 py-0.5 font-mono text-xs font-bold text-muted"
-                    >
-                      {level}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-6 flex flex-wrap gap-6">
+      {/* ── Portail ─────────────────────────────────────────────────────────── */}
+      <section className="px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {portalCards.map((card) => (
             <Link
-              href="/professeurs"
-              className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
+              key={card.href}
+              href={card.href}
+              className={`group rounded-md border p-6 ${card.border} bg-white/[0.04] transition hover:bg-white/[0.07]`}
             >
-              Voir tous les personnages →
-            </Link>
-            <Link
-              href="/personnages"
-              className="inline-flex items-center gap-2 text-sm font-bold text-jade transition hover:text-foreground"
-            >
-              Découvrir les héros des élèves →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Lieux pédagogiques ──────────────────────────────────────────────── */}
-      <section className="border-y border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
-              Lieux pédagogiques
-            </p>
-            <h2 className="mt-4 text-3xl font-black text-foreground">
-              Les espaces de l&apos;Académie
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              Chaque lieu a une fonction pédagogique précise. Ils ancrent les
-              apprentissages dans un espace reconnaissable et cohérent.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {lieuxAcademie.map((lieu) => (
-              <article
-                key={lieu.id}
-                className={`rounded-md border p-5 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
+              <h2 className="text-xl font-black text-foreground">
+                {card.title}
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-muted">
+                {card.description}
+              </p>
+              <span
+                className={`mt-4 inline-flex items-center gap-2 text-sm font-bold ${card.accent} transition group-hover:text-foreground`}
               >
-                <p
-                  className={`text-xs font-bold uppercase tracking-[0.14em] ${accentText[lieu.accentColor]}`}
-                >
-                  {lieu.matieresAssociees.slice(0, 2).join(" · ")}
-                </p>
-                <h3 className="mt-2 text-base font-black text-foreground">
-                  {lieu.nom}
-                </h3>
-                <p className="mt-3 text-xs leading-6 text-muted">
-                  {lieu.descriptionCourte}
-                </p>
-                <p
-                  className={`mt-3 text-xs font-semibold italic ${accentText[lieu.accentColor]}`}
-                >
-                  {lieu.fonctionPedagogique}
-                </p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-6">
-            <Link
-              href="/carte"
-              className="inline-flex items-center gap-2 text-sm font-bold text-sky transition hover:text-foreground"
-            >
-              Voir la carte de l&apos;Académie →
+                Découvrir →
+              </span>
             </Link>
-          </div>
-        </div>
-      </section>
+          ))}
 
-      {/* ── Principe pédagogique ────────────────────────────────────────────── */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
-              Principe pédagogique
+          {/* Badges : route non existante, bloc non cliquable */}
+          <div className="rounded-md border border-ember/35 bg-white/[0.04] p-6 opacity-70">
+            <h2 className="text-xl font-black text-foreground">Badges</h2>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Le système de badges de l&apos;Académie arrive prochainement.
             </p>
-            <h2 className="mt-4 text-3xl font-black text-foreground">
-              Comment fonctionne l&apos;Académie
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              Chaque séquence suit une progression en cinq temps : découvrir,
-              s&apos;entraîner, mobiliser, corriger, stabiliser.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {universePathways.map((step) => (
-              <article
-                key={step.step}
-                className={`rounded-md border p-5 ${accentBorder[step.accentColor]} bg-white/[0.04]`}
-              >
-                <p
-                  className={`font-mono text-xs font-black uppercase tracking-[0.2em] ${accentText[step.accentColor]}`}
-                >
-                  {step.step}
-                </p>
-                <h3 className="mt-2 text-base font-black text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-xs leading-6 text-muted">
-                  {step.description}
-                </p>
-              </article>
-            ))}
+            <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-ember">
+              Bientôt disponible
+            </span>
           </div>
         </div>
       </section>
