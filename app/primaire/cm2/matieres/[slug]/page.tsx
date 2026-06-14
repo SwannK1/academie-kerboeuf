@@ -12,6 +12,7 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
+import { FrancaisFichesBlock } from "./FrancaisFichesBlock";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -49,24 +50,30 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
     }));
 
   return (
-    <SubjectDetailPage
-      levelLabel="CM2"
-      levelHref="/primaire/cm2"
-      subjectsHref="/primaire/cm2/matieres"
-      subject={subject}
-      tree={tree ? mapCm2Tree(tree) : undefined}
-      accent={CM2_ACCENT}
-      sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
-      cycleLabel="Cycle 3"
-      linkedCards={linkedCards}
-      footerLinks={[
-        { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
-        { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
-        ...(slug === "mathematiques"
-          ? [{ href: "/primaire/cm2/fiches/mathematiques", label: "Compétences et fiches Mathématiques", tone: "jade" as const }]
-          : []),
-      ]}
-    />
+    <>
+      <SubjectDetailPage
+        levelLabel="CM2"
+        levelHref="/primaire/cm2"
+        subjectsHref="/primaire/cm2/matieres"
+        subject={subject}
+        tree={tree ? mapCm2Tree(tree) : undefined}
+        accent={CM2_ACCENT}
+        sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
+        cycleLabel="Cycle 3"
+        linkedCards={linkedCards}
+        footerLinks={[
+          { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
+          { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
+          ...(slug === "mathematiques"
+            ? [{ href: "/primaire/cm2/fiches/mathematiques", label: "Compétences et fiches Mathématiques", tone: "jade" as const }]
+            : []),
+          ...(slug === "francais"
+            ? [{ href: "/primaire/cm2/fiches/francais", label: "Catalogue des fiches Français", tone: "jade" as const }]
+            : []),
+        ]}
+      />
+      {slug === "francais" ? <FrancaisFichesBlock /> : null}
+    </>
   );
 }
 
