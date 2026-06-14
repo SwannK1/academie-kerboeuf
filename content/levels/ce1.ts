@@ -102,7 +102,7 @@ const leconTexteNarratif: Lesson = {
     roleHint:
       "Gaston encourage à relire le texte avant de répondre, et à toujours chercher la preuve dans les mots.",
   },
-  status: "available",
+  status: "in-progress",
 };
 
 // ── Sous-domaine : Lecture et compréhension ──────────────────────────────────

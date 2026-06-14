@@ -23,8 +23,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
             items={[
               { label: "Accueil", href: "/" },
               { label: "Primaire", href: "/primaire" },
-              { label: "Élémentaire", href: "/primaire/elementaire" },
-              { label: "Lieux", href: "/primaire/elementaire" },
+              { label: "Lieux pédagogiques", href: "/primaire/lieux" },
               { label: place.title },
             ]}
           />
@@ -177,7 +176,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
             )}
 
             <Link
-              href="/primaire/elementaire"
+              href="/primaire/lieux"
               className="inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
             >
               Retour aux lieux

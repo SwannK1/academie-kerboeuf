@@ -49,8 +49,8 @@ const LEVEL_GUIDES: Record<
 // Conservative statuses — updated as content is published
 const LEVEL_STATUS: Record<string, string> = {
   cp: "en construction",
-  ce1: "bientôt",
-  ce2: "bientôt",
+  ce1: "en construction",
+  ce2: "en construction",
   cm1: "en construction",
   cm2: "disponible",
 };
@@ -58,6 +58,8 @@ const LEVEL_STATUS: Record<string, string> = {
 // Routes that actually exist — no fictitious links
 const LEVEL_MATIERES: Record<string, string> = {
   cp: "/primaire/cp/matieres",
+  ce1: "/primaire/ce1/matieres",
+  ce2: "/primaire/ce2/matieres",
   cm1: "/primaire/cm1/matieres",
   cm2: "/primaire/cm2/matieres",
 };
@@ -83,7 +85,7 @@ export default function PrimairePage() {
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
       <PrimairePortalMap />
 
-      {/* ── Choix du niveau / personnage (desktop : accès secondaire) ─────── */}
+      {/* ── Accès par niveau ──────────────────────────────────────────────── */}
       <section className="px-4 pb-16 pt-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 border-b border-white/10 pb-6">
@@ -91,11 +93,10 @@ export default function PrimairePage() {
               CP · CE1 · CE2 · CM1 · CM2
             </p>
             <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-              Choisis ton guide
+              Accès par niveau
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-              Chaque niveau a son univers et ses missions. Clique sur un niveau
-              pour entrer dans l&apos;espace de ton guide.
+              Sélectionnez un niveau pour accéder à ses programmes et ressources.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
@@ -106,70 +107,20 @@ export default function PrimairePage() {
         </div>
       </section>
 
-      {/* ── Professeurs associés (secondaire) ─────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
-                Équipe pédagogique
-              </p>
-              <h2 className="mt-2 text-2xl font-black text-foreground">
-                Les professeurs des Lisières
-              </h2>
-            </div>
-            <Link
-              href="/professeurs"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
-            >
-              Tous les professeurs →
-            </Link>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {levels.map((level) => (
-              <Link
-                key={level.professor.slug}
-                href={`/professeurs/${level.professor.slug}`}
-                className="group rounded border border-white/10 bg-ink/30 p-4 transition hover:border-white/25 hover:bg-white/[0.06]"
-              >
-                <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-jade">
-                  {level.label}
-                </p>
-                <p className="mt-2 text-base font-black text-foreground">
-                  {level.professor.name}
-                </p>
-                <p className="mt-1 text-xs leading-5 text-muted">
-                  {level.professor.mainSubject}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Lieux des Lisières — accès secondaire ─────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+      {/* ── Liens secondaires ─────────────────────────────────────────────── */}
+      <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex flex-wrap gap-4">
+          <Link
+            href="/professeurs"
+            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+          >
+            Équipe pédagogique →
+          </Link>
           <Link
             href="/primaire/lieux"
-            className="group flex flex-col gap-5 rounded-md border border-jade/25 bg-jade/[0.05] p-6 transition hover:border-jade/45 hover:bg-jade/[0.08] sm:flex-row sm:items-center sm:justify-between"
+            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
           >
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                Géographie pédagogique
-              </p>
-              <h2 className="mt-2 text-2xl font-black text-foreground">
-                Explorer les lieux des Lisières
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-                La Bibliothèque des Explorateurs, la Cartothèque des Lisières,
-                l&apos;Atelier des Mathématiques&hellip; Chaque lieu correspond à
-                une fonction pédagogique précise dans l&apos;école élémentaire.
-              </p>
-            </div>
-            <span className="shrink-0 text-sm font-black text-jade transition group-hover:translate-x-1">
-              Voir les lieux →
-            </span>
+            Lieux des Lisières →
           </Link>
         </div>
       </section>

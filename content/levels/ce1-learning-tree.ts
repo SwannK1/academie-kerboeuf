@@ -179,6 +179,13 @@ const domainFrancais: ProgramDomain = {
             "Ajouter une precision simple pour rendre une phrase plus informative.",
           status: "upcoming",
         },
+        {
+          slug: "copier-un-texte-court-sans-erreur",
+          title: "Copier un texte court sans erreur",
+          objective:
+            "Recopier un texte court de facon lisible et sans erreur de copie.",
+          status: "upcoming",
+        },
       ],
     ),
     createSubdomain(
@@ -202,9 +209,46 @@ const domainFrancais: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "identifier-le-nom-dans-une-phrase",
+          title: "Identifier le nom dans une phrase",
+          objective:
+            "Reperer les noms communs et propres dans une phrase simple.",
+          status: "upcoming",
+        },
+        {
           slug: "identifier-le-sujet-dun-verbe-simple",
           title: "Identifier le sujet d'un verbe simple",
           objective: "Trouver qui fait l'action dans une phrase courte.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "vocabulaire",
+      "Vocabulaire",
+      "Enrichir et mobiliser le lexique rencontre en classe.",
+      [
+        {
+          slug: "enrichir-son-vocabulaire",
+          title: "Enrichir son vocabulaire",
+          objective:
+            "Reutiliser des mots nouveaux rencontres en classe dans des contextes varies.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "francais",
+      "oral",
+      "Langage oral",
+      "Ecouter, s'exprimer et participer aux echanges de la classe.",
+      [
+        {
+          slug: "participer-a-un-echange-oral",
+          title: "Participer a un echange oral",
+          objective:
+            "S'exprimer de facon audible, en attendant son tour et en restant dans le sujet.",
           status: "upcoming",
         },
       ],
@@ -277,10 +321,52 @@ const domainMathematiques: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "calculer-mentalement-des-soustractions",
+          title: "Calculer mentalement des soustractions",
+          objective:
+            "Trouver mentalement la difference entre deux petits nombres en utilisant des strategies adaptees.",
+          status: "upcoming",
+        },
+        {
           slug: "poser-une-addition-sans-retenue",
           title: "Poser une addition sans retenue",
           objective:
             "Aligner les chiffres par rang et calculer une addition posee simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "poser-une-soustraction",
+          title: "Poser une soustraction",
+          objective:
+            "Aligner les chiffres par rang et calculer une soustraction posee simple.",
+          status: "upcoming",
+        },
+        {
+          slug: "poser-une-addition-avec-retenue",
+          title: "Additionner avec retenue",
+          objective:
+            "Poser une addition a deux chiffres en gerant la retenue et verifier le resultat.",
+          status: "upcoming",
+        },
+        {
+          slug: "soustraire-avec-methode",
+          title: "Soustraire avec methode",
+          objective:
+            "Poser une soustraction simple et calculer le reste en suivant les etapes de l'algorithme.",
+          status: "upcoming",
+        },
+        {
+          slug: "comprendre-la-multiplication-comme-addition-repetee",
+          title: "Comprendre la multiplication comme addition repetee",
+          objective:
+            "Reconnaitre qu'une multiplication est l'addition d'un meme nombre plusieurs fois.",
+          status: "upcoming",
+        },
+        {
+          slug: "utiliser-les-tables-simples",
+          title: "Utiliser les tables simples (x2, x5, x10)",
+          objective:
+            "Memoriser et utiliser les tables de 2, 5 et 10 pour calculer des produits simples.",
           status: "upcoming",
         },
       ],
@@ -328,10 +414,24 @@ const domainMathematiques: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "mesurer-une-longueur",
+          title: "Mesurer une longueur",
+          objective:
+            "Utiliser une regle graduee pour mesurer une longueur et en exprimer le resultat en cm.",
+          status: "upcoming",
+        },
+        {
           slug: "lire-une-heure-simple",
           title: "Lire une heure simple",
           objective:
             "Lire l'heure pleine et la demi-heure sur une horloge a aiguilles.",
+          status: "upcoming",
+        },
+        {
+          slug: "utiliser-la-monnaie",
+          title: "Utiliser la monnaie",
+          objective:
+            "Reconnaitre les pieces et billets courants et calculer un prix ou une monnaie simple.",
           status: "upcoming",
         },
       ],
@@ -396,6 +496,13 @@ const domainQuestionnerLeMonde: ProgramDomain = {
             "L'eleve identifie producteurs et consommateurs dans une chaine alimentaire courte.",
           status: "upcoming",
         },
+        {
+          slug: "connaitre-les-besoins-des-animaux-et-vegetaux",
+          title: "Connaitre les besoins des animaux et des vegetaux",
+          objective:
+            "L'eleve nomme les besoins essentiels d'un animal ou d'une plante et les conditions de survie.",
+          status: "upcoming",
+        },
       ],
     ),
     createSubdomain(
@@ -404,6 +511,20 @@ const domainQuestionnerLeMonde: ProgramDomain = {
       "Espace et temps",
       "Lire une frise, situer des evenements et se reperer sur une carte simple.",
       [
+        {
+          slug: "observer-les-saisons",
+          title: "Observer les saisons",
+          objective:
+            "L'eleve associe chaque saison a ses caracteristiques observables et les ordonne sur une annee.",
+          status: "upcoming",
+        },
+        {
+          slug: "se-reperer-dans-le-calendrier",
+          title: "Se reperer dans le calendrier",
+          objective:
+            "L'eleve situe un jour, une semaine ou un mois dans le calendrier et utilise le vocabulaire du temps.",
+          status: "upcoming",
+        },
         {
           slug: "lire-une-frise-chronologique",
           title: "Lire une frise chronologique",
@@ -418,6 +539,13 @@ const domainQuestionnerLeMonde: ProgramDomain = {
             "L'eleve localise un lieu en utilisant la legende et les reperes d'une carte.",
           status: "upcoming",
         },
+        {
+          slug: "identifier-des-paysages-proches",
+          title: "Identifier des paysages proches",
+          objective:
+            "L'eleve decrit les caracteristiques d'un paysage familier et le distingue d'un autre paysage.",
+          status: "upcoming",
+        },
       ],
     ),
     createSubdomain(
@@ -426,6 +554,13 @@ const domainQuestionnerLeMonde: ProgramDomain = {
       "Matiere et energie",
       "Classer des matieres et explorer des circuits simples.",
       [
+        {
+          slug: "reconnaitre-des-materiaux",
+          title: "Reconnaitre des materiaux",
+          objective:
+            "L'eleve identifie les materiaux constituant des objets courants et les classe selon leurs proprietes.",
+          status: "upcoming",
+        },
         {
           slug: "classer-des-matieres-selon-leurs-proprietes",
           title: "Classer des matieres selon leurs proprietes",
@@ -438,6 +573,13 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           title: "Observer un circuit electrique simple",
           objective:
             "L'eleve identifie les elements d'un circuit simple et comprend pourquoi une lampe s'allume.",
+          status: "upcoming",
+        },
+        {
+          slug: "adopter-des-comportements-responsables",
+          title: "Adopter des comportements responsables",
+          objective:
+            "L'eleve propose et met en oeuvre un geste concret respectueux de l'environnement proche.",
           status: "upcoming",
         },
       ],
@@ -460,6 +602,13 @@ const domainEnseignementsArtistiques: ProgramDomain = {
       "Composer avec des formes et des couleurs, decrire une oeuvre.",
       [
         {
+          slug: "experimenter-couleurs-formes-et-matieres",
+          title: "Experimenter couleurs, formes et matieres",
+          objective:
+            "L'eleve explore differents materiaux, outils et couleurs pour produire des effets varies.",
+          status: "upcoming",
+        },
+        {
           slug: "composer-avec-formes-et-couleurs",
           title: "Composer avec des formes et des couleurs",
           objective:
@@ -467,10 +616,24 @@ const domainEnseignementsArtistiques: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "realiser-une-production-personnelle",
+          title: "Realiser une production personnelle",
+          objective:
+            "L'eleve realise une production complete en faisant des choix artistiques qu'il est capable d'expliquer.",
+          status: "upcoming",
+        },
+        {
           slug: "decrire-une-oeuvre-plastique",
           title: "Decrire une oeuvre plastique",
           objective:
             "L'eleve decrit ce qu'il voit dans une oeuvre en distinguant observation et ressenti.",
+          status: "upcoming",
+        },
+        {
+          slug: "organiser-l-espace-d-une-page",
+          title: "Organiser l'espace d'une page",
+          objective:
+            "L'eleve occupe intentionnellement l'espace de la feuille en tenant compte du cadrage et de la composition.",
           status: "upcoming",
         },
       ],
@@ -482,10 +645,31 @@ const domainEnseignementsArtistiques: ProgramDomain = {
       "Chanter avec precision et ecouter des extraits musicaux.",
       [
         {
+          slug: "chanter-avec-justesse",
+          title: "Chanter avec justesse",
+          objective:
+            "L'eleve chante une melodie simple en respectant la hauteur des notes.",
+          status: "upcoming",
+        },
+        {
           slug: "chanter-en-groupe-avec-precision",
           title: "Chanter en groupe avec precision",
           objective:
             "L'eleve chante en respectant le tempo, les paroles et l'intensite collective.",
+          status: "upcoming",
+        },
+        {
+          slug: "memoriser-un-chant",
+          title: "Memoriser un chant",
+          objective:
+            "L'eleve retient les paroles et la melodie d'un chant court travaille en classe.",
+          status: "upcoming",
+        },
+        {
+          slug: "reproduire-un-rythme",
+          title: "Reproduire un rythme",
+          objective:
+            "L'eleve reproduit un schema rythmique entendu en frappant dans les mains ou avec un instrument.",
           status: "upcoming",
         },
         {
@@ -515,10 +699,24 @@ const domainEPS: ProgramDomain = {
       "Ameliorer une performance et adapter son effort.",
       [
         {
+          slug: "courir-sauter-lancer-avec-intention",
+          title: "Courir, sauter, lancer avec intention",
+          objective:
+            "L'eleve realise des actions locomotrices et de lancer avec un objectif mesurable.",
+          status: "upcoming",
+        },
+        {
           slug: "ameliorer-une-performance-mesuree",
           title: "Ameliorer une performance mesuree",
           objective:
             "L'eleve realise une performance simple et cherche a progresser d'une seance a l'autre.",
+          status: "upcoming",
+        },
+        {
+          slug: "adapter-ses-deplacements",
+          title: "Adapter ses deplacements",
+          objective:
+            "L'eleve modifie sa vitesse, sa trajectoire ou son equilibre selon les contraintes de la situation.",
           status: "upcoming",
         },
         {
@@ -536,6 +734,20 @@ const domainEPS: ProgramDomain = {
       "Jeux collectifs",
       "Cooperer et assumer des roles varies dans un jeu collectif.",
       [
+        {
+          slug: "participer-a-un-jeu-collectif",
+          title: "Participer a un jeu collectif",
+          objective:
+            "L'eleve prend part activement a un jeu collectif en cherchant a atteindre l'objectif.",
+          status: "upcoming",
+        },
+        {
+          slug: "respecter-les-regles-d-un-jeu",
+          title: "Respecter les regles d'un jeu",
+          objective:
+            "L'eleve applique les regles du jeu et accepte les decisions de l'arbitre.",
+          status: "upcoming",
+        },
         {
           slug: "cooperer-dans-un-jeu-collectif",
           title: "Cooperer dans un jeu collectif",
@@ -592,6 +804,13 @@ const domainEMC: ProgramDomain = {
       "Comprendre l'utilite des regles et participer aux decisions collectives.",
       [
         {
+          slug: "respecter-les-regles-collectives",
+          title: "Respecter les regles collectives",
+          objective:
+            "L'eleve applique les regles de la classe et en explique l'importance pour la vie du groupe.",
+          status: "upcoming",
+        },
+        {
           slug: "comprendre-l-utilite-d-une-regle",
           title: "Comprendre l'utilite d'une regle",
           objective:
@@ -599,10 +818,46 @@ const domainEMC: ProgramDomain = {
           status: "upcoming",
         },
         {
+          slug: "cooperer-dans-un-groupe",
+          title: "Cooperer dans un groupe",
+          objective:
+            "L'eleve contribue a une tache collective en ecoutant les autres et en partageant.",
+          status: "upcoming",
+        },
+        {
+          slug: "prendre-soin-du-materiel-commun",
+          title: "Prendre soin du materiel commun",
+          objective:
+            "L'eleve utilise et range le materiel collectif avec soin et en rend compte si necessaire.",
+          status: "upcoming",
+        },
+        {
           slug: "participer-a-une-decision-collective",
           title: "Participer a une decision collective",
           objective:
-            "L'eleve exprime son avis et prend part a une vote ou un choix de groupe.",
+            "L'eleve exprime son avis et prend part a un vote ou un choix de groupe.",
+          status: "upcoming",
+        },
+      ],
+    ),
+    createSubdomain(
+      "emc",
+      "vie-interieure-et-alterite",
+      "Vie interieure et alterite",
+      "Reconnaitre et exprimer ses emotions, respecter les differences.",
+      [
+        {
+          slug: "exprimer-une-emotion",
+          title: "Exprimer une emotion",
+          objective:
+            "L'eleve identifie et nomme ce qu'il ressent dans une situation, en utilisant un vocabulaire adapte.",
+          status: "upcoming",
+        },
+        {
+          slug: "respecter-les-differences",
+          title: "Respecter les differences",
+          objective:
+            "L'eleve reconnait et accepte les differences entre les eleves de la classe.",
           status: "upcoming",
         },
       ],

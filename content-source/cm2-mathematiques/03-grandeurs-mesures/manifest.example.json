@@ -1,0 +1,13 @@
+{
+  "niveau": "CM2",
+  "matiere": "Mathématiques",
+  "domaine": "Grandeurs et mesures",
+  "sequence": "",
+  "competence": "",
+  "feuilles": [
+    "feuille-1.md",
+    "feuille-2.md",
+    "feuille-3.md"
+  ],
+  "statut": "planned"
+}

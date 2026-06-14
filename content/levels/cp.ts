@@ -101,7 +101,7 @@ const leconPhraseSimple: Lesson = {
     name: "Kiwi",
     roleHint: "Kiwi encourage à lire jusqu'au bout avant de répondre.",
   },
-  status: "available",
+  status: "in-progress",
 };
 
 // ── Sous-domaine : Lecture compréhension ────────────────────────────────────

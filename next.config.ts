@@ -19,6 +19,35 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/professeurs/felix",
+        destination: "/personnages/felix",
+        permanent: true,
+      },
+      {
+        source: "/primaire/elementaire",
+        destination: "/primaire/lieux",
+        permanent: true,
+      },
+      {
+        source: "/primaire/elementaire/lieux/:slug*",
+        destination: "/primaire/lieux",
+        permanent: true,
+      },
+      {
+        source: "/univers/personnages",
+        destination: "/professeurs",
+        permanent: true,
+      },
+      {
+        source: "/univers/personnages/:slug",
+        destination: "/professeurs/:slug",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

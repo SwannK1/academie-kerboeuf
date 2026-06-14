@@ -422,6 +422,67 @@ export const sharedMissions: SharedMission[] = [
   },
   {
     levelSlug: "seconde",
+    slug: "gerer-temps-revisions",
+    title: "Gérer son temps et ses révisions",
+    subject: "Méthodologie",
+    description:
+      "Apprendre à planifier son temps, hiérarchiser ses priorités et réviser efficacement au lycée.",
+    objective:
+      "Construire une méthode personnelle de gestion du temps et des révisions pour progresser de façon régulière.",
+    skill:
+      "Planifier, hiérarchiser et contrôler ses révisions avec des outils simples et vérifiables.",
+    difficulty: "lycée",
+    status: "disponible",
+    professorSlug: "oria",
+    professorName: "Oria",
+    theme: "sky",
+    introduction:
+      "Oria déroule un agenda vide sur le bureau : les cases sont là, mais rien ne dit encore ce qu'on doit y mettre — ni dans quel ordre.",
+    support: {
+      label: "Mini-leçon — Gérer son temps et ses révisions",
+      content:
+        "Au lycée, le volume de travail augmente et les délais se rapprochent. Deux pièges guettent : tout remettre à plus tard (procrastination) ou tout faire en même temps sans prioriser (dispersion).\n\n" +
+        "La méthode en 4 étapes :\n" +
+        "1. LISTER — noter toutes les tâches à faire pour la semaine (devoirs, révisions, lectures).\n" +
+        "2. PRIORISER — classer par urgence et importance : ce qui est urgent ET important passe en premier.\n" +
+        "3. DÉCOUPER — transformer chaque grande tâche en petites actions de 20 à 30 minutes maximum.\n" +
+        "4. VÉRIFIER — à la fin de chaque session, cocher ce qui est fait et ajuster le plan du lendemain.\n\n" +
+        "Exemple guidé :\n" +
+        "Léa a un contrôle de physique dans 5 jours, une rédaction à rendre dans 2 jours et deux chapitres d'histoire à relire.\n" +
+        "→ Jour 1 : rédaction (urgent, 2 jours) — 45 min de rédaction, découpée en deux séquences de 20 min.\n" +
+        "→ Jour 2 : rédaction + début physique — relire le cours (20 min), faire les exercices du chapitre 1 (25 min).\n" +
+        "→ Jours 3 et 4 : physique — chapitre 2 + fiche de révision (2 × 30 min).\n" +
+        "→ Jour 5 : relecture histoire + révision éclair physique (20 + 20 min).\n" +
+        "Résultat : aucune tâche oubliée, aucune soirée de panique.",
+    },
+    questions: [
+      "Exercice 1 (guidé) — Lis la liste suivante et classe chaque tâche en deux colonnes : Urgent / Pas urgent. Tâches : exposé à rendre demain, chapitre à relire pour la semaine prochaine, fiche de vocabulaire à compléter pour après-demain, mail à envoyer à un camarade.",
+      "Exercice 2 (intermédiaire) — Marco a un devoir de maths dans 3 jours et un exposé d'histoire dans 6 jours. Il dispose de 30 minutes par jour. Rédige un plan de travail jour par jour en découpant les tâches en séquences de 15 à 20 minutes.",
+      "Exercice 3 (approfondissement) — Décris ta propre semaine à venir : liste 5 tâches réelles, classe-les par priorité, découpe les deux plus importantes en petites actions, et prévois une séquence de vérification en fin de chaque journée.",
+    ],
+    correction: [
+      "Corrigé enseignant — Exercice 1 : Urgent : exposé à rendre demain, fiche de vocabulaire pour après-demain. Pas urgent : chapitre à relire pour la semaine prochaine, mail à envoyer. Valoriser la distinction urgence / importance et accepter les justifications argumentées.",
+      "Corrigé enseignant — Exercice 2 : Exemple de plan acceptable — Jour 1 : maths, révision cours (20 min) + exercices type (15 min). Jour 2 : maths, correction d'erreurs + fiche récapitulative (30 min). Jour 3 : relecture maths + début exposé histoire, plan (30 min). Jours 4-5 : exposé, rédaction et mise en forme (2 × 30 min). Jour 6 : relecture exposé + révision éclair maths (15 + 15 min). Valoriser la régularité, le découpage et l'absence de bourrage de crâne la veille.",
+      "Corrigé enseignant — Exercice 3 : Production personnelle. Critères d'évaluation : 5 tâches listées, classement justifié, au moins 2 tâches découpées en 2 actions ou plus, vérification prévue chaque soir. Correction en classe : confronter les plans et discuter des choix de priorisation.",
+    ],
+    methodTip:
+      "La règle d'or : une session de révision dure 20 à 30 minutes, pas plus. Faire une pause, puis recommencer est plus efficace que de travailler 2 heures d'affilée sans s'arrêter.",
+    projectionHint:
+      "Projeter la liste de tâches de l'exemple guidé et construire le planning collectivement avant de révéler la solution proposée.",
+    printHint:
+      "Imprimer une grille hebdomadaire vierge (colonnes : jour, tâche, durée prévue, fait ?).",
+    curriculumDomain: "Méthodologie",
+    curriculumCompetency: "Organiser ses révisions",
+    curriculumObjective: "à vérifier",
+    officialLevel: "Seconde",
+    cycle: "Lycée",
+    skillTags: ["gestion du temps", "révision", "planning", "priorisation"],
+    teacherUse: ["projection", "impression", "entraînement"],
+    studentUse:
+      "Lire la mini-leçon, réaliser les trois exercices dans l'ordre, puis construire son propre planning de révision.",
+  },
+  {
+    levelSlug: "seconde",
     slug: "methode-lycee",
     title: "Méthode Lycée",
     subject: "Méthodologie",
@@ -513,6 +574,67 @@ export const sharedMissions: SharedMission[] = [
     studentUse: "Relier les données à l'hypothèse et formuler une conclusion.",
   },
   {
+    levelSlug: "seconde",
+    slug: "equation-premier-degre",
+    title: "Résoudre une équation du premier degré",
+    subject: "Mathématiques",
+    description:
+      "Comprendre ce qu'est une équation du premier degré, apprendre la méthode en 4 étapes et s'entraîner sur trois exercices progressifs.",
+    objective:
+      "Résoudre une équation du premier degré en isolant l'inconnue de façon rigoureuse.",
+    skill:
+      "Appliquer les opérations inverses pour isoler x et vérifier la solution.",
+    difficulty: "lycée",
+    status: "disponible",
+    professorSlug: "oria",
+    professorName: "Oria",
+    theme: "gold",
+    introduction:
+      "Oria pose une question à ses élèves : « Si je double un nombre et j'ajoute 5, j'obtiens 17. Quel est ce nombre ? » Voici comment la mathématique transforme cette énigme en équation.",
+    support: {
+      label: "Mini-leçon — Équation du premier degré",
+      content: `Une équation du premier degré est une égalité de la forme ax + b = c (ou équivalente), où x est l'inconnue et a ≠ 0.
+
+Méthode en 4 étapes :
+1. Simplifier chaque membre si nécessaire (développer, réduire).
+2. Rassembler les termes en x d'un même côté (en faisant passer les termes de l'autre côté avec le signe opposé).
+3. Rassembler les constantes de l'autre côté.
+4. Diviser par le coefficient de x pour isoler x. Vérifier en remplaçant x par la valeur trouvée.
+
+Exemple guidé : 2x + 5 = 17
+Étape 1 — déjà simplifié.
+Étape 2 — x seul à gauche : 2x = 17 − 5
+Étape 3 — calculer la constante : 2x = 12
+Étape 4 — diviser par 2 : x = 6
+Vérification : 2 × 6 + 5 = 12 + 5 = 17 ✓`,
+    },
+    questions: [
+      "Exercice 1 (guidé) — Résoudre : 3x − 4 = 11",
+      "Exercice 2 (intermédiaire) — Résoudre : 5x + 3 = 2x + 12",
+      "Exercice 3 (approfondissement) — Résoudre : 2(x + 3) = x + 10",
+    ],
+    correction: [
+      "Exercice 1 : 3x − 4 = 11 → 3x = 11 + 4 = 15 → x = 5. Vérification : 3 × 5 − 4 = 15 − 4 = 11 ✓",
+      "Exercice 2 : 5x + 3 = 2x + 12 → 5x − 2x = 12 − 3 → 3x = 9 → x = 3. Vérification : 5 × 3 + 3 = 18 ; 2 × 3 + 12 = 18 ✓",
+      "Exercice 3 : développer → 2x + 6 = x + 10 → 2x − x = 10 − 6 → x = 4. Vérification : 2(4 + 3) = 14 ; 4 + 10 = 14 ✓",
+    ],
+    methodTip:
+      "Faire passer un terme d'un membre à l'autre revient à appliquer l'opération inverse : si +5 est à droite, on soustrait 5 des deux côtés.",
+    projectionHint:
+      "Projeter l'exemple guidé étape par étape ; masquer la suite avant que les élèves anticipent chaque étape.",
+    printHint:
+      "Imprimer les 3 exercices avec un cadre de réponse par étape (simplifier / rassembler x / rassembler constantes / isoler / vérifier).",
+    curriculumDomain: "Mathématiques",
+    curriculumCompetency: "Nombres et calculs — résolution d'équations",
+    curriculumObjective: "Résoudre une équation du premier degré à une inconnue",
+    officialLevel: "Seconde",
+    cycle: "Lycée",
+    skillTags: ["équation", "algèbre", "premier degré", "inconnue"],
+    teacherUse: ["projection", "impression", "entraînement"],
+    studentUse:
+      "Lire la mini-leçon, appliquer la méthode sur l'exemple guidé, puis résoudre les trois exercices de façon autonome.",
+  },
+  {
     levelSlug: "premiere",
     slug: "dissertation",
     title: "Dissertation",
@@ -522,7 +644,7 @@ export const sharedMissions: SharedMission[] = [
     objective: "Entrer dans l’exercice long sans perdre la logique du sujet.",
     skill: "Analyser un sujet et organiser une argumentation en parties.",
     difficulty: "lycée",
-    status: "disponible",
+    status: "à venir",
     professorSlug: "maia",
     professorName: "Maïa",
     theme: "gold",
@@ -614,7 +736,7 @@ export const sharedMissions: SharedMission[] = [
     objective: "Apprendre à poser une question philosophique avant de répondre.",
     skill: "Définir une notion et construire une problématique.",
     difficulty: "lycée",
-    status: "disponible",
+    status: "à venir",
     professorSlug: "akira",
     professorName: "Akira",
     theme: "gold",

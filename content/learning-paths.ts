@@ -158,7 +158,7 @@ export const learningPaths: LearningPath[] = [
     ],
     professorName: "Akira",
     professorSlug: "akira",
-    status: "disponible",
+    status: "à venir",
   },
 ];
 
