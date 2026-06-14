@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -74,6 +75,7 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   accent: Record<string, AccentTokens>;
   sequences: MatterSequence[];
   linkedCards?: LinkedCard[];
+  extraSection?: ReactNode;
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
 };
@@ -179,6 +181,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   accent,
   sequences,
   linkedCards = [],
+  extraSection,
   footerLinks,
   cycleLabel = "Cycle 3",
 }: SubjectDetailPageProps<TSubject>) {
@@ -273,6 +276,8 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
           </div>
         </section>
       )}
+
+      {extraSection}
 
       {linkedCards.length > 0 ? (
         <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
