@@ -56,7 +56,7 @@ const UNIVERSES: Array<{
   },
   {
     label: "Univers",
-    text: "Découvrir les personnages, les professeurs, la carte et la méthode de l'Académie.",
+    text: "Découvrir les personnages, les lieux et la méthode de l'Académie.",
     href: "/univers",
     cta: "Découvrir",
     accent: "jade",
