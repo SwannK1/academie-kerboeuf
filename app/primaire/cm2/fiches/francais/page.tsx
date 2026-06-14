@@ -11,7 +11,7 @@ import {
 } from "@/content/cm2-francais-fiches";
 
 export const metadata: Metadata = {
-  title: "Fiches Français CM2 — Académie Kerboeuf",
+  title: "Catalogue complet des fiches Français CM2 — Académie Kerboeuf",
   description:
     "Catalogue des fiches de Français CM2 : conjugaison, grammaire, orthographe, vocabulaire et lecture. Feuilles imprimables par notion.",
 };
@@ -62,12 +62,22 @@ export default function Cm2FichesFrancaisPage() {
             CM2 · Français
           </p>
           <h1 className="mt-5 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Fiches Français CM2
+            Catalogue complet des fiches Français CM2
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-muted">
             {total} notions réparties en {DOMAIN_ORDER.length} domaines —{" "}
             {complete} complètes (f1 + f2 + f3), {total - complete} partielles.
           </p>
+          <p className="mt-4 max-w-2xl rounded-md border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-6 text-muted">
+            Les fiches sont accessibles directement depuis la page matière, classées
+            par sous-domaine et compétence.
+          </p>
+          <Link
+            href="/primaire/cm2/matieres/francais"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-jade hover:underline"
+          >
+            ← Retour à la page Français CM2
+          </Link>
         </div>
       </section>
 
