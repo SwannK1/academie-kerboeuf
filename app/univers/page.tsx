@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { academyCharacters } from "@/content/academy-characters";
+import { felixBadges } from "@/content/felix-character";
 import { lieuxAcademie } from "@/content/lieux-academie";
 import { universePathways, type AccentKey } from "@/content/universe";
+
+const guideCharacters = academyCharacters.filter((c) => c.role === "guide");
+const professorCharacters = academyCharacters.filter(
+  (c) => c.role === "professeur",
+);
 
 export const metadata: Metadata = {
   title: "Univers | Académie Kerboeuf",
@@ -43,14 +49,52 @@ export default function UniversPage() {
             Académie Kerboeuf
           </p>
           <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
-            Un univers au service des apprentissages
+            L&apos;univers Académie Kerboeuf
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">
-            L&apos;Académie Kerboeuf est un univers pédagogique fictif. Les
-            personnages et les lieux ne sont pas une fin en soi — ils donnent
-            du sens aux apprentissages, structurent les démarches et motivent
-            l&apos;entrée dans les tâches scolaires.
+            Chaque personnage, lieu et badge accompagne une compétence ou une
+            posture d&apos;apprentissage.
           </p>
+        </div>
+      </section>
+
+      {/* ── Guides par niveau ─────────────────────────────────────────────── */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 max-w-2xl">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
+              Les guides par niveau
+            </p>
+            <h2 className="mt-4 text-3xl font-black text-foreground">
+              Un fil conducteur pour chaque niveau
+            </h2>
+            <p className="mt-4 text-base leading-7 text-muted">
+              Le guide accompagne les élèves dans la méthode, la démarche et
+              la vérification — il relie les matières entre elles.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {guideCharacters.map((character) => (
+              <article
+                key={character.slug}
+                className="rounded-md border border-white/10 bg-white/[0.04] p-5"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                  {character.species} · {character.levels.join(", ")}
+                </p>
+                <h3 className="mt-2 text-lg font-black text-foreground">
+                  {character.name}
+                </h3>
+                <p className="mt-1 text-xs font-semibold text-jade">
+                  {character.mainSubject}
+                </p>
+                <p className="mt-3 text-xs leading-6 text-muted">
+                  {character.shortDescription}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -59,10 +103,10 @@ export default function UniversPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
-              Personnages référents
+              Les professeurs par matière
             </p>
             <h2 className="mt-4 text-3xl font-black text-foreground">
-              Les professeurs de l&apos;Académie
+              Un professeur référent par matière
             </h2>
             <p className="mt-4 text-base leading-7 text-muted">
               Chaque personnage porte une matière et une posture d&apos;enseignement.
@@ -71,7 +115,7 @@ export default function UniversPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {academyCharacters.map((character) => (
+            {professorCharacters.map((character) => (
               <article
                 key={character.slug}
                 className="rounded-md border border-white/10 bg-white/[0.04] p-5"
@@ -166,6 +210,46 @@ export default function UniversPage() {
             >
               Voir la carte de l&apos;Académie →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Badges ───────────────────────────────────────────────────────────── */}
+      <section className="border-y border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 max-w-2xl">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
+              Les badges
+            </p>
+            <h2 className="mt-4 text-3xl font-black text-foreground">
+              Des preuves de compétences et d&apos;attitudes
+            </h2>
+            <p className="mt-4 text-base leading-7 text-muted">
+              Chaque badge récompense un geste précis — chercher, observer,
+              vérifier, expliquer, créer ou coopérer — et non un simple
+              résultat.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {felixBadges.map((badge) => (
+              <article
+                key={badge.slug}
+                className={`rounded-md border p-5 ${accentBorder[badge.color]} bg-white/[0.04]`}
+              >
+                <p
+                  className={`text-xs font-bold uppercase tracking-[0.14em] ${accentText[badge.color]}`}
+                >
+                  {badge.gesture}
+                </p>
+                <h3 className="mt-2 text-base font-black text-foreground">
+                  {badge.name}
+                </h3>
+                <p className="mt-3 text-xs leading-6 text-muted">
+                  {badge.description}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
