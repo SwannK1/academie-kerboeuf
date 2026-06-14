@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
 type TabKey = "programmation" | "progression";
@@ -55,6 +56,12 @@ export default function EnseignantsPage() {
               <p className="mt-4 text-sm text-[var(--muted-foreground)]">
                 En préparation.
               </p>
+              <Link
+                href="/primaire/programmation"
+                className="mt-4 inline-block text-sm font-semibold text-[var(--primary)] underline"
+              >
+                Voir la programmation et progression CM2 →
+              </Link>
             </section>
           )}
 
@@ -70,6 +77,22 @@ export default function EnseignantsPage() {
               </p>
             </section>
           )}
+        </div>
+
+        <div className="mt-10 border-t border-[var(--border)] pt-6">
+          <h2 className="text-xl font-semibold">Fiches par matière</h2>
+          <p className="mt-2 text-sm text-[var(--muted-foreground)]">
+            Catalogues complets des fiches imprimables, classées par
+            sous-domaine et compétence.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
+            <Link href="/primaire/cm2/fiches/mathematiques" className="text-[var(--primary)] underline">
+              Fiches Mathématiques CM2 →
+            </Link>
+            <Link href="/primaire/cm2/fiches/francais" className="text-[var(--primary)] underline">
+              Fiches Français CM2 →
+            </Link>
+          </div>
         </div>
       </div>
     </main>
