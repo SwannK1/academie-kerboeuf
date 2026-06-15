@@ -1492,7 +1492,11 @@ export function getProfessorBySlug(slug: string): ProfessorProfile | undefined {
 }
 
 export function getAllProfessorSlugs(): { slug: string }[] {
-  return professorProfiles.map((p) => ({ slug: p.slug }));
+  // Félix est un personnage-guide (cf. /personnages/felix), pas un professeur de matière :
+  // sa page /professeurs/felix redirige vers la route canonique.
+  return professorProfiles
+    .filter((p) => p.slug !== "felix")
+    .map((p) => ({ slug: p.slug }));
 }
 
 export function getRelatedProfessors(

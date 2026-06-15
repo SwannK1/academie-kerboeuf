@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/professeurs/felix",
+        destination: "/personnages/felix",
+        permanent: true,
+      },
+      {
         source: "/primaire/elementaire",
         destination: "/primaire/lieux",
         permanent: true,
@@ -29,6 +34,16 @@ const nextConfig: NextConfig = {
       {
         source: "/primaire/elementaire/lieux/:slug*",
         destination: "/primaire/lieux",
+        permanent: true,
+      },
+      {
+        source: "/univers/personnages",
+        destination: "/professeurs",
+        permanent: true,
+      },
+      {
+        source: "/univers/personnages/:slug",
+        destination: "/professeurs/:slug",
         permanent: true,
       },
     ];

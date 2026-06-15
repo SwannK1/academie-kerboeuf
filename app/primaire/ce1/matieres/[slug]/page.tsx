@@ -35,6 +35,17 @@ export default async function Ce1SubjectPage({ params }: PageProps) {
   const tree = getCe1SubjectTree(slug);
   const sequences = getCe1Sequences(slug);
 
+  const footerLinks: { href: string; label: string }[] = [
+    { href: "/primaire/ce1/matieres", label: "Toutes les matières CE1" },
+  ];
+
+  if (slug === "francais") {
+    footerLinks.push({
+      href: "/primaire/ce1/programmes/francais/etude-de-la-langue",
+      label: "Étude de la langue — séquences publiées",
+    });
+  }
+
   return (
     <SubjectDetailPage
       levelLabel="CE1"
@@ -44,7 +55,7 @@ export default async function Ce1SubjectPage({ params }: PageProps) {
       tree={tree}
       accent={CE1_ACCENT}
       sequences={sequences}
-      footerLinks={[{ href: "/primaire/ce1/lecons", label: "Leçons CE1" }]}
+      footerLinks={footerLinks}
     />
   );
 }

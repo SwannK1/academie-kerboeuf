@@ -54,7 +54,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       levelHref="/primaire/cm2"
       subjectsHref="/primaire/cm2/matieres"
       subject={subject}
-      tree={tree ? mapCm2Tree(tree, slug) : undefined}
+      tree={tree ? mapCm2Tree(tree) : undefined}
       accent={CM2_ACCENT}
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
@@ -62,12 +62,15 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
+        ...(slug === "mathematiques"
+          ? [{ href: "/primaire/cm2/fiches/mathematiques", label: "Compétences et fiches Mathématiques", tone: "jade" as const }]
+          : []),
       ]}
     />
   );
 }
 
-function mapCm2Tree(tree: Cm2SubjectNode, subjectSlug: string) {
+function mapCm2Tree(tree: Cm2SubjectNode) {
   return {
     place: tree.place,
     guides: tree.guides,
@@ -83,9 +86,9 @@ function mapCm2Tree(tree: Cm2SubjectNode, subjectSlug: string) {
           title: lesson.title,
           description: lesson.description,
           status: lesson.status,
-          href: lesson.routeSlug
-            ? `/primaire/cm2/matieres/${subjectSlug}/${domain.id}/${subdomain.id}/${lesson.routeSlug}`
-            : undefined,
+          // Pas de page de détail leçon CM2 (app/primaire/cm2/matieres/[slug]/[domain]/[subdomain]/[lesson]
+          // n'existe pas) : ne jamais générer de lien vers cette route absente.
+          href: undefined,
         })),
       })),
     })),

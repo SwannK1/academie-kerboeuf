@@ -45,7 +45,7 @@ export const ce1Subjects: Ce1Subject[] = [
     title: "Questionner le monde",
     shortDescription:
       "Observer le vivant, explorer la matière, se repérer dans le temps et l'espace.",
-    domains: ["Le monde vivant", "Espace et temps", "Matière et énergie", "Comportements responsables"],
+    domains: ["Le monde vivant", "Espace et temps", "Matière et énergie"],
     status: "upcoming",
     accent: "sky",
     teacherFocus:
