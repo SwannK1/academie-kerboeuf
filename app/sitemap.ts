@@ -69,6 +69,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASE_URL}/`, priority: 1.0 },
     { url: `${BASE_URL}/univers`, priority: 0.9 },
+    { url: `${BASE_URL}/personnages`, priority: 0.85 },
+    { url: `${BASE_URL}/personnages/eleves`, priority: 0.8 },
+    { url: `${BASE_URL}/personnages/professeurs`, priority: 0.8 },
+    { url: `${BASE_URL}/methode`, priority: 0.8 },
+    { url: `${BASE_URL}/programmation`, priority: 0.85 },
+    { url: `${BASE_URL}/enseignants`, priority: 0.75 },
     { url: `${BASE_URL}/professeurs`, priority: 0.8 },
     { url: `${BASE_URL}/maternelle`, priority: 0.8 },
     { url: `${BASE_URL}/primaire`, priority: 0.8 },
