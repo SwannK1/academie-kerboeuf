@@ -1,5 +1,5 @@
-// Carte du programme CP — Domaine Français uniquement (pilote).
-// Structure légère : domaine → sous-domaine → compétence attendue.
+// Carte du programme CP — Cycle 2, primaire.
+// Structure légère : domaine → sous-domaine → séquence (1 séquence = 1 compétence observable).
 // Aucun contenu pédagogique complet. Le site organise ; les PDF enseignent.
 // Tous les statuts sont "upcoming" : aucun href, aucun lien PDF mort.
 
@@ -236,6 +236,132 @@ export const cpCurriculumLevelMap: CurriculumLevelMap = {
                 "Je commence par le début.",
                 "J'utilise un mot de liaison (ensuite, puis, après).",
                 "Je raconte en phrases complètes.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      domainSlug: "mathematiques",
+      subject: "Mathématiques",
+      label: "Mathématiques",
+      subdomains: [
+        {
+          subdomainSlug: "numeration",
+          label: "Numération",
+          entries: [
+            {
+              id: "cp-ma-num-denombrer-jusqu-100",
+              levelSlug: "cp",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "numeration",
+              title: "Dénombrer, lire et écrire les nombres jusqu'à 100",
+              observableObjective:
+                "L'élève dénombre une collection, lit et écrit les nombres jusqu'à 100 en chiffres et en lettres.",
+              successCriteria: [
+                "Je compte une collection en formant des groupes de dix.",
+                "Je lis un nombre écrit en chiffres jusqu'à 100.",
+                "J'écris un nombre dicté en chiffres.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "cp-ma-num-comparer-ordonner",
+              levelSlug: "cp",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "numeration",
+              title: "Comparer et ordonner des nombres jusqu'à 100",
+              observableObjective:
+                "L'élève compare deux nombres et les place dans l'ordre croissant ou décroissant.",
+              successCriteria: [
+                "J'utilise les symboles < et > pour comparer deux nombres.",
+                "Je range une suite de nombres dans l'ordre croissant.",
+                "Je repère la position d'un nombre sur une droite graduée.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "calcul",
+          label: "Calcul",
+          entries: [
+            {
+              id: "cp-ma-cal-addition-soustraction",
+              levelSlug: "cp",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "calcul",
+              title: "Calculer des additions et des soustractions simples",
+              observableObjective:
+                "L'élève calcule mentalement ou par écrit des sommes et des différences inférieures à 20.",
+              successCriteria: [
+                "Je calcule une addition en ligne.",
+                "Je calcule une soustraction en ligne.",
+                "Je vérifie mon résultat par un autre moyen.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "cp-ma-cal-faits-numeriques",
+              levelSlug: "cp",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "calcul",
+              title: "Mémoriser les faits numériques de base",
+              observableObjective:
+                "L'élève mobilise immédiatement les compléments à 10 et les doubles.",
+              successCriteria: [
+                "Je connais les paires de nombres dont la somme est 10.",
+                "Je connais les doubles des nombres jusqu'à 10.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "geometrie",
+          label: "Géométrie",
+          entries: [
+            {
+              id: "cp-ma-geo-reconnaitre-figures",
+              levelSlug: "cp",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "geometrie",
+              title: "Reconnaître et nommer des figures géométriques simples",
+              observableObjective:
+                "L'élève identifie et nomme un carré, un rectangle, un triangle et un cercle.",
+              successCriteria: [
+                "Je nomme la figure quand on me la montre.",
+                "Je distingue une figure fermée d'une figure ouverte.",
+                "Je justifie mon choix par une propriété simple.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "grandeurs-mesures",
+          label: "Grandeurs et mesures",
+          entries: [
+            {
+              id: "cp-ma-gm-mesurer-longueurs",
+              levelSlug: "cp",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "grandeurs-mesures",
+              title: "Mesurer et comparer des longueurs",
+              observableObjective:
+                "L'élève mesure une longueur avec une règle et compare deux longueurs.",
+              successCriteria: [
+                "Je place correctement la règle pour mesurer.",
+                "J'exprime la mesure en centimètres.",
+                "Je dis lequel est le plus long en justifiant.",
               ],
               status: "upcoming",
             },

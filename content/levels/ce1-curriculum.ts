@@ -1,5 +1,5 @@
-// Carte du programme CE1 — Domaine Français uniquement (pilote).
-// Structure légère : domaine → sous-domaine → compétence attendue.
+// Carte du programme CE1 — Cycle 2, primaire.
+// Structure légère : domaine → sous-domaine → séquence (1 séquence = 1 compétence observable).
 // Aucun contenu pédagogique complet. Le site organise ; les PDF enseignent.
 // Tous les statuts sont "upcoming" : aucun href, aucun lien PDF mort.
 
@@ -223,6 +223,117 @@ export const ce1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je dis ce que j'ai choisi.",
                 "Je donne une raison avec 'parce que' ou 'car'.",
                 "Je parle en phrases complètes.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      domainSlug: "mathematiques",
+      subject: "Mathématiques",
+      label: "Mathématiques",
+      subdomains: [
+        {
+          subdomainSlug: "numeration",
+          label: "Numération",
+          entries: [
+            {
+              id: "ce1-ma-num-valeur-positionnelle",
+              levelSlug: "ce1",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "numeration",
+              title: "Comprendre la valeur positionnelle des chiffres jusqu'à 1000",
+              observableObjective:
+                "L'élève décompose un nombre en centaines, dizaines et unités.",
+              successCriteria: [
+                "Je lis un nombre jusqu'à 1000 en chiffres et en lettres.",
+                "Je décompose un nombre en centaines, dizaines et unités.",
+                "Je compare deux nombres jusqu'à 1000 et je justifie.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "calcul",
+          label: "Calcul",
+          entries: [
+            {
+              id: "ce1-ma-cal-addition-soustraction-posees",
+              levelSlug: "ce1",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "calcul",
+              title: "Poser et calculer des additions et soustractions",
+              observableObjective:
+                "L'élève pose et calcule une addition ou une soustraction en colonnes avec retenue.",
+              successCriteria: [
+                "Je pose correctement les chiffres en colonnes.",
+                "Je calcule en gérant la retenue.",
+                "Je vérifie le résultat.",
+              ],
+              status: "upcoming",
+            },
+            {
+              id: "ce1-ma-cal-tables-multiplication",
+              levelSlug: "ce1",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "calcul",
+              title: "Mémoriser et utiliser les tables de multiplication (×2, ×5, ×10)",
+              observableObjective:
+                "L'élève restitue immédiatement les produits des tables de 2, 5 et 10.",
+              successCriteria: [
+                "Je récite la table de 2, 5 ou 10 sans erreur.",
+                "Je calcule un produit simple sans compter.",
+                "J'utilise une table pour résoudre un calcul.",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "geometrie",
+          label: "Géométrie",
+          entries: [
+            {
+              id: "ce1-ma-geo-reproduire-figures",
+              levelSlug: "ce1",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "geometrie",
+              title: "Reconnaître et reproduire des figures géométriques",
+              observableObjective:
+                "L'élève trace et reproduit des figures simples en utilisant les outils adaptés.",
+              successCriteria: [
+                "J'utilise la règle pour tracer un segment droit.",
+                "Je reproduis une figure sur papier quadrillé.",
+                "Je nomme les figures courantes (carré, rectangle, triangle).",
+              ],
+              status: "upcoming",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "grandeurs-mesures",
+          label: "Grandeurs et mesures",
+          entries: [
+            {
+              id: "ce1-ma-gm-unites-conventionnelles",
+              levelSlug: "ce1",
+              subject: "Mathématiques",
+              domainSlug: "mathematiques",
+              subdomainSlug: "grandeurs-mesures",
+              title: "Mesurer en utilisant des unités conventionnelles",
+              observableObjective:
+                "L'élève utilise cm, m, kg et euro pour mesurer et comparer des grandeurs.",
+              successCriteria: [
+                "Je choisis l'unité adaptée à la grandeur mesurée.",
+                "Je lis une mesure sur un instrument simple.",
+                "Je compare deux mesures de même nature.",
               ],
               status: "upcoming",
             },
