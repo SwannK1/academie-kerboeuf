@@ -1,4 +1,5 @@
 // Carte du programme CM1 — Cycle 3, primaire.
+// Structure : domaine → sous-domaine → séquence (1 séquence = 1 compétence observable).
 // Le site organise ; les PDF enseignent.
 // Aucun contenu pédagogique complet : uniquement objectifs observables,
 // critères courts et ressources PDF prévues sans href.
@@ -187,6 +188,44 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
               status: "upcoming",
               resourceSlots: PLANNED_PDF_RESOURCES,
               competencyId: "cm1-fr-edl-sujet-verbe-accord",
+            },
+            {
+              id: "cm1-fr-edl-classes-de-mots-entry",
+              levelSlug: "cm1",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "etude-de-la-langue",
+              title: "Identifier les classes de mots dans une phrase",
+              officialReference: "Cycle 3 — Étude de la langue",
+              observableObjective:
+                "L'élève distingue nom, verbe, adjectif et déterminant dans une phrase.",
+              successCriteria: [
+                "Je nomme la classe d'un mot donné.",
+                "Je justifie mon choix par un critère grammatical.",
+                "Je retrouve plusieurs noms ou verbes dans une phrase.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-fr-edl-classes-mots",
+            },
+            {
+              id: "cm1-fr-edl-conjugaison-present-entry",
+              levelSlug: "cm1",
+              subject: "Français",
+              domainSlug: "francais",
+              subdomainSlug: "etude-de-la-langue",
+              title: "Conjuguer au présent et à l'imparfait",
+              officialReference: "Cycle 3 — Étude de la langue",
+              observableObjective:
+                "L'élève conjugue correctement un verbe du 1er groupe au présent et à l'imparfait.",
+              successCriteria: [
+                "Je conjugue un verbe en -er aux six personnes au présent.",
+                "Je conjugue ce même verbe à l'imparfait.",
+                "Je repère le temps utilisé dans un texte donné.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-fr-edl-conjugaison-present-imparfait",
             },
           ],
         },
@@ -418,6 +457,31 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
           ],
         },
         {
+          subdomainSlug: "moyen-age",
+          label: "Moyen Âge",
+          entries: [
+            {
+              id: "cm1-hi-ma-situer-periode-entry",
+              levelSlug: "cm1",
+              subject: "Histoire-Géographie",
+              domainSlug: "histoire-geographie",
+              subdomainSlug: "moyen-age",
+              title: "Situer le Moyen Âge sur une frise chronologique",
+              officialReference: "Cycle 3 — Histoire",
+              observableObjective:
+                "L'élève place la période médiévale sur une frise et la distingue de l'Antiquité.",
+              successCriteria: [
+                "Je repère le début et la fin du Moyen Âge.",
+                "Je place la période sur la frise en la comparant à l'Antiquité.",
+                "Je cite un événement ou un personnage repère.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-hi-ma-situer-periode",
+            },
+          ],
+        },
+        {
           subdomainSlug: "geographie",
           label: "Géographie",
           entries: [
@@ -490,6 +554,31 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
               status: "upcoming",
               resourceSlots: PLANNED_PDF_RESOURCES,
               competencyId: "cm1-sc-vivant-besoins",
+            },
+          ],
+        },
+        {
+          subdomainSlug: "matiere-energie",
+          label: "Matière et énergie",
+          entries: [
+            {
+              id: "cm1-sc-me-etats-matiere-entry",
+              levelSlug: "cm1",
+              subject: "Sciences",
+              domainSlug: "sciences",
+              subdomainSlug: "matiere-energie",
+              title: "Distinguer les états de la matière",
+              officialReference: "Cycle 3 — Sciences et technologie",
+              observableObjective:
+                "L'élève identifie les états solide, liquide et gazeux et les associe à des exemples concrets.",
+              successCriteria: [
+                "Je cite un exemple pour chaque état.",
+                "Je décris une propriété propre à chaque état.",
+                "J'explique une transformation d'état par un apport ou une perte de chaleur.",
+              ],
+              status: "upcoming",
+              resourceSlots: PLANNED_PDF_RESOURCES,
+              competencyId: "cm1-sc-me-etats-matiere",
             },
           ],
         },
