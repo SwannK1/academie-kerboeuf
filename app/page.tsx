@@ -78,6 +78,30 @@ const UNIVERSES: Array<{
     accent: "sky",
     status: "available",
   },
+  {
+    label: "Enseignants",
+    text: "Fiches par matière, programmation et progression.",
+    href: "/enseignants",
+    cta: "Accéder",
+    accent: "ember",
+    status: "available",
+  },
+  {
+    label: "Programmation",
+    text: "La programmation annuelle par niveau.",
+    href: "/programmation",
+    cta: "Consulter",
+    accent: "jade",
+    status: "available",
+  },
+  {
+    label: "Méthode",
+    text: "Comment fonctionne l'Académie Kerboeuf.",
+    href: "/methode",
+    cta: "Lire",
+    accent: "gold",
+    status: "available",
+  },
 ];
 
 export default function Home() {
