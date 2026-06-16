@@ -78,6 +78,30 @@ const UNIVERSES: Array<{
     accent: "sky",
     status: "available",
   },
+  {
+    label: "Enseignants",
+    text: "Préparez vos séances et organisez votre programmation.",
+    href: "/enseignants",
+    cta: "Accéder",
+    accent: "ember",
+    status: "available",
+  },
+  {
+    label: "Programmation",
+    text: "Planifiez les séquences sur l'année scolaire.",
+    href: "/programmation",
+    cta: "Voir",
+    accent: "jade",
+    status: "available",
+  },
+  {
+    label: "Méthode",
+    text: "Comment fonctionne l'Académie : séquences, fiches et progressions.",
+    href: "/methode",
+    cta: "Découvrir",
+    accent: "gold",
+    status: "available",
+  },
 ];
 
 export default function Home() {
