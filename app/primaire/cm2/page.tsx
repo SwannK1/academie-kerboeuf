@@ -158,7 +158,7 @@ export default function Cm2Page() {
             </Link>
 
             <Link
-              href="/primaire/cm2/fiches/mathematiques"
+              href="/primaire/cm2/matieres/mathematiques"
               className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
             >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
@@ -177,7 +177,7 @@ export default function Cm2Page() {
             </Link>
 
             <Link
-              href="/primaire/cm2/fiches/francais"
+              href="/primaire/cm2/matieres/francais"
               className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
             >
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
