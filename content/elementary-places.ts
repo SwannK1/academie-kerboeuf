@@ -100,7 +100,7 @@ const professorRefs = {
   rosa: {
     name: "Rosa le Flamant Rose",
     href: "/professeurs/rosa",
-    role: "Guide de la parole claire",
+    role: "Guide de la langue française",
   },
   hector: {
     name: "Hector le Castor",
