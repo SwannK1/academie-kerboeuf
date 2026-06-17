@@ -102,7 +102,7 @@ export function PrimaireLevelEntry({ level }: Props) {
               {subjects.map((subject) => (
                 <Link
                   key={subject.slug}
-                  href={`/primaire/${slug}/matieres`}
+                  href={`/primaire/${slug}/matieres/${subject.slug}`}
                   className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-jade/40"
                 >
                   <p className="text-lg font-black text-foreground">
