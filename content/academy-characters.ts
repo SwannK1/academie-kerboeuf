@@ -5,13 +5,23 @@ import type { PublicStatus } from "@/content/public-status";
 
 export type CharacterRole = "guide" | "professeur";
 
+/** Catégorie structurelle utilisée pour distinguer guides, professeurs et personnages secondaires. */
+export type AcademyCharacterCategory =
+  | "level-guide"
+  | "subject-teacher"
+  | "secondary";
+
 export type AcademyProfessorCharacter = {
+  /** Identifiant interne stable, identique à `slug` pour les personnages actuels */
+  id: string;
   /** Identifiant interne, correspond à ElementaryProfessorId ou "felix" */
   slug: string;
   /** Prénom + espèce */
   name: string;
   species: string;
   role: CharacterRole;
+  /** Catégorie structurelle (guide de niveau, professeur de matière, personnage secondaire) */
+  category: AcademyCharacterCategory;
   /** Matière principale enseignée */
   mainSubject: string;
   /** Courte description pédagogique (1-2 phrases) */
@@ -26,6 +36,10 @@ export type AcademyProfessorCharacter = {
   levels: string[];
   /** Clés de lieux associés dans l'Académie */
   associatedPlaceKeys: string[];
+  /** Slugs de badges associés, si déjà définis */
+  relatedBadges?: string[];
+  /** Chemin d'image du personnage, si déjà disponible */
+  imageSrc?: string;
   /** Statut public du personnage sur le site */
   publicStatus: PublicStatus;
   /** Utilisation prévue dans le site */
@@ -36,10 +50,12 @@ export type AcademyProfessorCharacter = {
 
 export const academyCharacters: AcademyProfessorCharacter[] = [
   {
+    id: "felix",
     slug: "felix",
     name: "Félix le lynx",
     species: "Lynx boréal",
     role: "guide",
+    category: "level-guide",
     mainSubject: "Méthode et gestes intellectuels",
     shortDescription:
       "Félix guide les élèves de CM2 dans leurs missions. Il structure la démarche : observer, chercher, vérifier, justifier, produire une trace.",
@@ -68,10 +84,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
       "Présent sur les pages CM2, missions Félix, et comme fil conducteur pédagogique de la fin du primaire.",
   },
   {
+    id: "hector",
     slug: "hector",
     name: "Hector le castor",
     species: "Castor d'Europe",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Mathématiques",
     shortDescription:
       "Hector enseigne les mathématiques avec rigueur et méthode. Il aime construire, mesurer et vérifier.",
@@ -97,10 +115,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
       "Référent mathématiques sur toutes les pages et missions du primaire.",
   },
   {
+    id: "rosa",
     slug: "rosa",
     name: "Rosa le Flamant rose",
     species: "Flamant rose",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Français",
     shortDescription:
       "Rosa enseigne la langue française : lecture, compréhension, écriture et structuration.",
@@ -124,10 +144,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     siteUsage: "Référente français sur toutes les pages et missions du primaire.",
   },
   {
+    id: "melina",
     slug: "melina",
     name: "Mélina l'abeille",
     species: "Abeille domestique",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Sciences",
     shortDescription:
       "Mélina enseigne les sciences en partant du réel : observer, expérimenter, comprendre le vivant et la matière.",
@@ -153,10 +175,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
       "Référente sciences sur toutes les pages et missions du primaire.",
   },
   {
+    id: "elian",
     slug: "elian",
     name: "Elian le dromadaire",
     species: "Dromadaire",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Histoire-Géographie",
     shortDescription:
       "Elian enseigne l'histoire et la géographie : lire des cartes, comprendre les traces du passé, se repérer dans le temps et l'espace.",
@@ -182,10 +206,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
       "Référent histoire-géographie sur les pages CE2, CM1, CM2 et missions correspondantes.",
   },
   {
+    id: "pablo",
     slug: "pablo",
     name: "Pablo l'Orang-outan",
     species: "Orang-outan",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Arts plastiques",
     shortDescription:
       "Pablo enseigne les arts plastiques : créer, observer, composer, expérimenter des techniques artistiques.",
@@ -211,10 +237,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
       "Référent arts plastiques sur les pages et missions du primaire.",
   },
   {
+    id: "naia",
     slug: "naia",
     name: "Naïa l'hippocampe",
     species: "Hippocampe moucheté",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Musique",
     shortDescription:
       "Naïa enseigne la musique : écouter, chanter, créer, reconnaître sons et rythmes.",
@@ -239,10 +267,12 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     siteUsage: "Référente musique sur les pages et missions du primaire.",
   },
   {
+    id: "max",
     slug: "max",
     name: "Max le kangourou",
     species: "Kangourou roux",
     role: "professeur",
+    category: "subject-teacher",
     mainSubject: "Éducation physique et sportive",
     shortDescription:
       "Max enseigne l'EPS : bouger, coopérer, progresser et respecter les règles.",
