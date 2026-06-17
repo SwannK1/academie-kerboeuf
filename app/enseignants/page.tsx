@@ -24,6 +24,36 @@ const subjectLinks = [
   },
 ] as const;
 
+const SHEET_FORMAT = [
+  {
+    title: "Feuille 1",
+    description: "Situation initiale, mini-leçon, automatismes.",
+  },
+  {
+    title: "Feuille 2",
+    description: "Application, consolidation, entraînement autonome.",
+  },
+  {
+    title: "Feuille 3",
+    description: "Évaluation courte, critères de réussite, vérification.",
+  },
+] as const;
+
+const DIFFERENTIATION_LEVELS = [
+  {
+    title: "Guidage fort",
+    description: "Consignes relues, exemples donnés, étapes très visibles.",
+  },
+  {
+    title: "Guidage moyen",
+    description: "Aide ponctuelle, outils disponibles, correction intermédiaire.",
+  },
+  {
+    title: "Autonomie",
+    description: "Mission complète, justification, vérification et trace finale.",
+  },
+] as const;
+
 export default function TeachersPage() {
   return (
     <HierarchyPage
@@ -42,13 +72,41 @@ export default function TeachersPage() {
 
       <TeacherCard
         title="Comprendre le format des fiches"
-        description="Consultez le niveau, la matière, l'objectif et les ressources réellement publiées avant d'utiliser une fiche en classe."
-      />
+        description="Consultez le niveau, la matière, l'objectif et les ressources réellement publiées avant d'utiliser une fiche en classe. Chaque notion s'appuie sur un même modèle en trois feuilles :"
+      >
+        <ul className="grid gap-2 sm:grid-cols-3" role="list">
+          {SHEET_FORMAT.map((sheet) => (
+            <li
+              key={sheet.title}
+              className="rounded-md border border-white/10 bg-background/45 p-4"
+            >
+              <p className="text-sm font-bold text-foreground">{sheet.title}</p>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                {sheet.description}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </TeacherCard>
 
       <TeacherCard
         title="Différencier"
-        description="Ajustez la quantité, le temps, les aides et le degré d'autonomie selon les besoins des élèves, sans changer l'objectif visé."
-      />
+        description="Ajustez la quantité, le temps, les aides et le degré d'autonomie selon les besoins des élèves, sans changer l'objectif visé. Les fiches peuvent être utilisées à trois niveaux d'accompagnement :"
+      >
+        <ul className="grid gap-2 sm:grid-cols-3" role="list">
+          {DIFFERENTIATION_LEVELS.map((level) => (
+            <li
+              key={level.title}
+              className="rounded-md border border-white/10 bg-background/45 p-4"
+            >
+              <p className="text-sm font-bold text-foreground">{level.title}</p>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                {level.description}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </TeacherCard>
 
       <TeacherCard
         title="Vérifier les statuts"
