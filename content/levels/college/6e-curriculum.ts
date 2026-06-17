@@ -91,13 +91,15 @@ export const sixiemeAccompagnementCards: CollegeAccompagnementCard[] = [
     slug: "methodes",
     label: "Méthodes de travail",
     description: "Organisation, prise de notes et stratégies d'apprentissage.",
-    status: "upcoming",
+    status: "available",
+    href: "/college/6e/methodes",
   },
   {
     slug: "entree-en-6e",
     label: "Réussir son entrée en 6e",
     description: "Repères pour bien démarrer le collège et s'y retrouver.",
-    status: "upcoming",
+    status: "available",
+    href: "/college/6e/reussir-son-entree-en-6e",
   },
 ];
 
