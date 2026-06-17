@@ -68,6 +68,39 @@ export const sixiemeMatieres: CollegeMatiereCard[] = [
   },
 ];
 
+// ── Cartes accompagnement du portail /college/6e ──────────────────────────────
+// Ressources, méthodes et aide à l'entrée en 6e.
+
+export type CollegeAccompagnementCard = {
+  slug: string;
+  label: string;
+  description: string;
+  status: ProgramStatus;
+  href?: string;
+};
+
+export const sixiemeAccompagnementCards: CollegeAccompagnementCard[] = [
+  {
+    slug: "ressources",
+    label: "Ressources",
+    description: "Fiches, documents de référence et supports pour la 6e.",
+    status: "available",
+    href: "/college/6e/ressources",
+  },
+  {
+    slug: "methodes",
+    label: "Méthodes de travail",
+    description: "Organisation, prise de notes et stratégies d'apprentissage.",
+    status: "upcoming",
+  },
+  {
+    slug: "entree-en-6e",
+    label: "Réussir son entrée en 6e",
+    description: "Repères pour bien démarrer le collège et s'y retrouver.",
+    status: "upcoming",
+  },
+];
+
 // ── Métadonnées d'affichage des sous-domaines Mathématiques ──────────────────
 // Utilisées par la page portail matière /college/6e/mathematiques.
 

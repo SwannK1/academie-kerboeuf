@@ -21,6 +21,8 @@ import {
   sixiemeHistoireGeographieEmcSubdomains,
   type CollegeMatiereCard,
   type CollegeSubdomainCard,
+  type CollegeAccompagnementCard,
+  sixiemeAccompagnementCards,
 } from "@/content/levels/college/6e-curriculum";
 import {
   cinqiemeMatieres,
@@ -1610,6 +1612,12 @@ export function getCollegeMatiereCards(levelSlug: string): CollegeMatiereCard[] 
 export function getSixiemeCurriculumMap(): CurriculumLevelMap {
   return sixiemeCurriculumLevelMap;
 }
+
+export function getSixiemeAccompagnementCards(): CollegeAccompagnementCard[] {
+  return sixiemeAccompagnementCards;
+}
+
+export type { CollegeAccompagnementCard };
 
 // ── Registre des portails matière par niveau ─────────────────────────────────
 // Données d'affichage par matière. Ajouter un niveau = ajouter un bloc ici.
