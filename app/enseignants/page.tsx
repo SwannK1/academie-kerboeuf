@@ -139,7 +139,9 @@ export default function TeachersPage() {
           <TeacherLink href="/programmation">
             Créer sa programmation
           </TeacherLink>
-          <TeacherLink href="/programmation">Créer sa progression</TeacherLink>
+          <TeacherLink href="/programmation#progression">
+            Créer sa progression
+          </TeacherLink>
         </div>
       </TeacherCard>
     </HierarchyPage>
