@@ -84,6 +84,33 @@ export default function TeachersPage() {
           <TeacherLink href="/programmation">Créer sa progression</TeacherLink>
         </div>
       </TeacherCard>
+
+      <TeacherCard
+        title="Programmation annuelle"
+        description="Répartissez les compétences du programme sur les périodes de l'année scolaire, matière par matière."
+      >
+        <TeacherLink href="/enseignants/programmation/annuelle">
+          Ouvrir l&apos;outil
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Progression de période"
+        description="Ordonnez les séquences d'une période en respectant la logique : une séquence pour une compétence."
+      >
+        <TeacherLink href="/enseignants/programmation/periode">
+          Ouvrir l&apos;outil
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Emploi du temps"
+        description="Construisez l'emploi du temps hebdomadaire de votre classe en respectant les horaires officiels."
+      >
+        <TeacherLink href="/enseignants/emploi-du-temps">
+          Ouvrir l&apos;outil
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
   );
 }
