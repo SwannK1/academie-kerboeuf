@@ -12,6 +12,17 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
+import type { MatterFicheDomain } from "@/components/academy/SubjectMatterCatalog";
+import {
+  cm2FrancaisFiches,
+  FICHE_DOMAIN_LABELS,
+  SHEET_LABELS as FRANCAIS_SHEET_LABELS,
+} from "@/content/cm2-francais-fiches";
+import {
+  cm2FichesMaths,
+  SHEET_LABELS as MATH_SHEET_LABELS,
+  SHEET_IDS as MATH_SHEET_IDS,
+} from "@/content/cm2-fiches-maths";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -59,6 +70,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
       linkedCards={linkedCards}
+      fichesGroups={getFichesGroups(slug)}
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
@@ -93,6 +105,56 @@ function mapCm2Tree(tree: Cm2SubjectNode) {
       })),
     })),
   };
+}
+
+function getFichesGroups(slug: string): MatterFicheDomain[] {
+  if (slug === "francais") return mapFrancaisFiches();
+  if (slug === "mathematiques") return mapMathFiches();
+  return [];
+}
+
+function mapFrancaisFiches(): MatterFicheDomain[] {
+  const byDomain = new Map<string, MatterFicheDomain["fiches"]>();
+
+  for (const notion of cm2FrancaisFiches) {
+    const sheets = (["f1", "f2", "f3"] as const)
+      .filter((id) => notion.sheets[id])
+      .map((id) => ({
+        id,
+        label: FRANCAIS_SHEET_LABELS[id],
+        href: notion.sheets[id]?.pdfHref,
+      }));
+
+    const list = byDomain.get(notion.domain) ?? [];
+    list.push({ slug: notion.slug, title: notion.title, sheets });
+    byDomain.set(notion.domain, list);
+  }
+
+  return Array.from(byDomain.entries()).map(([domain, fiches]) => ({
+    domain: FICHE_DOMAIN_LABELS[domain as keyof typeof FICHE_DOMAIN_LABELS],
+    fiches,
+  }));
+}
+
+function mapMathFiches(): MatterFicheDomain[] {
+  const byDomain = new Map<string, MatterFicheDomain["fiches"]>();
+
+  for (const notion of cm2FichesMaths) {
+    const sheets = MATH_SHEET_IDS.map((id) => {
+      const sheet = notion.sheets.find((s) => s.id === id);
+      return {
+        id,
+        label: MATH_SHEET_LABELS[id],
+        href: sheet?.status === "available" ? sheet.pdfHref : undefined,
+      };
+    });
+
+    const list = byDomain.get(notion.domain) ?? [];
+    list.push({ slug: notion.notionSlug, title: notion.title, skill: notion.skill, sheets });
+    byDomain.set(notion.domain, list);
+  }
+
+  return Array.from(byDomain.entries()).map(([domain, fiches]) => ({ domain, fiches }));
 }
 
 function mapCm2Sequences(sequences: Cm2Sequence[]) {

@@ -75,6 +75,7 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   accent: Record<string, AccentTokens>;
   sequences: MatterSequence[];
   linkedCards?: LinkedCard[];
+  fichesGroups?: MatterFicheDomain[];
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
 };
@@ -86,6 +87,24 @@ type LinkedCard = {
   description: string;
   accentText: string;
   accentBorder: string;
+};
+
+export type MatterFicheSheet = {
+  id: string;
+  label: string;
+  href?: string;
+};
+
+export type MatterFiche = {
+  slug: string;
+  title: string;
+  skill?: string;
+  sheets: MatterFicheSheet[];
+};
+
+export type MatterFicheDomain = {
+  domain: string;
+  fiches: MatterFiche[];
 };
 
 export function SubjectIndexPage<TSubject extends MatterSubject>({
@@ -180,6 +199,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   accent,
   sequences,
   linkedCards = [],
+  fichesGroups = [],
   footerLinks,
   cycleLabel = "Cycle 3",
 }: SubjectDetailPageProps<TSubject>) {
@@ -276,6 +296,70 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
           </div>
         </section>
       )}
+
+      {fichesGroups.length > 0 ? (
+        <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-8 border-b border-white/10 pb-5">
+              <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+                Fichiers PDF
+              </p>
+              <h2 className="mt-2 text-2xl font-black text-foreground">
+                Fiches disponibles en {subject.title}
+              </h2>
+            </div>
+            <div className="space-y-8">
+              {fichesGroups.map((group) => (
+                <div key={group.domain}>
+                  <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                    {group.domain}
+                  </p>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {group.fiches.map((fiche) => (
+                      <div
+                        key={fiche.slug}
+                        className="rounded-md border border-white/10 bg-white/[0.03] p-4"
+                      >
+                        <h3 className="text-sm font-black text-foreground">
+                          {fiche.title}
+                        </h3>
+                        {fiche.skill ? (
+                          <p className="mt-1 text-xs leading-5 text-muted">
+                            {fiche.skill}
+                          </p>
+                        ) : null}
+                        <div className="mt-3 space-y-1.5">
+                          {fiche.sheets.map((sheet) =>
+                            sheet.href ? (
+                              <a
+                                key={sheet.id}
+                                href={sheet.href}
+                                download
+                                className={`flex items-center justify-between rounded-sm border ${t.border} ${t.bg} px-2.5 py-1.5 text-xs font-bold ${t.text} transition hover:opacity-80`}
+                              >
+                                <span>{sheet.label}</span>
+                                <span aria-hidden="true">↓</span>
+                              </a>
+                            ) : (
+                              <div
+                                key={sheet.id}
+                                className="flex items-center justify-between rounded-sm border border-white/8 bg-white/[0.02] px-2.5 py-1.5 text-xs text-white/30"
+                              >
+                                <span>{sheet.label}</span>
+                                <span>À venir</span>
+                              </div>
+                            ),
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {linkedCards.length > 0 ? (
         <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
