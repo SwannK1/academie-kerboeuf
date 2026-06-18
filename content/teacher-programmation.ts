@@ -1,4 +1,4 @@
-import type { PublicStatusKey } from "@/content/public-status.domain";
+import type { PublicStatusKey } from "@/content/public-status";
 
 /**
  * Données de base de l'outil de programmation annuelle enseignant.
