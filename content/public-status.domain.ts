@@ -43,6 +43,8 @@ const internalStatusMap = {
   "en preparation": publicStatuses["in-progress"],
   // "en-cours" avec tiret — valeur de CurriculumStatus dans academy-curriculum.types.ts
   "en-cours": publicStatuses["in-progress"],
+  // "en-preparation" sans accent ni espace — outil de programmation annuelle enseignant
+  "en-preparation": publicStatuses["in-progress"],
   "à vérifier": publicStatuses["in-progress"],
   "a verifier": publicStatuses["in-progress"],
   draft: publicStatuses["in-progress"],

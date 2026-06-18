@@ -84,6 +84,15 @@ export default function TeachersPage() {
           <TeacherLink href="/programmation">Créer sa progression</TeacherLink>
         </div>
       </TeacherCard>
+
+      <TeacherCard
+        title="Programmation annuelle par séquence"
+        description="Choisissez un niveau, puis organisez par période les séquences conseillées, chacune liée à une compétence du programme."
+      >
+        <TeacherLink href="/enseignants/programmation">
+          Ouvrir l&apos;outil de programmation
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
   );
 }
