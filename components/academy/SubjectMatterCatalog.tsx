@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatusKey } from "@/content/public-status";
+import { getSubjectTeacher } from "@/content/subject-teacher-link";
 import type { AccentTokens } from "@/lib/cm2-accent";
 
 export type MatterSubject = {
@@ -240,6 +241,8 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
         </div>
       </section>
 
+      <SubjectTeacherSection subjectSlug={subject.slug} t={t} />
+
       {tree && tree.domains.length > 0 ? (
         <section className="px-4 pb-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
@@ -381,6 +384,35 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
         </div>
       </section>
     </main>
+  );
+}
+
+function SubjectTeacherSection({
+  subjectSlug,
+  t,
+}: {
+  subjectSlug: string;
+  t: AccentTokens;
+}) {
+  const teacher = getSubjectTeacher(subjectSlug);
+  if (!teacher) return null;
+
+  return (
+    <section className="px-4 pb-10 sm:px-6 lg:px-8 print:break-inside-avoid">
+      <div className="mx-auto max-w-7xl">
+        <div className={`rounded-md border ${t.border} ${t.bg} p-6`}>
+          <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+            Professeur référent
+          </p>
+          <p className="mt-2 text-lg font-bold text-foreground">
+            {teacher.name} · {teacher.mainSubject}
+          </p>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+            {teacher.shortDescription}
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 
