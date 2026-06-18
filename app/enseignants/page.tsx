@@ -142,6 +142,15 @@ export default function TeachersPage() {
           <TeacherLink href="/programmation">Créer sa progression</TeacherLink>
         </div>
       </TeacherCard>
+
+      <TeacherCard
+        title="Emploi du temps"
+        description="Construisez l'emploi du temps hebdomadaire de votre classe en respectant les horaires officiels."
+      >
+        <TeacherLink href="/enseignants/emploi-du-temps">
+          Ouvrir l&apos;outil
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
   );
 }
