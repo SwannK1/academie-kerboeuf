@@ -132,32 +132,11 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
-        title="Programmation et progression"
-        description="Répartissez les apprentissages dans l'année et ordonnez les notions selon votre classe, votre matière et vos périodes."
+        title="Programmation"
+        description="Répartissez les compétences du programme sur les périodes de l'année et ordonnez les séquences de chaque période."
       >
-        <div className="grid gap-2 sm:grid-cols-2">
-          <TeacherLink href="/programmation">
-            Créer sa programmation
-          </TeacherLink>
-          <TeacherLink href="/programmation">Créer sa progression</TeacherLink>
-        </div>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Programmation annuelle"
-        description="Répartissez les compétences du programme sur les périodes de l'année scolaire, matière par matière."
-      >
-        <TeacherLink href="/enseignants/programmation/annuelle">
-          Ouvrir l&apos;outil
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Progression de période"
-        description="Ordonnez les séquences d'une période en respectant la logique : une séquence pour une compétence."
-      >
-        <TeacherLink href="/enseignants/programmation/periode">
-          Ouvrir l&apos;outil
+        <TeacherLink href="/enseignants/programmation">
+          Ouvrir la programmation
         </TeacherLink>
       </TeacherCard>
 
@@ -170,6 +149,7 @@ export default function TeachersPage() {
         </TeacherLink>
       </TeacherCard>
     </HierarchyPage>
+
   );
 }
 
