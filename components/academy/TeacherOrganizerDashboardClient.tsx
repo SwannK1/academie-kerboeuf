@@ -94,11 +94,13 @@ export function TeacherOrganizerDashboardClient() {
           <ToolCard
             title="Plan de classe"
             description="Organiser le placement des élèves."
+            href="/enseignants/plan-de-classe"
             upcoming
           />
           <ToolCard
             title="Suivi de classe"
             description="Suivre l'avancement de la classe au fil de l'année."
+            href="/enseignants/suivi-classe"
             upcoming
           />
         </div>
@@ -237,7 +239,7 @@ function ToolCard({
     </>
   );
 
-  if (upcoming || !href) {
+  if (!href) {
     return (
       <div className="rounded-md border border-white/10 bg-white/[0.03] p-4 opacity-80">
         {content}
