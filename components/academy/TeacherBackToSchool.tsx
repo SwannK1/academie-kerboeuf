@@ -6,11 +6,15 @@ import { useTeacherClassProfile } from "@/components/academy/TeacherClassProfile
 import { teacherClassPeriods } from "@/content/teacher-organizer";
 import {
   BACK_TO_SCHOOL_STORAGE_KEY,
+  PARENT_MEETING_STORAGE_KEY,
   backToSchoolCategories,
   getDefaultBackToSchoolState,
+  getDefaultParentMeetingInfo,
+  getDefaultParentMeetingState,
   type BackToSchoolCategory,
   type BackToSchoolState,
   type BackToSchoolTask,
+  type ParentMeetingState,
 } from "@/content/teacher-back-to-school";
 
 function readStoredState(): BackToSchoolState {
@@ -27,11 +31,7 @@ function readStoredState(): BackToSchoolState {
       return getDefaultBackToSchoolState();
     }
     return {
-      tasks: parsed.tasks,
-      parentMeeting: {
-        ...getDefaultBackToSchoolState().parentMeeting,
-        ...(parsed.parentMeeting ?? {}),
-      },
+      tasks: parsed.tasks.filter((task) => task.category !== "reunion-parents"),
     };
   } catch {
     return getDefaultBackToSchoolState();
@@ -46,6 +46,88 @@ export function useBackToSchoolState() {
   useEffect(() => {
     window.localStorage.setItem(
       BACK_TO_SCHOOL_STORAGE_KEY,
+      JSON.stringify(state),
+    );
+  }, [state]);
+
+  return { state, setState };
+}
+
+// Migration douce : les anciennes données de la réunion parents
+// (tâches + informations de réunion) vivaient dans BACK_TO_SCHOOL_STORAGE_KEY.
+// On les lit une seule fois et on les recopie dans la clé dédiée, sans
+// supprimer les anciennes données.
+function readLegacyParentMeetingState(): Partial<ParentMeetingState> | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  try {
+    const raw = window.localStorage.getItem(BACK_TO_SCHOOL_STORAGE_KEY);
+    if (!raw) {
+      return null;
+    }
+    const parsed = JSON.parse(raw) as {
+      tasks?: BackToSchoolTask[];
+      parentMeeting?: Partial<ReturnType<typeof getDefaultParentMeetingInfo>>;
+    };
+    const legacyTasks = Array.isArray(parsed?.tasks)
+      ? parsed.tasks.filter((task) => task.category === "reunion-parents")
+      : [];
+    const legacyMeeting = parsed?.parentMeeting;
+    if (legacyTasks.length === 0 && !legacyMeeting) {
+      return null;
+    }
+    return {
+      tasks: legacyTasks.length > 0 ? legacyTasks : undefined,
+      meeting: legacyMeeting
+        ? { ...getDefaultParentMeetingInfo(), ...legacyMeeting }
+        : undefined,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function readStoredParentMeetingState(): ParentMeetingState {
+  if (typeof window === "undefined") {
+    return getDefaultParentMeetingState();
+  }
+  try {
+    const raw = window.localStorage.getItem(PARENT_MEETING_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as Partial<ParentMeetingState>;
+      if (parsed && Array.isArray(parsed.tasks)) {
+        return {
+          tasks: parsed.tasks,
+          meeting: {
+            ...getDefaultParentMeetingInfo(),
+            ...(parsed.meeting ?? {}),
+          },
+        };
+      }
+    }
+  } catch {
+    return getDefaultParentMeetingState();
+  }
+
+  const legacy = readLegacyParentMeetingState();
+  if (!legacy) {
+    return getDefaultParentMeetingState();
+  }
+  return {
+    tasks: legacy.tasks ?? getDefaultParentMeetingState().tasks,
+    meeting: legacy.meeting ?? getDefaultParentMeetingInfo(),
+  };
+}
+
+export function useParentMeetingState() {
+  const [state, setState] = useState<ParentMeetingState>(() =>
+    readStoredParentMeetingState(),
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      PARENT_MEETING_STORAGE_KEY,
       JSON.stringify(state),
     );
   }, [state]);
@@ -86,17 +168,23 @@ export function BackToSchoolClassSummary() {
 
 export function BackToSchoolOverview() {
   const { state } = useBackToSchoolState();
+  const { state: parentMeetingState } = useParentMeetingState();
 
-  const totalDone = state.tasks.filter((task) => task.isDone).length;
-  const total = state.tasks.length;
+  const allTasks = useMemo(
+    () => [...state.tasks, ...parentMeetingState.tasks],
+    [state.tasks, parentMeetingState.tasks],
+  );
+
+  const totalDone = allTasks.filter((task) => task.isDone).length;
+  const total = allTasks.length;
 
   const byCategory = useMemo(() => {
     return backToSchoolCategories.map((category) => {
-      const tasks = state.tasks.filter((task) => task.category === category.id);
+      const tasks = allTasks.filter((task) => task.category === category.id);
       const done = tasks.filter((task) => task.isDone).length;
       return { ...category, done, total: tasks.length };
     });
-  }, [state.tasks]);
+  }, [allTasks]);
 
   return (
     <div>
@@ -127,10 +215,14 @@ export function BackToSchoolChecklist({
 }: {
   category: BackToSchoolCategory;
 }) {
-  const { state, setState } = useBackToSchoolState();
+  const backToSchool = useBackToSchoolState();
+  const parentMeeting = useParentMeetingState();
   const [draft, setDraft] = useState("");
 
-  const tasks = state.tasks.filter((task) => task.category === category);
+  const isParentMeeting = category === "reunion-parents";
+  const tasks = isParentMeeting
+    ? parentMeeting.state.tasks
+    : backToSchool.state.tasks;
   const done = tasks.filter((task) => task.isDone).length;
 
   function addTask(event: React.FormEvent<HTMLFormElement>) {
@@ -146,27 +238,50 @@ export function BackToSchoolChecklist({
       isDone: false,
       createdAt: new Date().toISOString(),
     };
-    setState((current) => ({
-      ...current,
-      tasks: [...current.tasks, newTask],
-    }));
+    if (isParentMeeting) {
+      parentMeeting.setState((current) => ({
+        ...current,
+        tasks: [...current.tasks, newTask],
+      }));
+    } else {
+      backToSchool.setState((current) => ({
+        ...current,
+        tasks: [...current.tasks, newTask],
+      }));
+    }
     setDraft("");
   }
 
   function toggleTask(id: string) {
-    setState((current) => ({
-      ...current,
-      tasks: current.tasks.map((task) =>
-        task.id === id ? { ...task, isDone: !task.isDone } : task,
-      ),
-    }));
+    if (isParentMeeting) {
+      parentMeeting.setState((current) => ({
+        ...current,
+        tasks: current.tasks.map((task) =>
+          task.id === id ? { ...task, isDone: !task.isDone } : task,
+        ),
+      }));
+    } else {
+      backToSchool.setState((current) => ({
+        ...current,
+        tasks: current.tasks.map((task) =>
+          task.id === id ? { ...task, isDone: !task.isDone } : task,
+        ),
+      }));
+    }
   }
 
   function removeTask(id: string) {
-    setState((current) => ({
-      ...current,
-      tasks: current.tasks.filter((task) => task.id !== id),
-    }));
+    if (isParentMeeting) {
+      parentMeeting.setState((current) => ({
+        ...current,
+        tasks: current.tasks.filter((task) => task.id !== id),
+      }));
+    } else {
+      backToSchool.setState((current) => ({
+        ...current,
+        tasks: current.tasks.filter((task) => task.id !== id),
+      }));
+    }
   }
 
   return (
@@ -239,13 +354,13 @@ export function BackToSchoolChecklist({
 }
 
 export function ParentMeetingForm() {
-  const { state, setState } = useBackToSchoolState();
-  const meeting = state.parentMeeting;
+  const { state, setState } = useParentMeetingState();
+  const meeting = state.meeting;
 
   function update(field: keyof typeof meeting, value: string) {
     setState((current) => ({
       ...current,
-      parentMeeting: { ...current.parentMeeting, [field]: value },
+      meeting: { ...current.meeting, [field]: value },
     }));
   }
 

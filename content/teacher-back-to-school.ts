@@ -17,10 +17,16 @@ export type ParentMeetingInfo = {
 
 export type BackToSchoolState = {
   tasks: BackToSchoolTask[];
-  parentMeeting: ParentMeetingInfo;
+};
+
+export type ParentMeetingState = {
+  tasks: BackToSchoolTask[];
+  meeting: ParentMeetingInfo;
 };
 
 export const BACK_TO_SCHOOL_STORAGE_KEY = "academie-kerboeuf-rentree-v1";
+export const PARENT_MEETING_STORAGE_KEY =
+  "academie-kerboeuf-reunion-parents-v1";
 
 export const backToSchoolCategories: {
   id: BackToSchoolCategory;
@@ -73,6 +79,17 @@ export function getDefaultBackToSchoolTasks(): BackToSchoolTask[] {
     createTask("premieres-semaines", "Évaluations diagnostiques"),
     createTask("premieres-semaines", "Premières séquences"),
     createTask("premieres-semaines", "Premières séances"),
+  ];
+}
+
+export function getDefaultBackToSchoolState(): BackToSchoolState {
+  return {
+    tasks: getDefaultBackToSchoolTasks(),
+  };
+}
+
+export function getDefaultParentMeetingTasks(): BackToSchoolTask[] {
+  return [
     createTask("reunion-parents", "Date arrêtée"),
     createTask("reunion-parents", "Ordre du jour rédigé"),
     createTask("reunion-parents", "Documents préparés"),
@@ -80,9 +97,9 @@ export function getDefaultBackToSchoolTasks(): BackToSchoolTask[] {
   ];
 }
 
-export function getDefaultBackToSchoolState(): BackToSchoolState {
+export function getDefaultParentMeetingState(): ParentMeetingState {
   return {
-    tasks: getDefaultBackToSchoolTasks(),
-    parentMeeting: getDefaultParentMeetingInfo(),
+    tasks: getDefaultParentMeetingTasks(),
+    meeting: getDefaultParentMeetingInfo(),
   };
 }
