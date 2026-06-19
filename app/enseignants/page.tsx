@@ -68,7 +68,16 @@ export default function TeachersPage() {
       <TeacherCard
         title="Préparer une séance"
         description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      />
+      >
+        <div className="grid gap-2 sm:grid-cols-2">
+          <TeacherLink href="/enseignants/plan-de-classe">
+            Ouvrir le plan de classe
+          </TeacherLink>
+          <TeacherLink href="/enseignants/suivi-classe">
+            Consulter le suivi de classe
+          </TeacherLink>
+        </div>
+      </TeacherCard>
 
       <TeacherCard
         title="Comprendre le format des fiches"
