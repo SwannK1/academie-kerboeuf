@@ -7,6 +7,7 @@ import {
 } from "@/components/academy/TeacherOrganizerDashboardClient";
 
 const TOOL_LINKS = [
+  { href: "/enseignants/rentree", label: "Préparer ma rentrée" },
   { href: "/enseignants/programmation", label: "Programmation annuelle" },
   { href: "/enseignants/progression", label: "Progression de période" },
   { href: "/enseignants/emploi-du-temps", label: "Emploi du temps" },
