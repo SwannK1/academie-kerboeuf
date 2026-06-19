@@ -24,8 +24,7 @@ export default function PeriodProgressionPage() {
             items={[
               { label: "Accueil", href: "/" },
               { label: "Enseignants", href: "/enseignants" },
-              { label: "Programmation", href: "/enseignants/programmation" },
-              { label: "Période" },
+              { label: "Progression" },
             ]}
           />
         </div>
