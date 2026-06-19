@@ -148,6 +148,15 @@ export default function TeachersPage() {
           Ouvrir la programmation
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Premières semaines"
+        description="Organisez les priorités du premier jour, de la première semaine et de la suite de la période 1, avec une checklist par semaine."
+      >
+        <TeacherLink href="/enseignants/rentree/premieres-semaines">
+          Préparer les premières semaines
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
