@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   buildTeacherTimetableCellKey,
   getRecommendedTeacherTimetable,
@@ -36,9 +37,18 @@ function readStoredState(): TeacherTimetableState | null {
   }
 }
 
-export function TeacherWeeklyTimetableClient() {
+export function TeacherWeeklyTimetableClient({
+  initialNiveau,
+}: {
+  initialNiveau?: string;
+} = {}) {
+  const startingLevel =
+    (teacherTimetableLevels.find((l) => l.id === initialNiveau)
+      ?.id as TeacherTimetableLevelId) ?? DEFAULT_LEVEL_ID;
+
   const [state, setState] = useState<TeacherTimetableState>(
-    () => readStoredState() ?? getRecommendedTeacherTimetable(DEFAULT_LEVEL_ID),
+    () =>
+      readStoredState() ?? getRecommendedTeacherTimetable(startingLevel),
   );
 
   useEffect(() => {
@@ -207,6 +217,14 @@ export function TeacherWeeklyTimetableClient() {
                             </option>
                           ))}
                         </select>
+                        {state.assignments[key] ? (
+                          <Link
+                            href={`/enseignants/preparer-une-seance?niveau=${state.levelId}&matiere=${encodeURIComponent(state.assignments[key] ?? "")}&jour=${day.id}&creneau=${slot.id}`}
+                            className="mt-1 inline-flex text-xs font-bold text-sky transition hover:text-sky/80"
+                          >
+                            Préparer une séance →
+                          </Link>
+                        ) : null}
                       </td>
                     );
                   })}
@@ -255,6 +273,14 @@ export function TeacherWeeklyTimetableClient() {
                           </option>
                         ))}
                       </select>
+                      {state.assignments[key] ? (
+                        <Link
+                          href={`/enseignants/preparer-une-seance?niveau=${state.levelId}&matiere=${encodeURIComponent(state.assignments[key] ?? "")}&jour=${day.id}&creneau=${slot.id}`}
+                          className="mt-1 inline-flex text-xs font-bold text-sky transition hover:text-sky/80"
+                        >
+                          Préparer une séance →
+                        </Link>
+                      ) : null}
                     </div>
                   );
                 })}

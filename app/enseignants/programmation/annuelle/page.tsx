@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { OrganizerContextBand } from "@/components/academy/OrganizerContextBand";
 import { TeacherYearlyProgrammation } from "@/components/academy/TeacherYearlyProgrammationClient";
 
 export const metadata: Metadata = {
@@ -8,10 +9,25 @@ export const metadata: Metadata = {
     "Choisissez un niveau, puis organisez les séquences de l'année par période.",
 };
 
-export default function TeacherYearlyProgrammationPage() {
+type SearchParams = Record<string, string | string[] | undefined>;
+
+function asString(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function TeacherYearlyProgrammationPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = await searchParams;
+  const niveau = asString(params.niveau);
+
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+    <main className="pb-16 pt-10">
+      <OrganizerContextBand current="annuelle" params={{ niveau }} />
+
+      <div className="mx-auto max-w-6xl px-4 pt-14 sm:px-6 lg:px-8">
         <Breadcrumb
           items={[
             { label: "Accueil", href: "/" },
@@ -34,7 +50,7 @@ export default function TeacherYearlyProgrammationPage() {
         </header>
 
         <div className="mt-10">
-          <TeacherYearlyProgrammation />
+          <TeacherYearlyProgrammation initialNiveau={niveau} />
         </div>
       </div>
     </main>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { OrganizerContextBand } from "@/components/academy/OrganizerContextBand";
 import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
 
 export const metadata: Metadata = {
@@ -8,10 +9,25 @@ export const metadata: Metadata = {
     "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
 };
 
-export default function TeacherWeeklyTimetablePage() {
+type SearchParams = Record<string, string | string[] | undefined>;
+
+function asString(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function TeacherWeeklyTimetablePage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = await searchParams;
+  const niveau = asString(params.niveau);
+
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl">
+    <main className="pb-16 pt-10">
+      <OrganizerContextBand current="emploi-du-temps" params={{ niveau }} />
+
+      <div className="mx-auto max-w-5xl px-4 pt-14 sm:px-6 lg:px-8">
         <Breadcrumb
           items={[
             { label: "Accueil", href: "/" },
@@ -35,7 +51,7 @@ export default function TeacherWeeklyTimetablePage() {
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <TeacherWeeklyTimetable initialNiveau={niveau} />
       </div>
     </main>
   );

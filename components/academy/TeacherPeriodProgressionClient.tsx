@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatusKey } from "@/content/public-status";
 import {
@@ -62,9 +63,20 @@ function groupKey(level: PrimaryLevel, period: SchoolPeriod): string {
   return `${level}__${period}`;
 }
 
-export function TeacherPeriodProgressionClient() {
-  const [level, setLevel] = useState<PrimaryLevel>("cp");
-  const [period, setPeriod] = useState<SchoolPeriod>("periode-1");
+export function TeacherPeriodProgressionClient({
+  initialLevel,
+  initialPeriod,
+}: {
+  initialLevel?: string;
+  initialPeriod?: string;
+} = {}) {
+  const [level, setLevel] = useState<PrimaryLevel>(
+    (LEVELS.find((l) => l.id === initialLevel)?.id as PrimaryLevel) ?? "cp",
+  );
+  const [period, setPeriod] = useState<SchoolPeriod>(
+    (PERIODS.find((p) => p.id === initialPeriod)?.id as SchoolPeriod) ??
+      "periode-1",
+  );
   const [subjectFilter, setSubjectFilter] = useState<PrimarySubject | "all">(
     "all",
   );
@@ -281,6 +293,12 @@ export function TeacherPeriodProgressionClient() {
                       Durée indicative : ~1 semaine (estimation)
                     </span>
                   </div>
+                  <Link
+                    href={`/enseignants/preparer-une-seance?niveau=${level}&matiere=${entry.subject}&periode=${period}&semaine=${index + 1}`}
+                    className="mt-2 inline-flex text-xs font-bold text-sky transition hover:text-sky/80"
+                  >
+                    Préparer une séance pour cette semaine →
+                  </Link>
                 </div>
 
                 <div className="flex shrink-0 gap-2 sm:flex-col">

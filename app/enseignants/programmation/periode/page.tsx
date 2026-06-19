@@ -7,6 +7,22 @@ export const metadata: Metadata = {
     "Organisez l'ordre des séquences d'une période donnée par niveau et par matière.",
 };
 
-export default function TeacherPeriodProgressionPage() {
-  return <TeacherPeriodProgression />;
+type SearchParams = Record<string, string | string[] | undefined>;
+
+function asString(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function TeacherPeriodProgressionPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const params = await searchParams;
+  const niveau = asString(params.niveau);
+  const periode = asString(params.periode);
+
+  return (
+    <TeacherPeriodProgression initialNiveau={niveau} initialPeriode={periode} />
+  );
 }

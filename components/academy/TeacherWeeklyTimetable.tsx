@@ -10,6 +10,10 @@ const TeacherWeeklyTimetableClient = dynamic(
   { ssr: false },
 );
 
-export function TeacherWeeklyTimetable() {
-  return <TeacherWeeklyTimetableClient />;
+export function TeacherWeeklyTimetable({
+  initialNiveau,
+}: {
+  initialNiveau?: string;
+} = {}) {
+  return <TeacherWeeklyTimetableClient initialNiveau={initialNiveau} />;
 }

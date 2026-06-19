@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import {
   getTeacherProgrammationItemsByLevel,
@@ -65,8 +66,15 @@ function applyOverrides(
     .sort((a, b) => a.order - b.order);
 }
 
-export function TeacherYearlyProgrammation() {
-  const [selectedLevel, setSelectedLevel] = useState<TeacherLevel>("cm2");
+export function TeacherYearlyProgrammation({
+  initialNiveau,
+}: {
+  initialNiveau?: string;
+} = {}) {
+  const [selectedLevel, setSelectedLevel] = useState<TeacherLevel>(
+    (teacherLevels.find((l) => l.id === initialNiveau)?.id as TeacherLevel) ??
+      "cm2",
+  );
   const [activeSubjects, setActiveSubjects] = useState<Set<TeacherSubject>>(
     new Set(teacherSubjects.map((subject) => subject.id)),
   );
@@ -242,6 +250,13 @@ export function TeacherYearlyProgrammation() {
                 >
                   {period.label}
                 </h3>
+
+                <Link
+                  href={`/enseignants/programmation/periode?niveau=${selectedLevel}&periode=${period.id}`}
+                  className="mt-2 inline-flex text-xs font-bold text-sky transition hover:text-sky/80"
+                >
+                  Organiser la progression de cette période →
+                </Link>
 
                 <ul className="mt-3 flex flex-1 flex-col gap-3">
                   {periodItems.length === 0 ? (

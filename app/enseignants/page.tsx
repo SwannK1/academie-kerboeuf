@@ -68,7 +68,11 @@ export default function TeachersPage() {
       <TeacherCard
         title="Préparer une séance"
         description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      />
+      >
+        <TeacherLink href="/enseignants/preparer-une-seance">
+          Ouvrir la préparation de séance
+        </TeacherLink>
+      </TeacherCard>
 
       <TeacherCard
         title="Comprendre le format des fiches"
@@ -141,11 +145,38 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
-        title="Programmation"
-        description="Répartissez les compétences du programme sur les périodes de l'année et ordonnez les séquences de chaque période."
+        title="Programmation annuelle"
+        description="Répartissez les compétences du programme sur les périodes de l'année, matière par matière."
       >
-        <TeacherLink href="/enseignants/programmation">
-          Ouvrir la programmation
+        <TeacherLink href="/enseignants/programmation/annuelle">
+          Ouvrir la programmation annuelle
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Progression de période"
+        description="Ordonnez les séquences d'une période en respectant la logique : une séquence pour une compétence."
+      >
+        <TeacherLink href="/enseignants/programmation/periode">
+          Ouvrir la progression de période
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Plan de classe"
+        description="Listez vos élèves et attribuez une place à chacun grâce à des menus déroulants, sans drag and drop."
+      >
+        <TeacherLink href="/enseignants/plan-de-classe">
+          Ouvrir le plan de classe
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Suivi de classe"
+        description="Gardez des observations pédagogiques par élève et par date, conservées uniquement sur cet appareil."
+      >
+        <TeacherLink href="/enseignants/suivi-classe">
+          Ouvrir le suivi de classe
         </TeacherLink>
       </TeacherCard>
     </HierarchyPage>

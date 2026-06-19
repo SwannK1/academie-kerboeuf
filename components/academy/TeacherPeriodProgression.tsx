@@ -1,10 +1,22 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { OrganizerContextBand } from "@/components/academy/OrganizerContextBand";
 import { TeacherPeriodProgressionClient } from "@/components/academy/TeacherPeriodProgressionClient";
 
-export function TeacherPeriodProgression() {
+export function TeacherPeriodProgression({
+  initialNiveau,
+  initialPeriode,
+}: {
+  initialNiveau?: string;
+  initialPeriode?: string;
+} = {}) {
   return (
     <main>
-      <div className="px-4 pt-24 sm:px-6 lg:px-8">
+      <OrganizerContextBand
+        current="periode"
+        params={{ niveau: initialNiveau, periode: initialPeriode }}
+      />
+
+      <div className="px-4 pt-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb
             items={[
@@ -31,7 +43,10 @@ export function TeacherPeriodProgression() {
             uniquement sur cet appareil.
           </p>
 
-          <TeacherPeriodProgressionClient />
+          <TeacherPeriodProgressionClient
+            initialLevel={initialNiveau}
+            initialPeriod={initialPeriode}
+          />
         </div>
       </section>
     </main>
