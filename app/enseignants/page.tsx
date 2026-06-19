@@ -148,6 +148,15 @@ export default function TeachersPage() {
           Ouvrir la programmation
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Préparer la rentrée"
+        description="Listez le matériel à commander, suivez le statut de chaque article jusqu'à la réception et estimez le budget."
+      >
+        <TeacherLink href="/enseignants/rentree/commandes">
+          Ouvrir les commandes et l’inventaire
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
