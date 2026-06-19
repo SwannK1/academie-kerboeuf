@@ -148,6 +148,15 @@ export default function TeachersPage() {
           Ouvrir la programmation
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Préparer la rentrée"
+        description="Préparez des étiquettes élèves, des repères de classe et une checklist de documents de rentrée, à imprimer depuis le navigateur."
+      >
+        <TeacherLink href="/enseignants/rentree">
+          Ouvrir la préparation de rentrée
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
