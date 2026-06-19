@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import {
@@ -19,6 +20,7 @@ import {
   type TeacherSubject,
   type TeacherWeek,
 } from "@/content/teacher-planning";
+import { buildTeacherLessonPlannerHref } from "@/content/teacher-lesson-planner";
 
 type PlacedCompetency = TeacherCompetency & { week: TeacherWeek; order: number };
 
@@ -349,6 +351,18 @@ export function TeacherPeriodProgressionClient() {
                     {weekCounts.get(week.id) ?? 0}
                   </span>
                 </div>
+
+                <Link
+                  href={buildTeacherLessonPlannerHref({
+                    niveau: selectedLevel,
+                    matiere: selectedSubject,
+                    periode: selectedPeriod,
+                    semaine: week.id,
+                  })}
+                  className="mt-2 inline-flex min-h-9 items-center justify-center rounded-md border border-sky/35 bg-sky/10 px-2 text-center text-xs font-bold text-sky transition hover:bg-sky hover:text-ink"
+                >
+                  Préparer une séance pour cette semaine
+                </Link>
 
                 {selectedReserveId && (
                   <button
