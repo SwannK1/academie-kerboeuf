@@ -1,5 +1,5 @@
 import { permanentRedirect } from "next/navigation";
 
 export default function LegacyPrimaryProgrammingPage() {
-  permanentRedirect("/programmation");
+  permanentRedirect("/enseignants/programmation");
 }
