@@ -77,7 +77,7 @@ export default function BackToSchoolDashboardPage() {
             </div>
           </DashboardSection>
 
-          <DashboardSection id="checklist" title="Checklist de rentrée">
+          <DashboardSection id="checklist" title="Premières semaines et réunion parents">
             <BackToSchoolOverview />
           </DashboardSection>
         </div>

@@ -1,9 +1,4 @@
-export type BackToSchoolCategory =
-  | "commandes"
-  | "installation"
-  | "documents"
-  | "premieres-semaines"
-  | "reunion-parents";
+export type BackToSchoolCategory = "premieres-semaines" | "reunion-parents";
 
 export type BackToSchoolTask = {
   id: string;
@@ -32,8 +27,6 @@ export const backToSchoolCategories: {
   label: string;
   href: string;
 }[] = [
-  { id: "commandes", label: "Commander et inventorier", href: "/enseignants/rentree/commandes" },
-  { id: "installation", label: "Installer ma classe", href: "/enseignants/rentree/installation" },
   {
     id: "premieres-semaines",
     label: "Préparer les premières semaines",
@@ -75,14 +68,6 @@ function createTask(
 
 export function getDefaultBackToSchoolTasks(): BackToSchoolTask[] {
   return [
-    createTask("commandes", "Fournitures de classe"),
-    createTask("commandes", "Matériel pédagogique"),
-    createTask("commandes", "Inventaire du matériel existant"),
-    createTask("installation", "Plan de classe provisoire"),
-    createTask("installation", "Étiquettes"),
-    createTask("installation", "Porte-manteaux"),
-    createTask("installation", "Cahiers, casiers et rangements"),
-    createTask("installation", "Affichages à préparer"),
     createTask("premieres-semaines", "Rituels"),
     createTask("premieres-semaines", "Règles de classe"),
     createTask("premieres-semaines", "Évaluations diagnostiques"),
