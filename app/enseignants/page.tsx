@@ -71,24 +71,6 @@ export default function TeachersPage() {
       </div>
 
       <TeacherCard
-        id="preparer-une-seance"
-        title="Préparer une séance"
-        description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      >
-        <div className="grid gap-2 sm:grid-cols-3">
-          <TeacherLink href="/enseignants/preparer-une-seance">
-            Préparer une séance
-          </TeacherLink>
-          <TeacherLink href="/enseignants/plan-de-classe">
-            Ouvrir le plan de classe
-          </TeacherLink>
-          <TeacherLink href="/enseignants/suivi-classe">
-            Consulter le suivi de classe
-          </TeacherLink>
-        </div>
-      </TeacherCard>
-
-      <TeacherCard
         title="Comprendre le format des fiches"
         description="Consultez le niveau, la matière, l'objectif et les ressources réellement publiées avant d'utiliser une fiche en classe. Chaque notion s'appuie sur un même modèle en trois feuilles :"
       >
@@ -149,61 +131,6 @@ export default function TeachersPage() {
         </div>
       </TeacherCard>
 
-      <TeacherCard
-        title="Construire son emploi du temps"
-        description="Choisissez un niveau, répartissez les matières par créneau sur la semaine et suivez le total d'heures par rapport au repère de 24 h."
-      >
-        <TeacherLink href="/enseignants/emploi-du-temps">
-          Ouvrir l’emploi du temps
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Programmation annuelle"
-        description="Choisissez un niveau et une matière, puis placez les compétences du programme dans les périodes de l'année."
-      >
-        <TeacherLink href="/enseignants/programmation">
-          Ouvrir la programmation annuelle
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Progression de période"
-        description="Répartissez par semaine les compétences déjà placées dans la programmation annuelle, période par période."
-      >
-        <TeacherLink href="/enseignants/progression">
-          Ouvrir la progression de période
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Ma classe"
-        description="Renseignez le niveau, l'effectif et la période active de votre classe pour personnaliser les autres outils."
-      >
-        <TeacherLink href="/enseignants/ma-classe">
-          Configurer ma classe
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        id="plan-de-classe"
-        title="Plan de classe"
-        description="Choisissez une disposition, ajoutez vos élèves et organisez les places de la classe."
-      >
-        <TeacherLink href="/enseignants/plan-de-classe">
-          Ouvrir le plan de classe
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        id="suivi-classe"
-        title="Suivi de classe"
-        description="Garder des observations pédagogiques locales et préparer les remédiations, sans compte ni partage des données."
-      >
-        <TeacherLink href="/enseignants/suivi-classe">
-          Ouvrir le suivi de classe
-        </TeacherLink>
-      </TeacherCard>
     </HierarchyPage>
 
   );
@@ -229,22 +156,5 @@ function TeacherCard({
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">{description}</p>
       {children ? <div className="mt-5">{children}</div> : null}
     </article>
-  );
-}
-
-function TeacherLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="inline-flex min-h-11 items-center justify-center rounded-md border border-sky/35 bg-sky/10 px-4 text-center text-sm font-black text-sky transition hover:bg-sky hover:text-ink"
-    >
-      {children}
-    </Link>
   );
 }

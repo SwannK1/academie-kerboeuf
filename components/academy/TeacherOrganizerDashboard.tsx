@@ -6,6 +6,15 @@ import {
   OrganizerTaskList,
 } from "@/components/academy/TeacherOrganizerDashboardClient";
 
+const TOOL_LINKS = [
+  { href: "/enseignants/programmation", label: "Programmation annuelle" },
+  { href: "/enseignants/progression", label: "Progression de période" },
+  { href: "/enseignants/emploi-du-temps", label: "Emploi du temps" },
+  { href: "/enseignants/preparer-une-seance", label: "Préparer une séance" },
+  { href: "/enseignants/plan-de-classe", label: "Plan de classe" },
+  { href: "/enseignants/suivi-classe", label: "Suivi de classe" },
+] as const;
+
 export function TeacherOrganizerDashboard() {
   return (
     <div className="mt-10 grid gap-6">
@@ -14,45 +23,13 @@ export function TeacherOrganizerDashboard() {
         <ConfigureClassButton />
       </OrganizerSection>
 
-      <OrganizerSection id="preparer-aujourdhui" title="Préparer aujourd’hui">
+      <OrganizerSection id="mes-outils" title="Mes outils">
         <div className="grid gap-2 sm:grid-cols-2">
-          <OrganizerLink href="/enseignants/preparer-une-seance">
-            Préparer une séance
-          </OrganizerLink>
-          <OrganizerLink href="/enseignants/emploi-du-temps">
-            Consulter l’emploi du temps
-          </OrganizerLink>
-          <OrganizerLink href="/enseignants/plan-de-classe">
-            Ouvrir le plan de classe
-          </OrganizerLink>
-          <OrganizerLink href="/enseignants/suivi-classe">
-            Consulter les observations
-          </OrganizerLink>
-        </div>
-      </OrganizerSection>
-
-      <OrganizerSection id="organiser-annee" title="Organiser l’année">
-        <div className="grid gap-2 sm:grid-cols-3">
-          <OrganizerLink href="/enseignants/programmation">
-            Programmation annuelle
-          </OrganizerLink>
-          <OrganizerLink href="/enseignants/progression">
-            Progression de période
-          </OrganizerLink>
-          <OrganizerLink href="/enseignants/emploi-du-temps">
-            Emploi du temps hebdomadaire
-          </OrganizerLink>
-        </div>
-      </OrganizerSection>
-
-      <OrganizerSection id="quotidien" title="Ma classe au quotidien">
-        <div className="grid gap-2 sm:grid-cols-2">
-          <OrganizerLink href="/enseignants/plan-de-classe">
-            Plan de classe
-          </OrganizerLink>
-          <OrganizerLink href="/enseignants/suivi-classe">
-            Suivi de classe
-          </OrganizerLink>
+          {TOOL_LINKS.map((tool) => (
+            <OrganizerLink key={tool.href} href={tool.href}>
+              {tool.label}
+            </OrganizerLink>
+          ))}
         </div>
       </OrganizerSection>
 

@@ -195,6 +195,13 @@ export function TeacherYearlyProgrammation() {
         </div>
       </section>
 
+      <Link
+        href="/enseignants/progression"
+        className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-sky/35 bg-sky/10 px-4 text-sm font-bold text-sky transition hover:bg-sky hover:text-ink"
+      >
+        Ouvrir la progression de période
+      </Link>
+
       <section aria-labelledby="reserve-titre" className="mt-8">
         <h2 id="reserve-titre" className="text-xl font-black text-foreground">
           3. Choisir une compétence
