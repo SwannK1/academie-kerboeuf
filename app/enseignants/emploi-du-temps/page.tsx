@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { TeacherWeeklySchedule } from "@/components/academy/TeacherWeeklySchedule";
 
 export const metadata: Metadata = {
   title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
@@ -28,14 +28,14 @@ export default function TeacherWeeklyTimetablePage() {
             Emploi du temps hebdomadaire
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
+            Choisissez un niveau, une matière puis une durée, et cliquez sur un
+            créneau de la semaine pour le remplir. Suivez le total d’heures par
+            rapport au repère de 24 h hebdomadaires. Votre emploi du temps est
             sauvegardé sur cet appareil.
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <TeacherWeeklySchedule />
       </div>
     </main>
   );
