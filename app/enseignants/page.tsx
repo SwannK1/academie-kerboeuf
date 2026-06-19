@@ -157,6 +157,15 @@ export default function TeachersPage() {
           Ouvrir la progression de période
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Plan de classe"
+        description="Choisissez une disposition, ajoutez vos élèves et organisez les places de la classe."
+      >
+        <TeacherLink href="/enseignants/plan-de-classe">
+          Ouvrir l&apos;outil
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
