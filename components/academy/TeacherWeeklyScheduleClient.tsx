@@ -1,6 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import {
+  buildTeacherLessonPlannerHref,
+  matiereIdFromLabel,
+} from "@/content/teacher-lesson-planner";
 import {
   buildTeacherPlanningCellKey,
   createEmptyTeacherPlanningState,
@@ -506,6 +511,16 @@ export function TeacherWeeklyScheduleClient() {
 
           {panelMode === "menu" ? (
             <div className="mt-4 flex flex-wrap gap-2">
+              <Link
+                href={buildTeacherLessonPlannerHref({
+                  niveau: state.levelId,
+                  matiere: matiereIdFromLabel(activeCellData.subject),
+                  creneau: activeSlotId ?? undefined,
+                })}
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-sky/35 bg-sky/10 px-3 text-sm font-bold text-sky transition hover:bg-sky hover:text-ink"
+              >
+                Préparer une séance pour ce créneau
+              </Link>
               <button
                 type="button"
                 onClick={() => setPanelMode("subject")}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { HierarchyPage } from "@/app/personnages/_components/hierarchy";
+import { TeacherOrganizerDashboard } from "@/components/academy/TeacherOrganizerDashboard";
 
 export const metadata: Metadata = {
   title: "Espace enseignants | Académie Kerboeuf",
@@ -65,10 +66,27 @@ export default function TeachersPage() {
         { label: "Enseignants" },
       ]}
     >
+      <div className="md:col-span-2">
+        <TeacherOrganizerDashboard />
+      </div>
+
       <TeacherCard
+        id="preparer-une-seance"
         title="Préparer une séance"
         description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      />
+      >
+        <div className="grid gap-2 sm:grid-cols-3">
+          <TeacherLink href="/enseignants/preparer-une-seance">
+            Préparer une séance
+          </TeacherLink>
+          <TeacherLink href="/enseignants/plan-de-classe">
+            Ouvrir le plan de classe
+          </TeacherLink>
+          <TeacherLink href="/enseignants/suivi-classe">
+            Consulter le suivi de classe
+          </TeacherLink>
+        </div>
+      </TeacherCard>
 
       <TeacherCard
         title="Comprendre le format des fiches"
@@ -157,22 +175,56 @@ export default function TeachersPage() {
           Ouvrir la progression de période
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Ma classe"
+        description="Renseignez le niveau, l'effectif et la période active de votre classe pour personnaliser les autres outils."
+      >
+        <TeacherLink href="/enseignants/ma-classe">
+          Configurer ma classe
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        id="plan-de-classe"
+        title="Plan de classe"
+        description="Choisissez une disposition, ajoutez vos élèves et organisez les places de la classe."
+      >
+        <TeacherLink href="/enseignants/plan-de-classe">
+          Ouvrir le plan de classe
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        id="suivi-classe"
+        title="Suivi de classe"
+        description="Garder des observations pédagogiques locales et préparer les remédiations, sans compte ni partage des données."
+      >
+        <TeacherLink href="/enseignants/suivi-classe">
+          Ouvrir le suivi de classe
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
 }
 
 function TeacherCard({
+  id,
   title,
   description,
   children,
 }: {
+  id?: string;
   title: string;
   description: string;
   children?: ReactNode;
 }) {
   return (
-    <article className="flex flex-col rounded-lg border border-sky/25 bg-sky/[0.05] p-5 sm:p-6">
+    <article
+      id={id}
+      className="flex flex-col rounded-lg border border-sky/25 bg-sky/[0.05] p-5 sm:p-6"
+    >
       <h2 className="text-xl font-black text-foreground">{title}</h2>
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">{description}</p>
       {children ? <div className="mt-5">{children}</div> : null}
