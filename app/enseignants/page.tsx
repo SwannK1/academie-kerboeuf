@@ -142,6 +142,15 @@ export default function TeachersPage() {
           <TeacherLink href="/programmation">Créer sa progression</TeacherLink>
         </div>
       </TeacherCard>
+
+      <TeacherCard
+        title="Outil de programmation annuelle"
+        description="Choisissez un niveau, organisez les séquences par période et sauvegardez votre organisation dans votre navigateur."
+      >
+        <TeacherLink href="/enseignants/programmation">
+          Ouvrir l&apos;outil de programmation
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
   );
 }
