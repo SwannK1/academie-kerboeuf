@@ -1,12 +1,5 @@
-import type { Metadata } from "next";
-import { FichesMathsCatalogue } from "./FichesMathsCatalogue";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Compétences CM2 – Mathématiques | Académie Kerboeuf",
-  description:
-    "Pour chaque compétence CM2 en Mathématiques, retrouve la leçon, la consolidation et l'évaluation.",
-};
-
-export default function FichesMathsPage() {
-  return <FichesMathsCatalogue />;
+export default function Cm2FichesMathematiquesRedirect() {
+  redirect("/primaire/cm2/matieres/mathematiques");
 }
