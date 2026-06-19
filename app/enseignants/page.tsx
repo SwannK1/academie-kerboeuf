@@ -141,11 +141,20 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
-        title="Programmation"
-        description="Répartissez les compétences du programme sur les périodes de l'année et ordonnez les séquences de chaque période."
+        title="Programmation annuelle"
+        description="Choisissez un niveau et une matière, puis placez les compétences du programme dans les périodes de l'année."
       >
         <TeacherLink href="/enseignants/programmation">
-          Ouvrir la programmation
+          Ouvrir la programmation annuelle
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Progression de période"
+        description="Répartissez par semaine les compétences déjà placées dans la programmation annuelle, période par période."
+      >
+        <TeacherLink href="/enseignants/progression">
+          Ouvrir la progression de période
         </TeacherLink>
       </TeacherCard>
     </HierarchyPage>
