@@ -166,6 +166,15 @@ export default function TeachersPage() {
           Ouvrir l&apos;outil
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Suivi de classe"
+        description="Garder des observations utiles et préparer les remédiations, sans compte ni partage des données."
+      >
+        <TeacherLink href="/enseignants/suivi-classe">
+          Ouvrir l&apos;outil
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
