@@ -132,8 +132,8 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
-        title="Programmation"
-        description="Répartissez les compétences du programme sur les périodes de l'année et ordonnez les séquences de chaque période."
+        title="Créer ma programmation"
+        description="Organisez les séquences de l'année par période, matière et niveau."
       >
         <TeacherLink href="/enseignants/programmation">
           Ouvrir la programmation
@@ -141,8 +141,17 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
-        title="Emploi du temps"
-        description="Construisez l'emploi du temps hebdomadaire de votre classe en respectant les horaires officiels."
+        title="Créer ma progression"
+        description="Organisez les séquences d'une période dans l'ordre prévu."
+      >
+        <TeacherLink href="/enseignants/progression">
+          Ouvrir la progression
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Créer mon emploi du temps"
+        description="Répartissez les matières de la semaine et vérifiez les volumes horaires."
       >
         <TeacherLink href="/enseignants/emploi-du-temps">
           Ouvrir l&apos;outil

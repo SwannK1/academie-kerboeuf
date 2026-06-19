@@ -10,7 +10,15 @@ import type { PublicStatusKey } from "@/content/public-status";
 
 export type TeacherLevel = "cp" | "ce1" | "ce2" | "cm1" | "cm2";
 
-export type TeacherSubject = "francais" | "mathematiques" | "sciences";
+export type TeacherSubject =
+  | "francais"
+  | "mathematiques"
+  | "sciences"
+  | "histoire-geographie"
+  | "emc"
+  | "arts"
+  | "musique"
+  | "eps";
 
 export type TeacherPeriod =
   | "periode-1"
@@ -30,7 +38,12 @@ export const teacherLevels: { id: TeacherLevel; label: string }[] = [
 export const teacherSubjects: { id: TeacherSubject; label: string }[] = [
   { id: "francais", label: "Français" },
   { id: "mathematiques", label: "Mathématiques" },
-  { id: "sciences", label: "Sciences" },
+  { id: "sciences", label: "Sciences / Questionner le monde" },
+  { id: "histoire-geographie", label: "Histoire-Géographie" },
+  { id: "emc", label: "EMC" },
+  { id: "arts", label: "Arts" },
+  { id: "musique", label: "Musique" },
+  { id: "eps", label: "EPS" },
 ];
 
 export const teacherPeriods: { id: TeacherPeriod; label: string }[] = [

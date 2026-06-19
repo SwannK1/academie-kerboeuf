@@ -14,6 +14,16 @@ import {
 } from "@/content/teacher-programmation";
 
 const STORAGE_KEY = "academie-kerboeuf-programmation-v1";
+const YEAR_STORAGE_KEY = "academie-kerboeuf-programmation-annee-v1";
+
+const SCHOOL_YEARS = ["2025-2026", "2026-2027", "2027-2028"];
+
+function readStoredYear(): string {
+  if (typeof window === "undefined") {
+    return SCHOOL_YEARS[0];
+  }
+  return window.localStorage.getItem(YEAR_STORAGE_KEY) ?? SCHOOL_YEARS[0];
+}
 
 type ItemOverride = {
   period: TeacherPeriod;
@@ -73,6 +83,14 @@ export function TeacherYearlyProgrammation() {
   const [overrides, setOverrides] = useState<StoredOverrides>(() =>
     readStoredOverrides(),
   );
+  const [schoolYear, setSchoolYear] = useState<string>(() => readStoredYear());
+
+  function updateSchoolYear(year: string) {
+    setSchoolYear(year);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(YEAR_STORAGE_KEY, year);
+    }
+  }
 
   const baseItems = useMemo(
     () => getTeacherProgrammationItemsByLevel(selectedLevel),
@@ -178,6 +196,34 @@ export function TeacherYearlyProgrammation() {
           ))}
         </div>
       </section>
+
+      <section aria-labelledby="annee-scolaire-titre" className="mt-8">
+        <h2 id="annee-scolaire-titre" className="text-xl font-black text-foreground">
+          Année scolaire (facultatif)
+        </h2>
+        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Année scolaire">
+          {SCHOOL_YEARS.map((year) => (
+            <button
+              key={year}
+              type="button"
+              onClick={() => updateSchoolYear(year)}
+              aria-pressed={year === schoolYear}
+              className={[
+                "min-h-11 rounded-md border px-4 text-sm font-bold transition",
+                year === schoolYear
+                  ? "border-gold/60 bg-gold/10 text-gold"
+                  : "border-white/10 bg-white/[0.04] text-foreground hover:border-gold/40",
+              ].join(" ")}
+            >
+              {year}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <p className="mt-6 rounded-md border border-jade/30 bg-jade/[0.06] px-4 py-3 text-sm font-bold text-jade">
+        Règle : 1 séquence = 1 compétence.
+      </p>
 
       <section aria-labelledby="filtrer-matieres-titre" className="mt-8">
         <h2 id="filtrer-matieres-titre" className="text-xl font-black text-foreground">
