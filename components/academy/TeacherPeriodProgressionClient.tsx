@@ -111,6 +111,14 @@ export function TeacherPeriodProgressionClient() {
     return subjects;
   }, [baseEntries]);
 
+  const subjectCounts = useMemo(() => {
+    const counts = new Map<PrimarySubject, number>();
+    for (const entry of baseEntries) {
+      counts.set(entry.subject, (counts.get(entry.subject) ?? 0) + 1);
+    }
+    return counts;
+  }, [baseEntries]);
+
   const effectiveSubjectFilter =
     subjectFilter !== "all" && !availableSubjects.includes(subjectFilter)
       ? "all"
@@ -211,7 +219,7 @@ export function TeacherPeriodProgressionClient() {
                 : "border-white/15 text-foreground hover:border-jade/40"
             }`}
           >
-            Toutes les matières
+            Toutes les matières ({baseEntries.length})
           </button>
           {availableSubjects.map((subject) => (
             <button
@@ -225,7 +233,7 @@ export function TeacherPeriodProgressionClient() {
                   : "border-white/15 text-foreground hover:border-jade/40"
               }`}
             >
-              {SUBJECT_LABELS[subject]}
+              {SUBJECT_LABELS[subject]} ({subjectCounts.get(subject) ?? 0})
             </button>
           ))}
         </div>
