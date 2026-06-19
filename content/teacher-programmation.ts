@@ -238,7 +238,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Répondre à des questions explicites sur un texte court",
     period: "periode-1",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "in-progress",
   },
   {
     id: "ce1-francais-conjugaison-1",
@@ -249,7 +249,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Conjuguer au présent les verbes du 1er groupe",
     period: "periode-2",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "in-progress",
   },
   {
     id: "ce1-mathematiques-numeration-1",
@@ -260,7 +260,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Comprendre la numération décimale jusqu'à 100",
     period: "periode-1",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "in-progress",
   },
   {
     id: "ce1-mathematiques-calcul-1",
@@ -271,7 +271,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Poser et effectuer une addition sans retenue",
     period: "periode-2",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "in-progress",
   },
   {
     id: "ce1-sciences-vivant-1",
@@ -282,7 +282,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Distinguer le vivant du non-vivant",
     period: "periode-1",
     durationLabel: "1 semaine",
-    status: "upcoming",
+    status: "in-progress",
   },
 ];
 

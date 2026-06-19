@@ -206,7 +206,14 @@ export function TeacherYearlyProgrammation() {
         </div>
       </section>
 
-      <div className="mt-8 flex items-center justify-between gap-3">
+      <p
+        role="note"
+        className="mt-8 rounded-md border border-gold/25 bg-gold/[0.05] px-4 py-3 text-sm font-bold text-gold"
+      >
+        1 séquence = 1 compétence.
+      </p>
+
+      <div className="mt-4 flex items-center justify-between gap-3">
         <h2 className="text-xl font-black text-foreground">
           Programmation — {teacherLevels.find((l) => l.id === selectedLevel)?.label}
         </h2>
