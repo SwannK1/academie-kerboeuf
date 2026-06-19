@@ -67,8 +67,12 @@ export default function TeachersPage() {
     >
       <TeacherCard
         title="Préparer une séance"
-        description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      />
+        description="Partez de l'objectif d'apprentissage, reliez la séance au niveau, à la matière et à la période, puis construisez son déroulé étape par étape."
+      >
+        <TeacherLink href="/enseignants/preparer-une-seance">
+          Préparer une séance
+        </TeacherLink>
+      </TeacherCard>
 
       <TeacherCard
         title="Comprendre le format des fiches"
