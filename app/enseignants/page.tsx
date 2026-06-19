@@ -132,20 +132,20 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
+        title="Construire son emploi du temps"
+        description="Choisissez un niveau, répartissez les matières par créneau sur la semaine et suivez le total d'heures par rapport au repère de 24 h."
+      >
+        <TeacherLink href="/enseignants/emploi-du-temps">
+          Ouvrir l’emploi du temps
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
         title="Programmation"
         description="Répartissez les compétences du programme sur les périodes de l'année et ordonnez les séquences de chaque période."
       >
         <TeacherLink href="/enseignants/programmation">
           Ouvrir la programmation
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Emploi du temps"
-        description="Construisez l'emploi du temps hebdomadaire de votre classe en respectant les horaires officiels."
-      >
-        <TeacherLink href="/enseignants/emploi-du-temps">
-          Ouvrir l&apos;outil
         </TeacherLink>
       </TeacherCard>
     </HierarchyPage>
