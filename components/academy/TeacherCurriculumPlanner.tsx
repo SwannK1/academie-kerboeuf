@@ -24,6 +24,36 @@ const STORAGE_KEY = "academie-kerboeuf-curriculum-planning-v1";
  */
 const LEGACY_STORAGE_KEY = "academie-kerboeuf-programmation-v1";
 
+/**
+ * Liste des anciens éléments explicitement ignorés par l'enseignant.
+ * Ne touche jamais à LEGACY_STORAGE_KEY : permet seulement de masquer
+ * un élément du bandeau sans rien supprimer.
+ */
+const LEGACY_IGNORED_STORAGE_KEY = "academie-kerboeuf-programmation-v1-ignored";
+
+function readIgnoredLegacyIds(): string[] {
+  if (typeof window === "undefined") {
+    return [];
+  }
+  try {
+    const raw = window.localStorage.getItem(LEGACY_IGNORED_STORAGE_KEY);
+    if (!raw) {
+      return [];
+    }
+    const parsed = JSON.parse(raw) as unknown;
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeIgnoredLegacyIds(ids: string[]) {
+  if (typeof window === "undefined") {
+    return;
+  }
+  window.localStorage.setItem(LEGACY_IGNORED_STORAGE_KEY, JSON.stringify(ids));
+}
+
 type LegacyOverride = { period: string; order: number };
 type LegacyOverrides = Record<string, LegacyOverride>;
 
@@ -144,6 +174,32 @@ export function TeacherCurriculumPlanner() {
   const [legacyEntries] = useState<LegacyEntry[]>(() =>
     buildLegacyEntries(readLegacyOverrides()),
   );
+  const [ignoredLegacyIds, setIgnoredLegacyIds] = useState<string[]>(() =>
+    readIgnoredLegacyIds(),
+  );
+  const [legacyDeletionConfirming, setLegacyDeletionConfirming] = useState(false);
+  const [legacyDeleted, setLegacyDeleted] = useState(false);
+
+  const visibleLegacyEntries = useMemo(
+    () => legacyEntries.filter((entry) => !ignoredLegacyIds.includes(entry.id)),
+    [legacyEntries, ignoredLegacyIds],
+  );
+
+  function ignoreLegacyEntry(entryId: string) {
+    setIgnoredLegacyIds((current) => {
+      const next = current.includes(entryId) ? current : [...current, entryId];
+      writeIgnoredLegacyIds(next);
+      return next;
+    });
+  }
+
+  function confirmDeleteLegacyProgrammation() {
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+    }
+    setLegacyDeletionConfirming(false);
+    setLegacyDeleted(true);
+  }
 
   const subjectsForLevel = useMemo(
     () => getSubjectsForLevel(selectedLevel),
@@ -255,7 +311,7 @@ export function TeacherCurriculumPlanner() {
 
   return (
     <div>
-      {legacyEntries.length > 0 ? (
+      {legacyEntries.length > 0 && !legacyDeleted ? (
         <section
           aria-labelledby="ancienne-programmation-titre"
           className="mb-8 rounded-lg border border-amber/40 bg-amber/10 p-5"
@@ -266,33 +322,82 @@ export function TeacherCurriculumPlanner() {
           <p className="mt-2 text-sm leading-6 text-muted">
             Des données de l&apos;ancien outil de programmation ont été trouvées sur cet
             appareil. Elles ne sont pas reliées automatiquement au nouveau catalogue : vous
-            pouvez les consulter ci-dessous et reprendre chaque élément manuellement.
+            pouvez les consulter ci-dessous, reprendre chaque élément manuellement ou l&apos;ignorer.
           </p>
-          <ul className="mt-4 space-y-2">
-            {legacyEntries.map((entry) => (
-              <li
-                key={entry.id}
-                className="flex flex-wrap items-center gap-2 rounded border border-white/10 bg-background/40 p-3"
-              >
-                <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
-                  {entry.level.toUpperCase()}
+
+          {visibleLegacyEntries.length === 0 ? (
+            <p className="mt-4 text-sm text-muted">
+              Tous les éléments ont été ignorés. L&apos;ancienne sauvegarde reste disponible sur
+              cet appareil.
+            </p>
+          ) : (
+            <ul className="mt-4 space-y-2">
+              {visibleLegacyEntries.map((entry) => (
+                <li
+                  key={entry.id}
+                  className="flex flex-wrap items-center gap-2 rounded border border-white/10 bg-background/40 p-3"
+                >
+                  <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
+                    {entry.level.toUpperCase()}
+                  </span>
+                  <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
+                    {entry.subjectLabel}
+                  </span>
+                  <span className="text-xs text-muted">{entry.period}</span>
+                  <PublicStatusBadge status={entry.status} />
+                  <span className="text-sm font-bold text-foreground">{entry.title}</span>
+                  <div className="ml-auto flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => ignoreLegacyEntry(entry.id)}
+                      className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-white/30 hover:text-foreground"
+                    >
+                      Ignorer
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => resumeLegacyEntry(entry)}
+                      className="min-h-9 rounded border border-jade/40 px-3 text-xs font-bold text-jade transition hover:bg-jade/10"
+                    >
+                      Reprendre manuellement
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div className="mt-5 border-t border-white/10 pt-4">
+            {legacyDeletionConfirming ? (
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm font-bold text-rose">
+                  Confirmer la suppression définitive de l&apos;ancienne programmation ?
                 </span>
-                <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
-                  {entry.subjectLabel}
-                </span>
-                <span className="text-xs text-muted">{entry.period}</span>
-                <PublicStatusBadge status={entry.status} />
-                <span className="text-sm font-bold text-foreground">{entry.title}</span>
                 <button
                   type="button"
-                  onClick={() => resumeLegacyEntry(entry)}
-                  className="ml-auto min-h-9 rounded border border-jade/40 px-3 text-xs font-bold text-jade transition hover:bg-jade/10"
+                  onClick={confirmDeleteLegacyProgrammation}
+                  className="min-h-9 rounded border border-rose/50 px-3 text-xs font-bold text-rose transition hover:bg-rose/10"
                 >
-                  Reprendre manuellement
+                  Confirmer la suppression
                 </button>
-              </li>
-            ))}
-          </ul>
+                <button
+                  type="button"
+                  onClick={() => setLegacyDeletionConfirming(false)}
+                  className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-white/30"
+                >
+                  Annuler
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setLegacyDeletionConfirming(true)}
+                className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+              >
+                Supprimer l&apos;ancienne programmation
+              </button>
+            )}
+          </div>
         </section>
       ) : null}
 
