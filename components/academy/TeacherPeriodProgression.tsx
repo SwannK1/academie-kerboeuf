@@ -25,10 +25,10 @@ export function TeacherPeriodProgression() {
             Progression de période
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
-            Organisez l’ordre des séquences prévues pour une période donnée :
-            choisissez un niveau, une période, filtrez par matière puis
-            réordonnez avec les boutons. La progression est enregistrée
-            uniquement sur cet appareil.
+            Planifiez une période complète semaine par semaine : choisissez un
+            niveau et une période, créez des séquences (1 séquence = 1
+            compétence), glissez-les entre les semaines ou utilisez les
+            boutons clavier. Tout est enregistré uniquement sur cet appareil.
           </p>
 
           <TeacherPeriodProgressionClient />
