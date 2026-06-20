@@ -5,7 +5,7 @@ import { TeacherSubstituteFolderClient } from "@/components/teacher-substitute-f
 export const metadata: Metadata = {
   title: "Préparer mon dossier remplaçant | Académie Kerboeuf",
   description:
-    "Préparez un dossier remplaçant clair et imprimable : fonctionnement de la classe, emploi du temps, rituels, matériel, règles de vie et documents à laisser.",
+    "Préparez un dossier remplaçant clair et imprimable : horaires, matériel, rituels, déroulé de la journée, consignes collectives et contacts institutionnels.",
 };
 
 export default function TeacherSubstituteFolderPage() {
@@ -31,11 +31,11 @@ export default function TeacherSubstituteFolderPage() {
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted print:hidden">
             Construisez une checklist claire pour transmettre les repères
-            essentiels à un remplaçant : fonctionnement de la classe, emploi
-            du temps, rituels, matériel, règles de vie, documents à laisser et
-            points à vérifier avec la direction. Aucune donnée médicale ou
-            coordonnée famille ne doit être saisie ici. Votre dossier est
-            sauvegardé sur cet appareil uniquement.
+            essentiels à un remplaçant : horaires et récréations, matériel et
+            lieux utiles, rituels de classe, déroulé de la journée, consignes
+            collectives et contacts institutionnels génériques. Cet outil ne
+            permet aucune saisie de texte libre. Votre dossier est sauvegardé
+            sur cet appareil uniquement.
           </p>
         </header>
 
