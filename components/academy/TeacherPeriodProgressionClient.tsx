@@ -11,14 +11,38 @@ import {
   type KeyboardEvent,
 } from "react";
 import {
-  teacherLevels,
-  teacherPeriods,
-  teacherSubjects,
-  getTeacherProgrammationItemsByLevel,
-  type TeacherLevel,
-  type TeacherPeriod,
-  type TeacherSubject,
-} from "@/content/teacher-programmation";
+  schoolLevels,
+  curriculumSubjects,
+  getSubjectsForLevel,
+  type SchoolLevel,
+} from "@/content/teacher-programming-curriculum";
+import { getTeacherProgrammationItemsByLevel } from "@/content/teacher-programmation";
+
+/**
+ * `niveau` (CP→CM2), `matiere` et `domaine` viennent désormais de la source
+ * centrale `content/teacher-programming-curriculum.ts` — c'est le même
+ * catalogue que celui utilisé par la programmation annuelle
+ * (TeacherCurriculumPlanner). `content/teacher-programmation.ts` n'est plus
+ * lu que pour interpréter les anciens identifiants stockés en v1 lors de la
+ * migration ci-dessous : il ne sert plus à afficher de compétences.
+ */
+export type TeacherLevel = SchoolLevel;
+export type TeacherSubjectId = string;
+
+export type TeacherPeriod =
+  | "periode-1"
+  | "periode-2"
+  | "periode-3"
+  | "periode-4"
+  | "periode-5";
+
+export const teacherPeriods: { id: TeacherPeriod; label: string }[] = [
+  { id: "periode-1", label: "Période 1" },
+  { id: "periode-2", label: "Période 2" },
+  { id: "periode-3", label: "Période 3" },
+  { id: "periode-4", label: "Période 4" },
+  { id: "periode-5", label: "Période 5" },
+];
 
 /**
  * Progression de période — v2.
@@ -61,7 +85,7 @@ export interface PeriodSequence {
   id: string;
   niveau: TeacherLevel;
   periode: TeacherPeriod;
-  matiere: TeacherSubject;
+  matiere: TeacherSubjectId;
   domaine: string;
   /** Identifiant unique de compétence — 1 séquence = 1 compétence. */
   competenceId: string;
@@ -185,7 +209,7 @@ export function TeacherPeriodProgressionClient() {
   );
 
   // Filtres
-  const [filterMatiere, setFilterMatiere] = useState<TeacherSubject | "all">(
+  const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
   );
   const [filterDomaine, setFilterDomaine] = useState<string | "all">("all");
@@ -198,7 +222,7 @@ export function TeacherPeriodProgressionClient() {
 
   // Formulaire de création / édition.
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [formMatiere, setFormMatiere] = useState<TeacherSubject>("francais");
+  const [formMatiere, setFormMatiere] = useState<TeacherSubjectId>("francais");
   const [formCompetenceId, setFormCompetenceId] = useState<string>("");
   const [formTitre, setFormTitre] = useState("");
   const [formSemaine, setFormSemaine] = useState<WeekNumber>(1);
@@ -218,40 +242,51 @@ export function TeacherPeriodProgressionClient() {
     writeStoredSequences(sequences);
   }, [sequences]);
 
-  const catalogue = useMemo(
-    () => getTeacherProgrammationItemsByLevel(niveau),
-    [niveau],
+  // Matières et domaines disponibles pour ce niveau, lus depuis la source
+  // centrale partagée avec la programmation annuelle (aucune recopie locale
+  // des compétences). La sélection de "période" reste propre à la
+  // progression (semaines 1 à 5 à l'intérieur d'une période de l'année) : le
+  // catalogue central ne porte qu'une indication de période suggérée et ne
+  // sert pas de filtre strict ici.
+  const subjectsForLevel = useMemo(() => getSubjectsForLevel(niveau), [niveau]);
+
+  const subjectLabelById = useMemo(() => {
+    const map = new Map<string, string>();
+    curriculumSubjects.forEach((subject) => map.set(subject.id, subject.label));
+    return map;
+  }, []);
+
+  const allDomainLabelById = useMemo(() => {
+    const map = new Map<string, string>();
+    curriculumSubjects.forEach((subject) =>
+      subject.domains.forEach((domain) => map.set(domain.id, domain.label)),
+    );
+    return map;
+  }, []);
+
+  const formSubject = useMemo(
+    () => subjectsForLevel.find((subject) => subject.id === formMatiere) ?? null,
+    [subjectsForLevel, formMatiere],
   );
 
-  const catalogueForPeriod = useMemo(
-    () => catalogue.filter((item) => item.period === periode),
-    [catalogue, periode],
+  const domainesForFormMatiere = useMemo(
+    () => formSubject?.domains.map((domain) => domain.id) ?? [],
+    [formSubject],
   );
 
-  const catalogueForFormMatiere = useMemo(
-    () =>
-      catalogueForPeriod.filter((item) => item.subject === formMatiere),
-    [catalogueForPeriod, formMatiere],
-  );
-
-  const domainesForFormMatiere = useMemo(() => {
-    const seen = new Set<string>();
-    const domains: string[] = [];
-    for (const item of catalogueForFormMatiere) {
-      if (!seen.has(item.domain)) {
-        seen.add(item.domain);
-        domains.push(item.domain);
-      }
-    }
-    return domains;
-  }, [catalogueForFormMatiere]);
+  const domainLabelById = useMemo(() => {
+    const map = new Map<string, string>();
+    formSubject?.domains.forEach((domain) => map.set(domain.id, domain.label));
+    return map;
+  }, [formSubject]);
 
   const [formDomaine, setFormDomaine] = useState<string>("");
 
   const competencesForFormDomaine = useMemo(
     () =>
-      catalogueForFormMatiere.filter((item) => item.domain === formDomaine),
-    [catalogueForFormMatiere, formDomaine],
+      formSubject?.domains.find((domain) => domain.id === formDomaine)
+        ?.competencies ?? [],
+    [formSubject, formDomaine],
   );
 
   const periodSequences = useMemo(
@@ -263,8 +298,8 @@ export function TeacherPeriodProgressionClient() {
   );
 
   const availableMatieres = useMemo(() => {
-    const seen = new Set<TeacherSubject>();
-    const list: TeacherSubject[] = [];
+    const seen = new Set<TeacherSubjectId>();
+    const list: TeacherSubjectId[] = [];
     for (const sequence of periodSequences) {
       if (!seen.has(sequence.matiere)) {
         seen.add(sequence.matiere);
@@ -321,7 +356,7 @@ export function TeacherPeriodProgressionClient() {
   }, [filteredSequences, periodSequences]);
 
   const syntheseByMatiere = useMemo(() => {
-    const map = new Map<TeacherSubject, { count: number; dureeMinutes: number }>();
+    const map = new Map<TeacherSubjectId, { count: number; dureeMinutes: number }>();
     for (const sequence of periodSequences) {
       const current = map.get(sequence.matiere) ?? { count: 0, dureeMinutes: 0 };
       current.count += 1;
@@ -502,7 +537,7 @@ export function TeacherPeriodProgressionClient() {
 
   function submitForm() {
     if (!formTitre.trim() || !formDomaine || !formCompetenceId) return;
-    const competence = catalogueForFormMatiere.find(
+    const competence = competencesForFormDomaine.find(
       (item) => item.id === formCompetenceId,
     );
     if (!competence) return;
@@ -516,7 +551,7 @@ export function TeacherPeriodProgressionClient() {
                 matiere: formMatiere,
                 domaine: formDomaine,
                 competenceId: formCompetenceId,
-                competenceLabel: competence.skill,
+                competenceLabel: competence.label,
                 titre: formTitre.trim(),
                 semaine: formSemaine,
                 dureeMinutes: formDuree,
@@ -533,7 +568,7 @@ export function TeacherPeriodProgressionClient() {
         matiere: formMatiere,
         domaine: formDomaine,
         competenceId: formCompetenceId,
-        competenceLabel: competence.skill,
+        competenceLabel: competence.label,
         titre: formTitre.trim(),
         semaine: formSemaine,
         dureeMinutes: formDuree,
@@ -555,10 +590,14 @@ export function TeacherPeriodProgressionClient() {
             Niveau
             <select
               value={niveau}
-              onChange={(event) => setNiveau(event.target.value as TeacherLevel)}
+              onChange={(event) => {
+                setNiveau(event.target.value as TeacherLevel);
+                setFormDomaine("");
+                setFormCompetenceId("");
+              }}
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
-              {teacherLevels.map((option) => (
+              {schoolLevels.map((option) => (
                 <option key={option.id} value={option.id}>
                   {option.label}
                 </option>
@@ -592,13 +631,13 @@ export function TeacherPeriodProgressionClient() {
             <select
               value={formMatiere}
               onChange={(event) => {
-                setFormMatiere(event.target.value as TeacherSubject);
+                setFormMatiere(event.target.value as TeacherSubjectId);
                 setFormDomaine("");
                 setFormCompetenceId("");
               }}
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
-              {teacherSubjects.map((option) => (
+              {subjectsForLevel.map((option) => (
                 <option key={option.id} value={option.id}>
                   {option.label}
                 </option>
@@ -617,9 +656,9 @@ export function TeacherPeriodProgressionClient() {
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               <option value="">Choisir un domaine</option>
-              {domainesForFormMatiere.map((domain) => (
-                <option key={domain} value={domain}>
-                  {domain}
+              {domainesForFormMatiere.map((domainId) => (
+                <option key={domainId} value={domainId}>
+                  {domainLabelById.get(domainId) ?? domainId}
                 </option>
               ))}
             </select>
@@ -636,7 +675,7 @@ export function TeacherPeriodProgressionClient() {
               <option value="">Choisir une compétence</option>
               {competencesForFormDomaine.map((item) => (
                 <option key={item.id} value={item.id}>
-                  {item.skill}
+                  {item.label}
                 </option>
               ))}
             </select>
@@ -731,15 +770,14 @@ export function TeacherPeriodProgressionClient() {
             <select
               value={filterMatiere}
               onChange={(event) =>
-                setFilterMatiere(event.target.value as TeacherSubject | "all")
+                setFilterMatiere(event.target.value as TeacherSubjectId | "all")
               }
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               <option value="all">Toutes les matières</option>
               {availableMatieres.map((subject) => (
                 <option key={subject} value={subject}>
-                  {teacherSubjects.find((option) => option.id === subject)?.label ??
-                    subject}
+                  {subjectLabelById.get(subject) ?? subject}
                 </option>
               ))}
             </select>
@@ -754,7 +792,7 @@ export function TeacherPeriodProgressionClient() {
               <option value="all">Tous les domaines</option>
               {availableDomaines.map((domain) => (
                 <option key={domain} value={domain}>
-                  {domain}
+                  {allDomainLabelById.get(domain) ?? domain}
                 </option>
               ))}
             </select>
@@ -802,8 +840,7 @@ export function TeacherPeriodProgressionClient() {
                     className="border-b border-white/5 print:border-black"
                   >
                     <td className="py-2 pr-4 font-bold text-foreground">
-                      {teacherSubjects.find((option) => option.id === subject)
-                        ?.label ?? subject}
+                      {subjectLabelById.get(subject) ?? subject}
                     </td>
                     <td className="py-2 pr-4">{stats.count}</td>
                     <td className="py-2 pr-4">
@@ -1010,8 +1047,12 @@ function SequenceCard({
   onDelete,
 }: SequenceCardProps) {
   const matiereLabel =
-    teacherSubjects.find((option) => option.id === sequence.matiere)?.label ??
+    curriculumSubjects.find((option) => option.id === sequence.matiere)?.label ??
     sequence.matiere;
+  const domaineLabel =
+    curriculumSubjects
+      .flatMap((subject) => subject.domains)
+      .find((domain) => domain.id === sequence.domaine)?.label ?? sequence.domaine;
   const statutLabel =
     SEQUENCE_STATUSES.find((option) => option.id === sequence.statut)?.label ??
     sequence.statut;
@@ -1043,7 +1084,7 @@ function SequenceCard({
       </div>
 
       <p className="mt-2 text-xs font-bold uppercase tracking-wide text-muted print:text-black">
-        {matiereLabel} · {sequence.domaine}
+        {matiereLabel} · {domaineLabel}
       </p>
       <h4 className="mt-1 font-black text-foreground print:text-black">
         {sequence.titre}
