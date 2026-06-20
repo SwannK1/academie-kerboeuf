@@ -50,6 +50,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
     title: "Préparer la classe",
     cards: [
       {
+        title: "Organisation de classe",
+        description: "Organisez vos priorités de semaine par groupe, à la souris ou au clavier.",
+        href: "/enseignants/organisation",
+        icon: "🧭",
+      },
+      {
         title: "Ateliers",
         description: "Planifiez et organisez vos ateliers en autonomie ou en groupes.",
         href: "/enseignants/ateliers",
