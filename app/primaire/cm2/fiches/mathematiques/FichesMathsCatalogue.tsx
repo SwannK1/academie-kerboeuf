@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import {
@@ -15,21 +12,8 @@ import {
   type SheetId,
 } from "@/content/cm2-fiches-maths";
 
-type Filter = "all" | "complete" | "partial";
-
 export function FichesMathsCatalogue() {
-  const [filter, setFilter] = useState<Filter>("all");
-  const [domainFilter, setDomainFilter] = useState<string>("all");
-
   const domains = getMathDomains();
-
-  const visible = cm2FichesMaths.filter((notion) => {
-    const completeness = getNotionCompleteness(notion);
-    if (filter === "complete" && completeness !== "complete") return false;
-    if (filter === "partial" && completeness !== "partial") return false;
-    if (domainFilter !== "all" && notion.domain !== domainFilter) return false;
-    return true;
-  });
 
   return (
     <main>
@@ -59,64 +43,54 @@ export function FichesMathsCatalogue() {
             Compétences CM2<br className="hidden sm:block" /> Mathématiques
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
-            Pour chaque compétence, retrouve la leçon, la consolidation et
-            l&apos;évaluation.
+            Leçon, consolidation, évaluation — par domaine.
           </p>
-        </div>
-      </section>
-
-      {/* ── Filtres ──────────────────────────────────────────────────────── */}
-      <section className="border-b border-white/10 px-4 pb-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-wrap gap-2">
-            <FilterChip active={filter === "all"} onClick={() => setFilter("all")}>
-              Toutes
-            </FilterChip>
-            <FilterChip active={filter === "complete"} onClick={() => setFilter("complete")}>
-              Complètes
-            </FilterChip>
-            <FilterChip active={filter === "partial"} onClick={() => setFilter("partial")}>
-              Partielles
-            </FilterChip>
-
-            <span className="mx-1 self-center text-white/20" aria-hidden="true">|</span>
-
-            <FilterChip active={domainFilter === "all"} onClick={() => setDomainFilter("all")}>
-              Tous les domaines
-            </FilterChip>
-            {domains.map((domain) => (
-              <FilterChip
-                key={domain}
-                active={domainFilter === domain}
-                onClick={() => setDomainFilter(domain)}
-              >
-                {domain}
-              </FilterChip>
-            ))}
-          </div>
+          {domains.length > 1 ? (
+            <nav className="mt-6 flex flex-wrap gap-2" aria-label="Domaines">
+              {domains.map((domain) => (
+                <a
+                  key={domain}
+                  href={`#${domainAnchor(domain)}`}
+                  className="rounded-sm border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-muted transition hover:bg-white/[0.06] hover:text-foreground"
+                >
+                  {domain}
+                </a>
+              ))}
+            </nav>
+          ) : null}
         </div>
       </section>
 
       {/* ── Catalogue ────────────────────────────────────────────────────── */}
       <section className="px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-muted">
-            {visible.length} compétence{visible.length !== 1 ? "s" : ""} affichée{visible.length !== 1 ? "s" : ""}
-          </p>
-
-          {visible.length === 0 ? (
-            <p className="text-sm text-muted">Aucune compétence ne correspond aux filtres sélectionnés.</p>
-          ) : (
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {visible.map((notion) => (
-                <NotionCard key={notion.notionSlug} notion={notion} />
-              ))}
-            </div>
-          )}
+        <div className="mx-auto max-w-7xl space-y-12">
+          {domains.map((domain) => {
+            const notions = cm2FichesMaths.filter((n) => n.domain === domain);
+            return (
+              <div key={domain} id={domainAnchor(domain)}>
+                <h2 className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-jade">
+                  {domain} · {notions.length} compétence{notions.length !== 1 ? "s" : ""}
+                </h2>
+                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                  {notions.map((notion) => (
+                    <NotionCard key={notion.notionSlug} notion={notion} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
     </main>
   );
+}
+
+function domainAnchor(domain: string): string {
+  return domain
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-");
 }
 
 // ── NotionCard ────────────────────────────────────────────────────────────────
@@ -129,10 +103,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
       {/* Header */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex-1">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-jade">
-            {notion.domain}
-          </p>
-          <h2 className="mt-1.5 text-base font-black leading-snug text-foreground">
+          <h2 className="text-base font-black leading-snug text-foreground">
             {notion.title}
           </h2>
           <p className="mt-1 text-xs leading-5 text-muted">{notion.skill}</p>
@@ -214,31 +185,5 @@ function SheetRow({
     <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
       {inner}
     </div>
-  );
-}
-
-// ── FilterChip ────────────────────────────────────────────────────────────────
-
-function FilterChip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`rounded-sm px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] transition ${
-        active
-          ? "bg-jade/20 text-jade border border-jade/40"
-          : "border border-white/10 bg-white/[0.03] text-muted hover:bg-white/[0.06] hover:text-foreground"
-      }`}
-    >
-      {children}
-    </button>
   );
 }
