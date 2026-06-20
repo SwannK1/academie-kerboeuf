@@ -132,6 +132,15 @@ export default function TeachersPage() {
       </TeacherCard>
 
       <TeacherCard
+        title="Préparer ma rentrée"
+        description="Un tableau de bord local pour organiser commandes, installation de la classe, premières semaines et réunion parents. Toutes les données restent sur cet appareil."
+      >
+        <TeacherLink href="/enseignants/rentree">
+          Ouvrir le tableau de bord rentrée
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
         title="Construire son emploi du temps"
         description="Choisissez un niveau, répartissez les matières par créneau sur la semaine et suivez le total d'heures par rapport au repère de 24 h."
       >
