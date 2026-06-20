@@ -108,6 +108,13 @@ export function TeacherSubstituteFolderClient() {
   }
 
   function handleAddTask(sectionId: SubstituteFolderSectionId) {
+    // "Élèves à accompagner" est volontairement limité aux repères
+    // collectifs prédéfinis : aucune saisie libre n'y est autorisée afin
+    // d'éviter toute donnée nominative ou sensible.
+    if (sectionId === "eleves-a-accompagner") {
+      return;
+    }
+
     const label = (draftBySection[sectionId] ?? "").trim();
     if (!label) {
       return;
@@ -278,40 +285,51 @@ export function TeacherSubstituteFolderClient() {
                 ) : null}
               </ul>
 
-              <div className="mt-4 flex flex-wrap gap-2 print:hidden">
-                <label
-                  htmlFor={`add-task-${section.id}`}
-                  className="sr-only"
-                >
-                  Ajouter une tâche — {section.title}
-                </label>
-                <input
-                  id={`add-task-${section.id}`}
-                  type="text"
-                  value={draftBySection[section.id] ?? ""}
-                  onChange={(event) =>
-                    setDraftBySection((previous) => ({
-                      ...previous,
-                      [section.id]: event.target.value,
-                    }))
-                  }
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      event.preventDefault();
-                      handleAddTask(section.id);
+              {section.id === "eleves-a-accompagner" ? (
+                <p className="mt-4 rounded-md border border-dashed border-ember/30 bg-ember/[0.05] px-4 py-3 text-xs font-bold text-ember print:hidden">
+                  Aucun ajout libre dans cette section : pour protéger les
+                  élèves, seuls des repères collectifs prédéfinis sont
+                  proposés ici. Ne saisissez aucun nom d&apos;élève ni
+                  information médicale, familiale ou disciplinaire
+                  individuelle, y compris dans les notes générales
+                  ci-dessous.
+                </p>
+              ) : (
+                <div className="mt-4 flex flex-wrap gap-2 print:hidden">
+                  <label
+                    htmlFor={`add-task-${section.id}`}
+                    className="sr-only"
+                  >
+                    Ajouter une tâche — {section.title}
+                  </label>
+                  <input
+                    id={`add-task-${section.id}`}
+                    type="text"
+                    value={draftBySection[section.id] ?? ""}
+                    onChange={(event) =>
+                      setDraftBySection((previous) => ({
+                        ...previous,
+                        [section.id]: event.target.value,
+                      }))
                     }
-                  }}
-                  placeholder="Ajouter une tâche personnalisée"
-                  className="min-h-11 flex-1 rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleAddTask(section.id)}
-                  className="min-h-11 rounded-md border border-jade/40 bg-jade/10 px-4 text-sm font-black text-jade transition hover:bg-jade hover:text-ink"
-                >
-                  Ajouter
-                </button>
-              </div>
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        event.preventDefault();
+                        handleAddTask(section.id);
+                      }
+                    }}
+                    placeholder="Ajouter une tâche personnalisée"
+                    className="min-h-11 flex-1 rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleAddTask(section.id)}
+                    className="min-h-11 rounded-md border border-jade/40 bg-jade/10 px-4 text-sm font-black text-jade transition hover:bg-jade hover:text-ink"
+                  >
+                    Ajouter
+                  </button>
+                </div>
+              )}
             </section>
           );
         })}
@@ -324,6 +342,11 @@ export function TeacherSubstituteFolderClient() {
         <h2 className="text-xl font-black text-foreground print:text-black">
           Notes générales
         </h2>
+        <p className="mt-2 text-xs font-bold text-muted print:hidden">
+          N&apos;indiquez aucune information personnelle ou sensible sur un
+          élève (nom, comportement, santé, situation familiale) : ces notes
+          doivent rester générales et collectives.
+        </p>
         <label htmlFor="dossier-notes" className="sr-only">
           Notes générales
         </label>
@@ -332,7 +355,7 @@ export function TeacherSubstituteFolderClient() {
           value={state.notes}
           onChange={(event) => handleNotesChange(event.target.value)}
           rows={6}
-          placeholder="Indications complémentaires utiles au remplaçant…"
+          placeholder="Indications complémentaires utiles au remplaçant (informations générales uniquement)…"
           className="mt-4 w-full rounded-md border border-white/10 bg-background/45 p-3 text-sm leading-7 text-foreground print:border-black/20 print:bg-transparent print:text-black"
         />
       </section>

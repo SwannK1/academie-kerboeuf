@@ -83,8 +83,12 @@ export const substituteFolderSections: readonly SubstituteFolderSection[] = [
     id: "eleves-a-accompagner",
     title: "Élèves à accompagner",
     description:
-      "Zone libre facultative, sans donnée médicale ni coordonnées familles. Indiquer uniquement des repères pédagogiques utiles au remplaçant.",
-    defaultTasks: [],
+      "Repères collectifs uniquement : aucun nom, aucune donnée médicale, familiale ou disciplinaire individuelle ne doit être saisi ici, y compris dans les tâches personnalisées.",
+    defaultTasks: [
+      "Préciser le fonctionnement des groupes de besoin (sans nom d'élève)",
+      "Indiquer les adaptations collectives mises en place dans la classe",
+      "Rappeler les personnes ressources à contacter en cas de besoin (RASED, direction, etc.)",
+    ],
   },
   {
     id: "documents",
