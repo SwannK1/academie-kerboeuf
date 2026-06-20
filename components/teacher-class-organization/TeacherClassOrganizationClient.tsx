@@ -309,15 +309,19 @@ export function TeacherClassOrganizationClient() {
         <h2 id="ajout-priorite" className="text-xl font-black text-foreground">
           Ajouter une priorité
         </h2>
+        <p className="mt-2 text-sm font-bold text-ember">
+          Organisation générale uniquement. Ne pas inscrire de nom, prénom,
+          donnée élève, famille, santé, comportement ou incident.
+        </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
-            Intitulé de la priorité
+            Nouvelle priorité générale
             <input
               type="text"
               value={newLabel}
               onChange={(event) => setNewLabel(event.target.value)}
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-              placeholder="Ex : Préparer le matériel de sciences"
+              placeholder="Ex : Préparer les évaluations, Commander le matériel, Préparer la réunion de cycle"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">

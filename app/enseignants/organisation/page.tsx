@@ -5,7 +5,7 @@ import { TeacherClassOrganizationClient } from "@/components/teacher-class-organ
 export const metadata: Metadata = {
   title: "Organisation de classe | Académie Kerboeuf",
   description:
-    "Préparez votre semaine de classe : priorités par groupe, réorganisation à la souris ou au clavier. Aucune donnée élève. Sauvegarde sur cet appareil.",
+    "Préparez votre semaine de classe : priorités par groupe, réorganisation à la souris ou au clavier. Outil conçu pour des tâches professionnelles générales, sans donnée élève. Sauvegarde sur cet appareil.",
 };
 
 export default function TeacherClassOrganizationPage() {
@@ -30,8 +30,10 @@ export default function TeacherClassOrganizationPage() {
           <p className="mt-5 text-lg leading-8 text-muted">
             Choisissez un niveau et une période, organisez vos priorités de
             semaine par groupe (préparation, matériel, évaluations, réunions,
-            projets) et suivez votre avancement. Cet outil ne contient aucune
-            donnée élève. Votre progression est sauvegardée sur cet appareil.
+            projets) et suivez votre avancement. Cet outil est conçu pour des
+            tâches professionnelles générales : il ne doit pas contenir de
+            données personnelles (élève, famille, santé, comportement,
+            incident). Votre progression est sauvegardée sur cet appareil.
           </p>
         </header>
 

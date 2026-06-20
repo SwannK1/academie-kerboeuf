@@ -3,9 +3,9 @@ import { teacherLevels, teacherPeriods } from "@/content/teacher-programmation";
 /**
  * Outil général de préparation de classe.
  *
- * Règle : aucune donnée élève. Cet outil ne contient et ne stocke que des
- * priorités d'organisation de classe (préparation, matériel, évaluations,
- * réunions, projets), jamais de prénom, de suivi individuel ni
+ * Règle : cet outil est conçu pour des tâches professionnelles générales
+ * d'organisation de classe (préparation, matériel, évaluations, réunions,
+ * projets). Il ne doit pas contenir de prénom, de suivi individuel, ni
  * d'information médicale, familiale ou comportementale.
  */
 
