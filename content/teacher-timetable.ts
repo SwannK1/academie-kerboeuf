@@ -7,12 +7,6 @@ export type TeacherTimetableDayId =
   | "jeudi"
   | "vendredi";
 
-export type TeacherTimetableSlotId =
-  | "matin-1"
-  | "matin-2"
-  | "apres-midi-1"
-  | "apres-midi-2";
-
 export type TeacherTimetableLevel = {
   id: TeacherTimetableLevelId;
   label: string;
@@ -37,19 +31,6 @@ export const teacherTimetableDays: TeacherTimetableDay[] = [
   { id: "mercredi", label: "Mercredi" },
   { id: "jeudi", label: "Jeudi" },
   { id: "vendredi", label: "Vendredi" },
-];
-
-export type TeacherTimetableSlot = {
-  id: TeacherTimetableSlotId;
-  label: string;
-  durationHours: number;
-};
-
-export const teacherTimetableSlots: TeacherTimetableSlot[] = [
-  { id: "matin-1", label: "Matin 1", durationHours: 1.5 },
-  { id: "matin-2", label: "Matin 2", durationHours: 1.5 },
-  { id: "apres-midi-1", label: "Après-midi 1", durationHours: 1.5 },
-  { id: "apres-midi-2", label: "Après-midi 2", durationHours: 1 },
 ];
 
 export const teacherTimetableSubjectsByLevel: Record<
@@ -105,87 +86,211 @@ export const teacherTimetableSubjectsByLevel: Record<
   ],
 };
 
+/**
+ * Repères horaires hebdomadaires officiels indicatifs, par matière et par
+ * niveau (en heures). Valeurs arrondies à des fins de comparaison dans
+ * l'outil — l'enseignant garde la responsabilité de l'organisation réelle.
+ */
+export const teacherTimetableReferenceHoursByLevel: Record<
+  TeacherTimetableLevelId,
+  Record<string, number>
+> = {
+  cp: {
+    Français: 10,
+    Mathématiques: 5.5,
+    "Questionner le monde": 2.5,
+    EPS: 3,
+    Arts: 1,
+    Musique: 1,
+    EMC: 1,
+  },
+  ce1: {
+    Français: 9.5,
+    Mathématiques: 5,
+    "Questionner le monde": 2.5,
+    EPS: 3,
+    Arts: 1,
+    Musique: 1,
+    EMC: 1,
+  },
+  ce2: {
+    Français: 9,
+    Mathématiques: 5,
+    "Questionner le monde": 2.5,
+    EPS: 3,
+    Arts: 1.5,
+    Musique: 1,
+    EMC: 1,
+  },
+  cm1: {
+    Français: 8,
+    Mathématiques: 5,
+    "Histoire-Géographie": 2,
+    Sciences: 1.5,
+    EPS: 3,
+    Arts: 1.5,
+    Musique: 1,
+    EMC: 1,
+  },
+  cm2: {
+    Français: 8,
+    Mathématiques: 5,
+    "Histoire-Géographie": 2,
+    Sciences: 1.5,
+    EPS: 3,
+    Arts: 1.5,
+    Musique: 1,
+    EMC: 1,
+  },
+};
+
 export const TEACHER_TIMETABLE_WEEKLY_HOURS_TARGET = 24;
 
 export const TEACHER_TIMETABLE_STORAGE_KEY =
-  "academie-kerboeuf-emploi-du-temps-v1";
+  "academie-kerboeuf-emploi-du-temps-v2";
 
-export type TeacherTimetableCellKey =
-  `${TeacherTimetableDayId}__${TeacherTimetableSlotId}`;
+/** Grille de temps : créneaux possibles de 8h00 à 17h00, pas de 30 min. */
+export const TEACHER_TIMETABLE_GRID_START_MINUTES = 8 * 60;
+export const TEACHER_TIMETABLE_GRID_END_MINUTES = 17 * 60;
+export const TEACHER_TIMETABLE_GRID_STEP_MINUTES = 30;
 
-export function buildTeacherTimetableCellKey(
-  day: TeacherTimetableDayId,
-  slot: TeacherTimetableSlotId,
-): TeacherTimetableCellKey {
-  return `${day}__${slot}`;
+export const TEACHER_TIMETABLE_GRID_ROWS = Math.floor(
+  (TEACHER_TIMETABLE_GRID_END_MINUTES - TEACHER_TIMETABLE_GRID_START_MINUTES) /
+    TEACHER_TIMETABLE_GRID_STEP_MINUTES,
+);
+
+export const TEACHER_TIMETABLE_DURATION_OPTIONS = [30, 45, 60, 90, 120] as const;
+export type TeacherTimetableDurationMinutes =
+  (typeof TEACHER_TIMETABLE_DURATION_OPTIONS)[number];
+
+export function minutesToTimeLabel(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${String(hours).padStart(2, "0")}h${String(mins).padStart(2, "0")}`;
 }
 
-export type TeacherTimetableAssignments = Partial<
-  Record<TeacherTimetableCellKey, string>
->;
+export function timeLabelToMinutes(label: string): number | null {
+  const match = /^(\d{1,2}):(\d{2})$/.exec(label);
+  if (!match) return null;
+  const hours = Number(match[1]);
+  const mins = Number(match[2]);
+  if (Number.isNaN(hours) || Number.isNaN(mins)) return null;
+  return hours * 60 + mins;
+}
+
+export function clampToGrid(minutes: number): number {
+  const stepped =
+    Math.round(
+      (minutes - TEACHER_TIMETABLE_GRID_START_MINUTES) /
+        TEACHER_TIMETABLE_GRID_STEP_MINUTES,
+    ) * TEACHER_TIMETABLE_GRID_STEP_MINUTES +
+    TEACHER_TIMETABLE_GRID_START_MINUTES;
+  return Math.min(
+    Math.max(stepped, TEACHER_TIMETABLE_GRID_START_MINUTES),
+    TEACHER_TIMETABLE_GRID_END_MINUTES - TEACHER_TIMETABLE_GRID_STEP_MINUTES,
+  );
+}
+
+export function rowIndexToMinutes(rowIndex: number): number {
+  return (
+    TEACHER_TIMETABLE_GRID_START_MINUTES +
+    rowIndex * TEACHER_TIMETABLE_GRID_STEP_MINUTES
+  );
+}
+
+export function minutesToRowIndex(minutes: number): number {
+  return Math.round(
+    (minutes - TEACHER_TIMETABLE_GRID_START_MINUTES) /
+      TEACHER_TIMETABLE_GRID_STEP_MINUTES,
+  );
+}
+
+export interface TeacherTimetableSlot {
+  id: string;
+  day: TeacherTimetableDayId;
+  /** Minutes depuis minuit (multiple du pas de grille). */
+  startMinutes: number;
+  durationMinutes: TeacherTimetableDurationMinutes;
+  subject: string;
+}
 
 export type TeacherTimetableState = {
   levelId: TeacherTimetableLevelId;
-  assignments: TeacherTimetableAssignments;
+  slots: TeacherTimetableSlot[];
 };
 
-const RECOMMENDED_CM2_ASSIGNMENTS: TeacherTimetableAssignments = {
-  [buildTeacherTimetableCellKey("lundi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("lundi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("lundi", "apres-midi-1")]: "Sciences",
-  [buildTeacherTimetableCellKey("lundi", "apres-midi-2")]: "Arts",
+export function slotEndMinutes(slot: TeacherTimetableSlot): number {
+  return slot.startMinutes + slot.durationMinutes;
+}
 
-  [buildTeacherTimetableCellKey("mardi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("mardi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("mardi", "apres-midi-1")]: "Histoire-Géographie",
-  [buildTeacherTimetableCellKey("mardi", "apres-midi-2")]: "EMC",
+export function slotsOverlap(
+  a: Pick<TeacherTimetableSlot, "startMinutes" | "durationMinutes">,
+  b: Pick<TeacherTimetableSlot, "startMinutes" | "durationMinutes">,
+): boolean {
+  const aEnd = a.startMinutes + a.durationMinutes;
+  const bEnd = b.startMinutes + b.durationMinutes;
+  return a.startMinutes < bEnd && b.startMinutes < aEnd;
+}
 
-  [buildTeacherTimetableCellKey("mercredi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("mercredi", "matin-2")]: "EPS",
+export function findOverlappingSlotIds(
+  slots: TeacherTimetableSlot[],
+): Set<string> {
+  const overlapping = new Set<string>();
+  for (const day of teacherTimetableDays) {
+    const dayslots = slots.filter((slot) => slot.day === day.id);
+    for (let i = 0; i < dayslots.length; i += 1) {
+      for (let j = i + 1; j < dayslots.length; j += 1) {
+        if (slotsOverlap(dayslots[i], dayslots[j])) {
+          overlapping.add(dayslots[i].id);
+          overlapping.add(dayslots[j].id);
+        }
+      }
+    }
+  }
+  return overlapping;
+}
 
-  [buildTeacherTimetableCellKey("jeudi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("jeudi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("jeudi", "apres-midi-1")]: "Histoire-Géographie",
-  [buildTeacherTimetableCellKey("jeudi", "apres-midi-2")]: "Musique",
+let slotCounter = 0;
+export function nextTeacherTimetableSlotId(): string {
+  slotCounter += 1;
+  return `creneau-${Date.now()}-${slotCounter}`;
+}
 
-  [buildTeacherTimetableCellKey("vendredi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("vendredi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("vendredi", "apres-midi-1")]: "EPS",
-  [buildTeacherTimetableCellKey("vendredi", "apres-midi-2")]: "Arts",
-};
+const RECOMMENDED_ELEMENTAIRE_SLOTS: Array<
+  Omit<TeacherTimetableSlot, "id">
+> = [
+  { day: "lundi", startMinutes: 8 * 60 + 30, durationMinutes: 90, subject: "Français" },
+  { day: "lundi", startMinutes: 10 * 60, durationMinutes: 60, subject: "Mathématiques" },
+  { day: "lundi", startMinutes: 13 * 60 + 30, durationMinutes: 90, subject: "Questionner le monde" },
+  { day: "lundi", startMinutes: 15 * 60, durationMinutes: 60, subject: "Arts" },
+
+  { day: "mardi", startMinutes: 8 * 60 + 30, durationMinutes: 90, subject: "Français" },
+  { day: "mardi", startMinutes: 10 * 60, durationMinutes: 60, subject: "Mathématiques" },
+  { day: "mardi", startMinutes: 13 * 60 + 30, durationMinutes: 90, subject: "EMC" },
+  { day: "mardi", startMinutes: 15 * 60, durationMinutes: 60, subject: "Musique" },
+
+  { day: "mercredi", startMinutes: 8 * 60 + 30, durationMinutes: 90, subject: "Français" },
+  { day: "mercredi", startMinutes: 10 * 60, durationMinutes: 60, subject: "EPS" },
+
+  { day: "jeudi", startMinutes: 8 * 60 + 30, durationMinutes: 90, subject: "Français" },
+  { day: "jeudi", startMinutes: 10 * 60, durationMinutes: 60, subject: "Mathématiques" },
+  { day: "jeudi", startMinutes: 13 * 60 + 30, durationMinutes: 90, subject: "Questionner le monde" },
+  { day: "jeudi", startMinutes: 15 * 60, durationMinutes: 60, subject: "Musique" },
+
+  { day: "vendredi", startMinutes: 8 * 60 + 30, durationMinutes: 90, subject: "Français" },
+  { day: "vendredi", startMinutes: 10 * 60, durationMinutes: 60, subject: "Mathématiques" },
+  { day: "vendredi", startMinutes: 13 * 60 + 30, durationMinutes: 90, subject: "EPS" },
+  { day: "vendredi", startMinutes: 15 * 60, durationMinutes: 60, subject: "Arts" },
+];
 
 export function getRecommendedTeacherTimetable(
   levelId: TeacherTimetableLevelId,
 ): TeacherTimetableState {
-  if (levelId === "cm2" || levelId === "cm1") {
-    return { levelId, assignments: { ...RECOMMENDED_CM2_ASSIGNMENTS } };
-  }
-
   return {
     levelId,
-    assignments: {
-      [buildTeacherTimetableCellKey("lundi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("lundi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("lundi", "apres-midi-1")]: "Questionner le monde",
-      [buildTeacherTimetableCellKey("lundi", "apres-midi-2")]: "Arts",
-
-      [buildTeacherTimetableCellKey("mardi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("mardi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("mardi", "apres-midi-1")]: "EMC",
-      [buildTeacherTimetableCellKey("mardi", "apres-midi-2")]: "Musique",
-
-      [buildTeacherTimetableCellKey("mercredi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("mercredi", "matin-2")]: "EPS",
-
-      [buildTeacherTimetableCellKey("jeudi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("jeudi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("jeudi", "apres-midi-1")]: "Questionner le monde",
-      [buildTeacherTimetableCellKey("jeudi", "apres-midi-2")]: "Musique",
-
-      [buildTeacherTimetableCellKey("vendredi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("vendredi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("vendredi", "apres-midi-1")]: "EPS",
-      [buildTeacherTimetableCellKey("vendredi", "apres-midi-2")]: "Arts",
-    },
+    slots: RECOMMENDED_ELEMENTAIRE_SLOTS.map((slot) => ({
+      ...slot,
+      id: nextTeacherTimetableSlotId(),
+    })),
   };
 }

@@ -159,6 +159,15 @@ a {
 }
 
 @media print {
+  @page teacher-timetable {
+    margin: 10mm;
+    size: A4 landscape;
+  }
+
+  .teacher-timetable-print-root {
+    page: teacher-timetable;
+  }
+
   @page {
     margin: 14mm;
     size: A4 portrait;

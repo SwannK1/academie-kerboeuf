@@ -28,10 +28,12 @@ export default function TeacherWeeklyTimetablePage() {
             Emploi du temps hebdomadaire
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
-            sauvegardé sur cet appareil.
+            Choisissez un niveau, créez vos créneaux et déplacez-les à la
+            souris (ou au clavier) vers un autre jour ou un autre horaire.
+            Les chevauchements sont signalés et le total d’heures par
+            matière est recalculé immédiatement par rapport aux repères
+            configurés. Votre emploi du temps est sauvegardé sur cet
+            appareil.
           </p>
         </header>
 
