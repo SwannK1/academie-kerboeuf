@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   getDefaultSubstituteFolderState,
+  LEGACY_SUBSTITUTE_FOLDER_STORAGE_KEYS,
   SUBSTITUTE_FOLDER_STORAGE_KEY,
   substituteFolderSections,
   type SubstituteFolderSectionId,
   type SubstituteFolderState,
-  type SubstituteFolderTask,
 } from "@/content/teacher-substitute-folder";
 
 function readStoredState(): SubstituteFolderState | null {
@@ -30,6 +30,15 @@ function readStoredState(): SubstituteFolderState | null {
   }
 }
 
+function clearLegacyStoredState() {
+  if (typeof window === "undefined") {
+    return;
+  }
+  for (const legacyKey of LEGACY_SUBSTITUTE_FOLDER_STORAGE_KEYS) {
+    window.localStorage.removeItem(legacyKey);
+  }
+}
+
 function mergeWithDefaults(
   state: SubstituteFolderState | null,
 ): SubstituteFolderState {
@@ -41,34 +50,29 @@ function mergeWithDefaults(
   const tasksBySection = { ...defaults.tasksBySection };
   for (const section of substituteFolderSections) {
     const stored = state.tasksBySection?.[section.id];
-    if (Array.isArray(stored)) {
-      tasksBySection[section.id] = stored;
+    if (!Array.isArray(stored)) {
+      continue;
     }
+
+    tasksBySection[section.id] = tasksBySection[section.id].map((task) => {
+      const storedTask = stored.find((candidate) => candidate.id === task.id);
+      return storedTask?.status === "termine"
+        ? { ...task, status: "termine" }
+        : task;
+    });
   }
 
-  return {
-    tasksBySection,
-    notes: typeof state.notes === "string" ? state.notes : "",
-  };
-}
-
-function createTaskId(): string {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-    return crypto.randomUUID();
-  }
-  return `task-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  return { tasksBySection };
 }
 
 export function TeacherSubstituteFolderClient() {
   const [state, setState] = useState<SubstituteFolderState>(() =>
     mergeWithDefaults(readStoredState()),
   );
-  const [draftBySection, setDraftBySection] = useState<
-    Record<string, string>
-  >({});
-  const [confirmingTaskId, setConfirmingTaskId] = useState<string | null>(
-    null,
-  );
+
+  useEffect(() => {
+    clearLegacyStoredState();
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -107,63 +111,26 @@ export function TeacherSubstituteFolderClient() {
     }));
   }
 
-  function handleAddTask(sectionId: SubstituteFolderSectionId) {
-    const label = (draftBySection[sectionId] ?? "").trim();
-    if (!label) {
-      return;
-    }
-
-    const newTask: SubstituteFolderTask = {
-      id: createTaskId(),
-      label,
-      status: "a-faire",
-      custom: true,
-    };
-
-    setState((previous) => ({
-      ...previous,
-      tasksBySection: {
-        ...previous.tasksBySection,
-        [sectionId]: [...previous.tasksBySection[sectionId], newTask],
-      },
-    }));
-    setDraftBySection((previous) => ({ ...previous, [sectionId]: "" }));
-  }
-
-  function handleRemoveTask(
-    sectionId: SubstituteFolderSectionId,
-    taskId: string,
-  ) {
-    setState((previous) => ({
-      ...previous,
-      tasksBySection: {
-        ...previous.tasksBySection,
-        [sectionId]: previous.tasksBySection[sectionId].filter(
-          (task) => task.id !== taskId,
-        ),
-      },
-    }));
-    setConfirmingTaskId(null);
-  }
-
-  function handleNotesChange(notes: string) {
-    setState((previous) => ({ ...previous, notes }));
-  }
-
   function handlePrint() {
     window.print();
   }
 
   function handleReset() {
     setState(getDefaultSubstituteFolderState());
-    setConfirmingTaskId(null);
   }
 
   return (
     <div className="mt-10">
       <section
+        aria-label="Rappel de confidentialité"
+        className="rounded-lg border border-ember/40 bg-ember/[0.08] p-4 text-sm font-bold leading-7 text-ember print:border-black/20 print:bg-transparent print:text-black"
+      >
+        Ne pas inscrire de donnée sur un élève ou une famille.
+      </section>
+
+      <section
         aria-label="Avancement global"
-        className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-jade/30 bg-jade/[0.06] p-5 sm:p-6 print:hidden"
+        className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-jade/30 bg-jade/[0.06] p-5 sm:p-6 print:hidden"
       >
         <p className="text-sm font-bold text-foreground">
           Avancement global : {totalCounters.done} / {totalCounters.total}{" "}
@@ -237,105 +204,13 @@ export function TeacherSubstituteFolderClient() {
                         {task.label}
                       </span>
                     </label>
-
-                    {confirmingTaskId === task.id ? (
-                      <div className="flex shrink-0 items-center gap-2 print:hidden">
-                        <span className="text-xs font-bold text-muted">
-                          Supprimer ?
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveTask(section.id, task.id)}
-                          className="min-h-8 rounded-md border border-ember/40 px-2 text-xs font-black text-ember hover:bg-ember/10"
-                        >
-                          Confirmer
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setConfirmingTaskId(null)}
-                          className="min-h-8 rounded-md border border-white/15 px-2 text-xs font-black text-foreground hover:border-white/30"
-                        >
-                          Annuler
-                        </button>
-                      </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => setConfirmingTaskId(task.id)}
-                        aria-label={`Supprimer la tâche : ${task.label}`}
-                        className="shrink-0 rounded-md border border-white/10 px-2 py-1 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember print:hidden"
-                      >
-                        Supprimer
-                      </button>
-                    )}
                   </li>
                 ))}
-
-                {tasks.length === 0 ? (
-                  <li className="rounded-md border border-dashed border-white/15 px-4 py-3 text-sm text-muted print:border-black/20 print:text-black">
-                    Aucune tâche pour le moment.
-                  </li>
-                ) : null}
               </ul>
-
-              <div className="mt-4 flex flex-wrap gap-2 print:hidden">
-                <label
-                  htmlFor={`add-task-${section.id}`}
-                  className="sr-only"
-                >
-                  Ajouter une tâche — {section.title}
-                </label>
-                <input
-                  id={`add-task-${section.id}`}
-                  type="text"
-                  value={draftBySection[section.id] ?? ""}
-                  onChange={(event) =>
-                    setDraftBySection((previous) => ({
-                      ...previous,
-                      [section.id]: event.target.value,
-                    }))
-                  }
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      event.preventDefault();
-                      handleAddTask(section.id);
-                    }
-                  }}
-                  placeholder="Ajouter une tâche personnalisée"
-                  className="min-h-11 flex-1 rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleAddTask(section.id)}
-                  className="min-h-11 rounded-md border border-jade/40 bg-jade/10 px-4 text-sm font-black text-jade transition hover:bg-jade hover:text-ink"
-                >
-                  Ajouter
-                </button>
-              </div>
             </section>
           );
         })}
       </div>
-
-      <section
-        aria-label="Notes générales"
-        className="mt-8 rounded-lg border border-sky/25 bg-sky/[0.05] p-5 sm:p-6 print:border-black/20 print:bg-transparent"
-      >
-        <h2 className="text-xl font-black text-foreground print:text-black">
-          Notes générales
-        </h2>
-        <label htmlFor="dossier-notes" className="sr-only">
-          Notes générales
-        </label>
-        <textarea
-          id="dossier-notes"
-          value={state.notes}
-          onChange={(event) => handleNotesChange(event.target.value)}
-          rows={6}
-          placeholder="Indications complémentaires utiles au remplaçant…"
-          className="mt-4 w-full rounded-md border border-white/10 bg-background/45 p-3 text-sm leading-7 text-foreground print:border-black/20 print:bg-transparent print:text-black"
-        />
-      </section>
     </div>
   );
 }

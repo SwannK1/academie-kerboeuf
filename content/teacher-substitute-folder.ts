@@ -1,5 +1,9 @@
 export const SUBSTITUTE_FOLDER_STORAGE_KEY =
-  "academie-kerboeuf-dossier-remplacant-v1";
+  "academie-kerboeuf-dossier-remplacant-v2";
+
+export const LEGACY_SUBSTITUTE_FOLDER_STORAGE_KEYS = [
+  "academie-kerboeuf-dossier-remplacant-v1",
+] as const;
 
 export type SubstituteFolderTaskStatus = "a-faire" | "termine";
 
@@ -7,7 +11,6 @@ export type SubstituteFolderTask = {
   id: string;
   label: string;
   status: SubstituteFolderTaskStatus;
-  custom?: boolean;
 };
 
 export type SubstituteFolderSectionId =
@@ -16,7 +19,6 @@ export type SubstituteFolderSectionId =
   | "rituels"
   | "materiel"
   | "regles-de-vie"
-  | "eleves-a-accompagner"
   | "documents"
   | "urgences";
 
@@ -72,7 +74,7 @@ export const substituteFolderSections: readonly SubstituteFolderSection[] = [
   {
     id: "regles-de-vie",
     title: "Règles de vie",
-    description: "Le cadre partagé avec les élèves au quotidien.",
+    description: "Le cadre partagé avec la classe au quotidien.",
     defaultTasks: [
       "Rappeler les règles de vie affichées en classe",
       "Préciser le système de gestion des comportements en place",
@@ -80,19 +82,12 @@ export const substituteFolderSections: readonly SubstituteFolderSection[] = [
     ],
   },
   {
-    id: "eleves-a-accompagner",
-    title: "Élèves à accompagner",
-    description:
-      "Zone libre facultative, sans donnée médicale ni coordonnées familles. Indiquer uniquement des repères pédagogiques utiles au remplaçant.",
-    defaultTasks: [],
-  },
-  {
     id: "documents",
     title: "Documents à laisser",
     description: "Les supports à disposition du remplaçant.",
     defaultTasks: [
       "Laisser le cahier journal ou la programmation en cours",
-      "Laisser la liste des élèves de la classe",
+      "Laisser la liste de classe fournie par la direction",
       "Laisser les codes ou identifiants nécessaires aux outils numériques",
     ],
   },
@@ -101,7 +96,7 @@ export const substituteFolderSections: readonly SubstituteFolderSection[] = [
     title: "Urgences à vérifier avec la direction",
     description: "Les points à confirmer auprès de la direction de l'école.",
     defaultTasks: [
-      "Vérifier la procédure en cas d'incident avec un élève",
+      "Vérifier la procédure en cas d'incident en classe",
       "Vérifier la procédure en cas d'exercice de sécurité",
       "Vérifier les personnes à contacter en cas d'urgence",
     ],
@@ -110,7 +105,6 @@ export const substituteFolderSections: readonly SubstituteFolderSection[] = [
 
 export type SubstituteFolderState = {
   tasksBySection: Record<SubstituteFolderSectionId, SubstituteFolderTask[]>;
-  notes: string;
 };
 
 function buildSectionTasks(
@@ -133,5 +127,5 @@ export function getDefaultSubstituteFolderState(): SubstituteFolderState {
     tasksBySection[section.id] = buildSectionTasks(section);
   }
 
-  return { tasksBySection, notes: "" };
+  return { tasksBySection };
 }

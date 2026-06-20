@@ -30,12 +30,12 @@ export default function TeacherSubstituteFolderPage() {
             Préparer mon dossier remplaçant
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted print:hidden">
-            Construisez une checklist claire pour transmettre les repères
+            Cochez une checklist claire pour transmettre les repères
             essentiels à un remplaçant : fonctionnement de la classe, emploi
             du temps, rituels, matériel, règles de vie, documents à laisser et
-            points à vérifier avec la direction. Aucune donnée médicale ou
-            coordonnée famille ne doit être saisie ici. Votre dossier est
-            sauvegardé sur cet appareil uniquement.
+            points à vérifier avec la direction. Ne pas inscrire de donnée sur
+            un élève ou une famille. Votre dossier est sauvegardé sur cet
+            appareil uniquement.
           </p>
         </header>
 
