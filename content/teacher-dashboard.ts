@@ -74,6 +74,18 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "🖼️",
       },
       {
+        title: "Plan de classe",
+        description: "Organisez tables et groupes avec des étiquettes anonymes.",
+        href: "/enseignants/plan-de-classe",
+        icon: "🪑",
+      },
+      {
+        title: "Suivi de classe",
+        description: "Notez des constats collectifs et anonymes, semaine après semaine.",
+        href: "/enseignants/suivi-de-classe",
+        icon: "📊",
+      },
+      {
         title: "Bibliothèque de classe",
         description: "Organisez les livres et ressources de votre coin lecture.",
         href: "/enseignants/bibliotheque-classe",

@@ -16,7 +16,6 @@ export type SubstituteFolderSectionId =
   | "rituels"
   | "materiel"
   | "regles-de-vie"
-  | "eleves-a-accompagner"
   | "documents"
   | "urgences";
 
@@ -80,19 +79,11 @@ export const substituteFolderSections: readonly SubstituteFolderSection[] = [
     ],
   },
   {
-    id: "eleves-a-accompagner",
-    title: "Élèves à accompagner",
-    description:
-      "Zone libre facultative, sans donnée médicale ni coordonnées familles. Indiquer uniquement des repères pédagogiques utiles au remplaçant.",
-    defaultTasks: [],
-  },
-  {
     id: "documents",
     title: "Documents à laisser",
     description: "Les supports à disposition du remplaçant.",
     defaultTasks: [
       "Laisser le cahier journal ou la programmation en cours",
-      "Laisser la liste des élèves de la classe",
       "Laisser les codes ou identifiants nécessaires aux outils numériques",
     ],
   },

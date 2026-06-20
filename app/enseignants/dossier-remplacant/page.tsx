@@ -39,6 +39,16 @@ export default function TeacherSubstituteFolderPage() {
           </p>
         </header>
 
+        <div
+          role="note"
+          className="mt-6 max-w-3xl rounded-lg border border-ember/40 bg-ember/10 p-5 text-sm font-bold text-ember print:hidden"
+        >
+          ⚠️ Ne saisissez aucune donnée personnelle : pas de nom de famille,
+          pas d&apos;information médicale, familiale, disciplinaire ou
+          comportementale. Seuls les horaires, routines, matériel, contacts
+          institutionnels et consignes générales sont à conserver ici.
+        </div>
+
         <TeacherSubstituteFolderClient />
       </div>
     </main>
