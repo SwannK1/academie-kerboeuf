@@ -10,44 +10,36 @@ export type TeacherDashboardSection = {
   cards: TeacherDashboardCard[];
 };
 
-export const teacherDashboardSections: TeacherDashboardSection[] = [
+export const teacherDashboardPriorityCards: TeacherDashboardCard[] = [
   {
-    title: "Organiser l'année",
-    cards: [
-      {
-        title: "Programmation",
-        description: "Répartissez les compétences sur les périodes de l'année.",
-        href: "/enseignants/programmation",
-        icon: "📅",
-      },
-      {
-        title: "Emploi du temps",
-        description: "Construisez une semaine type et suivez le total d'heures.",
-        href: "/enseignants/emploi-du-temps",
-        icon: "🕐",
-      },
-      {
-        title: "Calendrier",
-        description: "Visualisez les échéances et les périodes de l'année scolaire.",
-        href: "/enseignants/calendrier",
-        icon: "🗓️",
-      },
-      {
-        title: "Fin de période",
-        description: "Suivez la liste des tâches à boucler avant les vacances.",
-        href: "/enseignants/fin-periode",
-        icon: "✅",
-      },
-      {
-        title: "Évaluations",
-        description: "Planifiez et organisez les évaluations de la classe.",
-        href: "/enseignants/evaluations",
-        icon: "📝",
-      },
-    ],
+    title: "Emploi du temps",
+    description: "Construire la semaine type de la classe.",
+    href: "/enseignants/emploi-du-temps",
+    icon: "🕐",
   },
   {
-    title: "Préparer la classe",
+    title: "Programmation annuelle",
+    description: "Répartir les compétences sur les périodes.",
+    href: "/enseignants/programmation/annuelle",
+    icon: "📅",
+  },
+  {
+    title: "Progression de période",
+    description: "Ordonner les séquences d'une période.",
+    href: "/enseignants/progression",
+    icon: "🗒️",
+  },
+  {
+    title: "Organisation de classe",
+    description: "Gérer le matériel et les quantités disponibles.",
+    href: "/enseignants/materiel-classe",
+    icon: "🧰",
+  },
+];
+
+export const teacherDashboardSections: TeacherDashboardSection[] = [
+  {
+    title: "Préparer",
     cards: [
       {
         title: "Organisation de classe",
@@ -57,79 +49,132 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
       },
       {
         title: "Ateliers",
-        description: "Planifiez et organisez vos ateliers en autonomie ou en groupes.",
+        description: "Planifier les ateliers en autonomie ou en groupes.",
         href: "/enseignants/ateliers",
         icon: "🧩",
       },
       {
         title: "Rituels",
-        description: "Gardez sous la main votre bibliothèque de rituels de classe.",
+        description: "Retrouver la bibliothèque de rituels de classe.",
         href: "/enseignants/rituels",
         icon: "🔁",
       },
       {
+        title: "Évaluations",
+        description: "Planifier les évaluations de la classe.",
+        href: "/enseignants/evaluations",
+        icon: "📝",
+      },
+      {
+        title: "APC",
+        description: "Préparer les activités pédagogiques complémentaires.",
+        href: "/enseignants/apc",
+        icon: "🎯",
+      },
+      {
         title: "Photocopies",
-        description: "Suivez la file des documents à reproduire pour la classe.",
+        description: "Suivre la file des documents à reproduire.",
         href: "/enseignants/photocopies",
         icon: "🖨️",
       },
       {
         title: "Affichages",
-        description: "Cochez les affichages de classe à préparer ou à mettre à jour.",
+        description: "Cocher les affichages à préparer ou mettre à jour.",
         href: "/enseignants/affichages",
         icon: "🖼️",
       },
       {
         title: "Bibliothèque de classe",
-        description: "Organisez les livres et ressources de votre coin lecture.",
+        description: "Organiser les livres du coin lecture.",
         href: "/enseignants/bibliotheque-classe",
         icon: "📚",
       },
     ],
   },
   {
-    title: "Projets et réunions",
+    title: "Organiser",
     cards: [
       {
-        title: "Projets et sorties",
-        description: "Suivez la préparation de vos projets et sorties scolaires.",
-        href: "/enseignants/projets-sorties",
-        icon: "🚌",
+        title: "Calendrier",
+        description: "Visualiser les périodes et échéances de l'année.",
+        href: "/enseignants/calendrier",
+        icon: "🗓️",
       },
       {
-        title: "Conseils de cycle",
-        description: "Préparez et gardez une trace de vos conseils de cycle.",
-        href: "/enseignants/conseils-cycle",
-        icon: "🗒️",
+        title: "Fin de période",
+        description: "Cocher les tâches à boucler avant les vacances.",
+        href: "/enseignants/fin-periode",
+        icon: "✅",
       },
       {
-        title: "Liaison CM2-6e",
-        description: "Organisez les échanges et le suivi de la liaison CM2-6e.",
-        href: "/enseignants/liaison-cm2-6e",
-        icon: "🎓",
-      },
-      {
-        title: "Communications",
-        description: "Centralisez les messages destinés aux familles.",
-        href: "/enseignants/communications",
-        icon: "✉️",
+        title: "Programmation",
+        description: "Accéder aux deux outils de programmation annuelle.",
+        href: "/enseignants/programmation",
+        icon: "📂",
       },
     ],
   },
   {
-    title: "Ressources personnelles",
+    title: "Réunions et projets",
+    cards: [
+      {
+        title: "Conseils de cycle",
+        description: "Préparer et garder une trace des conseils de cycle.",
+        href: "/enseignants/conseils-cycle",
+        icon: "🗒️",
+      },
+      {
+        title: "Conseil d'école",
+        description: "Préparer l'ordre du jour d'un conseil d'école.",
+        href: "/enseignants/conseil-ecole",
+        icon: "🏫",
+      },
+      {
+        title: "Liaison CM2-6e",
+        description: "Organiser les échanges de la liaison CM2-6e.",
+        href: "/enseignants/liaison-cm2-6e",
+        icon: "🎓",
+      },
+      {
+        title: "Rendez-vous professionnels",
+        description: "Préparer un rendez-vous professionnel.",
+        href: "/enseignants/rendez-vous",
+        icon: "🤝",
+      },
+      {
+        title: "Communications",
+        description: "Centraliser les messages destinés aux familles.",
+        href: "/enseignants/communications",
+        icon: "✉️",
+      },
+      {
+        title: "Projets et sorties",
+        description: "Suivre la préparation des projets et sorties.",
+        href: "/enseignants/projets-sorties",
+        icon: "🚌",
+      },
+    ],
+  },
+  {
+    title: "Ressources",
     cards: [
       {
         title: "Modèles",
-        description: "Retrouvez vos modèles de documents prêts à réutiliser.",
+        description: "Retrouver les modèles de documents réutilisables.",
         href: "/enseignants/modeles",
         icon: "🗂️",
       },
       {
         title: "Dossier remplaçant",
-        description: "Préparez le dossier à laisser à un remplaçant.",
+        description: "Préparer le dossier à laisser à un remplaçant.",
         href: "/enseignants/dossier-remplacant",
         icon: "📁",
+      },
+      {
+        title: "Formations",
+        description: "Suivre ses formations et son développement professionnel.",
+        href: "/enseignants/formations",
+        icon: "🎒",
       },
     ],
   },
