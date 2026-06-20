@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
+import { Cm2FrancaisDirectAccess } from "@/components/cm2/francais-direct-access";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import {
@@ -34,6 +35,10 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
   const subject = getCm2SubjectBySlug(slug);
 
   if (!subject) notFound();
+
+  if (slug === "francais") {
+    return <Cm2FrancaisDirectAccess />;
+  }
 
   const tree = getCm2SubjectTree(slug);
   const linkedCards = (subject.missionSlugs ?? [])
