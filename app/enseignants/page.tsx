@@ -148,6 +148,15 @@ export default function TeachersPage() {
           Ouvrir la programmation
         </TeacherLink>
       </TeacherCard>
+
+      <TeacherCard
+        title="Dossier remplaçant"
+        description="Préparez un dossier générique pour un remplaçant : horaires, matériel, rituels et organisation de la journée, sans aucune donnée personnelle."
+      >
+        <TeacherLink href="/enseignants/dossier-remplacant">
+          Ouvrir le dossier remplaçant
+        </TeacherLink>
+      </TeacherCard>
     </HierarchyPage>
 
   );
