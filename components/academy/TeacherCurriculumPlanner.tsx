@@ -8,8 +8,76 @@ import {
   type CurriculumCompetency,
   type SchoolLevel,
 } from "@/content/teacher-programming-curriculum";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import {
+  teacherProgrammationItems,
+  teacherSubjects as legacyTeacherSubjects,
+} from "@/content/teacher-programmation";
 
 const STORAGE_KEY = "academie-kerboeuf-curriculum-planning-v1";
+
+/**
+ * Ancienne clé de l'outil de programmation (avant le catalogue enrichi).
+ * On ne la supprime jamais automatiquement : elle reste consultable et
+ * peut être reprise manuellement, sans correspondance de compétence
+ * inventée vers le nouveau catalogue.
+ */
+const LEGACY_STORAGE_KEY = "academie-kerboeuf-programmation-v1";
+
+type LegacyOverride = { period: string; order: number };
+type LegacyOverrides = Record<string, LegacyOverride>;
+
+function readLegacyOverrides(): LegacyOverrides | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  try {
+    const raw = window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (!raw) {
+      return null;
+    }
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Object.keys(parsed).length === 0) {
+      return null;
+    }
+    return parsed as LegacyOverrides;
+  } catch {
+    return null;
+  }
+}
+
+type LegacyEntry = {
+  id: string;
+  level: string;
+  period: string;
+  subjectLabel: string;
+  title: string;
+  status: (typeof teacherProgrammationItems)[number]["status"];
+};
+
+function buildLegacyEntries(overrides: LegacyOverrides | null): LegacyEntry[] {
+  if (!overrides) {
+    return [];
+  }
+  const entries: LegacyEntry[] = [];
+  for (const [id, override] of Object.entries(overrides)) {
+    const item = teacherProgrammationItems.find((entry) => entry.id === id);
+    if (!item) {
+      continue;
+    }
+    entries.push({
+      id,
+      level: item.level,
+      period: override.period ?? item.period,
+      subjectLabel:
+        legacyTeacherSubjects.find((subject) => subject.id === item.subject)?.label ??
+        item.subject,
+      title: item.title,
+      status: item.status,
+    });
+  }
+  return entries;
+}
 
 const periods = [1, 2, 3, 4, 5] as const;
 
@@ -73,6 +141,9 @@ export function TeacherCurriculumPlanner() {
   const [assignments, setAssignments] = useState<StoredAssignments>(() =>
     readStoredAssignments(),
   );
+  const [legacyEntries] = useState<LegacyEntry[]>(() =>
+    buildLegacyEntries(readLegacyOverrides()),
+  );
 
   const subjectsForLevel = useMemo(
     () => getSubjectsForLevel(selectedLevel),
@@ -115,6 +186,18 @@ export function TeacherCurriculumPlanner() {
   function selectSubject(subjectId: string | null) {
     setActiveSubjectId(subjectId);
     setActiveDomainId(null);
+  }
+
+  /**
+   * Reprise manuelle d'une ancienne entrée : on amène l'enseignant sur le
+   * bon niveau et on préremplit la recherche avec l'ancien intitulé, pour
+   * qu'il retrouve et place lui-même la compétence correspondante du
+   * nouveau catalogue. Aucune correspondance n'est devinée automatiquement.
+   */
+  function resumeLegacyEntry(entry: LegacyEntry) {
+    setSelectedLevel(entry.level as SchoolLevel);
+    selectSubject(null);
+    setSearchQuery(entry.title);
   }
 
   function assignToPeriod(competencyId: string, period: number) {
@@ -172,6 +255,47 @@ export function TeacherCurriculumPlanner() {
 
   return (
     <div>
+      {legacyEntries.length > 0 ? (
+        <section
+          aria-labelledby="ancienne-programmation-titre"
+          className="mb-8 rounded-lg border border-amber/40 bg-amber/10 p-5"
+        >
+          <h2 id="ancienne-programmation-titre" className="text-lg font-black text-amber">
+            Ancienne programmation détectée
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Des données de l&apos;ancien outil de programmation ont été trouvées sur cet
+            appareil. Elles ne sont pas reliées automatiquement au nouveau catalogue : vous
+            pouvez les consulter ci-dessous et reprendre chaque élément manuellement.
+          </p>
+          <ul className="mt-4 space-y-2">
+            {legacyEntries.map((entry) => (
+              <li
+                key={entry.id}
+                className="flex flex-wrap items-center gap-2 rounded border border-white/10 bg-background/40 p-3"
+              >
+                <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
+                  {entry.level.toUpperCase()}
+                </span>
+                <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
+                  {entry.subjectLabel}
+                </span>
+                <span className="text-xs text-muted">{entry.period}</span>
+                <PublicStatusBadge status={entry.status} />
+                <span className="text-sm font-bold text-foreground">{entry.title}</span>
+                <button
+                  type="button"
+                  onClick={() => resumeLegacyEntry(entry)}
+                  className="ml-auto min-h-9 rounded border border-jade/40 px-3 text-xs font-bold text-jade transition hover:bg-jade/10"
+                >
+                  Reprendre manuellement
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       <section aria-labelledby="planificateur-niveau-titre">
         <h2 id="planificateur-niveau-titre" className="text-xl font-black text-foreground">
           Choisir un niveau
