@@ -68,7 +68,20 @@ export default function TeachersPage() {
       <TeacherCard
         title="Préparer une séance"
         description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      />
+      >
+        <TeacherLink href="/enseignants/preparer-une-seance">
+          Préparer une séance
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Ma classe"
+        description="Renseignez le niveau, l'effectif et la période active de votre classe. Ces réglages restent enregistrés sur cet appareil."
+      >
+        <TeacherLink href="/enseignants/ma-classe">
+          Ouvrir Ma classe
+        </TeacherLink>
+      </TeacherCard>
 
       <TeacherCard
         title="Comprendre le format des fiches"
@@ -146,6 +159,24 @@ export default function TeachersPage() {
       >
         <TeacherLink href="/enseignants/programmation">
           Ouvrir la programmation
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Plan de classe"
+        description="Choisissez une disposition, placez les élèves par prénom et ajustez les places. Enregistré uniquement sur cet appareil."
+      >
+        <TeacherLink href="/enseignants/plan-de-classe">
+          Ouvrir le plan de classe
+        </TeacherLink>
+      </TeacherCard>
+
+      <TeacherCard
+        title="Suivi de classe"
+        description="Gardez des observations utiles et préparez les remédiations, sans compte ni partage des données."
+      >
+        <TeacherLink href="/enseignants/suivi-classe">
+          Ouvrir le suivi de classe
         </TeacherLink>
       </TeacherCard>
     </HierarchyPage>
