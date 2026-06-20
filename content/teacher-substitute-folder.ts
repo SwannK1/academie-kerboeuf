@@ -7,18 +7,15 @@ export type SubstituteFolderTask = {
   id: string;
   label: string;
   status: SubstituteFolderTaskStatus;
-  custom?: boolean;
 };
 
 export type SubstituteFolderSectionId =
-  | "fonctionnement"
-  | "emploi-du-temps"
-  | "rituels"
-  | "materiel"
-  | "regles-de-vie"
-  | "eleves-a-accompagner"
-  | "documents"
-  | "urgences";
+  | "horaires-recreations"
+  | "materiel-lieux"
+  | "rituels-classe"
+  | "deroule-journee"
+  | "consignes-collectives"
+  | "contacts-institutionnels";
 
 export type SubstituteFolderSection = {
   id: SubstituteFolderSectionId;
@@ -29,88 +26,69 @@ export type SubstituteFolderSection = {
 
 export const substituteFolderSections: readonly SubstituteFolderSection[] = [
   {
-    id: "fonctionnement",
-    title: "Fonctionnement général de la classe",
-    description:
-      "Les repères pour que la journée se déroule sans surprise pour le remplaçant.",
+    id: "horaires-recreations",
+    title: "Horaires et récréations",
+    description: "Les repères horaires de la journée de classe.",
     defaultTasks: [
-      "Indiquer les horaires d'arrivée, de récréation et de sortie",
-      "Préciser le mode d'accueil du matin",
-      "Lister les adultes intervenant dans la classe (RASED, ATSEM, etc.)",
+      "Heure d'arrivée et modalités d'accueil du matin",
+      "Horaires des récréations",
+      "Heure de sortie et modalités",
     ],
   },
   {
-    id: "emploi-du-temps",
-    title: "Emploi du temps",
-    description: "Le déroulé de la semaine et des séances en cours.",
-    defaultTasks: [
-      "Laisser l'emploi du temps de la semaine à jour",
-      "Indiquer où en sont les séquences en cours par matière",
-      "Préciser les créneaux spécifiques (sport, langue, décloisonnement)",
-    ],
-  },
-  {
-    id: "rituels",
-    title: "Rituels",
-    description: "Les habitudes de classe à reproduire dès le premier jour.",
-    defaultTasks: [
-      "Décrire le rituel d'accueil et de mise au travail",
-      "Décrire le rituel de fin de journée",
-      "Indiquer les rituels spécifiques (date, météo, responsabilités)",
-    ],
-  },
-  {
-    id: "materiel",
-    title: "Matériel",
+    id: "materiel-lieux",
+    title: "Matériel et lieux utiles",
     description: "Ce qui doit être accessible et son emplacement.",
     defaultTasks: [
-      "Indiquer l'emplacement du matériel collectif",
-      "Indiquer l'emplacement des manuels et fichiers",
-      "Préciser le matériel numérique disponible et son usage",
+      "Emplacement du matériel collectif",
+      "Emplacement des manuels et fichiers",
+      "Lieux utiles (sanitaires, salle des maîtres, infirmerie)",
     ],
   },
   {
-    id: "regles-de-vie",
-    title: "Règles de vie",
-    description: "Le cadre partagé avec les élèves au quotidien.",
+    id: "rituels-classe",
+    title: "Rituels de classe",
+    description: "Les habitudes de classe à reproduire dès le premier jour.",
     defaultTasks: [
-      "Rappeler les règles de vie affichées en classe",
-      "Préciser le système de gestion des comportements en place",
-      "Indiquer les déplacements autorisés et les consignes de sécurité",
+      "Rituel d'accueil et de mise au travail",
+      "Rituel de fin de journée",
+      "Rituels spécifiques (date, météo, responsabilités)",
     ],
   },
   {
-    id: "eleves-a-accompagner",
-    title: "Élèves à accompagner",
-    description:
-      "Zone libre facultative, sans donnée médicale ni coordonnées familles. Indiquer uniquement des repères pédagogiques utiles au remplaçant.",
-    defaultTasks: [],
-  },
-  {
-    id: "documents",
-    title: "Documents à laisser",
-    description: "Les supports à disposition du remplaçant.",
+    id: "deroule-journee",
+    title: "Déroulé de la journée",
+    description: "L'organisation générale des temps de classe.",
     defaultTasks: [
-      "Laisser le cahier journal ou la programmation en cours",
-      "Laisser la liste des élèves de la classe",
-      "Laisser les codes ou identifiants nécessaires aux outils numériques",
+      "Déroulé des matières par demi-journée",
+      "Créneaux spécifiques (sport, langue, décloisonnement)",
+      "Temps de pause et de transition",
     ],
   },
   {
-    id: "urgences",
-    title: "Urgences à vérifier avec la direction",
+    id: "consignes-collectives",
+    title: "Consignes collectives",
+    description: "Le cadre partagé avec la classe au quotidien.",
+    defaultTasks: [
+      "Règles de vie affichées en classe",
+      "Déplacements autorisés et consignes de sécurité",
+      "Gestion collective des comportements",
+    ],
+  },
+  {
+    id: "contacts-institutionnels",
+    title: "Contacts institutionnels génériques",
     description: "Les points à confirmer auprès de la direction de l'école.",
     defaultTasks: [
-      "Vérifier la procédure en cas d'incident avec un élève",
-      "Vérifier la procédure en cas d'exercice de sécurité",
-      "Vérifier les personnes à contacter en cas d'urgence",
+      "Procédure en cas d'incident",
+      "Procédure en cas d'exercice de sécurité",
+      "Personnes à contacter à la direction",
     ],
   },
 ] as const;
 
 export type SubstituteFolderState = {
   tasksBySection: Record<SubstituteFolderSectionId, SubstituteFolderTask[]>;
-  notes: string;
 };
 
 function buildSectionTasks(
@@ -133,5 +111,5 @@ export function getDefaultSubstituteFolderState(): SubstituteFolderState {
     tasksBySection[section.id] = buildSectionTasks(section);
   }
 
-  return { tasksBySection, notes: "" };
+  return { tasksBySection };
 }
