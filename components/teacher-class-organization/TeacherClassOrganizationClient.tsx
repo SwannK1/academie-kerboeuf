@@ -132,6 +132,14 @@ export function TeacherClassOrganizationClient() {
 
   return (
     <div className="mt-10 space-y-8">
+      <p
+        role="note"
+        className="rounded-lg border border-ember/40 bg-ember/10 p-4 text-sm font-bold text-foreground"
+      >
+        Organisation générale uniquement. Ne pas inscrire de nom, prénom,
+        donnée élève, famille, santé, comportement ou incident.
+      </p>
+
       <section aria-labelledby="choix-niveau-periode">
         <h2
           id="choix-niveau-periode"
@@ -311,13 +319,13 @@ export function TeacherClassOrganizationClient() {
         </h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
-            Intitulé de la priorité
+            Nouvelle priorité générale
             <input
               type="text"
               value={newLabel}
               onChange={(event) => setNewLabel(event.target.value)}
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-              placeholder="Ex : Préparer le matériel de sciences"
+              placeholder="Préparer les évaluations, commander le matériel, préparer la réunion de cycle"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
