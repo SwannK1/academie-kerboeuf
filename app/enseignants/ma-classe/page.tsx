@@ -1,41 +1,39 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherYearlyProgrammation } from "@/components/academy/TeacherYearlyProgrammationClient";
+import { TeacherClassProfileForm } from "@/components/academy/TeacherClassProfile";
 
 export const metadata: Metadata = {
-  title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
+  title: "Ma classe | Académie Kerboeuf",
   description:
-    "Choisissez un niveau et une matière, puis placez les compétences dans les périodes de l'année.",
+    "Configurez les réglages locaux de votre classe : niveau, effectif et période active.",
 };
 
-export default function TeacherProgrammationPage() {
+export default function TeacherClassSettingsPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-3xl">
         <Breadcrumb
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Programmation annuelle" },
+            { label: "Ma classe" },
           ]}
         />
 
-        <header className="mt-6 max-w-3xl">
+        <header className="mt-6">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Programmation annuelle
+            Ma classe
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau et une matière, sélectionnez une compétence, puis
-            cliquez sur une période pour la placer. Aucun glisser-déposer.
+            Ces réglages alimentent le tableau de bord de l’organisateur. Ils
+            sont enregistrés uniquement sur cet appareil.
           </p>
         </header>
 
-        <div className="mt-10">
-          <TeacherYearlyProgrammation />
-        </div>
+        <TeacherClassProfileForm />
       </div>
     </main>
   );

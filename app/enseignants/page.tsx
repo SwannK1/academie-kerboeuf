@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { HierarchyPage } from "@/app/personnages/_components/hierarchy";
+import { TeacherOrganizerDashboard } from "@/components/academy/TeacherOrganizerDashboard";
 
 export const metadata: Metadata = {
   title: "Espace enseignants | Académie Kerboeuf",
@@ -65,10 +66,9 @@ export default function TeachersPage() {
         { label: "Enseignants" },
       ]}
     >
-      <TeacherCard
-        title="Préparer une séance"
-        description="Partez de l'objectif d'apprentissage, choisissez la ressource adaptée, puis prévoyez le temps de découverte, d'entraînement et de synthèse."
-      />
+      <div className="md:col-span-2">
+        <TeacherOrganizerDashboard />
+      </div>
 
       <TeacherCard
         title="Comprendre le format des fiches"
@@ -131,59 +131,30 @@ export default function TeachersPage() {
         </div>
       </TeacherCard>
 
-      <TeacherCard
-        title="Construire son emploi du temps"
-        description="Choisissez un niveau, répartissez les matières par créneau sur la semaine et suivez le total d'heures par rapport au repère de 24 h."
-      >
-        <TeacherLink href="/enseignants/emploi-du-temps">
-          Ouvrir l’emploi du temps
-        </TeacherLink>
-      </TeacherCard>
-
-      <TeacherCard
-        title="Programmation"
-        description="Répartissez les compétences du programme sur les périodes de l'année et ordonnez les séquences de chaque période."
-      >
-        <TeacherLink href="/enseignants/programmation">
-          Ouvrir la programmation
-        </TeacherLink>
-      </TeacherCard>
     </HierarchyPage>
 
   );
 }
 
 function TeacherCard({
+  id,
   title,
   description,
   children,
 }: {
+  id?: string;
   title: string;
   description: string;
   children?: ReactNode;
 }) {
   return (
-    <article className="flex flex-col rounded-lg border border-sky/25 bg-sky/[0.05] p-5 sm:p-6">
+    <article
+      id={id}
+      className="flex flex-col rounded-lg border border-sky/25 bg-sky/[0.05] p-5 sm:p-6"
+    >
       <h2 className="text-xl font-black text-foreground">{title}</h2>
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">{description}</p>
       {children ? <div className="mt-5">{children}</div> : null}
     </article>
-  );
-}
-
-function TeacherLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      className="inline-flex min-h-11 items-center justify-center rounded-md border border-sky/35 bg-sky/10 px-4 text-center text-sm font-black text-sky transition hover:bg-sky hover:text-ink"
-    >
-      {children}
-    </Link>
   );
 }
