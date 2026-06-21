@@ -27,6 +27,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "🕐",
       },
       {
+        title: "Cahier journal",
+        description: "Préparez votre vraie semaine avec des cartes de séances déplaçables.",
+        href: "/enseignants/cahier-journal",
+        icon: "📔",
+      },
+      {
         title: "Calendrier",
         description: "Visualisez les échéances et les périodes de l'année scolaire.",
         href: "/enseignants/calendrier",
