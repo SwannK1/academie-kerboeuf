@@ -21,6 +21,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "📅",
       },
       {
+        title: "Progression",
+        description: "Suivez l'avancement des séquences d'une période en Kanban.",
+        href: "/enseignants/progression",
+        icon: "🗂️",
+      },
+      {
         title: "Emploi du temps",
         description: "Construisez une semaine type et suivez le total d'heures.",
         href: "/enseignants/emploi-du-temps",

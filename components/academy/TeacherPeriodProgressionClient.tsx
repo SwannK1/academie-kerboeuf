@@ -5,10 +5,8 @@ import {
   useEffect,
   useId,
   useMemo,
-  useRef,
   useState,
   type DragEvent,
-  type KeyboardEvent,
 } from "react";
 import {
   schoolLevels,
@@ -16,16 +14,30 @@ import {
   getSubjectsForLevel,
   type SchoolLevel,
 } from "@/content/teacher-programming-curriculum";
-import { getTeacherProgrammationItemsByLevel } from "@/content/teacher-programmation";
 
 /**
- * `niveau` (CP→CM2), `matiere` et `domaine` viennent désormais de la source
- * centrale `content/teacher-programming-curriculum.ts` — c'est le même
- * catalogue que celui utilisé par la programmation annuelle
- * (TeacherCurriculumPlanner). `content/teacher-programmation.ts` n'est plus
- * lu que pour interpréter les anciens identifiants stockés en v1 lors de la
- * migration ci-dessous : il ne sert plus à afficher de compétences.
+ * Progression de période — Kanban V1.
+ *
+ * Relié à la programmation annuelle (mêmes matières/domaines/compétences,
+ * `content/teacher-programming-curriculum.ts`) mais totalement indépendant
+ * du cahier journal et de l'emploi du temps : cet outil ne planifie pas de
+ * créneaux horaires, il suit l'avancement de séquences sur une colonne de
+ * statut.
+ *
+ * Statuts locaux à cet outil uniquement (distincts des statuts publics de
+ * visibilité "disponible"/"bientôt"/"en construction" gouvernés par
+ * content/public-status.*). Ne jamais router ces statuts via la façade
+ * publique ni via PublicStatusBadge : ce sont deux systèmes différents.
+ *
+ * Aucune donnée nominative ou d'élève : uniquement carte / compétence /
+ * matière / durée / statut.
+ *
+ * "Imprimables disponibles" : le catalogue de compétences de programmation
+ * annuelle ne porte aujourd'hui aucune référence vers de vrais PDF. Tant
+ * qu'aucune liaison réelle n'existe, ce champ reste donc toujours vide —
+ * jamais de lien fictif ni de PDF inventé.
  */
+
 export type TeacherLevel = SchoolLevel;
 export type TeacherSubjectId = string;
 
@@ -44,65 +56,76 @@ export const teacherPeriods: { id: TeacherPeriod; label: string }[] = [
   { id: "periode-5", label: "Période 5" },
 ];
 
-/**
- * Progression de période — v2.
- *
- * Modèle pédagogique obligatoire :
- *   niveau → période → matière → domaine → compétence → séquence → semaine → statut
- *
- * Règle : 1 séquence = 1 compétence. `competenceId` est une chaîne unique,
- * jamais un tableau — pas de séquence multi-compétences.
- *
- * Statuts locaux à cet outil uniquement (distincts des statuts publics de
- * visibilité "disponible"/"bientôt"/"en construction" gouvernés par
- * content/public-status.*). Ne jamais router ces 4 statuts via la façade
- * publique ni via PublicStatusBadge : ce sont deux systèmes différents.
- *
- * Aucune donnée nominative ou d'élève : uniquement séquence / compétence /
- * semaine / matière / domaine / statut / durée.
- */
-
-export type SequenceStatus = "a-programmer" | "prevu" | "en-cours" | "termine";
+export type SequenceStatus =
+  | "a-prevoir"
+  | "pret"
+  | "en-cours"
+  | "termine"
+  | "a-reprendre";
 
 export const SEQUENCE_STATUSES: { id: SequenceStatus; label: string }[] = [
-  { id: "a-programmer", label: "À programmer" },
-  { id: "prevu", label: "Prévu" },
+  { id: "a-prevoir", label: "À prévoir" },
+  { id: "pret", label: "Prêt" },
   { id: "en-cours", label: "En cours" },
   { id: "termine", label: "Terminé" },
+  { id: "a-reprendre", label: "À reprendre" },
 ];
 
 const STATUS_STYLES: Record<SequenceStatus, string> = {
-  "a-programmer": "border-white/20 bg-white/5 text-muted",
-  prevu: "border-sky-400/50 bg-sky-400/10 text-sky-300",
+  "a-prevoir": "border-white/20 bg-white/5 text-muted",
+  pret: "border-sky-400/50 bg-sky-400/10 text-sky-300",
   "en-cours": "border-gold/50 bg-gold/10 text-gold",
   termine: "border-jade/50 bg-jade/10 text-jade",
+  "a-reprendre": "border-ember/50 bg-ember/10 text-ember",
 };
 
-export const WEEKS = [1, 2, 3, 4, 5] as const;
-export type WeekNumber = (typeof WEEKS)[number];
-
-export interface PeriodSequence {
+export interface PeriodCard {
   id: string;
   niveau: TeacherLevel;
   periode: TeacherPeriod;
   matiere: TeacherSubjectId;
   domaine: string;
-  /** Identifiant unique de compétence — 1 séquence = 1 compétence. */
+  /** Identifiant de compétence du catalogue, vide pour une carte libre. */
   competenceId: string;
   competenceLabel: string;
-  titre: string;
-  semaine: WeekNumber;
-  /** Durée indicative en minutes. */
   dureeMinutes: number;
   statut: SequenceStatus;
+  /**
+   * Référence vers de vrais imprimables disponibles pour cette carte.
+   * Toujours vide aujourd'hui : aucune liaison réelle n'existe entre le
+   * catalogue de compétences et les PDF de leçon par niveau/sous-domaine.
+   */
+  imprimablesDisponibles: { label: string; href: string }[];
 }
 
-type StoredStateV2 = {
-  sequences: PeriodSequence[];
+type StoredStateV3 = {
+  cards: PeriodCard[];
 };
 
+type StoredStateV2 = {
+  sequences: Array<{
+    id: string;
+    niveau: TeacherLevel;
+    periode: TeacherPeriod;
+    matiere: TeacherSubjectId;
+    domaine: string;
+    competenceId: string;
+    competenceLabel: string;
+    titre?: string;
+    dureeMinutes: number;
+    statut: "a-programmer" | "prevu" | "en-cours" | "termine";
+  }>;
+};
+
+const STORAGE_KEY_V3 = "progression-periode-kanban-v3";
 const STORAGE_KEY_V2 = "progression-periode-v2";
-const STORAGE_KEY_V1 = "academie-kerboeuf-progression-periode-v1";
+
+const V2_TO_V3_STATUS: Record<string, SequenceStatus> = {
+  "a-programmer": "a-prevoir",
+  prevu: "pret",
+  "en-cours": "en-cours",
+  termine: "termine",
+};
 
 function readJson<T>(key: string): T | null {
   if (typeof window === "undefined") return null;
@@ -115,152 +138,82 @@ function readJson<T>(key: string): T | null {
   }
 }
 
-/**
- * Migration v1 -> v2.
- *
- * Forme v1 (academie-kerboeuf-progression-periode-v1) :
- *   Record<"<level>__<period>", string[]>  — un simple ordre d'ids faisant
- *   référence à des entrées de content/primary-programmation.ts. Aucun champ
- *   "semaine", "durée" ou "statut" propre n'existait dans le stockage : seul
- *   l'ordre relatif était persisté, le reste (titre, compétence, matière,
- *   domaine, statut) provenait de la donnée statique au moment de l'affichage.
- *
- * Comme la v1 ne stockait ni semaine ni durée ni statut par séquence (champs
- * désormais obligatoires en v2), une reconstruction fidèle est impossible.
- * Le contenu utile et réel de la v1 est l'ORDRE choisi par l'enseignant pour
- * un (niveau, période) donné : on le préserve en répartissant les séquences
- * migrées sur les semaines 1..5 dans l'ordre sauvegardé (round-robin), avec
- * un statut par défaut "a-programmer" et une durée par défaut de 45 minutes
- * (valeur neutre, à ajuster manuellement par l'enseignant après migration).
- * On loggue chaque séquence migrée pour traçabilité — aucune donnée n'est
- * perdue silencieusement, mais le mapping "semaine"/"durée" est une
- * approximation explicite, pas une vérité reconstruite.
- */
-function migrateFromV1(): PeriodSequence[] {
-  const v1 = readJson<Record<string, string[]>>(STORAGE_KEY_V1);
-  if (!v1 || Object.keys(v1).length === 0) return [];
-
-  const migrated: PeriodSequence[] = [];
-
-  for (const [key, orderedIds] of Object.entries(v1)) {
-    const [levelRaw, periodRaw] = key.split("__");
-    const level = levelRaw as TeacherLevel;
-    const period = periodRaw as TeacherPeriod;
-    const catalogue = getTeacherProgrammationItemsByLevel(level);
-
-    orderedIds.forEach((id, index) => {
-      const item = catalogue.find((entry) => entry.id === id);
-      if (!item || item.period !== period) return;
-
-      const semaine = ((index % 5) + 1) as WeekNumber;
-      const migratedSequence: PeriodSequence = {
-        id: `migrated-${item.id}`,
-        niveau: level,
-        periode: period,
-        matiere: item.subject,
-        domaine: item.domain,
-        competenceId: item.id,
-        competenceLabel: item.skill,
-        titre: item.title,
-        semaine,
-        dureeMinutes: 45,
-        statut: "a-programmer",
-      };
-      migrated.push(migratedSequence);
-      console.info(
-        `[progression v1->v2] séquence migrée: "${migratedSequence.titre}" ` +
-          `(${level}/${period}) -> semaine ${semaine}, durée par défaut 45 min, statut "a-programmer".`,
-      );
-    });
-  }
-
-  return migrated;
-}
-
-function readStoredSequences(): PeriodSequence[] {
+function migrateFromV2(): PeriodCard[] {
   const v2 = readJson<StoredStateV2>(STORAGE_KEY_V2);
-  if (v2 && Array.isArray(v2.sequences)) {
-    return v2.sequences;
+  if (!v2 || !Array.isArray(v2.sequences) || v2.sequences.length === 0) {
+    return [];
   }
-  // Pas de clé v2 : tenter une migration depuis la v1 (lecture unique).
-  const migrated = migrateFromV1();
-  return migrated;
+  return v2.sequences.map((sequence) => ({
+    id: `migrated-${sequence.id}`,
+    niveau: sequence.niveau,
+    periode: sequence.periode,
+    matiere: sequence.matiere,
+    domaine: sequence.domaine,
+    competenceId: sequence.competenceId,
+    competenceLabel: sequence.competenceLabel,
+    dureeMinutes: sequence.dureeMinutes,
+    statut: V2_TO_V3_STATUS[sequence.statut] ?? "a-prevoir",
+    imprimablesDisponibles: [],
+  }));
 }
 
-function writeStoredSequences(sequences: PeriodSequence[]) {
+function readStoredCards(): PeriodCard[] {
+  const v3 = readJson<StoredStateV3>(STORAGE_KEY_V3);
+  if (v3 && Array.isArray(v3.cards)) return v3.cards;
+  return migrateFromV2();
+}
+
+function writeStoredCards(cards: PeriodCard[]) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(
-    STORAGE_KEY_V2,
-    JSON.stringify({ sequences } satisfies StoredStateV2),
+    STORAGE_KEY_V3,
+    JSON.stringify({ cards } satisfies StoredStateV3),
   );
 }
 
-let sequenceCounter = 0;
+let cardCounter = 0;
 function nextId(): string {
-  sequenceCounter += 1;
-  return `seq-${Date.now()}-${sequenceCounter}`;
+  cardCounter += 1;
+  return `carte-${Date.now()}-${cardCounter}`;
 }
 
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
   const [periode, setPeriode] = useState<TeacherPeriod>("periode-1");
-  const [sequences, setSequences] = useState<PeriodSequence[]>(() =>
-    readStoredSequences(),
-  );
+  const [cards, setCards] = useState<PeriodCard[]>(() => readStoredCards());
 
-  // Filtres
   const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
   );
-  const [filterDomaine, setFilterDomaine] = useState<string | "all">("all");
-  const [filterStatut, setFilterStatut] = useState<SequenceStatus | "all">(
-    "all",
+
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const [creationMode, setCreationMode] = useState<"catalogue" | "libre" | null>(
+    null,
   );
-
-  // Vue mobile : une semaine à la fois.
-  const [mobileWeek, setMobileWeek] = useState<WeekNumber>(1);
-
-  // Formulaire de création / édition.
-  const [editingId, setEditingId] = useState<string | null>(null);
   const [formMatiere, setFormMatiere] = useState<TeacherSubjectId>("francais");
+  const [formDomaine, setFormDomaine] = useState<string>("");
   const [formCompetenceId, setFormCompetenceId] = useState<string>("");
-  const [formTitre, setFormTitre] = useState("");
-  const [formSemaine, setFormSemaine] = useState<WeekNumber>(1);
+  const [formCompetenceLibre, setFormCompetenceLibre] = useState("");
   const [formDuree, setFormDuree] = useState(45);
-  const [formStatut, setFormStatut] = useState<SequenceStatus>("a-programmer");
 
   const formId = useId();
 
-  // Drag state.
-  const dragIdRef = useRef<string | null>(null);
+  const [dragId, setDragId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<{
-    semaine: WeekNumber;
+    statut: SequenceStatus;
     index: number;
   } | null>(null);
 
   useEffect(() => {
-    writeStoredSequences(sequences);
-  }, [sequences]);
+    writeStoredCards(cards);
+  }, [cards]);
 
-  // Matières et domaines disponibles pour ce niveau, lus depuis la source
-  // centrale partagée avec la programmation annuelle (aucune recopie locale
-  // des compétences). La sélection de "période" reste propre à la
-  // progression (semaines 1 à 5 à l'intérieur d'une période de l'année) : le
-  // catalogue central ne porte qu'une indication de période suggérée et ne
-  // sert pas de filtre strict ici.
   const subjectsForLevel = useMemo(() => getSubjectsForLevel(niveau), [niveau]);
 
   const subjectLabelById = useMemo(() => {
     const map = new Map<string, string>();
     curriculumSubjects.forEach((subject) => map.set(subject.id, subject.label));
-    return map;
-  }, []);
-
-  const allDomainLabelById = useMemo(() => {
-    const map = new Map<string, string>();
-    curriculumSubjects.forEach((subject) =>
-      subject.domains.forEach((domain) => map.set(domain.id, domain.label)),
-    );
     return map;
   }, []);
 
@@ -280,8 +233,6 @@ export function TeacherPeriodProgressionClient() {
     return map;
   }, [formSubject]);
 
-  const [formDomaine, setFormDomaine] = useState<string>("");
-
   const competencesForFormDomaine = useMemo(
     () =>
       formSubject?.domains.find((domain) => domain.id === formDomaine)
@@ -289,293 +240,201 @@ export function TeacherPeriodProgressionClient() {
     [formSubject, formDomaine],
   );
 
-  const periodSequences = useMemo(
-    () =>
-      sequences.filter(
-        (sequence) => sequence.niveau === niveau && sequence.periode === periode,
-      ),
-    [sequences, niveau, periode],
+  const periodCards = useMemo(
+    () => cards.filter((card) => card.niveau === niveau && card.periode === periode),
+    [cards, niveau, periode],
   );
 
   const availableMatieres = useMemo(() => {
     const seen = new Set<TeacherSubjectId>();
     const list: TeacherSubjectId[] = [];
-    for (const sequence of periodSequences) {
-      if (!seen.has(sequence.matiere)) {
-        seen.add(sequence.matiere);
-        list.push(sequence.matiere);
+    for (const card of periodCards) {
+      if (!seen.has(card.matiere)) {
+        seen.add(card.matiere);
+        list.push(card.matiere);
       }
     }
     return list;
-  }, [periodSequences]);
+  }, [periodCards]);
 
-  const availableDomaines = useMemo(() => {
-    const seen = new Set<string>();
-    const list: string[] = [];
-    for (const sequence of periodSequences) {
-      if (!seen.has(sequence.domaine)) {
-        seen.add(sequence.domaine);
-        list.push(sequence.domaine);
-      }
-    }
-    return list;
-  }, [periodSequences]);
-
-  const filteredSequences = useMemo(
+  const filteredCards = useMemo(
     () =>
-      periodSequences.filter((sequence) => {
-        if (filterMatiere !== "all" && sequence.matiere !== filterMatiere) {
-          return false;
-        }
-        if (filterDomaine !== "all" && sequence.domaine !== filterDomaine) {
-          return false;
-        }
-        if (filterStatut !== "all" && sequence.statut !== filterStatut) {
-          return false;
-        }
-        return true;
-      }),
-    [periodSequences, filterMatiere, filterDomaine, filterStatut],
+      periodCards.filter((card) =>
+        filterMatiere === "all" ? true : card.matiere === filterMatiere,
+      ),
+    [periodCards, filterMatiere],
   );
 
-  const sequencesByWeek = useMemo(() => {
-    const map = new Map<WeekNumber, PeriodSequence[]>();
-    for (const week of WEEKS) {
+  const cardsByStatus = useMemo(() => {
+    const map = new Map<SequenceStatus, PeriodCard[]>();
+    for (const status of SEQUENCE_STATUSES) {
       map.set(
-        week,
-        filteredSequences
-          .filter((sequence) => sequence.semaine === week)
-          .sort((a, b) => {
-            const orderA = periodSequences.indexOf(a);
-            const orderB = periodSequences.indexOf(b);
-            return orderA - orderB;
-          }),
+        status.id,
+        filteredCards
+          .filter((card) => card.statut === status.id)
+          .sort((a, b) => periodCards.indexOf(a) - periodCards.indexOf(b)),
       );
     }
     return map;
-  }, [filteredSequences, periodSequences]);
+  }, [filteredCards, periodCards]);
 
   const syntheseByMatiere = useMemo(() => {
-    const map = new Map<TeacherSubjectId, { count: number; dureeMinutes: number }>();
-    for (const sequence of periodSequences) {
-      const current = map.get(sequence.matiere) ?? { count: 0, dureeMinutes: 0 };
-      current.count += 1;
-      current.dureeMinutes += sequence.dureeMinutes;
-      map.set(sequence.matiere, current);
+    const map = new Map<
+      TeacherSubjectId,
+      { total: number; termine: number; dureeMinutes: number }
+    >();
+    for (const card of periodCards) {
+      const current =
+        map.get(card.matiere) ?? { total: 0, termine: 0, dureeMinutes: 0 };
+      current.total += 1;
+      current.dureeMinutes += card.dureeMinutes;
+      if (card.statut === "termine") current.termine += 1;
+      map.set(card.matiere, current);
     }
     return map;
-  }, [periodSequences]);
+  }, [periodCards]);
 
-  // --- Fonctions canoniques de déplacement, utilisées par le drag & drop ET
-  // --- les boutons clavier (même implémentation, pas de logique divergente).
-
-  const moveWithinWeek = useCallback(
-    (id: string, direction: -1 | 1) => {
-      setSequences((prev) => {
-        const sequence = prev.find((entry) => entry.id === id);
-        if (!sequence) return prev;
-        const sameWeek = prev.filter(
-          (entry) =>
-            entry.niveau === sequence.niveau &&
-            entry.periode === sequence.periode &&
-            entry.semaine === sequence.semaine,
-        );
-        const index = sameWeek.indexOf(sequence);
-        const targetIndex = index + direction;
-        if (targetIndex < 0 || targetIndex >= sameWeek.length) return prev;
-
-        const targetSequence = sameWeek[targetIndex];
-        const globalIndexA = prev.indexOf(sequence);
-        const globalIndexB = prev.indexOf(targetSequence);
-
-        const next = [...prev];
-        [next[globalIndexA], next[globalIndexB]] = [
-          next[globalIndexB],
-          next[globalIndexA],
-        ];
-        return next;
-      });
-    },
-    [],
+  const selectedCard = useMemo(
+    () => cards.find((card) => card.id === selectedId) ?? null,
+    [cards, selectedId],
   );
 
-  const moveToWeek = useCallback(
-    (id: string, targetWeek: WeekNumber, targetIndex?: number) => {
-      setSequences((prev) => {
-        const sequence = prev.find((entry) => entry.id === id);
-        if (!sequence) return prev;
-        if (targetWeek < 1 || targetWeek > 5) return prev;
+  const moveToStatus = useCallback(
+    (id: string, targetStatut: SequenceStatus, targetIndex?: number) => {
+      setCards((prev) => {
+        const card = prev.find((entry) => entry.id === id);
+        if (!card) return prev;
 
         const without = prev.filter((entry) => entry.id !== id);
-        const updated: PeriodSequence = { ...sequence, semaine: targetWeek };
+        const updated: PeriodCard = { ...card, statut: targetStatut };
 
         if (targetIndex === undefined) {
           return [...without, updated];
         }
 
-        // Insertion à une position précise relative aux séquences de la
-        // semaine cible (pour le drop avec indicateur de position).
-        const weekEntries = without.filter(
+        const columnEntries = without.filter(
           (entry) =>
-            entry.niveau === sequence.niveau &&
-            entry.periode === sequence.periode &&
-            entry.semaine === targetWeek,
+            entry.niveau === card.niveau &&
+            entry.periode === card.periode &&
+            entry.statut === targetStatut,
         );
         const others = without.filter(
           (entry) =>
             !(
-              entry.niveau === sequence.niveau &&
-              entry.periode === sequence.periode &&
-              entry.semaine === targetWeek
+              entry.niveau === card.niveau &&
+              entry.periode === card.periode &&
+              entry.statut === targetStatut
             ),
         );
-        const clampedIndex = Math.max(0, Math.min(targetIndex, weekEntries.length));
-        const nextWeekEntries = [...weekEntries];
-        nextWeekEntries.splice(clampedIndex, 0, updated);
-        return [...others, ...nextWeekEntries];
+        const clampedIndex = Math.max(
+          0,
+          Math.min(targetIndex, columnEntries.length),
+        );
+        const nextColumnEntries = [...columnEntries];
+        nextColumnEntries.splice(clampedIndex, 0, updated);
+        return [...others, ...nextColumnEntries];
       });
     },
     [],
   );
 
-  function moveToPreviousWeek(id: string) {
-    const sequence = sequences.find((entry) => entry.id === id);
-    if (!sequence) return;
-    moveToWeek(id, (sequence.semaine - 1) as WeekNumber);
-  }
-
-  function moveToNextWeek(id: string) {
-    const sequence = sequences.find((entry) => entry.id === id);
-    if (!sequence) return;
-    moveToWeek(id, (sequence.semaine + 1) as WeekNumber);
-  }
-
-  // --- Drag & drop natif (HTML5 Drag and Drop API). ---
-
   function handleDragStart(event: DragEvent<HTMLDivElement>, id: string) {
-    dragIdRef.current = id;
+    setDragId(id);
     event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("text/plain", id);
   }
 
   function handleDragOverSlot(
     event: DragEvent<HTMLLIElement>,
-    semaine: WeekNumber,
+    statut: SequenceStatus,
     index: number,
   ) {
     event.preventDefault();
-    setDropTarget({ semaine, index });
+    setDropTarget({ statut, index });
   }
 
-  function handleDragOverColumn(event: DragEvent<HTMLDivElement>, semaine: WeekNumber) {
+  function handleDragOverColumn(
+    event: DragEvent<HTMLDivElement>,
+    statut: SequenceStatus,
+  ) {
     event.preventDefault();
-    const weekEntries = sequencesByWeek.get(semaine) ?? [];
-    setDropTarget({ semaine, index: weekEntries.length });
+    const entries = cardsByStatus.get(statut) ?? [];
+    setDropTarget({ statut, index: entries.length });
   }
 
   function handleDrop(event: DragEvent<HTMLElement>) {
     event.preventDefault();
-    const id = dragIdRef.current ?? event.dataTransfer.getData("text/plain");
+    const id = dragId ?? event.dataTransfer.getData("text/plain");
     if (id && dropTarget) {
-      moveToWeek(id, dropTarget.semaine, dropTarget.index);
+      moveToStatus(id, dropTarget.statut, dropTarget.index);
     }
-    dragIdRef.current = null;
+    setDragId(null);
     setDropTarget(null);
   }
 
   function handleDragEnd() {
-    dragIdRef.current = null;
+    setDragId(null);
     setDropTarget(null);
   }
 
-  function handleCardKeyDown(event: KeyboardEvent<HTMLDivElement>, id: string) {
-    // Alternative clavier additionnelle (au-delà des boutons explicites) :
-    // flèches haut/bas pour réordonner, gauche/droite pour changer de semaine.
-    if (event.key === "ArrowUp") {
-      event.preventDefault();
-      moveWithinWeek(id, -1);
-    } else if (event.key === "ArrowDown") {
-      event.preventDefault();
-      moveWithinWeek(id, 1);
-    } else if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      moveToPreviousWeek(id);
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      moveToNextWeek(id);
-    }
-  }
-
-  // --- Création / édition / suppression. ---
-
   function resetForm() {
-    setEditingId(null);
+    setCreationMode(null);
     setFormMatiere("francais");
     setFormDomaine("");
     setFormCompetenceId("");
-    setFormTitre("");
-    setFormSemaine(1);
+    setFormCompetenceLibre("");
     setFormDuree(45);
-    setFormStatut("a-programmer");
   }
 
-  function startEdit(sequence: PeriodSequence) {
-    setEditingId(sequence.id);
-    setFormMatiere(sequence.matiere);
-    setFormDomaine(sequence.domaine);
-    setFormCompetenceId(sequence.competenceId);
-    setFormTitre(sequence.titre);
-    setFormSemaine(sequence.semaine);
-    setFormDuree(sequence.dureeMinutes);
-    setFormStatut(sequence.statut);
+  function deleteCard(id: string) {
+    setCards((prev) => prev.filter((card) => card.id !== id));
+    if (selectedId === id) setSelectedId(null);
   }
 
-  function deleteSequence(id: string) {
-    setSequences((prev) => prev.filter((sequence) => sequence.id !== id));
-    if (editingId === id) resetForm();
+  function updateCard(id: string, patch: Partial<PeriodCard>) {
+    setCards((prev) =>
+      prev.map((card) => (card.id === id ? { ...card, ...patch } : card)),
+    );
   }
 
-  function submitForm() {
-    if (!formTitre.trim() || !formDomaine || !formCompetenceId) return;
+  function submitCatalogueForm() {
     const competence = competencesForFormDomaine.find(
       (item) => item.id === formCompetenceId,
     );
-    if (!competence) return;
+    if (!formDomaine || !competence) return;
 
-    if (editingId) {
-      setSequences((prev) =>
-        prev.map((sequence) =>
-          sequence.id === editingId
-            ? {
-                ...sequence,
-                matiere: formMatiere,
-                domaine: formDomaine,
-                competenceId: formCompetenceId,
-                competenceLabel: competence.label,
-                titre: formTitre.trim(),
-                semaine: formSemaine,
-                dureeMinutes: formDuree,
-                statut: formStatut,
-              }
-            : sequence,
-        ),
-      );
-    } else {
-      const newSequence: PeriodSequence = {
-        id: nextId(),
-        niveau,
-        periode,
-        matiere: formMatiere,
-        domaine: formDomaine,
-        competenceId: formCompetenceId,
-        competenceLabel: competence.label,
-        titre: formTitre.trim(),
-        semaine: formSemaine,
-        dureeMinutes: formDuree,
-        statut: formStatut,
-      };
-      setSequences((prev) => [...prev, newSequence]);
-    }
+    const newCard: PeriodCard = {
+      id: nextId(),
+      niveau,
+      periode,
+      matiere: formMatiere,
+      domaine: formDomaine,
+      competenceId: competence.id,
+      competenceLabel: competence.label,
+      dureeMinutes: formDuree,
+      statut: "a-prevoir",
+      imprimablesDisponibles: [],
+    };
+    setCards((prev) => [...prev, newCard]);
+    resetForm();
+  }
+
+  function submitLibreForm() {
+    if (!formCompetenceLibre.trim()) return;
+
+    const newCard: PeriodCard = {
+      id: nextId(),
+      niveau,
+      periode,
+      matiere: formMatiere,
+      domaine: "",
+      competenceId: "",
+      competenceLabel: formCompetenceLibre.trim(),
+      dureeMinutes: formDuree,
+      statut: "a-prevoir",
+      imprimablesDisponibles: [],
+    };
+    setCards((prev) => [...prev, newCard]);
     resetForm();
   }
 
@@ -592,8 +451,7 @@ export function TeacherPeriodProgressionClient() {
               value={niveau}
               onChange={(event) => {
                 setNiveau(event.target.value as TeacherLevel);
-                setFormDomaine("");
-                setFormCompetenceId("");
+                resetForm();
               }}
               className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
@@ -621,150 +479,11 @@ export function TeacherPeriodProgressionClient() {
         </div>
       </section>
 
-      <section aria-labelledby="creer-sequence" className="print:hidden">
-        <h2 id="creer-sequence" className="text-xl font-black text-foreground">
-          {editingId ? "Modifier la séquence" : "Créer une séquence"}
-        </h2>
-        <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-3">
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Matière
-            <select
-              value={formMatiere}
-              onChange={(event) => {
-                setFormMatiere(event.target.value as TeacherSubjectId);
-                setFormDomaine("");
-                setFormCompetenceId("");
-              }}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            >
-              {subjectsForLevel.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Domaine
-            <select
-              value={formDomaine}
-              onChange={(event) => {
-                setFormDomaine(event.target.value);
-                setFormCompetenceId("");
-              }}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            >
-              <option value="">Choisir un domaine</option>
-              {domainesForFormMatiere.map((domainId) => (
-                <option key={domainId} value={domainId}>
-                  {domainLabelById.get(domainId) ?? domainId}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Compétence
-            <select
-              value={formCompetenceId}
-              onChange={(event) => setFormCompetenceId(event.target.value)}
-              disabled={!formDomaine}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground disabled:opacity-40"
-            >
-              <option value="">Choisir une compétence</option>
-              {competencesForFormDomaine.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2 lg:col-span-1">
-            Titre de la séquence
-            <input
-              type="text"
-              value={formTitre}
-              onChange={(event) => setFormTitre(event.target.value)}
-              placeholder="Ex : Découverte de l'imparfait"
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            />
-          </label>
-
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Semaine
-            <select
-              value={formSemaine}
-              onChange={(event) =>
-                setFormSemaine(Number(event.target.value) as WeekNumber)
-              }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            >
-              {WEEKS.map((week) => (
-                <option key={week} value={week}>
-                  Semaine {week}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Durée indicative (minutes)
-            <input
-              type="number"
-              min={5}
-              step={5}
-              value={formDuree}
-              onChange={(event) => setFormDuree(Number(event.target.value) || 0)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            />
-          </label>
-
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Statut
-            <select
-              value={formStatut}
-              onChange={(event) =>
-                setFormStatut(event.target.value as SequenceStatus)
-              }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            >
-              {SEQUENCE_STATUSES.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-3">
-            <button
-              type="button"
-              onClick={submitForm}
-              disabled={!formTitre.trim() || !formDomaine || !formCompetenceId}
-              className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              {editingId ? "Enregistrer les modifications" : "Ajouter la séquence"}
-            </button>
-            {editingId ? (
-              <button
-                type="button"
-                onClick={resetForm}
-                className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
-              >
-                Annuler
-              </button>
-            ) : null}
-          </div>
-        </div>
-      </section>
-
       <section aria-labelledby="filtres" className="print:hidden">
         <h2 id="filtres" className="text-xl font-black text-foreground">
           Filtres
         </h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
             Matière
             <select
@@ -782,67 +501,188 @@ export function TeacherPeriodProgressionClient() {
               ))}
             </select>
           </label>
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Domaine
-            <select
-              value={filterDomaine}
-              onChange={(event) => setFilterDomaine(event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            >
-              <option value="all">Tous les domaines</option>
-              {availableDomaines.map((domain) => (
-                <option key={domain} value={domain}>
-                  {allDomainLabelById.get(domain) ?? domain}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Statut
-            <select
-              value={filterStatut}
-              onChange={(event) =>
-                setFilterStatut(event.target.value as SequenceStatus | "all")
-              }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            >
-              <option value="all">Tous les statuts</option>
-              {SEQUENCE_STATUSES.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
         </div>
+      </section>
+
+      <section aria-labelledby="nouvelle-carte" className="print:hidden">
+        <h2 id="nouvelle-carte" className="text-xl font-black text-foreground">
+          Ajouter une carte
+        </h2>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() =>
+              setCreationMode((mode) => (mode === "catalogue" ? null : "catalogue"))
+            }
+            className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+          >
+            Depuis la programmation annuelle
+          </button>
+          <button
+            type="button"
+            onClick={() => setCreationMode((mode) => (mode === "libre" ? null : "libre"))}
+            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
+          >
+            Carte libre
+          </button>
+        </div>
+
+        {creationMode === "catalogue" ? (
+          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Matière
+              <select
+                value={formMatiere}
+                onChange={(event) => {
+                  setFormMatiere(event.target.value as TeacherSubjectId);
+                  setFormDomaine("");
+                  setFormCompetenceId("");
+                }}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              >
+                {subjectsForLevel.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Domaine
+              <select
+                value={formDomaine}
+                onChange={(event) => {
+                  setFormDomaine(event.target.value);
+                  setFormCompetenceId("");
+                }}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              >
+                <option value="">Choisir un domaine</option>
+                {domainesForFormMatiere.map((domainId) => (
+                  <option key={domainId} value={domainId}>
+                    {domainLabelById.get(domainId) ?? domainId}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Compétence
+              <select
+                value={formCompetenceId}
+                onChange={(event) => setFormCompetenceId(event.target.value)}
+                disabled={!formDomaine}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground disabled:opacity-40"
+              >
+                <option value="">Choisir une compétence</option>
+                {competencesForFormDomaine.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Durée indicative (minutes)
+              <input
+                type="number"
+                min={5}
+                step={5}
+                value={formDuree}
+                onChange={(event) => setFormDuree(Number(event.target.value) || 0)}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              />
+            </label>
+            <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
+              <button
+                type="button"
+                onClick={submitCatalogueForm}
+                disabled={!formDomaine || !formCompetenceId}
+                className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Ajouter la carte
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {creationMode === "libre" ? (
+          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Matière
+              <select
+                value={formMatiere}
+                onChange={(event) => setFormMatiere(event.target.value as TeacherSubjectId)}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              >
+                {subjectsForLevel.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
+              Compétence (texte libre)
+              <input
+                type="text"
+                value={formCompetenceLibre}
+                onChange={(event) => setFormCompetenceLibre(event.target.value)}
+                placeholder="Ex : Réviser les tables de multiplication"
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              />
+            </label>
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Durée indicative (minutes)
+              <input
+                type="number"
+                min={5}
+                step={5}
+                value={formDuree}
+                onChange={(event) => setFormDuree(Number(event.target.value) || 0)}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              />
+            </label>
+            <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
+              <button
+                type="button"
+                onClick={submitLibreForm}
+                disabled={!formCompetenceLibre.trim()}
+                className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Ajouter la carte
+              </button>
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <section aria-labelledby="synthese-matiere">
         <h2 id="synthese-matiere" className="text-xl font-black text-foreground">
-          Synthèse par matière
+          Progression par matière
         </h2>
         {syntheseByMatiere.size === 0 ? (
-          <p className="mt-4 text-sm text-muted">Aucune séquence pour cette période.</p>
+          <p className="mt-4 text-sm text-muted">Aucune carte pour cette période.</p>
         ) : (
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[28rem] border-collapse text-left text-sm print:border print:border-black">
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wide text-muted print:border-black print:text-black">
                   <th className="py-2 pr-4">Matière</th>
-                  <th className="py-2 pr-4">Séquences</th>
+                  <th className="py-2 pr-4">Cartes</th>
+                  <th className="py-2 pr-4">Terminées</th>
                   <th className="py-2 pr-4">Durée totale</th>
                 </tr>
               </thead>
               <tbody>
                 {Array.from(syntheseByMatiere.entries()).map(([subject, stats]) => (
-                  <tr
-                    key={subject}
-                    className="border-b border-white/5 print:border-black"
-                  >
+                  <tr key={subject} className="border-b border-white/5 print:border-black">
                     <td className="py-2 pr-4 font-bold text-foreground">
                       {subjectLabelById.get(subject) ?? subject}
                     </td>
-                    <td className="py-2 pr-4">{stats.count}</td>
+                    <td className="py-2 pr-4">{stats.total}</td>
+                    <td className="py-2 pr-4">
+                      {stats.termine} / {stats.total}
+                    </td>
                     <td className="py-2 pr-4">
                       {stats.dureeMinutes} min ({Math.round((stats.dureeMinutes / 60) * 10) / 10} h)
                     </td>
@@ -854,161 +694,120 @@ export function TeacherPeriodProgressionClient() {
         )}
       </section>
 
-      <section aria-labelledby="semaines">
-        <h2 id="semaines" className="text-xl font-black text-foreground">
-          Semaines de la période
+      <section aria-labelledby="kanban">
+        <h2 id="kanban" className="text-xl font-black text-foreground">
+          Tableau Kanban
         </h2>
 
-        {/* Navigation mobile : une semaine à la fois. */}
-        <div className="mt-4 flex items-center justify-between gap-3 sm:hidden print:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileWeek((week) => (week > 1 ? ((week - 1) as WeekNumber) : week))}
-            disabled={mobileWeek === 1}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            ← Semaine précédente
-          </button>
-          <span className="text-sm font-black text-foreground">Semaine {mobileWeek}</span>
-          <button
-            type="button"
-            onClick={() => setMobileWeek((week) => (week < 5 ? ((week + 1) as WeekNumber) : week))}
-            disabled={mobileWeek === 5}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            Semaine suivante →
-          </button>
-        </div>
-
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:hidden print:hidden">
-          <WeekColumn
-            week={mobileWeek}
-            sequences={sequencesByWeek.get(mobileWeek) ?? []}
-            dropTarget={dropTarget}
-            onDragStart={handleDragStart}
-            onDragOverSlot={handleDragOverSlot}
-            onDragOverColumn={handleDragOverColumn}
-            onDrop={handleDrop}
-            onDragEnd={handleDragEnd}
-            onCardKeyDown={handleCardKeyDown}
-            onMoveUp={(id) => moveWithinWeek(id, -1)}
-            onMoveDown={(id) => moveWithinWeek(id, 1)}
-            onMovePrev={moveToPreviousWeek}
-            onMoveNext={moveToNextWeek}
-            onEdit={startEdit}
-            onDelete={deleteSequence}
-            formId={formId}
-          />
-        </div>
-
-        <div className="mt-4 hidden gap-4 sm:grid sm:grid-cols-5 print:grid print:grid-cols-1 print:gap-2">
-          {WEEKS.map((week) => (
-            <WeekColumn
-              key={week}
-              week={week}
-              sequences={sequencesByWeek.get(week) ?? []}
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-5 print:grid-cols-1 print:gap-2">
+          {SEQUENCE_STATUSES.map((status) => (
+            <StatusColumn
+              key={status.id}
+              status={status.id}
+              label={status.label}
+              cards={cardsByStatus.get(status.id) ?? []}
               dropTarget={dropTarget}
               onDragStart={handleDragStart}
               onDragOverSlot={handleDragOverSlot}
               onDragOverColumn={handleDragOverColumn}
               onDrop={handleDrop}
               onDragEnd={handleDragEnd}
-              onCardKeyDown={handleCardKeyDown}
-              onMoveUp={(id) => moveWithinWeek(id, -1)}
-              onMoveDown={(id) => moveWithinWeek(id, 1)}
-              onMovePrev={moveToPreviousWeek}
-              onMoveNext={moveToNextWeek}
-              onEdit={startEdit}
-              onDelete={deleteSequence}
+              onSelect={setSelectedId}
+              subjectLabelById={subjectLabelById}
               formId={formId}
             />
           ))}
         </div>
       </section>
+
+      {selectedCard ? (
+        <CardSidePanel
+          card={selectedCard}
+          subjectLabelById={subjectLabelById}
+          onClose={() => setSelectedId(null)}
+          onUpdate={(patch) => updateCard(selectedCard.id, patch)}
+          onDelete={() => deleteCard(selectedCard.id)}
+        />
+      ) : null}
     </div>
   );
 }
 
-interface WeekColumnProps {
-  week: WeekNumber;
-  sequences: PeriodSequence[];
-  dropTarget: { semaine: WeekNumber; index: number } | null;
+interface StatusColumnProps {
+  status: SequenceStatus;
+  label: string;
+  cards: PeriodCard[];
+  dropTarget: { statut: SequenceStatus; index: number } | null;
   onDragStart: (event: DragEvent<HTMLDivElement>, id: string) => void;
   onDragOverSlot: (
     event: DragEvent<HTMLLIElement>,
-    semaine: WeekNumber,
+    statut: SequenceStatus,
     index: number,
   ) => void;
-  onDragOverColumn: (event: DragEvent<HTMLDivElement>, semaine: WeekNumber) => void;
+  onDragOverColumn: (event: DragEvent<HTMLDivElement>, statut: SequenceStatus) => void;
   onDrop: (event: DragEvent<HTMLElement>) => void;
   onDragEnd: () => void;
-  onCardKeyDown: (event: KeyboardEvent<HTMLDivElement>, id: string) => void;
-  onMoveUp: (id: string) => void;
-  onMoveDown: (id: string) => void;
-  onMovePrev: (id: string) => void;
-  onMoveNext: (id: string) => void;
-  onEdit: (sequence: PeriodSequence) => void;
-  onDelete: (id: string) => void;
+  onSelect: (id: string) => void;
+  subjectLabelById: Map<string, string>;
   formId: string;
 }
 
-function WeekColumn({
-  week,
-  sequences,
+function StatusColumn({
+  status,
+  label,
+  cards,
   dropTarget,
   onDragStart,
   onDragOverSlot,
   onDragOverColumn,
   onDrop,
   onDragEnd,
-  onCardKeyDown,
-  onMoveUp,
-  onMoveDown,
-  onMovePrev,
-  onMoveNext,
-  onEdit,
-  onDelete,
+  onSelect,
+  subjectLabelById,
   formId,
-}: WeekColumnProps) {
+}: StatusColumnProps) {
   return (
     <div
-      onDragOver={(event) => onDragOverColumn(event, week)}
+      onDragOver={(event) => onDragOverColumn(event, status)}
       onDrop={onDrop}
       className="flex flex-col gap-3 rounded-lg border border-white/10 bg-background/30 p-3 print:break-inside-avoid print:border-black print:bg-transparent"
     >
-      <h3 className="text-sm font-black uppercase tracking-wide text-foreground print:text-black">
-        Semaine {week}
+      <h3
+        id={`${formId}-status-${status}`}
+        className="flex items-center justify-between text-sm font-black uppercase tracking-wide text-foreground print:text-black"
+      >
+        <span>{label}</span>
+        <span className="rounded-full border border-white/15 px-2 py-0.5 text-xs font-bold text-muted print:border-black print:text-black">
+          {cards.length}
+        </span>
       </h3>
-      <ol className="flex flex-col gap-2" role="list" aria-labelledby={`${formId}-week-${week}`}>
-        {sequences.length === 0 ? (
+      <ol
+        className="flex flex-col gap-2"
+        role="list"
+        aria-labelledby={`${formId}-status-${status}`}
+      >
+        {cards.length === 0 ? (
           <li className="rounded-md border border-dashed border-white/15 p-3 text-xs text-muted print:hidden">
-            Aucune séquence.
+            Aucune carte.
           </li>
         ) : null}
-        {sequences.map((sequence, index) => (
+        {cards.map((card, index) => (
           <li
-            key={sequence.id}
-            onDragOver={(event) => onDragOverSlot(event, week, index)}
+            key={card.id}
+            onDragOver={(event) => onDragOverSlot(event, status, index)}
             onDrop={onDrop}
             className={
-              dropTarget?.semaine === week && dropTarget.index === index
+              dropTarget?.statut === status && dropTarget.index === index
                 ? "border-t-2 border-jade pt-1"
                 : undefined
             }
           >
-            <SequenceCard
-              sequence={sequence}
-              index={index}
-              total={sequences.length}
+            <ProgressionCard
+              card={card}
               onDragStart={onDragStart}
               onDragEnd={onDragEnd}
-              onCardKeyDown={onCardKeyDown}
-              onMoveUp={onMoveUp}
-              onMoveDown={onMoveDown}
-              onMovePrev={onMovePrev}
-              onMoveNext={onMoveNext}
-              onEdit={onEdit}
-              onDelete={onDelete}
+              onSelect={onSelect}
+              subjectLabelById={subjectLabelById}
             />
           </li>
         ))}
@@ -1017,139 +816,173 @@ function WeekColumn({
   );
 }
 
-interface SequenceCardProps {
-  sequence: PeriodSequence;
-  index: number;
-  total: number;
+interface ProgressionCardProps {
+  card: PeriodCard;
   onDragStart: (event: DragEvent<HTMLDivElement>, id: string) => void;
   onDragEnd: () => void;
-  onCardKeyDown: (event: KeyboardEvent<HTMLDivElement>, id: string) => void;
-  onMoveUp: (id: string) => void;
-  onMoveDown: (id: string) => void;
-  onMovePrev: (id: string) => void;
-  onMoveNext: (id: string) => void;
-  onEdit: (sequence: PeriodSequence) => void;
-  onDelete: (id: string) => void;
+  onSelect: (id: string) => void;
+  subjectLabelById: Map<string, string>;
 }
 
-function SequenceCard({
-  sequence,
-  index,
-  total,
+function ProgressionCard({
+  card,
   onDragStart,
   onDragEnd,
-  onCardKeyDown,
-  onMoveUp,
-  onMoveDown,
-  onMovePrev,
-  onMoveNext,
-  onEdit,
-  onDelete,
-}: SequenceCardProps) {
-  const matiereLabel =
-    curriculumSubjects.find((option) => option.id === sequence.matiere)?.label ??
-    sequence.matiere;
-  const domaineLabel =
-    curriculumSubjects
-      .flatMap((subject) => subject.domains)
-      .find((domain) => domain.id === sequence.domaine)?.label ?? sequence.domaine;
+  onSelect,
+  subjectLabelById,
+}: ProgressionCardProps) {
+  const matiereLabel = subjectLabelById.get(card.matiere) ?? card.matiere;
   const statutLabel =
-    SEQUENCE_STATUSES.find((option) => option.id === sequence.statut)?.label ??
-    sequence.statut;
+    SEQUENCE_STATUSES.find((option) => option.id === card.statut)?.label ?? card.statut;
 
   return (
     <div
       draggable
-      onDragStart={(event) => onDragStart(event, sequence.id)}
+      onDragStart={(event) => onDragStart(event, card.id)}
       onDragEnd={onDragEnd}
-      onKeyDown={(event) => onCardKeyDown(event, sequence.id)}
+      onClick={() => onSelect(card.id)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onSelect(card.id);
+        }
+      }}
       tabIndex={0}
-      role="group"
-      aria-label={`Séquence ${sequence.titre}`}
-      className="rounded-md border border-white/10 bg-background/50 p-3 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade/60 print:border-black"
+      role="button"
+      aria-label={`Ouvrir la carte ${card.competenceLabel}`}
+      className="cursor-pointer rounded-md border border-white/10 bg-background/50 p-3 text-sm transition hover:border-jade/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade/60 print:cursor-default print:border-black"
+    >
+      <p className="text-xs font-bold uppercase tracking-wide text-muted print:text-black">
+        {matiereLabel}
+      </p>
+      <h4 className="mt-1 font-black leading-snug text-foreground print:text-black">
+        {card.competenceLabel}
+      </h4>
+      <p className="mt-1 text-xs font-medium text-muted print:text-black">
+        {card.dureeMinutes} min
+      </p>
+      <span
+        className={`mt-2 inline-block rounded-full border px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide ${STATUS_STYLES[card.statut]} print:border-black print:bg-transparent print:text-black`}
+      >
+        {statutLabel}
+      </span>
+      <p className="mt-2 text-xs text-muted print:text-black">
+        {card.imprimablesDisponibles.length === 0
+          ? "Aucun imprimable disponible"
+          : `${card.imprimablesDisponibles.length} imprimable(s) disponible(s)`}
+      </p>
+    </div>
+  );
+}
+
+interface CardSidePanelProps {
+  card: PeriodCard;
+  subjectLabelById: Map<string, string>;
+  onClose: () => void;
+  onUpdate: (patch: Partial<PeriodCard>) => void;
+  onDelete: () => void;
+}
+
+function CardSidePanel({
+  card,
+  subjectLabelById,
+  onClose,
+  onUpdate,
+  onDelete,
+}: CardSidePanelProps) {
+  const niveauLabel =
+    schoolLevels.find((option) => option.id === card.niveau)?.label ?? card.niveau;
+  const matiereLabel = subjectLabelById.get(card.matiere) ?? card.matiere;
+
+  return (
+    <aside
+      role="dialog"
+      aria-label={`Détails de la carte ${card.competenceLabel}`}
+      className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
-        <span
-          aria-hidden="true"
-          className="select-none text-muted print:hidden"
-          title="Glisser pour déplacer"
-        >
-          ⠿
-        </span>
-        <span
-          className={`rounded-full border px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide ${STATUS_STYLES[sequence.statut]} print:border-black print:bg-transparent print:text-black`}
-        >
-          {statutLabel}
-        </span>
-      </div>
-
-      <p className="mt-2 text-xs font-bold uppercase tracking-wide text-muted print:text-black">
-        {matiereLabel} · {domaineLabel}
-      </p>
-      <h4 className="mt-1 font-black text-foreground print:text-black">
-        {sequence.titre}
-      </h4>
-      <p className="mt-1 text-xs leading-5 text-muted print:text-black">
-        Compétence : {sequence.competenceLabel}
-      </p>
-      <p className="mt-1 text-xs font-medium text-muted print:text-black">
-        Durée indicative : {sequence.dureeMinutes} min
-      </p>
-
-      <div className="mt-3 flex flex-wrap gap-1.5 print:hidden">
+        <h3 className="text-lg font-black text-foreground">Détails de la carte</h3>
         <button
           type="button"
-          onClick={() => onMoveUp(sequence.id)}
-          disabled={index === 0}
-          aria-label={`Monter ${sequence.titre} dans la semaine`}
-          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
+          onClick={onClose}
+          aria-label="Fermer le panneau"
+          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
-          ↑
-        </button>
-        <button
-          type="button"
-          onClick={() => onMoveDown(sequence.id)}
-          disabled={index === total - 1}
-          aria-label={`Descendre ${sequence.titre} dans la semaine`}
-          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          ↓
-        </button>
-        <button
-          type="button"
-          onClick={() => onMovePrev(sequence.id)}
-          disabled={sequence.semaine === 1}
-          aria-label={`Déplacer ${sequence.titre} vers la semaine précédente`}
-          className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          ← Semaine
-        </button>
-        <button
-          type="button"
-          onClick={() => onMoveNext(sequence.id)}
-          disabled={sequence.semaine === 5}
-          aria-label={`Déplacer ${sequence.titre} vers la semaine suivante`}
-          className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
-        >
-          Semaine →
-        </button>
-        <button
-          type="button"
-          onClick={() => onEdit(sequence)}
-          aria-label={`Modifier ${sequence.titre}`}
-          className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
-        >
-          Modifier
-        </button>
-        <button
-          type="button"
-          onClick={() => onDelete(sequence.id)}
-          aria-label={`Supprimer ${sequence.titre}`}
-          className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
-        >
-          Supprimer
+          ✕
         </button>
       </div>
-    </div>
+
+      <dl className="space-y-3 text-sm">
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Niveau</dt>
+          <dd className="font-bold text-foreground">{niveauLabel}</dd>
+        </div>
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Matière</dt>
+          <dd className="font-bold text-foreground">{matiereLabel}</dd>
+        </div>
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Compétence</dt>
+          <dd className="font-bold text-foreground">{card.competenceLabel}</dd>
+        </div>
+      </dl>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Statut
+        <select
+          value={card.statut}
+          onChange={(event) => onUpdate({ statut: event.target.value as SequenceStatus })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {SEQUENCE_STATUSES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Durée estimée (minutes)
+        <input
+          type="number"
+          min={5}
+          step={5}
+          value={card.dureeMinutes}
+          onChange={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wide text-muted">
+          Imprimables disponibles
+        </p>
+        {card.imprimablesDisponibles.length === 0 ? (
+          <p className="mt-1 text-sm text-muted">Aucun imprimable disponible.</p>
+        ) : (
+          <ul className="mt-1 space-y-1 text-sm">
+            {card.imprimablesDisponibles.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="font-bold text-jade underline-offset-2 hover:underline"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <button
+        type="button"
+        onClick={onDelete}
+        className="mt-auto min-h-11 rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-bold text-ember transition hover:bg-ember/20"
+      >
+        Supprimer la carte
+      </button>
+    </aside>
   );
 }
