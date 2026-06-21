@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 
 export const metadata: Metadata = {
@@ -67,10 +68,13 @@ export default function Cm2Page() {
           })}
         </div>
 
-        <div className="mt-8 border-t border-white/10 pt-5">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-            À venir : {otherSubjects.map((subject) => subject.title).join(", ")}
-          </p>
+        <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
+          {otherSubjects.map((subject) => (
+            <span key={subject.slug} className="flex items-center gap-2">
+              <span className="text-sm font-bold text-muted">{subject.title}</span>
+              <PublicStatusBadge status={subject.status} />
+            </span>
+          ))}
         </div>
       </div>
     </main>
