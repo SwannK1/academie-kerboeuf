@@ -32,7 +32,7 @@ export const teacherDashboardPriorityCards: TeacherDashboardCard[] = [
   {
     title: "Organisation de classe",
     description: "Gérer le matériel et les quantités disponibles.",
-    href: "/enseignants/materiel-classe",
+    href: "/enseignants/organisation",
     icon: "🧰",
   },
 ];
