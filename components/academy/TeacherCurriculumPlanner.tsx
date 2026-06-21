@@ -133,6 +133,7 @@ function nextStatus(status: PlanningStatus): PlanningStatus {
 type Assignment = {
   period: number;
   status: PlanningStatus;
+  order: number;
 };
 
 type StoredAssignments = Record<string, Assignment>;
@@ -150,7 +151,16 @@ function readStoredAssignments(): StoredAssignments {
     if (!parsed || typeof parsed !== "object") {
       return {};
     }
-    return parsed as StoredAssignments;
+    const entries = parsed as Record<string, Partial<Assignment> & { period: number; status: PlanningStatus }>;
+    const normalized: StoredAssignments = {};
+    Object.entries(entries).forEach(([id, value], index) => {
+      normalized[id] = {
+        period: value.period,
+        status: value.status,
+        order: typeof value.order === "number" ? value.order : index,
+      };
+    });
+    return normalized;
   } catch {
     return {};
   }
@@ -256,12 +266,46 @@ export function TeacherCurriculumPlanner() {
     setSearchQuery(entry.title);
   }
 
+  const allCompetenciesForLevel = useMemo(
+    () => subjectsForLevel.flatMap((subject) => subject.domains.flatMap((d) => d.competencies)),
+    [subjectsForLevel],
+  );
+
+  const competencyById = useMemo(() => {
+    const map = new Map<string, CurriculumCompetency>();
+    allCompetenciesForLevel.forEach((competency) => map.set(competency.id, competency));
+    return map;
+  }, [allCompetenciesForLevel]);
+
+  const assignedIdsForLevel = useMemo(
+    () =>
+      Object.keys(assignments).filter((id) => competencyById.has(id)),
+    [assignments, competencyById],
+  );
+
+  const [draggedId, setDraggedId] = useState<string | null>(null);
+  const [dragOverPeriod, setDragOverPeriod] = useState<number | null>(null);
+
+  function maxOrderInPeriod(current: StoredAssignments, period: number, excludeId?: string) {
+    let max = -1;
+    for (const [id, assignment] of Object.entries(current)) {
+      if (id === excludeId) continue;
+      if (assignment.period === period && assignment.order > max) {
+        max = assignment.order;
+      }
+    }
+    return max;
+  }
+
   function assignToPeriod(competencyId: string, period: number) {
     setAssignments((current) => {
+      // Une compétence ne peut être placée que dans une seule période :
+      // l'attribution remplace toujours l'éventuelle entrée précédente.
       const existing = current[competencyId];
+      const order = maxOrderInPeriod(current, period, competencyId) + 1;
       const next: StoredAssignments = {
         ...current,
-        [competencyId]: { period, status: existing?.status ?? "a-programmer" },
+        [competencyId]: { period, status: existing?.status ?? "a-programmer", order },
       };
       writeStoredAssignments(next);
       return next;
@@ -292,22 +336,104 @@ export function TeacherCurriculumPlanner() {
     });
   }
 
-  const allCompetenciesForLevel = useMemo(
-    () => subjectsForLevel.flatMap((subject) => subject.domains.flatMap((d) => d.competencies)),
-    [subjectsForLevel],
-  );
+  function competencyBelongsToLevel(competencyId: string, level: SchoolLevel) {
+    return competencyById.has(competencyId) && competencyById.get(competencyId)?.level === level;
+  }
 
-  const competencyById = useMemo(() => {
-    const map = new Map<string, CurriculumCompetency>();
-    allCompetenciesForLevel.forEach((competency) => map.set(competency.id, competency));
-    return map;
-  }, [allCompetenciesForLevel]);
+  function orderedIdsForPeriod(current: StoredAssignments, level: SchoolLevel, period: number) {
+    return Object.entries(current)
+      .filter(([id, assignment]) => assignment.period === period && competencyBelongsToLevel(id, level))
+      .sort((a, b) => a[1].order - b[1].order)
+      .map(([id]) => id);
+  }
 
-  const assignedIdsForLevel = useMemo(
-    () =>
-      Object.keys(assignments).filter((id) => competencyById.has(id)),
-    [assignments, competencyById],
-  );
+  /**
+   * Déplace une compétence vers une période cible, en l'insérant juste avant
+   * `beforeId` (ou en fin de liste si absent). Recalcule les ordres des deux
+   * périodes concernées pour éviter tout doublon de position.
+   */
+  function moveCompetency(competencyId: string, targetPeriod: number, beforeId?: string | null) {
+    setAssignments((current) => {
+      const existing = current[competencyId];
+      if (!existing) {
+        return current;
+      }
+
+      const sourcePeriod = existing.period;
+      const targetIds = orderedIdsForPeriod(current, selectedLevel, targetPeriod).filter(
+        (id) => id !== competencyId,
+      );
+
+      let insertAt = targetIds.length;
+      if (beforeId) {
+        const index = targetIds.indexOf(beforeId);
+        if (index !== -1) {
+          insertAt = index;
+        }
+      }
+      targetIds.splice(insertAt, 0, competencyId);
+
+      const next: StoredAssignments = { ...current };
+      targetIds.forEach((id, index) => {
+        next[id] = { ...next[id], period: targetPeriod, order: index };
+      });
+
+      if (sourcePeriod !== targetPeriod) {
+        const sourceIds = orderedIdsForPeriod(current, selectedLevel, sourcePeriod).filter(
+          (id) => id !== competencyId,
+        );
+        sourceIds.forEach((id, index) => {
+          next[id] = { ...next[id], order: index };
+        });
+      }
+
+      writeStoredAssignments(next);
+      return next;
+    });
+  }
+
+  function moveWithinPeriod(competencyId: string, direction: -1 | 1) {
+    setAssignments((current) => {
+      const existing = current[competencyId];
+      if (!existing) {
+        return current;
+      }
+      const ids = orderedIdsForPeriod(current, selectedLevel, existing.period);
+      const index = ids.indexOf(competencyId);
+      const targetIndex = index + direction;
+      if (index === -1 || targetIndex < 0 || targetIndex >= ids.length) {
+        return current;
+      }
+      const swapId = ids[targetIndex];
+      const next: StoredAssignments = {
+        ...current,
+        [competencyId]: { ...current[competencyId], order: current[swapId].order },
+        [swapId]: { ...current[swapId], order: current[competencyId].order },
+      };
+      writeStoredAssignments(next);
+      return next;
+    });
+  }
+
+  function moveToAdjacentPeriod(competencyId: string, direction: -1 | 1) {
+    const existing = assignments[competencyId];
+    if (!existing) {
+      return;
+    }
+    const targetPeriod = existing.period + direction;
+    if (targetPeriod < periods[0] || targetPeriod > periods[periods.length - 1]) {
+      return;
+    }
+    moveCompetency(competencyId, targetPeriod);
+  }
+
+  function handleDrop(targetPeriod: number, beforeId: string | null) {
+    if (draggedId) {
+      moveCompetency(draggedId, targetPeriod, beforeId);
+    }
+    setDraggedId(null);
+    setDragOverPeriod(null);
+  }
 
   return (
     <div>
@@ -620,15 +746,28 @@ export function TeacherCurriculumPlanner() {
         ) : (
           <div className="mt-4 grid gap-4 lg:grid-cols-5">
             {periods.map((period) => {
-              const periodCompetencyIds = assignedIdsForLevel.filter(
-                (id) => assignments[id]?.period === period,
-              );
+              const periodCompetencyIds = assignedIdsForLevel
+                .filter((id) => assignments[id]?.period === period)
+                .sort((a, b) => assignments[a].order - assignments[b].order);
+              const isDragOver = dragOverPeriod === period;
 
               return (
                 <section
                   key={period}
                   aria-labelledby={`periode-${period}-titre`}
-                  className="flex flex-col rounded-lg border border-white/10 bg-background/40 p-3"
+                  className={[
+                    "flex flex-col rounded-lg border bg-background/40 p-3 transition",
+                    isDragOver ? "border-jade/60 bg-jade/5" : "border-white/10",
+                  ].join(" ")}
+                  onDragOver={(event) => {
+                    event.preventDefault();
+                    setDragOverPeriod(period);
+                  }}
+                  onDragLeave={() => setDragOverPeriod((current) => (current === period ? null : current))}
+                  onDrop={(event) => {
+                    event.preventDefault();
+                    handleDrop(period, null);
+                  }}
                 >
                   <h3
                     id={`periode-${period}-titre`}
@@ -639,20 +778,50 @@ export function TeacherCurriculumPlanner() {
 
                   <ul className="mt-3 flex flex-1 flex-col gap-2">
                     {periodCompetencyIds.length === 0 ? (
-                      <li className="text-xs leading-6 text-muted">
-                        Aucune compétence dans cette période.
+                      <li
+                        className={[
+                          "rounded border border-dashed p-3 text-xs leading-6 text-muted transition",
+                          isDragOver ? "border-jade/50 bg-jade/5 text-jade" : "border-white/15",
+                        ].join(" ")}
+                      >
+                        {isDragOver
+                          ? "Déposer ici pour ajouter à cette période"
+                          : "Aucune compétence dans cette période."}
                       </li>
                     ) : (
-                      periodCompetencyIds.map((id) => {
+                      periodCompetencyIds.map((id, index) => {
                         const competency = competencyById.get(id);
                         const assignment = assignments[id];
                         if (!competency || !assignment) {
                           return null;
                         }
+                        const isFirst = index === 0;
+                        const isLast = index === periodCompetencyIds.length - 1;
+                        const isFirstPeriod = period === periods[0];
+                        const isLastPeriod = period === periods[periods.length - 1];
                         return (
                           <li
                             key={id}
-                            className="rounded border border-white/10 bg-white/[0.03] p-2"
+                            draggable
+                            onDragStart={() => setDraggedId(id)}
+                            onDragEnd={() => {
+                              setDraggedId(null);
+                              setDragOverPeriod(null);
+                            }}
+                            onDragOver={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              setDragOverPeriod(period);
+                            }}
+                            onDrop={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              handleDrop(period, id);
+                            }}
+                            className={[
+                              "cursor-grab rounded border border-white/10 bg-white/[0.03] p-2 active:cursor-grabbing",
+                              draggedId === id ? "opacity-40" : "",
+                            ].join(" ")}
                           >
                             <p className="text-xs font-bold text-foreground">
                               {competency.label}
@@ -672,6 +841,57 @@ export function TeacherCurriculumPlanner() {
                             >
                               {planningStatuses.find((s) => s.id === assignment.status)?.label}
                             </button>
+
+                            <div
+                              className="mt-2 flex flex-wrap gap-1"
+                              role="group"
+                              aria-label={`Déplacer ${competency.label}`}
+                            >
+                              <button
+                                type="button"
+                                onClick={() => moveWithinPeriod(id, -1)}
+                                disabled={isFirst}
+                                aria-label={`Monter ${competency.label} dans la période ${period}`}
+                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                              >
+                                Monter
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => moveWithinPeriod(id, 1)}
+                                disabled={isLast}
+                                aria-label={`Descendre ${competency.label} dans la période ${period}`}
+                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                              >
+                                Descendre
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => moveToAdjacentPeriod(id, -1)}
+                                disabled={isFirstPeriod}
+                                aria-label={`Déplacer ${competency.label} vers la période précédente`}
+                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                              >
+                                Période précédente
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => moveToAdjacentPeriod(id, 1)}
+                                disabled={isLastPeriod}
+                                aria-label={`Déplacer ${competency.label} vers la période suivante`}
+                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                              >
+                                Période suivante
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => removeAssignment(id)}
+                                aria-label={`Retirer ${competency.label} de la programmation`}
+                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                              >
+                                Retirer
+                              </button>
+                            </div>
                           </li>
                         );
                       })
