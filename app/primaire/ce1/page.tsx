@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { ce1LearningTree } from "@/content/levels/ce1-learning-tree";
+import { Ce1GastonLearningMap } from "@/components/academy/Ce1GastonLearningMap";
 
 export const metadata: Metadata = {
   title: "CE1 — Cycle 2 | Académie Kerboeuf",
@@ -59,6 +60,9 @@ export default function Ce1Page() {
         </div>
       </section>
 
+      {/* ── Carte des espaces pédagogiques ──────────────────────────────── */}
+      <Ce1GastonLearningMap />
+
       {/* ── Navigation rapide ────────────────────────────────────────────── */}
       <section className="border-t border-white/10 px-4 py-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -73,22 +77,10 @@ export default function Ce1Page() {
               Matières CE1 <span className="transition group-hover:translate-x-0.5">→</span>
             </Link>
             <Link
-              href="/primaire/ce1/programme"
+              href="/primaire/ce1/lecons"
               className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
             >
-              Programme <span className="transition group-hover:translate-x-0.5">→</span>
-            </Link>
-            <Link
-              href="/primaire/ce1/competences"
-              className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
-            >
-              Compétences <span className="transition group-hover:translate-x-0.5">→</span>
-            </Link>
-            <Link
-              href="/primaire/ce1/missions"
-              className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
-            >
-              Missions <span className="transition group-hover:translate-x-0.5">→</span>
+              Leçons CE1 <span className="transition group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
         </div>
