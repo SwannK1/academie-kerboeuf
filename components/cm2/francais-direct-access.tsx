@@ -8,7 +8,7 @@ import {
   type FicheNotion,
 } from "@/content/cm2-francais-fiches";
 import { cm2Subjects } from "@/content/cm2-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 
 const DOMAIN_ORDER: FicheDomain[] = [
   "conjugaison",
@@ -88,7 +88,9 @@ export function Cm2FrancaisDirectAccess() {
           })}
 
           <section>
-            <h2 className="mb-3 text-xl font-black text-foreground">À venir</h2>
+            <h2 className="mb-3 text-xl font-black text-foreground">
+              {getPublicStatusLabel("upcoming")}
+            </h2>
             <div className="flex flex-wrap gap-3">
               {UPCOMING_DOMAIN_LABELS.map((label) => (
                 <span
