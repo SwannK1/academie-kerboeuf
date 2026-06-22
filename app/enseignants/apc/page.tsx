@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherCurriculumPlanner } from "@/components/academy/TeacherCurriculumPlannerClient";
+import { TeacherApcPlanner } from "@/components/teacher-apc-planner/TeacherApcPlanner";
 
 export const metadata: Metadata = {
-  title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
+  title: "Préparer mes APC | Académie Kerboeuf",
   description:
-    "Choisissez un niveau, parcourez les matières et domaines du programme, puis organisez les compétences par période.",
+    "Préparez vos séances et cycles d'APC : axe, objectif, période, durée, matériel, déroulé et bilan collectif. Aucun nom d'élève, aucun suivi individuel.",
 };
 
-export default function TeacherYearlyProgrammationPage() {
+export default function TeacherApcPlannerPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Programmation", href: "/enseignants/programmation" },
-            { label: "Programmation annuelle" },
+            { label: "APC" },
           ]}
         />
 
@@ -26,16 +25,18 @@ export default function TeacherYearlyProgrammationPage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Programmation annuelle
+            Préparer mes APC
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, parcourez les matières et domaines du programme,
-            recherchez une compétence, puis placez-la dans une période de l&apos;année.
+            Organisez vos séances et cycles d&apos;activités pédagogiques
+            complémentaires par axe, période et statut. Cet outil ne stocke
+            aucun nom d&apos;élève, aucune difficulté individuelle et aucun
+            diagnostic. Vos données restent sur cet appareil.
           </p>
         </header>
 
         <div className="mt-10">
-          <TeacherCurriculumPlanner />
+          <TeacherApcPlanner />
         </div>
       </div>
     </main>

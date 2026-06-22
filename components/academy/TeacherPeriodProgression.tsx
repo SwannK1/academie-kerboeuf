@@ -25,10 +25,11 @@ export function TeacherPeriodProgression() {
             Progression de période
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
-            Organisez l’ordre des séquences prévues pour une période donnée :
-            choisissez un niveau, une période, filtrez par matière puis
-            réordonnez avec les boutons. La progression est enregistrée
-            uniquement sur cet appareil.
+            Suivez l&apos;avancement des séquences d&apos;une période en Kanban :
+            choisissez un niveau et une période, ajoutez des cartes depuis la
+            programmation annuelle ou librement, puis glissez-les entre les
+            colonnes À prévoir, Prêt, En cours, Terminé et À reprendre. Tout
+            est enregistré uniquement sur cet appareil.
           </p>
 
           <TeacherPeriodProgressionClient />

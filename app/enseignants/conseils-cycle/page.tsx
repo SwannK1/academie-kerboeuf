@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherCurriculumPlanner } from "@/components/academy/TeacherCurriculumPlannerClient";
+import { TeacherCycleMeetingsClient } from "@/components/teacher-cycle-meetings/TeacherCycleMeetingsClient";
 
 export const metadata: Metadata = {
-  title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
+  title: "Préparer mes conseils de cycle | Espace enseignants | Académie Kerboeuf",
   description:
-    "Choisissez un niveau, parcourez les matières et domaines du programme, puis organisez les compétences par période.",
+    "Préparez un conseil de cycle ou un conseil des maîtres : ordre du jour, décisions et tâches de suivi.",
 };
 
-export default function TeacherYearlyProgrammationPage() {
+export default function TeacherCycleMeetingsPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
@@ -16,8 +16,7 @@ export default function TeacherYearlyProgrammationPage() {
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Programmation", href: "/enseignants/programmation" },
-            { label: "Programmation annuelle" },
+            { label: "Préparer mes conseils de cycle" },
           ]}
         />
 
@@ -26,16 +25,17 @@ export default function TeacherYearlyProgrammationPage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Programmation annuelle
+            Préparer mes conseils de cycle
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, parcourez les matières et domaines du programme,
-            recherchez une compétence, puis placez-la dans une période de l&apos;année.
+            Créez une réunion, organisez l&apos;ordre du jour, notez les
+            décisions et suivez les tâches qui en découlent. Tout est
+            enregistré uniquement sur cet appareil.
           </p>
         </header>
 
         <div className="mt-10">
-          <TeacherCurriculumPlanner />
+          <TeacherCycleMeetingsClient />
         </div>
       </div>
     </main>

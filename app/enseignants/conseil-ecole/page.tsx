@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherCurriculumPlanner } from "@/components/academy/TeacherCurriculumPlannerClient";
+import { SchoolCouncilPlanner } from "@/components/teacher-school-council/SchoolCouncilPlannerClient";
 
 export const metadata: Metadata = {
-  title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
+  title: "Préparer un conseil d'école | Académie Kerboeuf",
   description:
-    "Choisissez un niveau, parcourez les matières et domaines du programme, puis organisez les compétences par période.",
+    "Préparez l'ordre du jour, les points à présenter, les décisions et les actions de suivi d'un conseil d'école, sans aucune donnée nominative.",
 };
 
-export default function TeacherYearlyProgrammationPage() {
+export default function SchoolCouncilPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Programmation", href: "/enseignants/programmation" },
-            { label: "Programmation annuelle" },
+            { label: "Conseil d'école" },
           ]}
         />
 
@@ -26,16 +25,18 @@ export default function TeacherYearlyProgrammationPage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Programmation annuelle
+            Préparer un conseil d&apos;école
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, parcourez les matières et domaines du programme,
-            recherchez une compétence, puis placez-la dans une période de l&apos;année.
+            Organisez l&apos;ordre du jour, les points à présenter, les décisions
+            et les actions de suivi d&apos;un conseil d&apos;école. Aucune donnée
+            nominative n&apos;est demandée : tout reste enregistré localement sur
+            cet appareil.
           </p>
         </header>
 
         <div className="mt-10">
-          <TeacherCurriculumPlanner />
+          <SchoolCouncilPlanner />
         </div>
       </div>
     </main>
