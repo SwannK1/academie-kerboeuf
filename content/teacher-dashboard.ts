@@ -62,6 +62,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "🧭",
       },
       {
+        title: "Plan de classe et groupes",
+        description: "Disposez les tables et générez des groupes avec rôles, sans données élève.",
+        href: "/enseignants/organisation-classe",
+        icon: "🧑‍🤝‍🧑",
+      },
+      {
         title: "Ateliers",
         description: "Planifiez et organisez vos ateliers en autonomie ou en groupes.",
         href: "/enseignants/ateliers",
