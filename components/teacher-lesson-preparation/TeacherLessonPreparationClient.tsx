@@ -415,6 +415,7 @@ function ImportFromProgressionModal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
+            autoFocus
             className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
           >
             ✕
@@ -515,6 +516,7 @@ function AddToLogbookModal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
+            autoFocus
             className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
           >
             ✕

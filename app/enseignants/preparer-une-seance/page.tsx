@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherLessonPreparationClient } from "@/components/teacher-lesson-preparation/TeacherLessonPreparationClient";
+import { TeacherLessonPreparation } from "@/components/teacher-lesson-preparation/TeacherLessonPreparation";
 
 export const metadata: Metadata = {
   title: "Préparer une séance | Espace enseignants | Académie Kerboeuf",
@@ -35,7 +35,7 @@ export default function TeacherLessonPreparationPage() {
           </p>
         </header>
 
-        <TeacherLessonPreparationClient />
+        <TeacherLessonPreparation />
       </div>
     </main>
   );
