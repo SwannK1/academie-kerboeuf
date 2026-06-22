@@ -1,24 +1,17 @@
 export type TeacherTimetableLevelId = "cp" | "ce1" | "ce2" | "cm1" | "cm2";
 
-export type TeacherTimetableDayId =
-  | "lundi"
-  | "mardi"
-  | "mercredi"
-  | "jeudi"
-  | "vendredi";
-
-export type TeacherTimetableSlotId =
-  | "matin-1"
-  | "matin-2"
-  | "apres-midi-1"
-  | "apres-midi-2";
-
-export type TeacherTimetableLevel = {
-  id: TeacherTimetableLevelId;
+export type TeacherTimetableDay = {
+  id: string;
   label: string;
 };
 
-export const teacherTimetableLevels: TeacherTimetableLevel[] = [
+export type TeacherTimetableSlot = {
+  id: string;
+  label: string;
+  durationHours: number;
+};
+
+export const teacherTimetableLevels: { id: TeacherTimetableLevelId; label: string }[] = [
   { id: "cp", label: "CP" },
   { id: "ce1", label: "CE1" },
   { id: "ce2", label: "CE2" },
@@ -26,12 +19,7 @@ export const teacherTimetableLevels: TeacherTimetableLevel[] = [
   { id: "cm2", label: "CM2" },
 ];
 
-export type TeacherTimetableDay = {
-  id: TeacherTimetableDayId;
-  label: string;
-};
-
-export const teacherTimetableDays: TeacherTimetableDay[] = [
+export const DEFAULT_TEACHER_TIMETABLE_DAYS: TeacherTimetableDay[] = [
   { id: "lundi", label: "Lundi" },
   { id: "mardi", label: "Mardi" },
   { id: "mercredi", label: "Mercredi" },
@@ -39,153 +27,200 @@ export const teacherTimetableDays: TeacherTimetableDay[] = [
   { id: "vendredi", label: "Vendredi" },
 ];
 
-export type TeacherTimetableSlot = {
-  id: TeacherTimetableSlotId;
-  label: string;
-  durationHours: number;
-};
-
-export const teacherTimetableSlots: TeacherTimetableSlot[] = [
+export const DEFAULT_TEACHER_TIMETABLE_SLOTS: TeacherTimetableSlot[] = [
   { id: "matin-1", label: "Matin 1", durationHours: 1.5 },
   { id: "matin-2", label: "Matin 2", durationHours: 1.5 },
   { id: "apres-midi-1", label: "Après-midi 1", durationHours: 1.5 },
   { id: "apres-midi-2", label: "Après-midi 2", durationHours: 1 },
 ];
 
-export const teacherTimetableSubjectsByLevel: Record<
-  TeacherTimetableLevelId,
-  string[]
-> = {
-  cp: [
-    "Français",
-    "Mathématiques",
-    "Questionner le monde",
-    "EPS",
-    "Arts",
-    "Musique",
-    "EMC",
-  ],
-  ce1: [
-    "Français",
-    "Mathématiques",
-    "Questionner le monde",
-    "EPS",
-    "Arts",
-    "Musique",
-    "EMC",
-  ],
-  ce2: [
-    "Français",
-    "Mathématiques",
-    "Questionner le monde",
-    "EPS",
-    "Arts",
-    "Musique",
-    "EMC",
-  ],
-  cm1: [
-    "Français",
-    "Mathématiques",
-    "Histoire-Géographie",
-    "Sciences",
-    "EPS",
-    "Arts",
-    "Musique",
-    "EMC",
-  ],
-  cm2: [
-    "Français",
-    "Mathématiques",
-    "Histoire-Géographie",
-    "Sciences",
-    "EPS",
-    "Arts",
-    "Musique",
-    "EMC",
-  ],
+export const teacherTimetableSubjectsByLevel: Record<TeacherTimetableLevelId, string[]> = {
+  cp: ["Français", "Mathématiques", "Questionner le monde", "EPS", "Arts", "Musique", "EMC"],
+  ce1: ["Français", "Mathématiques", "Questionner le monde", "EPS", "Arts", "Musique", "EMC"],
+  ce2: ["Français", "Mathématiques", "Questionner le monde", "EPS", "Arts", "Musique", "EMC"],
+  cm1: ["Français", "Mathématiques", "Histoire-Géographie", "Sciences", "EPS", "Arts", "Musique", "EMC"],
+  cm2: ["Français", "Mathématiques", "Histoire-Géographie", "Sciences", "EPS", "Arts", "Musique", "EMC"],
 };
+
+export type SubjectVisual = {
+  emoji: string;
+  colorKey: "jade" | "gold" | "sky" | "ember";
+};
+
+export const subjectVisuals: Record<string, SubjectVisual> = {
+  "Français": { emoji: "📖", colorKey: "jade" },
+  "Mathématiques": { emoji: "🔢", colorKey: "sky" },
+  "Questionner le monde": { emoji: "🔍", colorKey: "gold" },
+  "EPS": { emoji: "🤸", colorKey: "ember" },
+  "Arts": { emoji: "🎨", colorKey: "jade" },
+  "Musique": { emoji: "🎵", colorKey: "sky" },
+  "EMC": { emoji: "🤝", colorKey: "gold" },
+  "Histoire-Géographie": { emoji: "🗺️", colorKey: "ember" },
+  "Sciences": { emoji: "🔬", colorKey: "jade" },
+};
+
+export function getSubjectVisual(subject: string): SubjectVisual {
+  return subjectVisuals[subject] ?? { emoji: "📌", colorKey: "sky" };
+}
 
 export const TEACHER_TIMETABLE_WEEKLY_HOURS_TARGET = 24;
 
-export const TEACHER_TIMETABLE_STORAGE_KEY =
-  "academie-kerboeuf-emploi-du-temps-v1";
+export const TEACHER_TIMETABLE_STORAGE_KEY = "academie-kerboeuf-emploi-du-temps-v2";
 
-export type TeacherTimetableCellKey =
-  `${TeacherTimetableDayId}__${TeacherTimetableSlotId}`;
+export type TeacherTimetableCellKey = `${string}__${string}`;
 
-export function buildTeacherTimetableCellKey(
-  day: TeacherTimetableDayId,
-  slot: TeacherTimetableSlotId,
-): TeacherTimetableCellKey {
-  return `${day}__${slot}`;
+export function buildTeacherTimetableCellKey(dayId: string, slotId: string): TeacherTimetableCellKey {
+  return `${dayId}__${slotId}`;
 }
 
-export type TeacherTimetableAssignments = Partial<
-  Record<TeacherTimetableCellKey, string>
->;
+export type TeacherTimetableSession = {
+  subject: string;
+  durationHours: number;
+};
 
-export type TeacherTimetableState = {
-  levelId: TeacherTimetableLevelId;
+export type TeacherTimetableAssignments = Partial<Record<TeacherTimetableCellKey, TeacherTimetableSession>>;
+
+export type TeacherTimetableWeekKind =
+  | "reference"
+  | "reelle"
+  | "sortie"
+  | "evaluation"
+  | "projet"
+  | "remplacement"
+  | "raccourcie";
+
+export const teacherTimetableWeekKindLabels: Record<TeacherTimetableWeekKind, string> = {
+  reference: "Référence",
+  reelle: "Semaine réelle",
+  sortie: "Sortie",
+  evaluation: "Évaluation",
+  projet: "Projet",
+  remplacement: "Remplacement",
+  raccourcie: "Semaine raccourcie",
+};
+
+export const specialTeacherTimetableWeekKinds: TeacherTimetableWeekKind[] = [
+  "sortie",
+  "evaluation",
+  "projet",
+  "remplacement",
+  "raccourcie",
+];
+
+export type TeacherTimetableWeek = {
+  id: string;
+  label: string;
+  kind: TeacherTimetableWeekKind;
   assignments: TeacherTimetableAssignments;
 };
 
-const RECOMMENDED_CM2_ASSIGNMENTS: TeacherTimetableAssignments = {
-  [buildTeacherTimetableCellKey("lundi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("lundi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("lundi", "apres-midi-1")]: "Sciences",
-  [buildTeacherTimetableCellKey("lundi", "apres-midi-2")]: "Arts",
-
-  [buildTeacherTimetableCellKey("mardi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("mardi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("mardi", "apres-midi-1")]: "Histoire-Géographie",
-  [buildTeacherTimetableCellKey("mardi", "apres-midi-2")]: "EMC",
-
-  [buildTeacherTimetableCellKey("mercredi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("mercredi", "matin-2")]: "EPS",
-
-  [buildTeacherTimetableCellKey("jeudi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("jeudi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("jeudi", "apres-midi-1")]: "Histoire-Géographie",
-  [buildTeacherTimetableCellKey("jeudi", "apres-midi-2")]: "Musique",
-
-  [buildTeacherTimetableCellKey("vendredi", "matin-1")]: "Français",
-  [buildTeacherTimetableCellKey("vendredi", "matin-2")]: "Mathématiques",
-  [buildTeacherTimetableCellKey("vendredi", "apres-midi-1")]: "EPS",
-  [buildTeacherTimetableCellKey("vendredi", "apres-midi-2")]: "Arts",
+export type TeacherTimetableState = {
+  levelId: TeacherTimetableLevelId;
+  days: TeacherTimetableDay[];
+  slots: TeacherTimetableSlot[];
+  weeks: TeacherTimetableWeek[];
+  activeWeekId: string;
 };
 
-export function getRecommendedTeacherTimetable(
+export function createTeacherTimetableId(prefix: string): string {
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function buildRecommendedAssignments(levelId: TeacherTimetableLevelId): TeacherTimetableAssignments {
+  const isUpperLevel = levelId === "cm1" || levelId === "cm2";
+
+  const entries: [string, string, string][] = isUpperLevel
+    ? [
+        ["lundi", "matin-1", "Français"],
+        ["lundi", "matin-2", "Mathématiques"],
+        ["lundi", "apres-midi-1", "Sciences"],
+        ["lundi", "apres-midi-2", "Arts"],
+        ["mardi", "matin-1", "Français"],
+        ["mardi", "matin-2", "Mathématiques"],
+        ["mardi", "apres-midi-1", "Histoire-Géographie"],
+        ["mardi", "apres-midi-2", "EMC"],
+        ["mercredi", "matin-1", "Français"],
+        ["mercredi", "matin-2", "EPS"],
+        ["jeudi", "matin-1", "Français"],
+        ["jeudi", "matin-2", "Mathématiques"],
+        ["jeudi", "apres-midi-1", "Histoire-Géographie"],
+        ["jeudi", "apres-midi-2", "Musique"],
+        ["vendredi", "matin-1", "Français"],
+        ["vendredi", "matin-2", "Mathématiques"],
+        ["vendredi", "apres-midi-1", "EPS"],
+        ["vendredi", "apres-midi-2", "Arts"],
+      ]
+    : [
+        ["lundi", "matin-1", "Français"],
+        ["lundi", "matin-2", "Mathématiques"],
+        ["lundi", "apres-midi-1", "Questionner le monde"],
+        ["lundi", "apres-midi-2", "Arts"],
+        ["mardi", "matin-1", "Français"],
+        ["mardi", "matin-2", "Mathématiques"],
+        ["mardi", "apres-midi-1", "EMC"],
+        ["mardi", "apres-midi-2", "Musique"],
+        ["mercredi", "matin-1", "Français"],
+        ["mercredi", "matin-2", "EPS"],
+        ["jeudi", "matin-1", "Français"],
+        ["jeudi", "matin-2", "Mathématiques"],
+        ["jeudi", "apres-midi-1", "Questionner le monde"],
+        ["jeudi", "apres-midi-2", "Musique"],
+        ["vendredi", "matin-1", "Français"],
+        ["vendredi", "matin-2", "Mathématiques"],
+        ["vendredi", "apres-midi-1", "EPS"],
+        ["vendredi", "apres-midi-2", "Arts"],
+      ];
+
+  const slotDurations = new Map(
+    DEFAULT_TEACHER_TIMETABLE_SLOTS.map((slot) => [slot.id, slot.durationHours]),
+  );
+
+  const assignments: TeacherTimetableAssignments = {};
+  for (const [dayId, slotId, subject] of entries) {
+    assignments[buildTeacherTimetableCellKey(dayId, slotId)] = {
+      subject,
+      durationHours: slotDurations.get(slotId) ?? 1,
+    };
+  }
+  return assignments;
+}
+
+export function createInitialTeacherTimetableState(
   levelId: TeacherTimetableLevelId,
 ): TeacherTimetableState {
-  if (levelId === "cm2" || levelId === "cm1") {
-    return { levelId, assignments: { ...RECOMMENDED_CM2_ASSIGNMENTS } };
-  }
+  const recommended = buildRecommendedAssignments(levelId);
+  const referenceWeekId = createTeacherTimetableId("semaine");
+  const realWeekId = createTeacherTimetableId("semaine");
 
   return {
     levelId,
-    assignments: {
-      [buildTeacherTimetableCellKey("lundi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("lundi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("lundi", "apres-midi-1")]: "Questionner le monde",
-      [buildTeacherTimetableCellKey("lundi", "apres-midi-2")]: "Arts",
-
-      [buildTeacherTimetableCellKey("mardi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("mardi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("mardi", "apres-midi-1")]: "EMC",
-      [buildTeacherTimetableCellKey("mardi", "apres-midi-2")]: "Musique",
-
-      [buildTeacherTimetableCellKey("mercredi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("mercredi", "matin-2")]: "EPS",
-
-      [buildTeacherTimetableCellKey("jeudi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("jeudi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("jeudi", "apres-midi-1")]: "Questionner le monde",
-      [buildTeacherTimetableCellKey("jeudi", "apres-midi-2")]: "Musique",
-
-      [buildTeacherTimetableCellKey("vendredi", "matin-1")]: "Français",
-      [buildTeacherTimetableCellKey("vendredi", "matin-2")]: "Mathématiques",
-      [buildTeacherTimetableCellKey("vendredi", "apres-midi-1")]: "EPS",
-      [buildTeacherTimetableCellKey("vendredi", "apres-midi-2")]: "Arts",
-    },
+    days: DEFAULT_TEACHER_TIMETABLE_DAYS.map((day) => ({ ...day })),
+    slots: DEFAULT_TEACHER_TIMETABLE_SLOTS.map((slot) => ({ ...slot })),
+    weeks: [
+      {
+        id: referenceWeekId,
+        label: "Emploi du temps de référence",
+        kind: "reference",
+        assignments: recommended,
+      },
+      {
+        id: realWeekId,
+        label: "Semaine du lundi",
+        kind: "reelle",
+        assignments: { ...recommended },
+      },
+    ],
+    activeWeekId: realWeekId,
   };
+}
+
+export function computeHoursBySubject(
+  assignments: TeacherTimetableAssignments,
+): Map<string, number> {
+  const totals = new Map<string, number>();
+  for (const session of Object.values(assignments)) {
+    if (!session) continue;
+    totals.set(session.subject, (totals.get(session.subject) ?? 0) + session.durationHours);
+  }
+  return totals;
 }
