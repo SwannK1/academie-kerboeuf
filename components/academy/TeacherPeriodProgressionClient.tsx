@@ -353,18 +353,26 @@ export function TeacherPeriodProgressionClient() {
           .map((card) => card.sourceProgrammationId),
       );
       const toAdd: PeriodCard[] = [];
-      let working = prev;
+      let updatedCount = 0;
 
-      if (overwriteExisting) {
-        const importedSourceIds = new Set(importPreview.map((item) => item.sourceId));
-        working = prev.filter(
-          (card) =>
-            !(card.sourceProgrammationId && importedSourceIds.has(card.sourceProgrammationId)),
-        );
-      }
+      const working = prev.map((card) => {
+        if (!overwriteExisting || !card.sourceProgrammationId) return card;
+        const item = importPreview.find((entry) => entry.sourceId === card.sourceProgrammationId);
+        if (!item) return card;
+        updatedCount += 1;
+        return {
+          ...card,
+          matiere: item.subject,
+          domaine: item.domain,
+          competenceId: item.competenceId,
+          competenceLabel: item.title,
+          dureeMinutes: item.dureeMinutes,
+          priority: item.priority,
+        };
+      });
 
       for (const item of importPreview) {
-        if (!overwriteExisting && importOnlyNew && existingSourceIds.has(item.sourceId)) {
+        if (existingSourceIds.has(item.sourceId)) {
           continue;
         }
         toAdd.push({
@@ -384,10 +392,19 @@ export function TeacherPeriodProgressionClient() {
         });
       }
 
+      const summaryParts: string[] = [];
+      if (toAdd.length > 0) {
+        summaryParts.push(`${toAdd.length} carte(s) importée(s)`);
+      }
+      if (updatedCount > 0) {
+        summaryParts.push(
+          `${updatedCount} carte(s) déjà importée(s) mise(s) à jour (statut et notes conservés)`,
+        );
+      }
       setImportSummary(
-        toAdd.length === 0
+        summaryParts.length === 0
           ? "Aucune nouvelle carte à importer pour cette sélection."
-          : `${toAdd.length} carte(s) importée(s) depuis la programmation annuelle.`,
+          : `${summaryParts.join(", ")} depuis la programmation annuelle.`,
       );
 
       return [...working, ...toAdd];
@@ -400,7 +417,7 @@ export function TeacherPeriodProgressionClient() {
     );
     if (!importOnlyNew && hasExisting) {
       const confirmed = window.confirm(
-        "Des cartes déjà importées existent pour cette sélection. Les remplacer par la version actuelle de la programmation annuelle ?",
+        "Des cartes déjà importées existent pour cette sélection. Mettre à jour la matière, la compétence, la durée et la priorité depuis la programmation annuelle ? Le statut et les notes déjà saisis sur ces cartes seront conservés.",
       );
       if (!confirmed) return;
       runImport(true);
