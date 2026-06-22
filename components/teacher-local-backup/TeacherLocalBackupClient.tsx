@@ -182,6 +182,8 @@ export function TeacherLocalBackupClient() {
     Record<string, ImportChoice>
   >({});
   const [importDone, setImportDone] = useState<string | null>(null);
+  const [overwriteConfirmPending, setOverwriteConfirmPending] =
+    useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const detectedTools: DetectedTool[] = useMemo(() => {
@@ -202,6 +204,11 @@ export function TeacherLocalBackupClient() {
       };
     });
   }, [pendingFile]);
+
+  const toolsToOverwrite = detectedTools.filter(
+    (detected) =>
+      detected.hasExistingData && importChoices[detected.id] === "remplacer",
+  );
 
   function recordExport(action: HistoryEntry["action"], tools: string[]) {
     const date = new Date().toISOString();
@@ -235,6 +242,7 @@ export function TeacherLocalBackupClient() {
     setImportError(null);
     setImportDone(null);
     setPendingFile(null);
+    setOverwriteConfirmPending(false);
     const file = fileList?.[0];
     if (!file) return;
     const reader = new FileReader();
@@ -301,13 +309,27 @@ export function TeacherLocalBackupClient() {
     }
     setPendingFile(null);
     setImportChoices({});
+    setOverwriteConfirmPending(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
   function handleCancelImport() {
     setPendingFile(null);
     setImportChoices({});
+    setOverwriteConfirmPending(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
+  }
+
+  function handleRequestImport() {
+    if (toolsToOverwrite.length > 0) {
+      setOverwriteConfirmPending(true);
+      return;
+    }
+    handleConfirmImport();
+  }
+
+  function handleCancelOverwriteConfirm() {
+    setOverwriteConfirmPending(false);
   }
 
   return (
@@ -459,26 +481,45 @@ export function TeacherLocalBackupClient() {
               ))}
             </ul>
 
+            {overwriteConfirmPending && (
+              <div className="space-y-3 rounded-md border border-red-500/40 bg-red-500/10 p-3">
+                <p className="text-sm font-bold text-red-100">
+                  Confirmer le remplacement des données existantes ?
+                </p>
+                <p className="text-sm leading-6 text-red-100/90">
+                  Les données locales actuelles seront définitivement
+                  écrasées pour :{" "}
+                  <span className="font-bold">
+                    {toolsToOverwrite.map((tool) => tool.label).join(", ")}
+                  </span>
+                  . Cette action ne peut pas être annulée une fois validée.
+                  Vous pouvez encore annuler maintenant sans rien modifier.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleConfirmImport}
+                    className="min-h-11 rounded-md border border-red-500/60 bg-red-500/20 px-4 text-sm font-bold text-red-100 transition hover:bg-red-500/30"
+                  >
+                    Oui, remplacer ces données
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCancelOverwriteConfirm}
+                    className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-muted transition hover:bg-white/5"
+                  >
+                    Annuler
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="flex flex-wrap gap-3 pt-1">
               <button
                 type="button"
-                onClick={() => {
-                  const hasOverwrite = detectedTools.some(
-                    (detected) =>
-                      detected.hasExistingData &&
-                      importChoices[detected.id] === "remplacer",
-                  );
-                  if (
-                    hasOverwrite &&
-                    !window.confirm(
-                      "Des données existantes seront remplacées pour au moins un outil. Confirmer l'import ?",
-                    )
-                  ) {
-                    return;
-                  }
-                  handleConfirmImport();
-                }}
-                className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+                onClick={handleRequestImport}
+                disabled={overwriteConfirmPending}
+                className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:opacity-40"
               >
                 Confirmer l&apos;import
               </button>

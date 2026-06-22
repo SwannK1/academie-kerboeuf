@@ -5,7 +5,7 @@ import { TeacherLocalBackupClient } from "@/components/teacher-local-backup/Teac
 export const metadata: Metadata = {
   title: "Sauvegardes locales | Académie Kerboeuf",
   description:
-    "Exportez ou restaurez vos outils enseignants (programmation, progression, emploi du temps, cahier journal, plan de classe) sur cet appareil, sans compte ni cloud.",
+    "Exportez ou restaurez vos outils enseignants (programmation, progression, emploi du temps, cahier journal) sur cet appareil, sans compte ni cloud.",
 };
 
 export default function TeacherLocalBackupPage() {
@@ -29,8 +29,14 @@ export default function TeacherLocalBackupPage() {
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
             Exportez ou restaurez vos outils enseignants sur cet appareil :
-            programmation annuelle, progression de période, emploi du temps,
-            cahier journal et plan de classe.
+            programmation annuelle, progression de période, emploi du temps
+            et cahier journal.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-muted">
+            Le plan de classe et les groupes ne sont pas inclus dans ces
+            sauvegardes : tant que cet outil ne garantit pas l&apos;absence de
+            données nominatives d&apos;élèves, il reste exclu de l&apos;export
+            et de l&apos;import.
           </p>
         </header>
 

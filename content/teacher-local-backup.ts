@@ -2,8 +2,7 @@ export type TeacherBackupToolId =
   | "programmation-annuelle"
   | "progression-periode"
   | "emploi-du-temps"
-  | "cahier-journal"
-  | "plan-de-classe";
+  | "cahier-journal";
 
 export type TeacherBackupToolDefinition = {
   id: TeacherBackupToolId;
@@ -43,12 +42,6 @@ export const teacherBackupTools: TeacherBackupToolDefinition[] = [
     label: "Cahier journal",
     description: "Cartes de séances de la semaine.",
     storageKey: "academie-kerboeuf-cahier-journal-v1",
-  },
-  {
-    id: "plan-de-classe",
-    label: "Plan de classe et groupes",
-    description: "Disposition des tables et groupes, sans données élève.",
-    storageKey: "academie-kerboeuf-organisation-classe-plan-v1",
   },
 ];
 
