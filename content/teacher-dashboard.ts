@@ -33,6 +33,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "🕐",
       },
       {
+        title: "Cahier journal",
+        description: "Préparez votre vraie semaine avec des cartes de séances déplaçables.",
+        href: "/enseignants/cahier-journal",
+        icon: "📔",
+      },
+      {
         title: "Calendrier",
         description: "Visualisez les échéances et les périodes de l'année scolaire.",
         href: "/enseignants/calendrier",
@@ -60,6 +66,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         description: "Organisez vos priorités de semaine par groupe, à la souris ou au clavier.",
         href: "/enseignants/organisation",
         icon: "🧭",
+      },
+      {
+        title: "Plan de classe et groupes",
+        description: "Disposez les tables et générez des groupes avec rôles, sans données élève.",
+        href: "/enseignants/organisation-classe",
+        icon: "🧑‍🤝‍🧑",
       },
       {
         title: "Ateliers",
