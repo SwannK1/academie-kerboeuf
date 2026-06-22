@@ -25,10 +25,11 @@ export function TeacherPeriodProgression() {
             Progression de période
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
-            Planifiez une période complète semaine par semaine : choisissez un
-            niveau et une période, créez des séquences (1 séquence = 1
-            compétence), glissez-les entre les semaines ou utilisez les
-            boutons clavier. Tout est enregistré uniquement sur cet appareil.
+            Suivez l&apos;avancement des séquences d&apos;une période en Kanban :
+            choisissez un niveau et une période, ajoutez des cartes depuis la
+            programmation annuelle ou librement, puis glissez-les entre les
+            colonnes À prévoir, Prêt, En cours, Terminé et À reprendre. Tout
+            est enregistré uniquement sur cet appareil.
           </p>
 
           <TeacherPeriodProgressionClient />
