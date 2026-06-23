@@ -204,6 +204,16 @@ export function TeacherPeriodProgressionClient() {
     return items;
   }, [niveau, periode, importScope, importSubject]);
 
+  const newImportPreview = useMemo(
+    () =>
+      importPreview.filter(
+        (item) => !cards.some((card) => card.sourceProgrammationId === item.sourceId),
+      ),
+    [importPreview, cards],
+  );
+
+  const importDisplayCount = importOnlyNew ? newImportPreview.length : importPreview.length;
+
   const moveToStatus = useCallback(
     (id: string, targetStatut: SequenceStatus, targetIndex?: number) => {
       setCards((prev) => {
@@ -563,10 +573,10 @@ export function TeacherPeriodProgressionClient() {
               <button
                 type="button"
                 onClick={handleImportClick}
-                disabled={importPreview.length === 0}
+                disabled={importDisplayCount === 0}
                 className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                Importer ({importPreview.length} élément(s) trouvé(s) dans la programmation)
+                Importer ({importDisplayCount} élément(s) trouvé(s) dans la programmation)
               </button>
             </div>
             {importSummary ? (
@@ -950,7 +960,7 @@ function CardSidePanel({
     <aside
       role="dialog"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
-      className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 pt-24 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Détails de la carte</h3>

@@ -463,10 +463,10 @@ export function TeacherCurriculumPlanner() {
       .map((card) => card.cardKey);
   }
 
-  function reorderInPeriod(targetPeriod: PlanningPeriodNumber, orderedKeys: string[]) {
+  function applyPeriodOrder(state: PlanningState, targetPeriod: PlanningPeriodNumber, orderedKeys: string[]): PlanningState {
     const next: PlanningState = {
-      assignments: { ...planningState.assignments },
-      freeItems: [...planningState.freeItems],
+      assignments: { ...state.assignments },
+      freeItems: [...state.freeItems],
     };
     orderedKeys.forEach((key, index) => {
       const card = planningCards.find((c) => c.cardKey === key);
@@ -482,7 +482,11 @@ export function TeacherCurriculumPlanner() {
         );
       }
     });
-    persist(next);
+    return next;
+  }
+
+  function reorderInPeriod(targetPeriod: PlanningPeriodNumber, orderedKeys: string[]) {
+    persist(applyPeriodOrder(planningState, targetPeriod, orderedKeys));
   }
 
   function moveCard(cardKey: string, targetPeriod: PlanningPeriodNumber, beforeKey?: string | null) {
@@ -497,12 +501,14 @@ export function TeacherCurriculumPlanner() {
       if (index !== -1) insertAt = index;
     }
     targetKeys.splice(insertAt, 0, cardKey);
-    reorderInPeriod(targetPeriod, targetKeys);
+    let next = applyPeriodOrder(planningState, targetPeriod, targetKeys);
 
     if (sourcePeriod !== targetPeriod) {
       const sourceKeys = orderedCardKeysForPeriod(sourcePeriod).filter((key) => key !== cardKey);
-      reorderInPeriod(sourcePeriod, sourceKeys);
+      next = applyPeriodOrder(next, sourcePeriod, sourceKeys);
     }
+
+    persist(next);
   }
 
   function moveWithinPeriod(cardKey: string, direction: -1 | 1) {
@@ -1482,7 +1488,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
     <aside
       role="dialog"
       aria-label={`Modifier la carte ${card.title}`}
-      className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 pt-24 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
