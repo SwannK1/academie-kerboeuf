@@ -29,7 +29,7 @@ export default function TeacherProgrammingPortalPage() {
       <HierarchyCard
         title="Progression de période"
         description="Ordonnez les séquences d'une période en respectant la logique : une séquence pour une compétence."
-        href="/enseignants/programmation/periode"
+        href="/enseignants/progression"
         accent="sky"
       />
     </HierarchyPage>
