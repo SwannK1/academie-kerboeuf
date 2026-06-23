@@ -80,6 +80,8 @@ export default function PrimairePage() {
 
   return (
     <main>
+      <h1 className="sr-only">Primaire</h1>
+
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
