@@ -77,6 +77,7 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   linkedCards?: LinkedCard[];
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
+  bottomSection?: React.ReactNode;
 };
 
 type LinkedCard = {
@@ -182,6 +183,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   linkedCards = [],
   footerLinks,
   cycleLabel = "Cycle 3",
+  bottomSection,
 }: SubjectDetailPageProps<TSubject>) {
   const t = accent[subject.accent] ?? accent.gold;
   const sequenceGroups = groupSequences(sequences);
@@ -358,6 +360,8 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
           </div>
         </section>
       ) : null}
+
+      {bottomSection}
 
       <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
