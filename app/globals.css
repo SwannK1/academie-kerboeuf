@@ -182,6 +182,26 @@ a {
     display: none !important;
   }
 
+  /* ── Teacher tools: dark-theme text/borders are unreadable on the
+     forced white print background, so flatten everything to black
+     text on white with light-gray borders. ── */
+  body.print-teacher-tool * {
+    color: #111111 !important;
+    background-color: transparent !important;
+    border-color: #cccccc !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body.print-teacher-tool button,
+  body.print-teacher-tool select,
+  body.print-teacher-tool input,
+  body.print-teacher-tool textarea,
+  body.print-teacher-tool [role="group"],
+  body.print-teacher-tool [data-print-hide] {
+    display: none !important;
+  }
+
   /* ── Base: white background everywhere ── */
   .mission-detail-page,
   .mission-detail-hero,

@@ -1,10 +1,12 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherPeriodProgressionClient } from "@/components/academy/TeacherPeriodProgressionClient";
 
 export function TeacherPeriodProgression() {
   return (
     <main>
-      <div className="px-4 pt-24 sm:px-6 lg:px-8">
+      <PrintBodyClass className="print-teacher-tool" />
+      <div className="px-4 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb
             items={[
