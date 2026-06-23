@@ -1471,25 +1471,32 @@ export function TeacherCurriculumPlanner() {
       ) : null}
 
       {editingCard ? (
-        <PlanningCardEditor
-          card={editingCard}
-          onClose={() => setEditingKey(null)}
-          onUpdate={(patch) => {
-            if (editingCard.kind === "catalogue") {
-              updateCatalogueAssignment(editingCard.competencyId, patch);
-            } else if (editingCard.freeItemId) {
-              const freePatch: Partial<PlanningFreeItem> = { ...patch };
-              if (patch.title !== undefined) {
-                freePatch.title = patch.title;
+        <>
+          <div
+            aria-hidden="true"
+            onClick={() => setEditingKey(null)}
+            className="fixed inset-0 z-[55] bg-background/40 print:hidden"
+          />
+          <PlanningCardEditor
+            card={editingCard}
+            onClose={() => setEditingKey(null)}
+            onUpdate={(patch) => {
+              if (editingCard.kind === "catalogue") {
+                updateCatalogueAssignment(editingCard.competencyId, patch);
+              } else if (editingCard.freeItemId) {
+                const freePatch: Partial<PlanningFreeItem> = { ...patch };
+                if (patch.title !== undefined) {
+                  freePatch.title = patch.title;
+                }
+                updateFreeItem(editingCard.freeItemId, freePatch);
               }
-              updateFreeItem(editingCard.freeItemId, freePatch);
-            }
-          }}
-          onDelete={() => {
-            removeCard(editingCard);
-            setEditingKey(null);
-          }}
-        />
+            }}
+            onDelete={() => {
+              removeCard(editingCard);
+              setEditingKey(null);
+            }}
+          />
+        </>
       ) : null}
     </div>
   );
@@ -1528,164 +1535,157 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
   }, [onClose]);
 
   return (
-    <>
-      <div
-        aria-hidden="true"
-        onClick={onClose}
-        className="fixed inset-0 z-[55] bg-background/40 print:hidden"
-      />
-      <aside
-        role="dialog"
-        aria-label={`Modifier la carte ${card.title}`}
-        onClick={(event) => event.stopPropagation()}
-        className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
-      >
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Fermer le panneau"
-            className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
-          >
-            ✕
-          </button>
-        </div>
-
-        <dl className="space-y-3 text-sm">
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-muted">Matière</dt>
-            <dd className="font-bold text-foreground">{card.subjectLabel}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-muted">Domaine</dt>
-            <dd className="font-bold text-foreground">{card.domainLabel}</dd>
-          </div>
-        </dl>
-
-        {card.kind === "libre" ? (
-          <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-            Titre
-            <input
-              type="text"
-              defaultValue={card.title}
-              onBlur={(event) => onUpdate({ title: event.target.value })}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-            />
-          </label>
-        ) : (
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-muted">Compétence</dt>
-            <dd className="font-bold text-foreground">{card.title}</dd>
-          </div>
-        )}
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Période
-          <select
-            value={card.period}
-            onChange={(event) => onUpdate({ period: Number(event.target.value) as PlanningPeriodNumber })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          >
-            {planningPeriodNumbers.map((period) => (
-              <option key={period} value={period}>
-                Période {period}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Durée estimée (minutes)
-          <input
-            type="number"
-            min={5}
-            step={5}
-            defaultValue={card.dureeMinutes}
-            onBlur={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Priorité
-          <select
-            value={card.priority}
-            onChange={(event) => onUpdate({ priority: event.target.value as PlanningPriority })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          >
-            {PLANNING_PRIORITIES.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Statut
-          <select
-            value={card.status}
-            onChange={(event) => onUpdate({ status: event.target.value as PlanningStatus })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          >
-            {PLANNING_STATUSES.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Note enseignant
-          <textarea
-            defaultValue={card.teacherNote}
-            onBlur={(event) => onUpdate({ teacherNote: event.target.value })}
-            rows={3}
-            className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Lien vers une ressource réelle (optionnel)
-          <input
-            type="url"
-            defaultValue={card.resourceHref ?? ""}
-            onBlur={(event) => onUpdate({ resourceHref: event.target.value.trim() || undefined })}
-            placeholder="https://…"
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          État de la ressource
-          <select
-            value={card.resourceStatus ?? ""}
-            onChange={(event) =>
-              onUpdate({
-                resourceStatus: (event.target.value || undefined) as PlanningResourceStatus | undefined,
-              })
-            }
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          >
-            <option value="">Non précisé</option>
-            {PLANNING_RESOURCE_STATUSES.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
+    <aside
+      role="dialog"
+      aria-label={`Modifier la carte ${card.title}`}
+      onClick={(event) => event.stopPropagation()}
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
         <button
           type="button"
-          onClick={onDelete}
-          className="mt-auto min-h-11 rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-bold text-ember transition hover:bg-ember/20"
+          onClick={onClose}
+          aria-label="Fermer le panneau"
+          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
-          Retirer la carte
+          ✕
         </button>
-      </aside>
-    </>
+      </div>
+
+      <dl className="space-y-3 text-sm">
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Matière</dt>
+          <dd className="font-bold text-foreground">{card.subjectLabel}</dd>
+        </div>
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Domaine</dt>
+          <dd className="font-bold text-foreground">{card.domainLabel}</dd>
+        </div>
+      </dl>
+
+      {card.kind === "libre" ? (
+        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+          Titre
+          <input
+            type="text"
+            defaultValue={card.title}
+            onBlur={(event) => onUpdate({ title: event.target.value })}
+            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          />
+        </label>
+      ) : (
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Compétence</dt>
+          <dd className="font-bold text-foreground">{card.title}</dd>
+        </div>
+      )}
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Période
+        <select
+          value={card.period}
+          onChange={(event) => onUpdate({ period: Number(event.target.value) as PlanningPeriodNumber })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {planningPeriodNumbers.map((period) => (
+            <option key={period} value={period}>
+              Période {period}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Durée estimée (minutes)
+        <input
+          type="number"
+          min={5}
+          step={5}
+          defaultValue={card.dureeMinutes}
+          onBlur={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Priorité
+        <select
+          value={card.priority}
+          onChange={(event) => onUpdate({ priority: event.target.value as PlanningPriority })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {PLANNING_PRIORITIES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Statut
+        <select
+          value={card.status}
+          onChange={(event) => onUpdate({ status: event.target.value as PlanningStatus })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {PLANNING_STATUSES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Note enseignant
+        <textarea
+          defaultValue={card.teacherNote}
+          onBlur={(event) => onUpdate({ teacherNote: event.target.value })}
+          rows={3}
+          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Lien vers une ressource réelle (optionnel)
+        <input
+          type="url"
+          defaultValue={card.resourceHref ?? ""}
+          onBlur={(event) => onUpdate({ resourceHref: event.target.value.trim() || undefined })}
+          placeholder="https://…"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        État de la ressource
+        <select
+          value={card.resourceStatus ?? ""}
+          onChange={(event) =>
+            onUpdate({
+              resourceStatus: (event.target.value || undefined) as PlanningResourceStatus | undefined,
+            })
+          }
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          <option value="">Non précisé</option>
+          {PLANNING_RESOURCE_STATUSES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <button
+        type="button"
+        onClick={onDelete}
+        className="mt-auto min-h-11 rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-bold text-ember transition hover:bg-ember/20"
+      >
+        Retirer la carte
+      </button>
+    </aside>
   );
 }

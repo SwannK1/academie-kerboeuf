@@ -769,13 +769,20 @@ export function TeacherPeriodProgressionClient() {
       </section>
 
       {selectedCard ? (
-        <CardSidePanel
-          card={selectedCard}
-          subjectLabelById={subjectLabelById}
-          onClose={() => setSelectedId(null)}
-          onUpdate={(patch) => updateCard(selectedCard.id, patch)}
-          onDelete={() => deleteCard(selectedCard.id)}
-        />
+        <>
+          <div
+            aria-hidden="true"
+            onClick={() => setSelectedId(null)}
+            className="fixed inset-0 z-[55] bg-background/40 print:hidden"
+          />
+          <CardSidePanel
+            card={selectedCard}
+            subjectLabelById={subjectLabelById}
+            onClose={() => setSelectedId(null)}
+            onUpdate={(patch) => updateCard(selectedCard.id, patch)}
+            onDelete={() => deleteCard(selectedCard.id)}
+          />
+        </>
       ) : null}
     </div>
   );
@@ -957,185 +964,178 @@ function CardSidePanel({
   }, [onClose]);
 
   return (
-    <>
-      <div
-        aria-hidden="true"
-        onClick={onClose}
-        className="fixed inset-0 z-[55] bg-background/40 print:hidden"
-      />
-      <aside
-        role="dialog"
-        aria-label={`Détails de la carte ${card.competenceLabel}`}
-        onClick={(event) => event.stopPropagation()}
-        className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
-      >
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="text-lg font-black text-foreground">Détails de la carte</h3>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Fermer le panneau"
-            className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
-          >
-            ✕
-          </button>
-        </div>
-
-        <dl className="space-y-3 text-sm">
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-muted">Niveau</dt>
-            <dd className="font-bold text-foreground">{niveauLabel}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-muted">Matière</dt>
-            <dd className="font-bold text-foreground">{matiereLabel}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-bold uppercase tracking-wide text-muted">Compétence</dt>
-            <dd className="font-bold text-foreground">{card.competenceLabel}</dd>
-          </div>
-        </dl>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Statut
-          <select
-            value={card.statut}
-            onChange={(event) => onUpdate({ statut: event.target.value as SequenceStatus })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          >
-            {SEQUENCE_STATUSES.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Objectif
-          <textarea
-            defaultValue={card.objectif ?? ""}
-            onBlur={(event) => onUpdate({ objectif: event.target.value })}
-            rows={2}
-            className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Durée estimée (minutes)
-          <input
-            type="number"
-            min={5}
-            step={5}
-            value={card.dureeMinutes}
-            onChange={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Nombre de séances
-          <input
-            type="number"
-            min={1}
-            step={1}
-            defaultValue={card.nombreSeances ?? 1}
-            onBlur={(event) => onUpdate({ nombreSeances: Number(event.target.value) || 1 })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Traces prévues
-          <input
-            type="text"
-            defaultValue={card.tracesPrevues ?? ""}
-            onBlur={(event) => onUpdate({ tracesPrevues: event.target.value })}
-            placeholder="Ex : cahier du jour, affichage"
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Évaluation prévue
-          <input
-            type="text"
-            defaultValue={card.evaluationPrevue ?? ""}
-            onBlur={(event) => onUpdate({ evaluationPrevue: event.target.value })}
-            placeholder="Ex : exercices d'application, dictée"
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Différenciation
-          <input
-            type="text"
-            defaultValue={card.differenciation ?? ""}
-            onBlur={(event) => onUpdate({ differenciation: event.target.value })}
-            placeholder="Ex : groupe de besoin, étayage"
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-          Note enseignant
-          <textarea
-            defaultValue={card.noteEnseignant ?? ""}
-            onBlur={(event) => onUpdate({ noteEnseignant: event.target.value })}
-            rows={2}
-            className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
-          />
-        </label>
-
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-muted">
-            Imprimables disponibles
-          </p>
-          {card.imprimablesDisponibles.length === 0 ? (
-            <p className="mt-1 text-sm text-muted">Aucun imprimable disponible.</p>
-          ) : (
-            <ul className="mt-1 space-y-1 text-sm">
-              {card.imprimablesDisponibles.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className="font-bold text-jade underline-offset-2 hover:underline"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
-          <button
-            type="button"
-            disabled={!canPrepareLogbook}
-            title={
-              canPrepareLogbook
-                ? undefined
-                : "Renseigner au moins l'objectif pour préparer cette carte"
-            }
-            className="min-h-11 w-full rounded-md border border-white/15 px-4 text-sm font-bold text-muted opacity-60"
-          >
-            Préparer en cahier journal
-          </button>
-          <p className="mt-2 text-xs leading-5 text-muted">
-            La liaison vers le cahier journal sera activée après validation de l&apos;import.
-          </p>
-        </div>
-
+    <aside
+      role="dialog"
+      aria-label={`Détails de la carte ${card.competenceLabel}`}
+      onClick={(event) => event.stopPropagation()}
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="text-lg font-black text-foreground">Détails de la carte</h3>
         <button
           type="button"
-          onClick={onDelete}
-          className="mt-auto min-h-11 rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-bold text-ember transition hover:bg-ember/20"
+          onClick={onClose}
+          aria-label="Fermer le panneau"
+          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
-          Supprimer la carte
+          ✕
         </button>
-      </aside>
-    </>
+      </div>
+
+      <dl className="space-y-3 text-sm">
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Niveau</dt>
+          <dd className="font-bold text-foreground">{niveauLabel}</dd>
+        </div>
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Matière</dt>
+          <dd className="font-bold text-foreground">{matiereLabel}</dd>
+        </div>
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Compétence</dt>
+          <dd className="font-bold text-foreground">{card.competenceLabel}</dd>
+        </div>
+      </dl>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Statut
+        <select
+          value={card.statut}
+          onChange={(event) => onUpdate({ statut: event.target.value as SequenceStatus })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {SEQUENCE_STATUSES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Objectif
+        <textarea
+          defaultValue={card.objectif ?? ""}
+          onBlur={(event) => onUpdate({ objectif: event.target.value })}
+          rows={2}
+          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Durée estimée (minutes)
+        <input
+          type="number"
+          min={5}
+          step={5}
+          value={card.dureeMinutes}
+          onChange={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Nombre de séances
+        <input
+          type="number"
+          min={1}
+          step={1}
+          defaultValue={card.nombreSeances ?? 1}
+          onBlur={(event) => onUpdate({ nombreSeances: Number(event.target.value) || 1 })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Traces prévues
+        <input
+          type="text"
+          defaultValue={card.tracesPrevues ?? ""}
+          onBlur={(event) => onUpdate({ tracesPrevues: event.target.value })}
+          placeholder="Ex : cahier du jour, affichage"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Évaluation prévue
+        <input
+          type="text"
+          defaultValue={card.evaluationPrevue ?? ""}
+          onBlur={(event) => onUpdate({ evaluationPrevue: event.target.value })}
+          placeholder="Ex : exercices d'application, dictée"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Différenciation
+        <input
+          type="text"
+          defaultValue={card.differenciation ?? ""}
+          onBlur={(event) => onUpdate({ differenciation: event.target.value })}
+          placeholder="Ex : groupe de besoin, étayage"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Note enseignant
+        <textarea
+          defaultValue={card.noteEnseignant ?? ""}
+          onBlur={(event) => onUpdate({ noteEnseignant: event.target.value })}
+          rows={2}
+          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wide text-muted">
+          Imprimables disponibles
+        </p>
+        {card.imprimablesDisponibles.length === 0 ? (
+          <p className="mt-1 text-sm text-muted">Aucun imprimable disponible.</p>
+        ) : (
+          <ul className="mt-1 space-y-1 text-sm">
+            {card.imprimablesDisponibles.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="font-bold text-jade underline-offset-2 hover:underline"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
+        <button
+          type="button"
+          disabled={!canPrepareLogbook}
+          title={
+            canPrepareLogbook
+              ? undefined
+              : "Renseigner au moins l'objectif pour préparer cette carte"
+          }
+          className="min-h-11 w-full rounded-md border border-white/15 px-4 text-sm font-bold text-muted opacity-60"
+        >
+          Préparer en cahier journal
+        </button>
+        <p className="mt-2 text-xs leading-5 text-muted">
+          La liaison vers le cahier journal sera activée après validation de l&apos;import.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        onClick={onDelete}
+        className="mt-auto min-h-11 rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-bold text-ember transition hover:bg-ember/20"
+      >
+        Supprimer la carte
+      </button>
+    </aside>
   );
 }
