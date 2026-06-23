@@ -939,6 +939,16 @@ function CardSidePanel({
   onUpdate,
   onDelete,
 }: CardSidePanelProps) {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   const niveauLabel =
     schoolLevels.find((option) => option.id === card.niveau)?.label ?? card.niveau;
   const matiereLabel = subjectLabelById.get(card.matiere) ?? card.matiere;

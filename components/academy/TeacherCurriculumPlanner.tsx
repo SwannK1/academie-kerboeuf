@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   curriculumSubjects,
   getSubjectsForLevel,
@@ -1517,6 +1517,16 @@ interface PlanningCardEditorProps {
 }
 
 function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardEditorProps) {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
   return (
     <aside
       role="dialog"
