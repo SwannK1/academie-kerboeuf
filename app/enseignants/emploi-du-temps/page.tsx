@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
 
 export const metadata: Metadata = {
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 
 export default function TeacherWeeklyTimetablePage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
+      <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

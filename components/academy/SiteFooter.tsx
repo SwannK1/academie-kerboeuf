@@ -15,7 +15,7 @@ const footerSections = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-ink/70 px-4 py-10 sm:px-6 lg:px-8">
+    <footer className="border-t border-white/10 bg-ink/70 px-4 py-10 sm:px-6 lg:px-8 print:hidden">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_auto]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
