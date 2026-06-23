@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherYearlyProgrammation } from "@/components/academy/TeacherYearlyProgrammationClient";
+import { TeacherCurriculumPlanner } from "@/components/academy/TeacherCurriculumPlannerClient";
 
 export const metadata: Metadata = {
   title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
   description:
-    "Choisissez un niveau, puis organisez les séquences de l'année par période.",
+    "Choisissez un niveau, parcourez les matières et domaines du programme, puis organisez les compétences par période.",
 };
 
 export default function TeacherYearlyProgrammationPage() {
@@ -29,12 +29,13 @@ export default function TeacherYearlyProgrammationPage() {
             Programmation annuelle
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, puis organisez les séquences par période.
+            Choisissez un niveau, parcourez les matières et domaines du programme,
+            recherchez une compétence, puis placez-la dans une période de l&apos;année.
           </p>
         </header>
 
         <div className="mt-10">
-          <TeacherYearlyProgrammation />
+          <TeacherCurriculumPlanner />
         </div>
       </div>
     </main>
