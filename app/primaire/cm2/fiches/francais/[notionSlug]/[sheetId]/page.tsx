@@ -62,7 +62,7 @@ export default async function FicheDetailPage({ params }: Props) {
               { label: "Accueil", href: "/" },
               { label: "Primaire", href: "/primaire" },
               { label: "CM2", href: "/primaire/cm2" },
-              { label: "Fiches Français", href: "/primaire/cm2/fiches/francais" },
+              { label: "Fiches Français", href: "/primaire/cm2/matieres/francais" },
               { label: notion.title, href: `/primaire/cm2/fiches/francais/${notion.slug}/${sheetKeys[0]}` },
               { label: sheetLabel },
             ]}
@@ -118,7 +118,7 @@ export default async function FicheDetailPage({ params }: Props) {
           {/* Actions */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
-              href="/primaire/cm2/fiches/francais"
+              href="/primaire/cm2/matieres/francais"
               className="rounded-md border border-white/15 bg-white/[0.05] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-white/10"
             >
               ← Retour au catalogue
