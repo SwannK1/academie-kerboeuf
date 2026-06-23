@@ -23,7 +23,7 @@ export const teacherBackupTools: TeacherBackupToolDefinition[] = [
     id: "programmation-annuelle",
     label: "Programmation annuelle",
     description: "Répartition des compétences sur les périodes de l'année.",
-    storageKey: "academie-kerboeuf-curriculum-planning-v1",
+    storageKey: "academie-kerboeuf-curriculum-planning-v2",
   },
   {
     id: "progression-periode",
@@ -35,7 +35,7 @@ export const teacherBackupTools: TeacherBackupToolDefinition[] = [
     id: "emploi-du-temps",
     label: "Emploi du temps",
     description: "Semaine type et répartition des heures.",
-    storageKey: "academie-kerboeuf-emploi-du-temps-v2",
+    storageKey: "academie-kerboeuf-emploi-du-temps-v3",
   },
   {
     id: "cahier-journal",
