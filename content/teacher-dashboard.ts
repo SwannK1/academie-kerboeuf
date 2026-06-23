@@ -39,6 +39,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "📔",
       },
       {
+        title: "Préparer une séance",
+        description: "Construire une séance complète, puis la réutiliser.",
+        href: "/enseignants/preparer-une-seance",
+        icon: "🧑‍🏫",
+      },
+      {
         title: "Calendrier",
         description: "Visualisez les échéances et les périodes de l'année scolaire.",
         href: "/enseignants/calendrier",
@@ -148,6 +154,13 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         description: "Préparez le dossier à laisser à un remplaçant.",
         href: "/enseignants/dossier-remplacant",
         icon: "📁",
+      },
+      {
+        title: "Sauvegardes locales",
+        description:
+          "Exporter ou restaurer vos outils enseignants sur cet appareil.",
+        href: "/enseignants/sauvegardes",
+        icon: "💾",
       },
     ],
   },

@@ -12,11 +12,28 @@ import {
   schoolLevels,
   curriculumSubjects,
   getSubjectsForLevel,
-  type SchoolLevel,
 } from "@/content/teacher-programming-curriculum";
+import {
+  listPlanningExportItems,
+  type PlanningExportItem,
+} from "@/content/teacher-programmation-planning";
+import {
+  nextCardId,
+  periodNumberFromId,
+  readStoredCards,
+  statusClassName,
+  SEQUENCE_STATUSES,
+  teacherPeriods,
+  writeStoredCards,
+  type PeriodCard,
+  type SequenceStatus,
+  type TeacherLevel,
+  type TeacherPeriod,
+  type TeacherSubjectId,
+} from "@/content/teacher-progression";
 
 /**
- * Progression de période — Kanban V1.
+ * Progression de période — Kanban modulable.
  *
  * Relié à la programmation annuelle (mêmes matières/domaines/compétences,
  * `content/teacher-programming-curriculum.ts`) mais totalement indépendant
@@ -38,144 +55,17 @@ import {
  * jamais de lien fictif ni de PDF inventé.
  */
 
-export type TeacherLevel = SchoolLevel;
-export type TeacherSubjectId = string;
-
-export type TeacherPeriod =
-  | "periode-1"
-  | "periode-2"
-  | "periode-3"
-  | "periode-4"
-  | "periode-5";
-
-export const teacherPeriods: { id: TeacherPeriod; label: string }[] = [
-  { id: "periode-1", label: "Période 1" },
-  { id: "periode-2", label: "Période 2" },
-  { id: "periode-3", label: "Période 3" },
-  { id: "periode-4", label: "Période 4" },
-  { id: "periode-5", label: "Période 5" },
-];
-
-export type SequenceStatus =
-  | "a-prevoir"
-  | "pret"
-  | "en-cours"
-  | "termine"
-  | "a-reprendre";
-
-export const SEQUENCE_STATUSES: { id: SequenceStatus; label: string }[] = [
-  { id: "a-prevoir", label: "À prévoir" },
-  { id: "pret", label: "Prêt" },
-  { id: "en-cours", label: "En cours" },
-  { id: "termine", label: "Terminé" },
-  { id: "a-reprendre", label: "À reprendre" },
-];
-
-const STATUS_STYLES: Record<SequenceStatus, string> = {
-  "a-prevoir": "border-white/20 bg-white/5 text-muted",
-  pret: "border-sky-400/50 bg-sky-400/10 text-sky-300",
-  "en-cours": "border-gold/50 bg-gold/10 text-gold",
-  termine: "border-jade/50 bg-jade/10 text-jade",
-  "a-reprendre": "border-ember/50 bg-ember/10 text-ember",
-};
-
-export interface PeriodCard {
-  id: string;
-  niveau: TeacherLevel;
-  periode: TeacherPeriod;
-  matiere: TeacherSubjectId;
-  domaine: string;
-  /** Identifiant de compétence du catalogue, vide pour une carte libre. */
-  competenceId: string;
-  competenceLabel: string;
-  dureeMinutes: number;
-  statut: SequenceStatus;
-  /**
-   * Référence vers de vrais imprimables disponibles pour cette carte.
-   * Toujours vide aujourd'hui : aucune liaison réelle n'existe entre le
-   * catalogue de compétences et les PDF de leçon par niveau/sous-domaine.
-   */
-  imprimablesDisponibles: { label: string; href: string }[];
-}
-
-type StoredStateV3 = {
-  cards: PeriodCard[];
-};
-
-type StoredStateV2 = {
-  sequences: Array<{
-    id: string;
-    niveau: TeacherLevel;
-    periode: TeacherPeriod;
-    matiere: TeacherSubjectId;
-    domaine: string;
-    competenceId: string;
-    competenceLabel: string;
-    titre?: string;
-    dureeMinutes: number;
-    statut: "a-programmer" | "prevu" | "en-cours" | "termine";
-  }>;
-};
-
-const STORAGE_KEY_V3 = "progression-periode-kanban-v3";
-const STORAGE_KEY_V2 = "progression-periode-v2";
-
-const V2_TO_V3_STATUS: Record<string, SequenceStatus> = {
-  "a-programmer": "a-prevoir",
-  prevu: "pret",
-  "en-cours": "en-cours",
-  termine: "termine",
-};
-
-function readJson<T>(key: string): T | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(key);
-    if (!raw) return null;
-    return JSON.parse(raw) as T;
-  } catch {
-    return null;
-  }
-}
-
-function migrateFromV2(): PeriodCard[] {
-  const v2 = readJson<StoredStateV2>(STORAGE_KEY_V2);
-  if (!v2 || !Array.isArray(v2.sequences) || v2.sequences.length === 0) {
-    return [];
-  }
-  return v2.sequences.map((sequence) => ({
-    id: `migrated-${sequence.id}`,
-    niveau: sequence.niveau,
-    periode: sequence.periode,
-    matiere: sequence.matiere,
-    domaine: sequence.domaine,
-    competenceId: sequence.competenceId,
-    competenceLabel: sequence.competenceLabel,
-    dureeMinutes: sequence.dureeMinutes,
-    statut: V2_TO_V3_STATUS[sequence.statut] ?? "a-prevoir",
-    imprimablesDisponibles: [],
-  }));
-}
-
-function readStoredCards(): PeriodCard[] {
-  const v3 = readJson<StoredStateV3>(STORAGE_KEY_V3);
-  if (v3 && Array.isArray(v3.cards)) return v3.cards;
-  return migrateFromV2();
-}
-
-function writeStoredCards(cards: PeriodCard[]) {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(
-    STORAGE_KEY_V3,
-    JSON.stringify({ cards } satisfies StoredStateV3),
-  );
-}
+export type { TeacherLevel, TeacherPeriod, TeacherSubjectId };
+export { teacherPeriods, SEQUENCE_STATUSES };
+export type { SequenceStatus, PeriodCard };
 
 let cardCounter = 0;
 function nextId(): string {
   cardCounter += 1;
-  return `carte-${Date.now()}-${cardCounter}`;
+  return `${nextCardId()}-${cardCounter}`;
 }
+
+type ImportScope = "all" | "subject";
 
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
@@ -196,6 +86,12 @@ export function TeacherPeriodProgressionClient() {
   const [formCompetenceId, setFormCompetenceId] = useState<string>("");
   const [formCompetenceLibre, setFormCompetenceLibre] = useState("");
   const [formDuree, setFormDuree] = useState(45);
+
+  const [importOpen, setImportOpen] = useState(false);
+  const [importScope, setImportScope] = useState<ImportScope>("all");
+  const [importSubject, setImportSubject] = useState<TeacherSubjectId>("francais");
+  const [importOnlyNew, setImportOnlyNew] = useState(true);
+  const [importSummary, setImportSummary] = useState<string | null>(null);
 
   const formId = useId();
 
@@ -298,6 +194,15 @@ export function TeacherPeriodProgressionClient() {
     () => cards.find((card) => card.id === selectedId) ?? null,
     [cards, selectedId],
   );
+
+  const importPreview = useMemo<PlanningExportItem[]>(() => {
+    const periodNumber = periodNumberFromId(periode);
+    const items = listPlanningExportItems(niveau, periodNumber);
+    if (importScope === "subject") {
+      return items.filter((item) => item.subject === importSubject);
+    }
+    return items;
+  }, [niveau, periode, importScope, importSubject]);
 
   const moveToStatus = useCallback(
     (id: string, targetStatut: SequenceStatus, targetIndex?: number) => {
@@ -414,6 +319,7 @@ export function TeacherPeriodProgressionClient() {
       dureeMinutes: formDuree,
       statut: "a-prevoir",
       imprimablesDisponibles: [],
+      priority: "important",
     };
     setCards((prev) => [...prev, newCard]);
     resetForm();
@@ -433,9 +339,91 @@ export function TeacherPeriodProgressionClient() {
       dureeMinutes: formDuree,
       statut: "a-prevoir",
       imprimablesDisponibles: [],
+      priority: "important",
     };
     setCards((prev) => [...prev, newCard]);
     resetForm();
+  }
+
+  function runImport(overwriteExisting: boolean) {
+    setCards((prev) => {
+      const existingSourceIds = new Set(
+        prev
+          .filter((card) => card.sourceProgrammationId)
+          .map((card) => card.sourceProgrammationId),
+      );
+      const toAdd: PeriodCard[] = [];
+      let updatedCount = 0;
+
+      const working = prev.map((card) => {
+        if (!overwriteExisting || !card.sourceProgrammationId) return card;
+        const item = importPreview.find((entry) => entry.sourceId === card.sourceProgrammationId);
+        if (!item) return card;
+        updatedCount += 1;
+        return {
+          ...card,
+          matiere: item.subject,
+          domaine: item.domain,
+          competenceId: item.competenceId,
+          competenceLabel: item.title,
+          dureeMinutes: item.dureeMinutes,
+          priority: item.priority,
+        };
+      });
+
+      for (const item of importPreview) {
+        if (existingSourceIds.has(item.sourceId)) {
+          continue;
+        }
+        toAdd.push({
+          id: nextId(),
+          niveau: item.level,
+          periode,
+          matiere: item.subject,
+          domaine: item.domain,
+          competenceId: item.competenceId,
+          competenceLabel: item.title,
+          dureeMinutes: item.dureeMinutes,
+          statut: "a-prevoir",
+          imprimablesDisponibles: [],
+          priority: item.priority,
+          sourceProgrammationId: item.sourceId,
+          noteEnseignant: item.teacherNote,
+        });
+      }
+
+      const summaryParts: string[] = [];
+      if (toAdd.length > 0) {
+        summaryParts.push(`${toAdd.length} carte(s) importée(s)`);
+      }
+      if (updatedCount > 0) {
+        summaryParts.push(
+          `${updatedCount} carte(s) déjà importée(s) mise(s) à jour (statut et notes conservés)`,
+        );
+      }
+      setImportSummary(
+        summaryParts.length === 0
+          ? "Aucune nouvelle carte à importer pour cette sélection."
+          : `${summaryParts.join(", ")} depuis la programmation annuelle.`,
+      );
+
+      return [...working, ...toAdd];
+    });
+  }
+
+  function handleImportClick() {
+    const hasExisting = importPreview.some((item) =>
+      cards.some((card) => card.sourceProgrammationId === item.sourceId),
+    );
+    if (!importOnlyNew && hasExisting) {
+      const confirmed = window.confirm(
+        "Des cartes déjà importées existent pour cette sélection. Mettre à jour la matière, la compétence, la durée et la priorité depuis la programmation annuelle ? Le statut et les notes déjà saisis sur ces cartes seront conservés.",
+      );
+      if (!confirmed) return;
+      runImport(true);
+      return;
+    }
+    runImport(false);
   }
 
   return (
@@ -514,9 +502,9 @@ export function TeacherPeriodProgressionClient() {
             onClick={() =>
               setCreationMode((mode) => (mode === "catalogue" ? null : "catalogue"))
             }
-            className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
           >
-            Depuis la programmation annuelle
+            Carte depuis le catalogue
           </button>
           <button
             type="button"
@@ -525,7 +513,67 @@ export function TeacherPeriodProgressionClient() {
           >
             Carte libre
           </button>
+          <button
+            type="button"
+            onClick={() => setImportOpen((open) => !open)}
+            className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+          >
+            Importer depuis la programmation annuelle
+          </button>
         </div>
+
+        {importOpen ? (
+          <div className="mt-4 grid gap-4 rounded-lg border border-jade/30 bg-jade/[0.04] p-4 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+              Portée
+              <select
+                value={importScope}
+                onChange={(event) => setImportScope(event.target.value as ImportScope)}
+                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              >
+                <option value="all">Importer tout</option>
+                <option value="subject">Importer une seule matière</option>
+              </select>
+            </label>
+            {importScope === "subject" ? (
+              <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+                Matière
+                <select
+                  value={importSubject}
+                  onChange={(event) => setImportSubject(event.target.value)}
+                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                >
+                  {subjectsForLevel.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
+            <label className="flex min-h-11 items-center gap-2 text-sm font-bold text-foreground">
+              <input
+                type="checkbox"
+                checked={importOnlyNew}
+                onChange={(event) => setImportOnlyNew(event.target.checked)}
+              />
+              Seulement les éléments non déjà présents
+            </label>
+            <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
+              <button
+                type="button"
+                onClick={handleImportClick}
+                disabled={importPreview.length === 0}
+                className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Importer ({importPreview.length} élément(s) trouvé(s) dans la programmation)
+              </button>
+            </div>
+            {importSummary ? (
+              <p className="text-sm text-muted sm:col-span-2 lg:col-span-4">{importSummary}</p>
+            ) : null}
+          </div>
+        ) : null}
 
         {creationMode === "catalogue" ? (
           <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -860,9 +908,10 @@ function ProgressionCard({
       </h4>
       <p className="mt-1 text-xs font-medium text-muted print:text-black">
         {card.dureeMinutes} min
+        {card.sourceProgrammationId ? " · importée" : ""}
       </p>
       <span
-        className={`mt-2 inline-block rounded-full border px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide ${STATUS_STYLES[card.statut]} print:border-black print:bg-transparent print:text-black`}
+        className={`mt-2 inline-block rounded-full border px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wide ${statusClassName(card.statut)} print:border-black print:bg-transparent print:text-black`}
       >
         {statutLabel}
       </span>
@@ -893,12 +942,15 @@ function CardSidePanel({
   const niveauLabel =
     schoolLevels.find((option) => option.id === card.niveau)?.label ?? card.niveau;
   const matiereLabel = subjectLabelById.get(card.matiere) ?? card.matiere;
+  const canPrepareLogbook = Boolean(
+    card.objectif?.trim() && card.competenceLabel.trim() && card.dureeMinutes > 0,
+  );
 
   return (
     <aside
       role="dialog"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
-      className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Détails de la carte</h3>
@@ -943,6 +995,16 @@ function CardSidePanel({
       </label>
 
       <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Objectif
+        <textarea
+          defaultValue={card.objectif ?? ""}
+          onBlur={(event) => onUpdate({ objectif: event.target.value })}
+          rows={2}
+          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
         Durée estimée (minutes)
         <input
           type="number"
@@ -951,6 +1013,61 @@ function CardSidePanel({
           value={card.dureeMinutes}
           onChange={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
           className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Nombre de séances
+        <input
+          type="number"
+          min={1}
+          step={1}
+          defaultValue={card.nombreSeances ?? 1}
+          onBlur={(event) => onUpdate({ nombreSeances: Number(event.target.value) || 1 })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Traces prévues
+        <input
+          type="text"
+          defaultValue={card.tracesPrevues ?? ""}
+          onBlur={(event) => onUpdate({ tracesPrevues: event.target.value })}
+          placeholder="Ex : cahier du jour, affichage"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Évaluation prévue
+        <input
+          type="text"
+          defaultValue={card.evaluationPrevue ?? ""}
+          onBlur={(event) => onUpdate({ evaluationPrevue: event.target.value })}
+          placeholder="Ex : exercices d'application, dictée"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Différenciation
+        <input
+          type="text"
+          defaultValue={card.differenciation ?? ""}
+          onBlur={(event) => onUpdate({ differenciation: event.target.value })}
+          placeholder="Ex : groupe de besoin, étayage"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Note enseignant
+        <textarea
+          defaultValue={card.noteEnseignant ?? ""}
+          onBlur={(event) => onUpdate({ noteEnseignant: event.target.value })}
+          rows={2}
+          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -974,6 +1091,24 @@ function CardSidePanel({
             ))}
           </ul>
         )}
+      </div>
+
+      <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
+        <button
+          type="button"
+          disabled={!canPrepareLogbook}
+          title={
+            canPrepareLogbook
+              ? undefined
+              : "Renseigner au moins l'objectif pour préparer cette carte"
+          }
+          className="min-h-11 w-full rounded-md border border-white/15 px-4 text-sm font-bold text-muted opacity-60"
+        >
+          Préparer en cahier journal
+        </button>
+        <p className="mt-2 text-xs leading-5 text-muted">
+          La liaison vers le cahier journal sera activée après validation de l&apos;import.
+        </p>
       </div>
 
       <button

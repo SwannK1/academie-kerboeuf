@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
+import { Cm2MathFichesEmbed } from "@/components/academy/Cm2MathFichesEmbed";
+import { Cm2FrancaisFichesEmbed } from "@/components/academy/Cm2FrancaisFichesEmbed";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import {
@@ -50,6 +52,10 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       accentBorder: mission.theme.ringClass ?? "border-white/10",
     }));
 
+  let bottomSection: React.ReactNode = undefined;
+  if (slug === "francais") bottomSection = <Cm2FrancaisFichesEmbed />;
+  else if (slug === "mathematiques") bottomSection = <Cm2MathFichesEmbed />;
+
   return (
     <SubjectDetailPage
       levelLabel="CM2"
@@ -64,10 +70,8 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
-        ...(slug === "mathematiques"
-          ? [{ href: "/primaire/cm2/fiches/mathematiques", label: "Compétences et fiches Mathématiques", tone: "jade" as const }]
-          : []),
       ]}
+      bottomSection={bottomSection}
     />
   );
 }
@@ -88,8 +92,7 @@ function mapCm2Tree(tree: Cm2SubjectNode) {
           title: lesson.title,
           description: lesson.description,
           status: lesson.status,
-          // Pas de page de détail leçon CM2 (app/primaire/cm2/matieres/[slug]/[domain]/[subdomain]/[lesson]
-          // n'existe pas) : ne jamais générer de lien vers cette route absente.
+          // Pas de page de détail leçon CM2 — route [domain]/[subdomain]/[lesson] absente.
           href: undefined,
         })),
       })),
