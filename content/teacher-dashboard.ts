@@ -149,6 +149,13 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/dossier-remplacant",
         icon: "📁",
       },
+      {
+        title: "Sauvegardes locales",
+        description:
+          "Exporter ou restaurer vos outils enseignants sur cet appareil.",
+        href: "/enseignants/sauvegardes",
+        icon: "💾",
+      },
     ],
   },
 ];
