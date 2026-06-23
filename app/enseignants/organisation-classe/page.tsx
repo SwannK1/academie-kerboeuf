@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { TeacherClassroomLayoutClient } from "@/components/teacher-classroom-layout/TeacherClassroomLayoutClient";
 
 export const metadata: Metadata = {
-  title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
+  title: "Plan de classe et groupes | Académie Kerboeuf",
   description:
-    "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
+    "Construisez un plan de classe visuel, placez des étiquettes locales et générez des groupes d'élèves. Aucune donnée sensible, stockage uniquement sur cet appareil.",
 };
 
-export default function TeacherWeeklyTimetablePage() {
+export default function TeacherClassroomLayoutPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
@@ -16,7 +16,7 @@ export default function TeacherWeeklyTimetablePage() {
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Emploi du temps" },
+            { label: "Plan de classe et groupes" },
           ]}
         />
 
@@ -25,17 +25,17 @@ export default function TeacherWeeklyTimetablePage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Emploi du temps hebdomadaire
+            Plan de classe et groupes
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
-            sauvegardé sur cet appareil.
+            Déplacez des tables, choisissez une configuration de salle,
+            créez des étiquettes locales et générez des groupes avec rôles.
+            Cet outil ne contient aucune donnée élève sensible : tout est
+            sauvegardé uniquement sur cet appareil.
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <TeacherClassroomLayoutClient />
       </div>
     </main>
   );

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { SchoolCouncilPlanner } from "@/components/teacher-school-council/SchoolCouncilPlannerClient";
 
 export const metadata: Metadata = {
-  title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
+  title: "Préparer un conseil d'école | Académie Kerboeuf",
   description:
-    "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
+    "Préparez l'ordre du jour, les points à présenter, les décisions et les actions de suivi d'un conseil d'école, sans aucune donnée nominative.",
 };
 
-export default function TeacherWeeklyTimetablePage() {
+export default function SchoolCouncilPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
@@ -16,7 +16,7 @@ export default function TeacherWeeklyTimetablePage() {
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Emploi du temps" },
+            { label: "Conseil d'école" },
           ]}
         />
 
@@ -25,17 +25,19 @@ export default function TeacherWeeklyTimetablePage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Emploi du temps hebdomadaire
+            Préparer un conseil d&apos;école
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
-            sauvegardé sur cet appareil.
+            Organisez l&apos;ordre du jour, les points à présenter, les décisions
+            et les actions de suivi d&apos;un conseil d&apos;école. Aucune donnée
+            nominative n&apos;est demandée : tout reste enregistré localement sur
+            cet appareil.
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <div className="mt-10">
+          <SchoolCouncilPlanner />
+        </div>
       </div>
     </main>
   );

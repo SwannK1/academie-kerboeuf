@@ -70,14 +70,6 @@ const UNIVERSES: Array<{
     accent: "gold",
     status: "available",
   },
-  {
-    label: "Programmation",
-    text: "Calendrier et organisation pédagogique.",
-    href: "/programmation",
-    cta: "Voir",
-    accent: "sky",
-    status: "upcoming",
-  },
 ];
 
 export default function Home() {

@@ -14,6 +14,7 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
+import { getPublicStatusKey } from "@/content/public-status";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -41,6 +42,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
   const linkedCards = (subject.missionSlugs ?? [])
     .map((missionSlug) => getCm2MissionBySlug(missionSlug))
     .filter((mission): mission is NonNullable<typeof mission> => mission !== undefined)
+    .filter((mission) => getPublicStatusKey(mission.status) === "available")
     .map((mission) => ({
       href: `/primaire/cm2/missions/${mission.slug}`,
       eyebrow: mission.subject,

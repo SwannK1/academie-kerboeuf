@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { AssessmentPlanner } from "@/components/teacher-assessment-planner/AssessmentPlanner";
 
 export const metadata: Metadata = {
-  title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
+  title: "Préparer mes évaluations | Académie Kerboeuf",
   description:
-    "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
+    "Organisez vos évaluations de classe : titre, compétence, période, matériel et checklist de préparation, sans stocker de résultat d'élève.",
 };
 
-export default function TeacherWeeklyTimetablePage() {
+export default function TeacherAssessmentPlannerPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
@@ -16,7 +16,7 @@ export default function TeacherWeeklyTimetablePage() {
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Emploi du temps" },
+            { label: "Évaluations" },
           ]}
         />
 
@@ -25,17 +25,19 @@ export default function TeacherWeeklyTimetablePage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Emploi du temps hebdomadaire
+            Préparer mes évaluations
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
-            sauvegardé sur cet appareil.
+            Planifiez vos évaluations de classe : objectif, période, matériel
+            et checklist de préparation. Cet outil sert uniquement à organiser
+            votre préparation — aucun résultat d&apos;élève n&apos;est
+            enregistré. Vos données restent sauvegardées sur cet appareil.
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <div className="mt-10">
+          <AssessmentPlanner />
+        </div>
       </div>
     </main>
   );

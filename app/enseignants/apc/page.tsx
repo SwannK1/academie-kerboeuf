@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { TeacherApcPlanner } from "@/components/teacher-apc-planner/TeacherApcPlanner";
 
 export const metadata: Metadata = {
-  title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
+  title: "Préparer mes APC | Académie Kerboeuf",
   description:
-    "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
+    "Préparez vos séances et cycles d'APC : axe, objectif, période, durée, matériel, déroulé et bilan collectif. Aucun nom d'élève, aucun suivi individuel.",
 };
 
-export default function TeacherWeeklyTimetablePage() {
+export default function TeacherApcPlannerPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
@@ -16,7 +16,7 @@ export default function TeacherWeeklyTimetablePage() {
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Emploi du temps" },
+            { label: "APC" },
           ]}
         />
 
@@ -25,17 +25,19 @@ export default function TeacherWeeklyTimetablePage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Emploi du temps hebdomadaire
+            Préparer mes APC
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
-            sauvegardé sur cet appareil.
+            Organisez vos séances et cycles d&apos;activités pédagogiques
+            complémentaires par axe, période et statut. Cet outil ne stocke
+            aucun nom d&apos;élève, aucune difficulté individuelle et aucun
+            diagnostic. Vos données restent sur cet appareil.
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <div className="mt-10">
+          <TeacherApcPlanner />
+        </div>
       </div>
     </main>
   );

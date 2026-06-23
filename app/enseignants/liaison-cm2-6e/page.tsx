@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { TeacherCm26eTransitionClient } from "@/components/teacher-cm2-6e-transition/TeacherCm26eTransitionClient";
 
 export const metadata: Metadata = {
-  title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
+  title: "Préparer la liaison CM2-6e | Académie Kerboeuf",
   description:
-    "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
+    "Organisez la liaison CM2-6e : checklist par catégorie, rencontres avec ordre du jour et tâches de suivi, bilan général. Données conservées sur cet appareil.",
 };
 
-export default function TeacherWeeklyTimetablePage() {
+export default function TeacherCm26eTransitionPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
@@ -16,7 +16,7 @@ export default function TeacherWeeklyTimetablePage() {
           items={[
             { label: "Accueil", href: "/" },
             { label: "Enseignants", href: "/enseignants" },
-            { label: "Emploi du temps" },
+            { label: "Liaison CM2-6e" },
           ]}
         />
 
@@ -25,17 +25,17 @@ export default function TeacherWeeklyTimetablePage() {
             Espace enseignants
           </p>
           <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
-            Emploi du temps hebdomadaire
+            Préparer la liaison CM2-6e
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
-            Choisissez un niveau, associez une matière à chaque créneau de la
-            semaine et vérifiez le total d’heures par rapport au repère de 24 h
-            hebdomadaires de l’école élémentaire. Votre emploi du temps est
-            sauvegardé sur cet appareil.
+            Organisez la checklist de liaison par catégorie, planifiez les
+            rencontres avec le collège et suivez les tâches qui en découlent.
+            Aucune donnée nominative n’est demandée : votre organisation est
+            sauvegardée sur cet appareil uniquement.
           </p>
         </header>
 
-        <TeacherWeeklyTimetable />
+        <TeacherCm26eTransitionClient />
       </div>
     </main>
   );
