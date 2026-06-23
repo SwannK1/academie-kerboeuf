@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   TEACHER_BACKUP_FORMAT_VERSION,
   teacherBackupTools,
@@ -170,10 +170,9 @@ function mergeArrayValues(
 }
 
 export function TeacherLocalBackupClient() {
-  const [lastBackupDate, setLastBackupDate] = useState<string | null>(() =>
-    readLastBackupDate(),
-  );
-  const [history, setHistory] = useState<HistoryEntry[]>(() => readHistory());
+  const [lastBackupDate, setLastBackupDate] = useState<string | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
   const [selectedToolId, setSelectedToolId] =
     useState<TeacherBackupToolId>("programmation-annuelle");
   const [importError, setImportError] = useState<string | null>(null);
@@ -185,6 +184,14 @@ export function TeacherLocalBackupClient() {
   const [overwriteConfirmPending, setOverwriteConfirmPending] =
     useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Hydration-safe mount read: localStorage must not be read during SSR/first paint.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLastBackupDate(readLastBackupDate());
+    setHistory(readHistory());
+    setIsMounted(true);
+  }, []);
 
   const detectedTools: DetectedTool[] = useMemo(() => {
     if (!pendingFile) return [];
@@ -539,7 +546,9 @@ export function TeacherLocalBackupClient() {
         <h2 className="text-lg font-bold text-foreground">
           Historique local
         </h2>
-        {history.length === 0 ? (
+        {!isMounted ? (
+          <p className="mt-2 text-sm text-muted">Chargement de l&apos;historique…</p>
+        ) : history.length === 0 ? (
           <p className="mt-2 text-sm text-muted">
             Aucune opération enregistrée pour l&apos;instant.
           </p>
