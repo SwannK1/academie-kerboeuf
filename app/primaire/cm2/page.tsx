@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { cm2Level, cm2Missions } from "@/content/cm2";
-import { cm2Subjects, type Cm2Subject } from "@/content/cm2-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 
 export const metadata: Metadata = {
-  title: "CM2 — La Grande Classe des Explorateurs | Académie Kerboeuf",
+  title: "CM2 | Académie Kerboeuf",
   description:
-    "Page niveau CM2 : matières, domaines et missions de la Grande Classe des Explorateurs, guidée par Félix le Lynx.",
+    "Accès direct aux matières CM2 : Français, Mathématiques, Sciences.",
 };
 
 // ── Données UI ─────────────────────────────────────────────────────────────────
+
+const PRIORITY_SLUGS = ["francais", "mathematiques", "sciences"] as const;
 
 const ACCENT: Record<string, { text: string; border: string }> = {
   jade:  { text: "text-jade",  border: "border-jade/30"  },
@@ -23,257 +24,59 @@ const ACCENT: Record<string, { text: string; border: string }> = {
 // ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function Cm2Page() {
-  const missionCount = cm2Missions.length;
+  const prioritySubjects = PRIORITY_SLUGS.map((slug) =>
+    getCm2SubjectBySlug(slug),
+  ).filter((subject) => subject !== undefined);
 
-  return (
-    <main className="cm2-catalog-print">
-      <div className="px-4 pt-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Breadcrumb
-            items={[
-              { label: "Accueil", href: "/" },
-              { label: "Primaire", href: "/primaire" },
-              { label: "CM2" },
-            ]}
-          />
-        </div>
-      </div>
-
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(243,196,91,0.17),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.12),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
-        <div className="mx-auto max-w-7xl">
-          <Link
-            href="/personnages/felix"
-            className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold transition hover:bg-gold/20"
-          >
-            Cycle 3 · {cm2Level.character}, guide du CM2
-          </Link>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
-            CM2 — La Grande Classe<br className="hidden sm:block" /> des Explorateurs
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
-            {cm2Level.description} Le niveau consolide les méthodes du Cycle 3 :
-            lire avec précision, calculer avec stratégie, enquêter dans les
-            documents et préparer l&apos;entrée au collège.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/primaire/cm2/matieres"
-              className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
-            >
-              Explorer les matières CM2
-            </Link>
-            <Link
-              href="/primaire/cm2/parcours"
-              className="rounded-md border border-gold/35 bg-gold/10 px-5 py-3 text-sm font-bold text-gold transition hover:bg-gold hover:text-ink"
-            >
-              Parcours de l&apos;année
-            </Link>
-            <Link
-              href="/primaire/cm2/sequences"
-              className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
-            >
-              Cartographie des séquences
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Matières ──────────────────────────────────────────────────────── */}
-      <section className="px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-                Programmes CM2 · Cycle 3
-              </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-                Matières, domaines et séquences
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-                Chaque matière est structurée en domaines et sous-domaines.
-                Les séquences s&apos;y rattachent progressivement selon les programmes.
-              </p>
-            </div>
-            <Link
-              href="/primaire/cm2/matieres"
-              className="shrink-0 rounded-md border border-jade/30 bg-jade/[0.05] px-4 py-2.5 text-sm font-bold text-jade transition hover:bg-jade/[0.09]"
-            >
-              Voir toutes les matières →
-            </Link>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {cm2Subjects.map((subject) => (
-              <SubjectCard key={subject.slug} subject={subject} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Accès secondaires ─────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-muted">
-            Aller plus loin
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link
-              href="/primaire/cm2/missions"
-              className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                Ressources complémentaires
-              </p>
-              <p className="text-lg font-black text-foreground">
-                Missions pédagogiques CM2
-              </p>
-              <p className="text-sm leading-6 text-muted">
-                {missionCount} missions organisées par domaine, avec statut et
-                supports pédagogiques.
-              </p>
-              <span className="mt-1 text-sm font-black text-muted transition group-hover:translate-x-1 group-hover:text-foreground">
-                Voir les missions →
-              </span>
-            </Link>
-
-            <Link
-              href="/primaire/cm2/parcours"
-              className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
-                Progression de l&apos;année
-              </p>
-              <p className="text-lg font-black text-foreground">
-                Parcours pédagogique CM2
-              </p>
-              <p className="text-sm leading-6 text-muted">
-                Une séquence complète pour installer les compétences étape par
-                étape avec {cm2Level.character}.
-              </p>
-              <span className="mt-1 text-sm font-black text-jade transition group-hover:translate-x-1">
-                Ouvrir le parcours →
-              </span>
-            </Link>
-
-            <Link
-              href="/primaire/cm2/matieres/mathematiques"
-              className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
-                Fiches pédagogiques
-              </p>
-              <p className="text-lg font-black text-foreground">
-                Compétences et fiches CM2 Mathématiques
-              </p>
-              <p className="text-sm leading-6 text-muted">
-                Pour chaque compétence : leçon, consolidation et évaluation.
-                Un parcours clair par domaine mathématique.
-              </p>
-              <span className="mt-1 text-sm font-black text-jade transition group-hover:translate-x-1">
-                Voir les compétences →
-              </span>
-            </Link>
-
-            <Link
-              href="/primaire/cm2/matieres/francais"
-              className="group flex flex-col gap-2 rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:border-jade/45 hover:bg-jade/[0.09]"
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
-                Fiches imprimables
-              </p>
-              <p className="text-lg font-black text-foreground">
-                Fiches Français CM2
-              </p>
-              <p className="text-sm leading-6 text-muted">
-                37 notions : conjugaison, grammaire, orthographe, vocabulaire
-                et lecture. Feuilles découverte, entraînement et évaluation.
-              </p>
-              <span className="mt-1 text-sm font-black text-jade transition group-hover:translate-x-1">
-                Voir les fiches →
-              </span>
-            </Link>
-
-            <Link
-              href="/professeurs/felix"
-              className="group flex flex-col gap-2 rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-white/20 hover:bg-white/[0.07]"
-            >
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                Guide pédagogique
-              </p>
-              <p className="text-lg font-black text-foreground">
-                {cm2Level.character} le Lynx
-              </p>
-              <p className="text-sm leading-6 text-muted">
-                Méthodes, compétences observables et conseils de mise en œuvre
-                pour la classe.
-              </p>
-              <span className="mt-1 text-sm font-black text-muted transition group-hover:translate-x-1 group-hover:text-foreground">
-                Fiche de {cm2Level.character} →
-              </span>
-            </Link>
-          </div>
-        </div>
-      </section>
-    </main>
+  const otherSubjects = cm2Subjects.filter(
+    (subject) => !PRIORITY_SLUGS.includes(subject.slug as (typeof PRIORITY_SLUGS)[number]),
   );
-}
-
-// ── Composants ────────────────────────────────────────────────────────────────
-
-function SubjectCard({ subject }: { subject: Cm2Subject }) {
-  const t = ACCENT[subject.accent];
-  const isAvailable = getPublicStatusKey(subject.status) === "available";
 
   return (
-    <Link
-      href={`/primaire/cm2/matieres/${subject.slug}`}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${
-        isAvailable
-          ? `${t.border} bg-white/[0.04] hover:bg-white/[0.07]`
-          : "border-white/10 bg-white/[0.025] hover:bg-white/[0.04]"
-      }`}
-    >
-      <p
-        className={`text-xs font-bold uppercase tracking-[0.18em] ${
-          isAvailable ? t.text : "text-muted"
-        }`}
-      >
-        {subject.title}
-      </p>
-      <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-        {subject.shortDescription}
-      </p>
+    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <Breadcrumb
+          items={[
+            { label: "Accueil", href: "/" },
+            { label: "Primaire", href: "/primaire" },
+            { label: "CM2" },
+          ]}
+        />
 
-      {subject.domains.length > 0 ? (
-        <ul className="mt-4 space-y-1.5" aria-label="Domaines">
-          {subject.domains.map((domain) => (
-            <li key={domain} className="flex items-start gap-2 text-xs leading-5 text-muted">
-              <span className="mt-0.5 shrink-0 text-white/30" aria-hidden="true">·</span>
-              {domain}
-            </li>
+        <h1 className="mt-6 text-4xl font-black text-foreground sm:text-5xl">
+          CM2
+        </h1>
+        <p className="mt-3 text-base leading-7 text-muted">
+          Choisissez une matière pour accéder directement à ses ressources.
+        </p>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {prioritySubjects.map((subject) => {
+            const t = ACCENT[subject.accent];
+            return (
+              <Link
+                key={subject.slug}
+                href={`/primaire/cm2/matieres/${subject.slug}`}
+                className={`group flex flex-col gap-2 rounded-md border ${t.border} bg-white/[0.04] p-6 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
+              >
+                <p className={`text-lg font-black ${t.text}`}>{subject.title}</p>
+                <span className="mt-2 text-sm font-bold text-muted transition group-hover:translate-x-1 group-hover:text-foreground">
+                  Accéder →
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
+          {otherSubjects.map((subject) => (
+            <span key={subject.slug} className="flex items-center gap-2">
+              <span className="text-sm font-bold text-muted">{subject.title}</span>
+              <PublicStatusBadge status={subject.status} />
+            </span>
           ))}
-        </ul>
-      ) : null}
-
-      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-        <span
-          className={`text-xs font-bold uppercase tracking-[0.12em] ${
-            isAvailable ? t.text : "text-white/25"
-          }`}
-        >
-          {isAvailable ? "Voir les domaines" : "À structurer"}
-        </span>
-        <span
-          className={`text-xs transition group-hover:translate-x-0.5 ${
-            isAvailable ? t.text : "text-white/20"
-          }`}
-          aria-hidden="true"
-        >
-          →
-        </span>
+        </div>
       </div>
-    </Link>
+    </main>
   );
 }
