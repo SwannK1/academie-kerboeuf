@@ -463,10 +463,14 @@ export function TeacherCurriculumPlanner() {
       .map((card) => card.cardKey);
   }
 
-  function reorderInPeriod(targetPeriod: PlanningPeriodNumber, orderedKeys: string[]) {
+  function applyReorder(
+    base: PlanningState,
+    targetPeriod: PlanningPeriodNumber,
+    orderedKeys: string[],
+  ): PlanningState {
     const next: PlanningState = {
-      assignments: { ...planningState.assignments },
-      freeItems: [...planningState.freeItems],
+      assignments: { ...base.assignments },
+      freeItems: [...base.freeItems],
     };
     orderedKeys.forEach((key, index) => {
       const card = planningCards.find((c) => c.cardKey === key);
@@ -482,7 +486,11 @@ export function TeacherCurriculumPlanner() {
         );
       }
     });
-    persist(next);
+    return next;
+  }
+
+  function reorderInPeriod(targetPeriod: PlanningPeriodNumber, orderedKeys: string[]) {
+    persist(applyReorder(planningState, targetPeriod, orderedKeys));
   }
 
   function moveCard(cardKey: string, targetPeriod: PlanningPeriodNumber, beforeKey?: string | null) {
@@ -497,12 +505,15 @@ export function TeacherCurriculumPlanner() {
       if (index !== -1) insertAt = index;
     }
     targetKeys.splice(insertAt, 0, cardKey);
-    reorderInPeriod(targetPeriod, targetKeys);
+
+    let next = applyReorder(planningState, targetPeriod, targetKeys);
 
     if (sourcePeriod !== targetPeriod) {
       const sourceKeys = orderedCardKeysForPeriod(sourcePeriod).filter((key) => key !== cardKey);
-      reorderInPeriod(sourcePeriod, sourceKeys);
+      next = applyReorder(next, sourcePeriod, sourceKeys);
     }
+
+    persist(next);
   }
 
   function moveWithinPeriod(cardKey: string, direction: -1 | 1) {
@@ -615,6 +626,14 @@ export function TeacherCurriculumPlanner() {
       return { period, count: cards.length, dureeTotale };
     });
   }, [planningCards]);
+
+  const cardsWithoutDuration = useMemo(
+    () =>
+      planningCards.filter(
+        (card) => !card.hidden && (!card.dureeMinutes || Number.isNaN(card.dureeMinutes) || card.dureeMinutes <= 0),
+      ),
+    [planningCards],
+  );
 
   const subjectsWithoutCards = useMemo(() => {
     const subjectsWithCards = new Set(
@@ -1428,6 +1447,26 @@ export function TeacherCurriculumPlanner() {
               {overweightPeriods.length} période(s) dépassent {HEAVY_PERIOD_MINUTES_THRESHOLD} minutes de contenu estimé.
             </p>
           ) : null}
+
+          <div className="mt-6 rounded-lg border border-amber/40 bg-amber/10 p-4">
+            <h3 className="text-sm font-black uppercase tracking-[0.08em] text-amber">
+              Cartes sans durée ({cardsWithoutDuration.length})
+            </h3>
+            {cardsWithoutDuration.length === 0 ? (
+              <p className="mt-2 text-sm text-muted">Toutes les cartes ont une durée estimée renseignée.</p>
+            ) : (
+              <ul className="mt-2 space-y-1 text-sm">
+                {cardsWithoutDuration.map((card) => (
+                  <li key={card.cardKey} className="flex flex-wrap items-center gap-2">
+                    <span className="font-bold text-foreground">{card.title}</span>
+                    <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                      Période {card.period}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </section>
       ) : null}
 
@@ -1482,7 +1521,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
     <aside
       role="dialog"
       aria-label={`Modifier la carte ${card.title}`}
-      className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
