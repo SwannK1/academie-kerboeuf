@@ -13,8 +13,27 @@ import {
   teacherProgrammationItems,
   teacherSubjects as legacyTeacherSubjects,
 } from "@/content/teacher-programmation";
-
-const STORAGE_KEY = "academie-kerboeuf-curriculum-planning-v1";
+import {
+  planningPeriodNumbers,
+  PLANNING_PRIORITIES,
+  PLANNING_RESOURCE_STATUSES,
+  PLANNING_STATUSES,
+  nextFreeItemId,
+  readPlanningState,
+  writePlanningState,
+  type PlanningFreeItem,
+  type PlanningPeriodNumber,
+  type PlanningPriority,
+  type PlanningResourceStatus,
+  type PlanningState,
+  type PlanningStatus,
+} from "@/content/teacher-programmation-planning";
+import {
+  nextCardId,
+  readStoredCards,
+  writeStoredCards,
+  type PeriodCard,
+} from "@/content/teacher-progression";
 
 /**
  * Ancienne clé de l'outil de programmation (avant le catalogue enrichi).
@@ -23,23 +42,13 @@ const STORAGE_KEY = "academie-kerboeuf-curriculum-planning-v1";
  * inventée vers le nouveau catalogue.
  */
 const LEGACY_STORAGE_KEY = "academie-kerboeuf-programmation-v1";
-
-/**
- * Liste des anciens éléments explicitement ignorés par l'enseignant.
- * Ne touche jamais à LEGACY_STORAGE_KEY : permet seulement de masquer
- * un élément du bandeau sans rien supprimer.
- */
 const LEGACY_IGNORED_STORAGE_KEY = "academie-kerboeuf-programmation-v1-ignored";
 
 function readIgnoredLegacyIds(): string[] {
-  if (typeof window === "undefined") {
-    return [];
-  }
+  if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(LEGACY_IGNORED_STORAGE_KEY);
-    if (!raw) {
-      return [];
-    }
+    if (!raw) return [];
     const parsed = JSON.parse(raw) as unknown;
     return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "string") : [];
   } catch {
@@ -48,9 +57,7 @@ function readIgnoredLegacyIds(): string[] {
 }
 
 function writeIgnoredLegacyIds(ids: string[]) {
-  if (typeof window === "undefined") {
-    return;
-  }
+  if (typeof window === "undefined") return;
   window.localStorage.setItem(LEGACY_IGNORED_STORAGE_KEY, JSON.stringify(ids));
 }
 
@@ -58,14 +65,10 @@ type LegacyOverride = { period: string; order: number };
 type LegacyOverrides = Record<string, LegacyOverride>;
 
 function readLegacyOverrides(): LegacyOverrides | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
+  if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(LEGACY_STORAGE_KEY);
-    if (!raw) {
-      return null;
-    }
+    if (!raw) return null;
     const parsed = JSON.parse(raw) as unknown;
     if (!parsed || typeof parsed !== "object" || Object.keys(parsed).length === 0) {
       return null;
@@ -86,15 +89,11 @@ type LegacyEntry = {
 };
 
 function buildLegacyEntries(overrides: LegacyOverrides | null): LegacyEntry[] {
-  if (!overrides) {
-    return [];
-  }
+  if (!overrides) return [];
   const entries: LegacyEntry[] = [];
   for (const [id, override] of Object.entries(overrides)) {
     const item = teacherProgrammationItems.find((entry) => entry.id === id);
-    if (!item) {
-      continue;
-    }
+    if (!item) continue;
     entries.push({
       id,
       level: item.level,
@@ -109,86 +108,70 @@ function buildLegacyEntries(overrides: LegacyOverrides | null): LegacyEntry[] {
   return entries;
 }
 
-const periods = [1, 2, 3, 4, 5] as const;
+type PlanningView = "annuelle" | "matiere" | "equilibrer" | "impression";
 
-/**
- * Statut de planification de l'enseignant (à ne pas confondre avec le
- * statut public d'une ressource — c'est ici un suivi de mise en œuvre
- * propre à l'outil de programmation, sans lien avec PublicStatusBadge).
- */
-export type PlanningStatus = "a-programmer" | "prevu" | "en-cours" | "termine";
-
-const planningStatuses: { id: PlanningStatus; label: string; className: string }[] = [
-  { id: "a-programmer", label: "À programmer", className: "border-white/15 bg-white/[0.04] text-muted" },
-  { id: "prevu", label: "Prévu", className: "border-sky/40 bg-sky/10 text-sky" },
-  { id: "en-cours", label: "En cours", className: "border-amber/40 bg-amber/10 text-amber" },
-  { id: "termine", label: "Terminé", className: "border-jade/40 bg-jade/10 text-jade" },
+const PLANNING_VIEWS: { id: PlanningView; label: string }[] = [
+  { id: "annuelle", label: "Vue annuelle" },
+  { id: "matiere", label: "Vue par matière" },
+  { id: "equilibrer", label: "À équilibrer" },
+  { id: "impression", label: "Impression" },
 ];
 
-function nextStatus(status: PlanningStatus): PlanningStatus {
-  const index = planningStatuses.findIndex((s) => s.id === status);
-  return planningStatuses[(index + 1) % planningStatuses.length].id;
-}
-
-type Assignment = {
-  period: number;
-  status: PlanningStatus;
+/** Vue normalisée d'une carte placée, qu'elle soit issue du catalogue ou libre. */
+type PlanningCard = {
+  cardKey: string;
+  kind: "catalogue" | "libre";
+  competencyId: string;
+  freeItemId: string | null;
+  level: SchoolLevel;
+  subjectId: string;
+  subjectLabel: string;
+  domainId: string;
+  domainLabel: string;
+  title: string;
+  period: PlanningPeriodNumber;
   order: number;
+  status: PlanningStatus;
+  priority: PlanningPriority;
+  dureeMinutes: number;
+  teacherNote: string;
+  hidden: boolean;
+  resourceHref?: string;
+  resourceStatus?: PlanningResourceStatus;
 };
 
-type StoredAssignments = Record<string, Assignment>;
-
-function readStoredAssignments(): StoredAssignments {
-  if (typeof window === "undefined") {
-    return {};
-  }
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return {};
-    }
-    const parsed = JSON.parse(raw) as unknown;
-    if (!parsed || typeof parsed !== "object") {
-      return {};
-    }
-    const entries = parsed as Record<string, Partial<Assignment> & { period: number; status: PlanningStatus }>;
-    const normalized: StoredAssignments = {};
-    Object.entries(entries).forEach(([id, value], index) => {
-      normalized[id] = {
-        period: value.period,
-        status: value.status,
-        order: typeof value.order === "number" ? value.order : index,
-      };
-    });
-    return normalized;
-  } catch {
-    return {};
-  }
-}
-
-function writeStoredAssignments(assignments: StoredAssignments) {
-  if (typeof window === "undefined") {
-    return;
-  }
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(assignments));
-}
+const HEAVY_PERIOD_MINUTES_THRESHOLD = 600;
 
 export function TeacherCurriculumPlanner() {
   const [selectedLevel, setSelectedLevel] = useState<SchoolLevel>("cm2");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSubjectId, setActiveSubjectId] = useState<string | null>(null);
   const [activeDomainId, setActiveDomainId] = useState<string | null>(null);
-  const [assignments, setAssignments] = useState<StoredAssignments>(() =>
-    readStoredAssignments(),
-  );
-  const [legacyEntries] = useState<LegacyEntry[]>(() =>
-    buildLegacyEntries(readLegacyOverrides()),
-  );
-  const [ignoredLegacyIds, setIgnoredLegacyIds] = useState<string[]>(() =>
-    readIgnoredLegacyIds(),
-  );
+  const [view, setView] = useState<PlanningView>("annuelle");
+  const [planningState, setPlanningState] = useState<PlanningState>(() => readPlanningState());
+  const [showHidden, setShowHidden] = useState(false);
+  const [editingKey, setEditingKey] = useState<string | null>(null);
+  const [resetConfirm, setResetConfirm] = useState<{ kind: "period"; period: PlanningPeriodNumber } | { kind: "subject"; subject: string } | null>(null);
+
+  const [freeFormOpen, setFreeFormOpen] = useState(false);
+  const [freeTitle, setFreeTitle] = useState("");
+  const [freeSubjectId, setFreeSubjectId] = useState<string>("");
+  const [freeDomain, setFreeDomain] = useState("");
+  const [freePeriod, setFreePeriod] = useState<PlanningPeriodNumber>(1);
+  const [freeDuree, setFreeDuree] = useState(45);
+
+  const [legacyEntries] = useState<LegacyEntry[]>(() => buildLegacyEntries(readLegacyOverrides()));
+  const [ignoredLegacyIds, setIgnoredLegacyIds] = useState<string[]>(() => readIgnoredLegacyIds());
   const [legacyDeletionConfirming, setLegacyDeletionConfirming] = useState(false);
   const [legacyDeleted, setLegacyDeleted] = useState(false);
+
+  const [draggedKey, setDraggedKey] = useState<string | null>(null);
+  const [dragOverPeriod, setDragOverPeriod] = useState<number | null>(null);
+
+  function persist(next: PlanningState) {
+    setPlanningState(next);
+    writePlanningState(next);
+  }
 
   const visibleLegacyEntries = useMemo(
     () => legacyEntries.filter((entry) => !ignoredLegacyIds.includes(entry.id)),
@@ -211,10 +194,7 @@ export function TeacherCurriculumPlanner() {
     setLegacyDeleted(true);
   }
 
-  const subjectsForLevel = useMemo(
-    () => getSubjectsForLevel(selectedLevel),
-    [selectedLevel],
-  );
+  const subjectsForLevel = useMemo(() => getSubjectsForLevel(selectedLevel), [selectedLevel]);
 
   const subjectLabelById = useMemo(() => {
     const map = new Map<string, string>();
@@ -244,9 +224,7 @@ export function TeacherCurriculumPlanner() {
           .filter((domain) => !activeDomainId || domain.id === activeDomainId)
           .flatMap((domain) => domain.competencies),
       )
-      .filter((competency) =>
-        query.length === 0 || competency.label.toLowerCase().includes(query),
-      );
+      .filter((competency) => query.length === 0 || competency.label.toLowerCase().includes(query));
   }, [subjectsForLevel, activeSubjectId, activeDomainId, searchQuery]);
 
   function selectSubject(subjectId: string | null) {
@@ -254,12 +232,6 @@ export function TeacherCurriculumPlanner() {
     setActiveDomainId(null);
   }
 
-  /**
-   * Reprise manuelle d'une ancienne entrée : on amène l'enseignant sur le
-   * bon niveau et on préremplit la recherche avec l'ancien intitulé, pour
-   * qu'il retrouve et place lui-même la compétence correspondante du
-   * nouveau catalogue. Aucune correspondance n'est devinée automatiquement.
-   */
   function resumeLegacyEntry(entry: LegacyEntry) {
     setSelectedLevel(entry.level as SchoolLevel);
     selectSubject(null);
@@ -277,170 +249,409 @@ export function TeacherCurriculumPlanner() {
     return map;
   }, [allCompetenciesForLevel]);
 
-  const assignedIdsForLevel = useMemo(
-    () =>
-      Object.keys(assignments).filter((id) => competencyById.has(id)),
-    [assignments, competencyById],
+  /** Toutes les cartes placées (catalogue + libres) pour le niveau sélectionné. */
+  const planningCards = useMemo<PlanningCard[]>(() => {
+    const cards: PlanningCard[] = [];
+
+    for (const [competencyId, assignment] of Object.entries(planningState.assignments)) {
+      const competency = competencyById.get(competencyId);
+      if (!competency || competency.level !== selectedLevel) continue;
+      cards.push({
+        cardKey: `competence-${competencyId}`,
+        kind: "catalogue",
+        competencyId,
+        freeItemId: null,
+        level: selectedLevel,
+        subjectId: competency.subjectId,
+        subjectLabel: subjectLabelById.get(competency.subjectId) ?? competency.subjectId,
+        domainId: competency.domainId,
+        domainLabel: domainLabelById.get(competency.domainId) ?? competency.domainId,
+        title: competency.label,
+        period: assignment.period,
+        order: assignment.order,
+        status: assignment.status,
+        priority: assignment.priority,
+        dureeMinutes: assignment.dureeMinutes,
+        teacherNote: assignment.teacherNote,
+        hidden: assignment.hidden,
+        resourceHref: assignment.resourceHref,
+        resourceStatus: assignment.resourceStatus,
+      });
+    }
+
+    for (const item of planningState.freeItems) {
+      if (item.level !== selectedLevel) continue;
+      cards.push({
+        cardKey: `libre-${item.id}`,
+        kind: "libre",
+        competencyId: "",
+        freeItemId: item.id,
+        level: item.level,
+        subjectId: item.subject,
+        subjectLabel: item.subjectLabel,
+        domainId: item.domain,
+        domainLabel: item.domain,
+        title: item.title,
+        period: item.period,
+        order: item.order,
+        status: item.status,
+        priority: item.priority,
+        dureeMinutes: item.dureeMinutes,
+        teacherNote: item.teacherNote,
+        hidden: item.hidden,
+        resourceHref: item.resourceHref,
+        resourceStatus: item.resourceStatus,
+      });
+    }
+
+    return cards;
+  }, [planningState, competencyById, selectedLevel, subjectLabelById, domainLabelById]);
+
+  const assignedCompetencyIds = useMemo(
+    () => new Set(planningCards.filter((card) => card.kind === "catalogue").map((card) => card.competencyId)),
+    [planningCards],
   );
 
-  const [draggedId, setDraggedId] = useState<string | null>(null);
-  const [dragOverPeriod, setDragOverPeriod] = useState<number | null>(null);
+  function cardsForPeriod(period: PlanningPeriodNumber) {
+    return planningCards
+      .filter((card) => card.period === period && (showHidden || !card.hidden))
+      .sort((a, b) => a.order - b.order);
+  }
 
-  function maxOrderInPeriod(current: StoredAssignments, period: number, excludeId?: string) {
+  function maxOrderInPeriod(period: PlanningPeriodNumber) {
     let max = -1;
-    for (const [id, assignment] of Object.entries(current)) {
-      if (id === excludeId) continue;
-      if (assignment.period === period && assignment.order > max) {
-        max = assignment.order;
-      }
+    for (const card of planningCards) {
+      if (card.period === period && card.order > max) max = card.order;
     }
     return max;
   }
 
-  function assignToPeriod(competencyId: string, period: number) {
-    setAssignments((current) => {
-      // Une compétence ne peut être placée que dans une seule période :
-      // l'attribution remplace toujours l'éventuelle entrée précédente.
-      const existing = current[competencyId];
-      const order = maxOrderInPeriod(current, period, competencyId) + 1;
-      const next: StoredAssignments = {
-        ...current,
-        [competencyId]: { period, status: existing?.status ?? "a-programmer", order },
-      };
-      writeStoredAssignments(next);
-      return next;
+  function assignToPeriod(competencyId: string, period: PlanningPeriodNumber) {
+    const order = maxOrderInPeriod(period) + 1;
+    const existing = planningState.assignments[competencyId];
+    persist({
+      ...planningState,
+      assignments: {
+        ...planningState.assignments,
+        [competencyId]: {
+          period,
+          status: existing?.status ?? "a-prevoir",
+          order,
+          priority: existing?.priority ?? "important",
+          dureeMinutes: existing?.dureeMinutes ?? 45,
+          teacherNote: existing?.teacherNote ?? "",
+          hidden: false,
+          resourceHref: existing?.resourceHref,
+          resourceStatus: existing?.resourceStatus,
+        },
+      },
     });
   }
 
-  function cycleStatus(competencyId: string) {
-    setAssignments((current) => {
-      const existing = current[competencyId];
-      if (!existing) {
-        return current;
-      }
-      const next: StoredAssignments = {
-        ...current,
-        [competencyId]: { ...existing, status: nextStatus(existing.status) },
-      };
-      writeStoredAssignments(next);
-      return next;
+  function updateCatalogueAssignment(competencyId: string, patch: Partial<PlanningState["assignments"][string]>) {
+    const existing = planningState.assignments[competencyId];
+    if (!existing) return;
+    persist({
+      ...planningState,
+      assignments: {
+        ...planningState.assignments,
+        [competencyId]: { ...existing, ...patch },
+      },
     });
   }
 
   function removeAssignment(competencyId: string) {
-    setAssignments((current) => {
-      const next = { ...current };
-      delete next[competencyId];
-      writeStoredAssignments(next);
-      return next;
+    const next = { ...planningState.assignments };
+    delete next[competencyId];
+    persist({ ...planningState, assignments: next });
+  }
+
+  function updateFreeItem(id: string, patch: Partial<PlanningFreeItem>) {
+    persist({
+      ...planningState,
+      freeItems: planningState.freeItems.map((item) => (item.id === id ? { ...item, ...patch } : item)),
     });
   }
 
-  function competencyBelongsToLevel(competencyId: string, level: SchoolLevel) {
-    return competencyById.has(competencyId) && competencyById.get(competencyId)?.level === level;
+  function removeFreeItem(id: string) {
+    persist({ ...planningState, freeItems: planningState.freeItems.filter((item) => item.id !== id) });
   }
 
-  function orderedIdsForPeriod(current: StoredAssignments, level: SchoolLevel, period: number) {
-    return Object.entries(current)
-      .filter(([id, assignment]) => assignment.period === period && competencyBelongsToLevel(id, level))
-      .sort((a, b) => a[1].order - b[1].order)
-      .map(([id]) => id);
+  function addFreeItem() {
+    if (!freeTitle.trim() || !freeSubjectId) return;
+    const order = maxOrderInPeriod(freePeriod) + 1;
+    const subjectLabel = subjectLabelById.get(freeSubjectId) ?? freeSubjectId;
+    const newItem: PlanningFreeItem = {
+      id: nextFreeItemId(),
+      level: selectedLevel,
+      subject: freeSubjectId,
+      subjectLabel,
+      domain: freeDomain.trim(),
+      title: freeTitle.trim(),
+      period: freePeriod,
+      order,
+      status: "a-prevoir",
+      priority: "important",
+      dureeMinutes: freeDuree,
+      teacherNote: "",
+      hidden: false,
+    };
+    persist({ ...planningState, freeItems: [...planningState.freeItems, newItem] });
+    setFreeTitle("");
+    setFreeDomain("");
+    setFreeFormOpen(false);
   }
 
-  /**
-   * Déplace une compétence vers une période cible, en l'insérant juste avant
-   * `beforeId` (ou en fin de liste si absent). Recalcule les ordres des deux
-   * périodes concernées pour éviter tout doublon de position.
-   */
-  function moveCompetency(competencyId: string, targetPeriod: number, beforeId?: string | null) {
-    setAssignments((current) => {
-      const existing = current[competencyId];
-      if (!existing) {
-        return current;
-      }
+  function duplicateCard(card: PlanningCard) {
+    const order = maxOrderInPeriod(card.period) + 1;
+    const newItem: PlanningFreeItem = {
+      id: nextFreeItemId(),
+      level: card.level,
+      subject: card.subjectId,
+      subjectLabel: card.subjectLabel,
+      domain: card.domainId,
+      title: `${card.title} (copie)`,
+      period: card.period,
+      order,
+      status: "a-prevoir",
+      priority: card.priority,
+      dureeMinutes: card.dureeMinutes,
+      teacherNote: card.teacherNote,
+      hidden: false,
+      resourceHref: card.resourceHref,
+      resourceStatus: card.resourceStatus,
+    };
+    persist({ ...planningState, freeItems: [...planningState.freeItems, newItem] });
+  }
 
-      const sourcePeriod = existing.period;
-      const targetIds = orderedIdsForPeriod(current, selectedLevel, targetPeriod).filter(
-        (id) => id !== competencyId,
-      );
+  function setHidden(card: PlanningCard, hidden: boolean) {
+    if (card.kind === "catalogue") {
+      updateCatalogueAssignment(card.competencyId, { hidden });
+    } else if (card.freeItemId) {
+      updateFreeItem(card.freeItemId, { hidden });
+    }
+  }
 
-      let insertAt = targetIds.length;
-      if (beforeId) {
-        const index = targetIds.indexOf(beforeId);
-        if (index !== -1) {
-          insertAt = index;
+  function setPriority(card: PlanningCard, priority: PlanningPriority) {
+    if (card.kind === "catalogue") {
+      updateCatalogueAssignment(card.competencyId, { priority });
+    } else if (card.freeItemId) {
+      updateFreeItem(card.freeItemId, { priority });
+    }
+  }
+
+  function setStatus(card: PlanningCard, status: PlanningStatus) {
+    if (card.kind === "catalogue") {
+      updateCatalogueAssignment(card.competencyId, { status });
+    } else if (card.freeItemId) {
+      updateFreeItem(card.freeItemId, { status });
+    }
+  }
+
+  function removeCard(card: PlanningCard) {
+    if (card.kind === "catalogue") {
+      removeAssignment(card.competencyId);
+    } else if (card.freeItemId) {
+      removeFreeItem(card.freeItemId);
+    }
+  }
+
+  function orderedCardKeysForPeriod(period: PlanningPeriodNumber) {
+    return planningCards
+      .filter((card) => card.period === period)
+      .sort((a, b) => a.order - b.order)
+      .map((card) => card.cardKey);
+  }
+
+  function applyReorder(
+    base: PlanningState,
+    targetPeriod: PlanningPeriodNumber,
+    orderedKeys: string[],
+  ): PlanningState {
+    const next: PlanningState = {
+      assignments: { ...base.assignments },
+      freeItems: [...base.freeItems],
+    };
+    orderedKeys.forEach((key, index) => {
+      const card = planningCards.find((c) => c.cardKey === key);
+      if (!card) return;
+      if (card.kind === "catalogue") {
+        const existing = next.assignments[card.competencyId];
+        if (existing) {
+          next.assignments[card.competencyId] = { ...existing, period: targetPeriod, order: index };
         }
-      }
-      targetIds.splice(insertAt, 0, competencyId);
-
-      const next: StoredAssignments = { ...current };
-      targetIds.forEach((id, index) => {
-        next[id] = { ...next[id], period: targetPeriod, order: index };
-      });
-
-      if (sourcePeriod !== targetPeriod) {
-        const sourceIds = orderedIdsForPeriod(current, selectedLevel, sourcePeriod).filter(
-          (id) => id !== competencyId,
+      } else if (card.freeItemId) {
+        next.freeItems = next.freeItems.map((item) =>
+          item.id === card.freeItemId ? { ...item, period: targetPeriod, order: index } : item,
         );
-        sourceIds.forEach((id, index) => {
-          next[id] = { ...next[id], order: index };
-        });
       }
-
-      writeStoredAssignments(next);
-      return next;
     });
+    return next;
   }
 
-  function moveWithinPeriod(competencyId: string, direction: -1 | 1) {
-    setAssignments((current) => {
-      const existing = current[competencyId];
-      if (!existing) {
-        return current;
-      }
-      const ids = orderedIdsForPeriod(current, selectedLevel, existing.period);
-      const index = ids.indexOf(competencyId);
-      const targetIndex = index + direction;
-      if (index === -1 || targetIndex < 0 || targetIndex >= ids.length) {
-        return current;
-      }
-      const swapId = ids[targetIndex];
-      const next: StoredAssignments = {
-        ...current,
-        [competencyId]: { ...current[competencyId], order: current[swapId].order },
-        [swapId]: { ...current[swapId], order: current[competencyId].order },
-      };
-      writeStoredAssignments(next);
-      return next;
-    });
+  function reorderInPeriod(targetPeriod: PlanningPeriodNumber, orderedKeys: string[]) {
+    persist(applyReorder(planningState, targetPeriod, orderedKeys));
   }
 
-  function moveToAdjacentPeriod(competencyId: string, direction: -1 | 1) {
-    const existing = assignments[competencyId];
-    if (!existing) {
-      return;
+  function moveCard(cardKey: string, targetPeriod: PlanningPeriodNumber, beforeKey?: string | null) {
+    const card = planningCards.find((c) => c.cardKey === cardKey);
+    if (!card) return;
+    const sourcePeriod = card.period;
+
+    const targetKeys = orderedCardKeysForPeriod(targetPeriod).filter((key) => key !== cardKey);
+    let insertAt = targetKeys.length;
+    if (beforeKey) {
+      const index = targetKeys.indexOf(beforeKey);
+      if (index !== -1) insertAt = index;
     }
-    const targetPeriod = existing.period + direction;
-    if (targetPeriod < periods[0] || targetPeriod > periods[periods.length - 1]) {
-      return;
+    targetKeys.splice(insertAt, 0, cardKey);
+
+    let next = applyReorder(planningState, targetPeriod, targetKeys);
+
+    if (sourcePeriod !== targetPeriod) {
+      const sourceKeys = orderedCardKeysForPeriod(sourcePeriod).filter((key) => key !== cardKey);
+      next = applyReorder(next, sourcePeriod, sourceKeys);
     }
-    moveCompetency(competencyId, targetPeriod);
+
+    persist(next);
   }
 
-  function handleDrop(targetPeriod: number, beforeId: string | null) {
-    if (draggedId) {
-      moveCompetency(draggedId, targetPeriod, beforeId);
+  function moveWithinPeriod(cardKey: string, direction: -1 | 1) {
+    const card = planningCards.find((c) => c.cardKey === cardKey);
+    if (!card) return;
+    const keys = orderedCardKeysForPeriod(card.period);
+    const index = keys.indexOf(cardKey);
+    const targetIndex = index + direction;
+    if (index === -1 || targetIndex < 0 || targetIndex >= keys.length) return;
+    [keys[index], keys[targetIndex]] = [keys[targetIndex], keys[index]];
+    reorderInPeriod(card.period, keys);
+  }
+
+  function moveToAdjacentPeriod(cardKey: string, direction: -1 | 1) {
+    const card = planningCards.find((c) => c.cardKey === cardKey);
+    if (!card) return;
+    const targetPeriod = (card.period + direction) as PlanningPeriodNumber;
+    if (targetPeriod < 1 || targetPeriod > 5) return;
+    moveCard(cardKey, targetPeriod);
+  }
+
+  function handleDrop(targetPeriod: PlanningPeriodNumber, beforeKey: string | null) {
+    if (draggedKey) {
+      moveCard(draggedKey, targetPeriod, beforeKey);
     }
-    setDraggedId(null);
+    setDraggedKey(null);
     setDragOverPeriod(null);
   }
+
+  function sendCardToProgression(card: PlanningCard) {
+    const periodId = `periode-${card.period}` as const;
+    const cards = readStoredCards();
+    const sourceId = card.cardKey;
+    const existing = cards.find((c) => c.sourceProgrammationId === sourceId);
+    if (existing) {
+      const updated = cards.map((c) =>
+        c.id === existing.id
+          ? {
+              ...c,
+              matiere: card.subjectId,
+              domaine: card.domainId,
+              competenceLabel: card.title,
+              dureeMinutes: card.dureeMinutes,
+              priority: card.priority,
+              noteEnseignant: card.teacherNote,
+            }
+          : c,
+      );
+      writeStoredCards(updated);
+      return;
+    }
+    const newCard: PeriodCard = {
+      id: nextCardId(),
+      niveau: card.level,
+      periode: periodId,
+      matiere: card.subjectId,
+      domaine: card.domainId,
+      competenceId: card.competencyId,
+      competenceLabel: card.title,
+      dureeMinutes: card.dureeMinutes,
+      statut: "a-prevoir",
+      imprimablesDisponibles: [],
+      priority: card.priority,
+      sourceProgrammationId: sourceId,
+      noteEnseignant: card.teacherNote,
+    };
+    writeStoredCards([...cards, newCard]);
+  }
+
+  function resetPeriod(period: PlanningPeriodNumber) {
+    const nextAssignments = { ...planningState.assignments };
+    for (const [id, assignment] of Object.entries(nextAssignments)) {
+      const competency = competencyById.get(id);
+      if (competency && competency.level === selectedLevel && assignment.period === period) {
+        delete nextAssignments[id];
+      }
+    }
+    const nextFreeItems = planningState.freeItems.filter(
+      (item) => !(item.level === selectedLevel && item.period === period),
+    );
+    persist({ assignments: nextAssignments, freeItems: nextFreeItems });
+    setResetConfirm(null);
+  }
+
+  function resetSubject(subjectId: string) {
+    const nextAssignments = { ...planningState.assignments };
+    for (const id of Object.keys(nextAssignments)) {
+      const competency = competencyById.get(id);
+      if (competency && competency.level === selectedLevel && competency.subjectId === subjectId) {
+        delete nextAssignments[id];
+      }
+    }
+    const nextFreeItems = planningState.freeItems.filter(
+      (item) => !(item.level === selectedLevel && item.subject === subjectId),
+    );
+    persist({ assignments: nextAssignments, freeItems: nextFreeItems });
+    setResetConfirm(null);
+  }
+
+  const editingCard = useMemo(
+    () => planningCards.find((card) => card.cardKey === editingKey) ?? null,
+    [planningCards, editingKey],
+  );
+
+  // --- Vue "à équilibrer" -----------------------------------------------
+  const periodStats = useMemo(() => {
+    return planningPeriodNumbers.map((period) => {
+      const cards = planningCards.filter((card) => card.period === period && !card.hidden);
+      const dureeTotale = cards.reduce((sum, card) => sum + card.dureeMinutes, 0);
+      return { period, count: cards.length, dureeTotale };
+    });
+  }, [planningCards]);
+
+  const cardsWithoutDuration = useMemo(
+    () =>
+      planningCards.filter(
+        (card) => !card.hidden && (!card.dureeMinutes || Number.isNaN(card.dureeMinutes) || card.dureeMinutes <= 0),
+      ),
+    [planningCards],
+  );
+
+  const subjectsWithoutCards = useMemo(() => {
+    const subjectsWithCards = new Set(
+      planningCards.filter((card) => !card.hidden).map((card) => card.subjectId),
+    );
+    return subjectsForLevel.filter((subject) => !subjectsWithCards.has(subject.id));
+  }, [planningCards, subjectsForLevel]);
+
+  const unplacedCompetenciesCount = allCompetenciesForLevel.length - assignedCompetencyIds.size;
+
+  const overweightPeriods = periodStats.filter((stat) => stat.dureeTotale > HEAVY_PERIOD_MINUTES_THRESHOLD);
 
   return (
     <div>
       {legacyEntries.length > 0 && !legacyDeleted ? (
         <section
           aria-labelledby="ancienne-programmation-titre"
-          className="mb-8 rounded-lg border border-amber/40 bg-amber/10 p-5"
+          className="mb-8 rounded-lg border border-amber/40 bg-amber/10 p-5 print:hidden"
         >
           <h2 id="ancienne-programmation-titre" className="text-lg font-black text-amber">
             Ancienne programmation détectée
@@ -527,7 +738,7 @@ export function TeacherCurriculumPlanner() {
         </section>
       ) : null}
 
-      <section aria-labelledby="planificateur-niveau-titre">
+      <section aria-labelledby="planificateur-niveau-titre" className="print:hidden">
         <h2 id="planificateur-niveau-titre" className="text-xl font-black text-foreground">
           Choisir un niveau
         </h2>
@@ -557,352 +768,906 @@ export function TeacherCurriculumPlanner() {
         </div>
       </section>
 
-      <section aria-labelledby="planificateur-matieres-titre" className="mt-8">
-        <h2 id="planificateur-matieres-titre" className="text-xl font-black text-foreground">
-          Matières
+      <section aria-labelledby="planificateur-vues-titre" className="mt-8 print:hidden">
+        <h2 id="planificateur-vues-titre" className="text-xl font-black text-foreground">
+          Vues
         </h2>
-        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Matières">
-          <button
-            type="button"
-            onClick={() => selectSubject(null)}
-            aria-pressed={activeSubjectId === null}
-            className={[
-              "min-h-11 rounded-md border px-4 text-sm font-bold transition",
-              activeSubjectId === null
-                ? "border-sky/60 bg-sky/10 text-sky"
-                : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
-            ].join(" ")}
-          >
-            Toutes
-          </button>
-          {subjectsForLevel.map((subject) => (
+        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Vues de la programmation">
+          {PLANNING_VIEWS.map((option) => (
             <button
-              key={subject.id}
+              key={option.id}
               type="button"
-              onClick={() => selectSubject(subject.id)}
-              aria-pressed={activeSubjectId === subject.id}
+              onClick={() => setView(option.id)}
+              aria-pressed={view === option.id}
               className={[
                 "min-h-11 rounded-md border px-4 text-sm font-bold transition",
-                activeSubjectId === subject.id
+                view === option.id
                   ? "border-sky/60 bg-sky/10 text-sky"
                   : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
               ].join(" ")}
             >
-              {subject.label}
+              {option.label}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+          >
+            Imprimer
+          </button>
+          <label className="flex min-h-11 items-center gap-2 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground">
+            <input
+              type="checkbox"
+              checked={showHidden}
+              onChange={(event) => setShowHidden(event.target.checked)}
+            />
+            Voir les cartes masquées
+          </label>
         </div>
+      </section>
 
-        {activeSubject ? (
-          <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Domaines">
-            <button
-              type="button"
-              onClick={() => setActiveDomainId(null)}
-              aria-pressed={activeDomainId === null}
-              className={[
-                "min-h-9 rounded border px-3 text-xs font-bold transition",
-                activeDomainId === null
-                  ? "border-jade/50 bg-jade/10 text-jade"
-                  : "border-white/10 bg-white/[0.03] text-muted hover:border-jade/30",
-              ].join(" ")}
-            >
-              Tous les domaines
-            </button>
-            {activeSubject.domains.map((domain) => (
+      {view === "annuelle" || view === "impression" ? (
+        <>
+          <section aria-labelledby="planificateur-matieres-titre" className="mt-8 print:hidden">
+            <h2 id="planificateur-matieres-titre" className="text-xl font-black text-foreground">
+              Matières
+            </h2>
+            <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Matières">
               <button
-                key={domain.id}
                 type="button"
-                onClick={() => setActiveDomainId(domain.id)}
-                aria-pressed={activeDomainId === domain.id}
+                onClick={() => selectSubject(null)}
+                aria-pressed={activeSubjectId === null}
                 className={[
-                  "min-h-9 rounded border px-3 text-xs font-bold transition",
-                  activeDomainId === domain.id
-                    ? "border-jade/50 bg-jade/10 text-jade"
-                    : "border-white/10 bg-white/[0.03] text-muted hover:border-jade/30",
+                  "min-h-11 rounded-md border px-4 text-sm font-bold transition",
+                  activeSubjectId === null
+                    ? "border-sky/60 bg-sky/10 text-sky"
+                    : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
                 ].join(" ")}
               >
-                {domain.label}
+                Toutes
               </button>
-            ))}
-          </div>
-        ) : null}
-      </section>
-
-      <section aria-labelledby="planificateur-recherche-titre" className="mt-8">
-        <h2 id="planificateur-recherche-titre" className="text-xl font-black text-foreground">
-          Rechercher une compétence
-        </h2>
-        <input
-          type="search"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-          placeholder="Ex : conjuguer, fractions, frise chronologique…"
-          aria-label="Rechercher une compétence"
-          className="mt-4 min-h-11 w-full max-w-xl rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm text-foreground placeholder:text-muted focus:border-jade/50 focus:outline-none"
-        />
-      </section>
-
-      <section aria-labelledby="planificateur-resultats-titre" className="mt-8">
-        <h2 id="planificateur-resultats-titre" className="text-xl font-black text-foreground">
-          Compétences ({visibleCompetencies.length})
-        </h2>
-
-        {visibleCompetencies.length === 0 ? (
-          <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
-            Aucune compétence ne correspond à cette recherche.
-          </p>
-        ) : (
-          <ul className="mt-4 grid gap-3 lg:grid-cols-2">
-            {visibleCompetencies.map((competency) => {
-              const assignment = assignments[competency.id];
-              return (
-                <li
-                  key={competency.id}
-                  className="rounded-md border border-white/10 bg-white/[0.03] p-3"
-                >
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
-                      {schoolLevels.find((l) => l.id === competency.level)?.label}
-                    </span>
-                    <span className="rounded border border-white/15 px-2 py-0.5 text-xs text-muted">
-                      {competency.cycle === "cycle-2" ? "Cycle 2" : "Cycle 3"}
-                    </span>
-                    <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
-                      {subjectLabelById.get(competency.subjectId)}
-                    </span>
-                    <span className="text-xs text-muted">
-                      {domainLabelById.get(competency.domainId)}
-                    </span>
-                  </div>
-
-                  <p className="mt-2 text-sm font-bold text-foreground">{competency.label}</p>
-
-                  <div className="mt-3 flex flex-wrap items-center gap-2">
-                    {assignment ? (
-                      <>
-                        <span className="text-xs text-muted">
-                          Période {assignment.period}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => cycleStatus(competency.id)}
-                          className={[
-                            "min-h-9 rounded border px-2.5 text-xs font-bold uppercase tracking-[0.1em] transition",
-                            planningStatuses.find((s) => s.id === assignment.status)?.className,
-                          ].join(" ")}
-                        >
-                          {planningStatuses.find((s) => s.id === assignment.status)?.label}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => removeAssignment(competency.id)}
-                          className="min-h-9 rounded border border-white/15 px-2.5 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
-                        >
-                          Retirer
-                        </button>
-                      </>
-                    ) : (
-                      <label className="flex items-center gap-2 text-xs text-muted">
-                        Ajouter à
-                        <select
-                          defaultValue=""
-                          onChange={(event) => {
-                            const period = Number(event.target.value);
-                            if (period) {
-                              assignToPeriod(competency.id, period);
-                            }
-                          }}
-                          aria-label={`Ajouter ${competency.label} à une période`}
-                          className="min-h-9 rounded border border-white/15 bg-white/[0.04] px-2 text-xs text-foreground focus:border-jade/50 focus:outline-none"
-                        >
-                          <option value="" disabled>
-                            Choisir une période
-                          </option>
-                          {periods.map((period) => (
-                            <option key={period} value={period}>
-                              Période {period}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </section>
-
-      <section aria-labelledby="planificateur-periodes-titre" className="mt-10">
-        <h2 id="planificateur-periodes-titre" className="text-xl font-black text-foreground">
-          Programmation par période
-        </h2>
-
-        {assignedIdsForLevel.length === 0 ? (
-          <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
-            Aucune compétence n&apos;est encore placée dans une période pour ce niveau.
-          </p>
-        ) : (
-          <div className="mt-4 grid gap-4 lg:grid-cols-5">
-            {periods.map((period) => {
-              const periodCompetencyIds = assignedIdsForLevel
-                .filter((id) => assignments[id]?.period === period)
-                .sort((a, b) => assignments[a].order - assignments[b].order);
-              const isDragOver = dragOverPeriod === period;
-
-              return (
-                <section
-                  key={period}
-                  aria-labelledby={`periode-${period}-titre`}
+              {subjectsForLevel.map((subject) => (
+                <button
+                  key={subject.id}
+                  type="button"
+                  onClick={() => selectSubject(subject.id)}
+                  aria-pressed={activeSubjectId === subject.id}
                   className={[
-                    "flex flex-col rounded-lg border bg-background/40 p-3 transition",
-                    isDragOver ? "border-jade/60 bg-jade/5" : "border-white/10",
+                    "min-h-11 rounded-md border px-4 text-sm font-bold transition",
+                    activeSubjectId === subject.id
+                      ? "border-sky/60 bg-sky/10 text-sky"
+                      : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
                   ].join(" ")}
-                  onDragOver={(event) => {
-                    event.preventDefault();
-                    setDragOverPeriod(period);
-                  }}
-                  onDragLeave={() => setDragOverPeriod((current) => (current === period ? null : current))}
-                  onDrop={(event) => {
-                    event.preventDefault();
-                    handleDrop(period, null);
-                  }}
                 >
-                  <h3
-                    id={`periode-${period}-titre`}
-                    className="text-sm font-black uppercase tracking-[0.1em] text-foreground"
-                  >
-                    Période {period}
-                  </h3>
+                  {subject.label}
+                </button>
+              ))}
+            </div>
 
-                  <ul className="mt-3 flex flex-1 flex-col gap-2">
-                    {periodCompetencyIds.length === 0 ? (
+            {activeSubject ? (
+              <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Domaines">
+                <button
+                  type="button"
+                  onClick={() => setActiveDomainId(null)}
+                  aria-pressed={activeDomainId === null}
+                  className={[
+                    "min-h-9 rounded border px-3 text-xs font-bold transition",
+                    activeDomainId === null
+                      ? "border-jade/50 bg-jade/10 text-jade"
+                      : "border-white/10 bg-white/[0.03] text-muted hover:border-jade/30",
+                  ].join(" ")}
+                >
+                  Tous les domaines
+                </button>
+                {activeSubject.domains.map((domain) => (
+                  <button
+                    key={domain.id}
+                    type="button"
+                    onClick={() => setActiveDomainId(domain.id)}
+                    aria-pressed={activeDomainId === domain.id}
+                    className={[
+                      "min-h-9 rounded border px-3 text-xs font-bold transition",
+                      activeDomainId === domain.id
+                        ? "border-jade/50 bg-jade/10 text-jade"
+                        : "border-white/10 bg-white/[0.03] text-muted hover:border-jade/30",
+                    ].join(" ")}
+                  >
+                    {domain.label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </section>
+
+          {view === "annuelle" ? (
+            <section aria-labelledby="planificateur-recherche-titre" className="mt-8 print:hidden">
+              <h2 id="planificateur-recherche-titre" className="text-xl font-black text-foreground">
+                Rechercher une compétence
+              </h2>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Ex : conjuguer, fractions, frise chronologique…"
+                aria-label="Rechercher une compétence"
+                className="mt-4 min-h-11 w-full max-w-xl rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm text-foreground placeholder:text-muted focus:border-jade/50 focus:outline-none"
+              />
+            </section>
+          ) : null}
+
+          {view === "annuelle" ? (
+            <section aria-labelledby="planificateur-resultats-titre" className="mt-8 print:hidden">
+              <h2 id="planificateur-resultats-titre" className="text-xl font-black text-foreground">
+                Compétences ({visibleCompetencies.length})
+              </h2>
+
+              {visibleCompetencies.length === 0 ? (
+                <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+                  Aucune compétence ne correspond à cette recherche.
+                </p>
+              ) : (
+                <ul className="mt-4 grid gap-3 lg:grid-cols-2">
+                  {visibleCompetencies.map((competency) => {
+                    const isAssigned = assignedCompetencyIds.has(competency.id);
+                    return (
                       <li
-                        className={[
-                          "rounded border border-dashed p-3 text-xs leading-6 text-muted transition",
-                          isDragOver ? "border-jade/50 bg-jade/5 text-jade" : "border-white/15",
-                        ].join(" ")}
+                        key={competency.id}
+                        className="rounded-md border border-white/10 bg-white/[0.03] p-3"
                       >
-                        {isDragOver
-                          ? "Déposer ici pour ajouter à cette période"
-                          : "Aucune compétence dans cette période."}
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
+                            {schoolLevels.find((l) => l.id === competency.level)?.label}
+                          </span>
+                          <span className="rounded border border-white/15 px-2 py-0.5 text-xs text-muted">
+                            {competency.cycle === "cycle-2" ? "Cycle 2" : "Cycle 3"}
+                          </span>
+                          <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
+                            {subjectLabelById.get(competency.subjectId)}
+                          </span>
+                          <span className="text-xs text-muted">{domainLabelById.get(competency.domainId)}</span>
+                        </div>
+
+                        <p className="mt-2 text-sm font-bold text-foreground">{competency.label}</p>
+
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                          {isAssigned ? (
+                            <span className="text-xs text-muted">
+                              Déjà placée — voir la programmation par période ci-dessous
+                            </span>
+                          ) : (
+                            <label className="flex items-center gap-2 text-xs text-muted">
+                              Ajouter à
+                              <select
+                                defaultValue=""
+                                onChange={(event) => {
+                                  const period = Number(event.target.value) as PlanningPeriodNumber;
+                                  if (period) {
+                                    assignToPeriod(competency.id, period);
+                                  }
+                                }}
+                                aria-label={`Ajouter ${competency.label} à une période`}
+                                className="min-h-9 rounded border border-white/15 bg-white/[0.04] px-2 text-xs text-foreground focus:border-jade/50 focus:outline-none"
+                              >
+                                <option value="" disabled>
+                                  Choisir une période
+                                </option>
+                                {planningPeriodNumbers.map((period) => (
+                                  <option key={period} value={period}>
+                                    Période {period}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                          )}
+                        </div>
                       </li>
-                    ) : (
-                      periodCompetencyIds.map((id, index) => {
-                        const competency = competencyById.get(id);
-                        const assignment = assignments[id];
-                        if (!competency || !assignment) {
-                          return null;
-                        }
-                        const isFirst = index === 0;
-                        const isLast = index === periodCompetencyIds.length - 1;
-                        const isFirstPeriod = period === periods[0];
-                        const isLastPeriod = period === periods[periods.length - 1];
-                        return (
+                    );
+                  })}
+                </ul>
+              )}
+            </section>
+          ) : null}
+
+          {view === "annuelle" ? (
+            <section aria-labelledby="planificateur-carte-libre-titre" className="mt-8 print:hidden">
+              <h2 id="planificateur-carte-libre-titre" className="text-xl font-black text-foreground">
+                Carte libre
+              </h2>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => setFreeFormOpen((open) => !open)}
+                  className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+                >
+                  Ajouter une carte
+                </button>
+              </div>
+              {freeFormOpen ? (
+                <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+                  <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
+                    Titre
+                    <input
+                      type="text"
+                      value={freeTitle}
+                      onChange={(event) => setFreeTitle(event.target.value)}
+                      placeholder="Ex : Atelier production d'écrits"
+                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+                    Matière
+                    <select
+                      value={freeSubjectId}
+                      onChange={(event) => setFreeSubjectId(event.target.value)}
+                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    >
+                      <option value="">Choisir</option>
+                      {subjectsForLevel.map((subject) => (
+                        <option key={subject.id} value={subject.id}>
+                          {subject.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+                    Domaine (libre)
+                    <input
+                      type="text"
+                      value={freeDomain}
+                      onChange={(event) => setFreeDomain(event.target.value)}
+                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+                    Période
+                    <select
+                      value={freePeriod}
+                      onChange={(event) => setFreePeriod(Number(event.target.value) as PlanningPeriodNumber)}
+                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    >
+                      {planningPeriodNumbers.map((period) => (
+                        <option key={period} value={period}>
+                          Période {period}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+                    Durée estimée (minutes)
+                    <input
+                      type="number"
+                      min={5}
+                      step={5}
+                      value={freeDuree}
+                      onChange={(event) => setFreeDuree(Number(event.target.value) || 0)}
+                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    />
+                  </label>
+                  <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
+                    <button
+                      type="button"
+                      onClick={addFreeItem}
+                      disabled={!freeTitle.trim() || !freeSubjectId}
+                      className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Ajouter la carte
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+            </section>
+          ) : null}
+
+          <section aria-labelledby="planificateur-periodes-titre" className="mt-10">
+            <h2 id="planificateur-periodes-titre" className="text-xl font-black text-foreground print:text-black">
+              Programmation par période
+            </h2>
+
+            {planningCards.length === 0 ? (
+              <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+                Aucune compétence n&apos;est encore placée dans une période pour ce niveau.
+              </p>
+            ) : (
+              <div className="mt-4 grid gap-4 lg:grid-cols-5 print:grid-cols-1 print:gap-2">
+                {planningPeriodNumbers.map((period) => {
+                  const periodCards = cardsForPeriod(period);
+                  const isDragOver = dragOverPeriod === period;
+
+                  return (
+                    <section
+                      key={period}
+                      aria-labelledby={`periode-${period}-titre`}
+                      className={[
+                        "flex flex-col rounded-lg border bg-background/40 p-3 transition print:break-inside-avoid print:border-black print:bg-transparent",
+                        isDragOver ? "border-jade/60 bg-jade/5" : "border-white/10",
+                      ].join(" ")}
+                      onDragOver={(event) => {
+                        event.preventDefault();
+                        setDragOverPeriod(period);
+                      }}
+                      onDragLeave={() => setDragOverPeriod((current) => (current === period ? null : current))}
+                      onDrop={(event) => {
+                        event.preventDefault();
+                        handleDrop(period, null);
+                      }}
+                    >
+                      <div className="flex items-center justify-between print:hidden">
+                        <h3
+                          id={`periode-${period}-titre`}
+                          className="text-sm font-black uppercase tracking-[0.1em] text-foreground"
+                        >
+                          Période {period}
+                        </h3>
+                        <button
+                          type="button"
+                          onClick={() => setResetConfirm({ kind: "period", period })}
+                          className="text-[11px] font-bold text-muted underline-offset-2 hover:text-rose hover:underline"
+                        >
+                          Réinitialiser
+                        </button>
+                      </div>
+                      <h3 className="hidden text-sm font-black uppercase tracking-[0.1em] text-black print:block">
+                        Période {period}
+                      </h3>
+
+                      {resetConfirm?.kind === "period" && resetConfirm.period === period ? (
+                        <div className="mt-2 flex flex-wrap items-center gap-2 rounded border border-rose/40 bg-rose/10 p-2 text-xs print:hidden">
+                          <span className="font-bold text-rose">Vider la période {period} ?</span>
+                          <button
+                            type="button"
+                            onClick={() => resetPeriod(period)}
+                            className="rounded border border-rose/50 px-2 py-1 font-bold text-rose hover:bg-rose/10"
+                          >
+                            Confirmer
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setResetConfirm(null)}
+                            className="rounded border border-white/15 px-2 py-1 font-bold text-muted hover:border-white/30"
+                          >
+                            Annuler
+                          </button>
+                        </div>
+                      ) : null}
+
+                      <ul className="mt-3 flex flex-1 flex-col gap-2">
+                        {periodCards.length === 0 ? (
                           <li
-                            key={id}
-                            draggable
-                            onDragStart={() => setDraggedId(id)}
-                            onDragEnd={() => {
-                              setDraggedId(null);
-                              setDragOverPeriod(null);
-                            }}
-                            onDragOver={(event) => {
-                              event.preventDefault();
-                              event.stopPropagation();
-                              setDragOverPeriod(period);
-                            }}
-                            onDrop={(event) => {
-                              event.preventDefault();
-                              event.stopPropagation();
-                              handleDrop(period, id);
-                            }}
                             className={[
-                              "cursor-grab rounded border border-white/10 bg-white/[0.03] p-2 active:cursor-grabbing",
-                              draggedId === id ? "opacity-40" : "",
+                              "rounded border border-dashed p-3 text-xs leading-6 text-muted transition print:hidden",
+                              isDragOver ? "border-jade/50 bg-jade/5 text-jade" : "border-white/15",
                             ].join(" ")}
                           >
-                            <p className="text-xs font-bold text-foreground">
-                              {competency.label}
-                            </p>
-                            <p className="mt-1 text-[11px] text-muted">
-                              {subjectLabelById.get(competency.subjectId)} ·{" "}
-                              {domainLabelById.get(competency.domainId)}
-                            </p>
-                            <button
-                              type="button"
-                              onClick={() => cycleStatus(id)}
-                              className={[
-                                "mt-2 min-h-8 rounded border px-2 text-[11px] font-bold uppercase tracking-[0.08em] transition",
-                                planningStatuses.find((s) => s.id === assignment.status)
-                                  ?.className,
-                              ].join(" ")}
-                            >
-                              {planningStatuses.find((s) => s.id === assignment.status)?.label}
-                            </button>
-
-                            <div
-                              className="mt-2 flex flex-wrap gap-1"
-                              role="group"
-                              aria-label={`Déplacer ${competency.label}`}
-                            >
-                              <button
-                                type="button"
-                                onClick={() => moveWithinPeriod(id, -1)}
-                                disabled={isFirst}
-                                aria-label={`Monter ${competency.label} dans la période ${period}`}
-                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
-                              >
-                                Monter
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => moveWithinPeriod(id, 1)}
-                                disabled={isLast}
-                                aria-label={`Descendre ${competency.label} dans la période ${period}`}
-                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
-                              >
-                                Descendre
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => moveToAdjacentPeriod(id, -1)}
-                                disabled={isFirstPeriod}
-                                aria-label={`Déplacer ${competency.label} vers la période précédente`}
-                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
-                              >
-                                Période précédente
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => moveToAdjacentPeriod(id, 1)}
-                                disabled={isLastPeriod}
-                                aria-label={`Déplacer ${competency.label} vers la période suivante`}
-                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
-                              >
-                                Période suivante
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => removeAssignment(id)}
-                                aria-label={`Retirer ${competency.label} de la programmation`}
-                                className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
-                              >
-                                Retirer
-                              </button>
-                            </div>
+                            {isDragOver ? "Déposer ici pour ajouter à cette période" : "Aucune carte dans cette période."}
                           </li>
-                        );
-                      })
-                    )}
-                  </ul>
-                </section>
+                        ) : (
+                          periodCards.map((card, index) => {
+                            const isFirst = index === 0;
+                            const isLast = index === periodCards.length - 1;
+                            const isFirstPeriod = period === planningPeriodNumbers[0];
+                            const isLastPeriod = period === planningPeriodNumbers[planningPeriodNumbers.length - 1];
+                            const statusInfo = PLANNING_STATUSES.find((s) => s.id === card.status);
+                            return (
+                              <li
+                                key={card.cardKey}
+                                draggable
+                                onDragStart={() => setDraggedKey(card.cardKey)}
+                                onDragEnd={() => {
+                                  setDraggedKey(null);
+                                  setDragOverPeriod(null);
+                                }}
+                                onDragOver={(event) => {
+                                  event.preventDefault();
+                                  event.stopPropagation();
+                                  setDragOverPeriod(period);
+                                }}
+                                onDrop={(event) => {
+                                  event.preventDefault();
+                                  event.stopPropagation();
+                                  handleDrop(period, card.cardKey);
+                                }}
+                                className={[
+                                  "cursor-grab rounded border border-white/10 bg-white/[0.03] p-2 active:cursor-grabbing print:cursor-default print:border-black",
+                                  draggedKey === card.cardKey ? "opacity-40" : "",
+                                  card.hidden ? "opacity-50" : "",
+                                ].join(" ")}
+                              >
+                                <div className="flex flex-wrap items-center gap-1">
+                                  {card.priority === "essential" ? (
+                                    <span className="rounded border border-rose/40 bg-rose/10 px-1.5 py-0.5 text-[10px] font-bold uppercase text-rose print:border-black print:bg-transparent print:text-black">
+                                      Essentiel
+                                    </span>
+                                  ) : null}
+                                  {card.hidden ? (
+                                    <span className="rounded border border-white/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted print:hidden">
+                                      Masquée
+                                    </span>
+                                  ) : null}
+                                  <span className="rounded border border-white/15 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted print:border-black print:text-black">
+                                    {card.resourceStatus
+                                      ? PLANNING_RESOURCE_STATUSES.find((r) => r.id === card.resourceStatus)?.label
+                                      : "Aucune ressource"}
+                                  </span>
+                                </div>
+                                <p className="mt-1 text-xs font-bold text-foreground print:text-black">{card.title}</p>
+                                <p className="mt-1 text-[11px] text-muted print:text-black">
+                                  {card.subjectLabel} · {card.domainLabel} · {card.dureeMinutes} min
+                                </p>
+                                {card.resourceHref ? (
+                                  <a
+                                    href={card.resourceHref}
+                                    className="mt-1 inline-block text-[11px] font-bold text-jade underline-offset-2 hover:underline print:text-black"
+                                  >
+                                    Voir la ressource
+                                  </a>
+                                ) : null}
+                                <button
+                                  type="button"
+                                  onClick={() => setStatus(card, statusInfo ? cycleNextStatus(statusInfo.id) : "a-prevoir")}
+                                  className={[
+                                    "mt-2 min-h-8 rounded border px-2 text-[11px] font-bold uppercase tracking-[0.08em] transition print:hidden",
+                                    statusInfo?.className,
+                                  ].join(" ")}
+                                >
+                                  {statusInfo?.label}
+                                </button>
+
+                                <div
+                                  className="mt-2 flex flex-wrap gap-1 print:hidden"
+                                  role="group"
+                                  aria-label={`Actions ${card.title}`}
+                                >
+                                  <button
+                                    type="button"
+                                    onClick={() => moveWithinPeriod(card.cardKey, -1)}
+                                    disabled={isFirst}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                  >
+                                    Monter
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => moveWithinPeriod(card.cardKey, 1)}
+                                    disabled={isLast}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                  >
+                                    Descendre
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => moveToAdjacentPeriod(card.cardKey, -1)}
+                                    disabled={isFirstPeriod}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                  >
+                                    Période précédente
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => moveToAdjacentPeriod(card.cardKey, 1)}
+                                    disabled={isLastPeriod}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                  >
+                                    Période suivante
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setEditingKey(card.cardKey)}
+                                    className="min-h-7 rounded border border-sky/40 px-2 text-[11px] font-bold text-sky transition hover:bg-sky/10"
+                                  >
+                                    Modifier
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => duplicateCard(card)}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground"
+                                  >
+                                    Dupliquer
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setPriority(card, card.priority === "essential" ? "important" : "essential")}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                                  >
+                                    {card.priority === "essential" ? "Retirer priorité" : "Marquer prioritaire"}
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setStatus(card, "termine")}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade"
+                                  >
+                                    Marquer terminée
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setHidden(card, !card.hidden)}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-white/30"
+                                  >
+                                    {card.hidden ? "Restaurer" : "Masquer"}
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => sendCardToProgression(card)}
+                                    className="min-h-7 rounded border border-sky/40 px-2 text-[11px] font-bold text-sky transition hover:bg-sky/10"
+                                  >
+                                    Envoyer à la progression
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => removeCard(card)}
+                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                                  >
+                                    Retirer
+                                  </button>
+                                </div>
+                              </li>
+                            );
+                          })
+                        )}
+                      </ul>
+                    </section>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+        </>
+      ) : null}
+
+      {view === "matiere" ? (
+        <section aria-labelledby="vue-matiere-titre" className="mt-10">
+          <h2 id="vue-matiere-titre" className="text-xl font-black text-foreground">
+            Vue par matière
+          </h2>
+          <div className="mt-4 space-y-6">
+            {subjectsForLevel.map((subject) => {
+              const subjectCards = planningCards
+                .filter((card) => card.subjectId === subject.id && (showHidden || !card.hidden))
+                .sort((a, b) => a.period - b.period || a.order - b.order);
+              return (
+                <div key={subject.id} className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-black uppercase tracking-[0.08em] text-sky">{subject.label}</h3>
+                    <button
+                      type="button"
+                      onClick={() => setResetConfirm({ kind: "subject", subject: subject.id })}
+                      className="text-[11px] font-bold text-muted underline-offset-2 hover:text-rose hover:underline"
+                    >
+                      Réinitialiser cette matière
+                    </button>
+                  </div>
+                  {resetConfirm?.kind === "subject" && resetConfirm.subject === subject.id ? (
+                    <div className="mt-2 flex flex-wrap items-center gap-2 rounded border border-rose/40 bg-rose/10 p-2 text-xs">
+                      <span className="font-bold text-rose">Vider toute la matière « {subject.label} » ?</span>
+                      <button
+                        type="button"
+                        onClick={() => resetSubject(subject.id)}
+                        className="rounded border border-rose/50 px-2 py-1 font-bold text-rose hover:bg-rose/10"
+                      >
+                        Confirmer
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setResetConfirm(null)}
+                        className="rounded border border-white/15 px-2 py-1 font-bold text-muted hover:border-white/30"
+                      >
+                        Annuler
+                      </button>
+                    </div>
+                  ) : null}
+                  {subjectCards.length === 0 ? (
+                    <p className="mt-2 text-sm text-muted">Aucune carte placée pour cette matière.</p>
+                  ) : (
+                    <ul className="mt-3 space-y-2">
+                      {subjectCards.map((card) => (
+                        <li
+                          key={card.cardKey}
+                          className="flex flex-wrap items-center gap-2 rounded border border-white/10 bg-background/40 p-2 text-sm"
+                        >
+                          <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                            Période {card.period}
+                          </span>
+                          <span className="font-bold text-foreground">{card.title}</span>
+                          <span className="text-xs text-muted">{card.dureeMinutes} min</span>
+                          {card.hidden ? <span className="text-xs text-muted">(masquée)</span> : null}
+                          <button
+                            type="button"
+                            onClick={() => setEditingKey(card.cardKey)}
+                            className="ml-auto min-h-8 rounded border border-sky/40 px-2 text-[11px] font-bold text-sky transition hover:bg-sky/10"
+                          >
+                            Modifier
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
               );
             })}
           </div>
-        )}
-      </section>
+        </section>
+      ) : null}
+
+      {view === "equilibrer" ? (
+        <section aria-labelledby="vue-equilibrer-titre" className="mt-10">
+          <h2 id="vue-equilibrer-titre" className="text-xl font-black text-foreground">
+            À équilibrer
+          </h2>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {periodStats.map((stat) => (
+              <div
+                key={stat.period}
+                className={[
+                  "rounded-lg border p-4",
+                  stat.dureeTotale > HEAVY_PERIOD_MINUTES_THRESHOLD
+                    ? "border-rose/40 bg-rose/10"
+                    : "border-white/10 bg-white/[0.03]",
+                ].join(" ")}
+              >
+                <p className="text-sm font-black text-foreground">Période {stat.period}</p>
+                <p className="mt-1 text-xs text-muted">{stat.count} carte(s)</p>
+                <p className="mt-1 text-xs text-muted">
+                  {stat.dureeTotale} min ({Math.round((stat.dureeTotale / 60) * 10) / 10} h)
+                </p>
+                {stat.dureeTotale > HEAVY_PERIOD_MINUTES_THRESHOLD ? (
+                  <p className="mt-2 text-xs font-bold text-rose">Période chargée</p>
+                ) : null}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+              <h3 className="text-sm font-black uppercase tracking-[0.08em] text-foreground">
+                Matières peu présentes ({subjectsWithoutCards.length})
+              </h3>
+              {subjectsWithoutCards.length === 0 ? (
+                <p className="mt-2 text-sm text-muted">Toutes les matières ont au moins une carte placée.</p>
+              ) : (
+                <ul className="mt-2 space-y-1 text-sm text-muted">
+                  {subjectsWithoutCards.map((subject) => (
+                    <li key={subject.id}>{subject.label}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+              <h3 className="text-sm font-black uppercase tracking-[0.08em] text-foreground">
+                Compétences non placées
+              </h3>
+              <p className="mt-2 text-sm text-muted">
+                {unplacedCompetenciesCount} compétence(s) du catalogue de ce niveau ne sont placées dans aucune période.
+              </p>
+            </div>
+          </div>
+
+          {overweightPeriods.length > 0 ? (
+            <p className="mt-4 text-sm font-bold text-rose">
+              {overweightPeriods.length} période(s) dépassent {HEAVY_PERIOD_MINUTES_THRESHOLD} minutes de contenu estimé.
+            </p>
+          ) : null}
+
+          <div className="mt-6 rounded-lg border border-amber/40 bg-amber/10 p-4">
+            <h3 className="text-sm font-black uppercase tracking-[0.08em] text-amber">
+              Cartes sans durée ({cardsWithoutDuration.length})
+            </h3>
+            {cardsWithoutDuration.length === 0 ? (
+              <p className="mt-2 text-sm text-muted">Toutes les cartes ont une durée estimée renseignée.</p>
+            ) : (
+              <ul className="mt-2 space-y-1 text-sm">
+                {cardsWithoutDuration.map((card) => (
+                  <li key={card.cardKey} className="flex flex-wrap items-center gap-2">
+                    <span className="font-bold text-foreground">{card.title}</span>
+                    <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                      Période {card.period}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      ) : null}
+
+      {editingCard ? (
+        <PlanningCardEditor
+          card={editingCard}
+          onClose={() => setEditingKey(null)}
+          onUpdate={(patch) => {
+            if (editingCard.kind === "catalogue") {
+              updateCatalogueAssignment(editingCard.competencyId, patch);
+            } else if (editingCard.freeItemId) {
+              const freePatch: Partial<PlanningFreeItem> = { ...patch };
+              if (patch.title !== undefined) {
+                freePatch.title = patch.title;
+              }
+              updateFreeItem(editingCard.freeItemId, freePatch);
+            }
+          }}
+          onDelete={() => {
+            removeCard(editingCard);
+            setEditingKey(null);
+          }}
+        />
+      ) : null}
     </div>
+  );
+}
+
+function cycleNextStatus(status: PlanningStatus): PlanningStatus {
+  const index = PLANNING_STATUSES.findIndex((s) => s.id === status);
+  return PLANNING_STATUSES[(index + 1) % PLANNING_STATUSES.length].id;
+}
+
+interface PlanningCardEditorProps {
+  card: PlanningCard;
+  onClose: () => void;
+  onUpdate: (patch: {
+    title?: string;
+    dureeMinutes?: number;
+    period?: PlanningPeriodNumber;
+    priority?: PlanningPriority;
+    status?: PlanningStatus;
+    teacherNote?: string;
+    resourceHref?: string;
+    resourceStatus?: PlanningResourceStatus;
+  }) => void;
+  onDelete: () => void;
+}
+
+function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardEditorProps) {
+  return (
+    <aside
+      role="dialog"
+      aria-label={`Modifier la carte ${card.title}`}
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fermer le panneau"
+          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+        >
+          ✕
+        </button>
+      </div>
+
+      <dl className="space-y-3 text-sm">
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Matière</dt>
+          <dd className="font-bold text-foreground">{card.subjectLabel}</dd>
+        </div>
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Domaine</dt>
+          <dd className="font-bold text-foreground">{card.domainLabel}</dd>
+        </div>
+      </dl>
+
+      {card.kind === "libre" ? (
+        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+          Titre
+          <input
+            type="text"
+            defaultValue={card.title}
+            onBlur={(event) => onUpdate({ title: event.target.value })}
+            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          />
+        </label>
+      ) : (
+        <div>
+          <dt className="text-xs font-bold uppercase tracking-wide text-muted">Compétence</dt>
+          <dd className="font-bold text-foreground">{card.title}</dd>
+        </div>
+      )}
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Période
+        <select
+          value={card.period}
+          onChange={(event) => onUpdate({ period: Number(event.target.value) as PlanningPeriodNumber })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {planningPeriodNumbers.map((period) => (
+            <option key={period} value={period}>
+              Période {period}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Durée estimée (minutes)
+        <input
+          type="number"
+          min={5}
+          step={5}
+          defaultValue={card.dureeMinutes}
+          onBlur={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Priorité
+        <select
+          value={card.priority}
+          onChange={(event) => onUpdate({ priority: event.target.value as PlanningPriority })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {PLANNING_PRIORITIES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Statut
+        <select
+          value={card.status}
+          onChange={(event) => onUpdate({ status: event.target.value as PlanningStatus })}
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          {PLANNING_STATUSES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Note enseignant
+        <textarea
+          defaultValue={card.teacherNote}
+          onBlur={(event) => onUpdate({ teacherNote: event.target.value })}
+          rows={3}
+          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        Lien vers une ressource réelle (optionnel)
+        <input
+          type="url"
+          defaultValue={card.resourceHref ?? ""}
+          onBlur={(event) => onUpdate({ resourceHref: event.target.value.trim() || undefined })}
+          placeholder="https://…"
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        />
+      </label>
+
+      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+        État de la ressource
+        <select
+          value={card.resourceStatus ?? ""}
+          onChange={(event) =>
+            onUpdate({
+              resourceStatus: (event.target.value || undefined) as PlanningResourceStatus | undefined,
+            })
+          }
+          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+        >
+          <option value="">Non précisé</option>
+          {PLANNING_RESOURCE_STATUSES.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <button
+        type="button"
+        onClick={onDelete}
+        className="mt-auto min-h-11 rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-bold text-ember transition hover:bg-ember/20"
+      >
+        Retirer la carte
+      </button>
+    </aside>
   );
 }
