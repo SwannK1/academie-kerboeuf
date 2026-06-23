@@ -192,7 +192,7 @@ function Hero({ professors, stats }: HeroProps) {
           </div>
 
           {/* Panneau de stats */}
-          <aside className="rounded-md border border-white/10 bg-white/[0.035] p-6">
+          <div className="rounded-md border border-white/10 bg-white/[0.035] p-6">
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-gold">
               Conseil pédagogique
             </p>
@@ -233,7 +233,7 @@ function Hero({ professors, stats }: HeroProps) {
                 Niveaux Lycée
               </Link>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
