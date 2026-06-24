@@ -4,6 +4,12 @@ import {
   type CurriculumCompetency,
   type SchoolLevel,
 } from "@/content/teacher-programming-curriculum";
+import {
+  isLocalStorageAvailable,
+  isPlainObject,
+  sanitizeObjectArray,
+  writeLocalStorageJson,
+} from "@/content/teacher-local-storage";
 
 /**
  * Modèle de données de la programmation annuelle modulable.
@@ -107,6 +113,37 @@ function readJson<T>(key: string): T | null {
   }
 }
 
+function isPlanningAssignment(value: unknown): value is PlanningAssignment {
+  if (!isPlainObject(value)) return false;
+  return (
+    typeof value.period === "number" &&
+    typeof value.status === "string" &&
+    typeof value.order === "number"
+  );
+}
+
+function isPlanningAssignments(value: unknown): value is PlanningAssignments {
+  if (!isPlainObject(value)) return false;
+  return Object.values(value).every(isPlanningAssignment);
+}
+
+function isPlanningFreeItem(value: unknown): value is PlanningFreeItem {
+  if (!isPlainObject(value)) return false;
+  return (
+    typeof value.id === "string" &&
+    typeof value.level === "string" &&
+    typeof value.period === "number" &&
+    typeof value.status === "string"
+  );
+}
+
+function isPlanningState(value: unknown): value is PlanningState {
+  if (!isPlainObject(value)) return false;
+  return (
+    isPlanningAssignments(value.assignments ?? {}) && Array.isArray(value.freeItems)
+  );
+}
+
 const V1_STATUS_MAP: Record<string, PlanningStatus> = {
   "a-programmer": "a-prevoir",
   prevu: "pret",
@@ -139,22 +176,46 @@ function migrateFromV1(): PlanningAssignments {
   return result;
 }
 
-export function readPlanningState(): PlanningState {
-  const v2 = readJson<PlanningState>(STORAGE_KEY);
-  if (v2 && typeof v2 === "object") {
+const EMPTY_PLANNING_STATE: PlanningState = { assignments: {}, freeItems: [] };
+
+/**
+ * Lit l'état de la programmation. `wasReset` signale une donnée présente
+ * mais illisible/invalide (JSON corrompu ou forme inattendue) : l'outil
+ * appelant doit alors informer l'enseignant plutôt que de remplacer
+ * silencieusement la donnée.
+ */
+export function readPlanningStateChecked(): {
+  state: PlanningState;
+  wasReset: boolean;
+  storageAvailable: boolean;
+} {
+  const storageAvailable = isLocalStorageAvailable();
+  if (!storageAvailable) {
+    return { state: EMPTY_PLANNING_STATE, wasReset: false, storageAvailable };
+  }
+  const raw = readJson<unknown>(STORAGE_KEY);
+  if (raw === null) {
+    return { state: { assignments: migrateFromV1(), freeItems: [] }, wasReset: false, storageAvailable };
+  }
+  if (isPlanningState(raw)) {
     return {
-      assignments: v2.assignments ?? {},
-      freeItems: Array.isArray(v2.freeItems) ? v2.freeItems : [],
+      state: {
+        assignments: isPlanningAssignments(raw.assignments) ? raw.assignments : {},
+        freeItems: sanitizeObjectArray<PlanningFreeItem>(raw.freeItems).filter(isPlanningFreeItem),
+      },
+      wasReset: false,
+      storageAvailable,
     };
   }
-  return { assignments: migrateFromV1(), freeItems: [] };
+  return { state: EMPTY_PLANNING_STATE, wasReset: true, storageAvailable };
 }
 
-export function writePlanningState(state: PlanningState) {
-  if (typeof window === "undefined") {
-    return;
-  }
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+export function readPlanningState(): PlanningState {
+  return readPlanningStateChecked().state;
+}
+
+export function writePlanningState(state: PlanningState): boolean {
+  return writeLocalStorageJson(STORAGE_KEY, state);
 }
 
 let freeItemCounter = 0;

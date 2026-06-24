@@ -8,6 +8,12 @@ import {
   type ClassOrgGroupId,
 } from "@/content/teacher-class-organization";
 import type { TeacherLevel, TeacherPeriod } from "@/content/teacher-programmation";
+import {
+  isLocalStorageAvailable,
+  isPlainObject,
+  sanitizeObjectArray,
+  writeLocalStorageJson,
+} from "@/content/teacher-local-storage";
 
 const STORAGE_KEY = "academie-kerboeuf-organisation-classe-v1";
 
@@ -26,26 +32,51 @@ function weekKey(level: TeacherLevel, period: TeacherPeriod): WeekKey {
   return `${level}-${period}`;
 }
 
-function readStoredData(): StoredData {
+function isPriority(value: unknown): value is Priority {
+  if (!isPlainObject(value)) return false;
+  return typeof value.id === "string" && typeof value.label === "string";
+}
+
+function readStoredDataChecked(): {
+  data: StoredData;
+  wasReset: boolean;
+  storageAvailable: boolean;
+} {
   const fallback = {} as StoredData;
-  if (typeof window === "undefined") return fallback;
+  const storageAvailable = isLocalStorageAvailable();
+  if (!storageAvailable) return { data: fallback, wasReset: false, storageAvailable };
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return fallback;
+    if (!raw) return { data: fallback, wasReset: false, storageAvailable };
     const parsed = JSON.parse(raw) as unknown;
-    if (parsed && typeof parsed === "object") {
-      return parsed as StoredData;
+    if (!isPlainObject(parsed)) {
+      return { data: fallback, wasReset: true, storageAvailable };
     }
-    return fallback;
+    const result = {} as StoredData;
+    let wasReset = false;
+    for (const [key, value] of Object.entries(parsed)) {
+      const sanitized = sanitizeObjectArray<Priority>(value).filter(isPriority);
+      if (!Array.isArray(value) || sanitized.length !== value.length) wasReset = true;
+      result[key as WeekKey] = sanitized;
+    }
+    return { data: result, wasReset, storageAvailable };
   } catch {
-    return fallback;
+    return { data: fallback, wasReset: true, storageAvailable };
   }
 }
 
 export function TeacherClassOrganizationClient() {
   const [level, setLevel] = useState<TeacherLevel>(teacherLevels[0].id);
   const [period, setPeriod] = useState<TeacherPeriod>(teacherPeriods[0].id);
-  const [data, setData] = useState<StoredData>(() => readStoredData());
+  const initialData = useMemo(() => readStoredDataChecked(), []);
+  const [data, setData] = useState<StoredData>(initialData.data);
+  const [storageNotice, setStorageNotice] = useState<string | null>(
+    !initialData.storageAvailable
+      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+      : initialData.wasReset
+        ? "Certaines priorités enregistrées étaient illisibles et ont été ignorées."
+        : null,
+  );
   const [newLabel, setNewLabel] = useState("");
   const [newGroup, setNewGroup] = useState<ClassOrgGroupId>(
     classOrgGroups[0].id,
@@ -54,7 +85,7 @@ export function TeacherClassOrganizationClient() {
   const listInstructionsId = useId();
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    writeLocalStorageJson(STORAGE_KEY, data);
   }, [data]);
 
   const key = weekKey(level, period);
@@ -132,6 +163,21 @@ export function TeacherClassOrganizationClient() {
 
   return (
     <div className="mt-10 space-y-8">
+      {storageNotice ? (
+        <div
+          role="status"
+          className="flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber"
+        >
+          <p>{storageNotice}</p>
+          <button
+            type="button"
+            onClick={() => setStorageNotice(null)}
+            className="shrink-0 text-xs font-semibold uppercase tracking-wide text-amber underline"
+          >
+            Fermer
+          </button>
+        </div>
+      ) : null}
       <p
         role="note"
         className="rounded-lg border border-ember/40 bg-ember/10 p-4 text-sm font-bold text-foreground"

@@ -23,21 +23,54 @@ import {
   type LogbookStatus,
   type LogbookWeekData,
 } from "@/content/teacher-logbook";
+import {
+  isLocalStorageAvailable,
+  isPlainObject,
+  sanitizeObjectArray,
+  writeLocalStorageJson,
+} from "@/content/teacher-local-storage";
 
 const STORAGE_KEY = "academie-kerboeuf-cahier-journal-v1";
 
 type StoredData = Record<string, LogbookWeekData>;
 
-function readStoredData(): StoredData {
-  if (typeof window === "undefined") return {};
+function isLogbookSession(value: unknown): value is LogbookSession {
+  if (!isPlainObject(value)) return false;
+  return typeof value.id === "string" && typeof value.day === "string" && typeof value.slotId === "string";
+}
+
+function isLogbookWeekData(value: unknown): value is LogbookWeekData {
+  return isPlainObject(value) && Array.isArray(value.sessions);
+}
+
+function readStoredDataChecked(): {
+  data: StoredData;
+  wasReset: boolean;
+  storageAvailable: boolean;
+} {
+  const storageAvailable = isLocalStorageAvailable();
+  if (!storageAvailable) return { data: {}, wasReset: false, storageAvailable };
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
+    if (!raw) return { data: {}, wasReset: false, storageAvailable };
     const parsed = JSON.parse(raw) as unknown;
-    if (parsed && typeof parsed === "object") return parsed as StoredData;
-    return {};
+    if (!isPlainObject(parsed)) return { data: {}, wasReset: true, storageAvailable };
+    const result: StoredData = {};
+    let wasReset = false;
+    for (const [key, value] of Object.entries(parsed)) {
+      if (!isLogbookWeekData(value)) {
+        wasReset = true;
+        continue;
+      }
+      const sanitizedSessions = sanitizeObjectArray<LogbookSession>(value.sessions).filter(
+        isLogbookSession,
+      );
+      if (sanitizedSessions.length !== value.sessions.length) wasReset = true;
+      result[key] = { ...value, sessions: sanitizedSessions };
+    }
+    return { data: result, wasReset, storageAvailable };
   } catch {
-    return {};
+    return { data: {}, wasReset: true, storageAvailable };
   }
 }
 
@@ -62,7 +95,15 @@ function groupLabel(id: LogbookSession["group"]): string {
 }
 
 export function TeacherLogbookClient() {
-  const [data, setData] = useState<StoredData>(() => readStoredData());
+  const initialData = useMemo(() => readStoredDataChecked(), []);
+  const [data, setData] = useState<StoredData>(initialData.data);
+  const [storageNotice, setStorageNotice] = useState<string | null>(
+    !initialData.storageAvailable
+      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+      : initialData.wasReset
+        ? "Certaines séances enregistrées étaient illisibles et ont été ignorées."
+        : null,
+  );
   const [currentWeekKey, setCurrentWeekKey] = useState(() =>
     getMondayKey(new Date()),
   );
@@ -73,7 +114,7 @@ export function TeacherLogbookClient() {
   const instructionsId = useId();
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    writeLocalStorageJson(STORAGE_KEY, data);
   }, [data]);
 
   const week = useMemo<LogbookWeekData>(
@@ -279,6 +320,21 @@ export function TeacherLogbookClient() {
 
   return (
     <div className="mt-10 space-y-8 print:mt-4 print:space-y-4">
+      {storageNotice ? (
+        <div
+          role="status"
+          className="flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber print:hidden"
+        >
+          <p>{storageNotice}</p>
+          <button
+            type="button"
+            onClick={() => setStorageNotice(null)}
+            className="shrink-0 text-xs font-semibold uppercase tracking-wide text-amber underline"
+          >
+            Fermer
+          </button>
+        </div>
+      ) : null}
       <p
         role="note"
         className="rounded-lg border border-ember/40 bg-ember/10 p-4 text-sm font-bold text-foreground print:hidden"
