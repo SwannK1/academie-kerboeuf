@@ -525,7 +525,6 @@ export const emblematicStudents: EmblematicStudent[] = [
     recommendedMission: {
       title: "Dissertation",
       description: "Comprendre un sujet et construire une réflexion organisée.",
-      href: "/lycee/premiere/missions/dissertation",
     },
   },
   {
