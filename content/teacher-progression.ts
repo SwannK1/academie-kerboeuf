@@ -1,5 +1,11 @@
 import type { SchoolLevel } from "@/content/teacher-programming-curriculum";
 import type { PlanningPriority } from "@/content/teacher-programmation-planning";
+import {
+  isLocalStorageAvailable,
+  isPlainObject,
+  sanitizeObjectArray,
+  writeLocalStorageJson,
+} from "@/content/teacher-local-storage";
 
 /**
  * Progression de période — modèle de données partagé.
@@ -155,20 +161,53 @@ function migrateFromV2(): PeriodCard[] {
   }));
 }
 
-export function readStoredCards(): PeriodCard[] {
-  const v3 = readJson<StoredStateV3>(STORAGE_KEY_V3);
-  if (v3 && Array.isArray(v3.cards)) {
-    return v3.cards.map((card) => ({ ...card, priority: card.priority ?? "important" }));
-  }
-  return migrateFromV2();
+function isPeriodCard(value: unknown): value is PeriodCard {
+  if (!isPlainObject(value)) return false;
+  return (
+    typeof value.id === "string" &&
+    typeof value.niveau === "string" &&
+    typeof value.periode === "string" &&
+    typeof value.statut === "string"
+  );
 }
 
-export function writeStoredCards(cards: PeriodCard[]) {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(
-    STORAGE_KEY_V3,
-    JSON.stringify({ cards } satisfies StoredStateV3),
-  );
+/**
+ * Lit les cartes de progression. `wasReset` signale une sauvegarde v3
+ * présente mais corrompue (élément non-objet, JSON invalide) : on filtre
+ * les entrées invalides plutôt que de tout jeter, mais on le signale pour
+ * que l'outil appelant en informe l'enseignant.
+ */
+export function readStoredCardsChecked(): {
+  cards: PeriodCard[];
+  wasReset: boolean;
+  storageAvailable: boolean;
+} {
+  const storageAvailable = isLocalStorageAvailable();
+  if (!storageAvailable) {
+    return { cards: [], wasReset: false, storageAvailable };
+  }
+  const raw = readJson<unknown>(STORAGE_KEY_V3);
+  if (raw === null) {
+    return { cards: migrateFromV2(), wasReset: false, storageAvailable };
+  }
+  if (isPlainObject(raw) && Array.isArray(raw.cards)) {
+    const sanitized = sanitizeObjectArray<PeriodCard>(raw.cards).filter(isPeriodCard);
+    const wasReset = sanitized.length !== raw.cards.length;
+    return {
+      cards: sanitized.map((card) => ({ ...card, priority: card.priority ?? "important" })),
+      wasReset,
+      storageAvailable,
+    };
+  }
+  return { cards: [], wasReset: true, storageAvailable };
+}
+
+export function readStoredCards(): PeriodCard[] {
+  return readStoredCardsChecked().cards;
+}
+
+export function writeStoredCards(cards: PeriodCard[]): boolean {
+  return writeLocalStorageJson(STORAGE_KEY_V3, { cards } satisfies StoredStateV3);
 }
 
 let cardCounter = 0;

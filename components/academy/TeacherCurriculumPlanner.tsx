@@ -19,7 +19,7 @@ import {
   PLANNING_RESOURCE_STATUSES,
   PLANNING_STATUSES,
   nextFreeItemId,
-  readPlanningState,
+  readPlanningStateChecked,
   writePlanningState,
   type PlanningFreeItem,
   type PlanningPeriodNumber,
@@ -148,7 +148,15 @@ export function TeacherCurriculumPlanner() {
   const [activeSubjectId, setActiveSubjectId] = useState<string | null>(null);
   const [activeDomainId, setActiveDomainId] = useState<string | null>(null);
   const [view, setView] = useState<PlanningView>("annuelle");
-  const [planningState, setPlanningState] = useState<PlanningState>(() => readPlanningState());
+  const initialPlanning = useMemo(() => readPlanningStateChecked(), []);
+  const [planningState, setPlanningState] = useState<PlanningState>(initialPlanning.state);
+  const [storageNotice, setStorageNotice] = useState<string | null>(
+    !initialPlanning.storageAvailable
+      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+      : initialPlanning.wasReset
+        ? "Les données de programmation enregistrées étaient illisibles et ont été réinitialisées."
+        : null,
+  );
   const [showHidden, setShowHidden] = useState(false);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [resetConfirm, setResetConfirm] = useState<{ kind: "period"; period: PlanningPeriodNumber } | { kind: "subject"; subject: string } | null>(null);
@@ -170,7 +178,12 @@ export function TeacherCurriculumPlanner() {
 
   function persist(next: PlanningState) {
     setPlanningState(next);
-    writePlanningState(next);
+    const saved = writePlanningState(next);
+    if (!saved) {
+      setStorageNotice(
+        "Impossible d'enregistrer vos modifications (stockage local indisponible ou plein).",
+      );
+    }
   }
 
   const visibleLegacyEntries = useMemo(
@@ -562,7 +575,9 @@ export function TeacherCurriculumPlanner() {
             }
           : c,
       );
-      writeStoredCards(updated);
+      if (!writeStoredCards(updated)) {
+        setStorageNotice("Impossible d'enregistrer la carte dans la progression de période.");
+      }
       return;
     }
     const newCard: PeriodCard = {
@@ -580,7 +595,9 @@ export function TeacherCurriculumPlanner() {
       sourceProgrammationId: sourceId,
       noteEnseignant: card.teacherNote,
     };
-    writeStoredCards([...cards, newCard]);
+    if (!writeStoredCards([...cards, newCard])) {
+      setStorageNotice("Impossible d'enregistrer la carte dans la progression de période.");
+    }
   }
 
   function resetPeriod(period: PlanningPeriodNumber) {
@@ -648,6 +665,21 @@ export function TeacherCurriculumPlanner() {
 
   return (
     <div>
+      {storageNotice ? (
+        <div
+          role="status"
+          className="mb-6 flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber print:hidden"
+        >
+          <p>{storageNotice}</p>
+          <button
+            type="button"
+            onClick={() => setStorageNotice(null)}
+            className="shrink-0 text-xs font-semibold uppercase tracking-wide text-amber underline"
+          >
+            Fermer
+          </button>
+        </div>
+      ) : null}
       {legacyEntries.length > 0 && !legacyDeleted ? (
         <section
           aria-labelledby="ancienne-programmation-titre"

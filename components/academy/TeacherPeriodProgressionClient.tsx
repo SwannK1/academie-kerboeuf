@@ -20,7 +20,7 @@ import {
 import {
   nextCardId,
   periodNumberFromId,
-  readStoredCards,
+  readStoredCardsChecked,
   statusClassName,
   SEQUENCE_STATUSES,
   teacherPeriods,
@@ -70,7 +70,15 @@ type ImportScope = "all" | "subject";
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
   const [periode, setPeriode] = useState<TeacherPeriod>("periode-1");
-  const [cards, setCards] = useState<PeriodCard[]>(() => readStoredCards());
+  const initialCards = useMemo(() => readStoredCardsChecked(), []);
+  const [cards, setCards] = useState<PeriodCard[]>(initialCards.cards);
+  const [storageNotice, setStorageNotice] = useState<string | null>(
+    !initialCards.storageAvailable
+      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+      : initialCards.wasReset
+        ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
+        : null,
+  );
 
   const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
@@ -428,6 +436,21 @@ export function TeacherPeriodProgressionClient() {
 
   return (
     <div className="mt-10 space-y-8 print:text-black">
+      {storageNotice ? (
+        <div
+          role="status"
+          className="flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber print:hidden"
+        >
+          <p>{storageNotice}</p>
+          <button
+            type="button"
+            onClick={() => setStorageNotice(null)}
+            className="shrink-0 text-xs font-semibold uppercase tracking-wide text-amber underline"
+          >
+            Fermer
+          </button>
+        </div>
+      ) : null}
       <section aria-labelledby="choix-niveau-periode" className="print:hidden">
         <h2 id="choix-niveau-periode" className="text-xl font-black text-foreground">
           Choisir le niveau et la période

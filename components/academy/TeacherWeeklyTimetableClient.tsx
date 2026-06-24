@@ -9,10 +9,10 @@ import {
   formatDurationLabel,
   formatMinutesAsTime,
   getSubjectVisual,
-  readTeacherTimetableState,
+  readTeacherTimetableStateChecked,
   specialTeacherTimetableWeekKinds,
-  TEACHER_TIMETABLE_STORAGE_KEY,
   TEACHER_TIMETABLE_WEEKLY_HOURS_TARGET,
+  writeTeacherTimetableState,
   teacherTimetableDayLabels,
   teacherTimetableDayOrder,
   teacherTimetableLevels,
@@ -74,8 +74,16 @@ type DragPreview = { sessionId: string; dayId: TeacherTimetableDayId; startMinut
 type ResizePreview = { sessionId: string; durationMinutes: number };
 
 export function TeacherWeeklyTimetableClient() {
+  const initialTimetable = useMemo(() => readTeacherTimetableStateChecked(), []);
   const [state, setState] = useState<TeacherTimetableState>(
-    () => readTeacherTimetableState() ?? createInitialTeacherTimetableState(DEFAULT_LEVEL_ID),
+    () => initialTimetable.state ?? createInitialTeacherTimetableState(DEFAULT_LEVEL_ID),
+  );
+  const [storageNotice, setStorageNotice] = useState<string | null>(
+    !initialTimetable.storageAvailable
+      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+      : initialTimetable.wasReset
+        ? "L'emploi du temps enregistré était illisible et a été réinitialisé."
+        : null,
   );
   const [view, setView] = useState<"reference" | "reelle">("reelle");
   const [newWeekLabel, setNewWeekLabel] = useState("");
@@ -102,7 +110,7 @@ export function TeacherWeeklyTimetableClient() {
   const columnRefs = useRef<Partial<Record<TeacherTimetableDayId, HTMLDivElement | null>>>({});
 
   useEffect(() => {
-    window.localStorage.setItem(TEACHER_TIMETABLE_STORAGE_KEY, JSON.stringify(state));
+    writeTeacherTimetableState(state);
   }, [state]);
 
   const subjects = teacherTimetableSubjectsByLevel[state.levelId];
@@ -536,6 +544,21 @@ export function TeacherWeeklyTimetableClient() {
 
   return (
     <div className="mt-10">
+      {storageNotice ? (
+        <div
+          role="status"
+          className="mb-6 flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber print:hidden"
+        >
+          <p>{storageNotice}</p>
+          <button
+            type="button"
+            onClick={() => setStorageNotice(null)}
+            className="shrink-0 text-xs font-semibold uppercase tracking-wide text-amber underline"
+          >
+            Fermer
+          </button>
+        </div>
+      ) : null}
       <section aria-label="Choix du niveau" className="print:hidden">
         <h2 className="text-xl font-black text-foreground">Choisir un niveau</h2>
         <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5">

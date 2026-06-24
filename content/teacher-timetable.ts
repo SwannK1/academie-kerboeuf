@@ -1,3 +1,10 @@
+import {
+  isLocalStorageAvailable,
+  isPlainObject,
+  sanitizeObjectArray,
+  writeLocalStorageJson,
+} from "@/content/teacher-local-storage";
+
 export type TeacherTimetableLevelId = "cp" | "ce1" | "ce2" | "cm1" | "cm2";
 
 export const teacherTimetableLevels: { id: TeacherTimetableLevelId; label: string }[] = [
@@ -365,6 +372,40 @@ function migrateLegacyState(legacy: LegacyTeacherTimetableState): TeacherTimetab
   };
 }
 
+function isValidSession(value: unknown): value is TeacherTimetableSession {
+  if (!isPlainObject(value)) return false;
+  return (
+    typeof value.id === "string" &&
+    typeof value.dayId === "string" &&
+    typeof value.startMinutes === "number" &&
+    typeof value.durationMinutes === "number" &&
+    typeof value.subject === "string"
+  );
+}
+
+function isValidWeek(value: unknown): value is TeacherTimetableWeek {
+  if (!isPlainObject(value)) return false;
+  return (
+    typeof value.id === "string" &&
+    typeof value.label === "string" &&
+    typeof value.kind === "string" &&
+    Array.isArray(value.sessions)
+  );
+}
+
+/** Filtre les semaines/séances corrompues plutôt que de rejeter tout l'état. */
+function sanitizeTimetableState(state: TeacherTimetableState): TeacherTimetableState {
+  return {
+    ...state,
+    weeks: sanitizeObjectArray<TeacherTimetableWeek>(state.weeks)
+      .filter(isValidWeek)
+      .map((week) => ({
+        ...week,
+        sessions: sanitizeObjectArray<TeacherTimetableSession>(week.sessions).filter(isValidSession),
+      })),
+  };
+}
+
 function isValidState(value: unknown): value is TeacherTimetableState {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Partial<TeacherTimetableState>;
@@ -393,16 +434,41 @@ function isLegacyState(value: unknown): value is LegacyTeacherTimetableState {
  * grille v2 existe, la convertit sans jamais supprimer les données v2.
  */
 export function readTeacherTimetableState(): TeacherTimetableState | null {
-  if (typeof window === "undefined") return null;
+  return readTeacherTimetableStateChecked().state;
+}
 
+/**
+ * Lit l'état du calendrier. `wasReset` signale une sauvegarde v3 présente
+ * mais illisible/invalide : l'outil appelant doit alors prévenir
+ * l'enseignant plutôt que de remplacer silencieusement la donnée par un
+ * état neuf.
+ */
+export function readTeacherTimetableStateChecked(): {
+  state: TeacherTimetableState | null;
+  wasReset: boolean;
+  storageAvailable: boolean;
+} {
+  const storageAvailable = isLocalStorageAvailable();
+  if (!storageAvailable) {
+    return { state: null, wasReset: false, storageAvailable };
+  }
+
+  let rawV3: string | null = null;
   try {
-    const rawV3 = window.localStorage.getItem(TEACHER_TIMETABLE_STORAGE_KEY);
-    if (rawV3) {
-      const parsed = JSON.parse(rawV3);
-      if (isValidState(parsed)) return parsed;
-    }
+    rawV3 = window.localStorage.getItem(TEACHER_TIMETABLE_STORAGE_KEY);
   } catch {
-    // ignore et tente la migration
+    rawV3 = null;
+  }
+  if (rawV3) {
+    try {
+      const parsed = JSON.parse(rawV3);
+      if (isValidState(parsed)) {
+        return { state: sanitizeTimetableState(parsed), wasReset: false, storageAvailable };
+      }
+      return { state: null, wasReset: true, storageAvailable };
+    } catch {
+      return { state: null, wasReset: true, storageAvailable };
+    }
   }
 
   try {
@@ -410,12 +476,16 @@ export function readTeacherTimetableState(): TeacherTimetableState | null {
     if (rawV2) {
       const parsed = JSON.parse(rawV2);
       if (isLegacyState(parsed)) {
-        return migrateLegacyState(parsed);
+        return { state: migrateLegacyState(parsed), wasReset: false, storageAvailable };
       }
     }
   } catch {
     // ignore
   }
 
-  return null;
+  return { state: null, wasReset: false, storageAvailable };
+}
+
+export function writeTeacherTimetableState(state: TeacherTimetableState): boolean {
+  return writeLocalStorageJson(TEACHER_TIMETABLE_STORAGE_KEY, state);
 }
