@@ -1471,25 +1471,32 @@ export function TeacherCurriculumPlanner() {
       ) : null}
 
       {editingCard ? (
-        <PlanningCardEditor
-          card={editingCard}
-          onClose={() => setEditingKey(null)}
-          onUpdate={(patch) => {
-            if (editingCard.kind === "catalogue") {
-              updateCatalogueAssignment(editingCard.competencyId, patch);
-            } else if (editingCard.freeItemId) {
-              const freePatch: Partial<PlanningFreeItem> = { ...patch };
-              if (patch.title !== undefined) {
-                freePatch.title = patch.title;
+        <>
+          <div
+            aria-hidden="true"
+            onClick={() => setEditingKey(null)}
+            className="fixed inset-0 z-[55] bg-background/40 print:hidden"
+          />
+          <PlanningCardEditor
+            card={editingCard}
+            onClose={() => setEditingKey(null)}
+            onUpdate={(patch) => {
+              if (editingCard.kind === "catalogue") {
+                updateCatalogueAssignment(editingCard.competencyId, patch);
+              } else if (editingCard.freeItemId) {
+                const freePatch: Partial<PlanningFreeItem> = { ...patch };
+                if (patch.title !== undefined) {
+                  freePatch.title = patch.title;
+                }
+                updateFreeItem(editingCard.freeItemId, freePatch);
               }
-              updateFreeItem(editingCard.freeItemId, freePatch);
-            }
-          }}
-          onDelete={() => {
-            removeCard(editingCard);
-            setEditingKey(null);
-          }}
-        />
+            }}
+            onDelete={() => {
+              removeCard(editingCard);
+              setEditingKey(null);
+            }}
+          />
+        </>
       ) : null}
     </div>
   );
@@ -1541,6 +1548,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
       ref={panelRef}
       role="dialog"
       aria-label={`Modifier la carte ${card.title}`}
+      onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
