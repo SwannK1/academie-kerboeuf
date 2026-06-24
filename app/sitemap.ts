@@ -5,12 +5,8 @@ import { getAllCm2LessonPaths } from "@/content/cm2-learning-tree";
 import { felixProjects } from "@/content/felix-missions";
 import { learningPaths } from "@/content/learning-paths";
 import { getElementaryPedagogicalPlaces } from "@/content/pedagogical-places";
-import { ce1Level } from "@/content/levels/ce1";
 import { ce1Subjects } from "@/content/ce1-subjects";
-import { ce2Level } from "@/content/levels/ce2";
-import { cm1Level } from "@/content/levels/cm1";
 import { cm1Subjects } from "@/content/cm1-subjects";
-import { getPublicStatusKey } from "@/content/public-status";
 
 const BASE_URL = "https://academie-kerboeuf.fr";
 
@@ -48,24 +44,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.65,
   }));
 
-  const ce1LessonRoutes = ce1Level.domains
-    .flatMap((d) => d.subdomains)
-    .flatMap((s) => s.lessons)
-    .filter((l) => getPublicStatusKey(l.status) === "available")
-    .map((l) => ({ url: `${BASE_URL}/primaire/ce1/lecons/${l.slug}`, priority: 0.4 }));
-
-  const ce2LessonRoutes = ce2Level.domains
-    .flatMap((d) => d.subdomains)
-    .flatMap((s) => s.lessons)
-    .filter((l) => getPublicStatusKey(l.status) === "available")
-    .map((l) => ({ url: `${BASE_URL}/primaire/ce2/lecons/${l.slug}`, priority: 0.4 }));
-
-  const cm1LessonRoutes = cm1Level.domains
-    .flatMap((d) => d.subdomains)
-    .flatMap((s) => s.lessons)
-    .filter((l) => getPublicStatusKey(l.status) === "available")
-    .map((l) => ({ url: `${BASE_URL}/primaire/cm1/lecons/${l.slug}`, priority: 0.4 }));
-
   return [
     { url: `${BASE_URL}/`, priority: 1.0 },
     { url: `${BASE_URL}/univers`, priority: 0.9 },
@@ -82,14 +60,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...elementaryPlaceRoutes,
     { url: `${BASE_URL}/primaire/ce1/matieres`, priority: 0.7 },
     ...ce1MatieresRoutes,
-    { url: `${BASE_URL}/primaire/ce1/lecons`, priority: 0.35 },
-    ...ce1LessonRoutes,
-    { url: `${BASE_URL}/primaire/ce2/lecons`, priority: 0.55 },
-    ...ce2LessonRoutes,
+    { url: `${BASE_URL}/primaire/ce1/programmes/francais/etude-de-la-langue`, priority: 0.55 },
+    { url: `${BASE_URL}/primaire/ce2/programmes/mathematiques/nombres-calcul`, priority: 0.55 },
     { url: `${BASE_URL}/primaire/cm1/matieres`, priority: 0.7 },
     ...cm1MatieresRoutes,
-    { url: `${BASE_URL}/primaire/cm1/lecons`, priority: 0.35 },
-    ...cm1LessonRoutes,
     { url: `${BASE_URL}/primaire/cm2`, priority: 0.8 },
     { url: `${BASE_URL}/primaire/cm2/missions`, priority: 0.7 },
     { url: `${BASE_URL}/primaire/cm2/matieres`, priority: 0.7 },

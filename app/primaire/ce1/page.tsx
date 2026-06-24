@@ -77,10 +77,10 @@ export default function Ce1Page() {
               Matières CE1 <span className="transition group-hover:translate-x-0.5">→</span>
             </Link>
             <Link
-              href="/primaire/ce1/lecons"
+              href="/primaire/ce1/programmes/francais/etude-de-la-langue"
               className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
             >
-              Leçons CE1 <span className="transition group-hover:translate-x-0.5">→</span>
+              Étude de la langue CE1 <span className="transition group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
         </div>

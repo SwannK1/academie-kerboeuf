@@ -34,9 +34,7 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
   const tree = getCe2SubjectTree(slug);
   const sequences = getCe2Sequences(slug);
 
-  const footerLinks: { href: string; label: string }[] = [
-    { href: "/primaire/ce2/lecons", label: "Leçons CE2" },
-  ];
+  const footerLinks: { href: string; label: string }[] = [];
 
   if (slug === "mathematiques") {
     footerLinks.push({
