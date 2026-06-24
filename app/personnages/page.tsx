@@ -92,6 +92,7 @@ export default function PersonnagesPage() {
               meta={guide.level}
               description={guide.description}
               href={guide.href}
+              headingLevel="h3"
             />
           ))}
         </div>
@@ -187,15 +188,18 @@ function CharacterCard({
   meta,
   description,
   href,
+  headingLevel = "h4",
 }: {
   name: string;
   meta: string;
   description: string;
   href?: string;
+  headingLevel?: "h3" | "h4";
 }) {
+  const Heading = headingLevel;
   const content = (
     <>
-      <h4 className="text-base font-black text-foreground">{name}</h4>
+      <Heading className="text-base font-black text-foreground">{name}</Heading>
       <p className="mt-1 text-xs font-bold uppercase tracking-[0.1em] text-gold">
         {meta}
       </p>
