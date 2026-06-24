@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherLessonPreparation } from "@/components/teacher-lesson-preparation/TeacherLessonPreparation";
+import { PrintBodyClass } from "@/components/print/print-body-class";
 
 export const metadata: Metadata = {
   title: "Préparer une séance | Espace enseignants | Académie Kerboeuf",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function TeacherLessonPreparationPage() {
   return (
     <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
+      <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-6xl">
         <Breadcrumb
           items={[
