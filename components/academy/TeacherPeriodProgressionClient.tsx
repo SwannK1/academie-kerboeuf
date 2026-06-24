@@ -5,7 +5,6 @@ import {
   useEffect,
   useId,
   useMemo,
-  useRef,
   useState,
   type DragEvent,
 } from "react";
@@ -770,13 +769,20 @@ export function TeacherPeriodProgressionClient() {
       </section>
 
       {selectedCard ? (
-        <CardSidePanel
-          card={selectedCard}
-          subjectLabelById={subjectLabelById}
-          onClose={() => setSelectedId(null)}
-          onUpdate={(patch) => updateCard(selectedCard.id, patch)}
-          onDelete={() => deleteCard(selectedCard.id)}
-        />
+        <>
+          <div
+            aria-hidden="true"
+            onClick={() => setSelectedId(null)}
+            className="fixed inset-0 z-[55] bg-background/40 print:hidden"
+          />
+          <CardSidePanel
+            card={selectedCard}
+            subjectLabelById={subjectLabelById}
+            onClose={() => setSelectedId(null)}
+            onUpdate={(patch) => updateCard(selectedCard.id, patch)}
+            onDelete={() => deleteCard(selectedCard.id)}
+          />
+        </>
       ) : null}
     </div>
   );
@@ -946,30 +952,22 @@ function CardSidePanel({
   const canPrepareLogbook = Boolean(
     card.objectif?.trim() && card.competenceLabel.trim() && card.dureeMinutes > 0,
   );
-  const panelRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-    function handlePointerDown(event: PointerEvent) {
-      if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
         onClose();
       }
-    }
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("pointerdown", handlePointerDown);
     };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
   return (
     <aside
-      ref={panelRef}
       role="dialog"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
+      onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
