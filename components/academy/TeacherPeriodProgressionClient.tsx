@@ -5,6 +5,7 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type DragEvent,
 } from "react";
@@ -945,9 +946,28 @@ function CardSidePanel({
   const canPrepareLogbook = Boolean(
     card.objectif?.trim() && card.competenceLabel.trim() && card.dureeMinutes > 0,
   );
+  const panelRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+    function handlePointerDown(event: PointerEvent) {
+      if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [onClose]);
 
   return (
     <aside
+      ref={panelRef}
       role="dialog"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
