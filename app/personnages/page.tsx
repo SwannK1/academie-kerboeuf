@@ -20,10 +20,33 @@ const breadcrumb = [
 const guides = emblematicStudents.map((student) => ({
   slug: student.slug,
   name: student.name,
+  animal: student.animal,
   level: student.level,
+  levelSlug: student.levelSlug,
   description: student.shortDescription,
   href: `/eleves/${student.slug}`,
 }));
+
+// Mêmes regroupements que /personnages/eleves, pour rester cohérent avec le
+// reste du site et ne pas inventer de nouvelle taxonomie de niveaux.
+const guideStages = [
+  {
+    title: "Maternelle",
+    levels: ["ps", "ms", "gs"],
+  },
+  {
+    title: "Élémentaire",
+    levels: ["cp", "ce1", "ce2", "cm1", "cm2"],
+  },
+  {
+    title: "Collège",
+    levels: ["6e", "5e", "4e", "3e"],
+  },
+  {
+    title: "Lycée",
+    levels: ["seconde", "premiere", "terminale"],
+  },
+] as const;
 
 // Félix double comme professeur de niveau CM2 dans le contenu académique,
 // mais il reste un guide d'élève côté navigation (cf. content/professors.ts).
@@ -33,7 +56,7 @@ const subjectProfessors = professorProfiles.filter(
     professor.slug !== "felix",
 );
 
-const secondaryCharacters = professorProfiles.filter(
+const referentProfessors = professorProfiles.filter(
   (professor) => professor.characterType === "personnalité officielle",
 );
 
@@ -51,7 +74,7 @@ function groupBySubject<T extends { mainSubject: string }>(
 
 export default function PersonnagesPage() {
   const professorsBySubject = groupBySubject(subjectProfessors);
-  const secondaryBySubject = groupBySubject(secondaryCharacters);
+  const referentsBySubject = groupBySubject(referentProfessors);
 
   return (
     <main>
@@ -70,9 +93,8 @@ export default function PersonnagesPage() {
             Qui accompagne les apprentissages ?
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
-            Les guides de niveau accompagnent chaque élève dans sa posture
-            d&apos;apprentissage, du premier niveau au lycée. Les professeurs de
-            matière portent les méthodes propres à chaque discipline.
+            Les personnages de l&apos;Académie Kerboeuf accompagnent les
+            élèves selon leur niveau, leur rôle et les disciplines.
           </p>
         </div>
       </section>
@@ -81,22 +103,37 @@ export default function PersonnagesPage() {
         title="Guides de niveau"
         description="Un guide par niveau, de la maternelle au lycée, qui incarne une posture d'apprentissage propre à son étage de l'Académie."
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.map((guide) => (
-            <CharacterCard
-              key={guide.slug}
-              name={guide.name}
-              meta={guide.level}
-              description={guide.description}
-              href={guide.href}
-            />
-          ))}
+        <div className="space-y-8">
+          {guideStages.map((stage) => {
+            const stageGuides = guides.filter((guide) =>
+              (stage.levels as readonly string[]).includes(guide.levelSlug),
+            );
+            if (stageGuides.length === 0) return null;
+            return (
+              <div key={stage.title}>
+                <h3 className="text-sm font-black uppercase tracking-[0.12em] text-muted">
+                  {stage.title}
+                </h3>
+                <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {stageGuides.map((guide) => (
+                    <CharacterCard
+                      key={guide.slug}
+                      name={guide.name}
+                      meta={`${guide.animal} · ${guide.level}`}
+                      description={guide.description}
+                      href={guide.href}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </PersonnagesSection>
 
       <PersonnagesSection
         title="Professeurs de matière"
-        description="Les référents pédagogiques classés par matière, du CP à la 3e."
+        description="Les référents pédagogiques d'un niveau précis, classés par matière, du CP à la 3e."
       >
         <div className="space-y-8">
           {professorsBySubject.map((group) => (
@@ -120,32 +157,28 @@ export default function PersonnagesPage() {
         </div>
       </PersonnagesSection>
 
-      {secondaryCharacters.length > 0 ? (
+      {referentProfessors.length > 0 ? (
         <PersonnagesSection
-          title="Personnages secondaires"
-          description="Des personnalités officielles de l'Académie, classées par matière."
+          title="Professeurs référents"
+          description="Les professeurs référents accompagnent toute l'Académie sur leur discipline, au-delà d'un seul niveau."
         >
-          <div className="space-y-6">
-            {secondaryBySubject.map((group) => (
+          <div className="space-y-8">
+            {referentsBySubject.map((group) => (
               <div key={group.subject}>
                 <h3 className="text-sm font-black uppercase tracking-[0.12em] text-muted">
                   {group.subject}
                 </h3>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {group.items.map((character) => (
-                    <li key={character.slug}>
-                      <Link
-                        href={`/professeurs/${character.slug}`}
-                        className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm font-bold text-foreground transition hover:border-white/25"
-                      >
-                        {character.name}
-                        <span className="text-xs font-medium text-muted">
-                          {character.role}
-                        </span>
-                      </Link>
-                    </li>
+                <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.items.map((professor) => (
+                    <CharacterCard
+                      key={professor.slug}
+                      name={professor.name}
+                      meta={`${professor.role}`}
+                      description={`Discipline : ${professor.mainSubject}`}
+                      href={`/professeurs/${professor.slug}`}
+                    />
                   ))}
-                </ul>
+                </div>
               </div>
             ))}
           </div>
