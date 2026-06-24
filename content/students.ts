@@ -22,6 +22,8 @@ export type EmblematicStudent = {
     description: string;
     href?: string;
   };
+  /** Guide officiel du niveau, affiché dans /personnages et sur la page du niveau. Défaut : true. */
+  isLevelGuide?: boolean;
 };
 
 export type CharacterPersonalityProfile = {
@@ -191,6 +193,44 @@ export const emblematicStudents: EmblematicStudent[] = [
     },
   },
   {
+    name: "Kiwi la Grenouille",
+    slug: "kiwi",
+    level: "CP",
+    levelSlug: "cp",
+    levelHref: "/primaire/cp",
+    missionsHref: "/primaire/cp/missions",
+    cycle: "Cycle 2",
+    animal: "Grenouille",
+    dominantColor: "jade",
+    universe: "Salle des lanternes",
+    shortDescription:
+      "Kiwi saute d’un repère à l’autre pour apprendre à lire, compter et oser répondre.",
+    personality:
+      "Curieuse et bondissante, Kiwi observe avant de se lancer et avance par petits essais.",
+    personalityProfile: {
+      dominantTraits: ["Curieuse", "Bondissante", "Attentive", "Volontaire"],
+      strengths: ["Observe avant d’agir", "Ose essayer", "Construit ses premiers repères"],
+      energy: "Une énergie vive et curieuse, toujours prête à sauter vers une nouvelle découverte.",
+      posture: "Elle apprend par petits essais, repères visuels et réussites sécurisées.",
+      interaction: "Elle observe, puis ose répondre quand le cadre est clair.",
+      represents: "L’entrée dans les codes scolaires : lire, compter et oser répondre.",
+    },
+    learningStyle:
+      "Elle apprend par les repères visuels, les répétitions courtes et les réussites sécurisées.",
+    progression: [
+      "Oser répondre même sans certitude",
+      "Reconnaître les premiers codes de lecture",
+      "Associer image, son et mot",
+      "Entrer dans un rituel de classe",
+    ],
+    recommendedMission: {
+      title: "Atelier Lecture",
+      description:
+        "Commencer par une mission courte pour comprendre un texte et repérer les informations clés.",
+      href: "/primaire/cp/missions",
+    },
+  },
+  {
     name: "Zoé la Tortue Curieuse",
     slug: "zoe",
     level: "CP",
@@ -227,6 +267,8 @@ export const emblematicStudents: EmblematicStudent[] = [
         "Commencer par une mission courte pour comprendre un texte et repérer les informations clés.",
       href: "/primaire/cp/missions",
     },
+    // Zoé reste une fiche élève accessible, mais ne concurrence plus Kiwi comme guide officiel CP.
+    isLevelGuide: false,
   },
   {
     name: "Gaston le Hérisson Astucieux",
@@ -574,5 +616,7 @@ export function getAllStudentSlugs() {
 }
 
 export function getStudentForLevelSlug(levelSlug: string) {
-  return emblematicStudents.find((student) => student.levelSlug === levelSlug);
+  return emblematicStudents.find(
+    (student) => student.levelSlug === levelSlug && student.isLevelGuide !== false,
+  );
 }

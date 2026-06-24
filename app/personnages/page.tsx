@@ -17,13 +17,16 @@ const breadcrumb = [
 ];
 
 // Les guides élèves-niveau sont déjà classés par cycle dans le contenu source.
-const guides = emblematicStudents.map((student) => ({
-  slug: student.slug,
-  name: student.name,
-  level: student.level,
-  description: student.shortDescription,
-  href: `/eleves/${student.slug}`,
-}));
+// Seul le guide officiel d'un niveau (isLevelGuide !== false) apparaît ici.
+const guides = emblematicStudents
+  .filter((student) => student.isLevelGuide !== false)
+  .map((student) => ({
+    slug: student.slug,
+    name: student.name,
+    level: student.level,
+    description: student.shortDescription,
+    href: `/eleves/${student.slug}`,
+  }));
 
 // Félix double comme professeur de niveau CM2 dans le contenu académique,
 // mais il reste un guide d'élève côté navigation (cf. content/professors.ts).

@@ -229,6 +229,7 @@ export const elementaryStudentAssociationsById = {
         "sac ou carnet de premiers repères",
       ],
     },
+    existingStudentSlug: "kiwi",
   },
   gaston: {
     id: "gaston",
