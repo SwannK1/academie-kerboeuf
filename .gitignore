@@ -69,3 +69,6 @@ supabase/
 # documents internes sensibles
 docs/audit-request-setup.md
 docs/audit-requests-supabase.md
+
+# état runtime de l'espace admin (surcharges + journal local, jamais committé)
+data/admin/*.json
