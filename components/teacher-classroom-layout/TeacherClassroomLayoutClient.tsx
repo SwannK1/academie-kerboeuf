@@ -5,32 +5,89 @@ import {
   assignRoles,
   createGroups,
   generateGroupAssignment,
+  generateId,
   generateLayout,
   layoutKinds,
+  makeTable,
   roles,
   type AvoidPair,
   type Group,
   type GroupGenerationMode,
-  type Label,
   type LayoutKind,
   type RoleAssignment,
   type StoredLayout,
   type TableShape,
 } from "@/content/teacher-classroom-layout";
 
-const STORAGE_KEY = "academie-kerboeuf-organisation-classe-plan-v1";
+const STORAGE_KEY = "academie-kerboeuf-organisation-classe-plan-v2";
 const CANVAS_WIDTH = 880;
 const CANVAS_HEIGHT = 560;
 
 type Tab = "plan" | "groupes";
 
+type NamedSeat = { id: string; name: string };
+
+function seatCountLabel(seats: number): string {
+  if (seats === 1) return "table simple";
+  if (seats === 4) return "groupe de 4";
+  return "table double";
+}
+
+function normalizeTable(raw: unknown): TableShape | null {
+  if (typeof raw !== "object" || raw === null) return null;
+  const t = raw as Record<string, unknown>;
+  const seats =
+    typeof t.seats === "number" && t.seats > 0 ? Math.round(t.seats) : 2;
+  const rawNames = Array.isArray(t.names) ? t.names : [];
+  const names: (string | null)[] = Array.from({ length: seats }, (_, i) => {
+    const v = rawNames[i];
+    return typeof v === "string" && v.trim() ? v : null;
+  });
+  return {
+    id: typeof t.id === "string" ? t.id : generateId("table"),
+    x: typeof t.x === "number" ? t.x : 40,
+    y: typeof t.y === "number" ? t.y : 40,
+    rotation: typeof t.rotation === "number" ? t.rotation : 0,
+    width: typeof t.width === "number" ? t.width : 90,
+    height: typeof t.height === "number" ? t.height : 56,
+    seats,
+    names,
+  };
+}
+
+function normalizeLayout(raw: unknown): StoredLayout | null {
+  if (typeof raw !== "object" || raw === null) return null;
+  const s = raw as Record<string, unknown>;
+  const tables = Array.isArray(s.tables)
+    ? s.tables.map(normalizeTable).filter((t): t is TableShape => t !== null)
+    : [];
+  const groups = Array.isArray(s.groups) ? (s.groups as Group[]) : [];
+  const groupAssignment =
+    typeof s.groupAssignment === "object" && s.groupAssignment !== null
+      ? (s.groupAssignment as Record<string, string | null>)
+      : {};
+  const roleAssignment =
+    typeof s.roleAssignment === "object" && s.roleAssignment !== null
+      ? (s.roleAssignment as RoleAssignment)
+      : {};
+  return {
+    id: typeof s.id === "string" ? s.id : generateId("config"),
+    name: typeof s.name === "string" && s.name ? s.name : "Configuration",
+    tables,
+    groups,
+    groupAssignment,
+    roleAssignment,
+    isDefault: Boolean(s.isDefault),
+  };
+}
+
 function emptyLayout(name: string): StoredLayout {
   return {
-    id: `config-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: generateId("config"),
     name,
     tables: [],
-    labels: [],
     groups: [],
+    groupAssignment: {},
     roleAssignment: {},
     isDefault: false,
   };
@@ -42,8 +99,10 @@ function readSaves(): StoredLayout[] {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw) as unknown;
-    if (Array.isArray(parsed)) return parsed as StoredLayout[];
-    return [];
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .map(normalizeLayout)
+      .filter((l): l is StoredLayout => l !== null);
   } catch {
     return [];
   }
@@ -53,13 +112,17 @@ export function TeacherClassroomLayoutClient() {
   const [saves, setSaves] = useState<StoredLayout[]>(() => readSaves());
   const [initialDefault] = useState<StoredLayout>(() => {
     const initial = readSaves();
-    return initial.find((s) => s.isDefault) ?? initial[0] ?? emptyLayout("Configuration 1");
+    return (
+      initial.find((s) => s.isDefault) ?? initial[0] ?? emptyLayout("Configuration 1")
+    );
   });
   const [currentId, setCurrentId] = useState<string>(initialDefault.id);
 
   const [tables, setTables] = useState<TableShape[]>(initialDefault.tables);
-  const [labels, setLabels] = useState<Label[]>(initialDefault.labels);
   const [groups, setGroups] = useState<Group[]>(initialDefault.groups);
+  const [groupAssignment, setGroupAssignment] = useState<
+    Record<string, string | null>
+  >(initialDefault.groupAssignment);
   const [roleAssignment, setRoleAssignment] = useState<RoleAssignment>(
     initialDefault.roleAssignment,
   );
@@ -68,8 +131,8 @@ export function TeacherClassroomLayoutClient() {
   const [tab, setTab] = useState<Tab>("plan");
   const [showLegend, setShowLegend] = useState(true);
   const [pendingLayout, setPendingLayout] = useState<LayoutKind | null>(null);
+  const [selectedTableId, setSelectedTableId] = useState<string | null>(null);
 
-  const [newLabelText, setNewLabelText] = useState("");
   const [groupSize, setGroupSize] = useState(4);
   const [genMode, setGenMode] = useState<GroupGenerationMode>("heterogene");
   const [avoidPairs, setAvoidPairs] = useState<AvoidPair[]>([]);
@@ -85,22 +148,20 @@ export function TeacherClassroomLayoutClient() {
     offsetX: number;
     offsetY: number;
   } | null>(null);
-  const dragLabelRef = useRef<string | null>(null);
 
   const hydratedRef = useRef(false);
 
-  function persistCurrent(next: Partial<StoredLayout> = {}) {
+  function persistCurrent() {
     setSaves((prev) => {
       const existingIndex = prev.findIndex((s) => s.id === currentId);
       const updated: StoredLayout = {
         id: currentId,
         name: configName,
         tables,
-        labels,
         groups,
+        groupAssignment,
         roleAssignment,
         isDefault: existingIndex >= 0 ? prev[existingIndex].isDefault : false,
-        ...next,
       };
       const nextList =
         existingIndex >= 0
@@ -111,18 +172,15 @@ export function TeacherClassroomLayoutClient() {
     });
   }
 
-  function addTable() {
+  function addTable(seats: 1 | 2) {
     setTables((prev) => [
       ...prev,
-      {
-        id: `table-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-        x: 40 + (prev.length % 6) * 20,
-        y: 40 + Math.floor(prev.length / 6) * 20,
-        rotation: 0,
-        width: 90,
-        height: 56,
-        seats: 2,
-      },
+      makeTable(
+        40 + (prev.length % 6) * 20,
+        40 + Math.floor(prev.length / 6) * 20,
+        0,
+        seats,
+      ),
     ]);
   }
 
@@ -132,13 +190,34 @@ export function TeacherClassroomLayoutClient() {
       return;
     }
     setTables(generateLayout(kind, CANVAS_WIDTH, CANVAS_HEIGHT));
+    setSelectedTableId(null);
   }
 
   function confirmApplyLayout() {
     if (!pendingLayout) return;
     setTables(generateLayout(pendingLayout, CANVAS_WIDTH, CANVAS_HEIGHT));
-    setLabels((prev) => prev.map((label) => ({ ...label, tableId: null })));
+    setSelectedTableId(null);
     setPendingLayout(null);
+  }
+
+  function resetPlan() {
+    const hasContent =
+      tables.length > 0 || groups.length > 0 || Object.keys(roleAssignment).length > 0;
+    if (
+      hasContent &&
+      !window.confirm(
+        "Réinitialiser le plan ? Toutes les tables, les noms et les groupes actuels seront supprimés.",
+      )
+    ) {
+      return;
+    }
+    setTables([]);
+    setGroups([]);
+    setGroupAssignment({});
+    setRoleAssignment({});
+    setProposedGroups(null);
+    setSelectedTableId(null);
+    setAvoidPairs([]);
   }
 
   function updateTable(id: string, patch: Partial<TableShape>) {
@@ -154,41 +233,45 @@ export function TeacherClassroomLayoutClient() {
     });
   }
 
-  function resizeTable(id: string, delta: number) {
-    const table = tables.find((t) => t.id === id);
-    if (!table) return;
-    const nextWidth = Math.min(160, Math.max(56, table.width + delta));
-    const nextHeight = Math.min(120, Math.max(40, table.height + delta * 0.6));
-    updateTable(id, { width: nextWidth, height: nextHeight });
-  }
-
   function duplicateTable(id: string) {
     const table = tables.find((t) => t.id === id);
     if (!table) return;
-    setTables((prev) => [
-      ...prev,
-      {
-        ...table,
-        id: `table-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-        x: table.x + 20,
-        y: table.y + 20,
-      },
-    ]);
+    const copy: TableShape = {
+      ...table,
+      id: generateId("table"),
+      x: table.x + 20,
+      y: table.y + 20,
+      names: [...table.names],
+    };
+    setTables((prev) => [...prev, copy]);
+    setSelectedTableId(copy.id);
   }
 
   function deleteTable(id: string) {
     setTables((prev) => prev.filter((t) => t.id !== id));
-    setLabels((prev) =>
-      prev.map((label) =>
-        label.tableId === id ? { ...label, tableId: null } : label,
-      ),
+    if (selectedTableId === id) setSelectedTableId(null);
+  }
+
+  function setSeatName(tableId: string, seatIndex: number, value: string) {
+    setTables((prev) =>
+      prev.map((t) => {
+        if (t.id !== tableId) return t;
+        const names = [...t.names];
+        names[seatIndex] = value;
+        return { ...t, names };
+      }),
     );
+  }
+
+  function selectTable(tableId: string) {
+    setSelectedTableId(tableId);
   }
 
   function onTablePointerDown(
     event: React.PointerEvent<HTMLDivElement>,
     table: TableShape,
   ) {
+    selectTable(table.id);
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
@@ -198,6 +281,12 @@ export function TeacherClassroomLayoutClient() {
       offsetY: event.clientY - rect.top - table.y,
     };
     event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function onCanvasPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    if (event.target === event.currentTarget) {
+      setSelectedTableId(null);
+    }
   }
 
   function onCanvasPointerMove(event: React.PointerEvent<HTMLDivElement>) {
@@ -220,71 +309,37 @@ export function TeacherClassroomLayoutClient() {
     dragState.current = null;
   }
 
-  function addLabel() {
-    const text = newLabelText.trim();
-    if (!text) return;
-    setLabels((prev) => [
-      ...prev,
-      {
-        id: `label-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-        text,
-        tableId: null,
-        groupId: null,
-      },
-    ]);
-    setNewLabelText("");
-  }
-
-  function removeLabel(id: string) {
-    setLabels((prev) => prev.filter((label) => label.id !== id));
-    setAvoidPairs((prev) =>
-      prev.filter((pair) => pair.a !== id && pair.b !== id),
-    );
-  }
-
-  function onLabelDragStart(id: string) {
-    dragLabelRef.current = id;
-  }
-
-  function onTableDrop(tableId: string) {
-    const labelId = dragLabelRef.current;
-    dragLabelRef.current = null;
-    if (!labelId) return;
-    setLabels((prev) =>
-      prev.map((label) =>
-        label.id === labelId ? { ...label, tableId } : label,
+  const namedSeats = useMemo<NamedSeat[]>(
+    () =>
+      tables.flatMap((table) =>
+        table.names
+          .map((name, index) =>
+            name && name.trim()
+              ? { id: `${table.id}#${index}`, name: name.trim() }
+              : null,
+          )
+          .filter((s): s is NamedSeat => s !== null),
       ),
-    );
-  }
+    [tables],
+  );
 
-  function unassignLabel(labelId: string) {
-    setLabels((prev) =>
-      prev.map((label) =>
-        label.id === labelId ? { ...label, tableId: null } : label,
-      ),
-    );
-  }
-
-  function onGroupDrop(groupId: string | null) {
-    const labelId = dragLabelRef.current;
-    dragLabelRef.current = null;
-    if (!labelId) return;
-    setLabels((prev) =>
-      prev.map((label) =>
-        label.id === labelId ? { ...label, groupId } : label,
-      ),
-    );
-  }
+  const namedSeatsMap = useMemo(
+    () => new Map(namedSeats.map((s) => [s.id, s.name])),
+    [namedSeats],
+  );
 
   function createGroupSet(count: number) {
-    const nextGroups = createGroups(count);
-    setGroups(nextGroups);
-    setLabels((prev) => prev.map((label) => ({ ...label, groupId: null })));
+    setGroups(createGroups(count));
+    setGroupAssignment({});
     setRoleAssignment({});
   }
 
   function renameGroup(id: string, name: string) {
     setGroups((prev) => prev.map((g) => (g.id === id ? { ...g, name } : g)));
+  }
+
+  function setSeatGroup(seatId: string, groupId: string | null) {
+    setGroupAssignment((prev) => ({ ...prev, [seatId]: groupId }));
   }
 
   function addAvoidPair() {
@@ -299,10 +354,9 @@ export function TeacherClassroomLayoutClient() {
   }
 
   function generateProposal() {
-    if (groups.length === 0) return;
-    const labelIds = labels.map((l) => l.id);
+    if (groups.length === 0 || namedSeats.length === 0) return;
     const buckets = generateGroupAssignment(
-      labelIds,
+      namedSeats.map((s) => s.id),
       groupSize,
       genMode,
       avoidPairs,
@@ -317,18 +371,13 @@ export function TeacherClassroomLayoutClient() {
         ? groups
         : createGroups(proposedGroups.length);
     setGroups(nextGroups);
-    setLabels((prev) => {
-      const map = new Map<string, string>();
-      proposedGroups.forEach((bucket, index) => {
-        bucket.forEach((labelId) => {
-          map.set(labelId, nextGroups[index].id);
-        });
+    const nextAssignment: Record<string, string | null> = {};
+    proposedGroups.forEach((bucket, index) => {
+      bucket.forEach((seatId) => {
+        nextAssignment[seatId] = nextGroups[index].id;
       });
-      return prev.map((label) => ({
-        ...label,
-        groupId: map.get(label.id) ?? null,
-      }));
     });
+    setGroupAssignment(nextAssignment);
     setProposedGroups(null);
   }
 
@@ -339,22 +388,22 @@ export function TeacherClassroomLayoutClient() {
   function assignRolesToGroups() {
     const nextAssignment: RoleAssignment = {};
     groups.forEach((group) => {
-      const members = labels
-        .filter((label) => label.groupId === group.id)
-        .map((label) => label.id);
+      const members = namedSeats
+        .filter((seat) => groupAssignment[seat.id] === group.id)
+        .map((seat) => seat.id);
       Object.assign(nextAssignment, assignRoles(members));
     });
     setRoleAssignment(nextAssignment);
   }
 
   function saveAs(name: string) {
-    const id = `config-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const id = generateId("config");
     const next: StoredLayout = {
       id,
       name,
       tables,
-      labels,
       groups,
+      groupAssignment,
       roleAssignment,
       isDefault: false,
     };
@@ -373,10 +422,11 @@ export function TeacherClassroomLayoutClient() {
     setCurrentId(found.id);
     setConfigName(found.name);
     setTables(found.tables);
-    setLabels(found.labels);
     setGroups(found.groups);
+    setGroupAssignment(found.groupAssignment);
     setRoleAssignment(found.roleAssignment);
     setProposedGroups(null);
+    setSelectedTableId(null);
   }
 
   function renameSave(id: string, name: string) {
@@ -393,7 +443,7 @@ export function TeacherClassroomLayoutClient() {
     if (!found) return;
     const copy: StoredLayout = {
       ...found,
-      id: `config-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      id: generateId("config"),
       name: `${found.name} (copie)`,
       isDefault: false,
     };
@@ -427,27 +477,32 @@ export function TeacherClassroomLayoutClient() {
     }
     persistCurrent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tables, labels, groups, roleAssignment, configName]);
+  }, [tables, groups, groupAssignment, roleAssignment, configName]);
 
-  const unassignedLabels = useMemo(
-    () => labels.filter((label) => label.tableId === null),
-    [labels],
+  const selectedTable = useMemo(
+    () => tables.find((t) => t.id === selectedTableId) ?? null,
+    [tables, selectedTableId],
   );
 
-  const groupedLabels = useMemo(() => {
-    const map = new Map<string, Label[]>();
+  const groupedSeats = useMemo(() => {
+    const map = new Map<string, NamedSeat[]>();
     groups.forEach((g) => map.set(g.id, []));
-    labels.forEach((label) => {
-      if (label.groupId && map.has(label.groupId)) {
-        map.get(label.groupId)!.push(label);
+    namedSeats.forEach((seat) => {
+      const groupId = groupAssignment[seat.id];
+      if (groupId && map.has(groupId)) {
+        map.get(groupId)!.push(seat);
       }
     });
     return map;
-  }, [groups, labels]);
+  }, [groups, namedSeats, groupAssignment]);
 
-  const ungroupedLabels = useMemo(
-    () => labels.filter((label) => !label.groupId),
-    [labels],
+  const ungroupedSeats = useMemo(
+    () =>
+      namedSeats.filter((seat) => {
+        const groupId = groupAssignment[seat.id];
+        return !groupId || !groups.some((g) => g.id === groupId);
+      }),
+    [namedSeats, groupAssignment, groups],
   );
 
   return (
@@ -499,7 +554,7 @@ export function TeacherClassroomLayoutClient() {
               id="configs-rapides"
               className="text-xl font-black text-foreground"
             >
-              Configurations rapides
+              Modèles rapides
             </h2>
             <div className="mt-3 flex flex-wrap gap-2">
               {layoutKinds.map((k) => (
@@ -512,12 +567,29 @@ export function TeacherClassroomLayoutClient() {
                   {k.label}
                 </button>
               ))}
+            </div>
+
+            <div className="mt-3 flex flex-wrap gap-2">
               <button
                 type="button"
-                onClick={addTable}
+                onClick={() => addTable(1)}
                 className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
               >
-                + Ajouter une table
+                + Table simple
+              </button>
+              <button
+                type="button"
+                onClick={() => addTable(2)}
+                className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+              >
+                + Table double
+              </button>
+              <button
+                type="button"
+                onClick={resetPlan}
+                className="min-h-11 rounded-md border border-ember/50 px-4 text-sm font-bold text-ember transition hover:bg-ember/10"
+              >
+                Réinitialiser le plan
               </button>
             </div>
 
@@ -528,9 +600,8 @@ export function TeacherClassroomLayoutClient() {
                 className="mt-4 rounded-md border border-ember/50 bg-ember/10 p-3"
               >
                 <p id="confirm-overwrite" className="text-sm font-bold text-foreground">
-                  Remplacer le plan actuel par cette configuration ? Les
-                  tables actuelles seront supprimées et les étiquettes
-                  placées seront libérées.
+                  Remplacer le plan actuel par ce modèle ? Les tables et les
+                  noms actuellement placés seront supprimés.
                 </p>
                 <div className="mt-3 flex gap-2">
                   <button
@@ -556,22 +627,33 @@ export function TeacherClassroomLayoutClient() {
             <h2 id="surface-plan" className="text-xl font-black text-foreground">
               Surface de la salle
             </h2>
-            <div
-              ref={canvasRef}
-              onPointerMove={onCanvasPointerMove}
-              onPointerUp={onCanvasPointerUp}
-              className="relative mt-4 overflow-hidden rounded-lg border border-white/15 bg-background/30"
-              style={{ width: "100%", maxWidth: CANVAS_WIDTH, height: CANVAS_HEIGHT }}
-            >
-              {tables.map((table) => {
-                const tableLabels = labels.filter((l) => l.tableId === table.id);
-                return (
+            <p className="mt-1 text-sm text-muted print:hidden">
+              Touchez ou cliquez une table pour la sélectionner et agir
+              dessus. Tapez un nom dans chaque emplacement pour nommer un
+              élève.
+            </p>
+            <div className="mt-4 overflow-x-auto rounded-lg border border-white/15 bg-background/30">
+              <div
+                ref={canvasRef}
+                onPointerDown={onCanvasPointerDown}
+                onPointerMove={onCanvasPointerMove}
+                onPointerUp={onCanvasPointerUp}
+                className="relative"
+                style={{
+                  width: CANVAS_WIDTH,
+                  height: CANVAS_HEIGHT,
+                  flexShrink: 0,
+                }}
+              >
+                {tables.map((table) => (
                   <div
                     key={table.id}
                     onPointerDown={(e) => onTablePointerDown(e, table)}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={() => onTableDrop(table.id)}
-                    className="absolute flex flex-col items-center justify-center gap-1 rounded-md border-2 border-foreground/40 bg-background/70 p-1 text-center text-xs font-bold text-foreground shadow-sm"
+                    className={`absolute flex flex-col overflow-hidden rounded-md border-2 bg-background/70 text-center shadow-sm print:outline-none ${
+                      selectedTableId === table.id
+                        ? "border-jade outline outline-2 outline-jade"
+                        : "border-foreground/40"
+                    }`}
                     style={{
                       left: table.x,
                       top: table.y,
@@ -582,164 +664,82 @@ export function TeacherClassroomLayoutClient() {
                       touchAction: "none",
                     }}
                   >
-                    <span className="text-[10px] uppercase tracking-wide text-muted">
-                      {table.seats} places
-                    </span>
-                    <div className="flex flex-wrap items-center justify-center gap-1">
-                      {tableLabels.map((label) => (
-                        <span
-                          key={label.id}
-                          className="rounded bg-jade/20 px-1 text-[10px] font-bold text-jade"
-                        >
-                          {label.text}
+                    <div
+                      aria-hidden
+                      className="flex h-4 shrink-0 items-center justify-center bg-foreground/10 print:hidden"
+                    >
+                      <span className="text-[8px] leading-none text-foreground/50">
+                        ⠿⠿⠿
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-wrap items-center justify-center gap-1 p-1">
+                      {table.names.map((name, index) => (
+                        <span key={index} className="inline-flex">
+                          <input
+                            type="text"
+                            value={name ?? ""}
+                            onChange={(e) =>
+                              setSeatName(table.id, index, e.target.value)
+                            }
+                            onPointerDown={(e) => {
+                              e.stopPropagation();
+                              selectTable(table.id);
+                            }}
+                            placeholder="Élève"
+                            aria-label={`Nom de l'élève, place ${index + 1}`}
+                            className="w-[46px] min-h-6 rounded border border-white/25 bg-background/90 px-1 text-center text-[10px] font-bold text-foreground print:hidden"
+                          />
+                          <span className="hidden min-w-[46px] border-b border-foreground/40 px-1 text-[10px] font-bold text-foreground print:inline-block">
+                            {name || " "}
+                          </span>
                         </span>
                       ))}
                     </div>
-                    <div className="flex gap-1 print:hidden">
-                      <button
-                        type="button"
-                        aria-label="Pivoter la table"
-                        onClick={() => rotateTable(table.id)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
-                      >
-                        ⟳
-                      </button>
-                      <button
-                        type="button"
-                        aria-label="Agrandir la table"
-                        onClick={() => resizeTable(table.id, 12)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
-                      >
-                        +
-                      </button>
-                      <button
-                        type="button"
-                        aria-label="Réduire la table"
-                        onClick={() => resizeTable(table.id, -12)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
-                      >
-                        −
-                      </button>
-                      <button
-                        type="button"
-                        aria-label="Dupliquer la table"
-                        onClick={() => duplicateTable(table.id)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
-                      >
-                        ⧉
-                      </button>
-                      <button
-                        type="button"
-                        aria-label="Supprimer la table"
-                        onClick={() => deleteTable(table.id)}
-                        className="min-h-6 min-w-6 rounded border border-ember/40 text-[10px] text-ember"
-                      >
-                        ✕
-                      </button>
-                    </div>
                   </div>
-                );
-              })}
-              {tables.length === 0 && (
-                <p className="absolute inset-0 flex items-center justify-center text-sm text-muted">
-                  Salle vide. Ajoutez une table ou choisissez une
-                  configuration rapide.
-                </p>
-              )}
-            </div>
-          </section>
-
-          <section
-            aria-labelledby="etiquettes"
-            className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
-          >
-            <h2 id="etiquettes" className="text-xl font-black text-foreground">
-              Étiquettes
-            </h2>
-            <div className="mt-3 flex flex-wrap items-end gap-3">
-              <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-                Prénom ou code
-                <input
-                  type="text"
-                  value={newLabelText}
-                  onChange={(e) => setNewLabelText(e.target.value)}
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
-                  placeholder="Ex : Léo, ou Élève 4"
-                />
-              </label>
-              <button
-                type="button"
-                onClick={addLabel}
-                disabled={!newLabelText.trim()}
-                className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                Créer l&apos;étiquette
-              </button>
-            </div>
-
-            <p className="mt-3 text-sm text-muted">
-              Glissez une étiquette non placée sur une table du plan
-              ci-dessus.
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-2" role="list">
-              {unassignedLabels.map((label) => (
-                <li
-                  key={label.id}
-                  draggable
-                  onDragStart={() => onLabelDragStart(label.id)}
-                  className="cursor-grab rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
-                >
-                  {label.text}
-                </li>
-              ))}
-              {unassignedLabels.length === 0 && labels.length > 0 && (
-                <li className="text-sm text-muted">Toutes les étiquettes sont placées.</li>
-              )}
-            </ul>
-
-            {labels.some((l) => l.tableId !== null) && (
-              <div className="mt-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                  Étiquettes placées
-                </p>
-                <ul className="mt-2 flex flex-wrap gap-2" role="list">
-                  {labels
-                    .filter((l) => l.tableId !== null)
-                    .map((label) => (
-                      <li
-                        key={label.id}
-                        className="flex items-center gap-2 rounded-md border border-white/15 bg-background/30 px-3 py-2 text-sm font-bold text-foreground"
-                      >
-                        {label.text}
-                        <button
-                          type="button"
-                          aria-label={`Retirer ${label.text} de la table`}
-                          onClick={() => unassignLabel(label.id)}
-                          className="text-xs text-muted hover:text-ember"
-                        >
-                          ✕
-                        </button>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            )}
-
-            {labels.length > 0 && (
-              <ul className="mt-4 flex flex-wrap gap-2" role="list">
-                {labels.map((label) => (
-                  <li key={`del-${label.id}`}>
-                    <button
-                      type="button"
-                      aria-label={`Supprimer l'étiquette ${label.text}`}
-                      onClick={() => removeLabel(label.id)}
-                      className="text-xs text-muted hover:text-ember"
-                    >
-                      Supprimer {label.text}
-                    </button>
-                  </li>
                 ))}
-              </ul>
+                {tables.length === 0 && (
+                  <p className="absolute inset-0 flex items-center justify-center text-sm text-muted">
+                    Salle vide. Ajoutez une table ou choisissez un modèle
+                    rapide.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {selectedTable && (
+              <div className="mt-3 flex flex-wrap items-center gap-2 rounded-md border border-jade/40 bg-jade/10 p-3 print:hidden">
+                <p className="text-sm font-bold text-foreground">
+                  Sélection : {seatCountLabel(selectedTable.seats)}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => rotateTable(selectedTable.id)}
+                  className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground hover:border-jade/50"
+                >
+                  ⟳ Pivoter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => duplicateTable(selectedTable.id)}
+                  className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground hover:border-jade/50"
+                >
+                  ⧉ Dupliquer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => deleteTable(selectedTable.id)}
+                  className="min-h-11 rounded-md border border-ember/40 px-3 text-sm font-bold text-ember hover:bg-ember/10"
+                >
+                  ✕ Supprimer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedTableId(null)}
+                  className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+                >
+                  Désélectionner
+                </button>
+              </div>
             )}
           </section>
         </>
@@ -754,6 +754,9 @@ export function TeacherClassroomLayoutClient() {
             <h2 id="creer-groupes" className="text-xl font-black text-foreground">
               Créer des groupes
             </h2>
+            <p className="mt-1 text-sm text-muted">
+              Les élèves proviennent des noms saisis sur les tables du plan.
+            </p>
             <div className="mt-3 flex flex-wrap items-end gap-3">
               {[2, 3, 4, 5, 6].map((n) => (
                 <button
@@ -815,10 +818,10 @@ export function TeacherClassroomLayoutClient() {
                   onChange={(e) => setAvoidA(e.target.value)}
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
-                  <option value="">Étiquette 1</option>
-                  {labels.map((l) => (
-                    <option key={l.id} value={l.id}>
-                      {l.text}
+                  <option value="">Élève 1</option>
+                  {namedSeats.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name}
                     </option>
                   ))}
                 </select>
@@ -827,10 +830,10 @@ export function TeacherClassroomLayoutClient() {
                   onChange={(e) => setAvoidB(e.target.value)}
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
-                  <option value="">Étiquette 2</option>
-                  {labels.map((l) => (
-                    <option key={l.id} value={l.id}>
-                      {l.text}
+                  <option value="">Élève 2</option>
+                  {namedSeats.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name}
                     </option>
                   ))}
                 </select>
@@ -845,8 +848,8 @@ export function TeacherClassroomLayoutClient() {
               </div>
               <ul className="mt-2 flex flex-wrap gap-2" role="list">
                 {avoidPairs.map((pair, index) => {
-                  const a = labels.find((l) => l.id === pair.a)?.text ?? "?";
-                  const b = labels.find((l) => l.id === pair.b)?.text ?? "?";
+                  const a = namedSeatsMap.get(pair.a) ?? "?";
+                  const b = namedSeatsMap.get(pair.b) ?? "?";
                   return (
                     <li
                       key={`${pair.a}-${pair.b}`}
@@ -870,7 +873,7 @@ export function TeacherClassroomLayoutClient() {
             <button
               type="button"
               onClick={generateProposal}
-              disabled={groups.length === 0 || labels.length === 0}
+              disabled={groups.length === 0 || namedSeats.length === 0}
               className="mt-4 min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade disabled:cursor-not-allowed disabled:opacity-40"
             >
               Générer une proposition
@@ -886,7 +889,7 @@ export function TeacherClassroomLayoutClient() {
                     <li key={index} className="text-sm text-foreground">
                       <span className="font-bold">Groupe {index + 1} : </span>
                       {bucket
-                        .map((id) => labels.find((l) => l.id === id)?.text)
+                        .map((id) => namedSeatsMap.get(id))
                         .filter(Boolean)
                         .join(", ")}
                     </li>
@@ -928,16 +931,14 @@ export function TeacherClassroomLayoutClient() {
               </div>
 
               <p className="mt-2 text-sm text-muted print:hidden">
-                Glissez une étiquette d&apos;un groupe à l&apos;autre pour ajuster
-                manuellement après génération.
+                Utilisez le menu à côté de chaque élève pour le déplacer vers
+                un autre groupe.
               </p>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {groups.map((group) => (
                   <div
                     key={group.id}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={() => onGroupDrop(group.id)}
                     className="rounded-lg border-2 p-3"
                     style={{ borderColor: group.color }}
                   >
@@ -961,51 +962,82 @@ export function TeacherClassroomLayoutClient() {
                       </span>
                     </div>
                     <ul className="mt-3 space-y-1" role="list">
-                      {(groupedLabels.get(group.id) ?? []).map((label) => {
-                        const role = roleAssignment[label.id];
+                      {(groupedSeats.get(group.id) ?? []).map((seat) => {
+                        const role = roleAssignment[seat.id];
                         const roleLabel = roles.find((r) => r.id === role)?.label;
                         return (
                           <li
-                            key={label.id}
-                            draggable
-                            onDragStart={() => onLabelDragStart(label.id)}
+                            key={seat.id}
                             className="flex items-center justify-between gap-2 rounded-md border border-white/10 bg-background/30 px-2 py-1 text-sm font-bold text-foreground"
                           >
-                            <span>{label.text}</span>
-                            {roleLabel && (
-                              <span className="text-xs font-bold uppercase tracking-wide text-muted">
-                                {roleLabel}
-                              </span>
-                            )}
+                            <span>{seat.name}</span>
+                            <span className="flex items-center gap-2">
+                              {roleLabel && (
+                                <span className="text-xs font-bold uppercase tracking-wide text-muted">
+                                  {roleLabel}
+                                </span>
+                              )}
+                              <select
+                                value={group.id}
+                                onChange={(e) =>
+                                  setSeatGroup(
+                                    seat.id,
+                                    e.target.value === "none"
+                                      ? null
+                                      : e.target.value,
+                                  )
+                                }
+                                aria-label={`Déplacer ${seat.name} vers un autre groupe`}
+                                className="min-h-9 rounded-md border border-white/15 bg-background/60 px-1 text-xs font-bold text-foreground print:hidden"
+                              >
+                                {groups.map((g) => (
+                                  <option key={g.id} value={g.id}>
+                                    {g.name}
+                                  </option>
+                                ))}
+                                <option value="none">Sans groupe</option>
+                              </select>
+                            </span>
                           </li>
                         );
                       })}
-                      {(groupedLabels.get(group.id) ?? []).length === 0 && (
-                        <li className="text-xs text-muted">Aucune étiquette.</li>
+                      {(groupedSeats.get(group.id) ?? []).length === 0 && (
+                        <li className="text-xs text-muted">Aucun élève.</li>
                       )}
                     </ul>
                   </div>
                 ))}
               </div>
 
-              {ungroupedLabels.length > 0 && (
-                <div
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={() => onGroupDrop(null)}
-                  className="mt-4 rounded-lg border border-white/15 bg-background/30 p-3 print:hidden"
-                >
+              {ungroupedSeats.length > 0 && (
+                <div className="mt-4 rounded-lg border border-white/15 bg-background/30 p-3 print:hidden">
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                    Étiquettes sans groupe (déposer ici pour retirer d&apos;un groupe)
+                    Élèves sans groupe
                   </p>
-                  <ul className="mt-2 flex flex-wrap gap-2" role="list">
-                    {ungroupedLabels.map((label) => (
+                  <ul className="mt-2 space-y-2" role="list">
+                    {ungroupedSeats.map((seat) => (
                       <li
-                        key={label.id}
-                        draggable
-                        onDragStart={() => onLabelDragStart(label.id)}
-                        className="cursor-grab rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
+                        key={seat.id}
+                        className="flex items-center justify-between gap-2 rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
                       >
-                        {label.text}
+                        <span>{seat.name}</span>
+                        <select
+                          defaultValue=""
+                          onChange={(e) => {
+                            if (e.target.value) setSeatGroup(seat.id, e.target.value);
+                          }}
+                          aria-label={`Ajouter ${seat.name} à un groupe`}
+                          className="min-h-9 rounded-md border border-white/15 bg-background/60 px-1 text-xs font-bold text-foreground"
+                        >
+                          <option value="" disabled>
+                            Choisir un groupe
+                          </option>
+                          {groups.map((g) => (
+                            <option key={g.id} value={g.id}>
+                              {g.name}
+                            </option>
+                          ))}
+                        </select>
                       </li>
                     ))}
                   </ul>

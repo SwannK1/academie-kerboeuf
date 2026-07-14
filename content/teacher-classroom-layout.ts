@@ -1,10 +1,11 @@
 /**
  * Plan de classe et générateur de groupes — outil local.
  *
- * Règle impérative : aucune donnée élève sensible. Les étiquettes ne
- * doivent contenir qu'un prénom ou un code choisi par l'enseignant, jamais
- * d'information médicale, familiale ou comportementale. Tout est stocké
- * uniquement sur cet appareil (localStorage), sans envoi à un serveur.
+ * Règle impérative : aucune donnée élève sensible. Les noms saisis sur les
+ * tables ne doivent contenir qu'un prénom ou un code choisi par
+ * l'enseignant, jamais d'information médicale, familiale ou
+ * comportementale. Tout est stocké uniquement sur cet appareil
+ * (localStorage), sans envoi à un serveur.
  */
 
 export type TableShape = {
@@ -15,13 +16,7 @@ export type TableShape = {
   width: number;
   height: number;
   seats: number;
-};
-
-export type Label = {
-  id: string;
-  text: string;
-  tableId: string | null;
-  groupId: string | null;
+  names: (string | null)[];
 };
 
 export type RoleId =
@@ -59,28 +54,56 @@ export const groupPictograms = ["★", "●", "▲", "◆", "■", "♦"];
 
 export type RoleAssignment = Record<string, RoleId | null>;
 
-export type LayoutKind = "rangees" | "ilots" | "u" | "binomes" | "vide";
+export type LayoutKind =
+  | "frontal"
+  | "ilots"
+  | "u"
+  | "binomes"
+  | "groupes4"
+  | "evaluation";
 
 export const layoutKinds: { id: LayoutKind; label: string }[] = [
-  { id: "rangees", label: "Rangées" },
+  { id: "frontal", label: "Frontal" },
   { id: "ilots", label: "Îlots" },
   { id: "u", label: "En U" },
   { id: "binomes", label: "Binômes" },
-  { id: "vide", label: "Salle vide" },
+  { id: "groupes4", label: "Groupes de 4" },
+  { id: "evaluation", label: "Évaluation" },
 ];
 
-const TABLE_WIDTH = 90;
-const TABLE_HEIGHT = 56;
+const SIMPLE_WIDTH = 56;
+const SIMPLE_HEIGHT = 56;
+const DOUBLE_WIDTH = 100;
+const DOUBLE_HEIGHT = 56;
+const ISLAND_WIDTH = 104;
+const ISLAND_HEIGHT = 104;
 
-function makeTable(x: number, y: number, rotation = 0, seats = 2): TableShape {
+function dimsForSeats(seats: number): { width: number; height: number } {
+  if (seats <= 1) return { width: SIMPLE_WIDTH, height: SIMPLE_HEIGHT };
+  if (seats >= 4) return { width: ISLAND_WIDTH, height: ISLAND_HEIGHT };
+  return { width: DOUBLE_WIDTH, height: DOUBLE_HEIGHT };
+}
+
+export function generateId(prefix: string): string {
+  return `${prefix}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+export function makeTable(
+  x: number,
+  y: number,
+  rotation = 0,
+  seats: 1 | 2 | 4 = 2,
+): TableShape {
+  const { width, height } = dimsForSeats(seats);
   return {
-    id: `table-${Math.random().toString(36).slice(2, 10)}`,
+    id: generateId("table"),
     x,
     y,
     rotation,
-    width: TABLE_WIDTH,
-    height: TABLE_HEIGHT,
+    width,
+    height,
     seats,
+    names: Array.from({ length: seats }, () => null),
   };
 }
 
@@ -90,23 +113,20 @@ export function generateLayout(
   canvasHeight: number,
 ): TableShape[] {
   const margin = 24;
-  const usableWidth = Math.max(canvasWidth - margin * 2, TABLE_WIDTH);
-  const usableHeight = Math.max(canvasHeight - margin * 2, TABLE_HEIGHT);
+  const usableWidth = Math.max(canvasWidth - margin * 2, DOUBLE_WIDTH);
+  const usableHeight = Math.max(canvasHeight - margin * 2, DOUBLE_HEIGHT);
 
   switch (kind) {
-    case "vide":
-      return [];
-
-    case "binomes": {
-      const cols = Math.max(2, Math.floor(usableWidth / (TABLE_WIDTH + 24)));
-      const rows = Math.max(2, Math.floor(usableHeight / (TABLE_HEIGHT + 24)));
+    case "frontal": {
+      const cols = Math.max(2, Math.floor(usableWidth / (DOUBLE_WIDTH + 16)));
+      const rows = Math.max(2, Math.floor(usableHeight / (DOUBLE_HEIGHT + 16)));
       const tables: TableShape[] = [];
       for (let row = 0; row < rows; row += 1) {
         for (let col = 0; col < cols; col += 1) {
           tables.push(
             makeTable(
-              margin + col * (TABLE_WIDTH + 24),
-              margin + row * (TABLE_HEIGHT + 24),
+              margin + col * (DOUBLE_WIDTH + 16),
+              margin + row * (DOUBLE_HEIGHT + 16),
               0,
               2,
             ),
@@ -116,16 +136,16 @@ export function generateLayout(
       return tables;
     }
 
-    case "rangees": {
-      const cols = Math.max(2, Math.floor(usableWidth / (TABLE_WIDTH + 16)));
-      const rows = Math.max(2, Math.floor(usableHeight / (TABLE_HEIGHT + 16)));
+    case "binomes": {
+      const cols = Math.max(2, Math.floor(usableWidth / (DOUBLE_WIDTH + 28)));
+      const rows = Math.max(2, Math.floor(usableHeight / (DOUBLE_HEIGHT + 28)));
       const tables: TableShape[] = [];
       for (let row = 0; row < rows; row += 1) {
         for (let col = 0; col < cols; col += 1) {
           tables.push(
             makeTable(
-              margin + col * (TABLE_WIDTH + 16),
-              margin + row * (TABLE_HEIGHT + 16),
+              margin + col * (DOUBLE_WIDTH + 28),
+              margin + row * (DOUBLE_HEIGHT + 28),
               0,
               2,
             ),
@@ -136,17 +156,34 @@ export function generateLayout(
     }
 
     case "ilots": {
-      const islandCols = Math.max(2, Math.floor(usableWidth / 220));
-      const islandRows = Math.max(1, Math.floor(usableHeight / 200));
+      const islandCols = Math.max(1, Math.floor(usableWidth / 220));
+      const islandRows = Math.max(1, Math.floor(usableHeight / 160));
       const tables: TableShape[] = [];
       for (let row = 0; row < islandRows; row += 1) {
         for (let col = 0; col < islandCols; col += 1) {
           const baseX = margin + col * 220;
-          const baseY = margin + row * 200;
-          tables.push(makeTable(baseX, baseY, 0, 4));
-          tables.push(makeTable(baseX + 100, baseY, 0, 4));
-          tables.push(makeTable(baseX, baseY + 64, 0, 4));
-          tables.push(makeTable(baseX + 100, baseY + 64, 0, 4));
+          const baseY = margin + row * 160;
+          tables.push(makeTable(baseX, baseY, 0, 2));
+          tables.push(makeTable(baseX, baseY + DOUBLE_HEIGHT + 8, 0, 2));
+        }
+      }
+      return tables;
+    }
+
+    case "groupes4": {
+      const cols = Math.max(2, Math.floor(usableWidth / (ISLAND_WIDTH + 32)));
+      const rows = Math.max(1, Math.floor(usableHeight / (ISLAND_HEIGHT + 32)));
+      const tables: TableShape[] = [];
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          tables.push(
+            makeTable(
+              margin + col * (ISLAND_WIDTH + 32),
+              margin + row * (ISLAND_HEIGHT + 32),
+              0,
+              4,
+            ),
+          );
         }
       }
       return tables;
@@ -154,26 +191,48 @@ export function generateLayout(
 
     case "u": {
       const tables: TableShape[] = [];
-      const cols = Math.max(3, Math.floor(usableWidth / (TABLE_WIDTH + 16)));
-      const sideRows = Math.max(2, Math.floor((usableHeight - TABLE_HEIGHT) / (TABLE_HEIGHT + 16)));
+      const cols = Math.max(3, Math.floor(usableWidth / (DOUBLE_WIDTH + 16)));
+      const sideRows = Math.max(
+        2,
+        Math.floor((usableHeight - DOUBLE_HEIGHT) / (DOUBLE_HEIGHT + 16)),
+      );
 
       for (let col = 0; col < cols; col += 1) {
         tables.push(
-          makeTable(margin + col * (TABLE_WIDTH + 16), margin, 0, 2),
+          makeTable(margin + col * (DOUBLE_WIDTH + 16), margin, 0, 2),
         );
       }
       for (let row = 1; row <= sideRows; row += 1) {
         tables.push(
-          makeTable(margin, margin + row * (TABLE_HEIGHT + 16), 90, 2),
+          makeTable(margin, margin + row * (DOUBLE_HEIGHT + 16), 90, 2),
         );
         tables.push(
           makeTable(
-            margin + (cols - 1) * (TABLE_WIDTH + 16),
-            margin + row * (TABLE_HEIGHT + 16),
+            margin + (cols - 1) * (DOUBLE_WIDTH + 16),
+            margin + row * (DOUBLE_HEIGHT + 16),
             90,
             2,
           ),
         );
+      }
+      return tables;
+    }
+
+    case "evaluation": {
+      const cols = Math.max(2, Math.floor(usableWidth / (SIMPLE_WIDTH + 40)));
+      const rows = Math.max(2, Math.floor(usableHeight / (SIMPLE_HEIGHT + 40)));
+      const tables: TableShape[] = [];
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          tables.push(
+            makeTable(
+              margin + col * (SIMPLE_WIDTH + 40),
+              margin + row * (SIMPLE_HEIGHT + 40),
+              0,
+              1,
+            ),
+          );
+        }
       }
       return tables;
     }
@@ -185,7 +244,7 @@ export function generateLayout(
 
 export function createGroups(count: number): Group[] {
   return Array.from({ length: count }, (_, index) => ({
-    id: `groupe-${Math.random().toString(36).slice(2, 10)}`,
+    id: generateId("groupe"),
     name: `Groupe ${index + 1}`,
     color: groupColors[index % groupColors.length],
     pictogram: groupPictograms[index % groupPictograms.length],
@@ -214,23 +273,22 @@ function violatesAvoidPairs(
 }
 
 /**
- * Répartit des étiquettes dans un nombre de groupes calculé à partir de la
- * taille de groupe souhaitée. Sans donnée élève réelle disponible, le mode
- * « hétérogène » mélange l'ordre des étiquettes avant répartition et le
- * mode « homogène » conserve l'ordre fourni (ex. ordre alphabétique des
- * étiquettes), ce qui regroupe les étiquettes voisines dans l'ordre donné.
+ * Répartit des identifiants (sièges nommés) dans un nombre de groupes
+ * calculé à partir de la taille de groupe souhaitée. Le mode « hétérogène »
+ * mélange l'ordre avant répartition, le mode « homogène » conserve l'ordre
+ * fourni.
  */
 export function generateGroupAssignment(
-  labelIds: string[],
+  seatIds: string[],
   groupSize: number,
   mode: GroupGenerationMode,
   avoidPairs: AvoidPair[],
   maxAttempts = 200,
 ): string[][] {
-  const groupCount = Math.max(1, Math.ceil(labelIds.length / groupSize));
+  const groupCount = Math.max(1, Math.ceil(seatIds.length / groupSize));
 
   for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-    const ordered = mode === "heterogene" ? shuffle(labelIds) : labelIds;
+    const ordered = mode === "heterogene" ? shuffle(seatIds) : seatIds;
     const buckets: string[][] = Array.from({ length: groupCount }, () => []);
     ordered.forEach((id, index) => {
       buckets[index % groupCount].push(id);
@@ -244,7 +302,7 @@ export function generateGroupAssignment(
     }
   }
 
-  const ordered = mode === "heterogene" ? shuffle(labelIds) : labelIds;
+  const ordered = mode === "heterogene" ? shuffle(seatIds) : seatIds;
   const buckets: string[][] = Array.from({ length: groupCount }, () => []);
   ordered.forEach((id, index) => {
     buckets[index % groupCount].push(id);
@@ -264,8 +322,8 @@ export type StoredLayout = {
   id: string;
   name: string;
   tables: TableShape[];
-  labels: Label[];
   groups: Group[];
+  groupAssignment: Record<string, string | null>;
   roleAssignment: RoleAssignment;
   isDefault: boolean;
 };
