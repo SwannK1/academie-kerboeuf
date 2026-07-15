@@ -109,6 +109,10 @@ export default function ProfesseursPage() {
         <p className="mt-3 text-lg text-muted">
           Chaque matière a un référent pour guider les apprentissages.
         </p>
+        <p className="mt-2 text-sm font-bold text-foreground/70">
+          Chaque niveau est accompagné par un guide. Chaque discipline est
+          portée par un professeur référent.
+        </p>
       </section>
 
       <section aria-label="Grille des professeurs">

@@ -17,7 +17,7 @@ export type ProfessorProfile = {
   slug: string;
   profileHref: string;
   name: string;
-  characterType?: "professeur référent" | "personnalité officielle";
+  characterType?: "guide de niveau" | "professeur référent" | "personnalité officielle";
   role: string;
   initial: string;
   mainSubject: string;
@@ -918,7 +918,9 @@ const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
     slug: level.professor.slug,
     profileHref: `/professeurs/${level.professor.slug}`,
     name: level.professor.name,
-    characterType: "professeur référent",
+    // Ces profils sont construits à partir de academyLevels.professor, qui modélise
+    // en réalité les guides de niveau (un par niveau), pas des professeurs de matière.
+    characterType: "guide de niveau",
     role: level.professor.role,
     initial: level.professor.initial,
     mainSubject: level.professor.mainSubject,
@@ -975,6 +977,9 @@ const officialPersonalities: {
   accentColor: AccentColor;
   universe: string;
   personalityProfile: CharacterPersonalityProfile;
+  /** Les 7 professeurs référents officiels par discipline sont marqués explicitement ;
+   *  les autres personnalités restent "personnalité officielle" par défaut. */
+  characterType?: "professeur référent" | "personnalité officielle";
 }[] = [
   {
     slug: "agathe",
@@ -1043,6 +1048,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "gold",
     universe: "Agora lumineuse",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Charismatique", "Lumineuse", "Sociable", "Positive", "Élégante", "Dynamique"],
       strengths: ["Encourage la prise de parole", "Valorise l’expression", "Installe la confiance à l’écrit comme à l’oral"],
@@ -1062,6 +1068,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "ember",
     universe: "Archives des civilisations",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Sage", "Patient", "Cultivé", "Érudit", "Calme", "Conteur"],
       strengths: ["Relie les époques", "Raconte les civilisations", "Donne de la profondeur aux faits"],
@@ -1081,6 +1088,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "ember",
     universe: "Atelier des formes",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Créatif", "Expressif", "Chaleureux", "Imaginatif", "Libre", "Sensible"],
       strengths: ["Libère les idées", "Accepte les essais", "Donne forme aux émotions"],
@@ -1100,6 +1108,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "sky",
     universe: "Galerie des songes",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Poétique", "Apaisante", "Sensible", "Élégante", "Rêveuse", "Artistique"],
       strengths: ["Apaise l’entrée dans l’art", "Fait sentir les nuances", "Relie émotion et forme"],
@@ -1119,6 +1128,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "gold",
     universe: "Terrain des défis",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Énergique", "Bienveillant", "Motivant", "Protecteur", "Enthousiaste", "Courageux"],
       strengths: ["Remobilise les élèves", "Transforme l’effort en défi", "Protège la confiance"],
@@ -1138,6 +1148,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "jade",
     universe: "Atelier des prototypes",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Ingénieux", "Méthodique", "Constructeur", "Créatif", "Pratique", "Patient", "Organisé"],
       strengths: ["Construit des méthodes de calcul concrètes", "Planifie le raisonnement par étapes", "Vérifie chaque résultat"],
@@ -1157,6 +1168,7 @@ const officialPersonalities: {
     cycle: "Personnalité officielle",
     accentColor: "gold",
     universe: "Ruche des observations",
+    characterType: "professeur référent",
     personalityProfile: {
       dominantTraits: ["Organisée", "Vive", "Coopérative", "Précise", "Énergique", "Attentive aux détails"],
       strengths: ["Fait coopérer", "Repère les détails", "Organise les observations du vivant"],
@@ -1439,7 +1451,7 @@ function toOfficialProfile(profile: (typeof officialPersonalities)[number]): Pro
     slug: profile.slug,
     profileHref: `/professeurs/${profile.slug}`,
     name: profile.name,
-    characterType: "personnalité officielle",
+    characterType: profile.characterType ?? "personnalité officielle",
     role: profile.role,
     initial: profile.name.charAt(0),
     mainSubject: profile.mainSubject,

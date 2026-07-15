@@ -159,6 +159,11 @@ export function ProfessorHero({ professor }: { professor: ProfessorProfile }) {
           <div className="min-w-0 flex-1">
             {/* Badges */}
             <div className="flex flex-wrap items-center gap-2">
+              {professor.characterType ? (
+                <span className="rounded-md border border-white/20 bg-white/[0.06] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-foreground/80">
+                  {professor.characterType}
+                </span>
+              ) : null}
               <span className={`rounded-md border px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] ${a.badge}`}>
                 {professor.mainSubject}
               </span>

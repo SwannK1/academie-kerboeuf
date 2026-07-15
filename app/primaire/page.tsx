@@ -109,19 +109,25 @@ export default function PrimairePage() {
 
       {/* ── Liens secondaires ─────────────────────────────────────────────── */}
       <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl flex flex-wrap gap-4">
-          <Link
-            href="/professeurs"
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
-          >
-            Équipe pédagogique →
-          </Link>
-          <Link
-            href="/primaire/lieux"
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
-          >
-            Lieux des Lisières →
-          </Link>
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-4 text-sm font-bold text-muted">
+            Chaque niveau est accompagné par un guide. Chaque discipline est
+            portée par un professeur référent.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/professeurs"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+            >
+              Équipe pédagogique →
+            </Link>
+            <Link
+              href="/primaire/lieux"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+            >
+              Lieux des Lisières →
+            </Link>
+          </div>
         </div>
       </section>
     </main>

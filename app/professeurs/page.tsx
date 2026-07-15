@@ -127,9 +127,13 @@ function Hero({ professors, stats }: HeroProps) {
             </h1>
 
             <p className="mt-7 max-w-xl text-base leading-8 text-muted">
-              Chaque professeur est un univers. Chaque univers a sa méthode.
+              Chaque personnage est un univers. Chaque univers a sa méthode.
               Chaque méthode laisse une trace — des premiers apprentissages
               jusqu&rsquo;aux synthèses avancées.
+            </p>
+            <p className="mt-3 max-w-xl text-sm font-bold text-foreground/70">
+              Chaque niveau est accompagné par un guide. Chaque discipline est
+              portée par un professeur référent.
             </p>
 
             {/* Avatars preview */}
@@ -198,7 +202,7 @@ function Hero({ professors, stats }: HeroProps) {
             </p>
 
             <div className="mt-5 grid grid-cols-2 gap-4">
-              <StatBlock value={String(professors.length)} label="Professeurs" />
+              <StatBlock value={String(professors.length)} label="Personnages" />
               <StatBlock value={String(stats.cycles)} label="Cycles" />
               <StatBlock value={String(stats.primaire)} label="Niveau primaire" />
               <StatBlock value={String(stats.college)} label="Niveau collège" />
@@ -206,8 +210,9 @@ function Hero({ professors, stats }: HeroProps) {
 
             <div className="mt-5 border-t border-white/10 pt-5">
               <p className="text-xs leading-6 text-muted">
-                Chaque professeur est un repère visuel et méthodologique, pas un
-                compte ou une progression sauvegardée. Ils structurent l&rsquo;univers
+                Chaque personnage est un repère visuel et méthodologique, pas un
+                compte ou une progression sauvegardée. Les guides de niveau et
+                les professeurs référents structurent l&rsquo;univers
                 pédagogique de l&rsquo;Académie Kerboeuf du CP à la 3e, avec des
                 relais au lycée.
               </p>
@@ -292,11 +297,17 @@ function ClosingSection() {
           </h2>
 
           <p className="mt-5 max-w-2xl text-sm leading-7 text-muted">
-            Les neuf professeurs de l&rsquo;Académie Kerboeuf ne sont pas des fiches
-            de présentation — ils sont les gardiens de neuf méthodes distinctes,
-            neuf atmosphères de travail, neuf façons d&rsquo;entrer dans l&rsquo;apprentissage.
-            Ensemble, ils donnent une continuité lisible du CP à la 3e, puis
-            certains prolongent leur rôle dans les pages lycée.
+            Les personnages de l&rsquo;Académie Kerboeuf ne sont pas des fiches
+            de présentation — les guides de niveau et les professeurs référents
+            sont chacun les gardiens d&rsquo;une méthode distincte, d&rsquo;une
+            atmosphère de travail, d&rsquo;une façon d&rsquo;entrer dans
+            l&rsquo;apprentissage. Ensemble, ils donnent une continuité lisible
+            du CP à la 3e, puis certains prolongent leur rôle dans les pages
+            lycée.
+          </p>
+          <p className="mt-4 max-w-2xl text-sm font-bold text-foreground/80">
+            Chaque niveau est accompagné par un guide. Chaque discipline est
+            portée par un professeur référent.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

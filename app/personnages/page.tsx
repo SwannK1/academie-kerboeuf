@@ -28,12 +28,8 @@ const guides = emblematicStudents
     href: `/eleves/${student.slug}`,
   }));
 
-// Félix double comme professeur de niveau CM2 dans le contenu académique,
-// mais il reste un guide d'élève côté navigation (cf. content/professors.ts).
 const subjectProfessors = professorProfiles.filter(
-  (professor) =>
-    professor.characterType === "professeur référent" &&
-    professor.slug !== "felix",
+  (professor) => professor.characterType === "professeur référent",
 );
 
 const secondaryCharacters = professorProfiles.filter(
@@ -76,6 +72,10 @@ export default function PersonnagesPage() {
             Les guides de niveau accompagnent chaque élève dans sa posture
             d&apos;apprentissage, du premier niveau au lycée. Les professeurs de
             matière portent les méthodes propres à chaque discipline.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm font-bold text-foreground/80">
+            Chaque niveau est accompagné par un guide. Chaque discipline est
+            portée par un professeur référent.
           </p>
         </div>
       </section>

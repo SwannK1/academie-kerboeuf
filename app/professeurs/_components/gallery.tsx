@@ -12,7 +12,7 @@ export type ProfessorCardData = {
   slug: string;
   profileHref: string;
   name: string;
-  characterType: "professeur référent" | "personnalité officielle";
+  characterType: "guide de niveau" | "professeur référent" | "personnalité officielle";
   role: string;
   initial: string;
   mainSubject: string;
@@ -156,6 +156,9 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
         <div className="flex items-start gap-4">
           <GalleryAvatar professor={professor} />
           <div className="flex flex-col gap-1.5">
+            <span className="rounded border border-white/15 bg-white/[0.06] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-foreground/80">
+              {professor.characterType}
+            </span>
             <span className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${a.badge}`}>
               {professor.mainSubject}
             </span>
@@ -297,7 +300,7 @@ export function ProfessorGallery({ professors }: { professors: ProfessorCardData
           </p>
 
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-            {filtered.length} professeur{filtered.length > 1 ? "s" : ""}
+            {filtered.length} personnage{filtered.length > 1 ? "s" : ""}
           </p>
         </div>
 
