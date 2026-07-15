@@ -134,7 +134,7 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
       },
       {
         title: "Communications",
-        description: "Centralisez les messages destinés aux familles.",
+        description: "Générez des messages professionnels prêts à copier ou imprimer.",
         href: "/enseignants/communications",
         icon: "✉️",
       },
