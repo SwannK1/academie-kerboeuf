@@ -62,10 +62,16 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/evaluations",
         icon: "📝",
       },
+      {
+        title: "APC",
+        description: "Préparez vos cycles et séances d'APC sans suivi nominatif.",
+        href: "/enseignants/apc",
+        icon: "🎯",
+      },
     ],
   },
   {
-    title: "Préparer la classe",
+    title: "Organiser ma classe",
     cards: [
       {
         title: "Organisation de classe",
@@ -109,6 +115,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/bibliotheque-classe",
         icon: "📚",
       },
+      {
+        title: "Matériel de classe",
+        description: "Inventoriez le matériel disponible et les commandes à prévoir.",
+        href: "/enseignants/materiel-classe",
+        icon: "📦",
+      },
     ],
   },
   {
@@ -138,6 +150,18 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/communications",
         icon: "✉️",
       },
+      {
+        title: "Conseil d'école",
+        description: "Préparez l'ordre du jour, les décisions et les actions de suivi.",
+        href: "/enseignants/conseil-ecole",
+        icon: "🏫",
+      },
+      {
+        title: "Rendez-vous professionnels",
+        description: "Organisez vos échanges, notes, décisions et suivis.",
+        href: "/enseignants/rendez-vous",
+        icon: "🤝",
+      },
     ],
   },
   {
@@ -161,6 +185,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
           "Exporter ou restaurer vos outils enseignants sur cet appareil.",
         href: "/enseignants/sauvegardes",
         icon: "💾",
+      },
+      {
+        title: "Formations",
+        description: "Suivez vos formations, lectures et objectifs professionnels.",
+        href: "/enseignants/formations",
+        icon: "🎓",
       },
     ],
   },

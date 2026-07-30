@@ -2,28 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const navItems = [
-  { label: "Accueil", href: "/" },
-  { label: "Maternelle", href: "/maternelle" },
-  { label: "Primaire", href: "/primaire" },
-  { label: "Collège", href: "/college" },
-  { label: "Lycée", href: "/lycee" },
-  { label: "Univers", href: "/univers" },
-];
-
-function isActivePath(pathname: string, href: string) {
-  if (href === "/") {
-    return pathname === "/";
-  }
-
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
+import {
+  headerNavigationItems,
+  isGlobalNavItemActive,
+  mobileNavigationItems,
+} from "@/content/navigation";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/82 backdrop-blur-xl print:hidden">
@@ -33,7 +40,7 @@ export function SiteHeader() {
       >
         <Link
           href="/"
-          className="group flex min-w-0 items-center gap-3"
+          className="group flex min-w-0 items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
           onClick={() => setIsOpen(false)}
         >
           <span className="grid size-10 shrink-0 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold shadow-[0_0_28px_rgba(243,196,91,0.18)]">
@@ -50,15 +57,15 @@ export function SiteHeader() {
         </Link>
 
         <div className="hidden items-center gap-1 rounded-md border border-white/10 bg-white/[0.04] p-1 lg:flex">
-          {navItems.map((item) => {
-            const active = isActivePath(pathname, item.href);
+          {headerNavigationItems.map((item) => {
+            const active = isGlobalNavItemActive(pathname, item);
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded px-2.5 py-2 text-sm font-medium transition ${
+                className={`rounded px-2.5 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                   active
                     ? "bg-gold text-ink"
                     : "text-muted hover:bg-white/10 hover:text-foreground"
@@ -71,13 +78,16 @@ export function SiteHeader() {
         </div>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          className="grid size-10 place-items-center rounded-md border border-white/12 bg-white/[0.06] text-foreground lg:hidden"
+          className="grid size-10 place-items-center rounded-md border border-white/12 bg-white/[0.06] text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold lg:hidden"
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((open) => !open)}
         >
-          <span className="sr-only">Ouvrir le menu</span>
+          <span className="sr-only">
+            {isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          </span>
           <span className="flex w-5 flex-col gap-1.5" aria-hidden="true">
             <span
               className={`h-0.5 rounded-full bg-current transition ${
@@ -104,16 +114,19 @@ export function SiteHeader() {
           className="border-t border-white/10 bg-ink/96 px-4 py-3 shadow-2xl shadow-black/40 lg:hidden"
         >
           <div className="mx-auto grid max-w-7xl gap-2">
-            {navItems.map((item) => {
-              const active = isActivePath(pathname, item.href);
+            {mobileNavigationItems.map((item) => {
+              const active = isGlobalNavItemActive(pathname, item);
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  onClick={() => setIsOpen(false)}
-                  className={`rounded-md px-3 py-3 text-sm font-bold transition ${
+                  onClick={() => {
+                    setIsOpen(false);
+                    menuButtonRef.current?.focus();
+                  }}
+                  className={`rounded-md px-3 py-3 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                     active
                       ? "bg-gold text-ink"
                       : "bg-white/[0.04] text-muted hover:bg-white/10 hover:text-foreground"

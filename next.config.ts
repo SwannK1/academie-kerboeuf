@@ -46,6 +46,16 @@ const nextConfig: NextConfig = {
         destination: "/professeurs/:slug",
         permanent: true,
       },
+      {
+        source: "/enseignants/programmation/periode",
+        destination: "/enseignants/progression",
+        permanent: true,
+      },
+      {
+        source: "/enseignants/plan-de-classe",
+        destination: "/enseignants/organisation-classe",
+        permanent: true,
+      },
     ];
   },
   async headers() {
