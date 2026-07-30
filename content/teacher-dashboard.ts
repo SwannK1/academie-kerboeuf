@@ -62,6 +62,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/evaluations",
         icon: "📝",
       },
+      {
+        title: "APC",
+        description: "Préparez vos séances et cycles d'activités pédagogiques complémentaires.",
+        href: "/enseignants/apc",
+        icon: "🎯",
+      },
     ],
   },
   {
@@ -109,6 +115,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/bibliotheque-classe",
         icon: "📚",
       },
+      {
+        title: "Matériel de classe",
+        description: "Inventoriez votre matériel et repérez ce qu'il faut commander.",
+        href: "/enseignants/materiel-classe",
+        icon: "🧰",
+      },
     ],
   },
   {
@@ -125,6 +137,18 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         description: "Préparez et gardez une trace de vos conseils de cycle.",
         href: "/enseignants/conseils-cycle",
         icon: "🗒️",
+      },
+      {
+        title: "Conseil d'école",
+        description: "Préparez l'ordre du jour, les décisions et le suivi d'un conseil d'école.",
+        href: "/enseignants/conseil-ecole",
+        icon: "🏫",
+      },
+      {
+        title: "Rendez-vous professionnels",
+        description: "Préparez vos rendez-vous : objectif, ordre du jour, notes et suivi.",
+        href: "/enseignants/rendez-vous",
+        icon: "🤝",
       },
       {
         title: "Liaison CM2-6e",
@@ -148,6 +172,12 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         description: "Retrouvez vos modèles de documents prêts à réutiliser.",
         href: "/enseignants/modeles",
         icon: "🗂️",
+      },
+      {
+        title: "Mes formations",
+        description: "Suivez vos formations, lectures et compétences à développer.",
+        href: "/enseignants/formations",
+        icon: "🎓",
       },
       {
         title: "Dossier remplaçant",

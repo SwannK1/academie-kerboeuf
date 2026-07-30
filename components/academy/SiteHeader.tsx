@@ -11,6 +11,7 @@ const navItems = [
   { label: "Collège", href: "/college" },
   { label: "Lycée", href: "/lycee" },
   { label: "Univers", href: "/univers" },
+  { label: "Enseignants", href: "/enseignants" },
 ];
 
 function isActivePath(pathname: string, href: string) {
