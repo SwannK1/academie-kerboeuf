@@ -14,6 +14,12 @@ import {
   type PublicStatusKey,
 } from "@/content/public-status";
 
+const statusSectionOrder: PublicStatusKey[] = [
+  "available",
+  "in-progress",
+  "upcoming",
+];
+
 type FilterValue = "Toutes";
 type ModeFilter = FilterValue | ClassroomMode;
 type StatusFilter = FilterValue | PublicStatusKey;
@@ -93,6 +99,16 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
     );
   });
 
+  const groupedResources = statusSectionOrder
+    .map((key) => ({
+      key,
+      label: getPublicStatusLabel(key),
+      items: filteredResources.filter(
+        (resource) => getPublicStatusKey(resource.status) === key,
+      ),
+    }))
+    .filter((group) => group.items.length > 0);
+
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -162,11 +178,18 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
           </button>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filteredResources.map((resource) => (
-            <ResourceCard key={resource.id} resource={resource} />
-          ))}
-        </div>
+        {groupedResources.map((group) => (
+          <div key={group.key} className="mt-10">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-muted">
+              {group.label} · {group.items.length}
+            </h3>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {group.items.map((resource) => (
+                <ResourceCard key={resource.id} resource={resource} />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -206,11 +229,10 @@ function SelectFilter({
 }
 
 function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
-  return (
-    <Link
-      href={resource.href}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
-    >
+  const isAvailable = getPublicStatusKey(resource.status) === "available";
+
+  const body = (
+    <>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
@@ -230,20 +252,43 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
       <div className="mt-5 flex flex-wrap gap-2">
         <Badge>{resource.difficulty}</Badge>
         <Badge>{resource.professorName}</Badge>
-        {resource.modes.includes("projection") ? (
+        {isAvailable && resource.modes.includes("projection") ? (
           <ModeBadge mode="projection" />
         ) : null}
-        {resource.modes.includes("impression") ? (
+        {isAvailable && resource.modes.includes("impression") ? (
           <ModeBadge mode="impression" />
         ) : null}
-        {resource.modes.includes("correction") ? (
+        {isAvailable && resource.modes.includes("correction") ? (
           <ModeBadge mode="correction" />
         ) : null}
       </div>
 
-      <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
-        Ouvrir la mission
-      </span>
+      {isAvailable ? (
+        <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
+          Ouvrir la mission
+        </span>
+      ) : (
+        <span className="mt-6 text-sm font-bold text-muted">
+          {getPublicStatusLabel(resource.status)}
+        </span>
+      )}
+    </>
+  );
+
+  if (!isAvailable) {
+    return (
+      <div className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.02] p-5 opacity-80">
+        {body}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href={resource.href}
+      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+    >
+      {body}
     </Link>
   );
 }
