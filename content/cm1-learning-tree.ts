@@ -5,7 +5,7 @@
 export type Cm1LearningStatus = "available" | "in-progress" | "upcoming";
 
 export type Cm1GuideReference = {
-  id: "noisette" | "felix" | "chouette" | "hector" | "melina" | "max" | "naia" | "pablo" | "rosa";
+  id: "noisette" | "felix" | "hector" | "melina" | "max" | "naia" | "pablo" | "rosa";
   name: string;
   role?: string;
 };
@@ -80,7 +80,7 @@ export const cm1LearningTree: Cm1LearningTree = [
     place: { slug: "bibliotheque-des-explorateurs", label: "La Bibliothèque des Explorateurs" },
     guides: [
       { id: "noisette", name: "Noisette", role: "Guide CM1" },
-      { id: "chouette", name: "Chouette", role: "Guide Français" },
+      { id: "rosa", name: "Rosa la Chouette", role: "Guide Français" },
     ],
     status: "in-progress",
     domains: [

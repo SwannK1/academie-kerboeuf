@@ -65,12 +65,7 @@ const professorRefs = {
   esteban: {
     name: "Esteban",
     href: "/professeurs/esteban",
-    role: "Architecte des savoirs",
-  },
-  agathe: {
-    name: "Agathe la Chouette",
-    href: "/professeurs/agathe",
-    role: "Gardienne des récits",
+    role: "Guide principal du CE1 et du CE2",
   },
   leo: {
     name: "Léo le Zébu",
@@ -98,9 +93,9 @@ const professorRefs = {
     role: "Coach des défis positifs",
   },
   rosa: {
-    name: "Rosa le Flamant Rose",
+    name: "Rosa la Chouette",
     href: "/professeurs/rosa",
-    role: "Guide de la langue française",
+    role: "Gardienne des récits et guide de la langue française",
   },
   hector: {
     name: "Hector le Castor",
@@ -126,9 +121,9 @@ const studentRefs = {
     role: "Élève emblématique CM1",
   },
   esteban: {
-    name: "Esteban le Manchot Aventurier",
+    name: "Esteban le Pingouin Aventurier",
     href: "/eleves/esteban",
-    role: "Élève emblématique CE2",
+    role: "Élève emblématique CE1 et CE2",
   },
   gaston: {
     name: "Gaston le Hérisson Astucieux",
@@ -233,7 +228,7 @@ const places = [
     pedagogicalFunction:
       "Développer la compréhension fine, l'inférence et la culture littéraire dans un cadre apaisé.",
     disciplines: ["Français", "Lecture", "Histoire des arts", "EMI"],
-    professors: [professorRefs.agathe, professorRefs.felix],
+    professors: [professorRefs.rosa, professorRefs.felix],
     students: [studentRefs.zoe, studentRefs.felix],
     interactiveZones: [
       "Rayonnage des indices",
@@ -380,7 +375,7 @@ const places = [
     pedagogicalFunction:
       "Relier création, observation et langage pour produire, expliquer et exposer une démarche artistique.",
     disciplines: ["Arts plastiques", "Français", "Histoire des arts"],
-    professors: [professorRefs.pablo, professorRefs.agathe],
+    professors: [professorRefs.pablo, professorRefs.rosa],
     students: [studentRefs.noisette, studentRefs.felix],
     interactiveZones: [
       "Mur d'exposition",
@@ -588,7 +583,7 @@ const places = [
     pedagogicalFunction:
       "Rendre visibles les progrès, relier les missions entre elles et installer une mémoire collective du primaire.",
     disciplines: ["Français", "Arts", "EMI", "Méthodologie"],
-    professors: [professorRefs.agathe, professorRefs.pablo, professorRefs.felix],
+    professors: [professorRefs.rosa, professorRefs.pablo, professorRefs.felix],
     students: [studentRefs.zoe, studentRefs.noisette, studentRefs.felix],
     interactiveZones: [
       "Frise des missions",

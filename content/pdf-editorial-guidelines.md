@@ -48,7 +48,7 @@
 - Encadrés : bordure fine (0,5 pt), fond gris très clair (5 %) ou blanc — imprimable N&B.
 - Espace blanc préservé : au moins 2 cm de marge en bas pour annotations élève.
 - Félix : absent en CP–CE2. En CM1–CM2 : silhouette discrète, 1,5 cm, coin bas droit uniquement.
-- Professeur référent : mentionné dans le pied de page si la matière lui correspond (ex. « Avec Agathe la Chouette — Lecture »). Pas de portrait pleine page.
+- Professeur référent : mentionné dans le pied de page si la matière lui correspond (ex. « Avec Rosa la Chouette — Lecture »). Pas de portrait pleine page.
 
 ---
 
@@ -249,7 +249,7 @@ Slide 6 — Critères de réussite (cases à cocher vides)
 | CP–CE2 | Absent | Mention pied de page si matière correspond |
 | CM1–CM2 | Silhouette discrète, max 1,5 cm, bas droit | Mention pied de page |
 
-Les personnages référents (Agathe la Chouette, Léo le Zébu, Soa le Caméléon, etc.) sont mentionnés en pied de page ou slide de titre — jamais en illustration principale sur un document de contenu.
+Les personnages référents (Rosa la Chouette, Léo le Zébu, Soa le Caméléon, etc.) sont mentionnés en pied de page ou slide de titre — jamais en illustration principale sur un document de contenu.
 
 ---
 

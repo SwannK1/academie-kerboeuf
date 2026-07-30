@@ -8,7 +8,6 @@ export type ElementaryStudentId =
   | "felix";
 
 export type ElementaryProfessorId =
-  | "chouette"
   | "hector"
   | "melina"
   | "max"
@@ -268,8 +267,8 @@ export const elementaryStudentAssociationsById = {
   },
   esteban: {
     id: "esteban",
-    name: "Esteban le Manchot",
-    animal: "Manchot",
+    name: "Esteban le Pingouin",
+    animal: "Pingouin",
     level: "ce2",
     narrativeRole:
       "Explorateur des notions : il transforme les découvertes en traces claires, schémas et repères mémorisables.",
@@ -380,19 +379,6 @@ export const elementaryStudentAssociationsById = {
 } as const satisfies Record<ElementaryStudentId, ElementaryStudentAssociation>;
 
 export const elementaryProfessorAssociationsById = {
-  chouette: {
-    id: "chouette",
-    name: "Chouette",
-    animal: "Chouette",
-    discipline: ["Français", "Lecture", "Production d’écrit"],
-    associatedPlaceKeys: ["bibliotheque-des-recits", "salle-des-lanternes"],
-    pedagogicalPosture:
-      "Guide par questionnement calme, lecture fine et reformulation progressive.",
-    universeRole:
-      "Référente du langage écrit et oral : elle garantit la cohérence des récits, des textes et des consignes.",
-    forbiddenPlaceKeys: ["terrain-des-defis", "atelier-des-prototypes"],
-    existingProfessorSlug: "agathe",
-  },
   hector: {
     id: "hector",
     name: "Hector le Castor",
@@ -464,15 +450,15 @@ export const elementaryProfessorAssociationsById = {
   },
   rosa: {
     id: "rosa",
-    name: "Rosa le Flamant rose",
-    animal: "Flamant rose",
-    discipline: ["Anglais", "Cultures", "Expression orale"],
-    associatedPlaceKeys: ["agora-lumineuse", "bibliotheque-des-recits"],
+    name: "Rosa la Chouette",
+    animal: "Chouette",
+    discipline: ["Français", "Lecture", "Production d’écrit"],
+    associatedPlaceKeys: ["bibliotheque-des-recits", "salle-des-lanternes", "agora-lumineuse"],
     pedagogicalPosture:
-      "Installe une parole claire, encourage l’imitation, la répétition vivante et l’ouverture culturelle.",
+      "Guide par questionnement calme, lecture fine et reformulation progressive ; installe une parole claire et encourage l’expression orale.",
     universeRole:
-      "Ambassadrice des langues et cultures : elle fait passer de l’oral rassuré à la curiosité du monde.",
-    forbiddenPlaceKeys: ["atelier-des-prototypes", "cartotheque-secrete"],
+      "Référente du langage écrit et oral : elle garantit la cohérence des récits, des textes et des consignes.",
+    forbiddenPlaceKeys: ["terrain-des-defis", "atelier-des-prototypes"],
     existingProfessorSlug: "rosa",
   },
 } as const satisfies Record<ElementaryProfessorId, ElementaryProfessorAssociation>;

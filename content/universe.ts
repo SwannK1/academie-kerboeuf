@@ -225,7 +225,7 @@ export const mainPlaces: AcademyPlace[] = [
   {
     name: "Galerie des indices",
     category: "primaire",
-    inhabitant: "Gaston — CE1",
+    inhabitant: "Esteban & Gaston — CE1",
     description:
       "Tableaux effaçables couverts de colonnes de méthodes, chronomètre affiché et tournois de stratégies. La question signature : « Quelle stratégie tu as choisie ? »",
     accentColor: "gold",

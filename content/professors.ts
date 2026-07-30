@@ -113,14 +113,6 @@ const professorPersonalityProfiles: Record<string, CharacterPersonalityProfile> 
     interaction: "Elle rassure avant d’exiger, puis accompagne chaque réponse jusqu’à ce qu’elle devienne stable.",
     represents: "Le seuil de l’Académie : confiance, premiers codes et patience pédagogique.",
   },
-  gaston: {
-    dominantTraits: ["Calme", "Méthodique", "Observateur", "Logique", "Organisé"],
-    strengths: ["Fait nommer les stratégies", "Compare les démarches", "Installe la vérification"],
-    energy: "Une énergie posée, rigoureuse, qui transforme le calcul en méthode consciente.",
-    posture: "Il enseigne en faisant expliquer la procédure avant de valider la réponse.",
-    interaction: "Il questionne calmement et pousse l’élève à prouver ce qu’il avance.",
-    represents: "Le raisonnement explicite : comprendre avant d’agir.",
-  },
   esteban: {
     dominantTraits: ["Passionné", "Curieux", "Émerveillé", "Aventurier"],
     strengths: ["Organise les notions", "Trace des schémas mémorables", "Relie découverte et méthode"],
@@ -218,7 +210,7 @@ const extendedByLevelSlug: Record<string, ProfessorExtended> = {
         description: "La classe confirme ensemble avant que chaque élève n'ancre la réponse.",
       },
     ],
-    relatedSlugs: ["gaston", "esteban", "noisette"],
+    relatedSlugs: ["esteban", "noisette"],
     studentTransformation: [
       "Oser répondre même sans être certain",
       "Reconnaître les lettres et les sons avant de les assembler",
@@ -261,158 +253,79 @@ const extendedByLevelSlug: Record<string, ProfessorExtended> = {
 
   ce1: {
     accentColor: "gold",
-    avatarImage: "/images/academie-kerboeuf/personnages/professeurs/primaire/gaston.png",
-    bio: "Gaston est le professeur qui ne laisse jamais un élève calculer en silence. En CE1, il entraîne les élèves à nommer leur stratégie, à la comparer avec celle des autres, à comprendre pourquoi elle fonctionne — ou pourquoi elle échoue. Son objectif : transformer chaque automatisme en réflexe conscient.",
-    quote: "La bonne réponse ne suffit pas. Ce qui compte, c'est de savoir pourquoi elle est bonne.",
+    avatarImage: "/images/academie-kerboeuf/personnages/professeurs/primaire/esteban.png",
+    bio: "Esteban est le guide principal du CE1 et du CE2 à l'Académie Kerboeuf. En CE1, il aide les élèves à observer une notion pour la première fois et à en garder une trace claire — un schéma, un code couleur, un repère qu'ils pourront réutiliser. Il partage la Galerie des indices avec Gaston, qui accompagne les élèves au quotidien sur la méthode et l'autonomie.",
+    quote: "Une notion sans trace claire est une notion à moitié retenue.",
     headquarters: "Galerie des indices",
     universeNarrative:
-      "La Galerie des indices ressemble à un atelier d'entraînement en constante activité — tableaux effaçables couverts de colonnes de méthodes, chronomètre affiché en permanence, défis affichés sur les murs comme des records à battre. Gaston circule entre les postes, boussole en main, posant la même question à chaque élève : « Quelle stratégie tu as choisie ? »",
+      "La Galerie des indices est un espace vivant où chaque repère a sa place : indices affichés, premiers codes couleur, petits schémas de méthode. Esteban y trace en direct les premières notions du CE1, pendant que Gaston y anime les défis de stratégie et de vérification.",
     personality:
-      "Gaston est enthousiaste, curieux et légèrement compétitif. Il adore les défis chronométrés et les clashs de stratégies entre élèves. Il se souvient toujours de la procédure utilisée par chaque élève et la cite lors des bilans collectifs.",
+      "Esteban est précis, curieux et discrètement créatif. Il schématise tout et offre ses dessins de notions aux élèves. Ses codes couleur sont toujours les mêmes — rouge pour les exceptions, bleu pour les règles, vert pour les exemples.",
     visualIdentity:
-      "Table d'indices, repères dorés et petits défis chronométrés. Gaston porte toujours une boussole. Son espace de travail est dynamique : tableaux effaçables, chronomètre visible, colonnes de méthodes comparées côte à côte.",
+      "Galerie des indices, premiers tableaux de notions et tracés précis. Esteban utilise déjà les mêmes couleurs pour les mêmes fonctions qu'il retrouvera en CE2. Ses schémas sont simples, nets et faciles à reproduire.",
     pedagogicalRole:
-      "Transformer les automatismes en stratégies conscientes. Gaston aide les élèves à passer du bon réflexe à la bonne méthode — nommer ce qu'on fait est aussi important que de le faire correctement.",
+      "Faire passer les élèves de la découverte à la trace claire. Esteban transforme chaque première notion en repère visuel que l'élève peut retrouver et réutiliser, pendant que Gaston consolide la méthode et l'autonomie au quotidien.",
     academyFunction:
-      "Entraîneur de méthodes. Gaston organise les tournois de stratégies et maintient les rituels d'automatismes de la Galerie des indices. Il développe les outils de calcul mental et de vérification utilisés dans les niveaux suivants.",
+      "Guide principal du CE1. Esteban pose les premiers référentiels de classe — schémas, tableaux, codes — que les élèves retrouveront enrichis en CE2. Gaston reste le compagnon méthode et autonomie du niveau : il n'est pas remplacé, il travaille à ses côtés.",
     studentExperience:
-      "Les élèves de Gaston adorent gagner — mais ils apprennent vite que gagner seul ne compte pas autant que gagner en sachant pourquoi. Ils ressentent l'excitation d'un défi chronométré, puis la satisfaction plus profonde d'avoir pu expliquer leur stratégie devant la classe.",
+      "Les élèves d'Esteban découvrent qu'une notion floue peut devenir claire dès qu'elle est schématisée. Ils repartent avec un premier code couleur qu'ils retrouveront dans toutes les matières, et avec Gaston pour les entraîner à nommer leur stratégie.",
     missionPhilosophy:
-      "Gaston construit ses missions autour d'un défi central chronométré, suivi d'une phase de comparaison de procédures. L'objectif n'est jamais seulement la bonne réponse — c'est d'être capable d'expliquer en trente secondes pourquoi c'est la bonne réponse.",
+      "Esteban structure ses missions de CE1 comme de courtes découvertes : une notion observée, un schéma tracé en direct, une trace conservée. La mission ne sert pas uniquement à évaluer ; elle laisse une première empreinte dans le cahier de méthodes.",
     pedagogySteps: [
       {
-        label: "Défi lancé",
-        description: "Un problème chronométré pour activer la concentration et l'envie de gagner.",
+        label: "Observation guidée",
+        description: "Qu'est-ce qu'on remarque ? Esteban fait décrire avant de nommer la notion.",
+      },
+      {
+        label: "Premier schéma",
+        description: "Esteban trace en direct un schéma simple avec un code couleur constant.",
       },
       {
         label: "Stratégie nommée",
-        description: "Quelle méthode tu as choisie ? Chaque élève nomme sa démarche avant de valider.",
+        description: "Avec Gaston : quelle méthode as-tu choisie ? Chaque élève nomme sa démarche.",
       },
       {
-        label: "Comparaison de procédures",
-        description: "Deux méthodes côte à côte au tableau — laquelle est la plus solide ?",
-      },
-      {
-        label: "Vérification systématique",
-        description: "Aucune réponse n'est définitive sans vérification. Le réflexe s'installe dès le CE1.",
+        label: "Trace conservée",
+        description: "Le schéma rejoint le cahier de méthodes et devient un premier repère durable.",
       },
     ],
-    relatedSlugs: ["zoe", "esteban", "noisette"],
+    relatedSlugs: ["zoe", "noisette", "hector"],
     studentTransformation: [
-      "Nommer sa stratégie avant de valider sa réponse",
-      "Comparer deux procédures de calcul différentes",
-      "Vérifier systématiquement ses résultats",
-      "Expliquer sa démarche à voix haute devant la classe",
-      "Passer du bon réflexe à la bonne méthode",
+      "Observer une notion avant de la nommer",
+      "Construire un premier schéma avec un code couleur",
+      "Nommer sa stratégie avant de valider une réponse",
+      "Vérifier systématiquement un résultat",
+      "Garder une trace réutilisable dans le cahier de méthodes",
     ],
     teachesThrough: [
-      "Défis chronométrés",
-      "Comparaisons de procédures en binôme",
-      "Tournois de stratégies",
-      "Bilans collectifs après chaque mission",
+      "Schémas de notions dessinés en direct",
+      "Codes couleur simples et constants",
+      "Défis de stratégie menés avec Gaston",
+      "Traces conservées dans le cahier de méthodes",
     ],
     famousFor: [
-      "Sa question signature : « Quelle stratégie tu as choisie ? »",
-      "Le chronomètre toujours visible en classe",
-      "Ses colonnes de méthodes comparées au tableau",
-    ],
-    favoriteTools: [
-      "Tableau effaçable à colonnes",
-      "Chronomètre de classe",
-      "Boussole de méthodes",
-    ],
-    coreValues: ["Stratégie", "Rigueur", "Curiosité", "Vérification"],
-    method: [
-      {
-        label: "La question centrale",
-        text: "Gaston pose toujours la même question avant de valider : « Quelle stratégie tu as choisie ? » Les élèves apprennent à nommer leur démarche avant de passer à la suite.",
-      },
-      {
-        label: "Comparaison de procédures",
-        text: "Du calcul spontané à la stratégie expliquée. Gaston confronte deux procédures différentes devant la classe et laisse les élèves choisir la plus efficace — avec justification.",
-      },
-      {
-        label: "Vérification systématique",
-        text: "Chaque réponse est vérifiée avant d'être validée. Gaston installe le réflexe de revérification dès le CE1 : « Est-ce que tu as vérifié ? Avec quelle méthode ? »",
-      },
-    ],
-  },
-
-  ce2: {
-    accentColor: "sky",
-    avatarImage: "/images/academie-kerboeuf/personnages/professeurs/primaire/esteban.png",
-    bio: "Esteban est l'architecte du savoir de l'Académie. En CE2, elle aide les élèves à construire des représentations mentales organisées — schémas, tableaux, codes couleur — pour que chaque notion trouve sa place dans un ensemble cohérent. Elle ne supporte pas le flou, mais sait s'en servir comme point de départ d'une enquête.",
-    quote: "Une leçon sans schéma est une leçon à moitié retenue.",
-    headquarters: "Observatoire des notions",
-    universeNarrative:
-      "L'Observatoire des notions est un espace de silence actif. Chaque tableau est structuré selon le même code couleur — rouge pour les exceptions, bleu pour les règles, vert pour les exemples — et les schémas de Esteban sont tracés avec la précision d'une architecte. Rien n'est flou ici : chaque notion a sa place, chaque règle a sa trace.",
-    personality:
-      "Esteban est précise, structurée et discrètement créative. Elle schématise tout et offre ses dessins de notions aux élèves. Ses codes couleur sont toujours les mêmes — rouge pour les exceptions, bleu pour les règles, vert pour les exemples.",
-    visualIdentity:
-      "Observatoire calme, tableaux de notions et tracés précis. Esteban utilise toujours les mêmes couleurs pour les mêmes fonctions. Ses schémas sont nets, reproductibles, affichables. Son espace ressemble à un laboratoire de représentation.",
-    pedagogicalRole:
-      "Organiser le savoir pour le rendre mémorable et transférable. Esteban transforme chaque leçon en architecture visuelle que les élèves peuvent retrouver, reproduire et utiliser comme référence personnelle.",
-    academyFunction:
-      "Architecte des traces. Esteban construit les référentiels de classe que tous les autres professeurs de l'Académie peuvent réutiliser. Elle développe les outils de structuration visuelle du savoir — tableaux, schémas, codes — qui forment le langage commun de Kerboeuf.",
-    studentExperience:
-      "Les élèves de Esteban ont la sensation de voir pour la première fois — comme si une notion qu'ils connaissaient vaguement devenait soudainement claire, tracée, reproductible. Ils repartent avec des schémas dans la tête et un code couleur qu'ils utilisent dans toutes les matières.",
-    missionPhilosophy:
-      "Esteban structure ses missions comme des architectures visuelles. Chaque activité produit une trace de référence — un schéma, un tableau, un code — que les élèves conservent et réutilisent. La mission ne sert pas uniquement à évaluer ; elle sert à laisser une empreinte dans le cahier de méthodes.",
-    pedagogySteps: [
-      {
-        label: "Activation des acquis",
-        description: "Vous avez déjà vu quelque chose comme ça ? La nouvelle notion s'accroche à l'ancienne.",
-      },
-      {
-        label: "Lecture de la consigne",
-        description: "La consigne se lit comme une carte : elle indique une direction, pas un itinéraire.",
-      },
-      {
-        label: "Schéma de notion",
-        description: "Esteban trace en temps réel le schéma de la notion avec ses codes couleur constants.",
-      },
-      {
-        label: "Trace durable",
-        description: "La fiche rejoint le cahier de méthodes et devient un référentiel permanent.",
-      },
-    ],
-    relatedSlugs: ["zoe", "gaston", "noisette"],
-    studentTransformation: [
-      "Relier une nouvelle règle à ce qu'on sait déjà",
-      "Lire une consigne comme une carte à suivre",
-      "Construire un schéma mental d'une notion",
-      "Utiliser un référentiel personnel en autonomie",
-      "Organiser ses connaissances de façon visuelle",
-    ],
-    teachesThrough: [
-      "Schémas de notions dessinés en temps réel",
-      "Codes couleur constants et réutilisables",
-      "Référentiels affichés et consultables",
-      "Liens explicites entre concepts anciens et nouveaux",
-    ],
-    famousFor: [
-      "Ses schémas tracés à la main pendant la leçon",
-      "Son système de codes couleur mémorisé par les élèves",
-      "Les « traces durables » conservées dans le cahier",
+      "Ses premiers schémas tracés à la main pendant la leçon",
+      "Son code couleur que les élèves retrouvent ensuite en CE2",
+      "Sa complicité avec Gaston dans la Galerie des indices",
     ],
     favoriteTools: [
       "Tableau de notions codé couleur",
       "Cahier de méthodes personnel",
-      "Compas de structuration",
+      "Boussole de méthodes partagée avec Gaston",
     ],
-    coreValues: ["Clarté", "Organisation", "Mémorisation", "Cohérence"],
+    coreValues: ["Clarté", "Méthode", "Curiosité", "Vérification"],
     method: [
       {
-        label: "Relier le nouveau à l'ancien",
-        text: "Chaque nouvelle notion est reliée à quelque chose que les élèves connaissent déjà. Esteban commence toujours par : « Vous avez déjà vu quelque chose comme ça ? » avant d'introduire la règle.",
+        label: "Observer avant de nommer",
+        text: "Esteban ne donne jamais la règle en premier. Il fait d'abord observer et décrire, puis nomme la notion avec les élèves.",
       },
       {
-        label: "Consigne comme carte",
-        text: "La consigne se lit d'abord seul, puis on repère ensemble les mots qui indiquent ce qu'il faut faire. Esteban traite les consignes comme des cartes : elles indiquent une direction, pas un itinéraire complet.",
+        label: "Schéma et code couleur",
+        text: "Chaque notion reçoit un schéma simple et un code couleur constant, que les élèves retrouveront tout au long de leur scolarité au CE1 puis au CE2.",
       },
       {
-        label: "Traces durables",
-        text: "Les missions de Esteban servent de traces de référence après la leçon. Elles sont conservées dans le cahier de méthodes, réutilisées lors des révisions et affichées dans la classe.",
+        label: "Vérification avec Gaston",
+        text: "Esteban installe la trace claire ; Gaston installe la vérification systématique. Les deux rôles se complètent sans se remplacer.",
       },
     ],
   },
@@ -901,7 +814,7 @@ const extendedByLevelSlug: Record<string, ProfessorExtended> = {
   },
 };
 
-const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
+const perLevelProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
   const extended = extendedByLevelSlug[level.slug] ?? {
     bio: level.professor.description,
     method: [
@@ -964,6 +877,26 @@ const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
   };
 });
 
+/**
+ * Un même personnage (Esteban) est guide principal de deux niveaux (CE1 et CE2) :
+ * on fusionne les profils par slug pour n'avoir qu'une seule page /professeurs/[slug],
+ * en combinant les missions, matières et libellés de niveau des deux entrées.
+ */
+const rawProfessorProfiles: ProfessorProfile[] = Object.values(
+  perLevelProfessorProfiles.reduce<Record<string, ProfessorProfile>>((acc, profile) => {
+    const existing = acc[profile.slug];
+    acc[profile.slug] = existing
+      ? {
+          ...existing,
+          levelLabel: `${existing.levelLabel} · ${profile.levelLabel}`,
+          missions: [...existing.missions, ...profile.missions],
+          subjects: [...new Set([...existing.subjects, ...profile.subjects])],
+        }
+      : profile;
+    return acc;
+  }, {}),
+);
+
 const officialPersonalities: {
   slug: string;
   name: string;
@@ -976,25 +909,6 @@ const officialPersonalities: {
   universe: string;
   personalityProfile: CharacterPersonalityProfile;
 }[] = [
-  {
-    slug: "agathe",
-    name: "Agathe la Chouette",
-    role: "Gardienne des récits",
-    mainSubject: "Lecture",
-    symbol: "Plume nocturne",
-    levelLabel: "Académie",
-    cycle: "Personnalité officielle",
-    accentColor: "gold",
-    universe: "Bibliothèque des récits",
-    personalityProfile: {
-      dominantTraits: ["Sage", "Patiente", "Mystérieusement rassurante", "Fine observatrice", "Intelligente"],
-      strengths: ["Lit les détails invisibles", "Installe une exigence douce", "Fait aimer les récits"],
-      energy: "Une énergie calme, enveloppante, mais très exigeante intellectuellement.",
-      posture: "Elle guide par questions lentes, silences utiles et observation précise.",
-      interaction: "Elle rassure sans simplifier et pousse l’élève à lire plus finement.",
-      represents: "La lecture profonde : comprendre ce que le texte dit et ce qu’il suggère.",
-    },
-  },
   {
     slug: "leo",
     name: "Léo le Zébu",
@@ -1035,21 +949,21 @@ const officialPersonalities: {
   },
   {
     slug: "rosa",
-    name: "Rosa le Flamant Rose",
-    role: "Guide de la langue française",
+    name: "Rosa la Chouette",
+    role: "Gardienne des récits et guide de la langue française",
     mainSubject: "Français",
-    symbol: "Plume légère",
+    symbol: "Plume nocturne",
     levelLabel: "Académie",
     cycle: "Personnalité officielle",
     accentColor: "gold",
-    universe: "Agora lumineuse",
+    universe: "Bibliothèque des récits",
     personalityProfile: {
-      dominantTraits: ["Charismatique", "Lumineuse", "Sociable", "Positive", "Élégante", "Dynamique"],
-      strengths: ["Encourage la prise de parole", "Valorise l’expression", "Installe la confiance à l’écrit comme à l’oral"],
-      energy: "Une énergie solaire et sociale, tournée vers l’expression.",
-      posture: "Elle enseigne par lecture, écriture et prise de parole graduée.",
-      interaction: "Elle fait circuler la parole et rend chaque expression plus claire.",
-      represents: "La langue française assumée, élégante et encourageante.",
+      dominantTraits: ["Sage", "Charismatique", "Patiente", "Fine observatrice", "Élégante", "Rassurante"],
+      strengths: ["Lit les détails invisibles", "Encourage la prise de parole", "Installe la confiance à l’écrit comme à l’oral"],
+      energy: "Une énergie calme et lumineuse, exigeante sur la langue mais toujours rassurante.",
+      posture: "Elle enseigne par lecture fine, écriture et prise de parole graduée.",
+      interaction: "Elle rassure sans simplifier et fait circuler la parole pour rendre chaque expression plus claire.",
+      represents: "La langue française vivante : comprendre un texte en profondeur et s’exprimer avec assurance.",
     },
   },
   {

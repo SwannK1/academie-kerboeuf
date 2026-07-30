@@ -28,7 +28,7 @@ export const ce1GastonZones: Ce1GastonZone[] = [
   {
     id: "bibliotheque-rosa",
     placeName: "La Bibliothèque de Rosa",
-    character: "Rosa le Flamant Rose",
+    character: "Rosa la Chouette",
     mainSubject: "Français",
     tagline: "Lire, comprendre et écrire avec plaisir.",
     domains: subjectDomains("francais"),

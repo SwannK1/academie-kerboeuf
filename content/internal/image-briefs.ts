@@ -61,7 +61,7 @@ export const elementaryImageBriefs = [
     cycle: "Transversal",
     personnagesAutorisés: ["Zoé", "Gaston", "Félix"],
     personnagesInterdits: ["Personnages collège", "Personnages lycée", "Figurants non identifiés"],
-    professeursAutorisés: ["Zoé", "Gaston", "Félix"],
+    professeursAutorisés: ["Zoé", "Esteban", "Félix"],
     ambiance:
       "Cour lumineuse, active sans désordre, avec une sensation d'accueil et de départ en mission.",
     style:
@@ -172,7 +172,7 @@ export const elementaryImageBriefs = [
     cycle: "Cycle 2",
     personnagesAutorisés: ["Gaston", "Zoé", "Félix"],
     personnagesInterdits: ["Personnages lycée", "Personnages collège", "Mascottes décoratives"],
-    professeursAutorisés: ["Gaston"],
+    professeursAutorisés: ["Esteban"],
     ambiance:
       "Rigoureuse mais ludique, avec une impression de méthode, d'essai et de vérification.",
     style:
@@ -196,7 +196,7 @@ export const elementaryImageBriefs = [
       "Préserver une composition stable pour les cartes de lieu",
     ],
     promptComplet:
-      "Image officielle de l'Atelier des Mathématiques, salle de manipulation et de résolution de problèmes du primaire. Montrer du matériel de numération, des ardoises de stratégies, une table de problèmes et un espace de vérification. Ambiance méthodique, positive, avec le sentiment que les élèves passent de la manipulation à l'explication. Style semi-réaliste, clair, vivant sans surcharge. Personnages autorisés : Gaston, Zoé et Félix. Professeur autorisé : Gaston. Éviter formules avancées, calculs faux visibles, tableaux saturés et esthétique de laboratoire.",
+      "Image officielle de l'Atelier des Mathématiques, salle de manipulation et de résolution de problèmes du primaire. Montrer du matériel de numération, des ardoises de stratégies, une table de problèmes et un espace de vérification. Ambiance méthodique, positive, avec le sentiment que les élèves passent de la manipulation à l'explication. Style semi-réaliste, clair, vivant sans surcharge. Personnages autorisés : Gaston, Zoé et Félix. Professeur autorisé : Esteban. Éviter formules avancées, calculs faux visibles, tableaux saturés et esthétique de laboratoire.",
     statutValidation: "draft",
     dateValidation: null,
   },
@@ -357,7 +357,7 @@ export const elementaryImageBriefs = [
     cycle: "Transversal",
     personnagesAutorisés: ["Gaston", "Félix", "Esteban"],
     personnagesInterdits: ["Sportifs professionnels", "Public dans les gradins", "Personnages lycée"],
-    professeursAutorisés: ["Gaston", "Félix"],
+    professeursAutorisés: ["Esteban", "Félix"],
     ambiance:
       "Énergique, coopérative, sécurisée, avec un effort lisible mais non compétitif.",
     style:
@@ -381,7 +381,7 @@ export const elementaryImageBriefs = [
       "Éviter les poses ambiguës ou risquées",
     ],
     promptComplet:
-      "Image officielle du Gymnase du primaire, espace moteur pour coopérer, mesurer ses progrès et respecter des règles communes. Montrer des marquages au sol, une zone de règles collectives, un atelier de mesure et du matériel EPS sécurisé. Ambiance énergique, coopérative, scolaire, sans compétition agressive. Style semi-réaliste, lumineux, lisible en carte interactive. Personnages autorisés : Gaston, Félix et Esteban. Professeurs autorisés : Gaston et Félix. Éviter public en gradins, postures dangereuses et équipement professionnel dominant.",
+      "Image officielle du Gymnase du primaire, espace moteur pour coopérer, mesurer ses progrès et respecter des règles communes. Montrer des marquages au sol, une zone de règles collectives, un atelier de mesure et du matériel EPS sécurisé. Ambiance énergique, coopérative, scolaire, sans compétition agressive. Style semi-réaliste, lumineux, lisible en carte interactive. Personnages autorisés : Gaston, Félix et Esteban. Professeurs autorisés : Esteban et Félix. Éviter public en gradins, postures dangereuses et équipement professionnel dominant.",
     statutValidation: "draft",
     dateValidation: null,
   },
@@ -431,7 +431,7 @@ export const elementaryImageBriefs = [
     cycle: "Transversal",
     personnagesAutorisés: ["Zoé", "Gaston", "Noisette"],
     personnagesInterdits: ["Groupe de concert", "Personnages lycée", "Public de spectacle"],
-    professeursAutorisés: ["Zoé", "Gaston"],
+    professeursAutorisés: ["Zoé", "Esteban"],
     ambiance:
       "Écoute active, rythme collectif, calme joyeux, sans volume sonore suggéré comme excessif.",
     style:
@@ -455,7 +455,7 @@ export const elementaryImageBriefs = [
       "Garder une composition calme pour les élèves sensibles au bruit",
     ],
     promptComplet:
-      "Image officielle de la Salle de Musique du primaire, espace d'écoute, de rythme et de mémoire orale. Montrer des instruments simples, un cercle d'écoute, un affichage de rythmes et un espace de restitution collective. Ambiance d'écoute active, calme joyeux, rythme partagé, sans scène de spectacle. Style semi-réaliste, scolaire, chaleureux, lisible. Personnages autorisés : Zoé, Gaston et Noisette. Professeurs autorisés : Zoé et Gaston. Éviter concert rock, public, notes envahissantes et instruments adultes dominants.",
+      "Image officielle de la Salle de Musique du primaire, espace d'écoute, de rythme et de mémoire orale. Montrer des instruments simples, un cercle d'écoute, un affichage de rythmes et un espace de restitution collective. Ambiance d'écoute active, calme joyeux, rythme partagé, sans scène de spectacle. Style semi-réaliste, scolaire, chaleureux, lisible. Personnages autorisés : Zoé, Gaston et Noisette. Professeurs autorisés : Zoé et Esteban. Éviter concert rock, public, notes envahissantes et instruments adultes dominants.",
     statutValidation: "draft",
     dateValidation: null,
   },
@@ -542,7 +542,7 @@ export const elementaryImageBriefs = [
     cycle: "Transversal",
     personnagesAutorisés: ["Zoé", "Gaston", "Esteban"],
     personnagesInterdits: ["Personnel de restauration identifiable", "Personnages lycée", "Foule à table"],
-    professeursAutorisés: ["Zoé", "Gaston"],
+    professeursAutorisés: ["Zoé", "Esteban"],
     ambiance:
       "Conviviale, calme, organisée, avec une dimension d'EMC et de vocabulaire plutôt qu'une simple cantine.",
     style:
@@ -566,7 +566,7 @@ export const elementaryImageBriefs = [
       "Garder les affichages compréhensibles par pictogrammes",
     ],
     promptComplet:
-      "Image officielle du Réfectoire des Explorateurs, lieu de vie du primaire pour travailler alimentation, coopération, langage et règles partagées. Montrer des tables collectives ordonnées, un affichage de règles partagées, des repères alimentaires simples et une zone de tri ou de gestes responsables. Ambiance conviviale, calme, organisée, scolaire. Style semi-réaliste, chaleureux, sans surcharge. Personnages autorisés : Zoé, Gaston et Esteban. Professeurs autorisés : Zoé et Gaston. Éviter marques alimentaires, foule à table, file d'attente encombrée et ambiance bruyante.",
+      "Image officielle du Réfectoire des Explorateurs, lieu de vie du primaire pour travailler alimentation, coopération, langage et règles partagées. Montrer des tables collectives ordonnées, un affichage de règles partagées, des repères alimentaires simples et une zone de tri ou de gestes responsables. Ambiance conviviale, calme, organisée, scolaire. Style semi-réaliste, chaleureux, sans surcharge. Personnages autorisés : Zoé, Gaston et Esteban. Professeurs autorisés : Zoé et Esteban. Éviter marques alimentaires, foule à table, file d'attente encombrée et ambiance bruyante.",
     statutValidation: "draft",
     dateValidation: null,
   },
@@ -579,7 +579,7 @@ export const elementaryImageBriefs = [
     cycle: "Transversal",
     personnagesAutorisés: ["Zoé", "Gaston", "Esteban", "Noisette", "Félix"],
     personnagesInterdits: ["Personnages collège", "Personnages lycée", "Visiteurs anonymes"],
-    professeursAutorisés: ["Zoé", "Gaston", "Esteban", "Noisette", "Félix"],
+    professeursAutorisés: ["Zoé", "Esteban", "Noisette", "Félix"],
     ambiance:
       "Mémoire collective, circulation calme, fierté des productions et repères méthodologiques.",
     style:
@@ -603,7 +603,7 @@ export const elementaryImageBriefs = [
       "Permettre un recadrage vertical et horizontal",
     ],
     promptComplet:
-      "Image officielle des Couloirs des Traces, espace d'affichage progressif du primaire pour garder mémoire des méthodes, productions et réussites. Montrer une frise des méthodes, une galerie de productions, des panneaux de réussites et un chemin de circulation dégagé. Ambiance de mémoire collective, fierté calme, réutilisation des apprentissages. Style semi-réaliste, lumineux, ordonné, scolaire. Personnages autorisés : Zoé, Gaston, Esteban, Noisette et Félix. Professeurs autorisés : Zoé, Gaston, Esteban, Noisette et Félix. Éviter couloir vide, affichages saturés, perspective sombre et décor administratif.",
+      "Image officielle des Couloirs des Traces, espace d'affichage progressif du primaire pour garder mémoire des méthodes, productions et réussites. Montrer une frise des méthodes, une galerie de productions, des panneaux de réussites et un chemin de circulation dégagé. Ambiance de mémoire collective, fierté calme, réutilisation des apprentissages. Style semi-réaliste, lumineux, ordonné, scolaire. Personnages autorisés : Zoé, Gaston, Esteban, Noisette et Félix. Professeurs autorisés : Zoé, Esteban, Noisette et Félix. Éviter couloir vide, affichages saturés, perspective sombre et décor administratif.",
     statutValidation: "draft",
     dateValidation: null,
   },

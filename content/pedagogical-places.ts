@@ -144,7 +144,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
     ],
     professors: [
       { slug: "zoe", name: "Zoé", role: "Premiers rituels" },
-      { slug: "gaston", name: "Gaston", role: "Défis de stratégie" },
+      { slug: "esteban", name: "Esteban", role: "Défis de stratégie" },
       { slug: "felix", name: "Félix", role: "Lancement d'enquête" },
     ],
     students: [
@@ -342,7 +342,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
       "Représenter une situation problème",
       "Vérifier la cohérence d'un résultat",
     ],
-    professors: [{ slug: "gaston", name: "Gaston" }],
+    professors: [{ slug: "esteban", name: "Esteban" }],
     students: [
       { slug: "gaston", name: "Gaston le Hérisson Astucieux" },
       { slug: "felix", name: "Félix" },
@@ -409,7 +409,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
     ],
     professors: [{ slug: "esteban", name: "Esteban" }],
     students: [
-      { slug: "esteban", name: "Esteban le Manchot Aventurier" },
+      { slug: "esteban", name: "Esteban le Pingouin Aventurier" },
       { slug: "felix", name: "Félix" },
     ],
     interactiveZones: [
@@ -471,7 +471,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
       { slug: "felix", name: "Félix" },
     ],
     students: [
-      { slug: "esteban", name: "Esteban le Manchot Aventurier" },
+      { slug: "esteban", name: "Esteban le Pingouin Aventurier" },
       { slug: "felix", name: "Félix" },
     ],
     interactiveZones: [
@@ -715,7 +715,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
       "Mettre en voix ou en geste un récit",
     ],
     professors: [
-      { slug: "rosa", name: "Rosa le Flamant Rose" },
+      { slug: "rosa", name: "Rosa la Chouette" },
       { slug: "max", name: "Max le Kangourou" },
     ],
     students: [
@@ -845,7 +845,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
     ],
     students: [
       { slug: "noisette", name: "Noisette l'Écureuil Ingénieux" },
-      { slug: "esteban", name: "Esteban le Manchot Aventurier" },
+      { slug: "esteban", name: "Esteban le Pingouin Aventurier" },
       { slug: "felix", name: "Félix" },
     ],
     interactiveZones: [
@@ -908,7 +908,7 @@ export const elementaryPedagogicalPlaces: PedagogicalPlace[] = [
       { slug: "felix", name: "Félix" },
     ],
     students: [
-      { slug: "esteban", name: "Esteban le Manchot Aventurier" },
+      { slug: "esteban", name: "Esteban le Pingouin Aventurier" },
       { slug: "felix", name: "Félix" },
     ],
     interactiveZones: [

@@ -894,10 +894,10 @@ export const ce1LearningTree: AcademyLevelProgram = {
   cycle: "cycle-2",
   stage: "primaire",
   characterLink: {
-    characterSlug: "gaston",
-    name: "Gaston",
+    characterSlug: "esteban",
+    name: "Esteban",
     roleHint:
-      "Gaston accompagne la consolidation de la lecture, de l'ecriture et du raisonnement.",
+      "Esteban, guide principal du CE1, structure l'observation des notions ; Gaston, compagnon methode et autonomie, accompagne la consolidation de la lecture, de l'ecriture et du raisonnement.",
   },
   domains: [
     domainFrancais,

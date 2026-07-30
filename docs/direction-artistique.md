@@ -151,12 +151,12 @@ Il ne remplace pas les contenus pédagogiques. Il fixe les règles visuelles à 
 
 ### Les Lisières des Explorateurs
 
+- Esteban le Pingouin Aventurier : guide principal du CE1 et du CE2, observation et notions.
+- Gaston le Hérisson Astucieux : compagnon du CE1, méthode et stratégie.
 - Zoé la Tortue Curieuse : élève de CP, premiers codes et confiance.
-- Gaston le Hérisson Astucieux : élève de CE1, stratégie et vérification.
-- Esteban le Manchot Aventurier : élève de CE2, observation et notions.
 - Noisette l'Écureuil Ingénieux : élève de CM1, documents et organisation.
 - Félix : élève de CM2, enquête, indices, justification.
-- Professeurs et personnalités associées : Agathe, Léo, Soa, Rosa, Pablo, Naïa, Max, Hector, Mélina.
+- Professeurs et personnalités associées : Rosa la Chouette (Français), Léo, Soa, Pablo, Naïa, Max, Hector, Mélina.
 
 ### Univers collège
 

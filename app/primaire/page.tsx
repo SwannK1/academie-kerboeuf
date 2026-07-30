@@ -25,13 +25,13 @@ const LEVEL_GUIDES: Record<
     focus: "Oser entrer dans les premiers codes",
   },
   ce1: {
-    character: "Gaston",
-    species: "le Hérisson",
-    focus: "Choisir une stratégie et l'expliquer",
+    character: "Esteban",
+    species: "le Pingouin",
+    focus: "Observer, nommer, garder une trace — avec Gaston pour la méthode",
   },
   ce2: {
     character: "Esteban",
-    species: "le Manchot",
+    species: "le Pingouin",
     focus: "Observer, classer, garder une trace",
   },
   cm1: {

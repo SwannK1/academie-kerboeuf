@@ -136,10 +136,10 @@ export const ce1Level: AcademyLevelProgram = {
   cycle: "cycle-2",
   stage: "primaire",
   characterLink: {
-    characterSlug: "gaston",
-    name: "Gaston",
+    characterSlug: "esteban",
+    name: "Esteban",
     roleHint:
-      "Gaston guide les élèves de CE1 dans la lecture et la compréhension de textes.",
+      "Esteban, guide principal du CE1, aide les élèves à observer et structurer la lecture et la compréhension de textes. Gaston reste le compagnon méthode et autonomie du niveau.",
   },
   domains: [domaineFrancais],
 };

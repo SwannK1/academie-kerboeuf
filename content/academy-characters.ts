@@ -3,7 +3,7 @@ import type { PublicStatus } from "@/content/public-status";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
-export type CharacterRole = "guide" | "professeur";
+export type CharacterRole = "guide" | "professeur" | "compagnon";
 
 /** Catégorie structurelle utilisée pour distinguer guides, professeurs et personnages secondaires. */
 export type AcademyCharacterCategory =
@@ -116,13 +116,13 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
   {
     id: "esteban",
     slug: "esteban",
-    name: "Esteban le manchot",
-    species: "Manchot",
+    name: "Esteban le pingouin",
+    species: "Pingouin",
     role: "guide",
     category: "level-guide",
     mainSubject: "Méthode et structuration des notions",
     shortDescription:
-      "Esteban guide les élèves de CE2 dans l'observation et la structuration des notions : il transforme les découvertes en traces claires, schémas et repères mémorisables.",
+      "Esteban est le guide principal du CE1, où il aide les élèves à observer et nommer une notion pour la première fois. Il poursuit ce rôle en CE2, où il transforme les découvertes en traces claires, schémas et repères mémorisables.",
     learningFunction: [
       "Observer et classer une notion",
       "Construire des schémas et des codes de référence",
@@ -137,11 +137,44 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
       "Passionné",
       "Valorise la trace claire et reproductible",
     ],
-    levels: ["CE2"],
-    associatedPlaceKeys: ["observatoire-des-notions", "ruche-des-observations"],
+    levels: ["CE1", "CE2"],
+    associatedPlaceKeys: [
+      "galerie-des-indices",
+      "observatoire-des-notions",
+      "ruche-des-observations",
+    ],
     publicStatus: getPublicStatus("en construction"),
     siteUsage:
-      "Présent sur les pages CE2 comme guide de niveau, en complément des professeurs de matière.",
+      "Guide principal du CE1 et du CE2 : présent sur les pages des deux niveaux, en complément des professeurs de matière. À ne pas confondre avec Gaston, compagnon méthode et autonomie du CE1.",
+  },
+  {
+    id: "gaston",
+    slug: "gaston",
+    name: "Gaston le hérisson",
+    species: "Hérisson",
+    role: "compagnon",
+    category: "secondary",
+    mainSubject: "Méthode et autonomie",
+    shortDescription:
+      "Gaston accompagne au quotidien les élèves de CE1 : il aide à organiser son travail, à nommer sa stratégie et à progresser en autonomie, aux côtés d'Esteban, guide principal du CE1.",
+    learningFunction: [
+      "Nommer sa stratégie avant de valider une réponse",
+      "Comparer deux démarches",
+      "Vérifier systématiquement un résultat",
+      "Organiser son travail en autonomie",
+    ],
+    tone: "Enthousiaste, curieux et légèrement compétitif. Pose toujours la même question : « Quelle stratégie tu as choisie ? »",
+    pedagogicalTraits: [
+      "Méthodique",
+      "Observateur",
+      "Organisé",
+      "Valorise la vérification systématique",
+    ],
+    levels: ["CE1"],
+    associatedPlaceKeys: ["galerie-des-indices"],
+    publicStatus: getPublicStatus("en construction"),
+    siteUsage:
+      "Compagnon méthode et autonomie du CE1, aux côtés d'Esteban, guide principal du niveau.",
   },
   {
     id: "hector",
@@ -177,8 +210,8 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
   {
     id: "rosa",
     slug: "rosa",
-    name: "Rosa le Flamant rose",
-    species: "Flamant rose",
+    name: "Rosa la chouette",
+    species: "Chouette",
     role: "professeur",
     category: "subject-teacher",
     mainSubject: "Français",
@@ -210,7 +243,7 @@ export const academyCharacters: AcademyProfessorCharacter[] = [
     species: "Abeille domestique",
     role: "professeur",
     category: "subject-teacher",
-    mainSubject: "Sciences",
+    mainSubject: "Questionner le monde et Sciences",
     shortDescription:
       "Mélina enseigne les sciences en partant du réel : observer, expérimenter, comprendre le vivant et la matière.",
     learningFunction: [

@@ -12,7 +12,7 @@
 export type Cm2LearningStatus = "available" | "in-progress" | "upcoming";
 
 export type Cm2GuideReference = {
-  id: "felix" | "chouette" | "hector" | "melina" | "max" | "naia" | "pablo" | "rosa";
+  id: "felix" | "hector" | "melina" | "max" | "naia" | "pablo" | "rosa";
   name: string;
   role?: string;
 };
@@ -81,8 +81,8 @@ export const cm2LearningTree: Cm2LearningTree = [
     title: "Français",
     place: { slug: "bibliotheque-des-explorateurs", label: "La Bibliothèque des Explorateurs" },
     guides: [
-      { id: "felix",   name: "Félix le Lynx",  role: "Guide CM2"     },
-      { id: "chouette", name: "Chouette",        role: "Guide Français" },
+      { id: "felix", name: "Félix le Lynx", role: "Guide CM2" },
+      { id: "rosa", name: "Rosa la Chouette", role: "Guide Français" },
     ],
     status: "in-progress",
     domains: [
@@ -1173,8 +1173,7 @@ export const cm2LearningTree: Cm2LearningTree = [
     title: "Anglais",
     place: { slug: "voyage-decouverte", label: "Le Voyage Découverte" },
     guides: [
-      { id: "felix", name: "Félix le Lynx",          role: "Guide CM2"   },
-      { id: "rosa",  name: "Rosa le Flamant rose",   role: "Guide Anglais" },
+      { id: "felix", name: "Félix le Lynx", role: "Guide CM2" },
     ],
     status: "upcoming",
     domains: [

@@ -6,15 +6,15 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 export function Ce1GastonLearningMap() {
   return (
     <section
-      aria-label="Carte des espaces pédagogiques CE1, guidée par Gaston le Hérisson"
+      aria-label="Carte des espaces pédagogiques CE1, guidée par Esteban le Pingouin et Gaston le Hérisson"
       className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-4">
           <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-sky/30 bg-sky/10">
             <Image
-              src="/images/academie-kerboeuf/personnages/professeurs/primaire/gaston.png"
-              alt="Gaston le Hérisson, guide du CE1"
+              src="/images/academie-kerboeuf/personnages/professeurs/primaire/esteban.png"
+              alt="Esteban le Pingouin, guide du CE1"
               fill
               sizes="64px"
               className="object-cover"
@@ -22,7 +22,7 @@ export function Ce1GastonLearningMap() {
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
-              Choisis un espace avec Gaston
+              Choisis un espace avec Esteban et Gaston
             </p>
             <h2 className="mt-1 text-2xl font-black text-foreground">
               La carte du CE1

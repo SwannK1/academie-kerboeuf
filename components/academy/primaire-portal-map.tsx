@@ -37,9 +37,9 @@ const PORTAL_ZONES = [
     slug: "ce2",
     label: "CE2",
     character: "Esteban",
-    animal: "le Manchot",
+    animal: "le Pingouin",
     href: "/primaire/ce2",
-    ariaLabel: "Entrer dans le CE2 avec Esteban le Manchot",
+    ariaLabel: "Entrer dans le CE2 avec Esteban le Pingouin",
     x: 40, y: 0, w: 21, h: 100,
     rgb: "222,104,72",   // ember
     accent: "ember" as const,

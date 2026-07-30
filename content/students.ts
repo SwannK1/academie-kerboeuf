@@ -5,6 +5,8 @@ export type EmblematicStudent = {
   slug: string;
   level: string;
   levelSlug: string;
+  /** Autres niveaux dont ce personnage est aussi le guide officiel (ex. Esteban : CE1 et CE2). */
+  secondaryLevelSlugs?: string[];
   levelHref: string;
   missionsHref?: string;
   cycle: string;
@@ -307,16 +309,20 @@ export const emblematicStudents: EmblematicStudent[] = [
         "S’entraîner à choisir une stratégie et à vérifier un résultat.",
       href: "/primaire/ce1/missions",
     },
+    // Gaston reste une fiche élève accessible et le compagnon méthode et
+    // autonomie du CE1, mais Esteban est le guide officiel du niveau.
+    isLevelGuide: false,
   },
   {
-    name: "Esteban le Manchot Aventurier",
+    name: "Esteban le Pingouin Aventurier",
     slug: "esteban",
-    level: "CE2",
+    level: "CE1 · CE2",
     levelSlug: "ce2",
+    secondaryLevelSlugs: ["ce1"],
     levelHref: "/primaire/ce2",
     missionsHref: "/primaire/ce2/missions",
     cycle: "Cycle 2",
-    animal: "Manchot",
+    animal: "Pingouin",
     dominantColor: "sky",
     universe: "Observatoire des notions",
     shortDescription:
@@ -617,6 +623,8 @@ export function getAllStudentSlugs() {
 
 export function getStudentForLevelSlug(levelSlug: string) {
   return emblematicStudents.find(
-    (student) => student.levelSlug === levelSlug && student.isLevelGuide !== false,
+    (student) =>
+      student.isLevelGuide !== false &&
+      (student.levelSlug === levelSlug || student.secondaryLevelSlugs?.includes(levelSlug)),
   );
 }

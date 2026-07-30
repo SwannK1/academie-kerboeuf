@@ -37,9 +37,9 @@ export const PRIMAIRE_PORTAL_ZONES: PrimairePortalZone[] = [
     label: "CE2",
     href: "/primaire/ce2",
     character: "Esteban",
-    animal: "le manchot",
+    animal: "le pingouin",
     colorKey: "ember",
-    ariaLabel: "Accéder au CE2 avec Esteban le manchot",
+    ariaLabel: "Accéder au CE2 avec Esteban le pingouin",
     coords: { x: 42, y: 25, width: 18, height: 42 }, // PROVISOIRE
   },
   {

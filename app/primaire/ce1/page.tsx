@@ -7,7 +7,7 @@ import { Ce1GastonLearningMap } from "@/components/academy/Ce1GastonLearningMap"
 export const metadata: Metadata = {
   title: "CE1 — Cycle 2 | Académie Kerboeuf",
   description:
-    "Page niveau CE1 : matières, domaines et séquences-compétences du Cycle 2, guidées par Gaston le Hérisson.",
+    "Page niveau CE1 : matières, domaines et séquences-compétences du Cycle 2, guidées par Esteban le Pingouin, avec Gaston le Hérisson comme compagnon méthode et autonomie.",
 };
 
 export default function Ce1Page() {
@@ -33,13 +33,14 @@ export default function Ce1Page() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.10),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-sky/35 bg-sky/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-sky">
-            Cycle 2 · Guide : Gaston le Hérisson
+            Cycle 2 · Guide : Esteban le Pingouin · Compagnon : Gaston le Hérisson
           </p>
           <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             CE1 — Choisir une stratégie<br className="hidden sm:block" /> et l&apos;expliquer
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
-            En CE1, Gaston accompagne la consolidation de la lecture, de l&apos;écriture
+            En CE1, Esteban guide l&apos;observation des premières notions pendant que
+            Gaston accompagne la consolidation de la lecture, de l&apos;écriture
             et du raisonnement. Les séquences-compétences structurent les apprentissages
             en {domainCount} grandes matières du Cycle 2.
           </p>
