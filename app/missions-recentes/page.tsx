@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { getLevelMissionsPath } from "@/content/academy";
 import { allMissions } from "@/content/mission-registry";
 import {
   getPublicStatusKey,
@@ -91,6 +92,12 @@ const teacherUses = [
 function missionHref(mission: Mission) {
   if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
     return `/primaire/${mission.levelSlug}/missions`;
+  }
+
+  // Le collège n'a pas encore de page de détail par slug : renvoyer vers la
+  // page du niveau plutôt qu'une route `missions/[slug]` inexistante.
+  if (mission.stage === "college") {
+    return getLevelMissionsPath({ stage: mission.stage, slug: mission.levelSlug });
   }
 
   return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;

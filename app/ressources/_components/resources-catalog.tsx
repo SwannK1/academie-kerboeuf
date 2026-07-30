@@ -206,11 +206,10 @@ function SelectFilter({
 }
 
 function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
-  return (
-    <Link
-      href={resource.href}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
-    >
+  const isAvailable = getPublicStatusKey(resource.status) === "available";
+
+  const content = (
+    <>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
@@ -240,11 +239,30 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
           <ModeBadge mode="correction" />
         ) : null}
       </div>
+    </>
+  );
 
-      <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
-        Ouvrir la mission
+  if (isAvailable) {
+    return (
+      <Link
+        href={resource.href}
+        className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+      >
+        {content}
+        <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
+          Ouvrir la mission
+        </span>
+      </Link>
+    );
+  }
+
+  return (
+    <article className="flex min-h-full cursor-default flex-col rounded-md border border-white/10 bg-white/[0.045] p-5">
+      {content}
+      <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+        Détail non disponible
       </span>
-    </Link>
+    </article>
   );
 }
 

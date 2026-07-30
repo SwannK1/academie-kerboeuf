@@ -60,7 +60,10 @@ function missionHref(mission: Mission) {
 }
 
 function isLinkableMission(mission: Mission) {
-  return mission.stage !== "primaire" || mission.levelSlug === "cm2";
+  // Seuls le CM2 et le lycée disposent d'une page de détail par slug
+  // (`missions/[slug]`). Le collège n'a pas encore cette route : l'inclure
+  // ici produirait un CTA menant vers une page inexistante.
+  return mission.levelSlug === "cm2" || mission.stage === "lycee";
 }
 
 function resourceFromMission(mission: Mission): ClassroomResource {
