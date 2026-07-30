@@ -11,6 +11,16 @@ const footerSections = [
       { label: "Univers", href: "/univers" },
     ],
   },
+  {
+    title: "Légal",
+    links: [
+      { label: "Mentions légales", href: "/mentions-legales" },
+      { label: "Confidentialité", href: "/confidentialite" },
+      { label: "Cookies", href: "/cookies" },
+      { label: "Plan du site", href: "/plan-du-site" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
 ];
 
 export function SiteFooter() {
@@ -37,24 +47,26 @@ export function SiteFooter() {
           </p>
         </div>
 
-        {footerSections.map((section) => (
-          <div key={section.title}>
-            <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
-              {section.title}
-            </h2>
-            <div className="mt-4 grid gap-3">
-              {section.links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-muted transition hover:text-foreground"
-                >
-                  {link.label}
-                </Link>
-              ))}
+        <div className="flex flex-wrap gap-10 sm:gap-14">
+          {footerSections.map((section) => (
+            <div key={section.title}>
+              <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
+                {section.title}
+              </h2>
+              <div className="mt-4 grid gap-3">
+                {section.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm font-medium text-muted transition hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </footer>
   );
