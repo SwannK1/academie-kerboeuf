@@ -1013,6 +1013,7 @@ function CardSidePanel({
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"
+          autoFocus
           className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           ✕

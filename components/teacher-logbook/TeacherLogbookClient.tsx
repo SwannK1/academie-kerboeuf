@@ -590,7 +590,10 @@ export function TeacherLogbookClient() {
                         </ul>
                         <button
                           type="button"
-                          onClick={() => addSession(day.id, slot.id)}
+                          onClick={(event) => {
+                            editTriggerRef.current = event.currentTarget;
+                            addSession(day.id, slot.id);
+                          }}
                           className="mt-2 min-h-8 w-full rounded-md border border-dashed border-white/20 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
                         >
                           + Ajouter une séance
@@ -775,6 +778,7 @@ function SessionEditorModal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
+            autoFocus
             className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
           >
             ✕
