@@ -42,10 +42,6 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/82 backdrop-blur-xl print:hidden">
       <nav
