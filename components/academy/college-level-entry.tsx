@@ -6,7 +6,11 @@ import {
   getCollegeMatiereCards,
   getSixiemeAccompagnementCards,
 } from "@/content/college-curriculum";
-import { getPublicStatusKey } from "@/content/public-status";
+import {
+  getPublicStatusKey,
+  getPublicStatusLabel,
+  type PublicStatusKey,
+} from "@/content/public-status";
 
 type Props = {
   level: AcademyLevel;
@@ -14,10 +18,10 @@ type Props = {
 
 function cardLabel(
   isLinked: boolean,
-  statusKey: string,
+  statusKey: PublicStatusKey,
 ): string | null {
   if (isLinked) return null;
-  return statusKey === "in-progress" ? "En préparation" : "À venir";
+  return getPublicStatusLabel(statusKey);
 }
 
 export function CollegeLevelEntry({ level }: Props) {

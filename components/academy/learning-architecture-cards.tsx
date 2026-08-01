@@ -22,7 +22,7 @@ type AnnualPathCardProps = {
 
 export function CompetencyCard({ competency }: CompetencyCardProps) {
   const statusKey = getPublicStatusKey(competency.status);
-  const isUpcoming = statusKey === "upcoming";
+  const isUpcoming = statusKey === "coming-soon";
 
   return (
     <article
@@ -107,7 +107,7 @@ export function CompetencyCard({ competency }: CompetencyCardProps) {
 
 export function AnnualPathCard({ path }: AnnualPathCardProps) {
   const statusKey = getPublicStatusKey(path.status);
-  const isUpcoming = statusKey === "upcoming";
+  const isUpcoming = statusKey === "coming-soon";
 
   return (
     <article

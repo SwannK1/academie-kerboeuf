@@ -41,7 +41,7 @@ export default async function LyceeLevelMissionsPage({ params }: PageProps) {
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
-  const isUpcoming = getPublicStatusKey(levelStatus) === "upcoming";
+  const isUpcoming = getPublicStatusKey(levelStatus) === "coming-soon";
 
   if (isUpcoming) {
     const levelHref = `/lycee/${levelSlug}`;

@@ -44,10 +44,10 @@ export function CollegeDomainPage({
   levelLabel,
   subjectLabel = "6e — Collège",
 }: CollegeDomainPageProps) {
-  const isUpcoming = getPublicStatusKey(status) === "upcoming";
+  const isUpcoming = getPublicStatusKey(status) === "coming-soon";
 
   const inProgressCount = entries.filter(
-    (e) => getPublicStatusKey(e.status) === "in-progress",
+    (e) => getPublicStatusKey(e.status) === "preparing",
   ).length;
 
   return (
@@ -209,7 +209,7 @@ export function CollegeDomainPage({
                     <p className="text-xs font-bold leading-snug text-muted">
                       {resource.label}
                     </p>
-                    <PublicStatusBadge status="upcoming" />
+                    <PublicStatusBadge status="coming-soon" />
                   </div>
                 ))}
               </div>

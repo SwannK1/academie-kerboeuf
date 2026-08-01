@@ -18,7 +18,7 @@ export default function PsPage() {
       counts[key] += 1;
       return counts;
     },
-    { available: 0, "in-progress": 0, upcoming: 0 },
+    { available: 0, partial: 0, preparing: 0, "coming-soon": 0 },
   );
   const sequenceCount = psDomains.reduce(
     (total, domain) =>
@@ -47,7 +47,7 @@ export default function PsPage() {
             <span className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-jade">
               Cycle 1 · PS
             </span>
-            <PublicStatusBadge status="in-progress" />
+            <PublicStatusBadge status="preparing" />
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
@@ -62,8 +62,8 @@ export default function PsPage() {
             <div className="grid grid-cols-4 gap-2 sm:min-w-[28rem]">
               <QuickMetric label="Domaines" value={psDomains.length} />
               <QuickMetric label="Séquences" value={sequenceCount} />
-              <QuickMetric label="Pilote" value={statusCounts["in-progress"]} />
-              <QuickMetric label="À venir" value={statusCounts.upcoming} />
+              <QuickMetric label="Pilote" value={statusCounts.preparing} />
+              <QuickMetric label="À venir" value={statusCounts["coming-soon"]} />
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function PsPage() {
                   Aucun lien n&apos;est affiché tant que la ressource n&apos;existe pas.
                 </p>
               </div>
-              <PublicStatusBadge status="upcoming" />
+              <PublicStatusBadge status="coming-soon" />
             </div>
           </div>
         </div>

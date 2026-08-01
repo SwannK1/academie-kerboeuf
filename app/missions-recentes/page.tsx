@@ -64,13 +64,13 @@ const statusSections: {
       "Séances complètes avec support, questions, correction ou structure exploitable en classe.",
   },
   {
-    key: "in-progress",
+    key: "preparing",
     title: "Missions en préparation",
     description:
       "Dossiers annoncés pour organiser le catalogue, sans faux contenu pédagogique.",
   },
   {
-    key: "upcoming",
+    key: "coming-soon",
     title: "Missions à venir",
     description:
       "Missions prévues dans la progression, visibles pour donner une trajectoire claire.",
@@ -226,10 +226,10 @@ export default function MissionsRecentesPage() {
     missionsByStatus.find((section) => section.key === "available")?.missions
       .length ?? 0;
   const inProgressCount =
-    missionsByStatus.find((section) => section.key === "in-progress")?.missions
+    missionsByStatus.find((section) => section.key === "preparing")?.missions
       .length ?? 0;
   const upcomingCount =
-    missionsByStatus.find((section) => section.key === "upcoming")?.missions
+    missionsByStatus.find((section) => section.key === "coming-soon")?.missions
       .length ?? 0;
 
   return (
@@ -290,8 +290,8 @@ export default function MissionsRecentesPage() {
             </p>
             <div className="grid grid-cols-3 gap-3">
               <Metric value={availableCount} label={getPublicStatusLabel("available")} />
-              <Metric value={inProgressCount} label={getPublicStatusLabel("in-progress")} />
-              <Metric value={upcomingCount} label={getPublicStatusLabel("upcoming")} />
+              <Metric value={inProgressCount} label={getPublicStatusLabel("preparing")} />
+              <Metric value={upcomingCount} label={getPublicStatusLabel("coming-soon")} />
             </div>
             <p className="text-xs leading-6 text-muted">
               Une mission incomplète reste classée en préparation ou à venir :

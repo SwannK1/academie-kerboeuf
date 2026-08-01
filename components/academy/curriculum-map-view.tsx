@@ -87,7 +87,7 @@ function CompetencySlot({ expected, full }: CompetencySlotProps) {
   const criteria = full?.successCriteria ?? expected.successCriteria ?? [];
   const slotCount = full?.resourceSlots?.length ?? 0;
 
-  const isInProgress = statusKey === "in-progress";
+  const isInProgress = statusKey === "preparing";
 
   return (
     <article

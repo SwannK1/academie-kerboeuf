@@ -45,7 +45,7 @@ export async function generateMetadata({
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
 
-  if (getPublicStatusKey(levelStatus) === "upcoming") {
+  if (getPublicStatusKey(levelStatus) === "coming-soon") {
     return {
       title: "Mission en préparation | Académie Kerboeuf",
       description:
@@ -74,7 +74,7 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
-  const isUpcoming = getPublicStatusKey(levelStatus) === "upcoming";
+  const isUpcoming = getPublicStatusKey(levelStatus) === "coming-soon";
 
   if (isUpcoming) {
     const missionsHref = `/lycee/${levelSlug}/missions`;

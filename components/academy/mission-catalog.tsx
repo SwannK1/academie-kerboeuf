@@ -25,11 +25,11 @@ const missionStatusSections: {
     description: "Contenus prêts à ouvrir et à utiliser.",
   },
   {
-    key: "upcoming",
+    key: "coming-soon",
     description: "Missions visibles au catalogue, publication complète à venir.",
   },
   {
-    key: "in-progress",
+    key: "preparing",
     description: "Dossiers annoncés sans contenu pédagogique finalisé.",
   },
 ];

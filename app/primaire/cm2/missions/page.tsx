@@ -83,8 +83,8 @@ const audienceCards = [
 
 const projectStatusSummary: PublicStatusKey[] = [
   "available",
-  "upcoming",
-  "in-progress",
+  "coming-soon",
+  "preparing",
 ];
 
 function toMissionCardData(mission: Cm2Mission): MissionCardData {

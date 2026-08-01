@@ -44,7 +44,7 @@ const UNIVERSES: Array<{
     href: "/college",
     cta: "Découvrir",
     accent: "sky",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     label: "Lycée",
@@ -52,7 +52,7 @@ const UNIVERSES: Array<{
     href: "/lycee",
     cta: "Découvrir",
     accent: "ember",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     label: "Univers",
