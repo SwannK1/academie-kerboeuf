@@ -114,7 +114,6 @@ export default async function FicheDetailPage({ params }: Props) {
               height={1754}
               className="w-full h-auto"
               priority
-              unoptimized
             />
           </div>
 

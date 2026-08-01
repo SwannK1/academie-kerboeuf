@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -118,10 +119,13 @@ export default async function FicheDetailPage({ params }: PageProps) {
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.03] p-8">
           {clickable && sheet.imageHref ? (
             <div className="flex flex-col items-start gap-4">
-              <img
+              <Image
                 src={sheet.imageHref}
                 alt={`${notion.title} — ${label}`}
-                className="w-full rounded-md border border-white/10"
+                width={1055}
+                height={1491}
+                className="w-full h-auto rounded-md border border-white/10"
+                priority
               />
               <div className="flex flex-wrap gap-3">
                 <Link
