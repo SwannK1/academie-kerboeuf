@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherEndOfPeriodClient } from "@/components/teacher-end-of-period/TeacherEndOfPeriodClient";
+import { TeacherEndOfPeriod } from "@/components/teacher-end-of-period/TeacherEndOfPeriod";
 
 export const metadata: Metadata = {
   title: "Préparer ma fin de période | Académie Kerboeuf",
@@ -34,7 +34,7 @@ export default function TeacherEndOfPeriodPage() {
           </p>
         </header>
 
-        <TeacherEndOfPeriodClient />
+        <TeacherEndOfPeriod />
       </div>
     </main>
   );

@@ -75,23 +75,27 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
     [resources],
   );
 
-  const filteredResources = resources.filter((resource) => {
-    const matchesLevel = level === allLabel || resource.level === level;
-    const matchesSubject = subject === allLabel || resource.subject === subject;
-    const matchesStatus =
-      status === allLabel || getPublicStatusKey(resource.status) === status;
-    const matchesDifficulty =
-      difficulty === allLabel || resource.difficulty === difficulty;
-    const matchesMode = mode === allLabel || resource.modes.includes(mode);
+  const filteredResources = useMemo(
+    () =>
+      resources.filter((resource) => {
+        const matchesLevel = level === allLabel || resource.level === level;
+        const matchesSubject = subject === allLabel || resource.subject === subject;
+        const matchesStatus =
+          status === allLabel || getPublicStatusKey(resource.status) === status;
+        const matchesDifficulty =
+          difficulty === allLabel || resource.difficulty === difficulty;
+        const matchesMode = mode === allLabel || resource.modes.includes(mode);
 
-    return (
-      matchesLevel &&
-      matchesSubject &&
-      matchesStatus &&
-      matchesDifficulty &&
-      matchesMode
-    );
-  });
+        return (
+          matchesLevel &&
+          matchesSubject &&
+          matchesStatus &&
+          matchesDifficulty &&
+          matchesMode
+        );
+      }),
+    [resources, level, subject, status, difficulty, mode],
+  );
 
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">

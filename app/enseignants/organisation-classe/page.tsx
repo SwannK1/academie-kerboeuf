@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherClassroomLayoutClient } from "@/components/teacher-classroom-layout/TeacherClassroomLayoutClient";
+import { TeacherClassroomLayout } from "@/components/teacher-classroom-layout/TeacherClassroomLayout";
 
 export const metadata: Metadata = {
   title: "Plan de classe et groupes | Académie Kerboeuf",
@@ -35,7 +35,7 @@ export default function TeacherClassroomLayoutPage() {
           </p>
         </header>
 
-        <TeacherClassroomLayoutClient />
+        <TeacherClassroomLayout />
       </div>
     </main>
   );

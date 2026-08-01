@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { ClassLibraryClient } from "@/components/teacher-class-library/ClassLibraryClient";
+import { ClassLibrary } from "@/components/teacher-class-library/ClassLibrary";
 
 export const metadata: Metadata = {
   title: "Ma bibliothèque de classe | Académie Kerboeuf",
@@ -34,7 +34,7 @@ export default function ClassLibraryPage() {
           </p>
         </header>
 
-        <ClassLibraryClient />
+        <ClassLibrary />
       </div>
     </main>
   );

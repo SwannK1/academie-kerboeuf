@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherTemplateLibraryClient } from "@/components/teacher-template-library/TeacherTemplateLibraryClient";
+import { TeacherTemplateLibrary } from "@/components/teacher-template-library/TeacherTemplateLibrary";
 
 export const metadata: Metadata = {
   title: "Mes modèles enseignants | Académie Kerboeuf",
@@ -34,7 +34,7 @@ export default function TeacherTemplateLibraryPage() {
           </p>
         </header>
 
-        <TeacherTemplateLibraryClient />
+        <TeacherTemplateLibrary />
       </div>
     </main>
   );

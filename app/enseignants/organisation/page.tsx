@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherClassOrganizationClient } from "@/components/teacher-class-organization/TeacherClassOrganizationClient";
+import { TeacherClassOrganization } from "@/components/teacher-class-organization/TeacherClassOrganization";
 
 export const metadata: Metadata = {
   title: "Organisation de classe | Académie Kerboeuf",
@@ -35,7 +35,7 @@ export default function TeacherClassOrganizationPage() {
           </p>
         </header>
 
-        <TeacherClassOrganizationClient />
+        <TeacherClassOrganization />
       </div>
     </main>
   );

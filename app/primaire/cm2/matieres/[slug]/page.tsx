@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
-import { Cm2MathFichesEmbed } from "@/components/academy/Cm2MathFichesEmbed";
-import { Cm2FrancaisFichesEmbed } from "@/components/academy/Cm2FrancaisFichesEmbed";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import {
@@ -15,6 +14,17 @@ import {
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 import { getPublicStatusKey } from "@/content/public-status";
+
+const Cm2MathFichesEmbed = dynamic(() =>
+  import("@/components/academy/Cm2MathFichesEmbed").then(
+    (module) => module.Cm2MathFichesEmbed,
+  ),
+);
+const Cm2FrancaisFichesEmbed = dynamic(() =>
+  import("@/components/academy/Cm2FrancaisFichesEmbed").then(
+    (module) => module.Cm2FrancaisFichesEmbed,
+  ),
+);
 
 type PageProps = { params: Promise<{ slug: string }> };
 

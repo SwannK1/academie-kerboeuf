@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { readPngDimensions } from "@/lib/read-png-dimensions";
 import {
   cm2FichesMaths,
   getCm2FicheMath,
@@ -48,6 +50,8 @@ export default async function FicheDetailPage({ params }: PageProps) {
 
   const label = SHEET_LABELS[sheetId as SheetId];
   const clickable = isSheetClickable(sheet);
+  const imageDimensions =
+    clickable && sheet.imageHref ? readPngDimensions(sheet.imageHref) : null;
 
   // Sibling sheets for navigation
   const siblings = SHEET_IDS.map((id) => ({
@@ -112,12 +116,16 @@ export default async function FicheDetailPage({ params }: PageProps) {
 
         {/* ── Contenu ──────────────────────────────────────────────────────── */}
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.03] p-8">
-          {clickable && sheet.imageHref ? (
+          {clickable && sheet.imageHref && imageDimensions ? (
             <div className="flex flex-col items-start gap-4">
-              <img
+              <Image
                 src={sheet.imageHref}
                 alt={`${notion.title} — ${label}`}
-                className="w-full rounded-md border border-white/10"
+                width={imageDimensions.width}
+                height={imageDimensions.height}
+                className="w-full h-auto rounded-md border border-white/10"
+                sizes="(min-width: 1024px) 896px, 100vw"
+                priority
               />
               <div className="flex flex-wrap gap-3">
                 <Link

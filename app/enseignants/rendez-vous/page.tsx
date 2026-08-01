@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherProfessionalMeetingsClient } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetingsClient";
+import { TeacherProfessionalMeetings } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetings";
 
 export const metadata: Metadata = {
   title: "Rendez-vous professionnels | Espace enseignants | Académie Kerboeuf",
@@ -36,7 +36,7 @@ export default function TeacherProfessionalMeetingsPage() {
         </header>
 
         <div className="mt-10">
-          <TeacherProfessionalMeetingsClient />
+          <TeacherProfessionalMeetings />
         </div>
       </div>
     </main>

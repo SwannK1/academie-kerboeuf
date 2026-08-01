@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherSubstituteFolderClient } from "@/components/teacher-substitute-folder/TeacherSubstituteFolderClient";
+import { TeacherSubstituteFolder } from "@/components/teacher-substitute-folder/TeacherSubstituteFolder";
 
 export const metadata: Metadata = {
   title: "Préparer mon dossier remplaçant | Académie Kerboeuf",
@@ -39,7 +39,7 @@ export default function TeacherSubstituteFolderPage() {
           </p>
         </header>
 
-        <TeacherSubstituteFolderClient />
+        <TeacherSubstituteFolder />
       </div>
     </main>
   );

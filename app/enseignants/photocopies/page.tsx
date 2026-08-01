@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherPrintQueueClient } from "@/components/teacher-print-queue/TeacherPrintQueueClient";
+import { TeacherPrintQueue } from "@/components/teacher-print-queue/TeacherPrintQueue";
 
 export const metadata: Metadata = {
   title: "Préparer mes photocopies | Académie Kerboeuf",
@@ -34,7 +34,7 @@ export default function TeacherPrintQueuePage() {
           </p>
         </header>
 
-        <TeacherPrintQueueClient />
+        <TeacherPrintQueue />
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherCm26eTransitionClient } from "@/components/teacher-cm2-6e-transition/TeacherCm26eTransitionClient";
+import { TeacherCm26eTransition } from "@/components/teacher-cm2-6e-transition/TeacherCm26eTransition";
 
 export const metadata: Metadata = {
   title: "Préparer la liaison CM2-6e | Académie Kerboeuf",
@@ -35,7 +35,7 @@ export default function TeacherCm26eTransitionPage() {
           </p>
         </header>
 
-        <TeacherCm26eTransitionClient />
+        <TeacherCm26eTransition />
       </div>
     </main>
   );

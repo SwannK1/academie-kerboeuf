@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherCycleMeetingsClient } from "@/components/teacher-cycle-meetings/TeacherCycleMeetingsClient";
+import { TeacherCycleMeetings } from "@/components/teacher-cycle-meetings/TeacherCycleMeetings";
 
 export const metadata: Metadata = {
   title: "Préparer mes conseils de cycle | Espace enseignants | Académie Kerboeuf",
@@ -35,7 +35,7 @@ export default function TeacherCycleMeetingsPage() {
         </header>
 
         <div className="mt-10">
-          <TeacherCycleMeetingsClient />
+          <TeacherCycleMeetings />
         </div>
       </div>
     </main>
