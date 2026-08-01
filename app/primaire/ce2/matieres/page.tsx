@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { SubjectIndexPage } from "@/components/academy/SubjectMatterCatalog";
 import { ce2Subjects } from "@/content/ce2-subjects";
 import { CE2_ACCENT } from "@/lib/ce2-accent";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Matières CE2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Matières CE2",
   description:
     "Les matières du programme CE2 à l'Académie Kerboeuf — domaines, sous-domaines et séquences-compétences du Cycle 2.",
-};
+  path: "/primaire/ce2/matieres",
+});
 
 export default function Ce2MatieresPage() {
   return (

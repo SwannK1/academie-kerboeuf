@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { MaternelleDomainCard } from "@/components/academy/MaternelleDomainCard";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { gsDomains } from "@/content/levels/maternelle/gs-domains";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Grande Section | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Grande Section",
   description:
     "Tableau de bord Grande Section : domaines, observables, situations et ressources prévues.",
-};
+  path: "/maternelle/gs",
+});
 
 export default function GsPage() {
   const statusCounts = gsDomains.reduce(

@@ -11,6 +11,7 @@ import {
   SHEET_IDS,
   type SheetId,
 } from "@/content/cm2-fiches-maths";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ notionSlug: string; sheetId: string }> };
 
@@ -26,12 +27,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { notionSlug, sheetId } = await params;
   const notion = getCm2FicheMath(notionSlug);
-  if (!notion) return { title: "Fiche introuvable | Académie Kerboeuf" };
+  if (!notion) {
+    return { title: "Fiche introuvable", robots: { index: false, follow: false } };
+  }
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
-    title: `${notion.title} — ${label} | CM2 Mathématiques | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `${notion.title} — ${label} | CM2 Mathématiques`,
     description: `${notion.skill} (${label})`,
-  };
+    path: `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: PageProps) {

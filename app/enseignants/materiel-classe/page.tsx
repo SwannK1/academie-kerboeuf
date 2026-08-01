@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomMaterials } from "@/components/teacher-classroom-materials/TeacherClassroomMaterials";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Gérer mon matériel de classe | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Gérer mon matériel de classe",
   description:
     "Inventoriez le matériel de votre classe par catégorie, suivez les quantités disponibles et préparez vos commandes.",
-};
+  path: "/enseignants/materiel-classe",
+});
 
 export default function TeacherClassroomMaterialsPage() {
   return (

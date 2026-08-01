@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { ce1LearningTree } from "@/content/levels/ce1-learning-tree";
 import { Ce1GastonLearningMap } from "@/components/academy/Ce1GastonLearningMap";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "CE1 — Cycle 2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "CE1 — Cycle 2",
   description:
     "Page niveau CE1 : matières, domaines et séquences-compétences du Cycle 2, guidées par Gaston le Hérisson.",
-};
+  path: "/primaire/ce1",
+});
 
 export default function Ce1Page() {
   const domainCount = ce1LearningTree.domains.length;

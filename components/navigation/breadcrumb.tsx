@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BASE_URL } from "@/lib/seo";
 
 type BreadcrumbItem = {
   label: string;
@@ -10,8 +11,23 @@ type BreadcrumbProps = {
 };
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href ? { item: `${BASE_URL}${item.href}` } : {}),
+    })),
+  };
+
   return (
     <nav aria-label="Fil d’Ariane" className="text-sm print:hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <ol className="flex flex-wrap items-center gap-2 text-muted">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;

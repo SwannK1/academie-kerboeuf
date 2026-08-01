@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { SubjectIndexPage } from "@/components/academy/SubjectMatterCatalog";
 import { cm2Subjects } from "@/content/cm2-subjects";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Matières CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Matières CM2",
   description:
     "Les 8 matières du programme CM2 à l'Académie Kerboeuf : Français, Mathématiques, Histoire-Géographie, Sciences, EMC, Anglais, Arts, EPS.",
-};
+  path: "/primaire/cm2/matieres",
+});
 
 export default function Cm2MatieresPage() {
   return (

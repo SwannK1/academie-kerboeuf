@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { StudentGallery } from "@/app/eleves/_components/student-gallery";
 import { emblematicStudents } from "@/content/students";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Élèves emblématiques | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Élèves emblématiques",
   description:
     "La galerie des élèves emblématiques de l’Académie Kerboeuf, de la maternelle à la Terminale.",
-};
+  path: "/eleves",
+});
 
 export default function ElevesPage() {
   const cycles = [...new Set(emblematicStudents.map((student) => student.cycle))];

@@ -62,6 +62,13 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/evaluations",
         icon: "📝",
       },
+      {
+        title: "APC",
+        description:
+          "Préparez vos séances et cycles d'APC : axe, objectif, période, durée, matériel, déroulé et bilan collectif.",
+        href: "/enseignants/apc",
+        icon: "🎯",
+      },
     ],
   },
   {
@@ -109,6 +116,13 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/bibliotheque-classe",
         icon: "📚",
       },
+      {
+        title: "Matériel de classe",
+        description:
+          "Inventoriez le matériel de votre classe par catégorie, suivez les quantités disponibles et préparez vos commandes.",
+        href: "/enseignants/materiel-classe",
+        icon: "🧰",
+      },
     ],
   },
   {
@@ -138,6 +152,20 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/communications",
         icon: "✉️",
       },
+      {
+        title: "Conseil d'école",
+        description:
+          "Préparez l'ordre du jour, les points à présenter, les décisions et les actions de suivi d'un conseil d'école.",
+        href: "/enseignants/conseil-ecole",
+        icon: "🏫",
+      },
+      {
+        title: "Rendez-vous professionnels",
+        description:
+          "Préparez vos rendez-vous professionnels : objectif, ordre du jour, notes, décisions et suivi.",
+        href: "/enseignants/rendez-vous",
+        icon: "🤝",
+      },
     ],
   },
   {
@@ -161,6 +189,13 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
           "Exporter ou restaurer vos outils enseignants sur cet appareil.",
         href: "/enseignants/sauvegardes",
         icon: "💾",
+      },
+      {
+        title: "Formations",
+        description:
+          "Suivez vos formations, lectures professionnelles et compétences à développer.",
+        href: "/enseignants/formations",
+        icon: "🎓",
       },
     ],
   },

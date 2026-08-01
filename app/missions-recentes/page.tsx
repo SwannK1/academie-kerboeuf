@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -9,12 +8,14 @@ import {
   type PublicStatusKey,
 } from "@/content/public-status";
 import type { Mission, ThemeKey } from "@/content/types";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Missions pédagogiques | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Missions pédagogiques",
   description:
     "La vitrine des missions pédagogiques de l’Académie Kerboeuf, classées par statut public et niveau scolaire.",
-};
+  path: "/missions-recentes",
+});
 
 const themeClasses: Record<
   ThemeKey,

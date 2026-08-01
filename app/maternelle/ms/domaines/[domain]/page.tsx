@@ -8,6 +8,7 @@ import {
   getMsDomainBySlug,
   msDomains,
 } from "@/content/levels/maternelle/ms-domains";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ domain: string }>;
@@ -25,14 +26,16 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine MS introuvable | Académie Kerboeuf",
+      title: "Domaine MS introuvable",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `${domain.shortLabel} MS | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `${domain.shortLabel} MS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Moyenne Section.`,
-  };
+    path: `/maternelle/ms/domaines/${domainSlug}`,
+  });
 }
 
 export default async function MsDomainPage({ params }: PageProps) {

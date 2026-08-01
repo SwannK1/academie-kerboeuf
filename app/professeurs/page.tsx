@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -7,12 +6,14 @@ import {
   ProfessorGallery,
   type ProfessorCardData,
 } from "./_components/gallery";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Professeurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Professeurs",
   description:
     "Les professeurs référents de l'Académie Kerboeuf — du CP à la 3e, avec des relais au lycée. Chaque profil porte une méthode, une atmosphère et un rôle pédagogique distinct.",
-};
+  path: "/professeurs",
+});
 
 // Projection allégée : on ne passe pas les missions ni la méthode au client
 function toCardData(profiles: typeof professorProfiles): ProfessorCardData[] {

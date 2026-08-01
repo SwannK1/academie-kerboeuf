@@ -8,6 +8,7 @@ import {
   getGsDomainBySlug,
   gsDomains,
 } from "@/content/levels/maternelle/gs-domains";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ domain: string }>;
@@ -25,14 +26,16 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine GS introuvable | Académie Kerboeuf",
+      title: "Domaine GS introuvable",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `${domain.shortLabel} GS | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `${domain.shortLabel} GS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Grande Section.`,
-  };
+    path: `/maternelle/gs/domaines/${domainSlug}`,
+  });
 }
 
 export default async function GsDomainPage({ params }: PageProps) {

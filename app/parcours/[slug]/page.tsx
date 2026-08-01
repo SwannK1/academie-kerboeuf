@@ -7,6 +7,7 @@ import {
   getLearningPathWithSteps,
   learningPaths,
 } from "@/content/learning-paths";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -25,13 +26,14 @@ export async function generateMetadata({
   const path = getLearningPathWithSteps(slug);
 
   if (!path) {
-    return { title: "Parcours introuvable | Académie Kerboeuf" };
+    return { title: "Parcours introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${path.title} | Parcours`,
     description: path.globalObjective,
-  };
+    path: `/parcours/${slug}`,
+  });
 }
 
 export default async function LearningPathDetailPage({ params }: PageProps) {

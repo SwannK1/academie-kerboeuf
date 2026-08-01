@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ressources de Seconde | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources de Seconde",
   description:
     "Méthode, français et mathématiques pour réussir son entrée au lycée.",
-};
+  path: "/lycee/seconde/ressources",
+});
 
 type Block = {
   title: string;

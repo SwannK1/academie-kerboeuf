@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { LevelHero } from "@/components/levels/level-hero";
@@ -13,12 +12,14 @@ import {
   getPublicStatusLabel,
   type PublicStatusKey,
 } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Missions CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Missions CM2",
   description:
     "Vitrine pédagogique complète des missions CM2 de Félix : lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",
-};
+  path: "/primaire/cm2/missions",
+});
 
 const domainSections: {
   title: string;
