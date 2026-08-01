@@ -77,7 +77,7 @@ export function CollegeSubjectPortal({
                       : "border-white/10 bg-white/[0.035]"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-xl font-black text-foreground">{subdomain.label}</h3>
                     <div className="shrink-0">
                       <PublicStatusBadge status={subdomain.status} />

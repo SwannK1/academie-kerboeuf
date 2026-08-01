@@ -144,7 +144,7 @@ export default function MethodesPourApprendrePage() {
 function StepCard({ step }: { step: Step }) {
   return (
     <li className="flex flex-col rounded-md border border-white/10 bg-panel/60 p-6">
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <span className="font-mono text-3xl font-black text-gold/60">
           {String(step.number).padStart(2, "0")}
         </span>

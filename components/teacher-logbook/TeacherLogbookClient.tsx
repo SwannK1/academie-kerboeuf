@@ -111,6 +111,7 @@ export function TeacherLogbookClient() {
     null,
   );
   const dragSourceRef = useRef<string | null>(null);
+  const editTriggerRef = useRef<HTMLElement | null>(null);
   const instructionsId = useId();
 
   useEffect(() => {
@@ -160,6 +161,7 @@ export function TeacherLogbookClient() {
       ),
     }));
     setEditingSession(null);
+    editTriggerRef.current?.focus();
   }
 
   function deleteSession(id: string) {
@@ -168,6 +170,7 @@ export function TeacherLogbookClient() {
       sessions: current.sessions.filter((item) => item.id !== id),
     }));
     setEditingSession(null);
+    editTriggerRef.current?.focus();
   }
 
   function duplicateSession(session: LogbookSession) {
@@ -217,6 +220,7 @@ export function TeacherLogbookClient() {
       }));
     }
     setEditingSession(null);
+    editTriggerRef.current?.focus();
   }
 
   function moveSession(
@@ -500,7 +504,10 @@ export function TeacherLogbookClient() {
                             >
                               <button
                                 type="button"
-                                onClick={() => setEditingSession(session)}
+                                onClick={(event) => {
+                                  editTriggerRef.current = event.currentTarget;
+                                  setEditingSession(session);
+                                }}
                                 className="w-full min-h-8 text-left"
                               >
                                 <span className="block text-xs font-black text-foreground">
@@ -657,7 +664,10 @@ export function TeacherLogbookClient() {
       {editingSession && (
         <SessionEditorModal
           session={editingSession}
-          onClose={() => setEditingSession(null)}
+          onClose={() => {
+            setEditingSession(null);
+            editTriggerRef.current?.focus();
+          }}
           onSave={saveSession}
           onDelete={deleteSession}
           onDuplicate={duplicateSession}

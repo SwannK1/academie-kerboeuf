@@ -79,7 +79,7 @@ export function HierarchyCard({
 }: HierarchyCardProps) {
   const content = (
     <>
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           {number ? (
             <p className="text-xs font-black uppercase tracking-[0.18em]">

@@ -70,7 +70,7 @@ export default function LieuxPage() {
                 key={lieu.id}
                 className={`rounded-md border p-6 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-wrap items-start justify-between gap-3">
                   <p
                     className={`text-xs font-bold uppercase tracking-[0.14em] ${accentText[lieu.accentColor]}`}
                   >

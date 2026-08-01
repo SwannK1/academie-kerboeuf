@@ -78,7 +78,7 @@ export function CollegeLevelEntry({ level }: Props) {
                       : "border-white/10 bg-white/[0.025] opacity-60"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h2 className="text-xl font-black text-foreground">
                       {matiere.label}
                     </h2>
@@ -159,7 +159,7 @@ export function CollegeLevelEntry({ level }: Props) {
                         : "border-white/10 bg-white/[0.025] opacity-60"
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
                       <h2 className="text-xl font-black text-foreground">
                         {card.label}
                       </h2>

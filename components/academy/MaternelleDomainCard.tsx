@@ -15,7 +15,7 @@ export function MaternelleDomainCard({
   const observables = domain.observables.slice(0, 3);
   const card = (
     <article className="group flex h-full min-h-[22rem] flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-jade/30 hover:bg-white/[0.065]">
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <span className="flex size-8 shrink-0 items-center justify-center rounded border border-white/10 bg-ink/40 text-xs font-black text-muted">
           {index + 1}
         </span>

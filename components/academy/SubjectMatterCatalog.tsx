@@ -488,7 +488,7 @@ function SubjectCard<TSubject extends MatterSubject>({
       href={href}
       className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <h3
           className={`text-xs font-bold uppercase tracking-[0.18em] ${
             isAvailable ? t.text : "text-muted"

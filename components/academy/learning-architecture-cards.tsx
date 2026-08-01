@@ -33,7 +33,7 @@ export function CompetencyCard({ competency }: CompetencyCardProps) {
         .filter(Boolean)
         .join(" ")}
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky">
             {competency.levelSlug.toUpperCase()} · {competency.subject}
@@ -118,7 +118,7 @@ export function AnnualPathCard({ path }: AnnualPathCardProps) {
         .filter(Boolean)
         .join(" ")}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
             {path.levelSlug.toUpperCase()} · {path.subject}

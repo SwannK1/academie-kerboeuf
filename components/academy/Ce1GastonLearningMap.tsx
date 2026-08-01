@@ -37,7 +37,7 @@ export function Ce1GastonLearningMap() {
               href={zone.href}
               className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-sky/35 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky/60"
             >
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex flex-wrap items-start justify-between gap-3">
                 <h3 className="text-lg font-black text-foreground">
                   {zone.placeName}
                 </h3>
