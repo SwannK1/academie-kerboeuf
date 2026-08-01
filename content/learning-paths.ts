@@ -207,6 +207,18 @@ function normalizeMissionStatus(status: MissionStatus): LearningPathStatus {
 }
 
 function missionHref(mission: Mission) {
+  // Le collège n'a aucune page de détail par mission : /college/[level] est
+  // la seule route existante pour ce niveau.
+  if (mission.stage === "college") {
+    return `/college/${mission.levelSlug}`;
+  }
+
+  // La page de détail lycée renvoie une 404 tant que la mission n'est pas
+  // publiquement disponible : renvoyer vers la liste des missions du niveau.
+  if (mission.stage === "lycee" && mission.status !== "disponible") {
+    return `/lycee/${mission.levelSlug}/missions`;
+  }
+
   return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
 }
 

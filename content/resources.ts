@@ -60,7 +60,18 @@ function missionHref(mission: Mission) {
 }
 
 function isLinkableMission(mission: Mission) {
-  return mission.stage !== "primaire" || mission.levelSlug === "cm2";
+  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") return false;
+
+  // Le collège n'a aucune page de détail par mission : /college/[level] est
+  // la seule route existante pour ce niveau, donc aucune mission collège
+  // n'est présentée comme ressource cliquable ici.
+  if (mission.stage === "college") return false;
+
+  // La page de détail lycée renvoie une 404 tant que la mission n'est pas
+  // publiquement disponible.
+  if (mission.stage === "lycee") return mission.status === "disponible";
+
+  return true;
 }
 
 function resourceFromMission(mission: Mission): ClassroomResource {

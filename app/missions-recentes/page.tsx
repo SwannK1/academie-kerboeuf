@@ -93,6 +93,21 @@ function missionHref(mission: Mission) {
     return `/primaire/${mission.levelSlug}/missions`;
   }
 
+  // Le collège n'a pas de page de détail par mission : /college/[level] est
+  // la seule route existante pour ce niveau.
+  if (mission.stage === "college") {
+    return `/college/${mission.levelSlug}`;
+  }
+
+  // La page de détail lycée renvoie une 404 tant que la mission n'est pas
+  // publiquement disponible : ne pas y lier avant ce statut.
+  if (
+    mission.stage === "lycee" &&
+    getPublicStatusKey(mission.status) !== "available"
+  ) {
+    return `/lycee/${mission.levelSlug}/missions`;
+  }
+
   return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
 }
 
