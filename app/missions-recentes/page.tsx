@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { getLevelMissionsPath } from "@/content/academy";
-import { allMissions } from "@/content/mission-registry";
+import { allMissions, getMissionHref } from "@/content/mission-registry";
 import {
   getPublicStatusKey,
   getPublicStatusLabel,
@@ -89,28 +88,12 @@ const teacherUses = [
   "Préparer une séance sans afficher de contenu placeholder.",
 ];
 
-function missionHref(mission: Mission) {
-  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
-    return `/primaire/${mission.levelSlug}/missions`;
-  }
-
-  // Le collège n'a pas encore de page de détail par slug : renvoyer vers la
-  // page du niveau plutôt qu'une route `missions/[slug]` inexistante.
-  if (mission.stage === "college") {
-    return getLevelMissionsPath({ stage: mission.stage, slug: mission.levelSlug });
-  }
-
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
-}
-
 function MissionShowcaseCard({ mission }: { mission: Mission }) {
   const theme = themeClasses[mission.theme];
+  const isAvailable = getPublicStatusKey(mission.status) === "available";
 
-  return (
-    <Link
-      href={missionHref(mission)}
-      className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
-    >
+  const content = (
+    <>
       <div className="flex flex-wrap items-center gap-2">
         <span className="rounded bg-white/[0.06] px-2.5 py-1 text-xs font-black uppercase tracking-[0.16em] text-foreground">
           {mission.levelLabel}
@@ -141,13 +124,39 @@ function MissionShowcaseCard({ mission }: { mission: Mission }) {
         <span className="font-bold text-muted">
           {mission.professor.name}
         </span>
-        <span
-          className={`font-black transition group-hover:translate-x-1 ${theme.textClass}`}
-        >
-          Ouvrir →
-        </span>
+        {isAvailable ? (
+          <span
+            className={`font-black transition group-hover:translate-x-1 ${theme.textClass}`}
+          >
+            Ouvrir →
+          </span>
+        ) : (
+          <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+            Détail non disponible
+          </span>
+        )}
       </div>
-    </Link>
+    </>
+  );
+
+  if (isAvailable) {
+    return (
+      <Link
+        href={getMissionHref(mission)}
+        className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <article
+      className={`flex h-full cursor-default flex-col rounded-md border bg-white/[0.045] p-5 ${theme.ringClass}`}
+      aria-label={mission.title}
+    >
+      {content}
+    </article>
   );
 }
 

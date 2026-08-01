@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
-import { getPublicStatusKey } from "@/content/public-status";
+import { isPubliclyLinkable } from "@/content/public-status";
 import type { CollegeSubdomainCard } from "@/content/college-curriculum";
 
 type BreadcrumbItem = { label: string; href?: string };
@@ -67,7 +67,7 @@ export function CollegeSubjectPortal({
 
           <div className="grid gap-4 md:grid-cols-2">
             {subdomains.map((subdomain) => {
-              const isLinked = !!subdomain.href && getPublicStatusKey(subdomain.status) !== "coming-soon";
+              const isLinked = isPubliclyLinkable(subdomain.status, subdomain.href);
 
               const cardInner = (
                 <div

@@ -21,6 +21,7 @@ import {
   getPublicStatusDotClassName,
   getPublicStatusKey,
   getPublicStatusLabel,
+  isPubliclyLinkable,
 } from "@/content/public-status";
 
 type LevelOverviewProps = {
@@ -205,9 +206,10 @@ export function LevelOverview({ level }: LevelOverviewProps) {
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {collegeMatiereCards.map((matiere) => {
-                const isLinked =
-                  !!matiere.href &&
-                  getPublicStatusKey(matiere.status) !== "coming-soon";
+                const isLinked = isPubliclyLinkable(
+                  matiere.status,
+                  matiere.href,
+                );
                 const card = (
                   <div
                     className={`group flex h-full flex-col rounded-md border p-5 transition ${
@@ -491,39 +493,61 @@ export function LevelOverview({ level }: LevelOverviewProps) {
 
           {resources.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {resources.slice(0, 6).map((resource) => (
-                <Link
-                  key={resource.id}
-                  href={resource.href}
-                  className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-ember/25 hover:bg-white/[0.07]"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm font-bold text-foreground leading-snug">
-                      {resource.title}
-                    </p>
-                    <span
-                      role="img"
-                      aria-label={getPublicStatusLabel(resource.status)}
-                      className={`mt-0.5 size-2 shrink-0 rounded-full ${
-                        getPublicStatusDotClassName(resource.status)
-                      }`}
-                    />
-                  </div>
-                  <p className="mt-1.5 text-xs text-muted">{resource.subject}</p>
-                  {resource.modes.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {resource.modes.map((mode) => (
-                        <span
-                          key={mode}
-                          className={`rounded border px-2 py-0.5 text-xs font-bold ${modeBadge[mode]?.classes ?? ""}`}
-                        >
-                          {modeBadge[mode]?.label ?? mode}
-                        </span>
-                      ))}
+              {resources.slice(0, 6).map((resource) => {
+                const isAvailable =
+                  getPublicStatusKey(resource.status) === "available";
+
+                const resourceContent = (
+                  <>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm font-bold text-foreground leading-snug">
+                        {resource.title}
+                      </p>
+                      <span
+                        role="img"
+                        aria-label={getPublicStatusLabel(resource.status)}
+                        className={`mt-0.5 size-2 shrink-0 rounded-full ${
+                          getPublicStatusDotClassName(resource.status)
+                        }`}
+                      />
                     </div>
-                  )}
-                </Link>
-              ))}
+                    <p className="mt-1.5 text-xs text-muted">{resource.subject}</p>
+                    {resource.modes.length > 0 && (
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {resource.modes.map((mode) => (
+                          <span
+                            key={mode}
+                            className={`rounded border px-2 py-0.5 text-xs font-bold ${modeBadge[mode]?.classes ?? ""}`}
+                          >
+                            {modeBadge[mode]?.label ?? mode}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                );
+
+                if (isAvailable) {
+                  return (
+                    <Link
+                      key={resource.id}
+                      href={resource.href}
+                      className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-ember/25 hover:bg-white/[0.07]"
+                    >
+                      {resourceContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={resource.id}
+                    className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-5 opacity-75"
+                  >
+                    {resourceContent}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { getPublicStatusKey } from "@/content/public-status";
+import { getPublicStatusKey, isPubliclyLinkable } from "@/content/public-status";
 import { getSubjectTeacher } from "@/content/subject-teacher-link";
 import type { AccentTokens } from "@/lib/cm2-accent";
 
@@ -482,12 +482,10 @@ function SubjectCard<TSubject extends MatterSubject>({
 }) {
   const t = accent[subject.accent] ?? accent.gold;
   const isAvailable = getPublicStatusKey(subject.status) === "available";
+  const isLinked = isPubliclyLinkable(subject.status, href);
 
-  return (
-    <Link
-      href={href}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
-    >
+  const content = (
+    <>
       <div className="flex items-start justify-between gap-3">
         <h3
           className={`text-xs font-bold uppercase tracking-[0.18em] ${
@@ -529,7 +527,26 @@ function SubjectCard<TSubject extends MatterSubject>({
           →
         </span>
       </div>
-    </Link>
+    </>
+  );
+
+  if (isLinked) {
+    return (
+      <Link
+        href={href}
+        className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={`flex min-h-full flex-col rounded-md border p-5 ${t.border} bg-white/[0.025] opacity-75`}
+    >
+      {content}
+    </div>
   );
 }
 

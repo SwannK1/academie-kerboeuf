@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
-import { getPublicStatusKey } from "@/content/public-status";
+import { isPubliclyLinkable } from "@/content/public-status";
 import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
 
 type MaternelleDomainCardProps = {
@@ -85,7 +85,7 @@ export function MaternelleDomainCard({
         </div>
       )}
 
-      {domain.href && getPublicStatusKey(domain.status) !== "coming-soon" && (
+      {isPubliclyLinkable(domain.status, domain.href) && (
         <span className="mt-auto pt-5 text-sm font-black text-jade transition group-hover:translate-x-1">
           Ouvrir le domaine →
         </span>
@@ -93,7 +93,7 @@ export function MaternelleDomainCard({
     </article>
   );
 
-  if (!domain.href || getPublicStatusKey(domain.status) === "coming-soon") {
+  if (!isPubliclyLinkable(domain.status, domain.href)) {
     return card;
   }
 

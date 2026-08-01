@@ -11,7 +11,7 @@ import {
 } from "@/content/students";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatusLabel } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -275,18 +275,37 @@ export default async function EleveDetailPage({ params }: PageProps) {
             </p>
             {associatedMissions.length > 0 ? (
               <div className="mt-5 grid gap-3">
-                {associatedMissions.slice(0, 5).map((mission) => (
-                  <Link
-                    key={mission.id}
-                    href={mission.href}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
-                  >
-                    <span className="font-bold text-foreground">{mission.title}</span>
-                    <span className="block text-xs uppercase tracking-[0.12em] text-muted">
-                      {mission.subject} · {getPublicStatusLabel(mission.status)}
-                    </span>
-                  </Link>
-                ))}
+                {associatedMissions.slice(0, 5).map((mission) => {
+                  const missionContent = (
+                    <>
+                      <span className="font-bold text-foreground">{mission.title}</span>
+                      <span className="block text-xs uppercase tracking-[0.12em] text-muted">
+                        {mission.subject} · {getPublicStatusLabel(mission.status)}
+                      </span>
+                    </>
+                  );
+
+                  if (getPublicStatusKey(mission.status) === "available") {
+                    return (
+                      <Link
+                        key={mission.id}
+                        href={mission.href}
+                        className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+                      >
+                        {missionContent}
+                      </Link>
+                    );
+                  }
+
+                  return (
+                    <div
+                      key={mission.id}
+                      className="rounded border border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-muted opacity-75"
+                    >
+                      {missionContent}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <p className="mt-4 text-sm leading-7 text-muted">

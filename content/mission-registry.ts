@@ -1,9 +1,10 @@
-import { academyLevels } from "@/content/academy";
+import { academyLevels, getLevelMissionsPath } from "@/content/academy";
 import { cm2Missions } from "@/content/cm2";
 import {
   academyMissionToMission,
   cm2MissionToMission,
 } from "@/content/mission-adapters";
+import { getPublicStatusKey } from "@/content/public-status";
 import type { Mission } from "@/content/types";
 
 // Transitional registry for the future `content/missions/index.ts`.
@@ -51,7 +52,44 @@ export function getMissionsForLevel(levelSlug: string) {
 }
 
 export function getAvailableMissions() {
-  return allMissions.filter((mission) => mission.status === "disponible");
+  return allMissions.filter(
+    (mission) => getPublicStatusKey(mission.status) === "available",
+  );
+}
+
+/**
+ * Route publique d'une mission — logique centrale unique, réutilisée par
+ * tous les pipelines qui construisent un lien vers une mission
+ * (`/ressources`, `/missions-recentes`, `/parcours`).
+ *
+ * Le CM2 et le lycée disposent d'une page de détail par slug
+ * (`missions/[slug]`). Le collège et le primaire hors CM2 n'en ont pas
+ * encore : on retombe sur la page du niveau plutôt que de construire un
+ * lien vers une route inexistante.
+ */
+export function getMissionHref(mission: Mission): string {
+  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
+    return `/primaire/${mission.levelSlug}/missions`;
+  }
+
+  if (mission.stage === "college") {
+    return getLevelMissionsPath({
+      stage: mission.stage,
+      slug: mission.levelSlug,
+    });
+  }
+
+  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
+}
+
+/**
+ * Vrai seulement si une page de détail par slug existe réellement pour ce
+ * niveau (CM2 et lycée). À utiliser pour décider si une liste doit inclure
+ * une mission comme ressource cliquable en tant que telle, par opposition à
+ * un simple renvoi vers la page de son niveau.
+ */
+export function isMissionDetailLinkable(mission: Mission): boolean {
+  return mission.levelSlug === "cm2" || mission.stage === "lycee";
 }
 
 function dedupeById(missions: Mission[]) {

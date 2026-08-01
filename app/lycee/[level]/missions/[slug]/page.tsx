@@ -8,8 +8,8 @@ import { SharedMissionDetail } from "@/components/academy/shared-mission-detail"
 import {
   getAcademyMission,
   getAcademyMissionParams,
+  hasRealMissionContent,
   isMissionPubliclyAvailable,
-  isMissionReadyForDetail,
 } from "@/content/academy";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import {
@@ -144,7 +144,7 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
     );
   }
 
-  if (!isMissionReadyForDetail(mission)) {
+  if (!hasRealMissionContent(mission)) {
     return <MissionUnavailableNotice level={level} mission={mission} />;
   }
 

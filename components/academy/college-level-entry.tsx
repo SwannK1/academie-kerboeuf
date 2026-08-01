@@ -9,6 +9,7 @@ import {
 import {
   getPublicStatusKey,
   getPublicStatusLabel,
+  isPubliclyAvailable,
   type PublicStatusKey,
 } from "@/content/public-status";
 
@@ -70,8 +71,10 @@ export function CollegeLevelEntry({ level }: Props) {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {matiereCards.map((matiere) => {
               const statusKey = getPublicStatusKey(matiere.status);
-              const isLinked =
-                !!matiere.href && statusKey === "available";
+              const isLinked = isPubliclyAvailable(
+                matiere.status,
+                matiere.href,
+              );
               const tag = cardLabel(isLinked, statusKey);
 
               const cardContent = (
@@ -152,7 +155,7 @@ export function CollegeLevelEntry({ level }: Props) {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {accompagnementCards.map((card) => {
                 const statusKey = getPublicStatusKey(card.status);
-                const isLinked = !!card.href && statusKey === "available";
+                const isLinked = isPubliclyAvailable(card.status, card.href);
                 const tag = cardLabel(isLinked, statusKey);
 
                 const cardContent = (

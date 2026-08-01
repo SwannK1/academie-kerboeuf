@@ -14,7 +14,7 @@ import {
 } from "@/content/professors";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatusLabel } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 import { felixPlaces, felixBadges } from "@/content/felix-character";
 
 // ─── Système de couleurs par professeur ──────────────────────────────────────
@@ -754,18 +754,37 @@ function CharacterCrossLinks({ professor }: { professor: ProfessorProfile }) {
           </p>
           {resources.length > 0 ? (
             <div className="mt-5 grid gap-3">
-              {resources.slice(0, 6).map((resource) => (
-                <Link
-                  key={resource.id}
-                  href={resource.href}
-                  className={`rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
-                >
-                  <span className="font-bold text-foreground">{resource.title}</span>
-                  <span className="block text-xs uppercase tracking-[0.12em] text-muted">
-                    {resource.level} · {resource.subject} · {getPublicStatusLabel(resource.status)}
-                  </span>
-                </Link>
-              ))}
+              {resources.slice(0, 6).map((resource) => {
+                const meta = (
+                  <>
+                    <span className="font-bold text-foreground">{resource.title}</span>
+                    <span className="block text-xs uppercase tracking-[0.12em] text-muted">
+                      {resource.level} · {resource.subject} · {getPublicStatusLabel(resource.status)}
+                    </span>
+                  </>
+                );
+
+                if (getPublicStatusKey(resource.status) === "available") {
+                  return (
+                    <Link
+                      key={resource.id}
+                      href={resource.href}
+                      className={`rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
+                    >
+                      {meta}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={resource.id}
+                    className="rounded border border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-muted opacity-75"
+                  >
+                    {meta}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <p className="mt-4 text-sm leading-7 text-muted">

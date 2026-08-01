@@ -7,6 +7,7 @@ import {
   type CurriculumLevel,
 } from "@/content/curriculum";
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
+import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Programmes | Académie Kerboeuf",
@@ -210,6 +211,7 @@ function CurriculumCard({ level }: { level: CurriculumLevel }) {
               title: mission.title,
               subtitle: mission.subject,
               href: mission.href,
+              status: mission.status,
             }))}
           />
         ) : null}
@@ -294,7 +296,10 @@ function LinkSection({
   links,
 }: {
   title: string;
-  links: { title: string; subtitle: string; href: string }[];
+  // `status` est optionnel : absent pour les liens vers une page hub
+  // toujours sûre (parcours), présent pour un lien vers une ressource
+  // terminale (mission) dont le CTA ne doit être actif que si disponible.
+  links: { title: string; subtitle: string; href: string; status?: unknown }[];
 }) {
   if (links.length === 0) return null;
 
@@ -304,18 +309,41 @@ function LinkSection({
         {title}
       </h4>
       <div className="mt-3 grid gap-2">
-        {links.map((link) => (
-          <Link
-            key={`${link.href}-${link.title}`}
-            href={link.href}
-            className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
-          >
-            <span className="font-bold text-foreground">{link.title}</span>
-            <span className="block text-xs uppercase tracking-[0.12em] text-muted">
-              {link.subtitle}
-            </span>
-          </Link>
-        ))}
+        {links.map((link) => {
+          const isAvailable =
+            link.status === undefined ||
+            getPublicStatusKey(link.status) === "available";
+
+          const linkContent = (
+            <>
+              <span className="font-bold text-foreground">{link.title}</span>
+              <span className="block text-xs uppercase tracking-[0.12em] text-muted">
+                {link.subtitle}
+              </span>
+            </>
+          );
+
+          if (isAvailable) {
+            return (
+              <Link
+                key={`${link.href}-${link.title}`}
+                href={link.href}
+                className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+              >
+                {linkContent}
+              </Link>
+            );
+          }
+
+          return (
+            <div
+              key={`${link.href}-${link.title}`}
+              className="rounded border border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-muted opacity-75"
+            >
+              {linkContent}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
