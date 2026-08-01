@@ -1,80 +1,13 @@
-"use client";
-
-import type { CSSProperties } from "react";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-// ── Zones cliquables ────────────────────────────────────────────────────────
-// Coordonnées en % de l'image (left, top, width, height).
-// Les zones couvrent les silhouettes de personnages sans se chevaucher.
-// Ordre gauche → droite : Kiwi, Gaston, Esteban, Noisette, Félix.
-
-const PORTAL_ZONES = [
-  {
-    slug: "cp",
-    label: "CP",
-    character: "Kiwi",
-    animal: "la Grenouille",
-    href: "/primaire/cp",
-    ariaLabel: "Entrer dans le CP avec Kiwi la Grenouille",
-    x: 0, y: 0, w: 22, h: 100,
-    rgb: "80,200,164",   // jade
-    accent: "jade" as const,
-  },
-  {
-    slug: "ce1",
-    label: "CE1",
-    character: "Gaston",
-    animal: "le Hérisson",
-    href: "/primaire/ce1",
-    ariaLabel: "Entrer dans le CE1 avec Gaston le Hérisson",
-    x: 22, y: 0, w: 18, h: 100,
-    rgb: "139,200,255",  // sky
-    accent: "sky" as const,
-  },
-  {
-    slug: "ce2",
-    label: "CE2",
-    character: "Esteban",
-    animal: "le Manchot",
-    href: "/primaire/ce2",
-    ariaLabel: "Entrer dans le CE2 avec Esteban le Manchot",
-    x: 40, y: 0, w: 21, h: 100,
-    rgb: "222,104,72",   // ember
-    accent: "ember" as const,
-  },
-  {
-    slug: "cm1",
-    label: "CM1",
-    character: "Noisette",
-    animal: "l'Écureuille",
-    href: "/primaire/cm1",
-    ariaLabel: "Entrer dans le CM1 avec Noisette l'Écureuille",
-    x: 61, y: 0, w: 18, h: 100,
-    rgb: "243,196,91",   // gold
-    accent: "gold" as const,
-  },
-  {
-    slug: "cm2",
-    label: "CM2",
-    character: "Félix",
-    animal: "le Lynx",
-    href: "/primaire/cm2",
-    ariaLabel: "Entrer dans le CM2 avec Félix le Lynx",
-    x: 79, y: 0, w: 21, h: 100,
-    rgb: "243,196,91",   // gold
-    accent: "gold" as const,
-  },
-] as const;
-
-type ZoneSlug = (typeof PORTAL_ZONES)[number]["slug"];
+import { PrimairePortalHoverZones } from "@/components/academy/PrimairePortalHoverZones";
+import { PORTAL_ZONES } from "@/components/academy/primaire-portal-zones";
 
 // ── Composant principal ─────────────────────────────────────────────────────
+// Server Component : seule la superposition de zones survolables
+// (PrimairePortalHoverZones) a besoin d'interactivité côté client.
 
 export function PrimairePortalMap() {
-  const [hovered, setHovered] = useState<ZoneSlug | null>(null);
-
   return (
     <>
       {/* ── Desktop : portail immersif plein écran ────────────────────────── */}
@@ -104,80 +37,7 @@ export function PrimairePortalMap() {
         />
 
         {/* Zones interactives */}
-        {PORTAL_ZONES.map((zone) => {
-          const isHovered = hovered === zone.slug;
-          const isDimmed = hovered !== null && !isHovered;
-
-          return (
-            <Link
-              key={zone.slug}
-              href={zone.href}
-              aria-label={zone.ariaLabel}
-              onMouseEnter={() => setHovered(zone.slug)}
-              onMouseLeave={() => setHovered(null)}
-              onFocus={() => setHovered(zone.slug)}
-              onBlur={() => setHovered(null)}
-              className="absolute select-none focus:outline-none"
-              style={{
-                left: `${zone.x}%`,
-                top: `${zone.y}%`,
-                width: `${zone.w}%`,
-                height: `${zone.h}%`,
-              }}
-            >
-              {/* Voile sombre sur les colonnes non survolées.
-                  Couvre la pleine hauteur sans border-radius supérieur
-                  pour éviter des arches visibles au-dessus des personnages.
-                  Assombri à ~48% : visible mais pas éteint. */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0"
-                style={{
-                  background: "rgba(5,8,7,0.48)",
-                  opacity: isDimmed ? 1 : 0,
-                  transition: "opacity 380ms ease",
-                }}
-              />
-
-              {/* Double effet de contour au survol :
-                  — contour interne net (inset 1.5px, opacité 0.80)
-                  — lueur externe douce (spread 10px, opacité 0.16)
-                  L'intensité reste basse pour un rendu premium, non flashy. */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0"
-                style={{
-                  borderRadius: "50% 50% 50% 50% / 12% 12% 20% 20%",
-                  boxShadow: `inset 0 0 0 1.5px rgba(${zone.rgb}, 0.80), 0 0 32px 10px rgba(${zone.rgb}, 0.16)`,
-                  opacity: isHovered ? 1 : 0,
-                  transition: "opacity 320ms ease",
-                } as CSSProperties}
-              />
-
-              {/* Label personnage — glisse vers le haut au survol */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-0 bottom-5 flex flex-col items-center gap-1"
-                style={{
-                  opacity: isHovered ? 1 : 0,
-                  transform: isHovered ? "translateY(0)" : "translateY(6px)",
-                  transition: "opacity 300ms ease, transform 300ms ease",
-                }}
-              >
-                <span
-                  className="rounded-sm px-3 py-1 text-sm font-black text-white backdrop-blur-sm"
-                  style={{
-                    background: `rgba(${zone.rgb}, 0.22)`,
-                    border: `1px solid rgba(${zone.rgb}, 0.48)`,
-                  }}
-                >
-                  {zone.label} · {zone.character}
-                </span>
-                <span className="text-xs font-medium text-white/65">{zone.animal}</span>
-              </span>
-            </Link>
-          );
-        })}
+        <PrimairePortalHoverZones />
 
         {/* Bouton retour — discret, positionné en bas à gauche de l'image */}
         <Link
