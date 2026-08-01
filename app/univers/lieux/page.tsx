@@ -32,7 +32,7 @@ const accentBg: Record<AccentKey, string> = {
 
 export default function LieuxPage() {
   return (
-    <main>
+    <main id="main-content">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -95,7 +95,7 @@ export default function LieuxPage() {
 
                 {lieu.competencesPossibles.length > 0 && (
                   <div className="mt-4">
-                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-muted/60">
+                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-muted">
                       Compétences
                     </p>
                     <ul className="space-y-1">

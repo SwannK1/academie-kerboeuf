@@ -77,7 +77,7 @@ const steps: Step[] = [
 
 export default function MethodesPourApprendrePage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -171,7 +171,7 @@ function StepCard({ step }: { step: Step }) {
           <dd className="mt-1 text-foreground/80">{step.level}</dd>
         </div>
       </dl>
-      <p className="mt-auto pt-5 text-xs text-muted/60 italic">
+      <p className="mt-auto pt-5 text-xs text-muted italic">
         Ressource en préparation
       </p>
     </li>

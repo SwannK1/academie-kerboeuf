@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function TeacherLocalBackupPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:hidden">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:hidden">
       <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-5xl">
         <Breadcrumb

@@ -68,7 +68,7 @@ const ACCENT: Record<
   },
   ember: {
     text: "text-ember",
-    textMuted: "text-ember/70",
+    textMuted: "text-ember",
     border: "border-ember/35",
     borderMid: "border-ember/20",
     borderHover: "hover:border-ember/30",
@@ -123,7 +123,7 @@ export default async function ProfesseurPage({ params }: PageProps) {
     professor.coreValues;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

@@ -201,12 +201,12 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
         <p className="line-clamp-3 text-sm leading-6 text-muted">{professor.description}</p>
 
         {/* Spécialité */}
-        <p className="line-clamp-2 text-xs italic leading-5 text-muted/60">{professor.specialty}</p>
+        <p className="line-clamp-2 text-xs italic leading-5 text-muted">{professor.specialty}</p>
       </div>
 
       {/* Footer */}
       <div className="flex items-center justify-between border-t border-white/[0.07] px-6 py-4">
-        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted/60">
+        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
           {professor.symbol}
         </span>
         <span className={`flex items-center gap-1.5 text-xs font-bold ${a.text} transition-transform group-hover:translate-x-0.5`}>

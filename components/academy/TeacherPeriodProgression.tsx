@@ -4,7 +4,7 @@ import { TeacherPeriodProgressionClient } from "@/components/academy/TeacherPeri
 
 export function TeacherPeriodProgression() {
   return (
-    <main>
+    <main id="main-content">
       <PrintBodyClass className="print-teacher-tool" />
       <div className="px-4 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
         <div className="mx-auto max-w-5xl">

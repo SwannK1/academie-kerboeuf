@@ -46,7 +46,7 @@ const ACCENT: Record<
   },
   ember: {
     text: "text-ember",
-    textMuted: "text-ember/70",
+    textMuted: "text-ember",
     border: "border-ember/35",
     borderMid: "border-ember/20",
     bg: "bg-ember/[0.07]",

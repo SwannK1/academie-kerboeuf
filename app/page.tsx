@@ -74,7 +74,7 @@ const UNIVERSES: Array<{
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden px-4 pt-32 pb-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-30 opacity-45" />

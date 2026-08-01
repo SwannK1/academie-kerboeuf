@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   addDaysToKey,
   createBlankSession,
@@ -738,6 +739,7 @@ function SessionEditorModal({
 }) {
   const [draft, setDraft] = useState<LogbookSession>(session);
   const titleId = useId();
+  const dialogRef = useDialogFocusTrap<HTMLDivElement>();
 
   function update<K extends keyof LogbookSession>(
     key: K,
@@ -748,9 +750,11 @@ function SessionEditorModal({
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 print:hidden"
       onKeyDown={(event) => {
         if (event.key === "Escape") onClose();

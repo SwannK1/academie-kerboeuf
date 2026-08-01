@@ -130,7 +130,7 @@ export default function CartePage() {
   const lieuxSansRoute = lieuxTransversaux.filter((lieu) => !lieu.route);
 
   return (
-    <main>
+    <main id="main-content">
       {/* ── Breadcrumb ── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -486,7 +486,7 @@ function UniversCard({ univers }: { univers: UniversEntry }) {
             </li>
           ))}
           {univers.lieuxPrincipaux.length > 3 && (
-            <li className="text-xs text-muted/60">
+            <li className="text-xs text-muted">
               +{univers.lieuxPrincipaux.length - 3} autres lieux
             </li>
           )}
@@ -543,7 +543,7 @@ function LieuCard({
           </span>
         ))}
         {lieu.cyclesConcernes.length > 3 && (
-          <span className="rounded bg-white/[0.04] px-2 py-0.5 text-xs font-medium text-muted/60">
+          <span className="rounded bg-white/[0.04] px-2 py-0.5 text-xs font-medium text-muted">
             +{lieu.cyclesConcernes.length - 3}
           </span>
         )}

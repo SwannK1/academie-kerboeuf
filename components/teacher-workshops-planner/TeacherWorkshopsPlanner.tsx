@@ -3,7 +3,7 @@ import { TeacherWorkshopsPlannerClient } from "@/components/teacher-workshops-pl
 
 export function TeacherWorkshopsPlanner() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8 print:hidden">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb

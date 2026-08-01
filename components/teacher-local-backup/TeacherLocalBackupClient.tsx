@@ -381,6 +381,7 @@ export function TeacherLocalBackupClient() {
             onChange={(event) =>
               setSelectedToolId(event.target.value as TeacherBackupToolId)
             }
+            aria-label="Outil à exporter"
             className="min-h-11 rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
           >
             {teacherBackupTools.map((tool) => (
@@ -410,6 +411,7 @@ export function TeacherLocalBackupClient() {
           ref={fileInputRef}
           type="file"
           accept="application/json"
+          aria-label="Fichier de sauvegarde à importer"
           onChange={(event) => handleFileSelected(event.target.files)}
           className="mt-4 block w-full text-sm text-foreground"
         />

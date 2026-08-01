@@ -47,7 +47,7 @@ export default function ProfesseursPage() {
   const cycles = [...new Set(professorProfiles.map((p) => p.cycle))].length;
 
   return (
-    <main>
+    <main id="main-content">
       {/* Breadcrumb */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

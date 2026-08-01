@@ -79,7 +79,7 @@ export default function PrimairePage() {
   const levels = getLevelsByStage("primaire");
 
   return (
-    <main>
+    <main id="main-content">
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}

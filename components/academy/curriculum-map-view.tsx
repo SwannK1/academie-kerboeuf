@@ -131,7 +131,7 @@ function CompetencySlot({ expected, full }: CompetencySlotProps) {
 
       {/* ── Ressources prévues ── */}
       {slotCount > 0 ? (
-        <p className="mt-auto pt-3 text-[11px] text-white/30">
+        <p className="mt-auto pt-3 text-[11px] text-muted">
           {slotCount}&nbsp;ressource{slotCount > 1 ? "s" : ""} PDF
           prévue{slotCount > 1 ? "s" : ""}
         </p>

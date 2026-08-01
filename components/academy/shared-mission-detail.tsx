@@ -59,7 +59,7 @@ export function SharedMissionDetail({
   }
 
   return (
-    <main className={pageClass} data-mode={displayMode}>
+    <main id="main-content" className={pageClass} data-mode={displayMode}>
       <PrintBodyClass className="print-mission-detail" />
       <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

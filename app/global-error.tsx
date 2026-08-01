@@ -9,7 +9,7 @@ export default function GlobalError({
   return (
     <html lang="fr">
       <body>
-        <main>
+        <main id="main-content">
           <h1>Une erreur est survenue</h1>
           <button type="button" onClick={() => unstable_retry()}>
             Réessayer

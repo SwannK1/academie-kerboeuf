@@ -57,7 +57,7 @@ export default function ProgrammingPage() {
   const selectedLevel = levels.find((level) => level.levelId === selectedLevelId)!;
 
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <header className="max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">

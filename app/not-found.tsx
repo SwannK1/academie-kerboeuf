@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#f8f3e8] px-6 py-16 text-[#16213e]">
+    <main id="main-content" className="min-h-screen bg-[#f8f3e8] px-6 py-16 text-[#16213e]">
       <div className="mx-auto max-w-3xl rounded-3xl border border-[#d8c7a3] bg-white/80 p-8 shadow-sm">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#b7791f]">
           Académie Kerboeuf

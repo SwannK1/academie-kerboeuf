@@ -49,7 +49,7 @@ const methodes = [
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main id="main-content" className="mx-auto max-w-3xl px-4 py-12">
       <div className="mb-10">
         <Link
           href="/college/6e"

@@ -721,12 +721,14 @@ export function TeacherWeeklyTimetableClient() {
                   type="text"
                   value={newWeekLabel}
                   onChange={(event) => setNewWeekLabel(event.target.value)}
+                  aria-label="Nom de la semaine"
                   placeholder="Nom de la semaine"
                   className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
                 />
                 <select
                   value={newWeekKind}
                   onChange={(event) => setNewWeekKind(event.target.value as TeacherTimetableWeekKind)}
+                  aria-label="Type de semaine spéciale"
                   className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
                 >
                   {specialTeacherTimetableWeekKinds.map((kind) => (

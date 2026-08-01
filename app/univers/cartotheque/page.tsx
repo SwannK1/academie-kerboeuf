@@ -27,7 +27,7 @@ const niveaux = ["Cycle 2", "Cycle 3", "Cycle 4"];
 
 export default function CartothequePage() {
   return (
-    <main>
+    <main id="main-content">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

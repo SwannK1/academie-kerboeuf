@@ -58,7 +58,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
   }));
 
   return (
-    <main className="px-4 pb-24 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-24 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <Breadcrumb
           items={[
@@ -145,7 +145,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
               <p className="text-sm font-bold text-muted">
                 Cette feuille n&apos;est pas encore disponible.
               </p>
-              <p className="text-xs leading-6 text-white/30">
+              <p className="text-xs leading-6 text-muted">
                 La fiche {label.toLowerCase()} pour «&nbsp;{notion.title}&nbsp;» sera
                 mise en ligne prochainement.
               </p>

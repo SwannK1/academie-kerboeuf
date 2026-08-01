@@ -237,6 +237,7 @@ export function TeacherCycleMeetingsClient() {
                 type="text"
                 value={taskDraft}
                 onChange={(event) => setTaskDraft(event.target.value)}
+                aria-label="Nouvelle tâche de suivi"
                 onKeyDown={(event) => {
                   if (event.key === "Enter") {
                     event.preventDefault();

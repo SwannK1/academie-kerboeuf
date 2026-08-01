@@ -8,6 +8,7 @@ import {
   useState,
   type DragEvent,
 } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   schoolLevels,
   curriculumSubjects,
@@ -986,10 +987,15 @@ function CardSidePanel({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const dialogRef = useDialogFocusTrap<HTMLElement>();
+
   return (
     <aside
+      ref={dialogRef}
       role="dialog"
+      aria-modal="true"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
+      tabIndex={-1}
       onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >

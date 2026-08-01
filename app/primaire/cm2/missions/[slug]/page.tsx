@@ -73,7 +73,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
     );
 
     return (
-      <main className="mission-detail-page felix-project-detail">
+      <main id="main-content" className="mission-detail-page felix-project-detail">
         <PrintBodyClass className="print-mission-detail" />
 
         <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
@@ -270,7 +270,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
   );
 
   return (
-    <main className="mission-detail-page">
+    <main id="main-content" className="mission-detail-page">
       <PrintBodyClass className="print-mission-detail" />
       <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

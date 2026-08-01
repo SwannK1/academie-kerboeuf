@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function SixiemeRessourcesPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main id="main-content" className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="mb-2 text-2xl font-bold text-slate-900">
         Ressources méthode — 6e
       </h1>

@@ -106,7 +106,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -189,7 +189,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   const sequenceGroups = groupSequences(sequences);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -509,7 +509,7 @@ function SubjectCard<TSubject extends MatterSubject>({
               key={domain}
               className="flex items-start gap-2 text-xs leading-5 text-muted"
             >
-              <span className="mt-0.5 shrink-0 text-white/30" aria-hidden="true">
+              <span className="mt-0.5 shrink-0 text-muted" aria-hidden="true">
                 ·
               </span>
               {domain}
@@ -546,7 +546,7 @@ function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
             <p className="mt-1 text-xs text-muted">Zone · {domain.zone}</p>
           ) : null}
         </div>
-        <span className="shrink-0 rounded border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-white/35">
+        <span className="shrink-0 rounded border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-muted">
           {domain.subdomains.length}&nbsp;sous-domaine
           {domain.subdomains.length > 1 ? "s" : ""}
         </span>
@@ -594,7 +594,7 @@ function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
           ))}
         </ul>
       ) : (
-        <p className="mt-1 text-xs text-white/30">À structurer</p>
+        <p className="mt-1 text-xs text-muted">À structurer</p>
       )}
     </li>
   );

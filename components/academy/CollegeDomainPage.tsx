@@ -51,7 +51,7 @@ export function CollegeDomainPage({
   ).length;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb items={breadcrumbItems} />
@@ -143,7 +143,7 @@ export function CollegeDomainPage({
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex items-baseline gap-3">
-                        <span className="shrink-0 text-xs font-black text-muted/60">
+                        <span className="shrink-0 text-xs font-black text-muted">
                           {String(index + 1).padStart(2, "0")}
                         </span>
                         <h3 className="text-base font-black leading-6 text-foreground">
@@ -174,7 +174,7 @@ export function CollegeDomainPage({
                     )}
 
                     {entry.officialReference && (
-                      <p className="mt-4 text-xs font-bold text-muted/60">
+                      <p className="mt-4 text-xs font-bold text-muted">
                         {entry.officialReference}
                       </p>
                     )}

@@ -16,7 +16,7 @@ export function FichesMathsCatalogue() {
   const domains = getMathDomains();
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -165,7 +165,7 @@ function SheetRow({
       {clickable ? (
         <span className="text-xs font-bold text-jade">Ouvrir →</span>
       ) : (
-        <span className="text-xs text-white/25">À venir</span>
+        <span className="text-xs text-muted">À venir</span>
       )}
     </span>
   );
@@ -182,7 +182,7 @@ function SheetRow({
   }
 
   return (
-    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
+    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-muted">
       {inner}
     </div>
   );

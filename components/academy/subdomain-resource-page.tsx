@@ -47,7 +47,7 @@ export function SubdomainResourcePage({
   const hasStructuredCompetencies = Boolean(subdomain.competencies?.length);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb items={breadcrumbItems} />
@@ -300,7 +300,7 @@ function ResourceSlotRow({ slot }: { slot: PedagogicalResourceSlot }) {
       </dt>
       <dd className="mt-2">
         {isAbsent ? (
-          <span className="inline-flex w-fit rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white/35">
+          <span className="inline-flex w-fit rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
             Absente
           </span>
         ) : isLinkable ? (

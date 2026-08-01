@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   curriculumSubjects,
   getSubjectsForLevel,
@@ -1566,10 +1567,15 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const dialogRef = useDialogFocusTrap<HTMLElement>();
+
   return (
     <aside
+      ref={dialogRef}
       role="dialog"
+      aria-modal="true"
       aria-label={`Modifier la carte ${card.title}`}
+      tabIndex={-1}
       onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >

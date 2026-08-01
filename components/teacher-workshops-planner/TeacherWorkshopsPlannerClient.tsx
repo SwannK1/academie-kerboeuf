@@ -524,6 +524,7 @@ export function TeacherWorkshopsPlannerClient() {
                     type="checkbox"
                     checked={task.done}
                     onChange={() => toggleFormTaskDone(index)}
+                    aria-label={`Tâche « ${task.label} » réalisée`}
                   />
                   <span className={task.done ? "line-through text-muted" : ""}>{task.label}</span>
                   <button
@@ -544,6 +545,7 @@ export function TeacherWorkshopsPlannerClient() {
                 onChange={(event) =>
                   setForm((current) => ({ ...current, newTaskLabel: event.target.value }))
                 }
+                aria-label="Nouvelle tâche de préparation"
                 placeholder="Nouvelle tâche de préparation"
                 className="min-h-11 flex-1 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
               />

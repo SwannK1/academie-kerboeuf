@@ -813,6 +813,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={avoidA}
                   onChange={(e) => setAvoidA(e.target.value)}
+                  aria-label="Étiquette 1 à ne pas placer ensemble"
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="">Étiquette 1</option>
@@ -825,6 +826,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={avoidB}
                   onChange={(e) => setAvoidB(e.target.value)}
+                  aria-label="Étiquette 2 à ne pas placer ensemble"
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="">Étiquette 2</option>

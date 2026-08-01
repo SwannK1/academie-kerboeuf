@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TeacherRoutinesLibraryPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-6">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-6">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
