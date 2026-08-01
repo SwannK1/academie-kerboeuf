@@ -31,7 +31,7 @@ export function LevelHub({ stage, title, description, levels, getStatus }: Level
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Aile {stageLabels[stage]}
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {title}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">

@@ -69,7 +69,7 @@ export function CollegeDomainPage({
             </p>
             <PublicStatusBadge status={status} />
           </div>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {domainLabel}
           </h1>
           <p className="mt-3 text-sm font-bold text-jade/80">{officialRef}</p>

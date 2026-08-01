@@ -61,7 +61,7 @@ export default function UniversPage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
             Académie Kerboeuf
           </p>
-          <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
+          <h1 className="mt-4 break-words text-4xl font-black text-foreground sm:text-5xl">
             Un univers au service des apprentissages
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">

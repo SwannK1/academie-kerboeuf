@@ -233,7 +233,7 @@ export default function Cm2MissionsPage() {
                 className={`group flex min-h-full flex-col rounded-md border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${project.theme.ringClass}`}
               >
                 <div className={`mb-4 h-1 rounded-full ${project.theme.accentClass}`} aria-hidden="true" />
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-wrap items-start justify-between gap-3">
                   <p className={`text-xs font-bold uppercase tracking-[0.18em] ${project.theme.textClass}`}>
                     {project.mainSubject}
                   </p>

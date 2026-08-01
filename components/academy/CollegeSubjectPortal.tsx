@@ -45,7 +45,7 @@ export function CollegeSubjectPortal({
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             {cycleLabel}
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {subjectLabel}
           </h1>
           {subtitle && (

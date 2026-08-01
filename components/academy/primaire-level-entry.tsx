@@ -75,7 +75,7 @@ export function PrimaireLevelEntry({ level }: Props) {
               {level.cycle} · {level.label}
             </span>
           </div>
-          <h1 className="mt-5 text-5xl font-black leading-none text-foreground sm:text-6xl">
+          <h1 className="break-words mt-5 text-5xl font-black leading-none text-foreground sm:text-6xl">
             {level.label}
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">

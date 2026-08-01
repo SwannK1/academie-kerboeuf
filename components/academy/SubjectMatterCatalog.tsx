@@ -127,7 +127,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Programmes {levelLabel}
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Les matières du {levelLabel}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -216,7 +216,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
             </p>
             <PublicStatusBadge status={subject.status} />
           </div>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {subject.title}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">

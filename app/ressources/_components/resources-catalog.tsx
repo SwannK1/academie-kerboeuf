@@ -193,7 +193,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 w-full rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>
@@ -211,7 +211,7 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
       href={resource.href}
       className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
             {resource.level} · {resource.subject}

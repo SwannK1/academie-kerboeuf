@@ -176,7 +176,7 @@ export function ProfessorHero({ professor }: { professor: ProfessorProfile }) {
             </div>
 
             {/* Nom */}
-            <h1 className="mt-6 text-5xl font-black leading-[0.93] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="break-words mt-6 text-5xl font-black leading-[0.93] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               {professor.name}
             </h1>
 

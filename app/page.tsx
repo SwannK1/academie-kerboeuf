@@ -81,7 +81,7 @@ export default function Home() {
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.12),rgba(9,16,15,0.96))]" />
 
         <div className="mx-auto max-w-7xl text-center">
-          <h1 className="text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="break-words text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
             Académie Kerboeuf
           </h1>
           <p className="mt-5 text-xl font-bold text-gold sm:text-2xl">
@@ -102,7 +102,7 @@ export default function Home() {
                 className={`group flex min-h-48 flex-col justify-between rounded-md border ${t.border} bg-white/[0.04] p-7 transition hover:-translate-y-1 ${t.hoverBorder} ${t.hoverBg} focus:outline-none focus:ring-2 focus:ring-gold/60`}
               >
                 <div>
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h2 className="text-2xl font-black text-foreground sm:text-3xl">
                       {universe.label}
                     </h2>

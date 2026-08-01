@@ -47,7 +47,7 @@ export default function CartothequePage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
             Lieu pédagogique
           </p>
-          <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 text-4xl font-black text-foreground sm:text-5xl">
             Cartothèque des Lisières
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">

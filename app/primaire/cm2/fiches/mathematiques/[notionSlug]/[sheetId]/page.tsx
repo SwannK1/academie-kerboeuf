@@ -79,7 +79,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             {notion.domain}
           </p>
-          <h1 className="mt-3 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="break-words mt-3 text-4xl font-black leading-tight text-foreground sm:text-5xl">
             {notion.title}
             <br />
             <span className="text-jade">— {label}</span>

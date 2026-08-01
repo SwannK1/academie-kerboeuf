@@ -118,7 +118,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
                 {student.cycle}
               </span>
             </div>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {student.name}
             </h1>
             <p className={`mt-4 text-xl font-bold ${accent.textClass}`}>

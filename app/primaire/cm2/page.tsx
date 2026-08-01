@@ -43,7 +43,7 @@ export default function Cm2Page() {
           ]}
         />
 
-        <h1 className="mt-6 text-4xl font-black text-foreground sm:text-5xl">
+        <h1 className="break-words mt-6 text-4xl font-black text-foreground sm:text-5xl">
           CM2
         </h1>
         <p className="mt-3 text-base leading-7 text-muted">

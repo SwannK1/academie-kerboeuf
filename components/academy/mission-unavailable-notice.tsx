@@ -47,7 +47,7 @@ export function MissionUnavailableNotice({
             >
               {level.label} · {mission.subject}
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {mission.title}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">

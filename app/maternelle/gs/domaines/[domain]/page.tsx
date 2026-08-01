@@ -66,7 +66,7 @@ export default async function GsDomainPage({ params }: PageProps) {
             </span>
             <PublicStatusBadge status={domain.status} />
           </div>
-          <h1 className="mt-5 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-5 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             {domain.label}
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">

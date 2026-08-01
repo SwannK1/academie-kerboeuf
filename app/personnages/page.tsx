@@ -69,7 +69,7 @@ export default function PersonnagesPage() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
             Personnages
           </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="mt-4 max-w-3xl break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Qui accompagne les apprentissages ?
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">

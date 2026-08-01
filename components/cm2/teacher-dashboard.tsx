@@ -200,7 +200,7 @@ function DashboardGroup({
 function TeacherItemCard({ item }: { item: TeacherItem }) {
   return (
     <article className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
             {item.family}

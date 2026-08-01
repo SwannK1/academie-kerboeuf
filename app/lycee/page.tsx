@@ -62,7 +62,7 @@ export default function LyceePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Seconde · Première · Terminale
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Lycée
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
@@ -89,7 +89,7 @@ export default function LyceePage() {
               return (
                 <Link key={level.href} href={level.href}>
                   <div className="group flex h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-6 transition hover:-translate-y-0.5 hover:border-jade/30 hover:bg-white/[0.065]">
-                    <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
                       <h2 className="text-2xl font-black text-foreground">
                         {level.label}
                       </h2>
