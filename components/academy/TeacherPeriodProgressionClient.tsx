@@ -5,6 +5,7 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type DragEvent,
 } from "react";
@@ -70,15 +71,12 @@ type ImportScope = "all" | "subject";
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
   const [periode, setPeriode] = useState<TeacherPeriod>("periode-1");
-  const initialCards = useMemo(() => readStoredCardsChecked(), []);
-  const [cards, setCards] = useState<PeriodCard[]>(initialCards.cards);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialCards.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialCards.wasReset
-        ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
-        : null,
-  );
+  // Valeur initiale déterministe (identique serveur/client) : localStorage
+  // n'existe pas côté serveur, donc lire son contenu pendant le rendu ferait
+  // diverger le HTML serveur du premier rendu client (erreur d'hydratation
+  // React #418). Le contenu réel est chargé après le montage ci-dessous.
+  const [cards, setCards] = useState<PeriodCard[]>([]);
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
 
   const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
@@ -110,6 +108,30 @@ export function TeacherPeriodProgressionClient() {
   } | null>(null);
 
   useEffect(() => {
+    // Hydration-safe mount read: localStorage must not be read during SSR/first paint.
+    const stored = readStoredCardsChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCards(stored.cards);
+    setStorageNotice(
+      !stored.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : stored.wasReset
+          ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
+          : null,
+    );
+  }, []);
+
+  // La première exécution correspond au montage, avant que l'effet
+  // ci-dessus ait remplacé `cards` (encore `[]`) par le contenu réel du
+  // stockage : on l'ignore pour ne jamais écraser des cartes déjà
+  // enregistrées avec un tableau vide. Les exécutions suivantes (chargement
+  // terminé, puis modifications réelles) écrivent normalement.
+  const isInitialWriteRef = useRef(true);
+  useEffect(() => {
+    if (isInitialWriteRef.current) {
+      isInitialWriteRef.current = false;
+      return;
+    }
     writeStoredCards(cards);
   }, [cards]);
 
