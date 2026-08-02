@@ -120,7 +120,7 @@ export function TeacherDashboard({ missions, projects }: TeacherDashboardProps) 
           </p>
           <div className="mt-3 grid gap-5 lg:grid-cols-[1fr_0.72fr] lg:items-end">
             <div>
-              <h2 id="teacher-dashboard-title" className="text-3xl font-black text-foreground sm:text-4xl">
+              <h2 id="teacher-dashboard-title" className="break-words text-3xl font-black text-foreground sm:text-4xl">
                 Vue enseignant CM2
               </h2>
               <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">
@@ -199,9 +199,9 @@ function DashboardGroup({
 
 function TeacherItemCard({ item }: { item: TeacherItem }) {
   return (
-    <article className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.04] p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+    <article className="flex min-h-full min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.04] p-5">
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
+        <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
             {item.family}
           </p>

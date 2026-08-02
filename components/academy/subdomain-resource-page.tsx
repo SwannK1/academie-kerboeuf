@@ -63,7 +63,7 @@ export function SubdomainResourcePage({
             <PublicStatusBadge status={subdomain.status} />
           </div>
 
-          <h1 className="mt-6 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="break-words mt-6 text-4xl font-black leading-tight text-foreground sm:text-5xl">
             {domain.title} · {subdomain.title}
           </h1>
           {subdomain.description ? (

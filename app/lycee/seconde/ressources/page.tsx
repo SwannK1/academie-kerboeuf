@@ -71,7 +71,7 @@ export default function SecondeRessourcesPage() {
             </p>
             <PublicStatusBadge status="in-progress" />
           </div>
-          <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
             Ressources de Seconde
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-muted">

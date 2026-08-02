@@ -8,7 +8,7 @@ export default function NotFound() {
           Académie Kerboeuf
         </p>
 
-        <h1 className="mt-4 text-3xl font-bold">
+        <h1 className="break-words mt-4 text-3xl font-bold">
           Page introuvable
         </h1>
 

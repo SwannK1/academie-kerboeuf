@@ -76,7 +76,7 @@ export default function ReussirEntree6ePage() {
             </p>
             <PublicStatusBadge status={getPublicStatus("en-construction")} />
           </div>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Réussir son entrée en 6e
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">

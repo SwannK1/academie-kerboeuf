@@ -85,7 +85,7 @@ export default function ReussirEntreeSixiemePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Parcours de transition
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Réussir son entrée en 6e
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">

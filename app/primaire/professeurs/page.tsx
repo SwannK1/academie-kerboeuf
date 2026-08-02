@@ -103,7 +103,7 @@ export default function ProfesseursPage() {
       />
 
       <section className="mt-8 mb-12">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="break-words text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Les professeurs du primaire
         </h1>
         <p className="mt-3 text-lg text-muted">

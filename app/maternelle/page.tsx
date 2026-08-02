@@ -35,7 +35,7 @@ export default function MaternellePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Cycle 1
           </p>
-          <h1 className="mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
+          <h1 className="break-words mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
             Maternelle
           </h1>
           <p className="mt-4 text-xl font-black text-gold">

@@ -77,7 +77,7 @@ export default async function FicheDetailPage({ params }: Props) {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
               {FICHE_DOMAIN_LABELS[notion.domain]} · CM2
             </p>
-            <h1 className="mt-2 text-3xl font-black text-foreground sm:text-4xl">
+            <h1 className="break-words mt-2 text-3xl font-black text-foreground sm:text-4xl">
               {notion.title}
             </h1>
             <p className="mt-1 text-sm font-bold text-jade">{sheetLabel}</p>

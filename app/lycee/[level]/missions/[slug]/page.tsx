@@ -106,7 +106,7 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
               </p>
               <PublicStatusBadge status={levelStatus} />
             </div>
-            <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
               Mission en préparation
             </h1>
           </div>

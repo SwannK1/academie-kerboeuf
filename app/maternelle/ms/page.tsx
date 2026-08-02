@@ -51,7 +51,7 @@ export default function MsPage() {
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h1 className="text-4xl font-black leading-tight text-foreground sm:text-5xl">
+              <h1 className="break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
                 Moyenne Section
               </h1>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">

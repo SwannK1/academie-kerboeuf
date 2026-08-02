@@ -547,7 +547,7 @@ export function TeacherWorkshopsPlannerClient() {
                 }
                 aria-label="Nouvelle tâche de préparation"
                 placeholder="Nouvelle tâche de préparation"
-                className="min-h-11 flex-1 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 min-w-0 flex-1 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
               />
               <button
                 type="button"

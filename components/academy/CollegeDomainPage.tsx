@@ -69,7 +69,7 @@ export function CollegeDomainPage({
             </p>
             <PublicStatusBadge status={status} />
           </div>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {domainLabel}
           </h1>
           <p className="mt-3 text-sm font-bold text-jade/80">{officialRef}</p>
@@ -130,7 +130,7 @@ export function CollegeDomainPage({
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                   Compétences attendues
                 </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
+                <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                   Ce que l&rsquo;élève doit pouvoir faire
                 </h2>
               </div>

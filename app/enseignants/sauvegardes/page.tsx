@@ -26,7 +26,7 @@ export default function TeacherLocalBackupPage() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Espace enseignants
           </p>
-          <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="mt-4 break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Sauvegardes locales
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">

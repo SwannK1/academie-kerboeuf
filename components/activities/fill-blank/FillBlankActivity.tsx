@@ -141,7 +141,7 @@ function FillBlankInteractive({
       )}
 
       {(submitted || showCorrection) && (
-        <div className="rounded border border-gold/25 bg-gold/10 p-4">
+        <div role="status" className="rounded border border-gold/25 bg-gold/10 p-4">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold">
             Réponses attendues
           </p>

@@ -81,7 +81,7 @@ export default async function ProgrammePage({ params }: PageProps) {
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Programme complet — {meta.label}
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">

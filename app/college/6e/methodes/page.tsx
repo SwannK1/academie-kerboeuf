@@ -57,7 +57,7 @@ export default function Page() {
         >
           ← Retour à la 6e
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 className="break-words text-3xl font-bold tracking-tight text-gray-900">
           Méthodes de travail — 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">

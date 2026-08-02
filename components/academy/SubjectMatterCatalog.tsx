@@ -127,7 +127,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Programmes {levelLabel}
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Les matières du {levelLabel}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -216,7 +216,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
             </p>
             <PublicStatusBadge status={subject.status} />
           </div>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {subject.title}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -486,11 +486,11 @@ function SubjectCard<TSubject extends MatterSubject>({
   return (
     <Link
       href={href}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
+      className={`group flex min-h-full min-w-0 flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
         <h3
-          className={`text-xs font-bold uppercase tracking-[0.18em] ${
+          className={`min-w-0 text-xs font-bold uppercase tracking-[0.18em] ${
             isAvailable ? t.text : "text-muted"
           }`}
         >
@@ -535,9 +535,9 @@ function SubjectCard<TSubject extends MatterSubject>({
 
 function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
   return (
-    <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
-      <div className="flex items-start justify-between gap-4">
-        <div>
+    <div className={`min-w-0 rounded-md border ${t.border} bg-white/[0.025] p-5`}>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0">
           <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
             Domaine
           </p>

@@ -54,7 +54,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
             </p>
             <PublicStatusBadge status={status} />
           </div>
-          <h1 className="mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
+          <h1 className="break-words mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
             {level.label}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">

@@ -88,7 +88,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Compétences — {levelInfo.label}
           </h1>
           <p className="mt-2 text-sm leading-6 text-muted">

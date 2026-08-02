@@ -522,7 +522,6 @@ function AddToLogbookModal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
-            autoFocus
             className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
           >
             ✕
@@ -530,7 +529,7 @@ function AddToLogbookModal({
         </div>
 
         {done ? (
-          <p className="mt-4 text-sm font-bold text-jade">
+          <p role="status" className="mt-4 text-sm font-bold text-jade">
             Séance ajoutée au cahier journal, {formatWeekRangeLabel(weekKey)}.
           </p>
         ) : (
@@ -1089,7 +1088,7 @@ function LessonEditor({
                 }
                 aria-label="Nom du matériel"
                 placeholder="Manuel, fiche, matériel de manipulation..."
-                className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-9 min-w-0 flex-1 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
               <input
                 type="text"

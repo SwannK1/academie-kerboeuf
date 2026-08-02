@@ -53,7 +53,7 @@ export function CharacterHero({
             </p>
             <h2
               id="felix-hero-title"
-              className="mt-6 text-4xl font-black leading-[0.98] text-foreground sm:text-5xl"
+              className="break-words mt-6 text-4xl font-black leading-[0.98] text-foreground sm:text-5xl"
             >
               {character.name}
             </h2>

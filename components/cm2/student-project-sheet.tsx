@@ -27,7 +27,7 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
         </p>
         <h2
           id="student-project-sheet-title"
-          className="mt-2 text-2xl font-black leading-tight text-foreground sm:text-3xl"
+          className="break-words mt-2 text-2xl font-black leading-tight text-foreground sm:text-3xl"
         >
           {mission.title}
         </h2>

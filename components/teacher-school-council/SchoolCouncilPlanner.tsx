@@ -517,7 +517,7 @@ function CouncilActions({
           onChange={(event) => setDraftLabel(event.target.value)}
           aria-label="Nouvelle action"
           placeholder="Nouvelle action"
-          className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+          className="min-h-9 min-w-0 flex-1 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
         />
         <button
           type="button"

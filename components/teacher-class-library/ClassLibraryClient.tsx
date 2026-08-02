@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   CLASS_LIBRARY_STORAGE_KEY,
@@ -647,6 +647,8 @@ function DeleteConfirmDialog({
   onCancel: () => void;
 }) {
   const dialogRef = useDialogFocusTrap<HTMLDivElement>();
+  const titleId = useId();
+  const descriptionId = useId();
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -661,15 +663,16 @@ function DeleteConfirmDialog({
       ref={dialogRef}
       role="alertdialog"
       aria-modal="true"
-      aria-label="Confirmer la suppression"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
       tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 print:hidden"
     >
       <div className="max-w-sm rounded-lg border border-white/10 bg-background p-6">
-        <p className="text-base font-black text-foreground">
+        <p id={titleId} className="text-base font-black text-foreground">
           Supprimer cette ressource ?
         </p>
-        <p className="mt-2 text-sm leading-6 text-muted">
+        <p id={descriptionId} className="mt-2 text-sm leading-6 text-muted">
           Cette action est définitive et ne peut pas être annulée.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">

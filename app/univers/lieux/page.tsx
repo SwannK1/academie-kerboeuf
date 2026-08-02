@@ -52,7 +52,7 @@ export default function LieuxPage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
             Univers · Lieux
           </p>
-          <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 text-4xl font-black text-foreground sm:text-5xl">
             Les lieux de l&apos;Académie
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">
@@ -68,11 +68,11 @@ export default function LieuxPage() {
             {lieuxAcademie.map((lieu) => (
               <article
                 key={lieu.id}
-                className={`rounded-md border p-6 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
+                className={`min-w-0 rounded-md border p-6 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
                   <p
-                    className={`text-xs font-bold uppercase tracking-[0.14em] ${accentText[lieu.accentColor]}`}
+                    className={`min-w-0 text-xs font-bold uppercase tracking-[0.14em] ${accentText[lieu.accentColor]}`}
                   >
                     {lieu.matieresAssociees.slice(0, 2).join(" · ")}
                   </p>
@@ -133,7 +133,7 @@ export default function LieuxPage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
             Rôle pédagogique
           </p>
-          <h2 className="mt-4 text-3xl font-black text-foreground">
+          <h2 className="break-words mt-4 text-3xl font-black text-foreground">
             À quoi servent les lieux&nbsp;?
           </h2>
 

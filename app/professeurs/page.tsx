@@ -120,7 +120,7 @@ function Hero({ professors, stats }: HeroProps) {
               Galerie officielle
             </p>
 
-            <h1 className="mt-5 text-5xl font-black leading-[0.92] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="break-words mt-5 text-5xl font-black leading-[0.92] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Les Professeurs
               <br />
               <span className="text-foreground/50">de l&rsquo;Académie</span>
@@ -285,7 +285,7 @@ function ClosingSection() {
             L&rsquo;équipe pédagogique
           </p>
 
-          <h2 className="mt-4 max-w-2xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h2 className="break-words mt-4 max-w-2xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Une équipe pensée
             <br />
             comme un univers

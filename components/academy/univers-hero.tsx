@@ -66,7 +66,7 @@ export function UniversHero({
           <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
             Bible narrative & pédagogique
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl lg:text-7xl">
             Bienvenue dans l&apos;univers de l&apos;Académie Kerboeuf
           </h1>
           <p className="mt-5 text-2xl font-black text-jade sm:text-3xl">

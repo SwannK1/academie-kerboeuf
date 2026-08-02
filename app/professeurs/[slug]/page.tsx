@@ -201,7 +201,7 @@ function PersonalitySection({ professor }: { professor: ProfessorProfile }) {
           </p>
           <div className="mt-5 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <h2 className="text-3xl font-black text-foreground">
+              <h2 className="break-words text-3xl font-black text-foreground">
                 Ce que {professor.name} représente
               </h2>
               <p className="mt-4 text-sm leading-7 text-muted">

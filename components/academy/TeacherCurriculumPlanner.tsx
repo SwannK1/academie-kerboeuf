@@ -1011,13 +1011,18 @@ export function TeacherCurriculumPlanner() {
                 <button
                   type="button"
                   onClick={() => setFreeFormOpen((open) => !open)}
+                  aria-expanded={freeFormOpen}
+                  aria-controls="carte-libre-panneau"
                   className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
                 >
                   Ajouter une carte
                 </button>
               </div>
               {freeFormOpen ? (
-                <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div
+                  id="carte-libre-panneau"
+                  className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+                >
                   <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
                     Titre
                     <input

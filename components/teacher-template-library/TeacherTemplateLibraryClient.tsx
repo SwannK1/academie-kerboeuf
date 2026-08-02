@@ -199,7 +199,7 @@ export function TeacherTemplateLibraryClient() {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Rechercher un modèle…"
-          className="min-h-11 flex-1 rounded-md border border-white/10 bg-background/45 px-4 text-sm text-foreground"
+          className="min-h-11 min-w-0 flex-1 rounded-md border border-white/10 bg-background/45 px-4 text-sm text-foreground"
         />
 
         <label htmlFor="template-category-filter" className="sr-only">

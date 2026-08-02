@@ -14,7 +14,7 @@ export default function SuiviSequencesPage() {
   return (
     <main id="main-content" className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="break-words text-2xl font-bold text-gray-900">
           Suivi des séquences pédagogiques
         </h1>
         <p className="mt-1 text-sm text-gray-500">

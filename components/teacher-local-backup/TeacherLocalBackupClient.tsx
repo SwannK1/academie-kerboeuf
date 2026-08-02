@@ -417,13 +417,13 @@ export function TeacherLocalBackupClient() {
         />
 
         {importError && (
-          <p className="mt-3 rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          <p role="alert" className="mt-3 rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-200">
             {importError}
           </p>
         )}
 
         {importDone && (
-          <p className="mt-3 rounded-md border border-jade/40 bg-jade/10 px-3 py-2 text-sm text-jade">
+          <p role="status" className="mt-3 rounded-md border border-jade/40 bg-jade/10 px-3 py-2 text-sm text-jade">
             {importDone}
           </p>
         )}
@@ -440,58 +440,60 @@ export function TeacherLocalBackupClient() {
                   key={detected.id}
                   className="rounded-md border border-white/10 p-3"
                 >
-                  <p className="text-sm font-bold text-foreground">
-                    {detected.label}
-                  </p>
-                  <p className="mt-1 text-xs text-muted">
-                    {detected.hasExistingData
-                      ? "Des données existent déjà sur cet appareil pour cet outil."
-                      : "Aucune donnée existante sur cet appareil pour cet outil."}
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-3 text-xs">
-                    {(["remplacer", "fusionner", "annuler"] as const).map(
-                      (choice) => {
-                        const disabled =
-                          choice === "fusionner" && !detected.canMerge;
-                        return (
-                          <label
-                            key={choice}
-                            className={`flex items-center gap-1.5 ${
-                              disabled ? "opacity-40" : ""
-                            }`}
-                          >
-                            <input
-                              type="radio"
-                              name={`choice-${detected.id}`}
-                              disabled={disabled}
-                              checked={
-                                (importChoices[detected.id] ?? "annuler") ===
-                                choice
-                              }
-                              onChange={() =>
-                                setImportChoices((prev) => ({
-                                  ...prev,
-                                  [detected.id]: choice,
-                                }))
-                              }
-                            />
-                            {choice === "remplacer" && "Remplacer"}
-                            {choice === "fusionner" &&
-                              (disabled
-                                ? "Fusionner (indisponible)"
-                                : "Fusionner")}
-                            {choice === "annuler" && "Ne rien faire"}
-                          </label>
-                        );
-                      },
-                    )}
-                  </div>
+                  <fieldset className="m-0 border-0 p-0">
+                    <legend className="text-sm font-bold text-foreground">
+                      {detected.label}
+                    </legend>
+                    <p className="mt-1 text-xs text-muted">
+                      {detected.hasExistingData
+                        ? "Des données existent déjà sur cet appareil pour cet outil."
+                        : "Aucune donnée existante sur cet appareil pour cet outil."}
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-3 text-xs">
+                      {(["remplacer", "fusionner", "annuler"] as const).map(
+                        (choice) => {
+                          const disabled =
+                            choice === "fusionner" && !detected.canMerge;
+                          return (
+                            <label
+                              key={choice}
+                              className={`flex items-center gap-1.5 ${
+                                disabled ? "opacity-40" : ""
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name={`choice-${detected.id}`}
+                                disabled={disabled}
+                                checked={
+                                  (importChoices[detected.id] ?? "annuler") ===
+                                  choice
+                                }
+                                onChange={() =>
+                                  setImportChoices((prev) => ({
+                                    ...prev,
+                                    [detected.id]: choice,
+                                  }))
+                                }
+                              />
+                              {choice === "remplacer" && "Remplacer"}
+                              {choice === "fusionner" &&
+                                (disabled
+                                  ? "Fusionner (indisponible)"
+                                  : "Fusionner")}
+                              {choice === "annuler" && "Ne rien faire"}
+                            </label>
+                          );
+                        },
+                      )}
+                    </div>
+                  </fieldset>
                 </li>
               ))}
             </ul>
 
             {overwriteConfirmPending && (
-              <div className="space-y-3 rounded-md border border-red-500/40 bg-red-500/10 p-3">
+              <div role="alert" className="space-y-3 rounded-md border border-red-500/40 bg-red-500/10 p-3">
                 <p className="text-sm font-bold text-red-100">
                   Confirmer le remplacement des données existantes ?
                 </p>
