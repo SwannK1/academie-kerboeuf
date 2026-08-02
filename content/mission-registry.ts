@@ -1,9 +1,10 @@
-import { academyLevels } from "@/content/academy";
+import { academyLevels, getLevelMissionsPath } from "@/content/academy";
 import { cm2Missions } from "@/content/cm2";
 import {
   academyMissionToMission,
   cm2MissionToMission,
 } from "@/content/mission-adapters";
+import { getPublicStatusKey } from "@/content/public-status";
 import type { Mission } from "@/content/types";
 
 // Transitional registry for the future `content/missions/index.ts`.
@@ -52,6 +53,35 @@ export function getMissionsForLevel(levelSlug: string) {
 
 export function getAvailableMissions() {
   return allMissions.filter((mission) => mission.status === "disponible");
+}
+
+/**
+ * URL canonique de la page où une mission peut réellement être consultée.
+ * - CM2 et lycée ont une page de détail par mission (.../missions/:slug),
+ *   mais seulement pour les missions au statut public "disponible" : leur
+ *   page de détail appelle notFound() sinon (cf. isMissionPubliclyAvailable).
+ *   Pour une mission pas encore disponible, on renvoie vers la page de
+ *   listing du niveau (qui existe toujours) plutôt que vers une page de
+ *   détail qui répondrait en 404.
+ * - Le collège et les autres niveaux de primaire n'ont pas de page de
+ *   détail par mission : la mission est présentée sur la page du niveau
+ *   (cf. getLevelMissionsPath). Réutiliser ce helper évite de dupliquer
+ *   cette règle dans chaque page qui affiche des missions.
+ */
+export function getMissionHref(mission: Mission): string {
+  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
+    return `/primaire/${mission.levelSlug}/missions`;
+  }
+
+  if (mission.stage === "college") {
+    return getLevelMissionsPath({ stage: mission.stage, slug: mission.levelSlug });
+  }
+
+  if (getPublicStatusKey(mission.status) !== "available") {
+    return `/${mission.stage}/${mission.levelSlug}/missions`;
+  }
+
+  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
 }
 
 function dedupeById(missions: Mission[]) {

@@ -1,4 +1,4 @@
-import { allMissions } from "@/content/mission-registry";
+import { allMissions, getMissionHref } from "@/content/mission-registry";
 import type { Mission, MissionStatus } from "@/content/types";
 
 export type ResourceStatus = "disponible" | "à venir" | "en préparation";
@@ -55,10 +55,6 @@ function modesForResource({
   ].filter((mode): mode is ClassroomMode => Boolean(mode));
 }
 
-function missionHref(mission: Mission) {
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
-}
-
 function isLinkableMission(mission: Mission) {
   return mission.stage !== "primaire" || mission.levelSlug === "cm2";
 }
@@ -75,7 +71,7 @@ function resourceFromMission(mission: Mission): ClassroomResource {
     difficulty: mission.difficulty ?? levelDifficulties[mission.levelSlug] ?? mission.curriculum?.cycle ?? mission.levelLabel,
     status: normalizeMissionStatus(mission.status),
     professorName: mission.professor.name,
-    href: missionHref(mission),
+    href: getMissionHref(mission),
     modes: modesForResource({
       hasProjection: Boolean(mission.projectionHint ?? mission.pedagogy?.usage?.projection),
       hasPrinting: Boolean(mission.printHint ?? mission.pedagogy?.usage?.printing),

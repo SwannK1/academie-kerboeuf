@@ -508,9 +508,7 @@ function LinksPanel({ links }: { links: PedagogicalPlaceActivityLink[] }) {
 }
 
 function getProfessorHref(person: PedagogicalPlacePersonRef) {
-  return getProfessorBySlug(person.slug)
-    ? `/professeurs/${person.slug}`
-    : undefined;
+  return getProfessorBySlug(person.slug)?.profileHref;
 }
 
 function getStudentHref(person: PedagogicalPlacePersonRef) {
