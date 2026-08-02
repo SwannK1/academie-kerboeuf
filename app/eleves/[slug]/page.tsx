@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const student = getStudentBySlug(slug);
 
   if (!student) {
-    return { title: "Élève introuvable | Académie Kerboeuf" };
+    return { title: "Élève introuvable" };
   }
 
   return {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { HierarchyCard, HierarchyPage } from "@/app/personnages/_components/hierarchy";
 
 export const metadata: Metadata = {
-  title: "Programmation | Espace enseignants | Académie Kerboeuf",
+  title: "Programmation | Espace enseignants",
   description:
     "Organisez la programmation annuelle de votre classe et la progression de chaque période.",
 };

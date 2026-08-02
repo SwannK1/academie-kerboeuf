@@ -6,7 +6,7 @@ import { gsDomains } from "@/content/levels/maternelle/gs-domains";
 import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Grande Section | Académie Kerboeuf",
+  title: "Grande Section",
   description:
     "Tableau de bord Grande Section : domaines, observables, situations et ressources prévues.",
 };

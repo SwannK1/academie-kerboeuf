@@ -5,7 +5,7 @@ import { ce1LearningTree } from "@/content/levels/ce1-learning-tree";
 import { Ce1GastonLearningMap } from "@/components/academy/Ce1GastonLearningMap";
 
 export const metadata: Metadata = {
-  title: "CE1 — Cycle 2 | Académie Kerboeuf",
+  title: "CE1 — Cycle 2",
   description:
     "Page niveau CE1 : matières, domaines et séquences-compétences du Cycle 2, guidées par Gaston le Hérisson.",
 };

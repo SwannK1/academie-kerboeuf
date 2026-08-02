@@ -10,7 +10,7 @@ import {
 } from "@/content/pedagogical-places";
 
 export const metadata: Metadata = {
-  title: "Lieux pédagogiques élémentaires | Académie Kerboeuf",
+  title: "Lieux pédagogiques élémentaires",
   description:
     "Catalogue public des lieux pédagogiques élémentaires des Lisières des Explorateurs.",
 };

@@ -10,7 +10,7 @@ import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
 import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Programmes | Académie Kerboeuf",
+  title: "Programmes",
   description:
     "Architecture pédagogique de l’Académie Kerboeuf, organisée par niveaux, domaines, compétences et missions associées.",
 };

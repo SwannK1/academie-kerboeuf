@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherSubstituteFolderClient } from "@/components/teacher-substitute-folder/TeacherSubstituteFolderClient";
 
 export const metadata: Metadata = {
-  title: "Préparer mon dossier remplaçant | Académie Kerboeuf",
+  title: "Préparer mon dossier remplaçant",
   description:
     "Préparez un dossier remplaçant clair et imprimable : horaires, matériel, rituels, déroulé de la journée, consignes collectives et contacts institutionnels.",
 };

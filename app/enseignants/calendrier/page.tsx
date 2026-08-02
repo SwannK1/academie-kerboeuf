@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherSchoolCalendar } from "@/components/teacher-school-calendar/TeacherSchoolCalendar";
 
 export const metadata: Metadata = {
-  title: "Mon calendrier scolaire | Académie Kerboeuf",
+  title: "Mon calendrier scolaire",
   description:
     "Organisez vos périodes, dates importantes et échéances personnelles dans un calendrier mensuel sauvegardé sur cet appareil.",
 };

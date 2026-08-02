@@ -16,9 +16,9 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCpSubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
+  if (!subject) return { title: "Matière introuvable" };
   return {
-    title: `${subject.title} CP | Académie Kerboeuf`,
+    title: `${subject.title} CP`,
     description: subject.shortDescription,
   };
 }

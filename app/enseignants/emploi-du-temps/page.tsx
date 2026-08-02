@@ -4,7 +4,7 @@ import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
 
 export const metadata: Metadata = {
-  title: "Emploi du temps hebdomadaire | Académie Kerboeuf",
+  title: "Emploi du temps hebdomadaire",
   description:
     "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
 };

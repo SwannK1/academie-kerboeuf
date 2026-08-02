@@ -26,10 +26,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { notionSlug, sheetId } = await params;
   const notion = getCm2FicheMath(notionSlug);
-  if (!notion) return { title: "Fiche introuvable | Académie Kerboeuf" };
+  if (!notion) return { title: "Fiche introuvable" };
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
   return {
-    title: `${notion.title} — ${label} | CM2 Mathématiques | Académie Kerboeuf`,
+    title: `${notion.title} — ${label} | CM2 Mathématiques`,
     description: `${notion.skill} (${label})`,
   };
 }

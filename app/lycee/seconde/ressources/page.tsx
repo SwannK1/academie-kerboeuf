@@ -4,7 +4,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 export const metadata: Metadata = {
-  title: "Ressources de Seconde | Académie Kerboeuf",
+  title: "Ressources de Seconde",
   description:
     "Méthode, français et mathématiques pour réussir son entrée au lycée.",
 };

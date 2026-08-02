@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomLayoutClient } from "@/components/teacher-classroom-layout/TeacherClassroomLayoutClient";
 
 export const metadata: Metadata = {
-  title: "Plan de classe et groupes | Académie Kerboeuf",
+  title: "Plan de classe et groupes",
   description:
     "Construisez un plan de classe visuel, placez des étiquettes locales et générez des groupes d'élèves. Aucune donnée sensible, stockage uniquement sur cet appareil.",
 };

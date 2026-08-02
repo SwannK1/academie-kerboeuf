@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Réussir son entrée en 6e | Parcours | Académie Kerboeuf",
+  title: "Réussir son entrée en 6e | Parcours",
   description:
     "Un parcours pour passer du CM2 au collège avec méthode : organisation, lecture de consigne, tenue du cahier, préparation du cartable, apprentissage d'une leçon.",
 };

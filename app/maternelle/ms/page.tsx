@@ -6,7 +6,7 @@ import { msDomains } from "@/content/levels/maternelle/ms-domains";
 import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Moyenne Section | Académie Kerboeuf",
+  title: "Moyenne Section",
   description:
     "Tableau de bord Moyenne Section : domaines, observables, situations et ressources prévues.",
 };

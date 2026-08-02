@@ -568,6 +568,7 @@ export function TeacherClassroomLayoutClient() {
                 return (
                   <div
                     key={table.id}
+                    data-testid="classroom-table"
                     onPointerDown={(e) => onTablePointerDown(e, table)}
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={() => onTableDrop(table.id)}

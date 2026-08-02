@@ -4,7 +4,7 @@ import { TeacherLessonPreparation } from "@/components/teacher-lesson-preparatio
 import { PrintBodyClass } from "@/components/print/print-body-class";
 
 export const metadata: Metadata = {
-  title: "Préparer une séance | Espace enseignants | Académie Kerboeuf",
+  title: "Préparer une séance | Espace enseignants",
   description:
     "Construisez une séance complète avec des blocs repliables : informations, situation de départ, déroulé modulable, différenciation, évaluation, matériel et bilan. Sauvegarde locale uniquement.",
 };

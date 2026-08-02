@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { AssessmentPlanner } from "@/components/teacher-assessment-planner/AssessmentPlanner";
 
 export const metadata: Metadata = {
-  title: "Préparer mes évaluations | Académie Kerboeuf",
+  title: "Préparer mes évaluations",
   description:
     "Organisez vos évaluations de classe : titre, compétence, période, matériel et checklist de préparation, sans stocker de résultat d'élève.",
 };

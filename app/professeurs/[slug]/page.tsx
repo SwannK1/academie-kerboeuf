@@ -94,9 +94,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const professor = getProfessorBySlug(slug);
-  if (!professor) return { title: "Professeur introuvable | Académie Kerboeuf" };
+  if (!professor) return { title: "Professeur introuvable" };
   return {
-    title: `${professor.name} — ${professor.role} | Académie Kerboeuf`,
+    title: `${professor.name} — ${professor.role}`,
     description: professor.bio,
   };
 }

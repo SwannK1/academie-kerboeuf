@@ -25,12 +25,12 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine GS introuvable | Académie Kerboeuf",
+      title: "Domaine GS introuvable",
     };
   }
 
   return {
-    title: `${domain.shortLabel} GS | Académie Kerboeuf`,
+    title: `${domain.shortLabel} GS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Grande Section.`,
   };
 }

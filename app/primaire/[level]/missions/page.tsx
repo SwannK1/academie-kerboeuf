@@ -20,11 +20,11 @@ export async function generateMetadata({
   const level = getAcademyLevel("primaire", levelSlug);
 
   if (!level) {
-    return { title: "Missions introuvables | Académie Kerboeuf" };
+    return { title: "Missions introuvables" };
   }
 
   return {
-    title: `Missions ${level.label} | Académie Kerboeuf`,
+    title: `Missions ${level.label}`,
     description: `Catalogue de missions pédagogiques pour le niveau ${level.label}.`,
   };
 }

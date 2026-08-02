@@ -6,7 +6,7 @@ import { getPublicStatus } from "@/content/public-status";
 import { ResourcesCatalog } from "./_components/resources-catalog";
 
 export const metadata: Metadata = {
-  title: "Ressources | Académie Kerboeuf",
+  title: "Ressources",
   description:
     "Toutes les missions pédagogiques prêtes à projeter, imprimer ou corriger en classe.",
 };

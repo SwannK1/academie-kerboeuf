@@ -15,7 +15,7 @@ import {
 } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Missions CM2 | Académie Kerboeuf",
+  title: "Missions CM2",
   description:
     "Vitrine pédagogique complète des missions CM2 de Félix : lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",
 };

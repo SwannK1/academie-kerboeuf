@@ -5,7 +5,7 @@ import { StudentGallery } from "@/app/eleves/_components/student-gallery";
 import { emblematicStudents } from "@/content/students";
 
 export const metadata: Metadata = {
-  title: "Élèves emblématiques | Académie Kerboeuf",
+  title: "Élèves emblématiques",
   description:
     "La galerie des élèves emblématiques de l’Académie Kerboeuf, de la maternelle à la Terminale.",
 };

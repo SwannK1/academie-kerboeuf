@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Cartothèque des Lisières | Académie Kerboeuf",
+  title: "Cartothèque des Lisières",
   description:
     "La Cartothèque des Lisières — un lieu pour se repérer, relier les savoirs et construire des chemins d'apprentissage.",
 };

@@ -27,7 +27,7 @@ export async function generateMetadata({
   const path = getLearningPathWithSteps(slug);
 
   if (!path) {
-    return { title: "Parcours introuvable | Académie Kerboeuf" };
+    return { title: "Parcours introuvable" };
   }
 
   return {

@@ -25,9 +25,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCm2SubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
+  if (!subject) return { title: "Matière introuvable" };
   return {
-    title: `${subject.title} CM2 | Académie Kerboeuf`,
+    title: `${subject.title} CM2`,
     description: subject.shortDescription,
   };
 }

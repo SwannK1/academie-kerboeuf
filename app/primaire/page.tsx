@@ -9,7 +9,7 @@ import {
 } from "@/content/academy";
 
 export const metadata: Metadata = {
-  title: "Primaire — Les Lisières des Explorateurs | Académie Kerboeuf",
+  title: "Primaire — Les Lisières des Explorateurs",
   description:
     "Homepage du cycle élémentaire de l'Académie Kerboeuf : niveaux, professeurs, élèves repères et zones pédagogiques des Lisières des Explorateurs.",
 };
@@ -80,6 +80,8 @@ export default function PrimairePage() {
 
   return (
     <main>
+      <h1 className="sr-only">Primaire — Les Lisières des Explorateurs</h1>
+
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}

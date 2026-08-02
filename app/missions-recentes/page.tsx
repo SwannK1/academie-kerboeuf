@@ -11,7 +11,7 @@ import {
 import type { Mission, ThemeKey } from "@/content/types";
 
 export const metadata: Metadata = {
-  title: "Missions pédagogiques | Académie Kerboeuf",
+  title: "Missions pédagogiques",
   description:
     "La vitrine des missions pédagogiques de l’Académie Kerboeuf, classées par statut public et niveau scolaire.",
 };

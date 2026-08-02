@@ -4,7 +4,7 @@ import { cm1Subjects } from "@/content/cm1-subjects";
 import { CM1_ACCENT } from "@/lib/cm1-accent";
 
 export const metadata: Metadata = {
-  title: "Matières CM1 | Académie Kerboeuf",
+  title: "Matières CM1",
   description:
     "Les 8 matières du programme CM1 à l'Académie Kerboeuf : Français, Mathématiques, Histoire-Géographie, Sciences, EMC, Anglais, Arts, EPS.",
 };

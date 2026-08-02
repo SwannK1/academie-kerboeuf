@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherPrintQueueClient } from "@/components/teacher-print-queue/TeacherPrintQueueClient";
 
 export const metadata: Metadata = {
-  title: "Préparer mes photocopies | Académie Kerboeuf",
+  title: "Préparer mes photocopies",
   description:
     "Organisez vos demandes de photocopies : titre, nombre de pages et d'exemplaires, recto-verso, couleur, statut de préparation.",
 };

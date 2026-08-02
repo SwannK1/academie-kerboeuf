@@ -4,7 +4,7 @@ import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherLogbook } from "@/components/teacher-logbook/TeacherLogbook";
 
 export const metadata: Metadata = {
-  title: "Cahier journal | Académie Kerboeuf",
+  title: "Cahier journal",
   description:
     "Préparez votre vraie semaine de classe avec des cartes de séances déplaçables, jour par jour et créneau par créneau. Sauvegarde locale uniquement.",
 };

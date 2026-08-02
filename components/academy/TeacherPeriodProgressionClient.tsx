@@ -70,15 +70,29 @@ type ImportScope = "all" | "subject";
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
   const [periode, setPeriode] = useState<TeacherPeriod>("periode-1");
-  const initialCards = useMemo(() => readStoredCardsChecked(), []);
-  const [cards, setCards] = useState<PeriodCard[]>(initialCards.cards);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialCards.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialCards.wasReset
-        ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
-        : null,
-  );
+  // Lu uniquement côté client (useEffect), jamais pendant le rendu initial :
+  // localStorage n'existe pas côté serveur, donc lire sa disponibilité
+  // pendant le rendu produisait un résultat différent entre le HTML rendu
+  // par le serveur et le premier rendu client, provoquant une erreur
+  // d'hydratation (React #418) sur cette bannière de statut du stockage.
+  const [cards, setCards] = useState<PeriodCard[]>([]);
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
+  const [hasLoadedStorage, setHasLoadedStorage] = useState(false);
+
+  useEffect(() => {
+    // Hydration-safe mount read: localStorage must not be read during SSR/first paint.
+    const initialCards = readStoredCardsChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCards(initialCards.cards);
+    setStorageNotice(
+      !initialCards.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : initialCards.wasReset
+          ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
+          : null,
+    );
+    setHasLoadedStorage(true);
+  }, []);
 
   const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
@@ -110,8 +124,11 @@ export function TeacherPeriodProgressionClient() {
   } | null>(null);
 
   useEffect(() => {
+    // Ne jamais écrire avant la fin du chargement initial : sinon un cards=[]
+    // par défaut écraserait une sauvegarde existante au tout premier rendu.
+    if (!hasLoadedStorage) return;
     writeStoredCards(cards);
-  }, [cards]);
+  }, [cards, hasLoadedStorage]);
 
   const subjectsForLevel = useMemo(() => getSubjectsForLevel(niveau), [niveau]);
 
@@ -734,7 +751,12 @@ export function TeacherPeriodProgressionClient() {
         {syntheseByMatiere.size === 0 ? (
           <p className="mt-4 text-sm text-muted">Aucune carte pour cette période.</p>
         ) : (
-          <div className="mt-4 overflow-x-auto">
+          <div
+            className="mt-4 overflow-x-auto"
+            tabIndex={0}
+            role="region"
+            aria-label="Tableau de progression par matière, défilable horizontalement"
+          >
             <table className="w-full min-w-[28rem] border-collapse text-left text-sm print:border print:border-black">
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wide text-muted print:border-black print:text-black">

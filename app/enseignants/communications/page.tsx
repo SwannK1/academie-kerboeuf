@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherCommunicationsLibrary } from "@/components/teacher-communications-library/TeacherCommunicationsLibrary";
 
 export const metadata: Metadata = {
-  title: "Préparer mes communications | Académie Kerboeuf",
+  title: "Préparer mes communications",
   description:
     "Préparez et organisez des messages réutilisables pour votre classe : informations, sorties, matériel, réunions, rappels, projets et remerciements.",
 };

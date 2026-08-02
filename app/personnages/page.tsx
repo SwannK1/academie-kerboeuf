@@ -6,7 +6,7 @@ import { emblematicStudents } from "@/content/students";
 import { professorProfiles } from "@/content/professors";
 
 export const metadata: Metadata = {
-  title: "Personnages | Académie Kerboeuf",
+  title: "Personnages",
   description: "Les guides de niveau et les professeurs de l'Académie Kerboeuf.",
 };
 

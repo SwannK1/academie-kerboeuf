@@ -43,12 +43,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!resolved) {
     return {
-      title: "Programme introuvable | Académie Kerboeuf",
+      title: "Programme introuvable",
     };
   }
 
   return {
-    title: `${resolved.subdomain.title} ${resolved.levelLabel} | Académie Kerboeuf`,
+    title: `${resolved.subdomain.title} ${resolved.levelLabel}`,
     description: resolved.subdomain.description,
   };
 }

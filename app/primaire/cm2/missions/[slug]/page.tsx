@@ -44,7 +44,7 @@ export async function generateMetadata({
     };
   }
   const cm2 = getCm2MissionBySlug(slug);
-  if (!cm2) return { title: "Mission introuvable | Académie Kerboeuf" };
+  if (!cm2) return { title: "Mission introuvable" };
   return {
     title: `${cm2.title} | Missions CM2`,
     description: cm2.description,

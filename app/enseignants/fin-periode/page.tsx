@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherEndOfPeriodClient } from "@/components/teacher-end-of-period/TeacherEndOfPeriodClient";
 
 export const metadata: Metadata = {
-  title: "Préparer ma fin de période | Académie Kerboeuf",
+  title: "Préparer ma fin de période",
   description:
     "Organisez la clôture d'une période scolaire : checklist par catégorie, tâches personnalisées et notes de bilan. Sauvegarde sur cet appareil.",
 };

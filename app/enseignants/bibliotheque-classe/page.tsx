@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { ClassLibraryClient } from "@/components/teacher-class-library/ClassLibraryClient";
 
 export const metadata: Metadata = {
-  title: "Ma bibliothèque de classe | Académie Kerboeuf",
+  title: "Ma bibliothèque de classe",
   description:
     "Inventoriez et organisez votre bibliothèque de classe : livres, BD, documentaires et autres ressources, avec recherche, filtres et favoris.",
 };

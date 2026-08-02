@@ -58,7 +58,7 @@ export async function generateMetadata({
   const place = getElementaryPedagogicalPlaceBySlug(slug);
 
   if (!place) {
-    return { title: "Lieu pédagogique introuvable | Académie Kerboeuf" };
+    return { title: "Lieu pédagogique introuvable" };
   }
 
   return {

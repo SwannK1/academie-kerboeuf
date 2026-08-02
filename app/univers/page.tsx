@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Univers | Académie Kerboeuf",
+  title: "Univers",
   description:
     "L'Académie Kerboeuf — un univers pédagogique où personnages et lieux servent les apprentissages.",
 };

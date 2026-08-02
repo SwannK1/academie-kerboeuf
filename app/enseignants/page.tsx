@@ -4,7 +4,7 @@ import { TeacherDashboard } from "@/components/teacher-dashboard/TeacherDashboar
 import { teacherDashboardSections } from "@/content/teacher-dashboard";
 
 export const metadata: Metadata = {
-  title: "Espace enseignants | Académie Kerboeuf",
+  title: "Espace enseignants",
   description: "Organisez votre classe, vos outils et vos projets.",
 };
 

@@ -6,7 +6,7 @@ import { lieuxTransversaux } from "@/content/lieux-transversaux";
 import type { AccentKey } from "@/content/universe";
 
 export const metadata: Metadata = {
-  title: "Carte de l'Académie | Académie Kerboeuf",
+  title: "Carte de l'Académie",
   description:
     "Vue d'ensemble de l'Académie Kerboeuf — les quatre univers, les lieux transversaux et toutes les portes d'entrée.",
 };

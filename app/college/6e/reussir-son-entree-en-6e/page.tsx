@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Réussir son entrée en 6e | Collège | Académie Kerboeuf",
+  title: "Réussir son entrée en 6e | Collège",
   description:
     "Six repères pour aborder sereinement le passage du CM2 au collège : emploi du temps, changements de salle, matériel, devoirs, apprentissage et questions.",
 };

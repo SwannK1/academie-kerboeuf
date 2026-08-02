@@ -25,12 +25,12 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine PS introuvable | Académie Kerboeuf",
+      title: "Domaine PS introuvable",
     };
   }
 
   return {
-    title: `${domain.shortLabel} PS | Académie Kerboeuf`,
+    title: `${domain.shortLabel} PS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Petite Section.`,
   };
 }

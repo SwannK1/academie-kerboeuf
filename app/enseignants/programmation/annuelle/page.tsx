@@ -4,7 +4,7 @@ import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherCurriculumPlanner } from "@/components/academy/TeacherCurriculumPlannerClient";
 
 export const metadata: Metadata = {
-  title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
+  title: "Programmation annuelle | Espace enseignants",
   description:
     "Choisissez un niveau, parcourez les matières et domaines du programme, puis organisez les compétences par période.",
 };

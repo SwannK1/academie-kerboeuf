@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProjectsAndTrips } from "@/components/teacher-projects-and-trips/TeacherProjectsAndTrips";
 
 export const metadata: Metadata = {
-  title: "Préparer mes projets et sorties | Académie Kerboeuf",
+  title: "Préparer mes projets et sorties",
   description:
     "Organisez vos sorties, intervenants, projets de classe, partenariats et spectacles : objectifs, matériel, budget, autorisations et tâches de préparation.",
 };

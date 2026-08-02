@@ -25,12 +25,12 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine MS introuvable | Académie Kerboeuf",
+      title: "Domaine MS introuvable",
     };
   }
 
   return {
-    title: `${domain.shortLabel} MS | Académie Kerboeuf`,
+    title: `${domain.shortLabel} MS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Moyenne Section.`,
   };
 }

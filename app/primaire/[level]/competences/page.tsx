@@ -43,12 +43,12 @@ export async function generateMetadata({
 
   if (!isPrimaryCompetencyLevelSlug(level)) {
     return {
-      title: "Compétences introuvables | Académie Kerboeuf",
+      title: "Compétences introuvables",
     };
   }
 
   return {
-    title: `Compétences observables ${primaryCompetencyLevels[level].label} | Académie Kerboeuf`,
+    title: `Compétences observables ${primaryCompetencyLevels[level].label}`,
     description:
       "Repères de compétences observables, critères de réussite et ressources associées pour organiser le travail sans remplacer les supports PDF.",
   };

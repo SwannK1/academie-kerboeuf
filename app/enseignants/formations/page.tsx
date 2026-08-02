@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProfessionalDevelopment } from "@/components/teacher-professional-development/TeacherProfessionalDevelopment";
 
 export const metadata: Metadata = {
-  title: "Mes formations et développement professionnel | Académie Kerboeuf",
+  title: "Mes formations et développement professionnel",
   description:
     "Suivez vos formations, lectures professionnelles et compétences à développer, en privé sur cet appareil.",
 };

@@ -12,7 +12,7 @@ import {
 } from "@/content/cm2-sequences";
 
 export const metadata: Metadata = {
-  title: "Séquences CM2 — Cartographie des compétences | Académie Kerboeuf",
+  title: "Séquences CM2 — Cartographie des compétences",
   description:
     "Cartographie des séquences CM2 par domaine, sous-domaine et compétence principale.",
 };

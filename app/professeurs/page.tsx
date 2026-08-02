@@ -9,7 +9,7 @@ import {
 } from "./_components/gallery";
 
 export const metadata: Metadata = {
-  title: "Professeurs | Académie Kerboeuf",
+  title: "Professeurs",
   description:
     "Les professeurs référents de l'Académie Kerboeuf — du CP à la 3e, avec des relais au lycée. Chaque profil porte une méthode, une atmosphère et un rôle pédagogique distinct.",
 };

@@ -31,11 +31,11 @@ export async function generateMetadata({
   const { level } = await params;
 
   if (!isProgrammeLevelSlug(level)) {
-    return { title: "Programme introuvable | Académie Kerboeuf" };
+    return { title: "Programme introuvable" };
   }
 
   return {
-    title: `Programme complet ${levelMeta[level].label} | Académie Kerboeuf`,
+    title: `Programme complet ${levelMeta[level].label}`,
     description: `Carte structurée du programme de ${levelMeta[level].label} par matière, domaine et compétence attendue. Le site organise ; les PDF enseignent.`,
   };
 }

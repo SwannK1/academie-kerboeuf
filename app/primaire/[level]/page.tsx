@@ -20,11 +20,11 @@ export async function generateMetadata({
   const level = getAcademyLevel("primaire", levelSlug);
 
   if (!level) {
-    return { title: "Niveau introuvable | Académie Kerboeuf" };
+    return { title: "Niveau introuvable" };
   }
 
   return {
-    title: `${level.label} | Académie Kerboeuf`,
+    title: `${level.label}`,
     description: level.description,
   };
 }

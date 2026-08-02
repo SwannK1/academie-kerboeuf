@@ -4,7 +4,7 @@ import { getLevelsByStage } from "@/content/academy";
 import { getCollegeLevelStatus } from "@/content/levels/college-statuses";
 
 export const metadata: Metadata = {
-  title: "Collège | Académie Kerboeuf",
+  title: "Collège",
   description:
     "L’aile collège de l’Académie Kerboeuf, de la 6e à la 3e.",
 };

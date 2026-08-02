@@ -4,7 +4,7 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
-  title: "Méthodes de travail — 6e | Académie Kerboeuf",
+  title: "Méthodes de travail — 6e",
   description:
     "Les méthodes essentielles pour bien démarrer au collège : s'organiser, noter les devoirs, relire une leçon.",
 };

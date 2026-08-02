@@ -34,27 +34,27 @@ export async function generateMetadata({
   const academyMission = getAcademyMission("lycee", levelSlug, slug);
 
   if (!academyMission) {
-    return { title: "Mission introuvable | Académie Kerboeuf" };
+    return { title: "Mission introuvable" };
   }
 
   const { mission } = academyMission;
 
   if (!isMissionPubliclyAvailable(mission)) {
-    return { title: "Mission introuvable | Académie Kerboeuf" };
+    return { title: "Mission introuvable" };
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
 
   if (getPublicStatusKey(levelStatus) === "coming-soon") {
     return {
-      title: "Mission en préparation | Académie Kerboeuf",
+      title: "Mission en préparation",
       description:
         "Cette mission sera publiée lorsque le niveau lycée sera prêt avec ses matières, domaines et ressources associées.",
     };
   }
 
   return {
-    title: `${mission.title} | Académie Kerboeuf`,
+    title: `${mission.title}`,
     description: mission.description,
   };
 }
