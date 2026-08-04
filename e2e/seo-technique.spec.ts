@@ -5,9 +5,10 @@ import { test, expect } from "@playwright/test";
  * dupliquaient le suffixe de marque dans leur <title> (le layout racine
  * l'ajoute déjà via title.template). Ces tests empêchent son retour.
  *
- * Remarque : ni balise canonical ni JSON-LD ne sont implémentés sur le site
- * à ce jour (vérifié à l'inspection) — ces tests ne portent donc que sur ce
- * qui existe réellement (title, description, robots, OpenGraph, Twitter).
+ * canonical (lib/seo.ts, buildPageMetadata) et JSON-LD (Organization/WebSite
+ * dans app/layout.tsx, BreadcrumbList dans components/navigation/breadcrumb.tsx)
+ * ont été ajoutés par la finalisation SEO technique mais n'étaient pas
+ * couverts par cette suite — corrigé ci-dessous.
  */
 
 const REPRESENTATIVE_PAGES = [
@@ -58,6 +59,50 @@ test.describe("Métadonnées principales", () => {
     const breadcrumb = page.getByRole("navigation", { name: "Fil d’Ariane" });
     await expect(breadcrumb).toBeVisible();
     await expect(breadcrumb.locator("li")).not.toHaveCount(0);
+  });
+});
+
+test.describe("Canonical et JSON-LD", () => {
+  // L'accueil (app/page.tsx) n'exporte pas de metadata propre : elle hérite
+  // du layout racine, qui ne définit pas alternates.canonical — contrairement
+  // aux pages qui appellent buildPageMetadata (lib/seo.ts). Comportement
+  // réel actuel, pas une régression de cette consolidation ; hors périmètre.
+  for (const path of ["/ressources", "/primaire/cm2/matieres/francais"]) {
+    test(`${path} — balise canonical présente et cohérente avec le chemin`, async ({ page }) => {
+      await page.goto(path);
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+      expect(canonical).toBeTruthy();
+      expect(canonical?.endsWith(path)).toBe(true);
+    });
+  }
+
+  test("JSON-LD Organization/WebSite présent sur toutes les pages (layout racine)", async ({ page }) => {
+    await page.goto("/");
+    const scripts = page.locator('script[type="application/ld+json"]');
+    const count = await scripts.count();
+    const contents = await Promise.all(
+      Array.from({ length: count }, (_, i) => scripts.nth(i).textContent()),
+    );
+    expect(contents.some((raw) => raw?.includes('"@type":"Organization"'))).toBe(true);
+    expect(contents.some((raw) => raw?.includes('"@type":"WebSite"'))).toBe(true);
+  });
+
+  test("JSON-LD BreadcrumbList valide sur une page profonde utilisant le fil d'Ariane", async ({
+    page,
+  }) => {
+    await page.goto("/primaire/cm2/matieres/francais");
+    const scripts = page.locator('script[type="application/ld+json"]');
+    const count = await scripts.count();
+    const contents = await Promise.all(
+      Array.from({ length: count }, (_, i) => scripts.nth(i).textContent()),
+    );
+    const breadcrumbRaw = contents.find((raw) => raw?.includes("BreadcrumbList"));
+    expect(breadcrumbRaw).toBeTruthy();
+
+    const parsed = JSON.parse(breadcrumbRaw ?? "{}");
+    expect(parsed["@type"]).toBe("BreadcrumbList");
+    expect(Array.isArray(parsed.itemListElement)).toBe(true);
+    expect(parsed.itemListElement.length).toBeGreaterThan(0);
   });
 });
 

@@ -52,6 +52,30 @@ test.describe("getMissionHref — route sûre pour toute mission", () => {
     expect(href).toBe("/college/6e");
     expect(href).not.toContain("/missions/");
   });
+
+  test("CM2 non disponible retombe sur le listing — jamais un lien vers une page 404", () => {
+    const m = mission({
+      stage: "primaire",
+      levelSlug: "cm2",
+      slug: "mission-pas-encore-prete",
+      status: "en préparation",
+    });
+    const href = getMissionHref(m);
+    expect(href).toBe("/primaire/cm2/missions");
+    expect(href).not.toContain(m.slug);
+  });
+
+  test("lycée non disponible retombe sur le listing du niveau — jamais un lien vers une page 404", () => {
+    const m = mission({
+      stage: "lycee",
+      levelSlug: "terminale",
+      slug: "mission-pas-encore-prete",
+      status: "bientôt",
+    });
+    const href = getMissionHref(m);
+    expect(href).toBe("/lycee/terminale/missions");
+    expect(href).not.toContain(m.slug);
+  });
 });
 
 test.describe("isMissionDetailLinkable — existence réelle d'une page de détail", () => {
