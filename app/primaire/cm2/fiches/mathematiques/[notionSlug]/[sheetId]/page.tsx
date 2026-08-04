@@ -76,7 +76,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
             { label: "Mathématiques", href: "/primaire/cm2/matieres/mathematiques" },
             {
               label: "Fiches",
-              href: "/primaire/cm2/fiches/mathematiques",
+              href: "/primaire/cm2/matieres/mathematiques",
             },
             { label: notion.title },
           ]}
@@ -168,7 +168,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
         {/* ── Retour catalogue ─────────────────────────────────────────────── */}
         <div className="mt-10 border-t border-white/10 pt-8">
           <Link
-            href="/primaire/cm2/fiches/mathematiques"
+            href="/primaire/cm2/matieres/mathematiques"
             className="text-sm font-bold text-jade hover:underline"
           >
             ← Retour aux compétences CM2 Mathématiques
