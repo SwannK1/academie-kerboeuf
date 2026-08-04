@@ -35,7 +35,11 @@ test.describe("Plan de classe — /enseignants/organisation-classe", () => {
     const before = await table.boundingBox();
     if (!before) throw new Error("Table bounding box unavailable");
 
-    await table.hover({ position: { x: before.width / 2, y: before.height / 2 } });
+    // Le centre géométrique de la table (petite table par défaut, 90×56)
+    // tombe à proximité immédiate de la barre de boutons d'action, centrée
+    // dans le conteneur (items-center/justify-center) : on démarre le
+    // glisser depuis un coin, hors de toute zone cliquable interne.
+    await table.hover({ position: { x: 6, y: 6 } });
     await page.mouse.down();
     await page.mouse.move(before.x + before.width / 2 + 80, before.y + before.height / 2 + 60, {
       steps: 10,
@@ -46,7 +50,16 @@ test.describe("Plan de classe — /enseignants/organisation-classe", () => {
     if (!after) throw new Error("Table bounding box unavailable after drag");
     expect(Math.abs(after.x - before.x) + Math.abs(after.y - before.y)).toBeGreaterThan(20);
 
+    // Régression : le conteneur de table capturait le pointeur dès
+    // pointerdown, y compris quand celui-ci démarrait sur un bouton
+    // d'action imbriqué (Pivoter/Agrandir/Réduire/Dupliquer/Supprimer) — le
+    // clic navigateur était alors retargeté vers le conteneur et le bouton
+    // ne recevait jamais son onClick, en silence (aucune erreur console).
+    const transformBefore = await table.evaluate((el) => (el as HTMLElement).style.transform);
     await page.getByRole("button", { name: "Pivoter la table" }).first().click();
+    await expect
+      .poll(() => table.evaluate((el) => (el as HTMLElement).style.transform))
+      .not.toBe(transformBefore);
     expect(errors).toEqual([]);
   });
 
@@ -75,6 +88,57 @@ test.describe("Plan de classe — /enseignants/organisation-classe", () => {
 
     await page.reload();
     await expect(page.getByRole("button", { name: "Pivoter la table" })).toHaveCount(1);
+  });
+
+  test("glisser-déposer d'une étiquette sur une table, et affectation conservée après rechargement", async ({
+    page,
+  }) => {
+    // locator.dragTo() (glisser-déposer piloté par la souris) ne déclenche
+    // pas de façon fiable le drag HTML5 natif ici — on envoie donc
+    // directement la séquence d'événements DragEvent (dragstart → dragover
+    // → drop), l'alternative documentée par Playwright :
+    // https://playwright.dev/docs/input#dragging-manually
+    // bubbles: true est indispensable : React délègue ses écouteurs
+    // (onDragStart/onDrop) à la racine du DOM et ne les reçoit qu'en phase
+    // de bouillonnement.
+    const errors = trackConsoleErrors(page);
+    const labelText = "Léo (test e2e)";
+
+    await page.getByRole("button", { name: "+ Ajouter une table" }).click();
+    const table = page.getByTestId("classroom-table").first();
+    await expect(table).toBeVisible();
+
+    const labelsSection = page.locator('section[aria-labelledby="etiquettes"]');
+    const unassignedList = labelsSection.locator("ul").first();
+
+    await labelsSection.getByLabel("Prénom ou code").fill(labelText);
+    await labelsSection.getByRole("button", { name: "Créer l'étiquette" }).click();
+
+    const unplacedLabel = unassignedList.locator("li", { hasText: labelText });
+    await expect(unplacedLabel).toBeVisible();
+
+    const dataTransfer = await page.evaluateHandle(() => new DataTransfer());
+    await unplacedLabel.dispatchEvent("dragstart", { dataTransfer, bubbles: true, cancelable: true });
+    await table.dispatchEvent("dragover", { dataTransfer, bubbles: true, cancelable: true });
+    await table.dispatchEvent("drop", { dataTransfer, bubbles: true, cancelable: true });
+
+    // La liste "non placée" retombe sur son message d'état vide.
+    await expect(unassignedList.getByText("Toutes les étiquettes sont placées.")).toBeVisible();
+    await expect(unassignedList.locator("li", { hasText: labelText })).toHaveCount(0);
+
+    const retireButton = labelsSection.getByRole("button", {
+      name: `Retirer ${labelText} de la table`,
+    });
+    await expect(retireButton).toBeVisible();
+
+    await page.reload();
+    await expect(
+      page
+        .locator('section[aria-labelledby="etiquettes"]')
+        .getByRole("button", { name: `Retirer ${labelText} de la table` }),
+    ).toBeVisible();
+
+    expect(errors).toEqual([]);
   });
 });
 

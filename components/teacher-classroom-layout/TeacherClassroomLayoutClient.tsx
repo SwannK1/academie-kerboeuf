@@ -190,6 +190,13 @@ export function TeacherClassroomLayoutClient() {
     event: React.PointerEvent<HTMLDivElement>,
     table: TableShape,
   ) {
+    // Un pointerdown qui démarre sur un des boutons d'action de la table
+    // (pivoter, agrandir, réduire, dupliquer, supprimer) ne doit pas capturer
+    // le pointeur : sinon le clic est retargeté vers ce conteneur et le
+    // bouton ne reçoit jamais son événement click.
+    if ((event.target as HTMLElement).closest("button")) {
+      return;
+    }
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
