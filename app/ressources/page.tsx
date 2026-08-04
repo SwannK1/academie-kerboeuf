@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatus } from "@/content/public-status";
+import { getPublicStatus, getPublicStatusKey } from "@/content/public-status";
 import { ResourcesCatalog } from "./_components/resources-catalog";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -17,13 +17,19 @@ export default function RessourcesPage() {
     ...resource,
     status: getPublicStatus(resource.status),
   }));
-  const projectionCount = resources.filter((resource) =>
+  // Les compteurs ne portent que sur les ressources réellement disponibles :
+  // une mission "en préparation" ou "à venir" n'a pas de support réel à
+  // projeter/imprimer/corriger.
+  const availableResources = resources.filter(
+    (resource) => getPublicStatusKey(resource.status) === "available",
+  );
+  const projectionCount = availableResources.filter((resource) =>
     resource.modes.includes("projection"),
   ).length;
-  const printCount = resources.filter((resource) =>
+  const printCount = availableResources.filter((resource) =>
     resource.modes.includes("impression"),
   ).length;
-  const correctionCount = resources.filter((resource) =>
+  const correctionCount = availableResources.filter((resource) =>
     resource.modes.includes("correction"),
   ).length;
 

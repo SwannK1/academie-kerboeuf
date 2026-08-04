@@ -14,6 +14,13 @@ import {
   type PublicStatusKey,
 } from "@/content/public-status";
 
+const statusSectionOrder: PublicStatusKey[] = [
+  "available",
+  "partial",
+  "preparing",
+  "coming-soon",
+];
+
 type FilterValue = "Toutes";
 type ModeFilter = FilterValue | ClassroomMode;
 type StatusFilter = FilterValue | PublicStatusKey;
@@ -97,6 +104,16 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
     [resources, level, subject, status, difficulty, mode],
   );
 
+  const groupedResources = statusSectionOrder
+    .map((key) => ({
+      key,
+      label: getPublicStatusLabel(key),
+      items: filteredResources.filter(
+        (resource) => getPublicStatusKey(resource.status) === key,
+      ),
+    }))
+    .filter((group) => group.items.length > 0);
+
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -166,11 +183,18 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
           </button>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filteredResources.map((resource) => (
-            <ResourceCard key={resource.id} resource={resource} />
-          ))}
-        </div>
+        {groupedResources.map((group) => (
+          <div key={group.key} className="mt-10">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-muted">
+              {group.label} · {group.items.length}
+            </h3>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {group.items.map((resource) => (
+                <ResourceCard key={resource.id} resource={resource} />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -233,13 +257,13 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
       <div className="mt-5 flex flex-wrap gap-2">
         <Badge>{resource.difficulty}</Badge>
         <Badge>{resource.professorName}</Badge>
-        {resource.modes.includes("projection") ? (
+        {isAvailable && resource.modes.includes("projection") ? (
           <ModeBadge mode="projection" />
         ) : null}
-        {resource.modes.includes("impression") ? (
+        {isAvailable && resource.modes.includes("impression") ? (
           <ModeBadge mode="impression" />
         ) : null}
-        {resource.modes.includes("correction") ? (
+        {isAvailable && resource.modes.includes("correction") ? (
           <ModeBadge mode="correction" />
         ) : null}
       </div>
