@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   apcAxes,
   apcPeriods,
@@ -50,9 +50,13 @@ const axisLabel: Record<ApcAxis, string> = Object.fromEntries(
 ) as Record<ApcAxis, string>;
 
 export function TeacherApcPlanner() {
-  const [sessions, setSessions] = useState<ApcSession[]>(() =>
-    readStoredSessions(),
-  );
+  // Valeur initiale déterministe (identique serveur/client) : localStorage
+  // n'existe pas côté serveur, donc lire son contenu pendant le rendu (via un
+  // initialiseur useState paresseux) ferait diverger le HTML serveur du
+  // premier rendu client dès qu'une session est déjà enregistrée (erreur
+  // d'hydratation React #418). Le contenu réel est chargé après le montage
+  // ci-dessous.
+  const [sessions, setSessions] = useState<ApcSession[]>([]);
   const [search, setSearch] = useState("");
   const [axisFilter, setAxisFilter] = useState<ApcAxis | "all">("all");
   const [periodFilter, setPeriodFilter] = useState<string | "all">("all");
@@ -60,6 +64,22 @@ export function TeacherApcPlanner() {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
+    // Hydration-safe mount read: localStorage must not be read during SSR/first paint.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSessions(readStoredSessions());
+  }, []);
+
+  // La première exécution correspond au montage, avant que l'effet
+  // ci-dessus ait remplacé `sessions` (encore `[]`) par le contenu réel du
+  // stockage : on l'ignore pour ne jamais écraser des séances déjà
+  // enregistrées avec un tableau vide. Les exécutions suivantes (chargement
+  // terminé, puis modifications réelles) écrivent normalement.
+  const isInitialWriteRef = useRef(true);
+  useEffect(() => {
+    if (isInitialWriteRef.current) {
+      isInitialWriteRef.current = false;
+      return;
+    }
     writeStoredSessions(sessions);
   }, [sessions]);
 
