@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { ce1Level } from "@/content/levels/ce1";
+import { ce1LearningTree as ce1Level } from "@/content/levels/ce1-learning-tree";
 import { getPublishedSubdomainPage } from "@/content/levels/published-subdomain-pages";
 import { getPublicStatusKey } from "@/content/public-status";
 

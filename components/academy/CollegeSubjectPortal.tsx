@@ -67,7 +67,7 @@ export function CollegeSubjectPortal({
 
           <div className="grid gap-4 md:grid-cols-2">
             {subdomains.map((subdomain) => {
-              const isLinked = !!subdomain.href && getPublicStatusKey(subdomain.status) !== "upcoming";
+              const isLinked = !!subdomain.href && getPublicStatusKey(subdomain.status) === "available";
 
               const cardInner = (
                 <div

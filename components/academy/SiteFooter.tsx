@@ -11,12 +11,21 @@ const footerSections = [
       { label: "Univers", href: "/univers" },
     ],
   },
+  {
+    title: "Informations légales",
+    links: [
+      { label: "Mentions légales", href: "/mentions-legales" },
+      { label: "Confidentialité", href: "/confidentialite" },
+      { label: "Crédits", href: "/credits" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
 ];
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-ink/70 px-4 py-10 sm:px-6 lg:px-8 print:hidden">
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_auto]">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_auto_auto]">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
             <span className="grid size-10 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold">

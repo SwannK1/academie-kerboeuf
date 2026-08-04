@@ -80,5 +80,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/parcours`, priority: 0.7 },
     { url: `${BASE_URL}/programmes`, priority: 0.7 },
     { url: `${BASE_URL}/eleves`, priority: 0.6 },
+    { url: `${BASE_URL}/contact`, priority: 0.3 },
   ];
 }

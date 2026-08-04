@@ -85,7 +85,7 @@ export function MaternelleDomainCard({
         </div>
       )}
 
-      {domain.href && getPublicStatusKey(domain.status) !== "upcoming" && (
+      {domain.href && getPublicStatusKey(domain.status) === "available" && (
         <span className="mt-auto pt-5 text-sm font-black text-jade transition group-hover:translate-x-1">
           Ouvrir le domaine →
         </span>
@@ -93,7 +93,7 @@ export function MaternelleDomainCard({
     </article>
   );
 
-  if (!domain.href || getPublicStatusKey(domain.status) === "upcoming") {
+  if (!domain.href || getPublicStatusKey(domain.status) !== "available") {
     return card;
   }
 

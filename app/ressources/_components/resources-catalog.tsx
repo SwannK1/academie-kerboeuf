@@ -206,11 +206,10 @@ function SelectFilter({
 }
 
 function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
-  return (
-    <Link
-      href={resource.href}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
-    >
+  const isAvailable = getPublicStatusKey(resource.status) === "available";
+
+  const content = (
+    <>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
@@ -241,9 +240,32 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
         ) : null}
       </div>
 
-      <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
-        Ouvrir la mission
-      </span>
+      {isAvailable ? (
+        <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
+          Ouvrir la mission
+        </span>
+      ) : (
+        <span className="mt-6 text-sm font-bold text-muted">
+          Pas encore accessible
+        </span>
+      )}
+    </>
+  );
+
+  if (!isAvailable) {
+    return (
+      <article className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 opacity-80">
+        {content}
+      </article>
+    );
+  }
+
+  return (
+    <Link
+      href={resource.href}
+      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+    >
+      {content}
     </Link>
   );
 }

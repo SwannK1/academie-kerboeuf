@@ -207,7 +207,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               {collegeMatiereCards.map((matiere) => {
                 const isLinked =
                   !!matiere.href &&
-                  getPublicStatusKey(matiere.status) !== "upcoming";
+                  getPublicStatusKey(matiere.status) === "available";
                 const card = (
                   <div
                     className={`group flex h-full flex-col rounded-md border p-5 transition ${
