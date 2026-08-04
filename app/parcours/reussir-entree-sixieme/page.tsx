@@ -109,7 +109,7 @@ export default function ReussirEntreeSixiemePage() {
                   key={bloc.title}
                   className="rounded-md border border-white/10 bg-white/[0.04] p-5"
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h2 className="text-lg font-black text-foreground">
                       {bloc.title}
                     </h2>

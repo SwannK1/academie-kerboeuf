@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   createEmptyMaterialItem,
@@ -120,6 +120,8 @@ export function TeacherLessonPreparationClient() {
   const [selectedTemplate, setSelectedTemplate] = useState<LessonTemplateId>("libre");
   const [showImportPicker, setShowImportPicker] = useState(false);
   const [showLogbookConfirm, setShowLogbookConfirm] = useState(false);
+  const logbookTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const importTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ lessons } satisfies StoredData));
@@ -217,6 +219,7 @@ export function TeacherLessonPreparationClient() {
               Dupliquer
             </button>
             <button
+              ref={logbookTriggerRef}
               type="button"
               onClick={() => setShowLogbookConfirm(true)}
               className="min-h-11 rounded-md border border-sky-400/50 bg-sky-400/10 px-3 text-sm font-bold text-sky-300 transition hover:bg-sky-400/20"
@@ -238,7 +241,10 @@ export function TeacherLessonPreparationClient() {
         {showLogbookConfirm && (
           <AddToLogbookModal
             lesson={currentLesson}
-            onClose={() => setShowLogbookConfirm(false)}
+            onClose={() => {
+              setShowLogbookConfirm(false);
+              logbookTriggerRef.current?.focus();
+            }}
           />
         )}
       </div>
@@ -292,6 +298,7 @@ export function TeacherLessonPreparationClient() {
           Créer depuis ce modèle
         </button>
         <button
+          ref={importTriggerRef}
           type="button"
           onClick={() => setShowImportPicker(true)}
           className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
@@ -379,7 +386,10 @@ export function TeacherLessonPreparationClient() {
 
       {showImportPicker && (
         <ImportFromProgressionModal
-          onClose={() => setShowImportPicker(false)}
+          onClose={() => {
+            setShowImportPicker(false);
+            importTriggerRef.current?.focus();
+          }}
           onImport={importFromProgression}
         />
       )}

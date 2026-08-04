@@ -163,7 +163,7 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     <div
       className={`flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5`}
     >
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
           {level.cycle}
         </p>

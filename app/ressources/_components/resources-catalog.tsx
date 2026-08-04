@@ -197,7 +197,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 w-full rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>

@@ -99,7 +99,7 @@ function CompetencySlot({ expected, full }: CompetencySlotProps) {
       ].join(" ")}
     >
       {/* ── Titre + statut ── */}
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <h4 className="text-sm font-black leading-snug text-foreground">
           {expected.title}
         </h4>

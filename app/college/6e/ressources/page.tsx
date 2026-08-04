@@ -25,7 +25,7 @@ export default function SixiemeRessourcesPage() {
             key={resource.slug}
             className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm"
           >
-            <div className="mb-2 flex items-start justify-between gap-4">
+            <div className="mb-2 flex flex-wrap items-start justify-between gap-4">
               <h2 className="text-base font-semibold text-slate-800">
                 {resource.label}
               </h2>

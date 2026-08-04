@@ -89,7 +89,7 @@ export default function ImprimablesPage() {
                 key={section.title}
                 className="rounded-md border border-white/10 bg-white/[0.035] p-6"
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-wrap items-start justify-between gap-4">
                   <h2 className="text-base font-black text-foreground">
                     {section.title}
                   </h2>
