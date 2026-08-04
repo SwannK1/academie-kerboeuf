@@ -5,6 +5,7 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type DragEvent,
 } from "react";
@@ -100,6 +101,7 @@ export function TeacherPeriodProgressionClient() {
   );
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectTriggerRef = useRef<HTMLElement | null>(null);
 
   const [creationMode, setCreationMode] = useState<"catalogue" | "libre" | null>(
     null,
@@ -319,7 +321,10 @@ export function TeacherPeriodProgressionClient() {
 
   function deleteCard(id: string) {
     setCards((prev) => prev.filter((card) => card.id !== id));
-    if (selectedId === id) setSelectedId(null);
+    if (selectedId === id) {
+      setSelectedId(null);
+      selectTriggerRef.current?.focus();
+    }
   }
 
   function updateCard(id: string, patch: Partial<PeriodCard>) {
@@ -821,7 +826,10 @@ export function TeacherPeriodProgressionClient() {
               onDragOverColumn={handleDragOverColumn}
               onDrop={handleDrop}
               onDragEnd={handleDragEnd}
-              onSelect={setSelectedId}
+              onSelect={(id) => {
+                selectTriggerRef.current = document.activeElement as HTMLElement | null;
+                setSelectedId(id);
+              }}
               subjectLabelById={subjectLabelById}
               formId={formId}
             />
@@ -833,13 +841,19 @@ export function TeacherPeriodProgressionClient() {
         <>
           <div
             aria-hidden="true"
-            onClick={() => setSelectedId(null)}
+            onClick={() => {
+              setSelectedId(null);
+              selectTriggerRef.current?.focus();
+            }}
             className="fixed inset-0 z-[55] bg-background/40 print:hidden"
           />
           <CardSidePanel
             card={selectedCard}
             subjectLabelById={subjectLabelById}
-            onClose={() => setSelectedId(null)}
+            onClose={() => {
+              setSelectedId(null);
+              selectTriggerRef.current?.focus();
+            }}
             onUpdate={(patch) => updateCard(selectedCard.id, patch)}
             onDelete={() => deleteCard(selectedCard.id)}
           />
@@ -1042,6 +1056,7 @@ function CardSidePanel({
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"
+          autoFocus
           className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           ✕

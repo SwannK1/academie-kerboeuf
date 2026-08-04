@@ -13,7 +13,7 @@ export function CurriculumEntryRow({ entry }: CurriculumEntryRowProps) {
   return (
     <article className="flex h-full flex-col gap-3 rounded border border-white/[0.08] bg-white/[0.03] p-3">
       <div className="flex-1">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex flex-wrap items-start justify-between gap-3">
           <p className="text-sm font-bold leading-5 text-foreground">
             {entry.title}
           </p>

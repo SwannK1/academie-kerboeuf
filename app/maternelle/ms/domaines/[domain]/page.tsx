@@ -95,7 +95,7 @@ export default async function MsDomainPage({ params }: PageProps) {
                   key={observable.id}
                   className="rounded border border-white/10 bg-ink/30 p-4"
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-sm font-black leading-6 text-foreground">
                       {observable.title}
                     </h3>

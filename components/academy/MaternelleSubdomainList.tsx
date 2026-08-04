@@ -47,7 +47,7 @@ function SubdomainCard({ subdomain }: { subdomain: MaternelleSubdomain }) {
   return (
     <article className="flex flex-col rounded-md border border-white/10 bg-white/[0.035] p-5">
       {/* En-tête */}
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-jade">
           Sous-domaine
         </p>
@@ -84,7 +84,7 @@ function SequenceRow({ sequence }: { sequence: MaternelleSequence }) {
 
   return (
     <div className="rounded border border-white/10 bg-ink/20 p-3">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <p className="text-sm font-bold leading-snug text-foreground">
           {sequence.title}
         </p>

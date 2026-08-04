@@ -442,7 +442,7 @@ function UniversCard({ univers }: { univers: UniversEntry }) {
       href={univers.href}
       className={`group rounded-md border p-6 transition hover:-translate-y-1 hover:bg-white/[0.06] ${accentBorder[color]} bg-white/[0.04]`}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <span
           className={`rounded px-2.5 py-1 font-mono text-xs font-bold ${accentBg[color]} ${accentText[color]}`}
         >
@@ -520,7 +520,7 @@ function LieuCard({
 
   const content = (
     <>
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <PublicStatusBadge status={lieu.statut} />
         <span
           className={`rounded px-2 py-0.5 font-mono text-xs font-semibold ${accentBg[color]} ${accentText[color]}`}

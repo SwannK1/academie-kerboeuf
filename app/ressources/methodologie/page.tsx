@@ -106,7 +106,7 @@ export default function MethodologiePage() {
                 key={block.title}
                 className="rounded-md border border-white/10 bg-white/[0.035] p-6"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-wrap items-start justify-between gap-3">
                   <h2 className="text-base font-black text-foreground">
                     {block.title}
                   </h2>
