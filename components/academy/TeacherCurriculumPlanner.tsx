@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   curriculumSubjects,
   getSubjectsForLevel,
@@ -1021,13 +1022,18 @@ export function TeacherCurriculumPlanner() {
                 <button
                   type="button"
                   onClick={() => setFreeFormOpen((open) => !open)}
+                  aria-expanded={freeFormOpen}
+                  aria-controls="carte-libre-panneau"
                   className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
                 >
                   Ajouter une carte
                 </button>
               </div>
               {freeFormOpen ? (
-                <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div
+                  id="carte-libre-panneau"
+                  className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+                >
                   <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
                     Titre
                     <input
@@ -1577,10 +1583,15 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const dialogRef = useDialogFocusTrap<HTMLElement>();
+
   return (
     <aside
+      ref={dialogRef}
       role="dialog"
+      aria-modal="true"
       aria-label={`Modifier la carte ${card.title}`}
+      tabIndex={-1}
       onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >

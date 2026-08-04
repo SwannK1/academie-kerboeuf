@@ -52,7 +52,7 @@ export default async function LyceeLevelMissionsPage({ params }: PageProps) {
     const levelHref = `/lycee/${levelSlug}`;
 
     return (
-      <main>
+      <main id="main-content">
         <div className="px-4 pt-24 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Breadcrumb
@@ -76,7 +76,7 @@ export default async function LyceeLevelMissionsPage({ params }: PageProps) {
               </p>
               <PublicStatusBadge status={levelStatus} />
             </div>
-            <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
               Missions — {level.label}
             </h1>
           </div>

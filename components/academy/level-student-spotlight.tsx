@@ -45,7 +45,7 @@ export function LevelStudentSpotlight({ student }: LevelStudentSpotlightProps) {
             <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accent.textClass}`}>
               Élève emblématique
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               {student.name}
             </h2>
             <p className="mt-2 text-sm font-bold text-muted">

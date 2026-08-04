@@ -25,7 +25,7 @@ export function CurriculumMapView({ map, competenciesById }: CurriculumMapViewPr
           <section key={subject.slug} aria-label={subject.label}>
             {/* ── En-tête de matière ── */}
             <div className="mb-10 flex items-baseline justify-between gap-4 border-b border-white/15 pb-5">
-              <h2 className="text-3xl font-black text-foreground">
+              <h2 className="break-words text-3xl font-black text-foreground">
                 {subject.label}
               </h2>
               <span className="shrink-0 text-sm font-bold text-muted">
@@ -131,7 +131,7 @@ function CompetencySlot({ expected, full }: CompetencySlotProps) {
 
       {/* ── Ressources prévues ── */}
       {slotCount > 0 ? (
-        <p className="mt-auto pt-3 text-[11px] text-white/30">
+        <p className="mt-auto pt-3 text-[11px] text-muted">
           {slotCount}&nbsp;ressource{slotCount > 1 ? "s" : ""} PDF
           prévue{slotCount > 1 ? "s" : ""}
         </p>

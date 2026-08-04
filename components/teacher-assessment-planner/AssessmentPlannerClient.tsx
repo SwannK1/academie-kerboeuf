@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { AssessmentForm } from "@/components/teacher-assessment-planner/AssessmentForm";
 import {
   ASSESSMENT_PLANNER_STORAGE_KEY,
@@ -386,12 +386,18 @@ function FilterSelect<T extends string>({
   onChange: (value: string) => void;
   options: { value: T; label: string }[];
 }) {
+  const selectId = useId();
+
   return (
     <div>
-      <label className="text-xs font-bold uppercase tracking-[0.08em] text-muted">
+      <label
+        htmlFor={selectId}
+        className="text-xs font-bold uppercase tracking-[0.08em] text-muted"
+      >
         {label}
       </label>
       <select
+        id={selectId}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="mt-1 min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"

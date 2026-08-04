@@ -9,6 +9,7 @@ import {
   useState,
   type DragEvent,
 } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   schoolLevels,
   curriculumSubjects,
@@ -547,6 +548,8 @@ export function TeacherPeriodProgressionClient() {
             onClick={() =>
               setCreationMode((mode) => (mode === "catalogue" ? null : "catalogue"))
             }
+            aria-expanded={creationMode === "catalogue"}
+            aria-controls="carte-catalogue-panneau"
             className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
           >
             Carte depuis le catalogue
@@ -554,6 +557,8 @@ export function TeacherPeriodProgressionClient() {
           <button
             type="button"
             onClick={() => setCreationMode((mode) => (mode === "libre" ? null : "libre"))}
+            aria-expanded={creationMode === "libre"}
+            aria-controls="carte-libre-panneau"
             className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
           >
             Carte libre
@@ -561,6 +566,8 @@ export function TeacherPeriodProgressionClient() {
           <button
             type="button"
             onClick={() => setImportOpen((open) => !open)}
+            aria-expanded={importOpen}
+            aria-controls="import-programmation-panneau"
             className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
           >
             Importer depuis la programmation annuelle
@@ -568,7 +575,10 @@ export function TeacherPeriodProgressionClient() {
         </div>
 
         {importOpen ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-jade/30 bg-jade/[0.04] p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            id="import-programmation-panneau"
+            className="mt-4 grid gap-4 rounded-lg border border-jade/30 bg-jade/[0.04] p-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Portée
               <select
@@ -621,7 +631,10 @@ export function TeacherPeriodProgressionClient() {
         ) : null}
 
         {creationMode === "catalogue" ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            id="carte-catalogue-panneau"
+            className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Matière
               <select
@@ -699,7 +712,10 @@ export function TeacherPeriodProgressionClient() {
         ) : null}
 
         {creationMode === "libre" ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            id="carte-libre-panneau"
+            className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Matière
               <select
@@ -765,10 +781,10 @@ export function TeacherPeriodProgressionClient() {
             <table className="w-full min-w-[28rem] border-collapse text-left text-sm print:border print:border-black">
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wide text-muted print:border-black print:text-black">
-                  <th className="py-2 pr-4">Matière</th>
-                  <th className="py-2 pr-4">Cartes</th>
-                  <th className="py-2 pr-4">Terminées</th>
-                  <th className="py-2 pr-4">Durée totale</th>
+                  <th scope="col" className="py-2 pr-4">Matière</th>
+                  <th scope="col" className="py-2 pr-4">Cartes</th>
+                  <th scope="col" className="py-2 pr-4">Terminées</th>
+                  <th scope="col" className="py-2 pr-4">Durée totale</th>
                 </tr>
               </thead>
               <tbody>
@@ -1013,10 +1029,15 @@ function CardSidePanel({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const dialogRef = useDialogFocusTrap<HTMLElement>();
+
   return (
     <aside
+      ref={dialogRef}
       role="dialog"
+      aria-modal="true"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
+      tabIndex={-1}
       onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >

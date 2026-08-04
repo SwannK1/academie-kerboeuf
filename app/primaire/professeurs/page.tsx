@@ -95,7 +95,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
 
 export default function ProfesseursPage() {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <main id="main-content" className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Breadcrumb
         items={[
           { label: "Primaire", href: "/primaire" },
@@ -104,7 +104,7 @@ export default function ProfesseursPage() {
       />
 
       <section className="mt-8 mb-12">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="break-words text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Les professeurs du primaire
         </h1>
         <p className="mt-3 text-lg text-muted">

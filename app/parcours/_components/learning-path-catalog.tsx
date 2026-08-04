@@ -81,7 +81,7 @@ export function LearningPathCatalog({ paths }: LearningPathCatalogProps) {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Progressions guidées
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               {filteredPaths.length} parcours
             </h2>
           </div>
@@ -143,10 +143,10 @@ function LearningPathCard({ path }: { path: PublicLearningPathWithSteps }) {
   return (
     <Link
       href={`/parcours/${path.slug}`}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+      className="group flex min-h-full min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
             {path.level} · {path.subject}
           </p>

@@ -78,7 +78,7 @@ const RESOURCE_TYPES = [
 
 export default function RessourcesPrimairePage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -99,7 +99,7 @@ export default function RessourcesPrimairePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Primaire · CP au CM2
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Ressources primaire
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">

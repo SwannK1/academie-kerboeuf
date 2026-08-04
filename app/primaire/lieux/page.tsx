@@ -71,7 +71,7 @@ export default function ElementaryPedagogicalPlacesPage() {
   const places = getElementaryPedagogicalPlaces();
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -92,7 +92,7 @@ export default function ElementaryPedagogicalPlacesPage() {
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Catalogue élémentaire
             </p>
-            <h1 className="mt-6 max-w-5xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-5xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Les Lisières des Explorateurs
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -121,7 +121,7 @@ export default function ElementaryPedagogicalPlacesPage() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
                 Lieux pédagogiques
               </p>
-              <h2 id="places-title" className="mt-3 text-3xl font-black text-foreground">
+              <h2 id="places-title" className="break-words mt-3 text-3xl font-black text-foreground">
                 Grille des lieux
               </h2>
             </div>

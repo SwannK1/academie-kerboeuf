@@ -32,7 +32,7 @@ export function CollegeLevelEntry({ level }: Props) {
   const accompagnementCards = isSixieme ? getSixiemeAccompagnementCards() : [];
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -52,7 +52,7 @@ export function CollegeLevelEntry({ level }: Props) {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Collège · {level.cycle}
           </p>
-          <h1 className="mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
+          <h1 className="break-words mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
             {level.label}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
@@ -79,14 +79,14 @@ export function CollegeLevelEntry({ level }: Props) {
 
               const cardContent = (
                 <div
-                  className={`group flex h-full flex-col rounded-md border p-6 transition ${
+                  className={`group flex h-full min-w-0 flex-col rounded-md border p-6 transition ${
                     isLinked
                       ? "border-jade/30 bg-jade/[0.05] hover:-translate-y-0.5 hover:border-jade/50 hover:bg-jade/[0.09]"
                       : "border-white/10 bg-white/[0.025] opacity-60"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="text-xl font-black text-foreground">
+                  <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
+                    <h2 className="min-w-0 text-xl font-black text-foreground">
                       {matiere.label}
                     </h2>
                     <div className="shrink-0">
@@ -160,14 +160,14 @@ export function CollegeLevelEntry({ level }: Props) {
 
                 const cardContent = (
                   <div
-                    className={`group flex h-full flex-col rounded-md border p-6 transition ${
+                    className={`group flex h-full min-w-0 flex-col rounded-md border p-6 transition ${
                       isLinked
                         ? "border-jade/30 bg-jade/[0.05] hover:-translate-y-0.5 hover:border-jade/50 hover:bg-jade/[0.09]"
                         : "border-white/10 bg-white/[0.025] opacity-60"
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <h2 className="text-xl font-black text-foreground">
+                    <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
+                      <h2 className="min-w-0 text-xl font-black text-foreground">
                         {card.label}
                       </h2>
                       <div className="shrink-0">

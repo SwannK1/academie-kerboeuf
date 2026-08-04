@@ -84,7 +84,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -120,7 +120,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
                 {student.cycle}
               </span>
             </div>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {student.name}
             </h1>
             <p className={`mt-4 text-xl font-bold ${accent.textClass}`}>
@@ -187,7 +187,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
             </p>
             <div className="mt-5 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
-                <h2 className="text-3xl font-black text-foreground">
+                <h2 className="break-words text-3xl font-black text-foreground">
                   Ce que {student.name.split(" ")[0]} incarne
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-muted">
@@ -351,7 +351,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
               <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accent.textClass}`}>
                 Progression pédagogique
               </p>
-              <h2 className="mt-2 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-2 text-3xl font-black text-foreground">
                 Ce que ce profil aide à travailler
               </h2>
             </div>

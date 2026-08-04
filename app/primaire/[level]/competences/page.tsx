@@ -69,7 +69,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
   const curriculumMap = getCurriculumMapForLevel(level);
 
   return (
-    <main className="primary-competencies-page">
+    <main id="main-content" className="primary-competencies-page">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -91,7 +91,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Compétences — {levelInfo.label}
           </h1>
           <p className="mt-2 text-sm leading-6 text-muted">

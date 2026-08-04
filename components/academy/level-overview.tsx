@@ -64,7 +64,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
   const annualPaths = getAnnualPathsForLevel(level.slug);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -184,7 +184,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                 Matières prévues
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Un socle complet, prêt à enrichir.
               </h2>
             </div>
@@ -200,7 +200,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Programme {level.label}
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Matières du niveau
               </h2>
             </div>
@@ -257,7 +257,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Ressources CP par domaine
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Premiers portails PDF
               </h2>
             </div>
@@ -316,7 +316,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
                 Programme
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Compétences du niveau
               </h2>
             </div>
@@ -392,7 +392,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
                   Compétences observables
                 </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
+                <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                   Ce que l&apos;élève apprend à réussir
                 </h2>
               </div>
@@ -423,7 +423,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                   Parcours annuels
                 </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
+                <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                   Progressions à installer sur l&apos;année
                 </h2>
               </div>
@@ -450,7 +450,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Missions recommandées
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Premiers dossiers pédagogiques
               </h2>
             </div>
@@ -479,7 +479,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
                 Ressources classe
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 À projeter ou imprimer
               </h2>
             </div>
@@ -573,7 +573,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                 Parcours
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Séquences guidées disponibles
               </h2>
             </div>

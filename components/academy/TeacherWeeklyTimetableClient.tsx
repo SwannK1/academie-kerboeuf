@@ -346,17 +346,10 @@ export function TeacherWeeklyTimetableClient() {
     });
   }
 
-  function handleColumnClick(
-    event: React.MouseEvent<HTMLDivElement>,
-    dayId: TeacherTimetableDayId,
-  ) {
+  function addSessionAtStart(dayId: TeacherTimetableDayId, startMinutes: number) {
     if (!displayedWeek || view === "reference") return;
-    if (event.target !== event.currentTarget) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const offsetY = event.clientY - rect.top;
-    const rawStart = config.dayStartMinutes + offsetY / PX_PER_MINUTE;
-    const startMinutes = clamp(
-      snapToStep(rawStart, config.gridStepMinutes),
+    const clampedStart = clamp(
+      snapToStep(startMinutes, config.gridStepMinutes),
       config.dayStartMinutes,
       Math.max(config.dayStartMinutes, config.dayEndMinutes - DEFAULT_NEW_SESSION_DURATION),
     );
@@ -364,7 +357,7 @@ export function TeacherWeeklyTimetableClient() {
     const candidate: TeacherTimetableSession = {
       id: createTeacherTimetableId("seance"),
       dayId,
-      startMinutes,
+      startMinutes: clampedStart,
       durationMinutes: DEFAULT_NEW_SESSION_DURATION,
       subject: defaultSubject,
       title: defaultSubject,
@@ -377,6 +370,21 @@ export function TeacherWeeklyTimetableClient() {
     if (tryAddSession(displayedWeek.id, candidate)) {
       setSelectedSessionId(candidate.id);
     }
+  }
+
+  function handleColumnClick(
+    event: React.MouseEvent<HTMLDivElement>,
+    dayId: TeacherTimetableDayId,
+  ) {
+    if (event.target !== event.currentTarget) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const offsetY = event.clientY - rect.top;
+    const rawStart = config.dayStartMinutes + offsetY / PX_PER_MINUTE;
+    addSessionAtStart(dayId, rawStart);
+  }
+
+  function handleColumnKeyboardAdd(dayId: TeacherTimetableDayId) {
+    addSessionAtStart(dayId, config.dayStartMinutes);
   }
 
   function handleLevelChange(levelId: TeacherTimetableLevelId) {
@@ -721,12 +729,14 @@ export function TeacherWeeklyTimetableClient() {
                   type="text"
                   value={newWeekLabel}
                   onChange={(event) => setNewWeekLabel(event.target.value)}
+                  aria-label="Nom de la semaine"
                   placeholder="Nom de la semaine"
                   className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
                 />
                 <select
                   value={newWeekKind}
                   onChange={(event) => setNewWeekKind(event.target.value as TeacherTimetableWeekKind)}
+                  aria-label="Type de semaine spéciale"
                   className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
                 >
                   {specialTeacherTimetableWeekKinds.map((kind) => (
@@ -809,8 +819,20 @@ export function TeacherWeeklyTimetableClient() {
                     columnRefs.current[dayId] = el;
                   }}
                   role={isReadOnlyView ? undefined : "button"}
-                  tabIndex={-1}
+                  tabIndex={isReadOnlyView ? undefined : 0}
+                  aria-label={
+                    isReadOnlyView
+                      ? undefined
+                      : `Ajouter une séance le ${teacherTimetableDayLabels[dayId]}`
+                  }
                   onClick={(event) => handleColumnClick(event, dayId)}
+                  onKeyDown={(event) => {
+                    if (isReadOnlyView) return;
+                    if (event.target !== event.currentTarget) return;
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    handleColumnKeyboardAdd(dayId);
+                  }}
                   className="relative border-l border-white/5 bg-background/20"
                   style={{ height: totalHeight, cursor: isReadOnlyView ? "default" : "copy" }}
                 >
@@ -1222,9 +1244,9 @@ export function TeacherWeeklyTimetableClient() {
         <table className="mt-4 w-full border-collapse border border-black text-sm text-black">
           <thead>
             <tr>
-              <th className="border border-black p-2 text-left">Horaire</th>
+              <th scope="col" className="border border-black p-2 text-left">Horaire</th>
               {enabledDays.map((dayId) => (
-                <th key={dayId} className="border border-black p-2 text-left">
+                <th key={dayId} scope="col" className="border border-black p-2 text-left">
                   {teacherTimetableDayLabels[dayId]}
                 </th>
               ))}
@@ -1239,7 +1261,7 @@ export function TeacherWeeklyTimetableClient() {
               ),
             ).map((startMinutes) => (
               <tr key={startMinutes}>
-                <th className="border border-black p-2 text-left">
+                <th scope="row" className="border border-black p-2 text-left">
                   {formatMinutesAsTime(startMinutes)}
                 </th>
                 {enabledDays.map((dayId) => {

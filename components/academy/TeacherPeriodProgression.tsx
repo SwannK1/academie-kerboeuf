@@ -4,7 +4,7 @@ import { TeacherPeriodProgressionLazy } from "@/components/academy/TeacherPeriod
 
 export function TeacherPeriodProgression() {
   return (
-    <main>
+    <main id="main-content">
       <PrintBodyClass className="print-teacher-tool" />
       <div className="px-4 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
         <div className="mx-auto max-w-5xl">
@@ -23,7 +23,7 @@ export function TeacherPeriodProgression() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
             Outil enseignant
           </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Progression de période
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">

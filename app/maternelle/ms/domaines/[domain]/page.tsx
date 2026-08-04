@@ -47,7 +47,7 @@ export default async function MsDomainPage({ params }: PageProps) {
   }
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -69,7 +69,7 @@ export default async function MsDomainPage({ params }: PageProps) {
             </span>
             <PublicStatusBadge status={domain.status} />
           </div>
-          <h1 className="mt-5 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-5 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             {domain.label}
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
