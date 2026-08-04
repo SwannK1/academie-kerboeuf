@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { lieuxTransversaux } from "@/content/lieux-transversaux";
 import type { AccentKey } from "@/content/universe";
+import type { PublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
   title: "Carte de l'Académie | Académie Kerboeuf",
@@ -21,7 +22,7 @@ type UniversEntry = {
   publicsConcernes: string[];
   cycleLabel: string;
   lieuxPrincipaux: string[];
-  statut: string;
+  statut: PublicStatus["key"];
   href: string;
   accentColor: AccentKey;
   missionsHref?: string;
@@ -75,7 +76,7 @@ const universEntries: UniversEntry[] = [
       "Bureau des enquêtes",
       "Salle du conseil final",
     ],
-    statut: "available",
+    statut: "upcoming",
     href: "/college",
     accentColor: "sky",
   },
@@ -92,7 +93,7 @@ const universEntries: UniversEntry[] = [
       "Archives des spécialités",
       "Conseil des synthèses",
     ],
-    statut: "available",
+    statut: "upcoming",
     href: "/lycee",
     accentColor: "ember",
   },
