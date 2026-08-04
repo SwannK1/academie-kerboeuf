@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { ClassLibraryClient } from "@/components/teacher-class-library/ClassLibraryClient";
+import { ClassLibrary } from "@/components/teacher-class-library/ClassLibrary";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -35,7 +35,7 @@ export default function ClassLibraryPage() {
           </p>
         </header>
 
-        <ClassLibraryClient />
+        <ClassLibrary />
       </div>
     </main>
   );

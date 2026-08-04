@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherEndOfPeriodClient } from "@/components/teacher-end-of-period/TeacherEndOfPeriodClient";
+import { TeacherEndOfPeriod } from "@/components/teacher-end-of-period/TeacherEndOfPeriod";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -35,7 +35,7 @@ export default function TeacherEndOfPeriodPage() {
           </p>
         </header>
 
-        <TeacherEndOfPeriodClient />
+        <TeacherEndOfPeriod />
       </div>
     </main>
   );

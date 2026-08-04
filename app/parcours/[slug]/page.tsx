@@ -8,6 +8,7 @@ import {
   learningPaths,
 } from "@/content/learning-paths";
 import { buildPageMetadata } from "@/lib/seo";
+import { getPublicStatusKey } from "@/content/public-status";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -146,42 +147,62 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
                 Progression étape par étape
               </p>
               <div className="mt-6 grid gap-4">
-                {path.steps.map((step, index) => (
-                  <Link
-                    key={step.href}
-                    href={step.href}
-                    className="group grid gap-4 rounded-md border border-white/10 bg-ink/35 p-5 transition hover:border-gold/35 hover:bg-white/[0.065] md:grid-cols-[auto_1fr_auto] md:items-start"
-                  >
-                    <span className="grid size-11 place-items-center rounded-md border border-gold/30 bg-gold/10 font-mono text-sm font-black text-gold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
-                        {step.level} · {step.subject}
-                      </p>
-                      <h2 className="mt-2 text-2xl font-black text-foreground">
-                        {step.title}
-                      </h2>
-                      <p className="mt-3 text-sm leading-7 text-muted">
-                        {step.objective}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {step.modes.includes("projection") ? (
-                          <Badge>À projeter</Badge>
-                        ) : null}
-                        {step.modes.includes("impression") ? (
-                          <Badge>À imprimer</Badge>
-                        ) : null}
-                        {step.modes.includes("correction") ? (
-                          <Badge>Correction</Badge>
-                        ) : null}
+                {path.steps.map((step, index) => {
+                  const isAvailable = getPublicStatusKey(step.status) === "available";
+                  const body = (
+                    <>
+                      <span className="grid size-11 place-items-center rounded-md border border-gold/30 bg-gold/10 font-mono text-sm font-black text-gold">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
+                          {step.level} · {step.subject}
+                        </p>
+                        <h2 className="mt-2 text-2xl font-black text-foreground">
+                          {step.title}
+                        </h2>
+                        <p className="mt-3 text-sm leading-7 text-muted">
+                          {step.objective}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {step.modes.includes("projection") ? (
+                            <Badge>À projeter</Badge>
+                          ) : null}
+                          {step.modes.includes("impression") ? (
+                            <Badge>À imprimer</Badge>
+                          ) : null}
+                          {step.modes.includes("correction") ? (
+                            <Badge>Correction</Badge>
+                          ) : null}
+                        </div>
                       </div>
+                      {isAvailable ? (
+                        <span className="text-sm font-bold text-gold transition group-hover:translate-x-1">
+                          Ouvrir
+                        </span>
+                      ) : (
+                        <PublicStatusBadge status={step.status} />
+                      )}
+                    </>
+                  );
+
+                  return isAvailable ? (
+                    <Link
+                      key={step.href}
+                      href={step.href}
+                      className="group grid gap-4 rounded-md border border-white/10 bg-ink/35 p-5 transition hover:border-gold/35 hover:bg-white/[0.065] md:grid-cols-[auto_1fr_auto] md:items-start"
+                    >
+                      {body}
+                    </Link>
+                  ) : (
+                    <div
+                      key={step.href}
+                      className="grid gap-4 rounded-md border border-white/10 bg-ink/35 p-5 md:grid-cols-[auto_1fr_auto] md:items-start"
+                    >
+                      {body}
                     </div>
-                    <span className="text-sm font-bold text-gold transition group-hover:translate-x-1">
-                      Ouvrir
-                    </span>
-                  </Link>
-                ))}
+                  );
+                })}
               </div>
             </div>
 

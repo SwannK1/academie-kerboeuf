@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherWorkshopsPlannerClient } from "@/components/teacher-workshops-planner/TeacherWorkshopsPlannerClient";
+import { TeacherWorkshopsPlannerLazy } from "@/components/teacher-workshops-planner/TeacherWorkshopsPlannerLazy";
 
 export function TeacherWorkshopsPlanner() {
   return (
@@ -31,7 +31,7 @@ export function TeacherWorkshopsPlanner() {
             appareil.
           </p>
 
-          <TeacherWorkshopsPlannerClient />
+          <TeacherWorkshopsPlannerLazy />
         </div>
       </section>
     </main>

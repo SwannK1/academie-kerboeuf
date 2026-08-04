@@ -916,7 +916,14 @@ const rawProfessorProfiles: ProfessorProfile[] = academyLevels.map((level) => {
 
   return {
     slug: level.professor.slug,
-    profileHref: `/professeurs/${level.professor.slug}`,
+    // Félix est un personnage-guide, pas un professeur de matière : sa page
+    // canonique est /eleves/felix (cf. getAllProfessorSlugs ci-dessous, qui
+    // l'exclut des routes /professeurs/[slug] générées ; /personnages/felix
+    // et /professeurs/felix ne sont que des redirects de compatibilité).
+    profileHref:
+      level.professor.slug === "felix"
+        ? "/eleves/felix"
+        : `/professeurs/${level.professor.slug}`,
     name: level.professor.name,
     characterType: "professeur référent",
     role: level.professor.role,
@@ -1492,8 +1499,8 @@ export function getProfessorBySlug(slug: string): ProfessorProfile | undefined {
 }
 
 export function getAllProfessorSlugs(): { slug: string }[] {
-  // Félix est un personnage-guide (cf. /personnages/felix), pas un professeur de matière :
-  // sa page /professeurs/felix redirige vers la route canonique.
+  // Félix est un personnage-guide (cf. /eleves/felix), pas un professeur de
+  // matière : sa page /professeurs/felix redirige vers la route canonique.
   return professorProfiles
     .filter((p) => p.slug !== "felix")
     .map((p) => ({ slug: p.slug }));

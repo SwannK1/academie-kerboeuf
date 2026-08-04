@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { allMissions } from "@/content/mission-registry";
+import { allMissions, getMissionHref } from "@/content/mission-registry";
 import {
   getPublicStatusKey,
   getPublicStatusLabel,
@@ -89,20 +89,12 @@ const teacherUses = [
   "Préparer une séance sans afficher de contenu placeholder.",
 ];
 
-function missionHref(mission: Mission) {
-  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
-    return `/primaire/${mission.levelSlug}/missions`;
-  }
-
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
-}
-
 function MissionShowcaseCard({ mission }: { mission: Mission }) {
   const theme = themeClasses[mission.theme];
 
   return (
     <Link
-      href={missionHref(mission)}
+      href={getMissionHref(mission)}
       className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
     >
       <div className="flex flex-wrap items-center gap-2">

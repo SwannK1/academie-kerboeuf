@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherLocalBackupClient } from "@/components/teacher-local-backup/TeacherLocalBackupClient";
+import { TeacherLocalBackup } from "@/components/teacher-local-backup/TeacherLocalBackup";
 import { PrintBodyClass } from "@/components/print/print-body-class";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -43,7 +43,7 @@ export default function TeacherLocalBackupPage() {
           </p>
         </header>
 
-        <TeacherLocalBackupClient />
+        <TeacherLocalBackup />
       </div>
     </main>
   );
