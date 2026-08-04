@@ -55,7 +55,7 @@ export function ProfessorNavigation({ professor }: { professor: ProfessorProfile
           <p className={`text-xs font-bold uppercase tracking-[0.22em] ${a.text}`}>
             Explorer davantage
           </p>
-          <h2 className="mt-4 text-3xl font-black text-foreground">
+          <h2 className="break-words mt-4 text-3xl font-black text-foreground">
             Continuer avec {professor.name}
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-7 text-muted">

@@ -28,7 +28,7 @@ export default function PsPage() {
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -51,7 +51,7 @@ export default function PsPage() {
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h1 className="text-4xl font-black leading-tight text-foreground sm:text-5xl">
+              <h1 className="break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
                 Petite Section
               </h1>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">

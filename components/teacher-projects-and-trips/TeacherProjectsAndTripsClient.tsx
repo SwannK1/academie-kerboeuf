@@ -350,6 +350,7 @@ export function TeacherProjectsAndTripsClient() {
                           onChange={(event) =>
                             updateTaskAt(project.id, index, event.target.value)
                           }
+                          aria-label={`Tâche ${index + 1}`}
                           placeholder={`Tâche ${index + 1}`}
                           className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
                         />

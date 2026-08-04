@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TeacherSubstituteFolderPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pb-0 print:pt-0">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pb-0 print:pt-0">
       <div className="mx-auto max-w-5xl">
         <div className="print:hidden">
           <Breadcrumb
@@ -26,7 +26,7 @@ export default function TeacherSubstituteFolderPage() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade print:text-black">
             Espace enseignants
           </p>
-          <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl print:text-2xl print:text-black">
+          <h1 className="break-words mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl print:text-2xl print:text-black">
             Préparer mon dossier remplaçant
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted print:hidden">

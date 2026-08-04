@@ -73,7 +73,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
     );
 
     return (
-      <main className="mission-detail-page felix-project-detail">
+      <main id="main-content" className="mission-detail-page felix-project-detail">
         <PrintBodyClass className="print-mission-detail" />
 
         <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
@@ -100,7 +100,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
               >
                 {felixProject.mainSubject}
               </p>
-              <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+              <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
                 {felixProject.title}
               </h1>
               <p className={`mt-3 text-xl font-bold ${felixProject.theme.textClass}`}>
@@ -270,7 +270,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
   );
 
   return (
-    <main className="mission-detail-page">
+    <main id="main-content" className="mission-detail-page">
       <PrintBodyClass className="print-mission-detail" />
       <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -296,7 +296,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
             >
               {mission.subject}
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {mission.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">

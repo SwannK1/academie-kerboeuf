@@ -49,7 +49,7 @@ const methodes = [
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main id="main-content" className="mx-auto max-w-3xl px-4 py-12">
       <div className="mb-10">
         <Link
           href="/college/6e"
@@ -57,7 +57,7 @@ export default function Page() {
         >
           ← Retour à la 6e
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 className="break-words text-3xl font-bold tracking-tight text-gray-900">
           Méthodes de travail — 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">

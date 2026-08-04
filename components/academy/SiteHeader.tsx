@@ -77,7 +77,9 @@ export function SiteHeader() {
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((open) => !open)}
         >
-          <span className="sr-only">Ouvrir le menu</span>
+          <span className="sr-only">
+            {isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          </span>
           <span className="flex w-5 flex-col gap-1.5" aria-hidden="true">
             <span
               className={`h-0.5 rounded-full bg-current transition ${

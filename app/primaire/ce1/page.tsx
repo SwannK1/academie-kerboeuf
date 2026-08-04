@@ -14,7 +14,7 @@ export default function Ce1Page() {
   const domainCount = ce1LearningTree.domains.length;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -35,7 +35,7 @@ export default function Ce1Page() {
           <p className="inline-flex rounded-md border border-sky/35 bg-sky/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-sky">
             Cycle 2 · Guide : Gaston le Hérisson
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             CE1 — Choisir une stratégie<br className="hidden sm:block" /> et l&apos;expliquer
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">

@@ -24,7 +24,7 @@ export function HierarchyPage({
   children,
 }: HierarchyPageProps) {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb items={breadcrumb} />
@@ -36,7 +36,7 @@ export function HierarchyPage({
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
             {eyebrow}
           </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
             {title}
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
@@ -79,8 +79,8 @@ export function HierarchyCard({
 }: HierarchyCardProps) {
   const content = (
     <>
-      <div className="flex items-start justify-between gap-4">
-        <div>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0">
           {number ? (
             <p className="text-xs font-black uppercase tracking-[0.18em]">
               {number}
@@ -102,7 +102,7 @@ export function HierarchyCard({
     </>
   );
 
-  const className = `rounded-lg border p-5 sm:p-6 ${accentClasses[accent]}`;
+  const className = `min-w-0 rounded-lg border p-5 sm:p-6 ${accentClasses[accent]}`;
 
   return href ? (
     <Link

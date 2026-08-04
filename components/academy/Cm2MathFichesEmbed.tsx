@@ -167,7 +167,7 @@ function SheetRow({
       {clickable ? (
         <span className="text-xs font-bold text-jade">Ouvrir →</span>
       ) : (
-        <span className="text-xs text-white/25">À venir</span>
+        <span className="text-xs text-muted">À venir</span>
       )}
     </span>
   );
@@ -184,7 +184,7 @@ function SheetRow({
   }
 
   return (
-    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
+    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-muted">
       {inner}
     </div>
   );

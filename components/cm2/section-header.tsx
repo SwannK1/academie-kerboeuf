@@ -10,7 +10,7 @@ export function SectionHeader({ eyebrow, title, description }: SectionHeaderProp
       <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+      <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
         {title}
       </h2>
       <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">

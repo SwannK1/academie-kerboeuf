@@ -59,7 +59,7 @@ export default async function ProgrammePage({ params }: PageProps) {
   ).length;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -81,7 +81,7 @@ export default async function ProgrammePage({ params }: PageProps) {
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Programme complet — {meta.label}
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">

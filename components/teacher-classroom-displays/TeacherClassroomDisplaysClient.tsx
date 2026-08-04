@@ -258,6 +258,7 @@ export function TeacherClassroomDisplaysClient() {
 
               <select
                 className="rounded-md border border-border bg-background px-2 py-1 text-sm print:hidden"
+                aria-label={`Statut de « ${item.title} »`}
                 value={item.status}
                 onChange={(event) =>
                   updateItem(item.id, {

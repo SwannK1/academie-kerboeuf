@@ -204,7 +204,7 @@ function MissionSection({
     <section className="border-t border-white/10 pt-10">
       <div className="mb-6 flex flex-col justify-between gap-3 md:flex-row md:items-end">
         <div>
-          <h2 className="text-3xl font-black text-foreground">{title}</h2>
+          <h2 className="break-words text-3xl font-black text-foreground">{title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">
             {description}
           </p>
@@ -242,7 +242,7 @@ export default function MissionsRecentesPage() {
       .length ?? 0;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -262,7 +262,7 @@ export default function MissionsRecentesPage() {
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Salle des missions
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Missions pédagogiques
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -346,7 +346,7 @@ export default function MissionsRecentesPage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
             Continuer l’exploration
           </p>
-          <h2 className="mt-4 text-3xl font-black text-foreground">
+          <h2 className="break-words mt-4 text-3xl font-black text-foreground">
             Choisir une autre entrée de l’Académie
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

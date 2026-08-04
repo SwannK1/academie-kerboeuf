@@ -346,6 +346,7 @@ export function TeacherEndOfPeriodClient() {
           value={periodData.notes}
           onChange={(event) => setNotes(event.target.value)}
           rows={6}
+          aria-label="Notes de bilan de période"
           placeholder="Notez vos observations, points de vigilance et ajustements pour la suite."
           className="mt-4 w-full rounded-md border border-white/15 bg-background/60 p-3 text-sm leading-6 text-foreground"
         />
