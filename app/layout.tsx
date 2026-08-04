@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   },
   description:
     "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+  // La page d'accueil (app/page.tsx) n'exporte pas ses propres métadonnées
+  // (elle utilise le titre/description par défaut ci-dessus) : sans ce
+  // canonical explicite, elle était la seule route du site à ne pas en
+  // avoir un (toutes les autres passent par buildPageMetadata).
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fr_FR",

@@ -21,9 +21,16 @@ export default defineConfig({
     // d'une build différente de celle attendue par la version de
     // @playwright/test du dépôt. Sans ce chemin explicite, Playwright tente
     // de télécharger un nouveau binaire (bloqué hors ligne dans ce type
-    // d'environnement).
+    // d'environnement). --no-sandbox : requis pour lancer Chromium en tant
+    // que root dans ce conteneur (le projet tablet-chromium/iPad plantait
+    // sinon au lancement — desktop-chromium n'est pas concerné par la même
+    // combinaison de profil, mais le flag est sans risque dans ce
+    // conteneur isolé à locataire unique).
     launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
-      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE }
+      ? {
+          executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,
+          args: ["--no-sandbox"],
+        }
       : {},
   },
   webServer: {

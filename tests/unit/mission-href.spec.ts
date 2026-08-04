@@ -60,7 +60,7 @@ test.describe("getMissionHref — cas obligatoires", () => {
   });
 
   test("mission lycée à venir : repli vers la page de listing, jamais vers une page de détail qui répondrait 404", () => {
-    const mission = makeMission({ stage: "lycee", levelSlug: "seconde", slug: "lecture-analytique", status: "à venir" });
+    const mission = makeMission({ stage: "lycee", levelSlug: "seconde", slug: "lecture-analytique", status: "bientôt" });
     const href = getMissionHref(mission);
     expect(href).toBe("/lycee/seconde/missions");
     expect(href).not.toContain(mission.slug);
