@@ -233,13 +233,13 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
       <div className="mt-5 flex flex-wrap gap-2">
         <Badge>{resource.difficulty}</Badge>
         <Badge>{resource.professorName}</Badge>
-        {resource.modes.includes("projection") ? (
+        {isAvailable && resource.modes.includes("projection") ? (
           <ModeBadge mode="projection" />
         ) : null}
-        {resource.modes.includes("impression") ? (
+        {isAvailable && resource.modes.includes("impression") ? (
           <ModeBadge mode="impression" />
         ) : null}
-        {resource.modes.includes("correction") ? (
+        {isAvailable && resource.modes.includes("correction") ? (
           <ModeBadge mode="correction" />
         ) : null}
       </div>
