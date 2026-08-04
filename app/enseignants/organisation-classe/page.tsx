@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomLayoutClient } from "@/components/teacher-classroom-layout/TeacherClassroomLayoutClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Plan de classe et groupes",
   description:
     "Construisez un plan de classe visuel, placez des étiquettes locales et générez des groupes d'élèves. Aucune donnée sensible, stockage uniquement sur cet appareil.",
-};
+  path: "/enseignants/organisation-classe",
+});
 
 export default function TeacherClassroomLayoutPage() {
   return (

@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Ressources primaire",
   description:
     "Supports pédagogiques pour le primaire : leçons, exercices, évaluations, corrigés et méthodologie, par niveau.",
-};
+  path: "/primaire/ressources",
+});
 
 const LEVELS = [
   {

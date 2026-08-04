@@ -66,6 +66,19 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Fiches et images publiées sous /public : contenu qui ne change
+        // quasiment jamais après publication, mais servi aujourd'hui sans
+        // aucune mise en cache (max-age=0). Cache long + revalidation en
+        // arrière-plan plutôt qu'"immutable" pour rester correctif si besoin.
+        source: "/(fiches|images)/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
     ];
   },
 };

@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomDisplays } from "@/components/teacher-classroom-displays/TeacherClassroomDisplays";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Mes affichages de classe",
   description:
     "Organisez la checklist des affichages et repères de classe par catégorie, suivez leur statut et imprimez votre liste.",
-};
+  path: "/enseignants/affichages",
+});
 
 export default function TeacherClassroomDisplaysPage() {
   return (

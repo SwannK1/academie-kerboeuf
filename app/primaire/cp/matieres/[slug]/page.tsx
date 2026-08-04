@@ -4,6 +4,7 @@ import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { cpSubjects, getCpSubjectBySlug } from "@/content/cp-subjects";
 import { getCpSubjectTree, getCpSequences } from "@/content/levels/cp-learning-tree";
 import { CP_ACCENT } from "@/lib/cp-accent";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -16,11 +17,14 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCpSubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable" };
-  return {
+  if (!subject) {
+    return { title: "Matière introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
     title: `${subject.title} CP`,
     description: subject.shortDescription,
-  };
+    path: `/primaire/cp/matieres/${slug}`,
+  });
 }
 
 export default async function CpSubjectPage({ params }: PageProps) {

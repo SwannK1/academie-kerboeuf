@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherLessonPreparation } from "@/components/teacher-lesson-preparation/TeacherLessonPreparation";
 import { PrintBodyClass } from "@/components/print/print-body-class";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Préparer une séance | Espace enseignants",
   description:
     "Construisez une séance complète avec des blocs repliables : informations, situation de départ, déroulé modulable, différenciation, évaluation, matériel et bilan. Sauvegarde locale uniquement.",
-};
+  path: "/enseignants/preparer-une-seance",
+});
 
 export default function TeacherLessonPreparationPage() {
   return (

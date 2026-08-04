@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "CM2",
   description:
     "Accès direct aux matières CM2 : Français, Mathématiques, Sciences.",
-};
+  path: "/primaire/cm2",
+});
 
 // ── Données UI ─────────────────────────────────────────────────────────────────
 

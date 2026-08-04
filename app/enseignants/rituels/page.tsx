@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherRoutinesLibrary } from "@/components/teacher-routines-library/TeacherRoutinesLibrary";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Mes rituels de classe",
   description:
     "Organisez vos rituels quotidiens, hebdomadaires, mensuels ou ponctuels : créez, filtrez, dupliquez et imprimez vos rituels de classe.",
-};
+  path: "/enseignants/rituels",
+});
 
 export default function TeacherRoutinesLibraryPage() {
   return (

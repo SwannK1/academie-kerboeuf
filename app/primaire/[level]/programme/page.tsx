@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { CurriculumSubjectPanel } from "@/components/academy/curriculum-subject-panel";
 import { getCurriculumLevelMap } from "@/content/curriculum-map";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -31,13 +32,14 @@ export async function generateMetadata({
   const { level } = await params;
 
   if (!isProgrammeLevelSlug(level)) {
-    return { title: "Programme introuvable" };
+    return { title: "Programme introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `Programme complet ${levelMeta[level].label}`,
     description: `Carte structurée du programme de ${levelMeta[level].label} par matière, domaine et compétence attendue. Le site organise ; les PDF enseignent.`,
-  };
+    path: `/primaire/${level}/programme`,
+  });
 }
 
 export default async function ProgrammePage({ params }: PageProps) {

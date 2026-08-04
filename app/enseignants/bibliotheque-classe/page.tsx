@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { ClassLibraryClient } from "@/components/teacher-class-library/ClassLibraryClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Ma bibliothèque de classe",
   description:
     "Inventoriez et organisez votre bibliothèque de classe : livres, BD, documentaires et autres ressources, avec recherche, filtres et favoris.",
-};
+  path: "/enseignants/bibliotheque-classe",
+});
 
 export default function ClassLibraryPage() {
   return (

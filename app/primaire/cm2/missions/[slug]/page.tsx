@@ -21,6 +21,7 @@ import { felixProjects, getFelixProjectBySlug } from "@/content/felix-missions";
 import type { MissionEvidence } from "@/content/felix-types";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getPublicStatusLabel } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type MissionPageProps = {
   params: Promise<{ slug: string }>;
@@ -38,17 +39,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const felix = getFelixProjectBySlug(slug);
   if (felix) {
-    return {
+    return buildPageMetadata({
       title: `${felix.title} | Projets CM2`,
       description: felix.subtitle,
-    };
+      path: `/primaire/cm2/missions/${slug}`,
+    });
   }
   const cm2 = getCm2MissionBySlug(slug);
-  if (!cm2) return { title: "Mission introuvable" };
-  return {
+  if (!cm2) {
+    return { title: "Mission introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
     title: `${cm2.title} | Missions CM2`,
     description: cm2.description,
-  };
+    path: `/primaire/cm2/missions/${slug}`,
+  });
 }
 
 export default async function MissionDetailPage({ params }: MissionPageProps) {

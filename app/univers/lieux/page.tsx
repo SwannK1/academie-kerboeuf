@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { lieuxAcademie } from "@/content/lieux-academie";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AccentKey } from "@/content/universe";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Les lieux de l'Académie",
   description:
     "Chaque lieu de l'Académie Kerboeuf correspond à une manière d'apprendre — découvrez les espaces pédagogiques et leurs fonctions.",
-};
+  path: "/univers/lieux",
+});
 
 const accentText: Record<AccentKey, string> = {
   gold: "text-gold",

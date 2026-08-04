@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherWeeklyTimetable } from "@/components/academy/TeacherWeeklyTimetable";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Emploi du temps hebdomadaire",
   description:
     "Construisez une semaine type pour votre classe : choisissez un niveau, répartissez les matières par créneau et suivez le total d'heures.",
-};
+  path: "/enseignants/emploi-du-temps",
+});
 
 export default function TeacherWeeklyTimetablePage() {
   return (

@@ -8,6 +8,7 @@ import {
   getPsDomainBySlug,
   psDomains,
 } from "@/content/levels/maternelle/ps-domains";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ domain: string }>;
@@ -26,13 +27,15 @@ export async function generateMetadata({
   if (!domain) {
     return {
       title: "Domaine PS introuvable",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${domain.shortLabel} PS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Petite Section.`,
-  };
+    path: `/maternelle/ps/domaines/${domainSlug}`,
+  });
 }
 
 export default async function PsDomainPage({ params }: PageProps) {

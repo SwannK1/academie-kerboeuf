@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -11,6 +12,7 @@ import {
   SHEET_IDS,
   type SheetId,
 } from "@/content/cm2-fiches-maths";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ notionSlug: string; sheetId: string }> };
 
@@ -26,12 +28,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { notionSlug, sheetId } = await params;
   const notion = getCm2FicheMath(notionSlug);
-  if (!notion) return { title: "Fiche introuvable" };
+  if (!notion) {
+    return { title: "Fiche introuvable", robots: { index: false, follow: false } };
+  }
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
+  return buildPageMetadata({
     title: `${notion.title} — ${label} | CM2 Mathématiques`,
     description: `${notion.skill} (${label})`,
-  };
+    path: `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: PageProps) {
@@ -114,10 +119,13 @@ export default async function FicheDetailPage({ params }: PageProps) {
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.03] p-8">
           {clickable && sheet.imageHref ? (
             <div className="flex flex-col items-start gap-4">
-              <img
+              <Image
                 src={sheet.imageHref}
                 alt={`${notion.title} — ${label}`}
-                className="w-full rounded-md border border-white/10"
+                width={1055}
+                height={1491}
+                className="w-full h-auto rounded-md border border-white/10"
+                priority
               />
               <div className="flex flex-wrap gap-3">
                 <Link

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -8,12 +7,14 @@ import {
 } from "@/content/curriculum";
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Programmes",
   description:
     "Architecture pédagogique de l’Académie Kerboeuf, organisée par niveaux, domaines, compétences et missions associées.",
-};
+  path: "/programmes",
+});
 
 const groups: {
   title: string;
@@ -163,6 +164,12 @@ export default function ProgrammesPage() {
               className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
             >
               Missions récentes
+            </Link>
+            <Link
+              href="/programmes/progression-primaire"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            >
+              Progression primaire CP → CM2
             </Link>
           </div>
         </div>

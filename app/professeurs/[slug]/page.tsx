@@ -16,6 +16,7 @@ import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
 import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 import { felixPlaces, felixBadges } from "@/content/felix-character";
+import { buildPageMetadata } from "@/lib/seo";
 
 // ─── Système de couleurs par professeur ──────────────────────────────────────
 
@@ -94,11 +95,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const professor = getProfessorBySlug(slug);
-  if (!professor) return { title: "Professeur introuvable" };
-  return {
+  if (!professor) {
+    return { title: "Professeur introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
     title: `${professor.name} — ${professor.role}`,
     description: professor.bio,
-  };
+    path: `/professeurs/${slug}`,
+  });
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────

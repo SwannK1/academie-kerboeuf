@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProfessionalMeetingsClient } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetingsClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Rendez-vous professionnels | Espace enseignants",
   description:
     "Préparez vos rendez-vous professionnels : objectif, ordre du jour, notes, décisions et suivi, sans enregistrer de coordonnées.",
-};
+  path: "/enseignants/rendez-vous",
+});
 
 export default function TeacherProfessionalMeetingsPage() {
   return (

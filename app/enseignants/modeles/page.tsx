@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherTemplateLibraryClient } from "@/components/teacher-template-library/TeacherTemplateLibraryClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Mes modèles enseignants",
   description:
     "Créez et organisez vos modèles personnels réutilisables : séance, réunion parents, commande, projet, checklist ou document.",
-};
+  path: "/enseignants/modeles",
+});
 
 export default function TeacherTemplateLibraryPage() {
   return (

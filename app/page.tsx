@@ -70,6 +70,14 @@ const UNIVERSES: Array<{
     accent: "gold",
     status: "available",
   },
+  {
+    label: "Programmation",
+    text: "Progressions par niveau et par période, prêtes à organiser.",
+    href: "/programmation",
+    cta: "Organiser",
+    accent: "sky",
+    status: "available",
+  },
 ];
 
 export default function Home() {

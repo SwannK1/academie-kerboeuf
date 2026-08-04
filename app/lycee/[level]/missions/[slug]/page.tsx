@@ -18,6 +18,7 @@ import {
 } from "@/content/public-academy";
 import { getLyceeLevelStatus } from "@/content/levels/lycee-statuses";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string; slug: string }>;
@@ -34,29 +35,37 @@ export async function generateMetadata({
   const academyMission = getAcademyMission("lycee", levelSlug, slug);
 
   if (!academyMission) {
-    return { title: "Mission introuvable" };
+    return {
+      title: "Mission introuvable",
+      robots: { index: false, follow: false },
+    };
   }
 
   const { mission } = academyMission;
 
   if (!isMissionPubliclyAvailable(mission)) {
-    return { title: "Mission introuvable" };
+    return {
+      title: "Mission introuvable",
+      robots: { index: false, follow: false },
+    };
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
 
   if (getPublicStatusKey(levelStatus) === "coming-soon") {
-    return {
+    return buildPageMetadata({
       title: "Mission en préparation",
       description:
         "Cette mission sera publiée lorsque le niveau lycée sera prêt avec ses matières, domaines et ressources associées.",
-    };
+      path: `/lycee/${levelSlug}/missions/${slug}`,
+    });
   }
 
-  return {
-    title: `${mission.title}`,
+  return buildPageMetadata({
+    title: mission.title,
     description: mission.description,
-  };
+    path: `/lycee/${levelSlug}/missions/${slug}`,
+  });
 }
 
 export default async function LyceeMissionDetailPage({ params }: PageProps) {

@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherPrintQueueClient } from "@/components/teacher-print-queue/TeacherPrintQueueClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Préparer mes photocopies",
   description:
     "Organisez vos demandes de photocopies : titre, nombre de pages et d'exemplaires, recto-verso, couleur, statut de préparation.",
-};
+  path: "/enseignants/photocopies",
+});
 
 export default function TeacherPrintQueuePage() {
   return (

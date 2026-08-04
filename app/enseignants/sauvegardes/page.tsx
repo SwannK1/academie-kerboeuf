@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherLocalBackupClient } from "@/components/teacher-local-backup/TeacherLocalBackupClient";
 import { PrintBodyClass } from "@/components/print/print-body-class";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Sauvegardes locales",
   description:
     "Exportez ou restaurez vos outils enseignants (programmation, progression, emploi du temps, cahier journal) sur cet appareil, sans compte ni cloud.",
-};
+  path: "/enseignants/sauvegardes",
+});
 
 export default function TeacherLocalBackupPage() {
   return (
