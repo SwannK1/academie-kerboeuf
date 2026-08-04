@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { HierarchyPage } from "@/app/personnages/_components/hierarchy";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Comment fonctionne l'Académie | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Comment fonctionne l'Académie",
   description:
     "Le rôle du site, des PDF, des séquences, des programmations et des progressions.",
-};
+  path: "/methode",
+});
 
 const principles = [
   "Le site organise.",

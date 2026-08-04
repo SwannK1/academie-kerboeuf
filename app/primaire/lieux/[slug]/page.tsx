@@ -16,6 +16,7 @@ import {
 } from "@/content/pedagogical-places";
 import { getProfessorBySlug } from "@/content/professors";
 import { getStudentBySlug } from "@/content/students";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -58,13 +59,14 @@ export async function generateMetadata({
   const place = getElementaryPedagogicalPlaceBySlug(slug);
 
   if (!place) {
-    return { title: "Lieu pédagogique introuvable | Académie Kerboeuf" };
+    return { title: "Lieu pédagogique introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${place.name} | Lieux pédagogiques élémentaires`,
     description: place.shortDescription,
-  };
+    path: `/primaire/lieux/${slug}`,
+  });
 }
 
 export default async function ElementaryPedagogicalPlacePage({

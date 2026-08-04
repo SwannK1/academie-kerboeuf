@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherEndOfPeriod } from "@/components/teacher-end-of-period/TeacherEndOfPeriod";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Préparer ma fin de période | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer ma fin de période",
   description:
     "Organisez la clôture d'une période scolaire : checklist par catégorie, tâches personnalisées et notes de bilan. Sauvegarde sur cet appareil.",
-};
+  path: "/enseignants/fin-periode",
+});
 
 export default function TeacherEndOfPeriodPage() {
   return (

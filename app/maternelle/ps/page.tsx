@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { MaternelleDomainCard } from "@/components/academy/MaternelleDomainCard";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { psDomains } from "@/content/levels/maternelle/ps-domains";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Petite Section | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Petite Section",
   description:
     "Tableau de bord Petite Section : domaines, observables, situations et ressources prévues.",
-};
+  path: "/maternelle/ps",
+});
 
 export default function PsPage() {
   const statusCounts = psDomains.reduce(

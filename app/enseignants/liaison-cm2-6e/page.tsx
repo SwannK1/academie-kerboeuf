@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherCm26eTransition } from "@/components/teacher-cm2-6e-transition/TeacherCm26eTransition";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Préparer la liaison CM2-6e | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer la liaison CM2-6e",
   description:
     "Organisez la liaison CM2-6e : checklist par catégorie, rencontres avec ordre du jour et tâches de suivi, bilan général. Données conservées sur cet appareil.",
-};
+  path: "/enseignants/liaison-cm2-6e",
+});
 
 export default function TeacherCm26eTransitionPage() {
   return (

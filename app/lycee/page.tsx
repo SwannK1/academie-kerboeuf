@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
@@ -6,12 +5,14 @@ import {
   getLyceeLevelStatus,
   type LyceeLevelSlug,
 } from "@/content/levels/lycee-statuses";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Lycée | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Lycée",
   description:
     "L’aile lycée de l’Académie Kerboeuf, de la Seconde à la Terminale.",
-};
+  path: "/lycee",
+});
 
 const lyceeLevels: {
   slug: LyceeLevelSlug;

@@ -3,7 +3,7 @@ import { getAllSequenceRows } from "@/content/suivi-sequences-data";
 import { SequencesTable } from "./_components/sequences-table";
 
 export const metadata: Metadata = {
-  title: "Suivi des séquences | Académie Kerboeuf",
+  title: "Suivi des séquences",
   description: "Tableau de bord interne de l'avancement des séquences pédagogiques.",
   robots: { index: false, follow: false },
 };

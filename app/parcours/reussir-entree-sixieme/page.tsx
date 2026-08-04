@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatus } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Réussir son entrée en 6e | Parcours | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Réussir son entrée en 6e | Parcours",
   description:
     "Un parcours pour passer du CM2 au collège avec méthode : organisation, lecture de consigne, tenue du cahier, préparation du cartable, apprentissage d'une leçon.",
-};
+  path: "/parcours/reussir-entree-sixieme",
+});
 
 type Bloc = {
   title: string;

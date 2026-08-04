@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { lieuxTransversaux } from "@/content/lieux-transversaux";
 import type { AccentKey } from "@/content/universe";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Carte de l'Académie | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Carte de l'Académie",
   description:
     "Vue d'ensemble de l'Académie Kerboeuf — les quatre univers, les lieux transversaux et toutes les portes d'entrée.",
-};
+  path: "/carte",
+});
 
 // ─── Données des univers ───────────────────────────────────────────────────────
 

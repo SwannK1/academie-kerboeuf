@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Univers | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Univers",
   description:
     "L'Académie Kerboeuf — un univers pédagogique où personnages et lieux servent les apprentissages.",
-};
+  path: "/univers",
+});
 
 const entries = [
   {
@@ -29,6 +30,20 @@ const entries = [
       "Comment fonctionne l'Académie : le rôle du site, des PDF, des séquences et des progressions.",
     href: "/methode",
     accent: "sky",
+  },
+  {
+    title: "Cartothèque",
+    description:
+      "Les cartes de l'Académie — pour se repérer dans les ailes, les lieux et les zones transversales.",
+    href: "/univers/cartotheque",
+    accent: "gold",
+  },
+  {
+    title: "Lieux",
+    description:
+      "Tous les lieux transversaux de l'Académie, communs à plusieurs ailes et plusieurs niveaux.",
+    href: "/univers/lieux",
+    accent: "jade",
   },
 ] as const;
 

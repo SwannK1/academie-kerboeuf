@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomLayout } from "@/components/teacher-classroom-layout/TeacherClassroomLayout";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Plan de classe et groupes | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Plan de classe et groupes",
   description:
     "Construisez un plan de classe visuel, placez des étiquettes locales et générez des groupes d'élèves. Aucune donnée sensible, stockage uniquement sur cet appareil.",
-};
+  path: "/enseignants/organisation-classe",
+});
 
 export default function TeacherClassroomLayoutPage() {
   return (

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { LevelOverview } from "@/components/academy/level-overview";
 import { CollegeLevelEntry } from "@/components/academy/college-level-entry";
 import { getAcademyLevel, getLevelsByStage } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -19,13 +20,14 @@ export async function generateMetadata({
   const level = getAcademyLevel("college", levelSlug);
 
   if (!level) {
-    return { title: "Niveau introuvable | Académie Kerboeuf" };
+    return { title: "Niveau introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
-    title: `${level.label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: level.label,
     description: level.description,
-  };
+    path: `/college/${levelSlug}`,
+  });
 }
 
 export default async function CollegeLevelPage({ params }: PageProps) {

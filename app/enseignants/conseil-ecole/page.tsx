@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { SchoolCouncilPlanner } from "@/components/teacher-school-council/SchoolCouncilPlannerClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Préparer un conseil d'école | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer un conseil d'école",
   description:
     "Préparez l'ordre du jour, les points à présenter, les décisions et les actions de suivi d'un conseil d'école, sans aucune donnée nominative.",
-};
+  path: "/enseignants/conseil-ecole",
+});
 
 export default function SchoolCouncilPage() {
   return (

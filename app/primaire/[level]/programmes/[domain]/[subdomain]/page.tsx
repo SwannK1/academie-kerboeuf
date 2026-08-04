@@ -10,6 +10,7 @@ import {
   type PublishedPrimaryLevelSlug,
 } from "@/content/levels/published-subdomain-pages";
 import type { ProgramDomain, ProgramSubdomain } from "@/content/program-types";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{
@@ -43,14 +44,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!resolved) {
     return {
-      title: "Programme introuvable | Académie Kerboeuf",
+      title: "Programme introuvable",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `${resolved.subdomain.title} ${resolved.levelLabel} | Académie Kerboeuf`,
-    description: resolved.subdomain.description,
-  };
+  return buildPageMetadata({
+    title: `${resolved.subdomain.title} ${resolved.levelLabel}`,
+    description:
+      resolved.subdomain.description ??
+      resolved.domain.description ??
+      `${resolved.subdomain.title} — ${resolved.domain.title}, ${resolved.levelLabel}.`,
+    path: `/primaire/${level}/programmes/${domain}/${subdomain}`,
+  });
 }
 
 export default async function PrimaryProgramSubdomainPage({ params }: PageProps) {

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
@@ -7,12 +6,14 @@ import {
   getLevelsByStage,
   type AcademyLevel,
 } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Primaire — Les Lisières des Explorateurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Primaire — Les Lisières des Explorateurs",
   description:
     "Homepage du cycle élémentaire de l'Académie Kerboeuf : niveaux, professeurs, élèves repères et zones pédagogiques des Lisières des Explorateurs.",
-};
+  path: "/primaire",
+});
 
 // Narrative data per level slug — character species and posture, not in content files
 const LEVEL_GUIDES: Record<
@@ -126,6 +127,18 @@ export default function PrimairePage() {
             className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
           >
             Lieux des Lisières →
+          </Link>
+          <Link
+            href="/primaire/professeurs"
+            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+          >
+            Professeurs du primaire →
+          </Link>
+          <Link
+            href="/primaire/ressources"
+            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+          >
+            Ressources primaire →
           </Link>
         </div>
       </section>

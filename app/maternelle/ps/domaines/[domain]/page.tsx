@@ -8,6 +8,7 @@ import {
   getPsDomainBySlug,
   psDomains,
 } from "@/content/levels/maternelle/ps-domains";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ domain: string }>;
@@ -25,14 +26,16 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine PS introuvable | Académie Kerboeuf",
+      title: "Domaine PS introuvable",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `${domain.shortLabel} PS | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `${domain.shortLabel} PS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Petite Section.`,
-  };
+    path: `/maternelle/ps/domaines/${domainSlug}`,
+  });
 }
 
 export default async function PsDomainPage({ params }: PageProps) {
