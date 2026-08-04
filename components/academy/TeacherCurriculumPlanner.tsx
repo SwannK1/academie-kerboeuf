@@ -327,10 +327,21 @@ export function TeacherCurriculumPlanner() {
     [planningCards],
   );
 
+  const cardsByPeriod = useMemo(() => {
+    const map = new Map<PlanningPeriodNumber, PlanningCard[]>();
+    for (const period of planningPeriodNumbers) {
+      map.set(
+        period,
+        planningCards
+          .filter((card) => card.period === period && (showHidden || !card.hidden))
+          .sort((a, b) => a.order - b.order),
+      );
+    }
+    return map;
+  }, [planningCards, showHidden]);
+
   function cardsForPeriod(period: PlanningPeriodNumber) {
-    return planningCards
-      .filter((card) => card.period === period && (showHidden || !card.hidden))
-      .sort((a, b) => a.order - b.order);
+    return cardsByPeriod.get(period) ?? [];
   }
 
   function maxOrderInPeriod(period: PlanningPeriodNumber) {

@@ -41,10 +41,24 @@ export function MissionCatalog({ missions, linkBasePath }: MissionCatalogProps) 
   );
   const [selectedSubject, setSelectedSubject] = useState("Toutes");
 
-  const filteredMissions =
-    selectedSubject === "Toutes"
-      ? missions
-      : missions.filter((mission) => mission.subject === selectedSubject);
+  const filteredMissions = useMemo(
+    () =>
+      selectedSubject === "Toutes"
+        ? missions
+        : missions.filter((mission) => mission.subject === selectedSubject),
+    [missions, selectedSubject],
+  );
+
+  const sectionsWithMissions = useMemo(
+    () =>
+      missionStatusSections.map((section) => ({
+        section,
+        sectionMissions: filteredMissions.filter(
+          (mission) => getPublicStatusKey(mission.status) === section.key,
+        ),
+      })),
+    [filteredMissions],
+  );
 
   return (
     <div>
@@ -73,11 +87,7 @@ export function MissionCatalog({ missions, linkBasePath }: MissionCatalogProps) 
       </div>
 
       <div className="grid gap-8">
-        {missionStatusSections.map((section) => {
-          const sectionMissions = filteredMissions.filter(
-            (mission) => getPublicStatusKey(mission.status) === section.key,
-          );
-
+        {sectionsWithMissions.map(({ section, sectionMissions }) => {
           if (sectionMissions.length === 0) {
             return null;
           }

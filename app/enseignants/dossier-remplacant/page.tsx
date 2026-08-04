@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherSubstituteFolderClient } from "@/components/teacher-substitute-folder/TeacherSubstituteFolderClient";
+import { TeacherSubstituteFolder } from "@/components/teacher-substitute-folder/TeacherSubstituteFolder";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -40,7 +40,7 @@ export default function TeacherSubstituteFolderPage() {
           </p>
         </header>
 
-        <TeacherSubstituteFolderClient />
+        <TeacherSubstituteFolder />
       </div>
     </main>
   );

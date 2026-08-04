@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherProfessionalMeetingsClient } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetingsClient";
+import { TeacherProfessionalMeetings } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetings";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -37,7 +37,7 @@ export default function TeacherProfessionalMeetingsPage() {
         </header>
 
         <div className="mt-10">
-          <TeacherProfessionalMeetingsClient />
+          <TeacherProfessionalMeetings />
         </div>
       </div>
     </main>

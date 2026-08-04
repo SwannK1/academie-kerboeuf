@@ -1,6 +1,6 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PrintBodyClass } from "@/components/print/print-body-class";
-import { TeacherPeriodProgressionClient } from "@/components/academy/TeacherPeriodProgressionClient";
+import { TeacherPeriodProgressionLazy } from "@/components/academy/TeacherPeriodProgressionLazy";
 
 export function TeacherPeriodProgression() {
   return (
@@ -34,7 +34,7 @@ export function TeacherPeriodProgression() {
             est enregistré uniquement sur cet appareil.
           </p>
 
-          <TeacherPeriodProgressionClient />
+          <TeacherPeriodProgressionLazy />
         </div>
       </section>
     </main>

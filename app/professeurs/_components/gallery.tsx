@@ -255,15 +255,19 @@ export function ProfessorGallery({ professors }: { professors: ProfessorCardData
     [professors],
   );
 
-  const filtered = professors.filter((p) => {
-    const matchesCycle = cycle === allLabel || p.cycle === cycle;
-    const matchesLevel = level === allLabel || p.levelLabel === level;
-    const matchesSubject = subject === allLabel || p.mainSubject === subject;
-    const matchesType = type === allLabel || p.characterType === type;
-    const matchesTrait = trait === allLabel || p.dominantTraits.includes(trait);
+  const filtered = useMemo(
+    () =>
+      professors.filter((p) => {
+        const matchesCycle = cycle === allLabel || p.cycle === cycle;
+        const matchesLevel = level === allLabel || p.levelLabel === level;
+        const matchesSubject = subject === allLabel || p.mainSubject === subject;
+        const matchesType = type === allLabel || p.characterType === type;
+        const matchesTrait = trait === allLabel || p.dominantTraits.includes(trait);
 
-    return matchesCycle && matchesLevel && matchesSubject && matchesType && matchesTrait;
-  });
+        return matchesCycle && matchesLevel && matchesSubject && matchesType && matchesTrait;
+      }),
+    [professors, cycle, level, subject, type, trait],
+  );
 
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">

@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherClassroomLayoutClient } from "@/components/teacher-classroom-layout/TeacherClassroomLayoutClient";
+import { TeacherClassroomLayout } from "@/components/teacher-classroom-layout/TeacherClassroomLayout";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -36,7 +36,7 @@ export default function TeacherClassroomLayoutPage() {
           </p>
         </header>
 
-        <TeacherClassroomLayoutClient />
+        <TeacherClassroomLayout />
       </div>
     </main>
   );
