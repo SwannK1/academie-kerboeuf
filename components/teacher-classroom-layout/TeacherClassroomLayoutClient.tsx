@@ -450,6 +450,20 @@ export function TeacherClassroomLayoutClient() {
     [labels],
   );
 
+  const labelsByTable = useMemo(() => {
+    const map = new Map<string, Label[]>();
+    labels.forEach((label) => {
+      if (label.tableId === null) return;
+      const existing = map.get(label.tableId);
+      if (existing) {
+        existing.push(label);
+      } else {
+        map.set(label.tableId, [label]);
+      }
+    });
+    return map;
+  }, [labels]);
+
   return (
     <div className="mt-10 space-y-8">
       <p
@@ -564,7 +578,7 @@ export function TeacherClassroomLayoutClient() {
               style={{ width: "100%", maxWidth: CANVAS_WIDTH, height: CANVAS_HEIGHT }}
             >
               {tables.map((table) => {
-                const tableLabels = labels.filter((l) => l.tableId === table.id);
+                const tableLabels = labelsByTable.get(table.id) ?? [];
                 return (
                   <div
                     key={table.id}

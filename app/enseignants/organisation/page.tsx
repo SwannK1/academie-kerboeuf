@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherClassOrganizationClient } from "@/components/teacher-class-organization/TeacherClassOrganizationClient";
+import { TeacherClassOrganization } from "@/components/teacher-class-organization/TeacherClassOrganization";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -36,7 +36,7 @@ export default function TeacherClassOrganizationPage() {
           </p>
         </header>
 
-        <TeacherClassOrganizationClient />
+        <TeacherClassOrganization />
       </div>
     </main>
   );

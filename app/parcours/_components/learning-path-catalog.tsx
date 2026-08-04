@@ -35,12 +35,16 @@ export function LearningPathCatalog({ paths }: LearningPathCatalogProps) {
     [paths],
   );
 
-  const filteredPaths = paths.filter((path) => {
-    const matchesLevel = level === allLabel || path.level === level;
-    const matchesSubject = subject === allLabel || path.subject === subject;
+  const filteredPaths = useMemo(
+    () =>
+      paths.filter((path) => {
+        const matchesLevel = level === allLabel || path.level === level;
+        const matchesSubject = subject === allLabel || path.subject === subject;
 
-    return matchesLevel && matchesSubject;
-  });
+        return matchesLevel && matchesSubject;
+      }),
+    [paths, level, subject],
+  );
 
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">

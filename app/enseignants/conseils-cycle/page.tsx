@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherCycleMeetingsClient } from "@/components/teacher-cycle-meetings/TeacherCycleMeetingsClient";
+import { TeacherCycleMeetings } from "@/components/teacher-cycle-meetings/TeacherCycleMeetings";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -36,7 +36,7 @@ export default function TeacherCycleMeetingsPage() {
         </header>
 
         <div className="mt-10">
-          <TeacherCycleMeetingsClient />
+          <TeacherCycleMeetings />
         </div>
       </div>
     </main>
