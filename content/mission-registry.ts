@@ -58,31 +58,6 @@ export function getAvailableMissions() {
 }
 
 /**
- * Route publique d'une mission — logique centrale unique, réutilisée par
- * tous les pipelines qui construisent un lien vers une mission
- * (`/ressources`, `/missions-recentes`, `/parcours`).
- *
- * Le CM2 et le lycée disposent d'une page de détail par slug
- * (`missions/[slug]`). Le collège et le primaire hors CM2 n'en ont pas
- * encore : on retombe sur la page du niveau plutôt que de construire un
- * lien vers une route inexistante.
- */
-export function getMissionHref(mission: Mission): string {
-  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
-    return `/primaire/${mission.levelSlug}/missions`;
-  }
-
-  if (mission.stage === "college") {
-    return getLevelMissionsPath({
-      stage: mission.stage,
-      slug: mission.levelSlug,
-    });
-  }
-
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
-}
-
-/**
  * Vrai seulement si une page de détail par slug existe réellement pour ce
  * niveau (CM2 et lycée). À utiliser pour décider si une liste doit inclure
  * une mission comme ressource cliquable en tant que telle, par opposition à
@@ -90,6 +65,23 @@ export function getMissionHref(mission: Mission): string {
  */
 export function isMissionDetailLinkable(mission: Mission): boolean {
   return mission.levelSlug === "cm2" || mission.stage === "lycee";
+}
+
+// Individual mission detail pages only exist for CM2 and lycée missions, and
+// only once a mission is published. Every other case (collège, which has no
+// mission detail route at all; or an unavailable CM2/lycée mission, which is
+// prerendered as a 404) must fall back to the level's missions path so no
+// link ever points at a dead route.
+export function getMissionHref(mission: Mission): string {
+  const hasMissionDetailPage =
+    mission.stage === "lycee" || mission.levelSlug === "cm2";
+  const isAvailable = getPublicStatusKey(mission.status) === "available";
+
+  if (hasMissionDetailPage && isAvailable) {
+    return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
+  }
+
+  return getLevelMissionsPath({ stage: mission.stage, slug: mission.levelSlug });
 }
 
 function dedupeById(missions: Mission[]) {
