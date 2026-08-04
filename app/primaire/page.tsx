@@ -80,6 +80,11 @@ export default function PrimairePage() {
 
   return (
     <main>
+      {/* Le portail immersif ci-dessous est purement visuel (image + zones
+          survolables) : sans ce h1, la page n'avait aucun titre de niveau
+          1, ni visible ni pour lecteur d'écran. */}
+      <h1 className="sr-only">Primaire — Les Lisières des Explorateurs</h1>
+
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   curriculumSubjects,
   getSubjectsForLevel,
@@ -1577,6 +1577,20 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  // Gestion du focus attendue d'un dialog (ARIA APG) : le déplacer dans le
+  // panneau à l'ouverture, et le restituer à l'élément déclencheur (la carte
+  // cliquée) à la fermeture, plutôt que de laisser le focus se perdre sur
+  // <body> ou rester sur un élément désormais masqué derrière le panneau.
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    triggerRef.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    return () => {
+      triggerRef.current?.focus();
+    };
+  }, []);
+
   return (
     <aside
       role="dialog"
@@ -1587,6 +1601,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
         <button
+          ref={closeButtonRef}
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"

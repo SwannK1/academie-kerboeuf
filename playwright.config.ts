@@ -10,15 +10,30 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? "github" : "list",
+  timeout: 30_000,
+  expect: { timeout: 5_000 },
   use: {
     baseURL: "http://127.0.0.1:3100",
     trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    // Environnement d'exécution : Chromium pré-installé, potentiellement
+    // d'une build différente de celle attendue par la version de
+    // @playwright/test du dépôt. Sans ce chemin explicite, Playwright tente
+    // de télécharger un nouveau binaire (bloqué hors ligne dans ce type
+    // d'environnement).
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE }
+      : {},
   },
   webServer: {
-    command: "npm run build && npm run start -- -p 3100",
+    // Build de production uniquement si absent (jamais reconstruit à chaque
+    // exécution de la suite) — E2E finaux toujours sur build de prod, jamais
+    // sur `next dev`.
+    command: "test -f .next/BUILD_ID || npm run build; npm run start -- -p 3100",
     url: "http://127.0.0.1:3100",
     reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
+    timeout: 120_000,
   },
   projects: [
     {
