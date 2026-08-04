@@ -18,18 +18,18 @@ type ProgrammingItem = {
 type LevelProgramming = {
   levelId: string;
   label: string;
-  status: "available" | "upcoming" | "in-progress";
+  status: "available" | "coming-soon" | "preparing";
   order: number;
   periods: ProgrammingPeriod[];
   items: ProgrammingItem[];
 };
 
 const levels: LevelProgramming[] = [
-  { levelId: "maternelle", label: "Maternelle", status: "in-progress", order: 1, periods: [], items: [] },
-  { levelId: "cp", label: "CP", status: "in-progress", order: 2, periods: [], items: [] },
-  { levelId: "ce1", label: "CE1", status: "in-progress", order: 3, periods: [], items: [] },
-  { levelId: "ce2", label: "CE2", status: "in-progress", order: 4, periods: [], items: [] },
-  { levelId: "cm1", label: "CM1", status: "in-progress", order: 5, periods: [], items: [] },
+  { levelId: "maternelle", label: "Maternelle", status: "preparing", order: 1, periods: [], items: [] },
+  { levelId: "cp", label: "CP", status: "preparing", order: 2, periods: [], items: [] },
+  { levelId: "ce1", label: "CE1", status: "preparing", order: 3, periods: [], items: [] },
+  { levelId: "ce2", label: "CE2", status: "preparing", order: 4, periods: [], items: [] },
+  { levelId: "cm1", label: "CM1", status: "preparing", order: 5, periods: [], items: [] },
   {
     levelId: "cm2",
     label: "CM2",
@@ -48,8 +48,8 @@ const levels: LevelProgramming[] = [
       { id: "sciences-technologie", label: "Sciences et technologie", href: "/primaire/cm2/matieres/sciences" },
     ],
   },
-  { levelId: "college", label: "Collège", status: "in-progress", order: 7, periods: [], items: [] },
-  { levelId: "lycee", label: "Lycée", status: "in-progress", order: 8, periods: [], items: [] },
+  { levelId: "college", label: "Collège", status: "preparing", order: 7, periods: [], items: [] },
+  { levelId: "lycee", label: "Lycée", status: "preparing", order: 8, periods: [], items: [] },
 ];
 
 export function ProgrammationClient() {
