@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -8,12 +7,14 @@ import {
   type PedagogicalPlaceAccessibility,
   type PedagogicalPlaceQualityStatus,
 } from "@/content/pedagogical-places";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Lieux pédagogiques élémentaires",
   description:
     "Catalogue public des lieux pédagogiques élémentaires des Lisières des Explorateurs.",
-};
+  path: "/primaire/lieux",
+});
 
 const qualityStatusLabels = {
   draft: "Brouillon",

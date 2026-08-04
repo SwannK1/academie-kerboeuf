@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Méthodes pour apprendre",
   description:
     "Six étapes pour apprendre à apprendre : comprendre une consigne, chercher les informations importantes, organiser son travail, s'entraîner progressivement, corriger ses erreurs et expliquer sa méthode.",
-};
+  path: "/parcours/methodes-pour-apprendre",
+});
 
 type Step = {
   number: number;

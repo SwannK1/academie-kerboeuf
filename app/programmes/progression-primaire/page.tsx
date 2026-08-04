@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getLevelsByStage, getLevelPath } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Progression primaire CP → CM2",
   description:
     "Vue d'ensemble de la progression pédagogique du CP au CM2 : objectifs par niveau, matières principales et statut de publication.",
-};
+  path: "/programmes/progression-primaire",
+});
 
 const LEVEL_OBJECTIVES: Record<string, string> = {
   cp: "Entrer dans la lecture, l'écriture et les premiers nombres. Installer les repères fondamentaux.",

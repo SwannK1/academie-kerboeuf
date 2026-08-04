@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { LevelMissions } from "@/components/academy/level-missions";
 import { getAcademyLevel, getLevelsByStage } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -20,13 +21,14 @@ export async function generateMetadata({
   const level = getAcademyLevel("primaire", levelSlug);
 
   if (!level) {
-    return { title: "Missions introuvables" };
+    return { title: "Missions introuvables", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `Missions ${level.label}`,
     description: `Catalogue de missions pédagogiques pour le niveau ${level.label}.`,
-  };
+    path: `/primaire/${levelSlug}/missions`,
+  });
 }
 
 export default async function PrimaireLevelMissionsPage({ params }: PageProps) {

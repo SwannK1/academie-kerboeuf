@@ -7,6 +7,7 @@ import { LevelMissions } from "@/components/academy/level-missions";
 import { getAcademyLevel, getLevelsByStage } from "@/content/academy";
 import { getLyceeLevelStatus } from "@/content/levels/lycee-statuses";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -23,13 +24,17 @@ export async function generateMetadata({
   const level = getAcademyLevel("lycee", levelSlug);
 
   if (!level) {
-    return { title: "Missions introuvables" };
+    return {
+      title: "Missions introuvables",
+      robots: { index: false, follow: false },
+    };
   }
 
-  return {
+  return buildPageMetadata({
     title: `Missions ${level.label}`,
     description: `Catalogue de missions pédagogiques structurées pour le niveau ${level.label}.`,
-  };
+    path: `/lycee/${levelSlug}/missions`,
+  });
 }
 
 export default async function LyceeLevelMissionsPage({ params }: PageProps) {

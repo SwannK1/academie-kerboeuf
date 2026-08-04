@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Ressources maternelle",
   description:
     "Des activités simples pour observer, manipuler, parler et grandir — ressources PS, MS et GS en préparation.",
-};
+  path: "/maternelle/ressources",
+});
 
 const DOMAINS = [
   "Mobiliser le langage dans toutes ses dimensions",

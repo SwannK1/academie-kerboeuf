@@ -12,6 +12,7 @@ import {
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
 import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -26,13 +27,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const student = getStudentBySlug(slug);
 
   if (!student) {
-    return { title: "Élève introuvable" };
+    return { title: "Élève introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${student.name} | Élèves emblématiques`,
     description: student.shortDescription,
-  };
+    path: `/eleves/${slug}`,
+  });
 }
 
 function StudentHeroImage({ student }: { student: EmblematicStudent }) {

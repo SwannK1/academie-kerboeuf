@@ -9,6 +9,7 @@ import {
   FICHE_DOMAIN_LABELS,
   SHEET_LABELS,
 } from "@/content/cm2-francais-fiches";
+import { buildPageMetadata } from "@/lib/seo";
 
 type SheetId = "f1" | "f2" | "f3";
 
@@ -33,9 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const notion = getFicheNotionBySlug(notionSlug);
   if (!notion) return {};
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
+  return buildPageMetadata({
     title: `${notion.title} — ${label} — Fiches Français CM2`,
-  };
+    description: `${FICHE_DOMAIN_LABELS[notion.domain]} — ${notion.title} (${label}), fiche CM2 Français.`,
+    path: `/primaire/cm2/fiches/francais/${notionSlug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: Props) {
@@ -111,7 +114,6 @@ export default async function FicheDetailPage({ params }: Props) {
               height={1754}
               className="w-full h-auto"
               priority
-              unoptimized
             />
           </div>
 

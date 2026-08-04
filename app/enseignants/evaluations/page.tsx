@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { AssessmentPlanner } from "@/components/teacher-assessment-planner/AssessmentPlanner";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Préparer mes évaluations",
   description:
     "Organisez vos évaluations de classe : titre, compétence, période, matériel et checklist de préparation, sans stocker de résultat d'élève.",
-};
+  path: "/enseignants/evaluations",
+});
 
 export default function TeacherAssessmentPlannerPage() {
   return (

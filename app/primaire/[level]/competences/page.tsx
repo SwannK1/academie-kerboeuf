@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getCompetenciesForLevel } from "@/content/competencies";
 import { getCurriculumMapForLevel } from "@/content/curriculum-map";
 import type { LearningCompetency } from "@/content/learning-architecture-types";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -44,14 +45,16 @@ export async function generateMetadata({
   if (!isPrimaryCompetencyLevelSlug(level)) {
     return {
       title: "Compétences introuvables",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
+  return buildPageMetadata({
     title: `Compétences observables ${primaryCompetencyLevels[level].label}`,
     description:
       "Repères de compétences observables, critères de réussite et ressources associées pour organiser le travail sans remplacer les supports PDF.",
-  };
+    path: `/primaire/${level}/competences`,
+  });
 }
 
 export default async function PrimaryLevelCompetenciesPage({ params }: PageProps) {

@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Méthodologie",
   description:
     "Des repères pour apprendre, s'organiser et progresser. Ressources méthodologiques transversales pour le primaire, le collège et le lycée.",
-};
+  path: "/ressources/methodologie",
+});
 
 type MethodBlock = {
   title: string;

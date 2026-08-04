@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Cartothèque des Lisières",
   description:
     "La Cartothèque des Lisières — un lieu pour se repérer, relier les savoirs et construire des chemins d'apprentissage.",
-};
+  path: "/univers/cartotheque",
+});
 
 const competences = [
   "Se repérer dans l'espace et dans les savoirs",

@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
+import { BASE_URL, SITE_NAME } from "@/lib/seo";
 import "./globals.css";
 
-// TODO: remplacer par le domaine réel avant mise en production
-const BASE_URL = "https://academie-kerboeuf.fr";
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_NAME,
+  url: BASE_URL,
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: BASE_URL,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -52,6 +64,14 @@ export default function RootLayout({
         >
           Aller au contenu principal
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <SiteHeader />
         {children}
         <SiteFooter />

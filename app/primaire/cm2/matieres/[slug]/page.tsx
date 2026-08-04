@@ -15,6 +15,7 @@ import {
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -25,11 +26,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCm2SubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable" };
-  return {
+  if (!subject) {
+    return { title: "Matière introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
     title: `${subject.title} CM2`,
     description: subject.shortDescription,
-  };
+    path: `/primaire/cm2/matieres/${slug}`,
+  });
 }
 
 export default async function Cm2SubjectPage({ params }: PageProps) {

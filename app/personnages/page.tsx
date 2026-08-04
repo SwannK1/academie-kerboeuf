@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { emblematicStudents } from "@/content/students";
 import { professorProfiles } from "@/content/professors";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Personnages",
   description: "Les guides de niveau et les professeurs de l'Académie Kerboeuf.",
-};
+  path: "/personnages",
+});
 
 const breadcrumb = [
   { label: "Accueil", href: "/" },

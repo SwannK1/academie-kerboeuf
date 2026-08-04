@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProfessionalDevelopment } from "@/components/teacher-professional-development/TeacherProfessionalDevelopment";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Mes formations et développement professionnel",
   description:
     "Suivez vos formations, lectures professionnelles et compétences à développer, en privé sur cet appareil.",
-};
+  path: "/enseignants/formations",
+});
 
 export default function TeacherProfessionalDevelopmentPage() {
   return (

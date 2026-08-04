@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Ressources imprimables",
   description:
     "Des supports pensés pour la classe, l'entraînement et l'évaluation.",
-};
+  path: "/ressources/imprimables",
+});
 
 type PrintableSection = {
   title: string;

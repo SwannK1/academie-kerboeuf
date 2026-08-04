@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassOrganizationClient } from "@/components/teacher-class-organization/TeacherClassOrganizationClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Organisation de classe",
   description:
     "Préparez votre semaine de classe : priorités par groupe, réorganisation à la souris ou au clavier. Aucune donnée élève. Sauvegarde sur cet appareil.",
-};
+  path: "/enseignants/organisation",
+});
 
 export default function TeacherClassOrganizationPage() {
   return (

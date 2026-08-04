@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getClassroomResources } from "@/content/resources";
 import { getPublicStatus } from "@/content/public-status";
 import { ResourcesCatalog } from "./_components/resources-catalog";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Ressources",
   description:
     "Toutes les missions pédagogiques prêtes à projeter, imprimer ou corriger en classe.",
-};
+  path: "/ressources",
+});
 
 export default function RessourcesPage() {
   const resources = getClassroomResources().map((resource) => ({
@@ -91,6 +92,18 @@ export default function RessourcesPage() {
               className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
             >
               Programmes
+            </Link>
+            <Link
+              href="/ressources/imprimables"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            >
+              Ressources imprimables
+            </Link>
+            <Link
+              href="/ressources/methodologie"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            >
+              Méthodologie
             </Link>
           </div>
         </div>

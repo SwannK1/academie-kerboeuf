@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { MaternelleDomainCard } from "@/components/academy/MaternelleDomainCard";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { msDomains } from "@/content/levels/maternelle/ms-domains";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Moyenne Section",
   description:
     "Tableau de bord Moyenne Section : domaines, observables, situations et ressources prévues.",
-};
+  path: "/maternelle/ms",
+});
 
 export default function MsPage() {
   const statusCounts = msDomains.reduce(

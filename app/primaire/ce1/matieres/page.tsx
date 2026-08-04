@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { SubjectIndexPage } from "@/components/academy/SubjectMatterCatalog";
 import { ce1Subjects } from "@/content/ce1-subjects";
 import { CE1_ACCENT } from "@/lib/ce1-accent";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Matières CE1",
   description:
     "Les matières du programme CE1 à l'Académie Kerboeuf : Français et Mathématiques — domaines, sous-domaines et séquences-compétences du Cycle 2.",
-};
+  path: "/primaire/ce1/matieres",
+});
 
 export default function Ce1MatieresPage() {
   return (

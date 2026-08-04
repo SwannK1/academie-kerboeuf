@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherSchoolCalendar } from "@/components/teacher-school-calendar/TeacherSchoolCalendar";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Mon calendrier scolaire",
   description:
     "Organisez vos périodes, dates importantes et échéances personnelles dans un calendrier mensuel sauvegardé sur cet appareil.",
-};
+  path: "/enseignants/calendrier",
+});
 
 export default function TeacherSchoolCalendarPage() {
   return (

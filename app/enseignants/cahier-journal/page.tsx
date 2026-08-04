@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherLogbook } from "@/components/teacher-logbook/TeacherLogbook";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Cahier journal",
   description:
     "Préparez votre vraie semaine de classe avec des cartes de séances déplaçables, jour par jour et créneau par créneau. Sauvegarde locale uniquement.",
-};
+  path: "/enseignants/cahier-journal",
+});
 
 export default function TeacherLogbookPage() {
   return (
