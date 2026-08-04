@@ -8,10 +8,16 @@
     "local": "lsof -ti:3000 2>/dev/null | xargs kill -9 2>/dev/null; rm -rf .next && next dev --webpack",
     "open": "open http://localhost:3000",
     "build": "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
+    "build:if-needed": "test -d .next/server || npm run build",
     "start": "next start",
     "lint": "eslint",
+    "test:unit": "tsx --test tests/unit/*.test.ts tests/integration/*.test.ts",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "test:a11y": "playwright test e2e/accessibility.spec.ts",
+    "test:quick": "node scripts/link-audit/route-audit.mjs quick",
+    "test:routes": "node scripts/link-audit/route-audit.mjs full",
+    "validate": "rm -rf .next && npm run lint && npx tsc --noEmit && npm run build && npm run test:unit && npm run test:e2e && npm run test:a11y && npm run test:quick && npm run test:routes"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -19,6 +25,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -27,6 +34,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
+    "tsx": "^4.23.5",
     "typescript": "^5"
   }
 }

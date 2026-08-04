@@ -17,6 +17,11 @@
 /blob-report/
 /playwright/.cache/
 
+# sorties générées par l'audit de routes/liens (régénérées à chaque run)
+/scripts/link-audit/extracted-links.json
+/scripts/link-audit/verify-results.json
+/scripts/link-audit/http-check-results.json
+
 # next.js
 /.next/
 /out/
