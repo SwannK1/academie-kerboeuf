@@ -69,7 +69,7 @@ export default function MaternelleRessourcesPage() {
                   <span className="inline-flex rounded border border-jade/30 bg-jade/10 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-jade">
                     Cycle 1 · {short}
                   </span>
-                  <PublicStatusBadge status="in-progress" />
+                  <PublicStatusBadge status="preparing" />
                 </div>
 
                 <h2 className="mt-4 text-2xl font-black text-foreground">

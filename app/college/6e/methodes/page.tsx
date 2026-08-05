@@ -16,35 +16,35 @@ const methodes = [
     title: "Préparer son cartable",
     description:
       "Anticiper les cours du lendemain, vérifier le matériel nécessaire et éviter les oublis.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "noter-devoirs",
     title: "Noter les devoirs",
     description:
       "Utiliser l'agenda scolaire efficacement : noter la matière, la date et la nature du travail demandé.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "relire-lecon",
     title: "Relire une leçon",
     description:
       "Savoir identifier les points essentiels d'une leçon et les réviser à voix haute ou par écrit.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "emploi-du-temps",
     title: "Se repérer dans l'emploi du temps",
     description:
       "Lire un emploi du temps hebdomadaire, repérer les salles et anticiper les changements.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "demander-aide",
     title: "Demander de l'aide au bon moment",
     description:
       "Identifier quand et à qui s'adresser : professeur, CPE, documentaliste ou camarade.",
-    status: "in-progress",
+    status: "preparing",
   },
 ] as const;
 

@@ -119,4 +119,38 @@ test.describe("Préparer mes APC — hydratation", () => {
     await page.reload();
     await expect(created).toBeVisible();
   });
+
+  test("modification d'une séance déjà chargée depuis le stockage, persistée après rechargement", async ({
+    page,
+  }) => {
+    // Écrit le stockage via evaluate() (pas addInitScript, qui se
+    // ré-exécuterait aussi au rechargement plus bas et effacerait la
+    // modification testée en réinjectant la séance d'origine).
+    await page.goto("/enseignants/apc");
+    await page.evaluate(
+      ({ key, session }) => {
+        window.localStorage.setItem(key, JSON.stringify([session]));
+      },
+      { key: STORAGE_KEY, session: SAMPLE_SESSION },
+    );
+    await page.reload();
+
+    const errors = trackConsoleErrors(page);
+    await expect(page.getByText("Séance hydratation E2E")).toBeVisible();
+
+    await page.getByRole("button", { name: "Modifier" }).click();
+    await page.getByLabel("Titre").fill("Séance modifiée par le test");
+    await page.getByRole("button", { name: "Terminer" }).click();
+
+    const updated = page.getByText("Séance modifiée par le test");
+    await expect(updated).toBeVisible();
+    await expect(page.getByText("Séance hydratation E2E")).toHaveCount(0);
+    expect(errors).toEqual([]);
+
+    // La modification doit survivre au rechargement : ni écrasée par le
+    // stockage d'origine, ni perdue par une écriture prématurée.
+    await page.reload();
+    await expect(updated).toBeVisible();
+    await expect(page.getByText("Séance hydratation E2E")).toHaveCount(0);
+  });
 });

@@ -89,7 +89,7 @@ export function HierarchyCard({
           <h2 className="mt-2 text-xl font-black text-foreground">{title}</h2>
         </div>
         <PublicStatusBadge
-          status={href || available ? "available" : "in-progress"}
+          status={href || available ? "available" : "preparing"}
         />
       </div>
       <p className="mt-4 text-sm leading-7 text-muted">{description}</p>

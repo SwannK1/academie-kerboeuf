@@ -63,18 +63,43 @@ test.describe("Métadonnées principales", () => {
 });
 
 test.describe("Canonical et JSON-LD", () => {
-  // L'accueil (app/page.tsx) n'exporte pas de metadata propre : elle hérite
-  // du layout racine, qui ne définit pas alternates.canonical — contrairement
-  // aux pages qui appellent buildPageMetadata (lib/seo.ts). Comportement
-  // réel actuel, pas une régression de cette consolidation ; hors périmètre.
-  for (const path of ["/ressources", "/primaire/cm2/matieres/francais"]) {
-    test(`${path} — balise canonical présente et cohérente avec le chemin`, async ({ page }) => {
+  for (const path of ["/", "/ressources", "/primaire/cm2/matieres/francais"]) {
+    test(`${path} — balise canonical présente, unique et cohérente avec le chemin`, async ({ page }) => {
       await page.goto(path);
-      const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+      const canonicalLinks = page.locator('link[rel="canonical"]');
+      await expect(canonicalLinks).toHaveCount(1);
+      const canonical = await canonicalLinks.getAttribute("href");
       expect(canonical).toBeTruthy();
-      expect(canonical?.endsWith(path)).toBe(true);
+      // "/" est normalisée sans slash final par la résolution de metadataBase
+      // de Next.js ("https://academie-kerboeuf.fr", pas ".../").
+      const expected =
+        path === "/"
+          ? "https://academie-kerboeuf.fr"
+          : `https://academie-kerboeuf.fr${path}`;
+      expect(canonical).toBe(expected);
     });
   }
+
+  test("/ — title, description, OpenGraph et Twitter cohérents avec la marque", async ({ page }) => {
+    await page.goto("/");
+
+    const title = await page.locator("title").textContent();
+    expect(title?.trim().length).toBeGreaterThan(0);
+
+    const description = await page
+      .locator('meta[name="description"]')
+      .getAttribute("content");
+    expect(description?.trim().length).toBeGreaterThan(0);
+
+    await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+    await expect(page.locator('meta[property="og:description"]')).toHaveCount(1);
+    const ogUrl = await page.locator('meta[property="og:url"]').getAttribute("content");
+    expect(ogUrl).toBe("https://academie-kerboeuf.fr");
+
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveCount(1);
+    await expect(page.locator('meta[name="twitter:description"]')).toHaveCount(1);
+  });
 
   test("JSON-LD Organization/WebSite présent sur toutes les pages (layout racine)", async ({ page }) => {
     await page.goto("/");

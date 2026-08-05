@@ -17,6 +17,7 @@ import {
   type StoredLayout,
   type TableShape,
 } from "@/content/teacher-classroom-layout";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 
 const STORAGE_KEY = "academie-kerboeuf-organisation-classe-plan-v1";
 const CANVAS_WIDTH = 880;
@@ -579,33 +580,10 @@ export function TeacherClassroomLayoutClient() {
             </div>
 
             {pendingLayout && (
-              <div
-                role="alertdialog"
-                aria-labelledby="confirm-overwrite"
-                className="mt-4 rounded-md border border-ember/50 bg-ember/10 p-3"
-              >
-                <p id="confirm-overwrite" className="text-sm font-bold text-foreground">
-                  Remplacer le plan actuel par cette configuration ? Les
-                  tables actuelles seront supprimées et les étiquettes
-                  placées seront libérées.
-                </p>
-                <div className="mt-3 flex gap-2">
-                  <button
-                    type="button"
-                    onClick={confirmApplyLayout}
-                    className="min-h-9 rounded-md border border-ember/60 bg-ember/20 px-3 text-sm font-bold text-foreground"
-                  >
-                    Confirmer
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPendingLayout(null)}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
-                  >
-                    Annuler
-                  </button>
-                </div>
-              </div>
+              <OverwriteLayoutConfirmDialog
+                onConfirm={confirmApplyLayout}
+                onCancel={() => setPendingLayout(null)}
+              />
             )}
           </section>
 
@@ -750,7 +728,7 @@ export function TeacherClassroomLayoutClient() {
               ci-dessus, ou sélectionnez-la puis choisissez « Placer ici »
               sur la table souhaitée.
             </p>
-            <ul className="mt-3 flex flex-wrap gap-2" role="list">
+            <ul className="mt-3 flex flex-wrap gap-2" role="list" aria-label="Étiquettes non placées">
               {unassignedLabels.map((label) => (
                 <li key={label.id} draggable onDragStart={() => onLabelDragStart(label.id)}>
                   <button
@@ -1253,6 +1231,57 @@ export function TeacherClassroomLayoutClient() {
           </ul>
         )}
       </section>
+    </div>
+  );
+}
+
+function OverwriteLayoutConfirmDialog({
+  onConfirm,
+  onCancel,
+}: {
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const dialogRef = useDialogFocusTrap<HTMLDivElement>();
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onCancel();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onCancel]);
+
+  return (
+    <div
+      ref={dialogRef}
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="confirm-overwrite"
+      tabIndex={-1}
+      className="mt-4 rounded-md border border-ember/50 bg-ember/10 p-3"
+    >
+      <p id="confirm-overwrite" className="text-sm font-bold text-foreground">
+        Remplacer le plan actuel par cette configuration ? Les
+        tables actuelles seront supprimées et les étiquettes
+        placées seront libérées.
+      </p>
+      <div className="mt-3 flex gap-2">
+        <button
+          type="button"
+          onClick={onConfirm}
+          className="min-h-9 rounded-md border border-ember/60 bg-ember/20 px-3 text-sm font-bold text-foreground"
+        >
+          Confirmer
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="min-h-9 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+        >
+          Annuler
+        </button>
+      </div>
     </div>
   );
 }

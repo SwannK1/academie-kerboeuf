@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { PublicStatus } from "@/content/public-status";
+
+// L'accueil hérite du title/description/OpenGraph/Twitter par défaut du
+// layout racine (déjà corrects pour "/") — seule la canonical manquait ici.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 type Accent = "jade" | "gold" | "sky" | "ember";
 

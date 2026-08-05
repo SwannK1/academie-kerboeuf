@@ -19,7 +19,7 @@ type Block = {
 const blocks: Block[] = [
   {
     title: "Méthodologie lycée",
-    status: "in-progress",
+    status: "preparing",
     sequences: [
       "Prendre des notes efficacement",
       "Organiser son travail personnel",
@@ -28,7 +28,7 @@ const blocks: Block[] = [
   },
   {
     title: "Français",
-    status: "in-progress",
+    status: "preparing",
     sequences: [
       "Analyser un texte littéraire",
       "Rédiger un commentaire de texte",
@@ -37,7 +37,7 @@ const blocks: Block[] = [
   },
   {
     title: "Mathématiques",
-    status: "in-progress",
+    status: "preparing",
     sequences: [
       "Fonctions et représentations graphiques",
       "Géométrie repérée",
@@ -70,7 +70,7 @@ export default function SecondeRessourcesPage() {
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Lycée · Seconde
             </p>
-            <PublicStatusBadge status="in-progress" />
+            <PublicStatusBadge status="preparing" />
           </div>
           <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
             Ressources de Seconde
