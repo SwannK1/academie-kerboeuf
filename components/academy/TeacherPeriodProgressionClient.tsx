@@ -331,6 +331,20 @@ export function TeacherPeriodProgressionClient() {
     }
   }
 
+  // A status change while the side panel is open moves the card to another
+  // Kanban column: React unmounts the trigger element in its old column and
+  // mounts a new one, detaching `selectTriggerRef`. Re-query by card id so
+  // focus still returns to the (now relocated) card instead of falling back
+  // to <body>.
+  function focusCardTrigger(id: string) {
+    if (selectTriggerRef.current?.isConnected) {
+      selectTriggerRef.current.focus();
+      return;
+    }
+    const relocated = document.querySelector<HTMLElement>(`[data-card-id="${id}"]`);
+    relocated?.focus();
+  }
+
   function updateCard(id: string, patch: Partial<PeriodCard>) {
     setCards((prev) =>
       prev.map((card) => (card.id === id ? { ...card, ...patch } : card)),
@@ -847,7 +861,7 @@ export function TeacherPeriodProgressionClient() {
             aria-hidden="true"
             onClick={() => {
               setSelectedId(null);
-              selectTriggerRef.current?.focus();
+              focusCardTrigger(selectedCard.id);
             }}
             className="fixed inset-0 z-[55] bg-background/40 print:hidden"
           />
@@ -856,7 +870,7 @@ export function TeacherPeriodProgressionClient() {
             subjectLabelById={subjectLabelById}
             onClose={() => {
               setSelectedId(null);
-              selectTriggerRef.current?.focus();
+              focusCardTrigger(selectedCard.id);
             }}
             onUpdate={(patch) => updateCard(selectedCard.id, patch)}
             onDelete={() => deleteCard(selectedCard.id)}
@@ -984,6 +998,7 @@ function ProgressionCard({
       tabIndex={0}
       role="button"
       aria-label={`Ouvrir la carte ${card.competenceLabel}`}
+      data-card-id={card.id}
       className="cursor-pointer rounded-md border border-white/10 bg-background/50 p-3 text-sm transition hover:border-jade/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade/60 print:cursor-default print:border-black"
     >
       <p className="text-xs font-bold uppercase tracking-wide text-muted print:text-black">

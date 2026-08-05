@@ -61,7 +61,7 @@ export function ProfessorNavigation({ professor }: { professor: ProfessorProfile
           <p className="mt-3 max-w-xl text-sm leading-7 text-muted">
             {professor.levelDescription}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col flex-wrap gap-3 sm:flex-row">
             <Link
               href={professor.missionsPath}
               className={`inline-flex h-11 items-center justify-center rounded-md border px-6 text-sm font-extrabold transition hover:opacity-90 ${a.badge}`}

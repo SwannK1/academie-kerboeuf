@@ -26,6 +26,7 @@ export const metadata: Metadata = {
   },
   description:
     "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "fr_FR",
