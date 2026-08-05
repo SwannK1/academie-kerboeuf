@@ -6,7 +6,10 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import {
   getLearningPathWithSteps,
   learningPaths,
+  type LearningPathStep,
 } from "@/content/learning-paths";
+import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -25,13 +28,14 @@ export async function generateMetadata({
   const path = getLearningPathWithSteps(slug);
 
   if (!path) {
-    return { title: "Parcours introuvable | Académie Kerboeuf" };
+    return { title: "Parcours introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${path.title} | Parcours`,
     description: path.globalObjective,
-  };
+    path: `/parcours/${slug}`,
+  });
 }
 
 export default async function LearningPathDetailPage({ params }: PageProps) {
@@ -50,7 +54,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -71,7 +75,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
               {path.level} · {path.subject}
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {path.title}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -145,40 +149,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
               </p>
               <div className="mt-6 grid gap-4">
                 {path.steps.map((step, index) => (
-                  <Link
-                    key={step.href}
-                    href={step.href}
-                    className="group grid gap-4 rounded-md border border-white/10 bg-ink/35 p-5 transition hover:border-gold/35 hover:bg-white/[0.065] md:grid-cols-[auto_1fr_auto] md:items-start"
-                  >
-                    <span className="grid size-11 place-items-center rounded-md border border-gold/30 bg-gold/10 font-mono text-sm font-black text-gold">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
-                        {step.level} · {step.subject}
-                      </p>
-                      <h2 className="mt-2 text-2xl font-black text-foreground">
-                        {step.title}
-                      </h2>
-                      <p className="mt-3 text-sm leading-7 text-muted">
-                        {step.objective}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {step.modes.includes("projection") ? (
-                          <Badge>À projeter</Badge>
-                        ) : null}
-                        {step.modes.includes("impression") ? (
-                          <Badge>À imprimer</Badge>
-                        ) : null}
-                        {step.modes.includes("correction") ? (
-                          <Badge>Correction</Badge>
-                        ) : null}
-                      </div>
-                    </div>
-                    <span className="text-sm font-bold text-gold transition group-hover:translate-x-1">
-                      Ouvrir
-                    </span>
-                  </Link>
+                  <StepCard key={step.href} step={step} index={index} />
                 ))}
               </div>
             </div>
@@ -245,5 +216,65 @@ function Badge({ children }: { children: string }) {
     <span className="rounded border border-gold/25 bg-gold/10 px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-gold">
       {children}
     </span>
+  );
+}
+
+function StepCard({ step, index }: { step: LearningPathStep; index: number }) {
+  const isAvailable = getPublicStatusKey(step.status) === "available";
+
+  const content = (
+    <>
+      <span className="grid size-11 place-items-center rounded-md border border-gold/30 bg-gold/10 font-mono text-sm font-black text-gold">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
+          {step.level} · {step.subject}
+        </p>
+        <h2 className="mt-2 text-2xl font-black text-foreground">
+          {step.title}
+        </h2>
+        <p className="mt-3 text-sm leading-7 text-muted">
+          {step.objective}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {step.modes.includes("projection") ? (
+            <Badge>À projeter</Badge>
+          ) : null}
+          {step.modes.includes("impression") ? (
+            <Badge>À imprimer</Badge>
+          ) : null}
+          {step.modes.includes("correction") ? (
+            <Badge>Correction</Badge>
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
+
+  if (isAvailable) {
+    return (
+      <Link
+        href={step.href}
+        className="group grid gap-4 rounded-md border border-white/10 bg-ink/35 p-5 transition hover:border-gold/35 hover:bg-white/[0.065] md:grid-cols-[auto_1fr_auto] md:items-start"
+      >
+        {content}
+        <span className="text-sm font-bold text-gold transition group-hover:translate-x-1">
+          Ouvrir
+        </span>
+      </Link>
+    );
+  }
+
+  return (
+    <article
+      className="grid cursor-default gap-4 rounded-md border border-white/10 bg-ink/35 p-5 md:grid-cols-[auto_1fr_auto] md:items-start"
+      aria-label={step.title}
+    >
+      {content}
+      <span className="w-fit rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+        Détail non disponible
+      </span>
+    </article>
   );
 }

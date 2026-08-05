@@ -1,33 +1,40 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatus } from "@/content/public-status";
+import { getPublicStatus, getPublicStatusKey } from "@/content/public-status";
 import { ResourcesCatalog } from "./_components/resources-catalog";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ressources | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources",
   description:
     "Toutes les missions pédagogiques prêtes à projeter, imprimer ou corriger en classe.",
-};
+  path: "/ressources",
+});
 
 export default function RessourcesPage() {
   const resources = getClassroomResources().map((resource) => ({
     ...resource,
     status: getPublicStatus(resource.status),
   }));
-  const projectionCount = resources.filter((resource) =>
+  // Les compteurs ne portent que sur les ressources réellement disponibles :
+  // une mission "en préparation" ou "à venir" n'a pas de support réel à
+  // projeter/imprimer/corriger.
+  const availableResources = resources.filter(
+    (resource) => getPublicStatusKey(resource.status) === "available",
+  );
+  const projectionCount = availableResources.filter((resource) =>
     resource.modes.includes("projection"),
   ).length;
-  const printCount = resources.filter((resource) =>
+  const printCount = availableResources.filter((resource) =>
     resource.modes.includes("impression"),
   ).length;
-  const correctionCount = resources.filter((resource) =>
+  const correctionCount = availableResources.filter((resource) =>
     resource.modes.includes("correction"),
   ).length;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -44,7 +51,7 @@ export default function RessourcesPage() {
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Tableau enseignant
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Ressources prêtes pour la classe
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -91,6 +98,18 @@ export default function RessourcesPage() {
               className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
             >
               Programmes
+            </Link>
+            <Link
+              href="/ressources/imprimables"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            >
+              Ressources imprimables
+            </Link>
+            <Link
+              href="/ressources/methodologie"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            >
+              Méthodologie
             </Link>
           </div>
         </div>

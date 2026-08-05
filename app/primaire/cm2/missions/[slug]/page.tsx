@@ -21,6 +21,7 @@ import { felixProjects, getFelixProjectBySlug } from "@/content/felix-missions";
 import type { MissionEvidence } from "@/content/felix-types";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getPublicStatusLabel } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type MissionPageProps = {
   params: Promise<{ slug: string }>;
@@ -38,17 +39,21 @@ export async function generateMetadata({
   const { slug } = await params;
   const felix = getFelixProjectBySlug(slug);
   if (felix) {
-    return {
+    return buildPageMetadata({
       title: `${felix.title} | Projets CM2`,
       description: felix.subtitle,
-    };
+      path: `/primaire/cm2/missions/${slug}`,
+    });
   }
   const cm2 = getCm2MissionBySlug(slug);
-  if (!cm2) return { title: "Mission introuvable | Académie Kerboeuf" };
-  return {
+  if (!cm2) {
+    return { title: "Mission introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
     title: `${cm2.title} | Missions CM2`,
     description: cm2.description,
-  };
+    path: `/primaire/cm2/missions/${slug}`,
+  });
 }
 
 export default async function MissionDetailPage({ params }: MissionPageProps) {
@@ -73,7 +78,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
     );
 
     return (
-      <main className="mission-detail-page felix-project-detail">
+      <main id="main-content" className="mission-detail-page felix-project-detail">
         <PrintBodyClass className="print-mission-detail" />
 
         <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
@@ -100,7 +105,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
               >
                 {felixProject.mainSubject}
               </p>
-              <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+              <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
                 {felixProject.title}
               </h1>
               <p className={`mt-3 text-xl font-bold ${felixProject.theme.textClass}`}>
@@ -270,7 +275,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
   );
 
   return (
-    <main className="mission-detail-page">
+    <main id="main-content" className="mission-detail-page">
       <PrintBodyClass className="print-mission-detail" />
       <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -296,7 +301,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
             >
               {mission.subject}
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {mission.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">

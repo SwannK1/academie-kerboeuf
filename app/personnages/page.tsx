@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { emblematicStudents } from "@/content/students";
 import { professorProfiles } from "@/content/professors";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Personnages | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Personnages",
   description: "Les guides de niveau et les professeurs de l'Académie Kerboeuf.",
-};
+  path: "/personnages",
+});
 
 const breadcrumb = [
   { label: "Accueil", href: "/" },
@@ -57,7 +58,7 @@ export default function PersonnagesPage() {
   const secondaryBySubject = groupBySubject(secondaryCharacters);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb items={breadcrumb} />
@@ -69,7 +70,7 @@ export default function PersonnagesPage() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
             Personnages
           </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 max-w-3xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Qui accompagne les apprentissages ?
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-muted">
@@ -92,6 +93,7 @@ export default function PersonnagesPage() {
               meta={guide.level}
               description={guide.description}
               href={guide.href}
+              headingLevel="h3"
             />
           ))}
         </div>
@@ -170,7 +172,7 @@ function PersonnagesSection({
   return (
     <section className="border-t border-white/10 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-2xl font-black text-foreground sm:text-3xl">
+        <h2 className="break-words text-2xl font-black text-foreground sm:text-3xl">
           {title}
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
@@ -187,15 +189,18 @@ function CharacterCard({
   meta,
   description,
   href,
+  headingLevel = "h4",
 }: {
   name: string;
   meta: string;
   description: string;
   href?: string;
+  headingLevel?: "h3" | "h4";
 }) {
+  const Heading = headingLevel;
   const content = (
     <>
-      <h4 className="text-base font-black text-foreground">{name}</h4>
+      <Heading className="text-base font-black text-foreground">{name}</Heading>
       <p className="mt-1 text-xs font-bold uppercase tracking-[0.1em] text-gold">
         {meta}
       </p>

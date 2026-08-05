@@ -24,7 +24,7 @@ export function LevelMissions({ level }: LevelMissionsProps) {
   }));
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -55,7 +55,7 @@ export function LevelMissions({ level }: LevelMissionsProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Catalogue pédagogique
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
                 {level.missions.length} missions structurées
               </h2>
             </div>

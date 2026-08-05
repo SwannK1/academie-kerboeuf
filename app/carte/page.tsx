@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { lieuxTransversaux } from "@/content/lieux-transversaux";
 import type { AccentKey } from "@/content/universe";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Carte de l'Académie | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Carte de l'Académie",
   description:
     "Vue d'ensemble de l'Académie Kerboeuf — les quatre univers, les lieux transversaux et toutes les portes d'entrée.",
-};
+  path: "/carte",
+});
 
 // ─── Données des univers ───────────────────────────────────────────────────────
 
@@ -130,7 +131,7 @@ export default function CartePage() {
   const lieuxSansRoute = lieuxTransversaux.filter((lieu) => !lieu.route);
 
   return (
-    <main>
+    <main id="main-content">
       {/* ── Breadcrumb ── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -148,7 +149,7 @@ export default function CartePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Vue d&rsquo;ensemble
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             La Carte de l&rsquo;Académie
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -180,7 +181,7 @@ export default function CartePage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Les quatre ailes
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
               Choisissez votre univers
             </h2>
             <p className="mt-4 text-base leading-7 text-muted">
@@ -204,7 +205,7 @@ export default function CartePage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
               Lieux transversaux
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
               Ce qui relie tous les univers
             </h2>
             <p className="mt-4 text-base leading-7 text-muted">
@@ -252,7 +253,7 @@ export default function CartePage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
               Niveaux
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
               Accès directs par classe
             </h2>
             <p className="mt-4 text-base leading-7 text-muted">
@@ -371,7 +372,7 @@ export default function CartePage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
               Explorer l&rsquo;Académie
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
               Toutes les entrées
             </h2>
           </div>
@@ -442,7 +443,7 @@ function UniversCard({ univers }: { univers: UniversEntry }) {
       href={univers.href}
       className={`group rounded-md border p-6 transition hover:-translate-y-1 hover:bg-white/[0.06] ${accentBorder[color]} bg-white/[0.04]`}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <span
           className={`rounded px-2.5 py-1 font-mono text-xs font-bold ${accentBg[color]} ${accentText[color]}`}
         >
@@ -486,7 +487,7 @@ function UniversCard({ univers }: { univers: UniversEntry }) {
             </li>
           ))}
           {univers.lieuxPrincipaux.length > 3 && (
-            <li className="text-xs text-muted/60">
+            <li className="text-xs text-muted">
               +{univers.lieuxPrincipaux.length - 3} autres lieux
             </li>
           )}
@@ -520,7 +521,7 @@ function LieuCard({
 
   const content = (
     <>
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <PublicStatusBadge status={lieu.statut} />
         <span
           className={`rounded px-2 py-0.5 font-mono text-xs font-semibold ${accentBg[color]} ${accentText[color]}`}
@@ -543,7 +544,7 @@ function LieuCard({
           </span>
         ))}
         {lieu.cyclesConcernes.length > 3 && (
-          <span className="rounded bg-white/[0.04] px-2 py-0.5 text-xs font-medium text-muted/60">
+          <span className="rounded bg-white/[0.04] px-2 py-0.5 text-xs font-medium text-muted">
             +{lieu.cyclesConcernes.length - 3}
           </span>
         )}

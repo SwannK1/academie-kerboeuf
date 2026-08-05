@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Cartothèque des Lisières | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Cartothèque des Lisières",
   description:
     "La Cartothèque des Lisières — un lieu pour se repérer, relier les savoirs et construire des chemins d'apprentissage.",
-};
+  path: "/univers/cartotheque",
+});
 
 const competences = [
   "Se repérer dans l'espace et dans les savoirs",
@@ -27,7 +28,7 @@ const niveaux = ["Cycle 2", "Cycle 3", "Cycle 4"];
 
 export default function CartothequePage() {
   return (
-    <main>
+    <main id="main-content">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -47,7 +48,7 @@ export default function CartothequePage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
             Lieu pédagogique
           </p>
-          <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 text-4xl font-black text-foreground sm:text-5xl">
             Cartothèque des Lisières
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">
@@ -63,7 +64,7 @@ export default function CartothequePage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
             Fonction pédagogique
           </p>
-          <h2 className="mt-4 text-3xl font-black text-foreground">
+          <h2 className="break-words mt-4 text-3xl font-black text-foreground">
             À quoi sert ce lieu&nbsp;?
           </h2>
           <p className="mt-6 text-base leading-8 text-muted">
@@ -88,7 +89,7 @@ export default function CartothequePage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
               Compétences travaillées
             </p>
-            <h2 className="mt-4 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-4 text-3xl font-black text-foreground">
               Ce que l&apos;on apprend ici
             </h2>
           </div>

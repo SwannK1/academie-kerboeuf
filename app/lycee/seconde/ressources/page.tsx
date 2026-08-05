@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ressources de Seconde | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources de Seconde",
   description:
     "Méthode, français et mathématiques pour réussir son entrée au lycée.",
-};
+  path: "/lycee/seconde/ressources",
+});
 
 type Block = {
   title: string;
@@ -18,7 +19,7 @@ type Block = {
 const blocks: Block[] = [
   {
     title: "Méthodologie lycée",
-    status: "in-progress",
+    status: "preparing",
     sequences: [
       "Prendre des notes efficacement",
       "Organiser son travail personnel",
@@ -27,7 +28,7 @@ const blocks: Block[] = [
   },
   {
     title: "Français",
-    status: "in-progress",
+    status: "preparing",
     sequences: [
       "Analyser un texte littéraire",
       "Rédiger un commentaire de texte",
@@ -36,7 +37,7 @@ const blocks: Block[] = [
   },
   {
     title: "Mathématiques",
-    status: "in-progress",
+    status: "preparing",
     sequences: [
       "Fonctions et représentations graphiques",
       "Géométrie repérée",
@@ -47,7 +48,7 @@ const blocks: Block[] = [
 
 export default function SecondeRessourcesPage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -69,9 +70,9 @@ export default function SecondeRessourcesPage() {
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Lycée · Seconde
             </p>
-            <PublicStatusBadge status="in-progress" />
+            <PublicStatusBadge status="preparing" />
           </div>
-          <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
             Ressources de Seconde
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-muted">

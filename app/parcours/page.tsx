@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getPublicStatus } from "@/content/public-status";
 import { LearningPathCatalog } from "./_components/learning-path-catalog";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Parcours pédagogiques | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Parcours pédagogiques",
   description:
     "Des parcours progressifs pour organiser les missions de l’Académie Kerboeuf en séquences de classe.",
-};
+  path: "/parcours",
+});
 
 export default function ParcoursPage() {
   const paths = getLearningPathsWithSteps();
@@ -20,7 +21,7 @@ export default function ParcoursPage() {
   const missionCount = paths.reduce((total, path) => total + path.steps.length, 0);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -37,7 +38,7 @@ export default function ParcoursPage() {
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Progressions pédagogiques
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Parcours de missions
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -56,6 +57,18 @@ export default function ParcoursPage() {
                 className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
               >
                 Missions récentes
+              </Link>
+              <Link
+                href="/parcours/methodes-pour-apprendre"
+                className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+              >
+                Méthodes pour apprendre
+              </Link>
+              <Link
+                href="/parcours/reussir-entree-sixieme"
+                className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+              >
+                Réussir son entrée en 6e
               </Link>
             </div>
           </div>

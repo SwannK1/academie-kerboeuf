@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
-import { getPublicStatusKey } from "@/content/public-status";
+import { isPubliclyLinkable } from "@/content/public-status";
 import type { CollegeSubdomainCard } from "@/content/college-curriculum";
 
 type BreadcrumbItem = { label: string; href?: string };
@@ -30,7 +30,7 @@ export function CollegeSubjectPortal({
   levelLabel,
 }: CollegeSubjectPortalProps) {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb items={breadcrumbItems} />
@@ -45,7 +45,7 @@ export function CollegeSubjectPortal({
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             {cycleLabel}
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {subjectLabel}
           </h1>
           {subtitle && (
@@ -62,12 +62,12 @@ export function CollegeSubjectPortal({
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Domaines du programme
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">{domainsHeading}</h2>
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">{domainsHeading}</h2>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             {subdomains.map((subdomain) => {
-              const isLinked = !!subdomain.href && getPublicStatusKey(subdomain.status) !== "upcoming";
+              const isLinked = isPubliclyLinkable(subdomain.status, subdomain.href);
 
               const cardInner = (
                 <div
@@ -77,7 +77,7 @@ export function CollegeSubjectPortal({
                       : "border-white/10 bg-white/[0.035]"
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-xl font-black text-foreground">{subdomain.label}</h3>
                     <div className="shrink-0">
                       <PublicStatusBadge status={subdomain.status} />

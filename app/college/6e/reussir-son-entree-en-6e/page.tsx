@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatus } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Réussir son entrée en 6e | Collège | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Réussir son entrée en 6e | Collège",
   description:
     "Six repères pour aborder sereinement le passage du CM2 au collège : emploi du temps, changements de salle, matériel, devoirs, apprentissage et questions.",
-};
+  path: "/college/6e/reussir-son-entree-en-6e",
+});
 
 const reperes = [
   {
@@ -51,7 +52,7 @@ const reperes = [
 
 export default function ReussirEntree6ePage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -76,7 +77,7 @@ export default function ReussirEntree6ePage() {
             </p>
             <PublicStatusBadge status={getPublicStatus("en-construction")} />
           </div>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Réussir son entrée en 6e
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
@@ -99,7 +100,7 @@ export default function ReussirEntree6ePage() {
                 key={repere.numero}
                 className="rounded-md border border-white/10 bg-white/[0.04] p-5"
               >
-                <p className="text-xs font-black tracking-[0.18em] text-jade/60">
+                <p className="text-xs font-black tracking-[0.18em] text-jade">
                   {repere.numero}
                 </p>
                 <h2 className="mt-2 text-base font-black text-foreground">

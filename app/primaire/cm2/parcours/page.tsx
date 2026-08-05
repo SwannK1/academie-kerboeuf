@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Badge } from "@/components/cm2/badge";
@@ -7,12 +6,14 @@ import { SectionHeader } from "@/components/cm2/section-header";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Missions, type Cm2Mission } from "@/content/cm2";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Parcours CM2 — L’année des grands explorateurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Parcours CM2 — L’année des grands explorateurs",
   description:
     "Progression CM2 lisible pour organiser les missions de Félix en lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",
-};
+  path: "/primaire/cm2/parcours",
+});
 
 const domainGroups = [
   {
@@ -121,7 +122,7 @@ export default function Cm2ParcoursPage() {
     .filter((step) => step.missions.length > 0);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -143,7 +144,7 @@ export default function Cm2ParcoursPage() {
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Progression CM2 · Félix
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Parcours CM2 — L’année des grands explorateurs
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -253,7 +254,7 @@ export default function Cm2ParcoursPage() {
               </p>
               <div className="mt-4 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
                 <div>
-                  <h2 className="text-3xl font-black text-foreground">
+                  <h2 className="break-words text-3xl font-black text-foreground">
                     {cm2Path.title}
                   </h2>
                   <p className="mt-4 text-sm leading-7 text-muted">
@@ -399,7 +400,7 @@ function AudiencePanel({
       <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-black text-foreground">{title}</h2>
+      <h2 className="break-words mt-3 text-3xl font-black text-foreground">{title}</h2>
       <ul className="mt-5 grid gap-3">
         {items.map((item) => (
           <li

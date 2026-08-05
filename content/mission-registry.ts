@@ -1,9 +1,10 @@
-import { academyLevels } from "@/content/academy";
+import { academyLevels, getLevelMissionsPath } from "@/content/academy";
 import { cm2Missions } from "@/content/cm2";
 import {
   academyMissionToMission,
   cm2MissionToMission,
 } from "@/content/mission-adapters";
+import { getPublicStatusKey } from "@/content/public-status";
 import type { Mission } from "@/content/types";
 
 // Transitional registry for the future `content/missions/index.ts`.
@@ -51,7 +52,36 @@ export function getMissionsForLevel(levelSlug: string) {
 }
 
 export function getAvailableMissions() {
-  return allMissions.filter((mission) => mission.status === "disponible");
+  return allMissions.filter(
+    (mission) => getPublicStatusKey(mission.status) === "available",
+  );
+}
+
+/**
+ * Vrai seulement si une page de détail par slug existe réellement pour ce
+ * niveau (CM2 et lycée). À utiliser pour décider si une liste doit inclure
+ * une mission comme ressource cliquable en tant que telle, par opposition à
+ * un simple renvoi vers la page de son niveau.
+ */
+export function isMissionDetailLinkable(mission: Mission): boolean {
+  return mission.levelSlug === "cm2" || mission.stage === "lycee";
+}
+
+// Individual mission detail pages only exist for CM2 and lycée missions, and
+// only once a mission is published. Every other case (collège, which has no
+// mission detail route at all; or an unavailable CM2/lycée mission, which is
+// prerendered as a 404) must fall back to the level's missions path so no
+// link ever points at a dead route.
+export function getMissionHref(mission: Mission): string {
+  const hasMissionDetailPage =
+    mission.stage === "lycee" || mission.levelSlug === "cm2";
+  const isAvailable = getPublicStatusKey(mission.status) === "available";
+
+  if (hasMissionDetailPage && isAvailable) {
+    return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
+  }
+
+  return getLevelMissionsPath({ stage: mission.stage, slug: mission.levelSlug });
 }
 
 function dedupeById(missions: Mission[]) {

@@ -21,6 +21,7 @@ import {
   getPublicStatusDotClassName,
   getPublicStatusKey,
   getPublicStatusLabel,
+  isPubliclyLinkable,
 } from "@/content/public-status";
 
 type LevelOverviewProps = {
@@ -63,7 +64,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
   const annualPaths = getAnnualPathsForLevel(level.slug);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -183,7 +184,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                 Matières prévues
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Un socle complet, prêt à enrichir.
               </h2>
             </div>
@@ -199,15 +200,16 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Programme {level.label}
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Matières du niveau
               </h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {collegeMatiereCards.map((matiere) => {
-                const isLinked =
-                  !!matiere.href &&
-                  getPublicStatusKey(matiere.status) !== "upcoming";
+                const isLinked = isPubliclyLinkable(
+                  matiere.status,
+                  matiere.href,
+                );
                 const card = (
                   <div
                     className={`group flex h-full flex-col rounded-md border p-5 transition ${
@@ -255,7 +257,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Ressources CP par domaine
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Premiers portails PDF
               </h2>
             </div>
@@ -314,7 +316,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
                 Programme
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Compétences du niveau
               </h2>
             </div>
@@ -390,7 +392,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
                   Compétences observables
                 </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
+                <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                   Ce que l&apos;élève apprend à réussir
                 </h2>
               </div>
@@ -421,7 +423,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                   Parcours annuels
                 </p>
-                <h2 className="mt-3 text-3xl font-black text-foreground">
+                <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                   Progressions à installer sur l&apos;année
                 </h2>
               </div>
@@ -448,7 +450,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Missions recommandées
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Premiers dossiers pédagogiques
               </h2>
             </div>
@@ -477,7 +479,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
                 Ressources classe
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 À projeter ou imprimer
               </h2>
             </div>
@@ -491,39 +493,61 @@ export function LevelOverview({ level }: LevelOverviewProps) {
 
           {resources.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {resources.slice(0, 6).map((resource) => (
-                <Link
-                  key={resource.id}
-                  href={resource.href}
-                  className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-ember/25 hover:bg-white/[0.07]"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-sm font-bold text-foreground leading-snug">
-                      {resource.title}
-                    </p>
-                    <span
-                      role="img"
-                      aria-label={getPublicStatusLabel(resource.status)}
-                      className={`mt-0.5 size-2 shrink-0 rounded-full ${
-                        getPublicStatusDotClassName(resource.status)
-                      }`}
-                    />
-                  </div>
-                  <p className="mt-1.5 text-xs text-muted">{resource.subject}</p>
-                  {resource.modes.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {resource.modes.map((mode) => (
-                        <span
-                          key={mode}
-                          className={`rounded border px-2 py-0.5 text-xs font-bold ${modeBadge[mode]?.classes ?? ""}`}
-                        >
-                          {modeBadge[mode]?.label ?? mode}
-                        </span>
-                      ))}
+              {resources.slice(0, 6).map((resource) => {
+                const isAvailable =
+                  getPublicStatusKey(resource.status) === "available";
+
+                const resourceContent = (
+                  <>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm font-bold text-foreground leading-snug">
+                        {resource.title}
+                      </p>
+                      <span
+                        role="img"
+                        aria-label={getPublicStatusLabel(resource.status)}
+                        className={`mt-0.5 size-2 shrink-0 rounded-full ${
+                          getPublicStatusDotClassName(resource.status)
+                        }`}
+                      />
                     </div>
-                  )}
-                </Link>
-              ))}
+                    <p className="mt-1.5 text-xs text-muted">{resource.subject}</p>
+                    {resource.modes.length > 0 && (
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {resource.modes.map((mode) => (
+                          <span
+                            key={mode}
+                            className={`rounded border px-2 py-0.5 text-xs font-bold ${modeBadge[mode]?.classes ?? ""}`}
+                          >
+                            {modeBadge[mode]?.label ?? mode}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                );
+
+                if (isAvailable) {
+                  return (
+                    <Link
+                      key={resource.id}
+                      href={resource.href}
+                      className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-ember/25 hover:bg-white/[0.07]"
+                    >
+                      {resourceContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={resource.id}
+                    className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-5 opacity-75"
+                  >
+                    {resourceContent}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">
@@ -549,7 +573,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                 Parcours
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Séquences guidées disponibles
               </h2>
             </div>

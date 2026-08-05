@@ -78,7 +78,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Distinguer nom, verbe, adjectif et déterminant dans une phrase",
     period: "periode-1",
     durationLabel: "2 semaines",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     id: "cm2-francais-conjugaison-imparfait",
@@ -111,7 +111,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Accorder en genre et en nombre dans un groupe nominal",
     period: "periode-4",
     durationLabel: "2 semaines",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     id: "cm2-francais-redaction-recit",
@@ -122,7 +122,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Produire un récit cohérent avec une situation initiale, des péripéties et une fin",
     period: "periode-5",
     durationLabel: "3 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
 
   // --- CM2 — Mathématiques ---
@@ -135,7 +135,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Comprendre et utiliser les nombres décimaux",
     period: "periode-1",
     durationLabel: "3 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "cm2-mathematiques-geometrie-outils",
@@ -157,7 +157,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Poser et effectuer une addition ou une soustraction de nombres décimaux",
     period: "periode-3",
     durationLabel: "2 semaines",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     id: "cm2-mathematiques-mesures-aires",
@@ -168,7 +168,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Calculer l'aire d'un rectangle et d'un carré",
     period: "periode-4",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "cm2-mathematiques-proportionnalite",
@@ -179,7 +179,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Identifier et résoudre une situation de proportionnalité",
     period: "periode-5",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
 
   // --- CM2 — Sciences ---
@@ -192,7 +192,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Identifier les besoins nutritifs des êtres vivants",
     period: "periode-1",
     durationLabel: "2 semaines",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     id: "cm2-sciences-matiere",
@@ -203,7 +203,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Distinguer les états solide, liquide et gazeux de la matière",
     period: "periode-2",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "cm2-sciences-energie",
@@ -214,7 +214,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Reconnaître quelques sources d'énergie et leurs usages",
     period: "periode-3",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "cm2-sciences-objets-techniques",
@@ -225,7 +225,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Identifier les principales fonctions d'un objet technique simple",
     period: "periode-4",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
 
   // --- CE1 — structure de base en préparation ---
@@ -238,7 +238,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Répondre à des questions explicites sur un texte court",
     period: "periode-1",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "ce1-francais-conjugaison-1",
@@ -249,7 +249,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Conjuguer au présent les verbes du 1er groupe",
     period: "periode-2",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "ce1-mathematiques-numeration-1",
@@ -260,7 +260,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Comprendre la numération décimale jusqu'à 100",
     period: "periode-1",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "ce1-mathematiques-calcul-1",
@@ -271,7 +271,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Poser et effectuer une addition sans retenue",
     period: "periode-2",
     durationLabel: "2 semaines",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "ce1-sciences-vivant-1",
@@ -282,7 +282,7 @@ export const teacherProgrammationItems: TeacherProgrammationItem[] = [
     skill: "Distinguer le vivant du non-vivant",
     period: "periode-1",
     durationLabel: "1 semaine",
-    status: "upcoming",
+    status: "coming-soon",
   },
 ];
 

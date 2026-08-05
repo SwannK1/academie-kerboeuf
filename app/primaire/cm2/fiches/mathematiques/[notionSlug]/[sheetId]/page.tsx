@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { readPngDimensions } from "@/lib/read-png-dimensions";
 import {
   cm2FichesMaths,
   getCm2FicheMath,
@@ -11,6 +13,7 @@ import {
   SHEET_IDS,
   type SheetId,
 } from "@/content/cm2-fiches-maths";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ notionSlug: string; sheetId: string }> };
 
@@ -26,12 +29,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { notionSlug, sheetId } = await params;
   const notion = getCm2FicheMath(notionSlug);
-  if (!notion) return { title: "Fiche introuvable | Académie Kerboeuf" };
+  if (!notion) {
+    return { title: "Fiche introuvable", robots: { index: false, follow: false } };
+  }
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
-    title: `${notion.title} — ${label} | CM2 Mathématiques | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `${notion.title} — ${label} | CM2 Mathématiques`,
     description: `${notion.skill} (${label})`,
-  };
+    path: `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: PageProps) {
@@ -48,6 +54,8 @@ export default async function FicheDetailPage({ params }: PageProps) {
 
   const label = SHEET_LABELS[sheetId as SheetId];
   const clickable = isSheetClickable(sheet);
+  const imageDimensions =
+    clickable && sheet.imageHref ? readPngDimensions(sheet.imageHref) : null;
 
   // Sibling sheets for navigation
   const siblings = SHEET_IDS.map((id) => ({
@@ -58,7 +66,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
   }));
 
   return (
-    <main className="px-4 pb-24 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-24 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <Breadcrumb
           items={[
@@ -68,7 +76,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
             { label: "Mathématiques", href: "/primaire/cm2/matieres/mathematiques" },
             {
               label: "Fiches",
-              href: "/primaire/cm2/fiches/mathematiques",
+              href: "/primaire/cm2/matieres/mathematiques",
             },
             { label: notion.title },
           ]}
@@ -79,7 +87,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             {notion.domain}
           </p>
-          <h1 className="mt-3 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="break-words mt-3 text-4xl font-black leading-tight text-foreground sm:text-5xl">
             {notion.title}
             <br />
             <span className="text-jade">— {label}</span>
@@ -112,12 +120,16 @@ export default async function FicheDetailPage({ params }: PageProps) {
 
         {/* ── Contenu ──────────────────────────────────────────────────────── */}
         <div className="mt-10 rounded-md border border-white/10 bg-white/[0.03] p-8">
-          {clickable && sheet.imageHref ? (
+          {clickable && sheet.imageHref && imageDimensions ? (
             <div className="flex flex-col items-start gap-4">
-              <img
+              <Image
                 src={sheet.imageHref}
                 alt={`${notion.title} — ${label}`}
-                className="w-full rounded-md border border-white/10"
+                width={imageDimensions.width}
+                height={imageDimensions.height}
+                className="w-full h-auto rounded-md border border-white/10"
+                sizes="(min-width: 1024px) 896px, 100vw"
+                priority
               />
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -145,7 +157,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
               <p className="text-sm font-bold text-muted">
                 Cette feuille n&apos;est pas encore disponible.
               </p>
-              <p className="text-xs leading-6 text-white/30">
+              <p className="text-xs leading-6 text-muted">
                 La fiche {label.toLowerCase()} pour «&nbsp;{notion.title}&nbsp;» sera
                 mise en ligne prochainement.
               </p>
@@ -156,7 +168,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
         {/* ── Retour catalogue ─────────────────────────────────────────────── */}
         <div className="mt-10 border-t border-white/10 pt-8">
           <Link
-            href="/primaire/cm2/fiches/mathematiques"
+            href="/primaire/cm2/matieres/mathematiques"
             className="text-sm font-bold text-jade hover:underline"
           >
             ← Retour aux compétences CM2 Mathématiques

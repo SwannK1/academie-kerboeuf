@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { LevelHero } from "@/components/levels/level-hero";
@@ -13,12 +12,14 @@ import {
   getPublicStatusLabel,
   type PublicStatusKey,
 } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Missions CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Missions CM2",
   description:
     "Vitrine pédagogique complète des missions CM2 de Félix : lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",
-};
+  path: "/primaire/cm2/missions",
+});
 
 const domainSections: {
   title: string;
@@ -83,8 +84,8 @@ const audienceCards = [
 
 const projectStatusSummary: PublicStatusKey[] = [
   "available",
-  "upcoming",
-  "in-progress",
+  "coming-soon",
+  "preparing",
 ];
 
 function toMissionCardData(mission: Cm2Mission): MissionCardData {
@@ -118,7 +119,7 @@ export default function Cm2MissionsPage() {
   const projectionPrintMissions = cm2Missions.filter(hasProjectionAndPrint);
 
   return (
-    <main className="cm2-catalog-print">
+    <main id="main-content" className="cm2-catalog-print">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -201,7 +202,7 @@ export default function Cm2MissionsPage() {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Projets transversaux Félix
               </p>
-              <h2 id="felix-projects-title" className="mt-3 text-3xl font-black text-foreground">
+              <h2 id="felix-projects-title" className="break-words mt-3 text-3xl font-black text-foreground">
                 Les 9 projets enrichis de Félix
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
@@ -230,11 +231,11 @@ export default function Cm2MissionsPage() {
               <Link
                 key={project.slug}
                 href={`/primaire/cm2/missions/${project.slug}`}
-                className={`group flex min-h-full flex-col rounded-md border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${project.theme.ringClass}`}
+                className={`group flex min-h-full min-w-0 flex-col rounded-md border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${project.theme.ringClass}`}
               >
                 <div className={`mb-4 h-1 rounded-full ${project.theme.accentClass}`} aria-hidden="true" />
-                <div className="flex items-start justify-between gap-3">
-                  <p className={`text-xs font-bold uppercase tracking-[0.18em] ${project.theme.textClass}`}>
+                <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
+                  <p className={`min-w-0 text-xs font-bold uppercase tracking-[0.18em] ${project.theme.textClass}`}>
                     {project.mainSubject}
                   </p>
                   <PublicStatusBadge status={project.status} />
@@ -268,7 +269,7 @@ export default function Cm2MissionsPage() {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                 Prêtes pour la classe
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground">
                 Missions disponibles à projeter et à imprimer
               </h2>
               <p className="mt-4 max-w-3xl text-sm leading-7 text-muted">
@@ -319,7 +320,7 @@ export default function Cm2MissionsPage() {
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Catalogue par domaine
               </p>
-              <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+              <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
                 Une progression CM2 lisible
               </h2>
             </div>

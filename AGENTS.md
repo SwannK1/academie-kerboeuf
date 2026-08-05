@@ -26,7 +26,14 @@ components/academy/PublicStatusBadge.tsx  ← badge officiel (seul composant aut
 
 4. **Nouveaux statuts** : tout ajout doit être fait dans `internalStatusMap` (domain) ET dans `publicStatusUi` (ui). Le `satisfies` TypeScript enforce la cohérence — si le build passe, la couverture est complète.
 
-5. **Labels visibles** : les labels français ("Disponible", "À venir", "En construction") sont dans `public-status.ui.ts` uniquement. Aucun label de statut hardcodé dans les composants.
+   Clés canoniques actuelles : `available` | `partial` | `preparing` | `coming-soon`.
+   Les anciennes clés `upcoming` et `in-progress` restent acceptées en **entrée**
+   (synonymes dans `internalStatusMap`, pointant vers `coming-soon`/`preparing`)
+   pour ne pas casser les producteurs de statuts non encore migrés
+   (`ProgramStatus`, `CurriculumStatus`, `MissionStatus`, etc.), mais aucun
+   nouveau code ne doit les utiliser comme clé cible.
+
+5. **Labels visibles** : les labels français ("Disponible", "Partiel", "En préparation", "À venir") sont dans `public-status.ui.ts` uniquement. Aucun label de statut hardcodé dans les composants.
 
 6. **`getPublicStatusVariant()`** est déprécié. Utiliser `getPublicStatusKey()` pour toute logique de filtrage ou de comparaison.
 
@@ -34,7 +41,7 @@ components/academy/PublicStatusBadge.tsx  ← badge officiel (seul composant aut
 
 ## Garde-fou anti-régression
 
-Dans `app/` et `components/`, ne jamais comparer directement des statuts bruts comme `"disponible"`, `"bientôt"`, `"available"`, `"upcoming"` ou `"in-progress"`. Toute logique conditionnelle doit passer par `getPublicStatusKey(status)`, tout affichage doit passer par `PublicStatusBadge`, et tout catalogue client typé `PublicStatus` doit recevoir un statut normalisé avec `getPublicStatus(status)`.
+Dans `app/` et `components/`, ne jamais comparer directement des statuts bruts comme `"disponible"`, `"bientôt"`, `"partiel"`, `"available"`, `"upcoming"` ou `"in-progress"`. Toute logique conditionnelle doit passer par `getPublicStatusKey(status)` puis comparer au résultat normalisé (`"available"` | `"partial"` | `"preparing"` | `"coming-soon"`), tout affichage doit passer par `PublicStatusBadge`, et tout catalogue client typé `PublicStatus` doit recevoir un statut normalisé avec `getPublicStatus(status)`.
 
 Dans `content/`, les comparaisons de statuts bruts sont tolérées uniquement lorsqu'elles restent dans la couche données/adaptation.
 

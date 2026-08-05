@@ -9,6 +9,7 @@ import {
   FICHE_DOMAIN_LABELS,
   SHEET_LABELS,
 } from "@/content/cm2-francais-fiches";
+import { buildPageMetadata } from "@/lib/seo";
 
 type SheetId = "f1" | "f2" | "f3";
 
@@ -33,9 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const notion = getFicheNotionBySlug(notionSlug);
   if (!notion) return {};
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
-    title: `${notion.title} — ${label} — Fiches Français CM2 | Académie Kerboeuf`,
-  };
+  return buildPageMetadata({
+    title: `${notion.title} — ${label} — Fiches Français CM2`,
+    description: `${FICHE_DOMAIN_LABELS[notion.domain]} — ${notion.title} (${label}), fiche CM2 Français.`,
+    path: `/primaire/cm2/fiches/francais/${notionSlug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: Props) {
@@ -54,7 +57,7 @@ export default async function FicheDetailPage({ params }: Props) {
   const sheetLabel = SHEET_LABELS[key] ?? key;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb
@@ -77,7 +80,7 @@ export default async function FicheDetailPage({ params }: Props) {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
               {FICHE_DOMAIN_LABELS[notion.domain]} · CM2
             </p>
-            <h1 className="mt-2 text-3xl font-black text-foreground sm:text-4xl">
+            <h1 className="break-words mt-2 text-3xl font-black text-foreground sm:text-4xl">
               {notion.title}
             </h1>
             <p className="mt-1 text-sm font-bold text-jade">{sheetLabel}</p>
@@ -110,8 +113,8 @@ export default async function FicheDetailPage({ params }: Props) {
               width={1240}
               height={1754}
               className="w-full h-auto"
+              sizes="(min-width: 1024px) 1024px, 100vw"
               priority
-              unoptimized
             />
           </div>
 

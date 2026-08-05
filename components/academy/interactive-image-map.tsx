@@ -17,7 +17,7 @@ export function InteractiveImageMap(props: PedagogicalImageHero) {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-jade">
             {eyebrow}
           </p>
-          <h2 id={titleId} className="mt-3 text-3xl font-black text-foreground">
+          <h2 id={titleId} className="break-words mt-3 text-3xl font-black text-foreground">
             {title}
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">

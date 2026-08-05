@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
@@ -6,12 +5,14 @@ import {
   getLyceeLevelStatus,
   type LyceeLevelSlug,
 } from "@/content/levels/lycee-statuses";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Lycée | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Lycée",
   description:
     "L’aile lycée de l’Académie Kerboeuf, de la Seconde à la Terminale.",
-};
+  path: "/lycee",
+});
 
 const lyceeLevels: {
   slug: LyceeLevelSlug;
@@ -48,7 +49,7 @@ const lyceeLevels: {
 
 export default function LyceePage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <Breadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Lycée" }]} />
@@ -62,7 +63,7 @@ export default function LyceePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Seconde · Première · Terminale
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Lycée
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
@@ -78,7 +79,7 @@ export default function LyceePage() {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Niveaux
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               Choisir un niveau
             </h2>
           </div>
@@ -87,10 +88,10 @@ export default function LyceePage() {
               const status = getLyceeLevelStatus(level.slug);
 
               return (
-                <Link key={level.href} href={level.href}>
-                  <div className="group flex h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-6 transition hover:-translate-y-0.5 hover:border-jade/30 hover:bg-white/[0.065]">
-                    <div className="flex items-start justify-between gap-3">
-                      <h2 className="text-2xl font-black text-foreground">
+                <Link key={level.href} href={level.href} className="min-w-0">
+                  <div className="group flex h-full min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.045] p-6 transition hover:-translate-y-0.5 hover:border-jade/30 hover:bg-white/[0.065]">
+                    <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
+                      <h2 className="min-w-0 text-2xl font-black text-foreground">
                         {level.label}
                       </h2>
                       <div className="shrink-0">

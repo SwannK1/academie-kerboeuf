@@ -14,8 +14,9 @@ import {
 } from "@/content/professors";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatusLabel } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 import { felixPlaces, felixBadges } from "@/content/felix-character";
+import { buildPageMetadata } from "@/lib/seo";
 
 // ─── Système de couleurs par professeur ──────────────────────────────────────
 
@@ -68,7 +69,7 @@ const ACCENT: Record<
   },
   ember: {
     text: "text-ember",
-    textMuted: "text-ember/70",
+    textMuted: "text-ember",
     border: "border-ember/35",
     borderMid: "border-ember/20",
     borderHover: "hover:border-ember/30",
@@ -94,11 +95,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const professor = getProfessorBySlug(slug);
-  if (!professor) return { title: "Professeur introuvable | Académie Kerboeuf" };
-  return {
-    title: `${professor.name} — ${professor.role} | Académie Kerboeuf`,
+  if (!professor) {
+    return { title: "Professeur introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
+    title: `${professor.name} — ${professor.role}`,
     description: professor.bio,
-  };
+    path: `/professeurs/${slug}`,
+  });
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -123,7 +127,7 @@ export default async function ProfesseurPage({ params }: PageProps) {
     professor.coreValues;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -201,7 +205,7 @@ function PersonalitySection({ professor }: { professor: ProfessorProfile }) {
           </p>
           <div className="mt-5 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
-              <h2 className="text-3xl font-black text-foreground">
+              <h2 className="break-words text-3xl font-black text-foreground">
                 Ce que {professor.name} représente
               </h2>
               <p className="mt-4 text-sm leading-7 text-muted">
@@ -754,18 +758,37 @@ function CharacterCrossLinks({ professor }: { professor: ProfessorProfile }) {
           </p>
           {resources.length > 0 ? (
             <div className="mt-5 grid gap-3">
-              {resources.slice(0, 6).map((resource) => (
-                <Link
-                  key={resource.id}
-                  href={resource.href}
-                  className={`rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
-                >
-                  <span className="font-bold text-foreground">{resource.title}</span>
-                  <span className="block text-xs uppercase tracking-[0.12em] text-muted">
-                    {resource.level} · {resource.subject} · {getPublicStatusLabel(resource.status)}
-                  </span>
-                </Link>
-              ))}
+              {resources.slice(0, 6).map((resource) => {
+                const meta = (
+                  <>
+                    <span className="font-bold text-foreground">{resource.title}</span>
+                    <span className="block text-xs uppercase tracking-[0.12em] text-muted">
+                      {resource.level} · {resource.subject} · {getPublicStatusLabel(resource.status)}
+                    </span>
+                  </>
+                );
+
+                if (getPublicStatusKey(resource.status) === "available") {
+                  return (
+                    <Link
+                      key={resource.id}
+                      href={resource.href}
+                      className={`rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
+                    >
+                      {meta}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={resource.id}
+                    className="rounded border border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-muted opacity-75"
+                  >
+                    {meta}
+                  </div>
+                );
+              })}
             </div>
           ) : (
             <p className="mt-4 text-sm leading-7 text-muted">

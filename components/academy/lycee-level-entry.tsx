@@ -30,7 +30,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
   const curriculumSubjects = curriculumLevel?.subjects ?? [];
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -54,7 +54,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
             </p>
             <PublicStatusBadge status={status} />
           </div>
-          <h1 className="mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
+          <h1 className="break-words mt-6 text-6xl font-black leading-[0.95] text-foreground sm:text-7xl">
             {level.label}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
@@ -117,20 +117,36 @@ export function LyceeLevelEntry({ level, status }: Props) {
               </div>
             )}
 
-            {/* Ressources — à venir, non cliquable */}
-            <div
-              aria-label="Ressources — à venir"
-              className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60"
-            >
-              <h2 className="text-xl font-black text-foreground">Ressources</h2>
-              <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                Fiches méthode, exercices, corrections et supports de révision
-                en PDF.
-              </p>
-              <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                À venir
-              </span>
-            </div>
+            {/* Ressources — cliquable uniquement si la page existe déjà (Seconde) */}
+            {slug === "seconde" ? (
+              <Link
+                href="/lycee/seconde/ressources"
+                className="group flex flex-col rounded-md border border-jade/20 bg-jade/[0.04] p-6 transition hover:-translate-y-0.5 hover:border-jade/40 hover:bg-jade/[0.07]"
+              >
+                <h2 className="text-xl font-black text-foreground">Ressources</h2>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted">
+                  Fiches méthode, exercices, corrections et supports de révision
+                  en PDF.
+                </p>
+                <span className="mt-6 inline-flex text-sm font-black text-jade transition group-hover:translate-x-1">
+                  Voir les ressources →
+                </span>
+              </Link>
+            ) : (
+              <div
+                aria-label="Ressources — à venir"
+                className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60"
+              >
+                <h2 className="text-xl font-black text-foreground">Ressources</h2>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted">
+                  Fiches méthode, exercices, corrections et supports de révision
+                  en PDF.
+                </p>
+                <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                  À venir
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { getPublicStatusKey } from "@/content/public-status";
+import { getPublicStatusKey, isPubliclyLinkable } from "@/content/public-status";
 import { getSubjectTeacher } from "@/content/subject-teacher-link";
 import type { AccentTokens } from "@/lib/cm2-accent";
 
@@ -106,7 +106,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -127,7 +127,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Programmes {levelLabel}
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Les matières du {levelLabel}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -189,7 +189,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   const sequenceGroups = groupSequences(sequences);
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -216,7 +216,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
             </p>
             <PublicStatusBadge status={subject.status} />
           </div>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             {subject.title}
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -482,15 +482,13 @@ function SubjectCard<TSubject extends MatterSubject>({
 }) {
   const t = accent[subject.accent] ?? accent.gold;
   const isAvailable = getPublicStatusKey(subject.status) === "available";
+  const isLinked = isPubliclyLinkable(subject.status, href);
 
-  return (
-    <Link
-      href={href}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
-    >
-      <div className="flex items-start justify-between gap-3">
+  const content = (
+    <>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-2">
         <h3
-          className={`text-xs font-bold uppercase tracking-[0.18em] ${
+          className={`min-w-0 text-xs font-bold uppercase tracking-[0.18em] ${
             isAvailable ? t.text : "text-muted"
           }`}
         >
@@ -509,7 +507,7 @@ function SubjectCard<TSubject extends MatterSubject>({
               key={domain}
               className="flex items-start gap-2 text-xs leading-5 text-muted"
             >
-              <span className="mt-0.5 shrink-0 text-white/30" aria-hidden="true">
+              <span className="mt-0.5 shrink-0 text-muted" aria-hidden="true">
                 ·
               </span>
               {domain}
@@ -529,15 +527,34 @@ function SubjectCard<TSubject extends MatterSubject>({
           →
         </span>
       </div>
-    </Link>
+    </>
+  );
+
+  if (isLinked) {
+    return (
+      <Link
+        href={href}
+        className={`group flex min-h-full min-w-0 flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={`flex min-h-full min-w-0 flex-col rounded-md border p-5 ${t.border} bg-white/[0.025] opacity-75`}
+    >
+      {content}
+    </div>
   );
 }
 
 function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
   return (
-    <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
-      <div className="flex items-start justify-between gap-4">
-        <div>
+    <div className={`min-w-0 rounded-md border ${t.border} bg-white/[0.025] p-5`}>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0">
           <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
             Domaine
           </p>
@@ -546,7 +563,7 @@ function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
             <p className="mt-1 text-xs text-muted">Zone · {domain.zone}</p>
           ) : null}
         </div>
-        <span className="shrink-0 rounded border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-white/35">
+        <span className="shrink-0 rounded border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-muted">
           {domain.subdomains.length}&nbsp;sous-domaine
           {domain.subdomains.length > 1 ? "s" : ""}
         </span>
@@ -594,7 +611,7 @@ function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
           ))}
         </ul>
       ) : (
-        <p className="mt-1 text-xs text-white/30">À structurer</p>
+        <p className="mt-1 text-xs text-muted">À structurer</p>
       )}
     </li>
   );

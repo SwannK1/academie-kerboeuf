@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Univers | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Univers",
   description:
     "L'Académie Kerboeuf — un univers pédagogique où personnages et lieux servent les apprentissages.",
-};
+  path: "/univers",
+});
 
 const entries = [
   {
@@ -30,6 +31,20 @@ const entries = [
     href: "/methode",
     accent: "sky",
   },
+  {
+    title: "Cartothèque",
+    description:
+      "Les cartes de l'Académie — pour se repérer dans les ailes, les lieux et les zones transversales.",
+    href: "/univers/cartotheque",
+    accent: "gold",
+  },
+  {
+    title: "Lieux",
+    description:
+      "Tous les lieux transversaux de l'Académie, communs à plusieurs ailes et plusieurs niveaux.",
+    href: "/univers/lieux",
+    accent: "jade",
+  },
 ] as const;
 
 const accentText: Record<(typeof entries)[number]["accent"], string> = {
@@ -45,7 +60,7 @@ const accentBorder: Record<(typeof entries)[number]["accent"], string> = {
 
 export default function UniversPage() {
   return (
-    <main>
+    <main id="main-content">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -61,7 +76,7 @@ export default function UniversPage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
             Académie Kerboeuf
           </p>
-          <h1 className="mt-4 text-4xl font-black text-foreground sm:text-5xl">
+          <h1 className="break-words mt-4 text-4xl font-black text-foreground sm:text-5xl">
             Un univers au service des apprentissages
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted">

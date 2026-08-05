@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getCompetenciesForLevel } from "@/content/competencies";
 import { getCurriculumMapForLevel } from "@/content/curriculum-map";
 import type { LearningCompetency } from "@/content/learning-architecture-types";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -43,15 +44,17 @@ export async function generateMetadata({
 
   if (!isPrimaryCompetencyLevelSlug(level)) {
     return {
-      title: "Compétences introuvables | Académie Kerboeuf",
+      title: "Compétences introuvables",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `Compétences observables ${primaryCompetencyLevels[level].label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `Compétences observables ${primaryCompetencyLevels[level].label}`,
     description:
       "Repères de compétences observables, critères de réussite et ressources associées pour organiser le travail sans remplacer les supports PDF.",
-  };
+    path: `/primaire/${level}/competences`,
+  });
 }
 
 export default async function PrimaryLevelCompetenciesPage({ params }: PageProps) {
@@ -66,7 +69,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
   const curriculumMap = getCurriculumMapForLevel(level);
 
   return (
-    <main className="primary-competencies-page">
+    <main id="main-content" className="primary-competencies-page">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -88,7 +91,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
             </span>
           </div>
 
-          <h1 className="mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-4 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Compétences — {levelInfo.label}
           </h1>
           <p className="mt-2 text-sm leading-6 text-muted">

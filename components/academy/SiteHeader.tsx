@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navItems = [
   { label: "Accueil", href: "/" },
@@ -24,6 +24,23 @@ function isActivePath(pathname: string, href: string) {
 export function SiteHeader() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        toggleRef.current?.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/82 backdrop-blur-xl print:hidden">
@@ -71,13 +88,16 @@ export function SiteHeader() {
         </div>
 
         <button
+          ref={toggleRef}
           type="button"
           className="grid size-10 place-items-center rounded-md border border-white/12 bg-white/[0.06] text-foreground lg:hidden"
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((open) => !open)}
         >
-          <span className="sr-only">Ouvrir le menu</span>
+          <span className="sr-only">
+            {isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          </span>
           <span className="flex w-5 flex-col gap-1.5" aria-hidden="true">
             <span
               className={`h-0.5 rounded-full bg-current transition ${

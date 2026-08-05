@@ -14,6 +14,13 @@ import {
   type PublicStatusKey,
 } from "@/content/public-status";
 
+const statusSectionOrder: PublicStatusKey[] = [
+  "available",
+  "partial",
+  "preparing",
+  "coming-soon",
+];
+
 type FilterValue = "Toutes";
 type ModeFilter = FilterValue | ClassroomMode;
 type StatusFilter = FilterValue | PublicStatusKey;
@@ -75,23 +82,37 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
     [resources],
   );
 
-  const filteredResources = resources.filter((resource) => {
-    const matchesLevel = level === allLabel || resource.level === level;
-    const matchesSubject = subject === allLabel || resource.subject === subject;
-    const matchesStatus =
-      status === allLabel || getPublicStatusKey(resource.status) === status;
-    const matchesDifficulty =
-      difficulty === allLabel || resource.difficulty === difficulty;
-    const matchesMode = mode === allLabel || resource.modes.includes(mode);
+  const filteredResources = useMemo(
+    () =>
+      resources.filter((resource) => {
+        const matchesLevel = level === allLabel || resource.level === level;
+        const matchesSubject = subject === allLabel || resource.subject === subject;
+        const matchesStatus =
+          status === allLabel || getPublicStatusKey(resource.status) === status;
+        const matchesDifficulty =
+          difficulty === allLabel || resource.difficulty === difficulty;
+        const matchesMode = mode === allLabel || resource.modes.includes(mode);
 
-    return (
-      matchesLevel &&
-      matchesSubject &&
-      matchesStatus &&
-      matchesDifficulty &&
-      matchesMode
-    );
-  });
+        return (
+          matchesLevel &&
+          matchesSubject &&
+          matchesStatus &&
+          matchesDifficulty &&
+          matchesMode
+        );
+      }),
+    [resources, level, subject, status, difficulty, mode],
+  );
+
+  const groupedResources = statusSectionOrder
+    .map((key) => ({
+      key,
+      label: getPublicStatusLabel(key),
+      items: filteredResources.filter(
+        (resource) => getPublicStatusKey(resource.status) === key,
+      ),
+    }))
+    .filter((group) => group.items.length > 0);
 
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
@@ -142,7 +163,7 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Catalogue classe
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               {filteredResources.length} ressource
               {filteredResources.length > 1 ? "s" : ""}
             </h2>
@@ -162,11 +183,18 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
           </button>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {filteredResources.map((resource) => (
-            <ResourceCard key={resource.id} resource={resource} />
-          ))}
-        </div>
+        {groupedResources.map((group) => (
+          <div key={group.key} className="mt-10">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-muted">
+              {group.label} · {group.items.length}
+            </h3>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {group.items.map((resource) => (
+                <ResourceCard key={resource.id} resource={resource} />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -193,7 +221,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 w-full rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>
@@ -206,13 +234,12 @@ function SelectFilter({
 }
 
 function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
-  return (
-    <Link
-      href={resource.href}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div>
+  const isAvailable = getPublicStatusKey(resource.status) === "available";
+
+  const content = (
+    <>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
             {resource.level} · {resource.subject}
           </p>
@@ -230,21 +257,40 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
       <div className="mt-5 flex flex-wrap gap-2">
         <Badge>{resource.difficulty}</Badge>
         <Badge>{resource.professorName}</Badge>
-        {resource.modes.includes("projection") ? (
+        {isAvailable && resource.modes.includes("projection") ? (
           <ModeBadge mode="projection" />
         ) : null}
-        {resource.modes.includes("impression") ? (
+        {isAvailable && resource.modes.includes("impression") ? (
           <ModeBadge mode="impression" />
         ) : null}
-        {resource.modes.includes("correction") ? (
+        {isAvailable && resource.modes.includes("correction") ? (
           <ModeBadge mode="correction" />
         ) : null}
       </div>
+    </>
+  );
 
-      <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
-        Ouvrir la mission
+  if (isAvailable) {
+    return (
+      <Link
+        href={resource.href}
+        className="group flex min-h-full min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+      >
+        {content}
+        <span className="mt-6 text-sm font-bold text-gold transition group-hover:translate-x-1">
+          Ouvrir la mission
+        </span>
+      </Link>
+    );
+  }
+
+  return (
+    <article className="flex min-h-full min-w-0 cursor-default flex-col rounded-md border border-white/10 bg-white/[0.045] p-5">
+      {content}
+      <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+        Détail non disponible
       </span>
-    </Link>
+    </article>
   );
 }
 

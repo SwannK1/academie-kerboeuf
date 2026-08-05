@@ -11,7 +11,8 @@ import {
 } from "@/content/students";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatusLabel } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -26,13 +27,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const student = getStudentBySlug(slug);
 
   if (!student) {
-    return { title: "Élève introuvable | Académie Kerboeuf" };
+    return { title: "Élève introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${student.name} | Élèves emblématiques`,
     description: student.shortDescription,
-  };
+    path: `/eleves/${slug}`,
+  });
 }
 
 function StudentHeroImage({ student }: { student: EmblematicStudent }) {
@@ -82,7 +84,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -118,7 +120,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
                 {student.cycle}
               </span>
             </div>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               {student.name}
             </h1>
             <p className={`mt-4 text-xl font-bold ${accent.textClass}`}>
@@ -185,7 +187,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
             </p>
             <div className="mt-5 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
-                <h2 className="text-3xl font-black text-foreground">
+                <h2 className="break-words text-3xl font-black text-foreground">
                   Ce que {student.name.split(" ")[0]} incarne
                 </h2>
                 <p className="mt-4 text-sm leading-7 text-muted">
@@ -275,18 +277,37 @@ export default async function EleveDetailPage({ params }: PageProps) {
             </p>
             {associatedMissions.length > 0 ? (
               <div className="mt-5 grid gap-3">
-                {associatedMissions.slice(0, 5).map((mission) => (
-                  <Link
-                    key={mission.id}
-                    href={mission.href}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
-                  >
-                    <span className="font-bold text-foreground">{mission.title}</span>
-                    <span className="block text-xs uppercase tracking-[0.12em] text-muted">
-                      {mission.subject} · {getPublicStatusLabel(mission.status)}
-                    </span>
-                  </Link>
-                ))}
+                {associatedMissions.slice(0, 5).map((mission) => {
+                  const missionContent = (
+                    <>
+                      <span className="font-bold text-foreground">{mission.title}</span>
+                      <span className="block text-xs uppercase tracking-[0.12em] text-muted">
+                        {mission.subject} · {getPublicStatusLabel(mission.status)}
+                      </span>
+                    </>
+                  );
+
+                  if (getPublicStatusKey(mission.status) === "available") {
+                    return (
+                      <Link
+                        key={mission.id}
+                        href={mission.href}
+                        className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+                      >
+                        {missionContent}
+                      </Link>
+                    );
+                  }
+
+                  return (
+                    <div
+                      key={mission.id}
+                      className="rounded border border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-muted opacity-75"
+                    >
+                      {missionContent}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <p className="mt-4 text-sm leading-7 text-muted">
@@ -330,7 +351,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
               <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accent.textClass}`}>
                 Progression pédagogique
               </p>
-              <h2 className="mt-2 text-3xl font-black text-foreground">
+              <h2 className="break-words mt-2 text-3xl font-black text-foreground">
                 Ce que ce profil aide à travailler
               </h2>
             </div>

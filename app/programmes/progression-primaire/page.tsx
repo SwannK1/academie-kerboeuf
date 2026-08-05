@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getLevelsByStage, getLevelPath } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Progression primaire CP → CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Progression primaire CP → CM2",
   description:
     "Vue d'ensemble de la progression pédagogique du CP au CM2 : objectifs par niveau, matières principales et statut de publication.",
-};
+  path: "/programmes/progression-primaire",
+});
 
 const LEVEL_OBJECTIVES: Record<string, string> = {
   cp: "Entrer dans la lecture, l'écriture et les premiers nombres. Installer les repères fondamentaux.",
@@ -49,7 +50,7 @@ export default function ProgressionPrimairePage() {
   const levels = getLevelsByStage("primaire");
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -70,7 +71,7 @@ export default function ProgressionPrimairePage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Cycles 2 et 3
           </p>
-          <h1 className="mt-6 max-w-3xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-3xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Progression primaire
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
@@ -86,7 +87,7 @@ export default function ProgressionPrimairePage() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               CP · CE1 · CE2 · CM1 · CM2
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               Niveaux
             </h2>
           </div>
@@ -102,7 +103,7 @@ export default function ProgressionPrimairePage() {
                   key={level.slug}
                   className="flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5"
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
                         {level.cycle}
@@ -149,7 +150,7 @@ export default function ProgressionPrimairePage() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               1 séquence = 1 compétence
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               Méthodologie
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">

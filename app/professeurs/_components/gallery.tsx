@@ -201,12 +201,12 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
         <p className="line-clamp-3 text-sm leading-6 text-muted">{professor.description}</p>
 
         {/* Spécialité */}
-        <p className="line-clamp-2 text-xs italic leading-5 text-muted/60">{professor.specialty}</p>
+        <p className="line-clamp-2 text-xs italic leading-5 text-muted">{professor.specialty}</p>
       </div>
 
       {/* Footer */}
       <div className="flex items-center justify-between border-t border-white/[0.07] px-6 py-4">
-        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted/60">
+        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
           {professor.symbol}
         </span>
         <span className={`flex items-center gap-1.5 text-xs font-bold ${a.text} transition-transform group-hover:translate-x-0.5`}>
@@ -255,15 +255,19 @@ export function ProfessorGallery({ professors }: { professors: ProfessorCardData
     [professors],
   );
 
-  const filtered = professors.filter((p) => {
-    const matchesCycle = cycle === allLabel || p.cycle === cycle;
-    const matchesLevel = level === allLabel || p.levelLabel === level;
-    const matchesSubject = subject === allLabel || p.mainSubject === subject;
-    const matchesType = type === allLabel || p.characterType === type;
-    const matchesTrait = trait === allLabel || p.dominantTraits.includes(trait);
+  const filtered = useMemo(
+    () =>
+      professors.filter((p) => {
+        const matchesCycle = cycle === allLabel || p.cycle === cycle;
+        const matchesLevel = level === allLabel || p.levelLabel === level;
+        const matchesSubject = subject === allLabel || p.mainSubject === subject;
+        const matchesType = type === allLabel || p.characterType === type;
+        const matchesTrait = trait === allLabel || p.dominantTraits.includes(trait);
 
-    return matchesCycle && matchesLevel && matchesSubject && matchesType && matchesTrait;
-  });
+        return matchesCycle && matchesLevel && matchesSubject && matchesType && matchesTrait;
+      }),
+    [professors, cycle, level, subject, type, trait],
+  );
 
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
@@ -331,7 +335,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 w-full rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>

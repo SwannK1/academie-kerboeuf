@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   SequenceRegistry,
@@ -10,12 +9,14 @@ import {
   getCm2SequencesStats,
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Séquences CM2 — Cartographie des compétences | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Séquences CM2 — Cartographie des compétences",
   description:
     "Cartographie des séquences CM2 par domaine, sous-domaine et compétence principale.",
-};
+  path: "/primaire/cm2/sequences",
+});
 
 type SequenceGroup = {
   domain: string;
@@ -53,7 +54,7 @@ const stats = getCm2SequencesStats();
 
 export default function Cm2SequencesPage() {
   return (
-    <main className="cm2-catalog-print">
+    <main id="main-content" className="cm2-catalog-print">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -74,7 +75,7 @@ export default function Cm2SequencesPage() {
           <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
             CM2 · Cartographie des compétences
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
             Séquences CM2
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -129,7 +130,7 @@ export default function Cm2SequencesPage() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Domaine → sous-domaine → séquence → compétence
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
               Registre des séquences
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">

@@ -7,6 +7,7 @@ import {
   getCe1Sequences,
 } from "@/content/levels/ce1-learning-tree";
 import { CE1_ACCENT } from "@/lib/ce1-accent";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -17,11 +18,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCe1SubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
-  return {
-    title: `${subject.title} CE1 | Académie Kerboeuf`,
+  if (!subject) {
+    return { title: "Matière introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
+    title: `${subject.title} CE1`,
     description: subject.shortDescription,
-  };
+    path: `/primaire/ce1/matieres/${slug}`,
+  });
 }
 
 export default async function Ce1SubjectPage({ params }: PageProps) {

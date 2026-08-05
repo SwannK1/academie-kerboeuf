@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -7,12 +6,14 @@ import {
   ProfessorGallery,
   type ProfessorCardData,
 } from "./_components/gallery";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Professeurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Professeurs",
   description:
     "Les professeurs référents de l'Académie Kerboeuf — du CP à la 3e, avec des relais au lycée. Chaque profil porte une méthode, une atmosphère et un rôle pédagogique distinct.",
-};
+  path: "/professeurs",
+});
 
 // Projection allégée : on ne passe pas les missions ni la méthode au client
 function toCardData(profiles: typeof professorProfiles): ProfessorCardData[] {
@@ -47,7 +48,7 @@ export default function ProfesseursPage() {
   const cycles = [...new Set(professorProfiles.map((p) => p.cycle))].length;
 
   return (
-    <main>
+    <main id="main-content">
       {/* Breadcrumb */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -120,7 +121,7 @@ function Hero({ professors, stats }: HeroProps) {
               Galerie officielle
             </p>
 
-            <h1 className="mt-5 text-5xl font-black leading-[0.92] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="break-words mt-5 text-5xl font-black leading-[0.92] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Les Professeurs
               <br />
               <span className="text-foreground/50">de l&rsquo;Académie</span>
@@ -285,7 +286,7 @@ function ClosingSection() {
             L&rsquo;équipe pédagogique
           </p>
 
-          <h2 className="mt-4 max-w-2xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h2 className="break-words mt-4 max-w-2xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             Une équipe pensée
             <br />
             comme un univers

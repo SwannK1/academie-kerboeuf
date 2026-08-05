@@ -48,7 +48,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
   return (
     <div className="mx-auto mb-14 max-w-7xl">
       <div className="mb-8 border-b border-white/10 pb-6">
-        <h2 className="text-3xl font-black text-foreground sm:text-4xl">
+        <h2 className="break-words text-3xl font-black text-foreground sm:text-4xl">
           Déroulement de la séance
         </h2>
       </div>

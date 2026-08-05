@@ -23,6 +23,7 @@ export type CurriculumMissionLink = {
   title: string;
   href: string;
   subject: string;
+  status: unknown;
 };
 
 export type CurriculumPathLink = {
@@ -331,6 +332,7 @@ function getMissionLinks(levelSlug: CurriculumLevelSlug): CurriculumMissionLink[
       title: resource.title,
       href: resource.href,
       subject: resource.subject,
+      status: resource.status,
     }));
 }
 

@@ -35,12 +35,16 @@ export function LearningPathCatalog({ paths }: LearningPathCatalogProps) {
     [paths],
   );
 
-  const filteredPaths = paths.filter((path) => {
-    const matchesLevel = level === allLabel || path.level === level;
-    const matchesSubject = subject === allLabel || path.subject === subject;
+  const filteredPaths = useMemo(
+    () =>
+      paths.filter((path) => {
+        const matchesLevel = level === allLabel || path.level === level;
+        const matchesSubject = subject === allLabel || path.subject === subject;
 
-    return matchesLevel && matchesSubject;
-  });
+        return matchesLevel && matchesSubject;
+      }),
+    [paths, level, subject],
+  );
 
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
@@ -77,7 +81,7 @@ export function LearningPathCatalog({ paths }: LearningPathCatalogProps) {
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Progressions guidées
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground">
               {filteredPaths.length} parcours
             </h2>
           </div>
@@ -116,7 +120,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 w-full rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>
@@ -139,10 +143,10 @@ function LearningPathCard({ path }: { path: PublicLearningPathWithSteps }) {
   return (
     <Link
       href={`/parcours/${path.slug}`}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+      className="group flex min-h-full min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <div className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
             {path.level} · {path.subject}
           </p>

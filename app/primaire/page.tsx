@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
@@ -7,12 +6,14 @@ import {
   getLevelsByStage,
   type AcademyLevel,
 } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Primaire — Les Lisières des Explorateurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Primaire — Les Lisières des Explorateurs",
   description:
     "Homepage du cycle élémentaire de l'Académie Kerboeuf : niveaux, professeurs, élèves repères et zones pédagogiques des Lisières des Explorateurs.",
-};
+  path: "/primaire",
+});
 
 // Narrative data per level slug — character species and posture, not in content files
 const LEVEL_GUIDES: Record<
@@ -79,7 +80,9 @@ export default function PrimairePage() {
   const levels = getLevelsByStage("primaire");
 
   return (
-    <main>
+    <main id="main-content">
+      <h1 className="break-words sr-only">Primaire — Les Lisières des Explorateurs</h1>
+
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
@@ -92,7 +95,7 @@ export default function PrimairePage() {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               CP · CE1 · CE2 · CM1 · CM2
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
+            <h2 className="break-words mt-3 text-3xl font-black text-foreground sm:text-4xl">
               Accès par niveau
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
@@ -122,6 +125,18 @@ export default function PrimairePage() {
           >
             Lieux des Lisières →
           </Link>
+          <Link
+            href="/primaire/professeurs"
+            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+          >
+            Professeurs du primaire →
+          </Link>
+          <Link
+            href="/primaire/ressources"
+            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+          >
+            Ressources primaire →
+          </Link>
         </div>
       </section>
     </main>
@@ -148,7 +163,7 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     <div
       className={`flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5`}
     >
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
           {level.cycle}
         </p>

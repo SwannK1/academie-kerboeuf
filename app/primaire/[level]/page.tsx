@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrimaireLevelEntry } from "@/components/academy/primaire-level-entry";
 import { getAcademyLevel, getLevelsByStage } from "@/content/academy";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -20,13 +21,14 @@ export async function generateMetadata({
   const level = getAcademyLevel("primaire", levelSlug);
 
   if (!level) {
-    return { title: "Niveau introuvable | Académie Kerboeuf" };
+    return { title: "Niveau introuvable", robots: { index: false, follow: false } };
   }
 
-  return {
-    title: `${level.label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: level.label,
     description: level.description,
-  };
+    path: `/primaire/${levelSlug}`,
+  });
 }
 
 export default async function PrimaireLevelPage({ params }: PageProps) {

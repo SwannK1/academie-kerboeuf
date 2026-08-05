@@ -10,6 +10,7 @@ import {
   type ProfessionalDevelopmentStatusId,
   type ProfessionalDevelopmentTypeId,
 } from "@/content/teacher-professional-development";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 
 function readStoredEntries(): ProfessionalDevelopmentEntry[] | null {
   if (typeof window === "undefined") {
@@ -285,31 +286,11 @@ export function TeacherProfessionalDevelopmentClient() {
                 )}
 
                 {pendingDeleteId === entry.id ? (
-                  <div
-                    role="alertdialog"
-                    aria-label="Confirmer la suppression"
-                    className="mt-4 rounded-md border border-ember/30 bg-ember/[0.08] p-4"
-                  >
-                    <p className="text-sm font-bold text-foreground">
-                      Supprimer définitivement « {entry.title || "Sans titre"} » ?
-                    </p>
-                    <div className="mt-3 flex gap-2">
-                      <button
-                        type="button"
-                        onClick={() => handleConfirmDelete(entry.id)}
-                        className="inline-flex min-h-11 items-center justify-center rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-black text-ember"
-                      >
-                        Confirmer la suppression
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setPendingDeleteId(null)}
-                        className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground"
-                      >
-                        Annuler
-                      </button>
-                    </div>
-                  </div>
+                  <DeleteEntryConfirmDialog
+                    entryLabel={entry.title || "Sans titre"}
+                    onConfirm={() => handleConfirmDelete(entry.id)}
+                    onCancel={() => setPendingDeleteId(null)}
+                  />
                 ) : null}
               </li>
             ))}
@@ -639,6 +620,57 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
           className="inline-flex min-h-11 items-center justify-center rounded-md border border-jade/50 bg-jade/10 px-4 text-sm font-black text-jade"
         >
           Terminer
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function DeleteEntryConfirmDialog({
+  entryLabel,
+  onConfirm,
+  onCancel,
+}: {
+  entryLabel: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const dialogRef = useDialogFocusTrap<HTMLDivElement>();
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onCancel();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onCancel]);
+
+  return (
+    <div
+      ref={dialogRef}
+      role="alertdialog"
+      aria-modal="true"
+      aria-label="Confirmer la suppression"
+      tabIndex={-1}
+      className="mt-4 rounded-md border border-ember/30 bg-ember/[0.08] p-4"
+    >
+      <p className="text-sm font-bold text-foreground">
+        Supprimer définitivement « {entryLabel} » ?
+      </p>
+      <div className="mt-3 flex gap-2">
+        <button
+          type="button"
+          onClick={onConfirm}
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ember/50 bg-ember/10 px-4 text-sm font-black text-ember"
+        >
+          Confirmer la suppression
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground"
+        >
+          Annuler
         </button>
       </div>
     </div>

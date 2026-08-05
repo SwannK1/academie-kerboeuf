@@ -3,15 +3,10 @@
 import { useState, useMemo, type ChangeEvent } from "react";
 import type { SequenceRow, ResourceCellStatus } from "@/content/suivi-sequences-data";
 import { getPublicStatusKey } from "@/content/public-status";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 type Props = {
   rows: SequenceRow[];
-};
-
-const STATUS_LABELS: Record<string, string> = {
-  available: "Disponible",
-  "in-progress": "En préparation",
-  upcoming: "À venir",
 };
 
 const RESOURCE_LABELS: Record<ResourceCellStatus, string> = {
@@ -30,29 +25,22 @@ const RESOURCE_CLASSES: Record<ResourceCellStatus, string> = {
   none: "text-gray-300",
 };
 
+const RESOURCE_ARIA_LABELS: Record<ResourceCellStatus, string> = {
+  available: "Disponible",
+  "in-preparation": "En préparation",
+  planned: "Planifié",
+  missing: "Absent",
+  none: "Non défini",
+};
+
 function ResourceCell({ status }: { status: ResourceCellStatus }) {
   return (
     <span
       className={RESOURCE_CLASSES[status]}
-      title={status}
-      aria-label={status}
+      title={RESOURCE_ARIA_LABELS[status]}
+      aria-label={RESOURCE_ARIA_LABELS[status]}
     >
       {RESOURCE_LABELS[status]}
-    </span>
-  );
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const key = getPublicStatusKey(status);
-  const cls =
-    key === "available"
-      ? "bg-green-100 text-green-800 border border-green-300"
-      : key === "in-progress"
-        ? "bg-blue-100 text-blue-800 border border-blue-300"
-        : "bg-amber-100 text-amber-800 border border-amber-300";
-  return (
-    <span className={`inline-block rounded px-1.5 py-0.5 text-xs ${cls}`}>
-      {STATUS_LABELS[key] ?? key}
     </span>
   );
 }
@@ -149,8 +137,9 @@ export function SequencesTable({ rows }: Props) {
           >
             <option value="">Tous</option>
             <option value="available">Disponible</option>
-            <option value="in-progress">En préparation</option>
-            <option value="upcoming">À venir</option>
+            <option value="partial">Partiel</option>
+            <option value="preparing">En préparation</option>
+            <option value="coming-soon">À venir</option>
           </select>
         </div>
 
@@ -178,21 +167,24 @@ export function SequencesTable({ rows }: Props) {
       {/* Tableau */}
       <div className="overflow-x-auto rounded-lg border border-gray-200">
         <table className="w-full border-collapse text-sm">
+          <caption className="sr-only">
+            Suivi des séquences pédagogiques et de leurs ressources associées
+          </caption>
           <thead>
             <tr className="bg-gray-100 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
-              <th className="border-b border-gray-200 px-3 py-2">Niveau</th>
-              <th className="border-b border-gray-200 px-3 py-2">Matière</th>
-              <th className="border-b border-gray-200 px-3 py-2">Domaine</th>
-              <th className="border-b border-gray-200 px-3 py-2">Sous-domaine</th>
-              <th className="border-b border-gray-200 px-3 py-2">Séquence</th>
-              <th className="border-b border-gray-200 px-3 py-2">Compétence</th>
-              <th className="border-b border-gray-200 px-3 py-2">Statut</th>
-              <th className="border-b border-gray-200 px-3 py-2 text-center">Leçon</th>
-              <th className="border-b border-gray-200 px-3 py-2 text-center">Exercices</th>
-              <th className="border-b border-gray-200 px-3 py-2 text-center">Éval.</th>
-              <th className="border-b border-gray-200 px-3 py-2 text-center">Corrigé</th>
-              <th className="border-b border-gray-200 px-3 py-2 text-center">Proj.</th>
-              <th className="border-b border-gray-200 px-3 py-2 text-center">Parent</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Niveau</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Matière</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Domaine</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Sous-domaine</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Séquence</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Compétence</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2">Statut</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2 text-center">Leçon</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2 text-center">Exercices</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2 text-center">Éval.</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2 text-center">Corrigé</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2 text-center">Proj.</th>
+              <th scope="col" className="border-b border-gray-200 px-3 py-2 text-center">Parent</th>
             </tr>
           </thead>
           <tbody>
@@ -226,7 +218,7 @@ export function SequencesTable({ rows }: Props) {
                     {row.competency || "—"}
                   </td>
                   <td className="px-3 py-2">
-                    <StatusBadge status={row.status} />
+                    <PublicStatusBadge status={row.status} />
                   </td>
                   <td className="px-3 py-2 text-center">
                     <ResourceCell status={row.lesson} />

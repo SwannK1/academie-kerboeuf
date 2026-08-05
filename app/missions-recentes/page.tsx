@@ -1,20 +1,21 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { allMissions } from "@/content/mission-registry";
+import { allMissions, getMissionHref } from "@/content/mission-registry";
 import {
   getPublicStatusKey,
   getPublicStatusLabel,
   type PublicStatusKey,
 } from "@/content/public-status";
 import type { Mission, ThemeKey } from "@/content/types";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Missions pédagogiques | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Missions pédagogiques",
   description:
     "La vitrine des missions pédagogiques de l’Académie Kerboeuf, classées par statut public et niveau scolaire.",
-};
+  path: "/missions-recentes",
+});
 
 const themeClasses: Record<
   ThemeKey,
@@ -63,13 +64,13 @@ const statusSections: {
       "Séances complètes avec support, questions, correction ou structure exploitable en classe.",
   },
   {
-    key: "in-progress",
+    key: "preparing",
     title: "Missions en préparation",
     description:
       "Dossiers annoncés pour organiser le catalogue, sans faux contenu pédagogique.",
   },
   {
-    key: "upcoming",
+    key: "coming-soon",
     title: "Missions à venir",
     description:
       "Missions prévues dans la progression, visibles pour donner une trajectoire claire.",
@@ -88,22 +89,12 @@ const teacherUses = [
   "Préparer une séance sans afficher de contenu placeholder.",
 ];
 
-function missionHref(mission: Mission) {
-  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
-    return `/primaire/${mission.levelSlug}/missions`;
-  }
-
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
-}
-
 function MissionShowcaseCard({ mission }: { mission: Mission }) {
   const theme = themeClasses[mission.theme];
+  const isAvailable = getPublicStatusKey(mission.status) === "available";
 
-  return (
-    <Link
-      href={missionHref(mission)}
-      className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
-    >
+  const content = (
+    <>
       <div className="flex flex-wrap items-center gap-2">
         <span className="rounded bg-white/[0.06] px-2.5 py-1 text-xs font-black uppercase tracking-[0.16em] text-foreground">
           {mission.levelLabel}
@@ -134,13 +125,39 @@ function MissionShowcaseCard({ mission }: { mission: Mission }) {
         <span className="font-bold text-muted">
           {mission.professor.name}
         </span>
-        <span
-          className={`font-black transition group-hover:translate-x-1 ${theme.textClass}`}
-        >
-          Ouvrir →
-        </span>
+        {isAvailable ? (
+          <span
+            className={`font-black transition group-hover:translate-x-1 ${theme.textClass}`}
+          >
+            Ouvrir →
+          </span>
+        ) : (
+          <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+            Détail non disponible
+          </span>
+        )}
       </div>
-    </Link>
+    </>
+  );
+
+  if (isAvailable) {
+    return (
+      <Link
+        href={getMissionHref(mission)}
+        className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <article
+      className={`flex h-full cursor-default flex-col rounded-md border bg-white/[0.045] p-5 ${theme.ringClass}`}
+      aria-label={mission.title}
+    >
+      {content}
+    </article>
   );
 }
 
@@ -188,7 +205,7 @@ function MissionSection({
     <section className="border-t border-white/10 pt-10">
       <div className="mb-6 flex flex-col justify-between gap-3 md:flex-row md:items-end">
         <div>
-          <h2 className="text-3xl font-black text-foreground">{title}</h2>
+          <h2 className="break-words text-3xl font-black text-foreground">{title}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-muted">
             {description}
           </p>
@@ -219,14 +236,14 @@ export default function MissionsRecentesPage() {
     missionsByStatus.find((section) => section.key === "available")?.missions
       .length ?? 0;
   const inProgressCount =
-    missionsByStatus.find((section) => section.key === "in-progress")?.missions
+    missionsByStatus.find((section) => section.key === "preparing")?.missions
       .length ?? 0;
   const upcomingCount =
-    missionsByStatus.find((section) => section.key === "upcoming")?.missions
+    missionsByStatus.find((section) => section.key === "coming-soon")?.missions
       .length ?? 0;
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -246,7 +263,7 @@ export default function MissionsRecentesPage() {
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Salle des missions
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Missions pédagogiques
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -283,8 +300,8 @@ export default function MissionsRecentesPage() {
             </p>
             <div className="grid grid-cols-3 gap-3">
               <Metric value={availableCount} label={getPublicStatusLabel("available")} />
-              <Metric value={inProgressCount} label={getPublicStatusLabel("in-progress")} />
-              <Metric value={upcomingCount} label={getPublicStatusLabel("upcoming")} />
+              <Metric value={inProgressCount} label={getPublicStatusLabel("preparing")} />
+              <Metric value={upcomingCount} label={getPublicStatusLabel("coming-soon")} />
             </div>
             <p className="text-xs leading-6 text-muted">
               Une mission incomplète reste classée en préparation ou à venir :
@@ -330,7 +347,7 @@ export default function MissionsRecentesPage() {
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
             Continuer l’exploration
           </p>
-          <h2 className="mt-4 text-3xl font-black text-foreground">
+          <h2 className="break-words mt-4 text-3xl font-black text-foreground">
             Choisir une autre entrée de l’Académie
           </h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

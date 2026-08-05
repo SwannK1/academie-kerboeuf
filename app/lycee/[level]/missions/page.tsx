@@ -7,6 +7,7 @@ import { LevelMissions } from "@/components/academy/level-missions";
 import { getAcademyLevel, getLevelsByStage } from "@/content/academy";
 import { getLyceeLevelStatus } from "@/content/levels/lycee-statuses";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -23,13 +24,17 @@ export async function generateMetadata({
   const level = getAcademyLevel("lycee", levelSlug);
 
   if (!level) {
-    return { title: "Missions introuvables | Académie Kerboeuf" };
+    return {
+      title: "Missions introuvables",
+      robots: { index: false, follow: false },
+    };
   }
 
-  return {
-    title: `Missions ${level.label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `Missions ${level.label}`,
     description: `Catalogue de missions pédagogiques structurées pour le niveau ${level.label}.`,
-  };
+    path: `/lycee/${levelSlug}/missions`,
+  });
 }
 
 export default async function LyceeLevelMissionsPage({ params }: PageProps) {
@@ -41,13 +46,13 @@ export default async function LyceeLevelMissionsPage({ params }: PageProps) {
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
-  const isUpcoming = getPublicStatusKey(levelStatus) === "upcoming";
+  const isUpcoming = getPublicStatusKey(levelStatus) === "coming-soon";
 
   if (isUpcoming) {
     const levelHref = `/lycee/${levelSlug}`;
 
     return (
-      <main>
+      <main id="main-content">
         <div className="px-4 pt-24 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Breadcrumb
@@ -71,7 +76,7 @@ export default async function LyceeLevelMissionsPage({ params }: PageProps) {
               </p>
               <PublicStatusBadge status={levelStatus} />
             </div>
-            <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
               Missions — {level.label}
             </h1>
           </div>

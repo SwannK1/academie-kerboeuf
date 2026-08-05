@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherProfessionalMeetingsClient } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetingsClient";
+import { TeacherProfessionalMeetings } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetings";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Rendez-vous professionnels | Espace enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Rendez-vous professionnels | Espace enseignants",
   description:
     "Préparez vos rendez-vous professionnels : objectif, ordre du jour, notes, décisions et suivi, sans enregistrer de coordonnées.",
-};
+  path: "/enseignants/rendez-vous",
+});
 
 export default function TeacherProfessionalMeetingsPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
@@ -24,7 +25,7 @@ export default function TeacherProfessionalMeetingsPage() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Espace enseignants
           </p>
-          <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="mt-4 break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Préparer mes rendez-vous professionnels
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">
@@ -36,7 +37,7 @@ export default function TeacherProfessionalMeetingsPage() {
         </header>
 
         <div className="mt-10">
-          <TeacherProfessionalMeetingsClient />
+          <TeacherProfessionalMeetings />
         </div>
       </div>
     </main>

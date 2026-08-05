@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "CM2",
   description:
     "Accès direct aux matières CM2 : Français, Mathématiques, Sciences.",
-};
+  path: "/primaire/cm2",
+});
 
 // ── Données UI ─────────────────────────────────────────────────────────────────
 
@@ -33,7 +34,7 @@ export default function Cm2Page() {
   );
 
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
@@ -43,7 +44,7 @@ export default function Cm2Page() {
           ]}
         />
 
-        <h1 className="mt-6 text-4xl font-black text-foreground sm:text-5xl">
+        <h1 className="break-words mt-6 text-4xl font-black text-foreground sm:text-5xl">
           CM2
         </h1>
         <p className="mt-3 text-base leading-7 text-muted">

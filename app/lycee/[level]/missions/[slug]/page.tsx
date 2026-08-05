@@ -8,8 +8,8 @@ import { SharedMissionDetail } from "@/components/academy/shared-mission-detail"
 import {
   getAcademyMission,
   getAcademyMissionParams,
+  hasRealMissionContent,
   isMissionPubliclyAvailable,
-  isMissionReadyForDetail,
 } from "@/content/academy";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import {
@@ -18,6 +18,7 @@ import {
 } from "@/content/public-academy";
 import { getLyceeLevelStatus } from "@/content/levels/lycee-statuses";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ level: string; slug: string }>;
@@ -34,29 +35,37 @@ export async function generateMetadata({
   const academyMission = getAcademyMission("lycee", levelSlug, slug);
 
   if (!academyMission) {
-    return { title: "Mission introuvable | Académie Kerboeuf" };
+    return {
+      title: "Mission introuvable",
+      robots: { index: false, follow: false },
+    };
   }
 
   const { mission } = academyMission;
 
   if (!isMissionPubliclyAvailable(mission)) {
-    return { title: "Mission introuvable | Académie Kerboeuf" };
+    return {
+      title: "Mission introuvable",
+      robots: { index: false, follow: false },
+    };
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
 
-  if (getPublicStatusKey(levelStatus) === "upcoming") {
-    return {
-      title: "Mission en préparation | Académie Kerboeuf",
+  if (getPublicStatusKey(levelStatus) === "coming-soon") {
+    return buildPageMetadata({
+      title: "Mission en préparation",
       description:
         "Cette mission sera publiée lorsque le niveau lycée sera prêt avec ses matières, domaines et ressources associées.",
-    };
+      path: `/lycee/${levelSlug}/missions/${slug}`,
+    });
   }
 
-  return {
-    title: `${mission.title} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: mission.title,
     description: mission.description,
-  };
+    path: `/lycee/${levelSlug}/missions/${slug}`,
+  });
 }
 
 export default async function LyceeMissionDetailPage({ params }: PageProps) {
@@ -74,14 +83,14 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
-  const isUpcoming = getPublicStatusKey(levelStatus) === "upcoming";
+  const isUpcoming = getPublicStatusKey(levelStatus) === "coming-soon";
 
   if (isUpcoming) {
     const missionsHref = `/lycee/${levelSlug}/missions`;
     const levelHref = `/lycee/${levelSlug}`;
 
     return (
-      <main>
+      <main id="main-content">
         <div className="px-4 pt-24 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Breadcrumb
@@ -106,7 +115,7 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
               </p>
               <PublicStatusBadge status={levelStatus} />
             </div>
-            <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
               Mission en préparation
             </h1>
           </div>
@@ -144,7 +153,7 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
     );
   }
 
-  if (!isMissionReadyForDetail(mission)) {
+  if (!hasRealMissionContent(mission)) {
     return <MissionUnavailableNotice level={level} mission={mission} />;
   }
 

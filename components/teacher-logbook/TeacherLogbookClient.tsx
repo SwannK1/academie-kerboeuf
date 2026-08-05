@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   addDaysToKey,
   createBlankSession,
@@ -111,6 +112,7 @@ export function TeacherLogbookClient() {
     null,
   );
   const dragSourceRef = useRef<string | null>(null);
+  const editTriggerRef = useRef<HTMLElement | null>(null);
   const instructionsId = useId();
 
   useEffect(() => {
@@ -160,6 +162,7 @@ export function TeacherLogbookClient() {
       ),
     }));
     setEditingSession(null);
+    editTriggerRef.current?.focus();
   }
 
   function deleteSession(id: string) {
@@ -168,6 +171,7 @@ export function TeacherLogbookClient() {
       sessions: current.sessions.filter((item) => item.id !== id),
     }));
     setEditingSession(null);
+    editTriggerRef.current?.focus();
   }
 
   function duplicateSession(session: LogbookSession) {
@@ -217,6 +221,7 @@ export function TeacherLogbookClient() {
       }));
     }
     setEditingSession(null);
+    editTriggerRef.current?.focus();
   }
 
   function moveSession(
@@ -500,7 +505,10 @@ export function TeacherLogbookClient() {
                             >
                               <button
                                 type="button"
-                                onClick={() => setEditingSession(session)}
+                                onClick={(event) => {
+                                  editTriggerRef.current = event.currentTarget;
+                                  setEditingSession(session);
+                                }}
                                 className="w-full min-h-8 text-left"
                               >
                                 <span className="block text-xs font-black text-foreground">
@@ -583,7 +591,10 @@ export function TeacherLogbookClient() {
                         </ul>
                         <button
                           type="button"
-                          onClick={() => addSession(day.id, slot.id)}
+                          onClick={(event) => {
+                            editTriggerRef.current = event.currentTarget;
+                            addSession(day.id, slot.id);
+                          }}
                           className="mt-2 min-h-8 w-full rounded-md border border-dashed border-white/20 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
                         >
                           + Ajouter une séance
@@ -657,7 +668,10 @@ export function TeacherLogbookClient() {
       {editingSession && (
         <SessionEditorModal
           session={editingSession}
-          onClose={() => setEditingSession(null)}
+          onClose={() => {
+            setEditingSession(null);
+            editTriggerRef.current?.focus();
+          }}
           onSave={saveSession}
           onDelete={deleteSession}
           onDuplicate={duplicateSession}
@@ -738,6 +752,7 @@ function SessionEditorModal({
 }) {
   const [draft, setDraft] = useState<LogbookSession>(session);
   const titleId = useId();
+  const dialogRef = useDialogFocusTrap<HTMLDivElement>();
 
   function update<K extends keyof LogbookSession>(
     key: K,
@@ -748,9 +763,11 @@ function SessionEditorModal({
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 print:hidden"
       onKeyDown={(event) => {
         if (event.key === "Escape") onClose();
@@ -765,6 +782,7 @@ function SessionEditorModal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
+            autoFocus
             className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
           >
             ✕

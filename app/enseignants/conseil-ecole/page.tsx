@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { SchoolCouncilPlanner } from "@/components/teacher-school-council/SchoolCouncilPlannerClient";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Préparer un conseil d'école | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer un conseil d'école",
   description:
     "Préparez l'ordre du jour, les points à présenter, les décisions et les actions de suivi d'un conseil d'école, sans aucune donnée nominative.",
-};
+  path: "/enseignants/conseil-ecole",
+});
 
 export default function SchoolCouncilPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
@@ -24,7 +25,7 @@ export default function SchoolCouncilPage() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Espace enseignants
           </p>
-          <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="mt-4 break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Préparer un conseil d&apos;école
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">

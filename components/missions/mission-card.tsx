@@ -30,7 +30,7 @@ type MissionCardProps = {
 };
 
 export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) {
-  const cardClassName = `group relative block overflow-hidden rounded-md border bg-white/[0.045] p-5 ${mission.theme.ringClass}`;
+  const cardClassName = `group relative block min-w-0 overflow-hidden rounded-md border bg-white/[0.045] p-5 ${mission.theme.ringClass}`;
   const linkedClassName = `${cardClassName} transition hover:-translate-y-1 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/70`;
   const staticClassName = `${cardClassName} cursor-default`;
   const content = (
@@ -38,7 +38,7 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
       <div
         className={`absolute inset-x-0 top-0 h-1 ${mission.theme.accentClass}`}
       />
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <span
           className={`grid size-11 shrink-0 place-items-center rounded-md border font-mono text-sm font-black ${mission.theme.surfaceClass} ${mission.theme.textClass} ${mission.theme.ringClass}`}
         >

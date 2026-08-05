@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Méthodes de travail — 6e | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Méthodes de travail — 6e",
   description:
     "Les méthodes essentielles pour bien démarrer au collège : s'organiser, noter les devoirs, relire une leçon.",
-};
+  path: "/college/6e/methodes",
+});
 
 const methodes = [
   {
@@ -15,41 +16,41 @@ const methodes = [
     title: "Préparer son cartable",
     description:
       "Anticiper les cours du lendemain, vérifier le matériel nécessaire et éviter les oublis.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "noter-devoirs",
     title: "Noter les devoirs",
     description:
       "Utiliser l'agenda scolaire efficacement : noter la matière, la date et la nature du travail demandé.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "relire-lecon",
     title: "Relire une leçon",
     description:
       "Savoir identifier les points essentiels d'une leçon et les réviser à voix haute ou par écrit.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "emploi-du-temps",
     title: "Se repérer dans l'emploi du temps",
     description:
       "Lire un emploi du temps hebdomadaire, repérer les salles et anticiper les changements.",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     slug: "demander-aide",
     title: "Demander de l'aide au bon moment",
     description:
       "Identifier quand et à qui s'adresser : professeur, CPE, documentaliste ou camarade.",
-    status: "in-progress",
+    status: "preparing",
   },
 ] as const;
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main id="main-content" className="mx-auto max-w-3xl px-4 py-12">
       <div className="mb-10">
         <Link
           href="/college/6e"
@@ -57,7 +58,7 @@ export default function Page() {
         >
           ← Retour à la 6e
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 className="break-words text-3xl font-bold tracking-tight text-gray-900">
           Méthodes de travail — 6e
         </h1>
         <p className="mt-2 text-lg text-gray-600">

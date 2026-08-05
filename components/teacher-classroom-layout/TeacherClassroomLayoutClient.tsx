@@ -17,6 +17,7 @@ import {
   type StoredLayout,
   type TableShape,
 } from "@/content/teacher-classroom-layout";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 
 const STORAGE_KEY = "academie-kerboeuf-organisation-classe-plan-v1";
 const CANVAS_WIDTH = 880;
@@ -70,6 +71,7 @@ export function TeacherClassroomLayoutClient() {
   const [pendingLayout, setPendingLayout] = useState<LayoutKind | null>(null);
 
   const [newLabelText, setNewLabelText] = useState("");
+  const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
   const [groupSize, setGroupSize] = useState(4);
   const [genMode, setGenMode] = useState<GroupGenerationMode>("heterogene");
   const [avoidPairs, setAvoidPairs] = useState<AvoidPair[]>([]);
@@ -189,6 +191,13 @@ export function TeacherClassroomLayoutClient() {
     event: React.PointerEvent<HTMLDivElement>,
     table: TableShape,
   ) {
+    // Un pointerdown qui démarre sur un des boutons d'action de la table
+    // (pivoter, agrandir, réduire, dupliquer, supprimer) ne doit pas capturer
+    // le pointeur : sinon le clic est retargeté vers ce conteneur et le
+    // bouton ne reçoit jamais son événement click.
+    if ((event.target as HTMLElement).closest("button")) {
+      return;
+    }
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
@@ -257,6 +266,20 @@ export function TeacherClassroomLayoutClient() {
     );
   }
 
+  function toggleLabelSelection(labelId: string) {
+    setSelectedLabelId((current) => (current === labelId ? null : labelId));
+  }
+
+  function placeSelectedLabelOnTable(tableId: string) {
+    if (!selectedLabelId) return;
+    setLabels((prev) =>
+      prev.map((label) =>
+        label.id === selectedLabelId ? { ...label, tableId } : label,
+      ),
+    );
+    setSelectedLabelId(null);
+  }
+
   function unassignLabel(labelId: string) {
     setLabels((prev) =>
       prev.map((label) =>
@@ -274,6 +297,16 @@ export function TeacherClassroomLayoutClient() {
         label.id === labelId ? { ...label, groupId } : label,
       ),
     );
+  }
+
+  function placeSelectedLabelOnGroup(groupId: string | null) {
+    if (!selectedLabelId) return;
+    setLabels((prev) =>
+      prev.map((label) =>
+        label.id === selectedLabelId ? { ...label, groupId } : label,
+      ),
+    );
+    setSelectedLabelId(null);
   }
 
   function createGroupSet(count: number) {
@@ -450,6 +483,20 @@ export function TeacherClassroomLayoutClient() {
     [labels],
   );
 
+  const labelsByTable = useMemo(() => {
+    const map = new Map<string, Label[]>();
+    labels.forEach((label) => {
+      if (label.tableId === null) return;
+      const existing = map.get(label.tableId);
+      if (existing) {
+        existing.push(label);
+      } else {
+        map.set(label.tableId, [label]);
+      }
+    });
+    return map;
+  }, [labels]);
+
   return (
     <div className="mt-10 space-y-8">
       <p
@@ -471,13 +518,24 @@ export function TeacherClassroomLayoutClient() {
             { id: "plan", label: "Plan de classe" },
             { id: "groupes", label: "Groupes" },
           ] as { id: Tab; label: string }[]
-        ).map((t) => (
+        ).map((t, index, all) => (
           <button
             key={t.id}
+            id={`tab-${t.id}`}
             type="button"
             role="tab"
             aria-selected={tab === t.id}
+            aria-controls={`panel-${t.id}`}
+            tabIndex={tab === t.id ? 0 : -1}
             onClick={() => setTab(t.id)}
+            onKeyDown={(event) => {
+              if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+              event.preventDefault();
+              const direction = event.key === "ArrowRight" ? 1 : -1;
+              const nextTab = all[(index + direction + all.length) % all.length];
+              setTab(nextTab.id);
+              document.getElementById(`tab-${nextTab.id}`)?.focus();
+            }}
             className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
               tab === t.id
                 ? "border-jade/60 bg-jade/15 text-jade"
@@ -490,7 +548,7 @@ export function TeacherClassroomLayoutClient() {
       </div>
 
       {tab === "plan" && (
-        <>
+        <div id="panel-plan" role="tabpanel" aria-labelledby="tab-plan">
           <section
             aria-labelledby="configs-rapides"
             className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
@@ -522,33 +580,10 @@ export function TeacherClassroomLayoutClient() {
             </div>
 
             {pendingLayout && (
-              <div
-                role="alertdialog"
-                aria-labelledby="confirm-overwrite"
-                className="mt-4 rounded-md border border-ember/50 bg-ember/10 p-3"
-              >
-                <p id="confirm-overwrite" className="text-sm font-bold text-foreground">
-                  Remplacer le plan actuel par cette configuration ? Les
-                  tables actuelles seront supprimées et les étiquettes
-                  placées seront libérées.
-                </p>
-                <div className="mt-3 flex gap-2">
-                  <button
-                    type="button"
-                    onClick={confirmApplyLayout}
-                    className="min-h-9 rounded-md border border-ember/60 bg-ember/20 px-3 text-sm font-bold text-foreground"
-                  >
-                    Confirmer
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPendingLayout(null)}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
-                  >
-                    Annuler
-                  </button>
-                </div>
-              </div>
+              <OverwriteLayoutConfirmDialog
+                onConfirm={confirmApplyLayout}
+                onCancel={() => setPendingLayout(null)}
+              />
             )}
           </section>
 
@@ -564,10 +599,11 @@ export function TeacherClassroomLayoutClient() {
               style={{ width: "100%", maxWidth: CANVAS_WIDTH, height: CANVAS_HEIGHT }}
             >
               {tables.map((table) => {
-                const tableLabels = labels.filter((l) => l.tableId === table.id);
+                const tableLabels = labelsByTable.get(table.id) ?? [];
                 return (
                   <div
                     key={table.id}
+                    data-testid="classroom-table"
                     onPointerDown={(e) => onTablePointerDown(e, table)}
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={() => onTableDrop(table.id)}
@@ -595,7 +631,17 @@ export function TeacherClassroomLayoutClient() {
                         </span>
                       ))}
                     </div>
-                    <div className="flex gap-1 print:hidden">
+                    <div className="flex flex-wrap justify-center gap-1 print:hidden">
+                      {selectedLabelId ? (
+                        <button
+                          type="button"
+                          aria-label={`Placer l'étiquette sélectionnée sur cette table (${table.seats} places)`}
+                          onClick={() => placeSelectedLabelOnTable(table.id)}
+                          className="min-h-6 rounded border border-jade/60 bg-jade/15 px-1 text-[10px] font-bold text-jade"
+                        >
+                          Placer ici
+                        </button>
+                      ) : null}
                       <button
                         type="button"
                         aria-label="Pivoter la table"
@@ -679,17 +725,24 @@ export function TeacherClassroomLayoutClient() {
 
             <p className="mt-3 text-sm text-muted">
               Glissez une étiquette non placée sur une table du plan
-              ci-dessus.
+              ci-dessus, ou sélectionnez-la puis choisissez « Placer ici »
+              sur la table souhaitée.
             </p>
-            <ul className="mt-3 flex flex-wrap gap-2" role="list">
+            <ul className="mt-3 flex flex-wrap gap-2" role="list" aria-label="Étiquettes non placées">
               {unassignedLabels.map((label) => (
-                <li
-                  key={label.id}
-                  draggable
-                  onDragStart={() => onLabelDragStart(label.id)}
-                  className="cursor-grab rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
-                >
-                  {label.text}
+                <li key={label.id} draggable onDragStart={() => onLabelDragStart(label.id)}>
+                  <button
+                    type="button"
+                    aria-pressed={selectedLabelId === label.id}
+                    onClick={() => toggleLabelSelection(label.id)}
+                    className={`cursor-grab rounded-md border px-3 py-2 text-sm font-bold transition ${
+                      selectedLabelId === label.id
+                        ? "border-jade/60 bg-jade/15 text-jade"
+                        : "border-white/15 bg-background/60 text-foreground"
+                    }`}
+                  >
+                    {label.text}
+                  </button>
                 </li>
               ))}
               {unassignedLabels.length === 0 && labels.length > 0 && (
@@ -742,11 +795,11 @@ export function TeacherClassroomLayoutClient() {
               </ul>
             )}
           </section>
-        </>
+        </div>
       )}
 
       {tab === "groupes" && (
-        <>
+        <div id="panel-groupes" role="tabpanel" aria-labelledby="tab-groupes">
           <section
             aria-labelledby="creer-groupes"
             className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
@@ -813,6 +866,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={avoidA}
                   onChange={(e) => setAvoidA(e.target.value)}
+                  aria-label="Étiquette 1 à ne pas placer ensemble"
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="">Étiquette 1</option>
@@ -825,6 +879,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={avoidB}
                   onChange={(e) => setAvoidB(e.target.value)}
+                  aria-label="Étiquette 2 à ne pas placer ensemble"
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="">Étiquette 2</option>
@@ -929,7 +984,8 @@ export function TeacherClassroomLayoutClient() {
 
               <p className="mt-2 text-sm text-muted print:hidden">
                 Glissez une étiquette d&apos;un groupe à l&apos;autre pour ajuster
-                manuellement après génération.
+                manuellement après génération, ou sélectionnez-la puis
+                choisissez « Placer ici » dans le groupe souhaité.
               </p>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -953,30 +1009,45 @@ export function TeacherClassroomLayoutClient() {
                         type="text"
                         value={group.name}
                         onChange={(e) => renameGroup(group.id, e.target.value)}
-                        className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/60 px-2 text-sm font-bold text-foreground print:hidden"
+                        className="min-h-9 min-w-0 flex-1 rounded-md border border-white/15 bg-background/60 px-2 text-sm font-bold text-foreground print:hidden"
                         aria-label={`Renommer ${group.name}`}
                       />
                       <span className="hidden text-sm font-bold text-foreground print:inline">
                         {group.name}
                       </span>
                     </div>
+                    {selectedLabelId ? (
+                      <button
+                        type="button"
+                        onClick={() => placeSelectedLabelOnGroup(group.id)}
+                        className="mt-2 min-h-8 w-full rounded border border-jade/60 bg-jade/15 px-2 text-xs font-bold text-jade print:hidden"
+                      >
+                        Placer ici
+                      </button>
+                    ) : null}
                     <ul className="mt-3 space-y-1" role="list">
                       {(groupedLabels.get(group.id) ?? []).map((label) => {
                         const role = roleAssignment[label.id];
                         const roleLabel = roles.find((r) => r.id === role)?.label;
                         return (
-                          <li
-                            key={label.id}
-                            draggable
-                            onDragStart={() => onLabelDragStart(label.id)}
-                            className="flex items-center justify-between gap-2 rounded-md border border-white/10 bg-background/30 px-2 py-1 text-sm font-bold text-foreground"
-                          >
-                            <span>{label.text}</span>
-                            {roleLabel && (
-                              <span className="text-xs font-bold uppercase tracking-wide text-muted">
-                                {roleLabel}
-                              </span>
-                            )}
+                          <li key={label.id} draggable onDragStart={() => onLabelDragStart(label.id)}>
+                            <button
+                              type="button"
+                              aria-pressed={selectedLabelId === label.id}
+                              onClick={() => toggleLabelSelection(label.id)}
+                              className={`flex w-full items-center justify-between gap-2 rounded-md border px-2 py-1 text-sm font-bold transition ${
+                                selectedLabelId === label.id
+                                  ? "border-jade/60 bg-jade/15 text-jade"
+                                  : "border-white/10 bg-background/30 text-foreground"
+                              }`}
+                            >
+                              <span>{label.text}</span>
+                              {roleLabel && (
+                                <span className="text-xs font-bold uppercase tracking-wide text-muted">
+                                  {roleLabel}
+                                </span>
+                              )}
+                            </button>
                           </li>
                         );
                       })}
@@ -997,15 +1068,30 @@ export function TeacherClassroomLayoutClient() {
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                     Étiquettes sans groupe (déposer ici pour retirer d&apos;un groupe)
                   </p>
+                  {selectedLabelId ? (
+                    <button
+                      type="button"
+                      onClick={() => placeSelectedLabelOnGroup(null)}
+                      className="mt-2 min-h-8 rounded border border-jade/60 bg-jade/15 px-2 text-xs font-bold text-jade"
+                    >
+                      Placer ici
+                    </button>
+                  ) : null}
                   <ul className="mt-2 flex flex-wrap gap-2" role="list">
                     {ungroupedLabels.map((label) => (
-                      <li
-                        key={label.id}
-                        draggable
-                        onDragStart={() => onLabelDragStart(label.id)}
-                        className="cursor-grab rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
-                      >
-                        {label.text}
+                      <li key={label.id} draggable onDragStart={() => onLabelDragStart(label.id)}>
+                        <button
+                          type="button"
+                          aria-pressed={selectedLabelId === label.id}
+                          onClick={() => toggleLabelSelection(label.id)}
+                          className={`cursor-grab rounded-md border px-3 py-2 text-sm font-bold transition ${
+                            selectedLabelId === label.id
+                              ? "border-jade/60 bg-jade/15 text-jade"
+                              : "border-white/15 bg-background/60 text-foreground"
+                          }`}
+                        >
+                          {label.text}
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -1013,7 +1099,7 @@ export function TeacherClassroomLayoutClient() {
               )}
             </section>
           )}
-        </>
+        </div>
       )}
 
       <section
@@ -1145,6 +1231,57 @@ export function TeacherClassroomLayoutClient() {
           </ul>
         )}
       </section>
+    </div>
+  );
+}
+
+function OverwriteLayoutConfirmDialog({
+  onConfirm,
+  onCancel,
+}: {
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const dialogRef = useDialogFocusTrap<HTMLDivElement>();
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onCancel();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onCancel]);
+
+  return (
+    <div
+      ref={dialogRef}
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="confirm-overwrite"
+      tabIndex={-1}
+      className="mt-4 rounded-md border border-ember/50 bg-ember/10 p-3"
+    >
+      <p id="confirm-overwrite" className="text-sm font-bold text-foreground">
+        Remplacer le plan actuel par cette configuration ? Les
+        tables actuelles seront supprimées et les étiquettes
+        placées seront libérées.
+      </p>
+      <div className="mt-3 flex gap-2">
+        <button
+          type="button"
+          onClick={onConfirm}
+          className="min-h-9 rounded-md border border-ember/60 bg-ember/20 px-3 text-sm font-bold text-foreground"
+        >
+          Confirmer
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="min-h-9 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+        >
+          Annuler
+        </button>
+      </div>
     </div>
   );
 }

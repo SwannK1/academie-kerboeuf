@@ -8,6 +8,7 @@ import {
   getMsDomainBySlug,
   msDomains,
 } from "@/content/levels/maternelle/ms-domains";
+import { buildPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ domain: string }>;
@@ -25,14 +26,16 @@ export async function generateMetadata({
 
   if (!domain) {
     return {
-      title: "Domaine MS introuvable | Académie Kerboeuf",
+      title: "Domaine MS introuvable",
+      robots: { index: false, follow: false },
     };
   }
 
-  return {
-    title: `${domain.shortLabel} MS | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `${domain.shortLabel} MS`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Moyenne Section.`,
-  };
+    path: `/maternelle/ms/domaines/${domainSlug}`,
+  });
 }
 
 export default async function MsDomainPage({ params }: PageProps) {
@@ -44,7 +47,7 @@ export default async function MsDomainPage({ params }: PageProps) {
   }
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -66,7 +69,7 @@ export default async function MsDomainPage({ params }: PageProps) {
             </span>
             <PublicStatusBadge status={domain.status} />
           </div>
-          <h1 className="mt-5 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
+          <h1 className="break-words mt-5 max-w-4xl text-3xl font-black leading-tight text-foreground sm:text-4xl">
             {domain.label}
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
@@ -95,7 +98,7 @@ export default async function MsDomainPage({ params }: PageProps) {
                   key={observable.id}
                   className="rounded border border-white/10 bg-ink/30 p-4"
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-sm font-black leading-6 text-foreground">
                       {observable.title}
                     </h3>

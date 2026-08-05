@@ -812,22 +812,6 @@ export function isMissionPubliclyAvailable(
   return getPublicStatusKey(mission.status) === "available";
 }
 
-export function isMissionReadyForDetail(
-  mission: Pick<
-    AcademyMission,
-    | "status"
-    | "introduction"
-    | "support"
-    | "questions"
-    | "correction"
-    | "methodTip"
-    | "projectionHint"
-    | "printHint"
-  >,
-) {
-  return hasRealMissionContent(mission);
-}
-
 const placeholderContentPatterns = [
   /sera\s+r[ée]dig[ée]/i,
   /sera\s+ajout[ée]/i,

@@ -13,6 +13,7 @@ import {
   type TeacherPrintQueueStatus,
   type TeacherPrintQueueStatusFilter,
 } from "@/content/teacher-print-queue";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 
 function readStoredItems(): TeacherPrintQueueItem[] {
   if (typeof window === "undefined") {
@@ -565,31 +566,11 @@ export function TeacherPrintQueueClient() {
                   </div>
 
                   {pendingDeleteId === item.id ? (
-                    <div
-                      role="alertdialog"
-                      aria-label="Confirmer la suppression"
-                      className="mt-3 rounded-md border border-ember/30 bg-ember/[0.08] p-3 print:hidden"
-                    >
-                      <p className="text-sm font-bold text-foreground">
-                        Supprimer définitivement « {item.title} » ?
-                      </p>
-                      <div className="mt-2 flex gap-2">
-                        <button
-                          type="button"
-                          onClick={handleDeleteConfirm}
-                          className="min-h-11 rounded-md border border-ember/50 bg-ember/10 px-3 text-sm font-black text-ember"
-                        >
-                          Confirmer
-                        </button>
-                        <button
-                          type="button"
-                          onClick={handleDeleteCancel}
-                          className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
-                        >
-                          Annuler
-                        </button>
-                      </div>
-                    </div>
+                    <DeleteItemConfirmDialog
+                      itemLabel={item.title}
+                      onConfirm={handleDeleteConfirm}
+                      onCancel={handleDeleteCancel}
+                    />
                   ) : null}
                 </li>
               );
@@ -597,6 +578,57 @@ export function TeacherPrintQueueClient() {
           </ul>
         )}
       </section>
+    </div>
+  );
+}
+
+function DeleteItemConfirmDialog({
+  itemLabel,
+  onConfirm,
+  onCancel,
+}: {
+  itemLabel: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const dialogRef = useDialogFocusTrap<HTMLDivElement>();
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onCancel();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onCancel]);
+
+  return (
+    <div
+      ref={dialogRef}
+      role="alertdialog"
+      aria-modal="true"
+      aria-label="Confirmer la suppression"
+      tabIndex={-1}
+      className="mt-3 rounded-md border border-ember/30 bg-ember/[0.08] p-3 print:hidden"
+    >
+      <p className="text-sm font-bold text-foreground">
+        Supprimer définitivement « {itemLabel} » ?
+      </p>
+      <div className="mt-2 flex gap-2">
+        <button
+          type="button"
+          onClick={onConfirm}
+          className="min-h-11 rounded-md border border-ember/50 bg-ember/10 px-3 text-sm font-black text-ember"
+        >
+          Confirmer
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+        >
+          Annuler
+        </button>
+      </div>
     </div>
   );
 }

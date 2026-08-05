@@ -10,19 +10,26 @@ export const publicStatusUi = {
     className: "border-jade/35 bg-jade/10 text-jade",
     dotClassName: "bg-jade",
   },
-  upcoming: {
-    label: "À venir",
-    ariaLabel: "Statut public : à venir",
-    variant: "upcoming",
-    className: "border-gold/35 bg-gold/10 text-gold",
-    dotClassName: "bg-gold",
+  partial: {
+    label: "Partiel",
+    ariaLabel: "Statut public : partiellement disponible",
+    variant: "partial",
+    className: "border-ember/35 bg-ember/10 text-ember",
+    dotClassName: "bg-ember",
   },
-  "in-progress": {
+  preparing: {
     label: "En préparation",
     ariaLabel: "Statut public : en préparation",
-    variant: "in-progress",
+    variant: "preparing",
     className: "border-sky/25 bg-sky/10 text-sky",
     dotClassName: "bg-sky",
+  },
+  "coming-soon": {
+    label: "À venir",
+    ariaLabel: "Statut public : à venir",
+    variant: "coming-soon",
+    className: "border-gold/35 bg-gold/10 text-gold",
+    dotClassName: "bg-gold",
   },
 } as const satisfies Record<
   PublicStatusKey,

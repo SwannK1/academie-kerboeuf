@@ -61,7 +61,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Identifier les correspondances graphème-phonème",
     notionTitle: "Les premiers sons et lettres",
-    status: "in-progress",
+    status: "preparing",
   },
   {
     id: "cp-mathematiques-nombres-1",
@@ -72,7 +72,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Dénombrer une quantité jusqu'à 10",
     notionTitle: "Les nombres jusqu'à 10",
-    status: "upcoming",
+    status: "coming-soon",
   },
 
   // --- CE1 ---
@@ -85,7 +85,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Conjuguer au présent les verbes du 1er groupe",
     notionTitle: "Le présent des verbes en -er",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "ce1-mathematiques-numeration-1",
@@ -96,7 +96,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Comprendre la numération décimale jusqu'à 100",
     notionTitle: "Les nombres jusqu'à 100",
-    status: "in-progress",
+    status: "preparing",
   },
 
   // --- CE2 ---
@@ -109,7 +109,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Identifier la nature des mots dans une phrase",
     notionTitle: "Nature des mots : nom, verbe, adjectif",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "ce2-mathematiques-geometrie-1",
@@ -120,7 +120,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Reconnaître et nommer les figures planes usuelles",
     notionTitle: "Les figures planes",
-    status: "in-progress",
+    status: "preparing",
   },
 
   // --- CM1 ---
@@ -133,7 +133,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Conjuguer à l'imparfait les verbes des trois groupes",
     notionTitle: "L'imparfait",
-    status: "upcoming",
+    status: "coming-soon",
   },
   {
     id: "cm1-mathematiques-nombres-1",
@@ -144,7 +144,7 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Lire, écrire et décomposer les grands nombres",
     notionTitle: "Les nombres jusqu'au million",
-    status: "in-progress",
+    status: "preparing",
   },
 
   // --- CM2 ---
@@ -193,6 +193,6 @@ export const primaryProgrammingEntries: PrimaryProgrammingEntry[] = [
     order: 1,
     skill: "Comprendre et utiliser les nombres décimaux",
     notionTitle: "Les nombres décimaux",
-    status: "upcoming",
+    status: "coming-soon",
   },
 ];

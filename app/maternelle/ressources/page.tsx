@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ressources maternelle | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources maternelle",
   description:
     "Des activités simples pour observer, manipuler, parler et grandir — ressources PS, MS et GS en préparation.",
-};
+  path: "/maternelle/ressources",
+});
 
 const DOMAINS = [
   "Mobiliser le langage dans toutes ses dimensions",
@@ -25,7 +26,7 @@ const SECTIONS = [
 
 export default function MaternelleRessourcesPage() {
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -46,7 +47,7 @@ export default function MaternelleRessourcesPage() {
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Cycle 1
           </p>
-          <h1 className="mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
+          <h1 className="break-words mt-6 text-5xl font-black leading-[0.95] text-foreground sm:text-6xl">
             Ressources maternelle
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
@@ -68,7 +69,7 @@ export default function MaternelleRessourcesPage() {
                   <span className="inline-flex rounded border border-jade/30 bg-jade/10 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-jade">
                     Cycle 1 · {short}
                   </span>
-                  <PublicStatusBadge status="in-progress" />
+                  <PublicStatusBadge status="preparing" />
                 </div>
 
                 <h2 className="mt-4 text-2xl font-black text-foreground">

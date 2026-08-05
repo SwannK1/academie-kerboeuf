@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { MaternelleDomainCard } from "@/components/academy/MaternelleDomainCard";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { msDomains } from "@/content/levels/maternelle/ms-domains";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Moyenne Section | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Moyenne Section",
   description:
     "Tableau de bord Moyenne Section : domaines, observables, situations et ressources prévues.",
-};
+  path: "/maternelle/ms",
+});
 
 export default function MsPage() {
   const statusCounts = msDomains.reduce(
@@ -18,7 +19,7 @@ export default function MsPage() {
       counts[key] += 1;
       return counts;
     },
-    { available: 0, "in-progress": 0, upcoming: 0 },
+    { available: 0, partial: 0, preparing: 0, "coming-soon": 0 },
   );
   const sequenceCount = msDomains.reduce(
     (total, domain) =>
@@ -28,7 +29,7 @@ export default function MsPage() {
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -47,11 +48,11 @@ export default function MsPage() {
             <span className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-jade">
               Cycle 1 · MS
             </span>
-            <PublicStatusBadge status="in-progress" />
+            <PublicStatusBadge status="preparing" />
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <h1 className="text-4xl font-black leading-tight text-foreground sm:text-5xl">
+              <h1 className="break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
                 Moyenne Section
               </h1>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
@@ -62,8 +63,8 @@ export default function MsPage() {
             <div className="grid grid-cols-4 gap-2 sm:min-w-[28rem]">
               <QuickMetric label="Domaines" value={msDomains.length} />
               <QuickMetric label="Séquences" value={sequenceCount} />
-              <QuickMetric label="Pilote" value={statusCounts["in-progress"]} />
-              <QuickMetric label="À venir" value={statusCounts.upcoming} />
+              <QuickMetric label="Pilote" value={statusCounts.preparing} />
+              <QuickMetric label="À venir" value={statusCounts["coming-soon"]} />
             </div>
           </div>
         </div>
@@ -110,7 +111,7 @@ export default function MsPage() {
                   Aucun lien n&apos;est affiché tant que la ressource n&apos;existe pas.
                 </p>
               </div>
-              <PublicStatusBadge status="upcoming" />
+              <PublicStatusBadge status="coming-soon" />
             </div>
           </div>
         </div>

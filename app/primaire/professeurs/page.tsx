@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Professeurs du primaire — Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Professeurs du primaire",
   description:
     "Découvrez les professeurs référents du primaire à l'Académie Kerboeuf : Français, Mathématiques, Sciences, Histoire-Géographie, Arts plastiques, Musique et EPS.",
-};
+  path: "/primaire/professeurs",
+});
 
 type Professor = {
   name: string;
@@ -94,7 +95,7 @@ function ProfessorCard({ professor }: { professor: Professor }) {
 
 export default function ProfesseursPage() {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <main id="main-content" className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Breadcrumb
         items={[
           { label: "Primaire", href: "/primaire" },
@@ -103,7 +104,7 @@ export default function ProfesseursPage() {
       />
 
       <section className="mt-8 mb-12">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="break-words text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Les professeurs du primaire
         </h1>
         <p className="mt-3 text-lg text-muted">

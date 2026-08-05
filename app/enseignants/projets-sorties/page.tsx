@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProjectsAndTrips } from "@/components/teacher-projects-and-trips/TeacherProjectsAndTrips";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Préparer mes projets et sorties | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mes projets et sorties",
   description:
     "Organisez vos sorties, intervenants, projets de classe, partenariats et spectacles : objectifs, matériel, budget, autorisations et tâches de préparation.",
-};
+  path: "/enseignants/projets-sorties",
+});
 
 export default function TeacherProjectsAndTripsPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="main-content" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
@@ -24,7 +25,7 @@ export default function TeacherProjectsAndTripsPage() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Espace enseignants
           </p>
-          <h1 className="mt-4 text-4xl font-black leading-tight text-foreground sm:text-5xl">
+          <h1 className="mt-4 break-words text-4xl font-black leading-tight text-foreground sm:text-5xl">
             Préparer mes projets et sorties
           </h1>
           <p className="mt-5 text-lg leading-8 text-muted">

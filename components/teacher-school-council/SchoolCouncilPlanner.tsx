@@ -251,6 +251,7 @@ export function SchoolCouncilPlanner() {
                           category: event.target.value as CouncilPointCategory,
                         })
                       }
+                      aria-label="Catégorie du point"
                       className="min-h-9 rounded border border-white/15 bg-background/60 px-2 text-xs font-bold text-foreground"
                     >
                       {councilPointCategories.map((category) => (
@@ -274,6 +275,7 @@ export function SchoolCouncilPlanner() {
                     onChange={(event) =>
                       updateDraftPoint(point.id, { title: event.target.value })
                     }
+                    aria-label="Titre du point"
                     placeholder="Titre du point"
                     className="mt-2 min-h-10 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
                   />
@@ -282,6 +284,7 @@ export function SchoolCouncilPlanner() {
                     onChange={(event) =>
                       updateDraftPoint(point.id, { details: event.target.value })
                     }
+                    aria-label="Détails du point (facultatif)"
                     placeholder="Détails (facultatif)"
                     rows={2}
                     className="mt-2 w-full rounded-md border border-white/15 bg-background/60 p-2 text-sm text-foreground"
@@ -512,8 +515,9 @@ function CouncilActions({
           type="text"
           value={draftLabel}
           onChange={(event) => setDraftLabel(event.target.value)}
+          aria-label="Nouvelle action"
           placeholder="Nouvelle action"
-          className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+          className="min-h-9 min-w-0 flex-1 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
         />
         <button
           type="button"
@@ -540,6 +544,7 @@ function CouncilActions({
                     status: event.target.value as ActionStatus,
                   })
                 }
+                aria-label={`Statut de « ${action.label} »`}
                 className="min-h-9 rounded border border-white/15 bg-background/60 px-2 text-xs font-bold text-foreground"
               >
                 {actionStatuses.map((status) => (
@@ -556,6 +561,7 @@ function CouncilActions({
                     priority: event.target.value as ActionPriority,
                   })
                 }
+                aria-label={`Priorité de « ${action.label} »`}
                 className="min-h-9 rounded border border-white/15 bg-background/60 px-2 text-xs font-bold text-foreground"
               >
                 {actionPriorities.map((priority) => (

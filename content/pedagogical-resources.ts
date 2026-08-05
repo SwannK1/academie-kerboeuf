@@ -1,4 +1,4 @@
-import { getPublicStatusKey } from "@/content/public-status";
+import { isPubliclyAvailable } from "@/content/public-status";
 import type {
   PedagogicalResourceKind,
   PedagogicalResourceRef,
@@ -36,8 +36,13 @@ export function isPedagogicalResourceAbsent(
   return !resource || resource.status === "missing";
 }
 
+/**
+ * Conservé comme wrapper stable pour tous les appelants existants (façade
+ * par objet `PedagogicalResourceRef`) — délègue à la décision centrale
+ * unique `isPubliclyAvailable()`.
+ */
 export function isPedagogicalResourceLinkable(
   resource: PedagogicalResourceRef | undefined,
 ): resource is PedagogicalResourceRef & { href: string } {
-  return Boolean(resource?.href) && getPublicStatusKey(resource?.status) === "available";
+  return isPubliclyAvailable(resource?.status, resource?.href);
 }

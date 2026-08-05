@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
-import { Cm2MathFichesEmbed } from "@/components/academy/Cm2MathFichesEmbed";
-import { Cm2FrancaisFichesEmbed } from "@/components/academy/Cm2FrancaisFichesEmbed";
 import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import {
@@ -15,6 +14,18 @@ import {
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
+
+const Cm2MathFichesEmbed = dynamic(() =>
+  import("@/components/academy/Cm2MathFichesEmbed").then(
+    (module) => module.Cm2MathFichesEmbed,
+  ),
+);
+const Cm2FrancaisFichesEmbed = dynamic(() =>
+  import("@/components/academy/Cm2FrancaisFichesEmbed").then(
+    (module) => module.Cm2FrancaisFichesEmbed,
+  ),
+);
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -25,11 +36,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCm2SubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
-  return {
-    title: `${subject.title} CM2 | Académie Kerboeuf`,
+  if (!subject) {
+    return { title: "Matière introuvable", robots: { index: false, follow: false } };
+  }
+  return buildPageMetadata({
+    title: `${subject.title} CM2`,
     description: subject.shortDescription,
-  };
+    path: `/primaire/cm2/matieres/${slug}`,
+  });
 }
 
 export default async function Cm2SubjectPage({ params }: PageProps) {

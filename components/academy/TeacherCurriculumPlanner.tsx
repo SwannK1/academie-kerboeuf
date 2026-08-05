@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   curriculumSubjects,
   getSubjectsForLevel,
@@ -159,6 +160,7 @@ export function TeacherCurriculumPlanner() {
   );
   const [showHidden, setShowHidden] = useState(false);
   const [editingKey, setEditingKey] = useState<string | null>(null);
+  const editTriggerRef = useRef<HTMLElement | null>(null);
   const [resetConfirm, setResetConfirm] = useState<{ kind: "period"; period: PlanningPeriodNumber } | { kind: "subject"; subject: string } | null>(null);
 
   const [freeFormOpen, setFreeFormOpen] = useState(false);
@@ -325,10 +327,21 @@ export function TeacherCurriculumPlanner() {
     [planningCards],
   );
 
+  const cardsByPeriod = useMemo(() => {
+    const map = new Map<PlanningPeriodNumber, PlanningCard[]>();
+    for (const period of planningPeriodNumbers) {
+      map.set(
+        period,
+        planningCards
+          .filter((card) => card.period === period && (showHidden || !card.hidden))
+          .sort((a, b) => a.order - b.order),
+      );
+    }
+    return map;
+  }, [planningCards, showHidden]);
+
   function cardsForPeriod(period: PlanningPeriodNumber) {
-    return planningCards
-      .filter((card) => card.period === period && (showHidden || !card.hidden))
-      .sort((a, b) => a.order - b.order);
+    return cardsByPeriod.get(period) ?? [];
   }
 
   function maxOrderInPeriod(period: PlanningPeriodNumber) {
@@ -1010,13 +1023,18 @@ export function TeacherCurriculumPlanner() {
                 <button
                   type="button"
                   onClick={() => setFreeFormOpen((open) => !open)}
+                  aria-expanded={freeFormOpen}
+                  aria-controls="carte-libre-panneau"
                   className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
                 >
                   Ajouter une carte
                 </button>
               </div>
               {freeFormOpen ? (
-                <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div
+                  id="carte-libre-panneau"
+                  className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+                >
                   <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
                     Titre
                     <input
@@ -1284,7 +1302,10 @@ export function TeacherCurriculumPlanner() {
                                   </button>
                                   <button
                                     type="button"
-                                    onClick={() => setEditingKey(card.cardKey)}
+                                    onClick={(event) => {
+                                      editTriggerRef.current = event.currentTarget;
+                                      setEditingKey(card.cardKey);
+                                    }}
                                     className="min-h-7 rounded border border-sky/40 px-2 text-[11px] font-bold text-sky transition hover:bg-sky/10"
                                   >
                                     Modifier
@@ -1404,7 +1425,10 @@ export function TeacherCurriculumPlanner() {
                           {card.hidden ? <span className="text-xs text-muted">(masquée)</span> : null}
                           <button
                             type="button"
-                            onClick={() => setEditingKey(card.cardKey)}
+                            onClick={(event) => {
+                              editTriggerRef.current = event.currentTarget;
+                              setEditingKey(card.cardKey);
+                            }}
                             className="ml-auto min-h-8 rounded border border-sky/40 px-2 text-[11px] font-bold text-sky transition hover:bg-sky/10"
                           >
                             Modifier
@@ -1506,12 +1530,18 @@ export function TeacherCurriculumPlanner() {
         <>
           <div
             aria-hidden="true"
-            onClick={() => setEditingKey(null)}
+            onClick={() => {
+              setEditingKey(null);
+              editTriggerRef.current?.focus();
+            }}
             className="fixed inset-0 z-[55] bg-background/40 print:hidden"
           />
           <PlanningCardEditor
             card={editingCard}
-            onClose={() => setEditingKey(null)}
+            onClose={() => {
+              setEditingKey(null);
+              editTriggerRef.current?.focus();
+            }}
             onUpdate={(patch) => {
               if (editingCard.kind === "catalogue") {
                 updateCatalogueAssignment(editingCard.competencyId, patch);
@@ -1526,6 +1556,7 @@ export function TeacherCurriculumPlanner() {
             onDelete={() => {
               removeCard(editingCard);
               setEditingKey(null);
+              editTriggerRef.current?.focus();
             }}
           />
         </>
@@ -1566,10 +1597,15 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const dialogRef = useDialogFocusTrap<HTMLElement>();
+
   return (
     <aside
+      ref={dialogRef}
       role="dialog"
+      aria-modal="true"
       aria-label={`Modifier la carte ${card.title}`}
+      tabIndex={-1}
       onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
@@ -1579,6 +1615,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"
+          autoFocus
           className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           ✕

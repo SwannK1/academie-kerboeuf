@@ -41,15 +41,19 @@ export function StudentGallery({ students }: { students: EmblematicStudent[] }) 
     [students],
   );
 
-  const filteredStudents = students.filter((student) => {
-    const matchesCycle = cycle === allLabel || student.cycle === cycle;
-    const matchesLevel = level === allLabel || student.level === level;
-    const matchesType = type === allLabel || student.animal === type;
-    const matchesTrait =
-      trait === allLabel || student.personalityProfile.dominantTraits.includes(trait);
+  const filteredStudents = useMemo(
+    () =>
+      students.filter((student) => {
+        const matchesCycle = cycle === allLabel || student.cycle === cycle;
+        const matchesLevel = level === allLabel || student.level === level;
+        const matchesType = type === allLabel || student.animal === type;
+        const matchesTrait =
+          trait === allLabel || student.personalityProfile.dominantTraits.includes(trait);
 
-    return matchesCycle && matchesLevel && matchesType && matchesTrait;
-  });
+        return matchesCycle && matchesLevel && matchesType && matchesTrait;
+      }),
+    [students, cycle, level, type, trait],
+  );
 
   return (
     <section className="px-4 pb-24 sm:px-6 lg:px-8">
@@ -118,7 +122,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 w-full rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>

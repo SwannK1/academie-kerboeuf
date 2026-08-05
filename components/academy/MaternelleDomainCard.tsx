@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
-import { getPublicStatusKey } from "@/content/public-status";
+import { isPubliclyLinkable } from "@/content/public-status";
 import type { MaternelleDomainEntry } from "@/content/levels/maternelle/types";
 
 type MaternelleDomainCardProps = {
@@ -15,7 +15,7 @@ export function MaternelleDomainCard({
   const observables = domain.observables.slice(0, 3);
   const card = (
     <article className="group flex h-full min-h-[22rem] flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-jade/30 hover:bg-white/[0.065]">
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <span className="flex size-8 shrink-0 items-center justify-center rounded border border-white/10 bg-ink/40 text-xs font-black text-muted">
           {index + 1}
         </span>
@@ -85,7 +85,7 @@ export function MaternelleDomainCard({
         </div>
       )}
 
-      {domain.href && getPublicStatusKey(domain.status) !== "upcoming" && (
+      {isPubliclyLinkable(domain.status, domain.href) && (
         <span className="mt-auto pt-5 text-sm font-black text-jade transition group-hover:translate-x-1">
           Ouvrir le domaine →
         </span>
@@ -93,7 +93,7 @@ export function MaternelleDomainCard({
     </article>
   );
 
-  if (!domain.href || getPublicStatusKey(domain.status) === "upcoming") {
+  if (!isPubliclyLinkable(domain.status, domain.href)) {
     return card;
   }
 

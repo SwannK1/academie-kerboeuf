@@ -5,9 +5,11 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type DragEvent,
 } from "react";
+import { useDialogFocusTrap } from "@/lib/use-dialog-focus-trap";
 import {
   schoolLevels,
   curriculumSubjects,
@@ -70,21 +72,19 @@ type ImportScope = "all" | "subject";
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
   const [periode, setPeriode] = useState<TeacherPeriod>("periode-1");
-  const initialCards = useMemo(() => readStoredCardsChecked(), []);
-  const [cards, setCards] = useState<PeriodCard[]>(initialCards.cards);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialCards.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialCards.wasReset
-        ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
-        : null,
-  );
+  // Valeur initiale déterministe (identique serveur/client) : localStorage
+  // n'existe pas côté serveur, donc lire son contenu pendant le rendu ferait
+  // diverger le HTML serveur du premier rendu client (erreur d'hydratation
+  // React #418). Le contenu réel est chargé après le montage ci-dessous.
+  const [cards, setCards] = useState<PeriodCard[]>([]);
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
 
   const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
   );
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectTriggerRef = useRef<HTMLElement | null>(null);
 
   const [creationMode, setCreationMode] = useState<"catalogue" | "libre" | null>(
     null,
@@ -110,6 +110,30 @@ export function TeacherPeriodProgressionClient() {
   } | null>(null);
 
   useEffect(() => {
+    // Hydration-safe mount read: localStorage must not be read during SSR/first paint.
+    const stored = readStoredCardsChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCards(stored.cards);
+    setStorageNotice(
+      !stored.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : stored.wasReset
+          ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
+          : null,
+    );
+  }, []);
+
+  // La première exécution correspond au montage, avant que l'effet
+  // ci-dessus ait remplacé `cards` (encore `[]`) par le contenu réel du
+  // stockage : on l'ignore pour ne jamais écraser des cartes déjà
+  // enregistrées avec un tableau vide. Les exécutions suivantes (chargement
+  // terminé, puis modifications réelles) écrivent normalement.
+  const isInitialWriteRef = useRef(true);
+  useEffect(() => {
+    if (isInitialWriteRef.current) {
+      isInitialWriteRef.current = false;
+      return;
+    }
     writeStoredCards(cards);
   }, [cards]);
 
@@ -301,7 +325,10 @@ export function TeacherPeriodProgressionClient() {
 
   function deleteCard(id: string) {
     setCards((prev) => prev.filter((card) => card.id !== id));
-    if (selectedId === id) setSelectedId(null);
+    if (selectedId === id) {
+      setSelectedId(null);
+      selectTriggerRef.current?.focus();
+    }
   }
 
   function updateCard(id: string, patch: Partial<PeriodCard>) {
@@ -525,6 +552,8 @@ export function TeacherPeriodProgressionClient() {
             onClick={() =>
               setCreationMode((mode) => (mode === "catalogue" ? null : "catalogue"))
             }
+            aria-expanded={creationMode === "catalogue"}
+            aria-controls="carte-catalogue-panneau"
             className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
           >
             Carte depuis le catalogue
@@ -532,6 +561,8 @@ export function TeacherPeriodProgressionClient() {
           <button
             type="button"
             onClick={() => setCreationMode((mode) => (mode === "libre" ? null : "libre"))}
+            aria-expanded={creationMode === "libre"}
+            aria-controls="carte-libre-panneau"
             className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
           >
             Carte libre
@@ -539,6 +570,8 @@ export function TeacherPeriodProgressionClient() {
           <button
             type="button"
             onClick={() => setImportOpen((open) => !open)}
+            aria-expanded={importOpen}
+            aria-controls="import-programmation-panneau"
             className="min-h-11 rounded-md border border-jade/50 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
           >
             Importer depuis la programmation annuelle
@@ -546,7 +579,10 @@ export function TeacherPeriodProgressionClient() {
         </div>
 
         {importOpen ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-jade/30 bg-jade/[0.04] p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            id="import-programmation-panneau"
+            className="mt-4 grid gap-4 rounded-lg border border-jade/30 bg-jade/[0.04] p-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Portée
               <select
@@ -599,7 +635,10 @@ export function TeacherPeriodProgressionClient() {
         ) : null}
 
         {creationMode === "catalogue" ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            id="carte-catalogue-panneau"
+            className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Matière
               <select
@@ -677,7 +716,10 @@ export function TeacherPeriodProgressionClient() {
         ) : null}
 
         {creationMode === "libre" ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            id="carte-libre-panneau"
+            className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Matière
               <select
@@ -734,14 +776,19 @@ export function TeacherPeriodProgressionClient() {
         {syntheseByMatiere.size === 0 ? (
           <p className="mt-4 text-sm text-muted">Aucune carte pour cette période.</p>
         ) : (
-          <div className="mt-4 overflow-x-auto">
+          <div
+            className="mt-4 overflow-x-auto"
+            tabIndex={0}
+            role="region"
+            aria-label="Tableau de progression par matière, défilable horizontalement"
+          >
             <table className="w-full min-w-[28rem] border-collapse text-left text-sm print:border print:border-black">
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wide text-muted print:border-black print:text-black">
-                  <th className="py-2 pr-4">Matière</th>
-                  <th className="py-2 pr-4">Cartes</th>
-                  <th className="py-2 pr-4">Terminées</th>
-                  <th className="py-2 pr-4">Durée totale</th>
+                  <th scope="col" className="py-2 pr-4">Matière</th>
+                  <th scope="col" className="py-2 pr-4">Cartes</th>
+                  <th scope="col" className="py-2 pr-4">Terminées</th>
+                  <th scope="col" className="py-2 pr-4">Durée totale</th>
                 </tr>
               </thead>
               <tbody>
@@ -783,7 +830,10 @@ export function TeacherPeriodProgressionClient() {
               onDragOverColumn={handleDragOverColumn}
               onDrop={handleDrop}
               onDragEnd={handleDragEnd}
-              onSelect={setSelectedId}
+              onSelect={(id) => {
+                selectTriggerRef.current = document.activeElement as HTMLElement | null;
+                setSelectedId(id);
+              }}
               subjectLabelById={subjectLabelById}
               formId={formId}
             />
@@ -795,13 +845,19 @@ export function TeacherPeriodProgressionClient() {
         <>
           <div
             aria-hidden="true"
-            onClick={() => setSelectedId(null)}
+            onClick={() => {
+              setSelectedId(null);
+              selectTriggerRef.current?.focus();
+            }}
             className="fixed inset-0 z-[55] bg-background/40 print:hidden"
           />
           <CardSidePanel
             card={selectedCard}
             subjectLabelById={subjectLabelById}
-            onClose={() => setSelectedId(null)}
+            onClose={() => {
+              setSelectedId(null);
+              selectTriggerRef.current?.focus();
+            }}
             onUpdate={(patch) => updateCard(selectedCard.id, patch)}
             onDelete={() => deleteCard(selectedCard.id)}
           />
@@ -986,10 +1042,15 @@ function CardSidePanel({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const dialogRef = useDialogFocusTrap<HTMLElement>();
+
   return (
     <aside
+      ref={dialogRef}
       role="dialog"
+      aria-modal="true"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
+      tabIndex={-1}
       onClick={(event) => event.stopPropagation()}
       className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
     >
@@ -999,6 +1060,7 @@ function CardSidePanel({
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"
+          autoFocus
           className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           ✕

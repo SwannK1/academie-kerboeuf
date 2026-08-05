@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -7,12 +6,15 @@ import {
   type CurriculumLevel,
 } from "@/content/curriculum";
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
+import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Programmes | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Programmes",
   description:
     "Architecture pédagogique de l’Académie Kerboeuf, organisée par niveaux, domaines, compétences et missions associées.",
-};
+  path: "/programmes",
+});
 
 const groups: {
   title: string;
@@ -60,7 +62,7 @@ export default function ProgrammesPage() {
   );
 
   return (
-    <main>
+    <main id="main-content">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -77,7 +79,7 @@ export default function ProgrammesPage() {
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Alignement pédagogique
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
+            <h1 className="break-words mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
               Programmes de l’Académie
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
@@ -119,7 +121,7 @@ export default function ProgrammesPage() {
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
                       {group.eyebrow}
                     </p>
-                    <h2 className="mt-2 text-3xl font-black text-foreground">
+                    <h2 className="break-words mt-2 text-3xl font-black text-foreground">
                       {group.title}
                     </h2>
                   </div>
@@ -162,6 +164,12 @@ export default function ProgrammesPage() {
               className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
             >
               Missions récentes
+            </Link>
+            <Link
+              href="/programmes/progression-primaire"
+              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            >
+              Progression primaire CP → CM2
             </Link>
           </div>
         </div>
@@ -210,6 +218,7 @@ function CurriculumCard({ level }: { level: CurriculumLevel }) {
               title: mission.title,
               subtitle: mission.subject,
               href: mission.href,
+              status: mission.status,
             }))}
           />
         ) : null}
@@ -294,7 +303,10 @@ function LinkSection({
   links,
 }: {
   title: string;
-  links: { title: string; subtitle: string; href: string }[];
+  // `status` est optionnel : absent pour les liens vers une page hub
+  // toujours sûre (parcours), présent pour un lien vers une ressource
+  // terminale (mission) dont le CTA ne doit être actif que si disponible.
+  links: { title: string; subtitle: string; href: string; status?: unknown }[];
 }) {
   if (links.length === 0) return null;
 
@@ -304,18 +316,41 @@ function LinkSection({
         {title}
       </h4>
       <div className="mt-3 grid gap-2">
-        {links.map((link) => (
-          <Link
-            key={`${link.href}-${link.title}`}
-            href={link.href}
-            className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
-          >
-            <span className="font-bold text-foreground">{link.title}</span>
-            <span className="block text-xs uppercase tracking-[0.12em] text-muted">
-              {link.subtitle}
-            </span>
-          </Link>
-        ))}
+        {links.map((link) => {
+          const isAvailable =
+            link.status === undefined ||
+            getPublicStatusKey(link.status) === "available";
+
+          const linkContent = (
+            <>
+              <span className="font-bold text-foreground">{link.title}</span>
+              <span className="block text-xs uppercase tracking-[0.12em] text-muted">
+                {link.subtitle}
+              </span>
+            </>
+          );
+
+          if (isAvailable) {
+            return (
+              <Link
+                key={`${link.href}-${link.title}`}
+                href={link.href}
+                className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+              >
+                {linkContent}
+              </Link>
+            );
+          }
+
+          return (
+            <div
+              key={`${link.href}-${link.title}`}
+              className="rounded border border-white/10 bg-white/[0.025] p-3 text-sm leading-6 text-muted opacity-75"
+            >
+              {linkContent}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

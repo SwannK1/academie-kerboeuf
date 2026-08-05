@@ -237,6 +237,7 @@ export function TeacherCycleMeetingsClient() {
                 type="text"
                 value={taskDraft}
                 onChange={(event) => setTaskDraft(event.target.value)}
+                aria-label="Nouvelle tâche de suivi"
                 onKeyDown={(event) => {
                   if (event.key === "Enter") {
                     event.preventDefault();
@@ -244,7 +245,7 @@ export function TeacherCycleMeetingsClient() {
                   }
                 }}
                 placeholder="Ex. : préparer le bilan de période"
-                className="min-h-11 flex-1 rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
+                className="min-h-11 min-w-0 flex-1 rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
               />
               <button
                 type="button"
