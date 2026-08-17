@@ -6,6 +6,7 @@ import { psDomains } from "@/content/levels/maternelle/ps-domains";
 import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/maternelle/ps" },
   title: "Petite Section | Académie Kerboeuf",
   description:
     "Tableau de bord Petite Section : domaines, observables, situations et ressources prévues.",

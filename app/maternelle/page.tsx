@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { maternelleLevels, maternelleWorld } from "@/content/students";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/maternelle" },
   title: "Maternelle | Académie Kerboeuf",
   description:
     "Le Jardin des Premières Découvertes de l'Académie Kerboeuf, pour structurer les premiers apprentissages de maternelle.",

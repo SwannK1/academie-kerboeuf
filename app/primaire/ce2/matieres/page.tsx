@@ -4,6 +4,7 @@ import { ce2Subjects } from "@/content/ce2-subjects";
 import { CE2_ACCENT } from "@/lib/ce2-accent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/ce2/matieres" },
   title: "Matières CE2 | Académie Kerboeuf",
   description:
     "Les matières du programme CE2 à l'Académie Kerboeuf — domaines, sous-domaines et séquences-compétences du Cycle 2.",

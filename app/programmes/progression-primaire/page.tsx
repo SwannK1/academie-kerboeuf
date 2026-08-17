@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getLevelsByStage, getLevelPath } from "@/content/academy";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/programmes/progression-primaire" },
   title: "Progression primaire CP → CM2 | Académie Kerboeuf",
   description:
     "Vue d'ensemble de la progression pédagogique du CP au CM2 : objectifs par niveau, matières principales et statut de publication.",

@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherApcPlanner } from "@/components/teacher-apc-planner/TeacherApcPlanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/apc" },
   title: "Préparer mes APC | Académie Kerboeuf",
   description:
     "Préparez vos séances et cycles d'APC : axe, objectif, période, durée, matériel, déroulé et bilan collectif. Aucun nom d'élève, aucun suivi individuel.",

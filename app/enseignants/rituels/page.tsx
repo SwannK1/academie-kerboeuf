@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherRoutinesLibrary } from "@/components/teacher-routines-library/TeacherRoutinesLibrary";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/rituels" },
   title: "Mes rituels de classe | Académie Kerboeuf",
   description:
     "Organisez vos rituels quotidiens, hebdomadaires, mensuels ou ponctuels : créez, filtrez, dupliquez et imprimez vos rituels de classe.",

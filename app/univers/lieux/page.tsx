@@ -6,6 +6,7 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AccentKey } from "@/content/universe";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/univers/lieux" },
   title: "Les lieux de l'Académie | Académie Kerboeuf",
   description:
     "Chaque lieu de l'Académie Kerboeuf correspond à une manière d'apprendre — découvrez les espaces pédagogiques et leurs fonctions.",

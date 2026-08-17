@@ -3,6 +3,7 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { sixiemeResources } from "@/content/levels/college/6e-resources";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/college/6e/ressources" },
   title: "Ressources méthode 6e | Académie Kerboeuf",
   description:
     "Méthodes de travail prioritaires pour réussir l'entrée en 6e : lire une consigne, organiser son classeur, apprendre une leçon.",

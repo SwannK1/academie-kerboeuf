@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { HierarchyPage } from "@/app/personnages/_components/hierarchy";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/methode" },
   title: "Comment fonctionne l'Académie | Académie Kerboeuf",
   description:
     "Le rôle du site, des PDF, des séquences, des programmations et des progressions.",

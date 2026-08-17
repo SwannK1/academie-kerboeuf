@@ -9,6 +9,7 @@ import { cm2Missions, type Cm2Mission } from "@/content/cm2";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/cm2/parcours" },
   title: "Parcours CM2 — L’année des grands explorateurs | Académie Kerboeuf",
   description:
     "Progression CM2 lisible pour organiser les missions de Félix en lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",

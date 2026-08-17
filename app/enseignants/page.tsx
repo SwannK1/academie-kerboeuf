@@ -4,6 +4,7 @@ import { TeacherDashboard } from "@/components/teacher-dashboard/TeacherDashboar
 import { teacherDashboardSections } from "@/content/teacher-dashboard";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants" },
   title: "Espace enseignants | Académie Kerboeuf",
   description: "Organisez votre classe, vos outils et vos projets.",
 };

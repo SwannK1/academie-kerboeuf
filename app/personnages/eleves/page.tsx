@@ -7,6 +7,7 @@ import {
 import { emblematicStudents } from "@/content/students";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/personnages/eleves" },
   title: "Élèves-guides | Personnages | Académie Kerboeuf",
   description: "Les élèves-guides de la maternelle au lycée.",
 };

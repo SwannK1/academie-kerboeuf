@@ -9,6 +9,7 @@ import {
 } from "@/content/academy";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire" },
   title: "Primaire — Les Lisières des Explorateurs | Académie Kerboeuf",
   description:
     "Homepage du cycle élémentaire de l'Académie Kerboeuf : niveaux, professeurs, élèves repères et zones pédagogiques des Lisières des Explorateurs.",

@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomMaterials } from "@/components/teacher-classroom-materials/TeacherClassroomMaterials";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/materiel-classe" },
   title: "Gérer mon matériel de classe | Académie Kerboeuf",
   description:
     "Inventoriez le matériel de votre classe par catégorie, suivez les quantités disponibles et préparez vos commandes.",

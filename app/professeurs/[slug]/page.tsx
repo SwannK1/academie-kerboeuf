@@ -96,6 +96,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const professor = getProfessorBySlug(slug);
   if (!professor) return { title: "Professeur introuvable | Académie Kerboeuf" };
   return {
+    alternates: { canonical: `/professeurs/${slug}` },
     title: `${professor.name} — ${professor.role} | Académie Kerboeuf`,
     description: professor.bio,
   };

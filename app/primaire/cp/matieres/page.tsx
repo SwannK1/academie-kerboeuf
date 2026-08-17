@@ -4,6 +4,7 @@ import { cpSubjects } from "@/content/cp-subjects";
 import { CP_ACCENT } from "@/lib/cp-accent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/cp/matieres" },
   title: "Matières CP | Académie Kerboeuf",
   description:
     "Les matières du programme CP à l'Académie Kerboeuf : Français et Mathématiques. Structure en domaines, sous-domaines et séquences-compétences.",

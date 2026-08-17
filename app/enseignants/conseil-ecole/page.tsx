@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { SchoolCouncilPlanner } from "@/components/teacher-school-council/SchoolCouncilPlannerClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/conseil-ecole" },
   title: "Préparer un conseil d'école | Académie Kerboeuf",
   description:
     "Préparez l'ordre du jour, les points à présenter, les décisions et les actions de suivi d'un conseil d'école, sans aucune donnée nominative.",

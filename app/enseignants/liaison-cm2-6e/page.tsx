@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherCm26eTransitionClient } from "@/components/teacher-cm2-6e-transition/TeacherCm26eTransitionClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/liaison-cm2-6e" },
   title: "Préparer la liaison CM2-6e | Académie Kerboeuf",
   description:
     "Organisez la liaison CM2-6e : checklist par catégorie, rencontres avec ordre du jour et tâches de suivi, bilan général. Données conservées sur cet appareil.",

@@ -4,6 +4,7 @@ import { TeacherLocalBackupClient } from "@/components/teacher-local-backup/Teac
 import { PrintBodyClass } from "@/components/print/print-body-class";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/sauvegardes" },
   title: "Sauvegardes locales | Académie Kerboeuf",
   description:
     "Exportez ou restaurez vos outils enseignants (programmation, progression, emploi du temps, cahier journal) sur cet appareil, sans compte ni cloud.",

@@ -8,6 +8,7 @@ import {
 } from "@/content/levels/lycee-statuses";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/lycee" },
   title: "Lycée | Académie Kerboeuf",
   description:
     "L’aile lycée de l’Académie Kerboeuf, de la Seconde à la Terminale.",

@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomDisplays } from "@/components/teacher-classroom-displays/TeacherClassroomDisplays";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/affichages" },
   title: "Mes affichages de classe | Académie Kerboeuf",
   description:
     "Organisez la checklist des affichages et repères de classe par catégorie, suivez leur statut et imprimez votre liste.",

@@ -10,7 +10,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
     default: "Académie Kerboeuf | Missions pédagogiques immersives",
-    template: "%s | Académie Kerboeuf",
+    // Every page already appends "| Académie Kerboeuf" to its own title,
+    // so the template must stay a no-op — anything else duplicates the suffix.
+    template: "%s",
   },
   description:
     "Une plateforme pédagogique immersive pour élèves, enseignants et parents — de la maternelle à la Terminale.",

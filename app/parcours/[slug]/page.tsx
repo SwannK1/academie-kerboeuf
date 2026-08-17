@@ -29,6 +29,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/parcours/${slug}` },
     title: `${path.title} | Parcours`,
     description: path.globalObjective,
   };

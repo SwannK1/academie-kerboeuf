@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
+    alternates: { canonical: `/eleves/${slug}` },
     title: `${student.name} | Élèves emblématiques`,
     description: student.shortDescription,
   };

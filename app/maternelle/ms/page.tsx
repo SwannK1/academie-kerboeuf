@@ -6,6 +6,7 @@ import { msDomains } from "@/content/levels/maternelle/ms-domains";
 import { getPublicStatusKey } from "@/content/public-status";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/maternelle/ms" },
   title: "Moyenne Section | Académie Kerboeuf",
   description:
     "Tableau de bord Moyenne Section : domaines, observables, situations et ressources prévues.",

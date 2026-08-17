@@ -54,6 +54,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/lycee/${levelSlug}/missions/${slug}` },
     title: `${mission.title} | Académie Kerboeuf`,
     description: mission.description,
   };

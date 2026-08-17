@@ -34,7 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!notion) return {};
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
   return {
+    alternates: { canonical: `/primaire/cm2/fiches/francais/${notionSlug}/${sheetId}` },
     title: `${notion.title} — ${label} — Fiches Français CM2 | Académie Kerboeuf`,
+    description: `Fiche ${label} — ${notion.title}, ${FICHE_DOMAIN_LABELS[notion.domain]} CM2.`,
   };
 }
 

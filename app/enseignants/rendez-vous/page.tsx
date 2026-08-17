@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProfessionalMeetingsClient } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetingsClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/rendez-vous" },
   title: "Rendez-vous professionnels | Espace enseignants | Académie Kerboeuf",
   description:
     "Préparez vos rendez-vous professionnels : objectif, ordre du jour, notes, décisions et suivi, sans enregistrer de coordonnées.",

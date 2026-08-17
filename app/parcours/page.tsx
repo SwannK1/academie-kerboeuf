@@ -6,6 +6,7 @@ import { getPublicStatus } from "@/content/public-status";
 import { LearningPathCatalog } from "./_components/learning-path-catalog";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/parcours" },
   title: "Parcours pédagogiques | Académie Kerboeuf",
   description:
     "Des parcours progressifs pour organiser les missions de l’Académie Kerboeuf en séquences de classe.",

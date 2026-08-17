@@ -27,6 +27,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/lycee/${levelSlug}/missions` },
     title: `Missions ${level.label} | Académie Kerboeuf`,
     description: `Catalogue de missions pédagogiques structurées pour le niveau ${level.label}.`,
   };

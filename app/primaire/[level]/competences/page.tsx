@@ -48,6 +48,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/primaire/${level}/competences` },
     title: `Compétences observables ${primaryCompetencyLevels[level].label} | Académie Kerboeuf`,
     description:
       "Repères de compétences observables, critères de réussite et ressources associées pour organiser le travail sans remplacer les supports PDF.",

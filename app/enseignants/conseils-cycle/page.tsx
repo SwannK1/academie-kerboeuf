@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherCycleMeetingsClient } from "@/components/teacher-cycle-meetings/TeacherCycleMeetingsClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/conseils-cycle" },
   title: "Préparer mes conseils de cycle | Espace enseignants | Académie Kerboeuf",
   description:
     "Préparez un conseil de cycle ou un conseil des maîtres : ordre du jour, décisions et tâches de suivi.",

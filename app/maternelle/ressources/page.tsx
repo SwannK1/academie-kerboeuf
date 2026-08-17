@@ -4,6 +4,7 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/maternelle/ressources" },
   title: "Ressources maternelle | Académie Kerboeuf",
   description:
     "Des activités simples pour observer, manipuler, parler et grandir — ressources PS, MS et GS en préparation.",

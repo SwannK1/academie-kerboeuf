@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!notion) return { title: "Fiche introuvable | Académie Kerboeuf" };
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
   return {
+    alternates: { canonical: `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}` },
     title: `${notion.title} — ${label} | CM2 Mathématiques | Académie Kerboeuf`,
     description: `${notion.skill} (${label})`,
   };

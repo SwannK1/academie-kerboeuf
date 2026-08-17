@@ -30,6 +30,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/maternelle/ps/domaines/${domainSlug}` },
     title: `${domain.shortLabel} PS | Académie Kerboeuf`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Petite Section.`,
   };

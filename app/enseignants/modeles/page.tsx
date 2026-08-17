@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherTemplateLibraryClient } from "@/components/teacher-template-library/TeacherTemplateLibraryClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/modeles" },
   title: "Mes modèles enseignants | Académie Kerboeuf",
   description:
     "Créez et organisez vos modèles personnels réutilisables : séance, réunion parents, commande, projet, checklist ou document.",

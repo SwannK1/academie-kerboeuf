@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const subject = getCe1SubjectBySlug(slug);
   if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
   return {
+    alternates: { canonical: `/primaire/ce1/matieres/${slug}` },
     title: `${subject.title} CE1 | Académie Kerboeuf`,
     description: subject.shortDescription,
   };

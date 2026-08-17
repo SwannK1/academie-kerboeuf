@@ -48,6 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
+    alternates: { canonical: `/primaire/${level}/programmes/${domain}/${subdomain}` },
     title: `${resolved.subdomain.title} ${resolved.levelLabel} | Académie Kerboeuf`,
     description: resolved.subdomain.description,
   };

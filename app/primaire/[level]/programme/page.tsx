@@ -35,6 +35,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/primaire/${level}/programme` },
     title: `Programme complet ${levelMeta[level].label} | Académie Kerboeuf`,
     description: `Carte structurée du programme de ${levelMeta[level].label} par matière, domaine et compétence attendue. Le site organise ; les PDF enseignent.`,
   };

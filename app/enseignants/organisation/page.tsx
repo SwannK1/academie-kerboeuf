@@ -3,6 +3,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassOrganizationClient } from "@/components/teacher-class-organization/TeacherClassOrganizationClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/enseignants/organisation" },
   title: "Organisation de classe | Académie Kerboeuf",
   description:
     "Préparez votre semaine de classe : priorités par groupe, réorganisation à la souris ou au clavier. Aucune donnée élève. Sauvegarde sur cet appareil.",

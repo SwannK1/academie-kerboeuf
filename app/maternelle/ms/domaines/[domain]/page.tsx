@@ -30,6 +30,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/maternelle/ms/domaines/${domainSlug}` },
     title: `${domain.shortLabel} MS | Académie Kerboeuf`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Moyenne Section.`,
   };

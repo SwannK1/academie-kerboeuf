@@ -5,6 +5,7 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ressources/methodologie" },
   title: "Méthodologie | Académie Kerboeuf",
   description:
     "Des repères pour apprendre, s'organiser et progresser. Ressources méthodologiques transversales pour le primaire, le collège et le lycée.",

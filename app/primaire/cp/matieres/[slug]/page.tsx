@@ -18,6 +18,7 @@ export async function generateMetadata({
   const subject = getCpSubjectBySlug(slug);
   if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
   return {
+    alternates: { canonical: `/primaire/cp/matieres/${slug}` },
     title: `${subject.title} CP | Académie Kerboeuf`,
     description: subject.shortDescription,
   };

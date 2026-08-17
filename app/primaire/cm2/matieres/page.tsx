@@ -4,6 +4,7 @@ import { cm2Subjects } from "@/content/cm2-subjects";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/cm2/matieres" },
   title: "Matières CM2 | Académie Kerboeuf",
   description:
     "Les 8 matières du programme CM2 à l'Académie Kerboeuf : Français, Mathématiques, Histoire-Géographie, Sciences, EMC, Anglais, Arts, EPS.",

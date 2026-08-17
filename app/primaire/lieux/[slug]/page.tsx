@@ -62,6 +62,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/primaire/lieux/${slug}` },
     title: `${place.name} | Lieux pédagogiques élémentaires`,
     description: place.shortDescription,
   };

@@ -30,6 +30,7 @@ export async function generateMetadata({
   }
 
   return {
+    alternates: { canonical: `/maternelle/gs/domaines/${domainSlug}` },
     title: `${domain.shortLabel} GS | Académie Kerboeuf`,
     description: `${domain.label} : observables, situations, traces et ressources prévues pour la Grande Section.`,
   };

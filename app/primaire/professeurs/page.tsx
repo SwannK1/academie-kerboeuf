@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/professeurs" },
   title: "Professeurs du primaire — Académie Kerboeuf",
   description:
     "Découvrez les professeurs référents du primaire à l'Académie Kerboeuf : Français, Mathématiques, Sciences, Histoire-Géographie, Arts plastiques, Musique et EPS.",

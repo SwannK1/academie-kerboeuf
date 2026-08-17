@@ -5,6 +5,7 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/cm2" },
   title: "CM2 | Académie Kerboeuf",
   description:
     "Accès direct aux matières CM2 : Français, Mathématiques, Sciences.",

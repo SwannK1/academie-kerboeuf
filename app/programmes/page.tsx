@@ -9,6 +9,7 @@ import {
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/programmes" },
   title: "Programmes | Académie Kerboeuf",
   description:
     "Architecture pédagogique de l’Académie Kerboeuf, organisée par niveaux, domaines, compétences et missions associées.",

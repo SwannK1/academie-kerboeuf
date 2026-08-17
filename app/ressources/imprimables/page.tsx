@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ressources/imprimables" },
   title: "Ressources imprimables | Académie Kerboeuf",
   description:
     "Des supports pensés pour la classe, l'entraînement et l'évaluation.",

@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { PublicStatus } from "@/content/public-status";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 type Accent = "jade" | "gold" | "sky" | "ember";
 

@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/primaire/ressources" },
   title: "Ressources primaire | Académie Kerboeuf",
   description:
     "Supports pédagogiques pour le primaire : leçons, exercices, évaluations, corrigés et méthodologie, par niveau.",

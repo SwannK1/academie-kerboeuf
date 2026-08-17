@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/parcours/methodes-pour-apprendre" },
   title: "Méthodes pour apprendre | Académie Kerboeuf",
   description:
     "Six étapes pour apprendre à apprendre : comprendre une consigne, chercher les informations importantes, organiser son travail, s'entraîner progressivement, corriger ses erreurs et expliquer sa méthode.",
