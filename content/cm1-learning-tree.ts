@@ -95,7 +95,7 @@ export const cm1LearningTree: Cm1LearningTree = [
             title: "Comprendre un récit",
             status: "in-progress",
             sequences: [
-              sequence("francais-lecture-recits-intentions-personnage", "Comprendre les intentions d'un personnage", "Déduire l'intention d'un personnage à partir de ses paroles, actions et réactions.", "in-progress"),
+              sequence("francais-lecture-recits-intentions-personnage", "Comprendre les intentions d'un personnage", "Déduire l'intention d'un personnage à partir de ses paroles, actions et réactions.", "available"),
               sequence("francais-lecture-recits-inference-simple", "Inférer une information implicite simple", "Formuler une inférence simple en s'appuyant sur un ou plusieurs indices du texte."),
               sequence("francais-lecture-recits-chronologie", "Reconstituer l'ordre des événements", "Remettre les événements d'un récit dans l'ordre chronologique et logique."),
             ],
@@ -227,7 +227,7 @@ export const cm1LearningTree: Cm1LearningTree = [
             title: "Calcul posé",
             status: "upcoming",
             sequences: [
-              sequence("mathematiques-nombres-calculs-calcul-pose-multiplication", "Poser et calculer une multiplication", "Calculer le produit de deux nombres entiers en utilisant l'algorithme posé."),
+              sequence("mathematiques-nombres-calculs-calcul-pose-multiplication", "Poser et calculer une multiplication", "Calculer le produit de deux nombres entiers en utilisant l'algorithme posé.", "available"),
               sequence("mathematiques-nombres-calculs-calcul-pose-division", "Poser et calculer une division euclidienne", "Déterminer quotient et reste dans une division euclidienne simple."),
             ],
           },
