@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
-export const metadata: Metadata = {
-  title: "Ressources de Seconde | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources de Seconde",
   description:
     "Méthode, français et mathématiques pour réussir son entrée au lycée.",
-};
+  path: "/lycee/seconde/ressources",
+});
 
 type Block = {
   title: string;
@@ -47,7 +48,7 @@ const blocks: Block[] = [
 
 export default function SecondeRessourcesPage() {
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

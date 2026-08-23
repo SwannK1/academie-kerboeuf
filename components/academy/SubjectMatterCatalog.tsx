@@ -78,6 +78,7 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
   bottomSection?: React.ReactNode;
+  layout?: "default" | "compact";
 };
 
 type LinkedCard = {
@@ -106,7 +107,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
   );
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -184,12 +185,32 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   footerLinks,
   cycleLabel = "Cycle 3",
   bottomSection,
+  layout = "default",
 }: SubjectDetailPageProps<TSubject>) {
   const t = accent[subject.accent] ?? accent.gold;
   const sequenceGroups = groupSequences(sequences);
 
+  if (layout === "compact") {
+    return (
+      <CompactSubjectDetailPage
+        levelLabel={levelLabel}
+        levelHref={levelHref}
+        subjectsHref={subjectsHref}
+        subject={subject}
+        tree={tree}
+        t={t}
+        sequenceGroups={sequenceGroups}
+        sequences={sequences}
+        linkedCards={linkedCards}
+        footerLinks={footerLinks}
+        cycleLabel={cycleLabel}
+        bottomSection={bottomSection}
+      />
+    );
+  }
+
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
@@ -388,6 +409,350 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
         </div>
       </section>
     </main>
+  );
+}
+
+function CompactSubjectDetailPage<TSubject extends MatterSubject>({
+  levelLabel,
+  levelHref,
+  subjectsHref,
+  subject,
+  tree,
+  t,
+  sequenceGroups,
+  sequences,
+  linkedCards,
+  footerLinks,
+  cycleLabel,
+  bottomSection,
+}: {
+  levelLabel: string;
+  levelHref: string;
+  subjectsHref: string;
+  subject: TSubject;
+  tree?: MatterTree;
+  t: AccentTokens;
+  sequenceGroups: ReturnType<typeof groupSequences>;
+  sequences: MatterSequence[];
+  linkedCards: LinkedCard[];
+  footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
+  cycleLabel: string;
+  bottomSection?: React.ReactNode;
+}) {
+  const domainCount = tree?.domains.length ?? subject.domains.length;
+  const sequenceCount = sequences.length;
+  const inProgressCount = sequences.filter(
+    (sequence) => getPublicStatusKey(sequence.status) !== "available",
+  ).length;
+
+  return (
+    <main id="contenu-principal">
+      <div className="px-4 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Breadcrumb
+            items={[
+              { label: "Accueil", href: "/" },
+              { label: "Primaire", href: "/primaire" },
+              { label: levelLabel, href: levelHref },
+              { label: "Matières", href: subjectsHref },
+              { label: subject.title },
+            ]}
+          />
+        </div>
+      </div>
+
+      <section
+        id="presentation"
+        className="relative isolate overflow-hidden px-4 py-12 sm:px-6 lg:px-8"
+      >
+        <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.03),rgba(9,16,15,0.95))]" />
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <p
+                className={`inline-flex rounded-md border ${t.border} ${t.bg} px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}
+              >
+                {levelLabel} · {cycleLabel}
+              </p>
+              <PublicStatusBadge status={subject.status} />
+            </div>
+            <h1 className="mt-6 max-w-4xl text-4xl font-black leading-tight text-foreground sm:text-5xl">
+              {subject.title}
+            </h1>
+            <p className="mt-5 max-w-3xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+              {subject.shortDescription}
+            </p>
+          </div>
+
+          <dl
+            id="resume"
+            aria-label={`Résumé ${subject.title} ${levelLabel}`}
+            className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1"
+          >
+            <SubjectMetric label="missions disponibles" value={linkedCards.length} />
+            <SubjectMetric label="domaines" value={domainCount} />
+            <SubjectMetric label="progressions en cours" value={inProgressCount} />
+          </dl>
+        </div>
+      </section>
+
+      <SubjectTeacherSection subjectSlug={subject.slug} t={t} />
+
+      {linkedCards.length > 0 ? (
+        <CompactMissionsSection
+          subjectTitle={subject.title}
+          linkedCards={linkedCards}
+          t={t}
+        />
+      ) : null}
+
+      {tree && tree.domains.length > 0 ? (
+        <section
+          id="domaines"
+          aria-labelledby="domaines-title"
+          className="px-4 pb-12 sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-6 border-b border-white/10 pb-5">
+              <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+                Structure
+              </p>
+              <h2 id="domaines-title" className="mt-2 text-2xl font-black text-foreground">
+                Domaines et compétences
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+                Les détails restent consultables sans afficher tout l&apos;inventaire
+                d&apos;un coup.
+              </p>
+            </div>
+            <div className="space-y-3">
+              {tree.domains.map((domain, index) => (
+                <DomainDetailsBlock
+                  key={domain.id}
+                  domain={domain}
+                  t={t}
+                  open={index === 0}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section
+          id="domaines"
+          aria-labelledby="domaines-title"
+          className="px-4 pb-12 sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="rounded-md border border-white/10 bg-white/[0.025] p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
+                En cours de structuration
+              </p>
+              <h2 id="domaines-title" className="sr-only">
+                Domaines en cours de structuration
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">
+                Les domaines, notions et ressources pour cette matière sont en
+                cours de construction dans l&apos;Académie Kerboeuf.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {sequenceGroups.length > 0 ? (
+        <section
+          id="progression-detaillee"
+          aria-labelledby="progression-detaillee-title"
+          className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto max-w-7xl">
+            <details className={`group rounded-md border ${t.border} bg-white/[0.025]`}>
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70">
+                <span>
+                  <span className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+                    Inventaire secondaire
+                  </span>
+                  <span
+                    id="progression-detaillee-title"
+                    className="mt-2 block text-2xl font-black text-foreground"
+                  >
+                    Progression détaillée
+                  </span>
+                  <span className="mt-2 block text-sm leading-6 text-muted">
+                    {sequenceCount} compétence{sequenceCount > 1 ? "s" : ""} classée
+                    {sequenceCount > 1 ? "s" : ""} par domaine.
+                  </span>
+                </span>
+                <span
+                  className={`mt-1 shrink-0 text-sm font-black ${t.text} transition group-open:rotate-90`}
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </summary>
+              <div className="space-y-5 border-t border-white/10 p-5 pt-0">
+                {sequenceGroups.map(({ domain, subdomains }) => (
+                  <SequenceDomainBlock
+                    key={domain}
+                    domain={domain}
+                    subdomains={subdomains}
+                    t={t}
+                  />
+                ))}
+              </div>
+            </details>
+          </div>
+        </section>
+      ) : null}
+
+      {subject.teacherFocus ? (
+        <section
+          id="outils-enseignants"
+          aria-labelledby="outils-enseignants-title"
+          className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
+                Pour l&apos;enseignant
+              </p>
+              <h2 id="outils-enseignants-title" className="sr-only">
+                Outils enseignants
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-muted">
+                {subject.teacherFocus}
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {bottomSection}
+
+      <SubjectFooter subjectsHref={subjectsHref} footerLinks={footerLinks} />
+    </main>
+  );
+}
+
+function SubjectMetric({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-md border border-white/10 bg-white/[0.04] p-4">
+      <dt className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
+        {label}
+      </dt>
+      <dd className="mt-2 text-3xl font-black text-foreground">{value}</dd>
+    </div>
+  );
+}
+
+function CompactMissionsSection({
+  subjectTitle,
+  linkedCards,
+  t,
+}: {
+  subjectTitle: string;
+  linkedCards: LinkedCard[];
+  t: AccentTokens;
+}) {
+  return (
+    <section
+      id="missions-disponibles"
+      aria-labelledby="missions-disponibles-title"
+      className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+              Missions prêtes
+            </p>
+            <h2
+              id="missions-disponibles-title"
+              className="mt-2 text-2xl font-black text-foreground"
+            >
+              Accès rapide en {subjectTitle}
+            </h2>
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {linkedCards.map((card) => (
+            <Link
+              key={card.href}
+              href={card.href}
+              className={`group flex flex-col rounded-md border ${card.accentBorder} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
+            >
+              <p className={`text-xs font-bold uppercase tracking-[0.18em] ${card.accentText}`}>
+                {card.eyebrow}
+              </p>
+              <h3 className="mt-3 text-lg font-black text-foreground">
+                {card.title}
+              </h3>
+              <p className="mt-2 flex-1 text-sm leading-6 text-muted">
+                {card.description}
+              </p>
+              <span className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${card.accentText}`}>
+                Ouvrir la mission →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DomainDetailsBlock({
+  domain,
+  t,
+  open,
+}: {
+  domain: MatterDomain;
+  t: AccentTokens;
+  open: boolean;
+}) {
+  const itemCount = domain.subdomains.reduce(
+    (count, subdomain) => count + subdomain.items.length,
+    0,
+  );
+
+  return (
+    <details
+      open={open}
+      className={`group rounded-md border ${t.border} bg-white/[0.025]`}
+    >
+      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70">
+        <span>
+          <span className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
+            Domaine
+          </span>
+          <span className="mt-1 block text-lg font-black text-foreground">
+            {domain.title}
+          </span>
+          <span className="mt-2 block text-xs leading-5 text-muted">
+            {domain.subdomains.length} sous-domaine
+            {domain.subdomains.length > 1 ? "s" : ""} · {itemCount} compétence
+            {itemCount > 1 ? "s" : ""}
+            {domain.zone ? ` · ${domain.zone}` : ""}
+          </span>
+        </span>
+        <span
+          className={`mt-1 shrink-0 text-sm font-black ${t.text} transition group-open:rotate-90`}
+          aria-hidden="true"
+        >
+          →
+        </span>
+      </summary>
+
+      {domain.subdomains.length > 0 ? (
+        <div className="grid gap-3 border-t border-white/10 p-5 pt-0 sm:grid-cols-2 lg:grid-cols-3">
+          {domain.subdomains.map((subdomain) => (
+            <SubdomainItem key={subdomain.id} subdomain={subdomain} />
+          ))}
+        </div>
+      ) : null}
+    </details>
   );
 }
 
@@ -660,6 +1025,41 @@ function groupSequences(sequences: MatterSequence[]) {
       sequences: groupedSequences,
     })),
   }));
+}
+
+function SubjectFooter({
+  subjectsHref,
+  footerLinks,
+}: {
+  subjectsHref: string;
+  footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
+}) {
+  return (
+    <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-muted">
+          Aller plus loin
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href={subjectsHref}
+            className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+          >
+            ← Toutes les matières
+          </Link>
+          {footerLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={footerLinkClassName(link.tone)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function footerLinkClassName(tone?: "gold" | "jade") {

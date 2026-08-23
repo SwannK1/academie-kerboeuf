@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherDashboard } from "@/components/teacher-dashboard/TeacherDashboard";
 import { teacherDashboardSections } from "@/content/teacher-dashboard";
 
-export const metadata: Metadata = {
-  title: "Espace enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Espace enseignants",
   description: "Organisez votre classe, vos outils et vos projets.",
-};
+  path: "/enseignants",
+});
 
 export default function TeachersPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

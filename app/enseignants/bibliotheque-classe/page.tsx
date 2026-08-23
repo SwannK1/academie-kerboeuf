@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { ClassLibraryClient } from "@/components/teacher-class-library/ClassLibraryClient";
 
-export const metadata: Metadata = {
-  title: "Ma bibliothèque de classe | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ma bibliothèque de classe",
   description:
     "Inventoriez et organisez votre bibliothèque de classe : livres, BD, documentaires et autres ressources, avec recherche, filtres et favoris.",
-};
+  path: "/enseignants/bibliotheque-classe",
+  noIndex: true,
+});
 
 export default function ClassLibraryPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

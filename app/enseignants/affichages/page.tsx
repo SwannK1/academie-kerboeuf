@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomDisplays } from "@/components/teacher-classroom-displays/TeacherClassroomDisplays";
 
-export const metadata: Metadata = {
-  title: "Mes affichages de classe | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Mes affichages de classe",
   description:
     "Organisez la checklist des affichages et repères de classe par catégorie, suivez leur statut et imprimez votre liste.",
-};
+  path: "/enseignants/affichages",
+  noIndex: true,
+});
 
 export default function TeacherClassroomDisplaysPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:pt-4">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:pt-4">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

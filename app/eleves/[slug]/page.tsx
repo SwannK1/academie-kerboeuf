@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const student = getStudentBySlug(slug);
 
   if (!student) {
-    return { title: "Élève introuvable | Académie Kerboeuf" };
+    return { title: "Élève introuvable" };
   }
 
   return {
@@ -82,7 +82,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
   );
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

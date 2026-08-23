@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherCommunicationsLibrary } from "@/components/teacher-communications-library/TeacherCommunicationsLibrary";
 
-export const metadata: Metadata = {
-  title: "Préparer mes communications | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mes communications",
   description:
     "Préparez et organisez des messages réutilisables pour votre classe : informations, sorties, matériel, réunions, rappels, projets et remerciements.",
-};
+  path: "/enseignants/communications",
+  noIndex: true,
+});
 
 export default function TeacherCommunicationsPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

@@ -1,4 +1,5 @@
 import {
+  aggregatePublicStatus,
   normalizePublicStatus,
   type PublicStatus,
   type PublicStatusKey,
@@ -18,6 +19,12 @@ export type {
 
 export function getPublicStatus(status: unknown): PublicStatus {
   return normalizePublicStatus(status);
+}
+
+export function getAggregatedPublicStatus(
+  statuses: readonly unknown[],
+): PublicStatus {
+  return aggregatePublicStatus(statuses);
 }
 
 export function getPublicStatusKey(status: unknown): PublicStatusKey {

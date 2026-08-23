@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherLocalBackupClient } from "@/components/teacher-local-backup/TeacherLocalBackupClient";
 import { PrintBodyClass } from "@/components/print/print-body-class";
 
-export const metadata: Metadata = {
-  title: "Sauvegardes locales | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Sauvegardes locales",
   description:
     "Exportez ou restaurez vos outils enseignants (programmation, progression, emploi du temps, cahier journal) sur cet appareil, sans compte ni cloud.",
-};
+  path: "/enseignants/sauvegardes",
+  noIndex: true,
+});
 
 export default function TeacherLocalBackupPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:hidden">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:hidden">
       <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-5xl">
         <Breadcrumb

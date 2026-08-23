@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProfessionalDevelopment } from "@/components/teacher-professional-development/TeacherProfessionalDevelopment";
 
-export const metadata: Metadata = {
-  title: "Mes formations et développement professionnel | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Mes formations et développement professionnel",
   description:
     "Suivez vos formations, lectures professionnelles et compétences à développer, en privé sur cet appareil.",
-};
+  path: "/enseignants/formations",
+  noIndex: true,
+});
 
 export default function TeacherProfessionalDevelopmentPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

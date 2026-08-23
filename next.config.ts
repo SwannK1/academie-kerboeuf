@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
           "**/node_modules/**",
           "**/.next/**",
           "**/.next-*/**",
+          "**/.audit-pr268-codex/**",
+          "**/.worktrees/**",
+          "**/tmp/**",
         ],
       };
     }

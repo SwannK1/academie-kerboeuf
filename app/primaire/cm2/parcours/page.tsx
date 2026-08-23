@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Badge } from "@/components/cm2/badge";
@@ -8,11 +8,12 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { cm2Missions, type Cm2Mission } from "@/content/cm2";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 
-export const metadata: Metadata = {
-  title: "Parcours CM2 — L’année des grands explorateurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Parcours CM2 — L’année des grands explorateurs",
   description:
     "Progression CM2 lisible pour organiser les missions de Félix en lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",
-};
+  path: "/primaire/cm2/parcours",
+});
 
 const domainGroups = [
   {
@@ -121,7 +122,7 @@ export default function Cm2ParcoursPage() {
     .filter((step) => step.missions.length > 0);
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

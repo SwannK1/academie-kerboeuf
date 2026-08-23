@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { AssessmentPlanner } from "@/components/teacher-assessment-planner/AssessmentPlanner";
 
-export const metadata: Metadata = {
-  title: "Préparer mes évaluations | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mes évaluations",
   description:
     "Organisez vos évaluations de classe : titre, compétence, période, matériel et checklist de préparation, sans stocker de résultat d'élève.",
-};
+  path: "/enseignants/evaluations",
+  noIndex: true,
+});
 
 export default function TeacherAssessmentPlannerPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

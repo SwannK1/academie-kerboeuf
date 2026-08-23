@@ -37,6 +37,7 @@ export type AcademyStage =
 
 export type ProgramStatus =
   | "available"    // contenu exploitable, affiché
+  | "partial"      // premières ressources exploitables, couverture incomplète
   | "in-progress"  // visible mais incomplet
   | "upcoming";    // prévu, pas encore disponible
 

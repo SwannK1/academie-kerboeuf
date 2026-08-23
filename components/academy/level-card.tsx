@@ -1,12 +1,12 @@
 import Link from "next/link";
 import type { AcademyLevel } from "@/content/academy";
 import { getLevelPath } from "@/content/academy";
-import type { ProgramStatus } from "@/content/program-types";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import type { PublicStatusKey } from "@/content/public-status";
 
 type LevelCardProps = {
   level: AcademyLevel;
-  status?: ProgramStatus;
+  status?: PublicStatusKey;
 };
 
 export function LevelCard({ level, status }: LevelCardProps) {

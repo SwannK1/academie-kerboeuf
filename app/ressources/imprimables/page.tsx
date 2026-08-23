@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
-export const metadata: Metadata = {
-  title: "Ressources imprimables | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources imprimables",
   description:
     "Des supports pensés pour la classe, l'entraînement et l'évaluation.",
-};
+  path: "/ressources/imprimables",
+});
 
 type PrintableSection = {
   title: string;
@@ -50,13 +51,13 @@ const sections: PrintableSection[] = [
 
 export default function ImprimablesPage() {
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
             items={[
               { label: "Accueil", href: "/" },
-              { label: "Ressources", href: "/ressources" },
+              { label: "Ressources prêtes", href: "/ressources" },
               { label: "Imprimables" },
             ]}
           />

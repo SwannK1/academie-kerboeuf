@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { Cm2MathFichesEmbed } from "@/components/academy/Cm2MathFichesEmbed";
@@ -25,11 +26,20 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCm2SubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
-  return {
-    title: `${subject.title} CM2 | Académie Kerboeuf`,
+  if (!subject) {
+    return buildPageMetadata({
+      title: "Matière introuvable",
+      description: "Cette matière n'est pas publiée dans le catalogue public.",
+      path: "/primaire/cm2/matieres",
+      noIndex: true,
+    });
+  }
+
+  return buildPageMetadata({
+    title: `${subject.title} CM2`,
     description: subject.shortDescription,
-  };
+    path: `/primaire/cm2/matieres/${slug}`,
+  });
 }
 
 export default async function Cm2SubjectPage({ params }: PageProps) {
@@ -72,6 +82,7 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },
       ]}
       bottomSection={bottomSection}
+      layout={slug === "francais" || slug === "mathematiques" ? "compact" : "default"}
     />
   );
 }

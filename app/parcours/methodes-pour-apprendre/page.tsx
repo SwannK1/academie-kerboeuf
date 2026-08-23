@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
-export const metadata: Metadata = {
-  title: "Méthodes pour apprendre | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Méthodes pour apprendre",
   description:
     "Six étapes pour apprendre à apprendre : comprendre une consigne, chercher les informations importantes, organiser son travail, s'entraîner progressivement, corriger ses erreurs et expliquer sa méthode.",
-};
+  path: "/parcours/methodes-pour-apprendre",
+});
 
 type Step = {
   number: number;
@@ -77,7 +78,7 @@ const steps: Step[] = [
 
 export default function MethodesPourApprendrePage() {
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

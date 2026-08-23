@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherApcPlanner } from "@/components/teacher-apc-planner/TeacherApcPlanner";
 
-export const metadata: Metadata = {
-  title: "Préparer mes APC | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mes APC",
   description:
     "Préparez vos séances et cycles d'APC : axe, objectif, période, durée, matériel, déroulé et bilan collectif. Aucun nom d'élève, aucun suivi individuel.",
-};
+  path: "/enseignants/apc",
+  noIndex: true,
+});
 
 export default function TeacherApcPlannerPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import {
   HierarchyCard,
   HierarchyPage,
@@ -6,10 +6,11 @@ import {
 } from "@/app/personnages/_components/hierarchy";
 import { emblematicStudents } from "@/content/students";
 
-export const metadata: Metadata = {
-  title: "Élèves-guides | Personnages | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Élèves-guides | Personnages",
   description: "Les élèves-guides de la maternelle au lycée.",
-};
+  path: "/personnages/eleves",
+});
 
 const categories = [
   {

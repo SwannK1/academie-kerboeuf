@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
 
-export const metadata: Metadata = {
-  title: "Méthodes de travail — 6e | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Méthodes de travail — 6e",
   description:
     "Les méthodes essentielles pour bien démarrer au collège : s'organiser, noter les devoirs, relire une leçon.",
-};
+  path: "/college/6e/methodes",
+});
 
 const methodes = [
   {
@@ -49,7 +50,7 @@ const methodes = [
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main id="contenu-principal" className="mx-auto max-w-3xl px-4 py-12">
       <div className="mb-10">
         <Link
           href="/college/6e"

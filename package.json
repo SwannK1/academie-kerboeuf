@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "import:resources": "node scripts/import-ce1-resources.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

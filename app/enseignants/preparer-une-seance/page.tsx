@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherLessonPreparation } from "@/components/teacher-lesson-preparation/TeacherLessonPreparation";
 import { PrintBodyClass } from "@/components/print/print-body-class";
 
-export const metadata: Metadata = {
-  title: "Préparer une séance | Espace enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer une séance | Espace enseignants",
   description:
     "Construisez une séance complète avec des blocs repliables : informations, situation de départ, déroulé modulable, différenciation, évaluation, matériel et bilan. Sauvegarde locale uniquement.",
-};
+  path: "/enseignants/preparer-une-seance",
+  noIndex: true,
+});
 
 export default function TeacherLessonPreparationPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
       <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-6xl">
         <Breadcrumb

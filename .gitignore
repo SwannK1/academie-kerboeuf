@@ -24,6 +24,9 @@
 # builds de validation codex (répertoires temporaires générés localement)
 .next-*/
 .next-stale-build*/
+.audit-pr268-codex/
+.worktrees/
+tmp/
 
 # production
 /build

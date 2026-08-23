@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getLevelsByStage, getLevelPath } from "@/content/academy";
 
-export const metadata: Metadata = {
-  title: "Progression primaire CP → CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Progression primaire CP → CM2",
   description:
     "Vue d'ensemble de la progression pédagogique du CP au CM2 : objectifs par niveau, matières principales et statut de publication.",
-};
+  path: "/programmes/progression-primaire",
+});
 
 const LEVEL_OBJECTIVES: Record<string, string> = {
   cp: "Entrer dans la lecture, l'écriture et les premiers nombres. Installer les repères fondamentaux.",
@@ -49,7 +50,7 @@ export default function ProgressionPrimairePage() {
   const levels = getLevelsByStage("primaire");
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

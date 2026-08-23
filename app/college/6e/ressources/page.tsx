@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { sixiemeResources } from "@/content/levels/college/6e-resources";
 
-export const metadata: Metadata = {
-  title: "Ressources méthode 6e | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources méthode 6e",
   description:
     "Méthodes de travail prioritaires pour réussir l'entrée en 6e : lire une consigne, organiser son classeur, apprendre une leçon.",
-};
+  path: "/college/6e/ressources",
+});
 
 export default function SixiemeRessourcesPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main id="contenu-principal" className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="mb-2 text-2xl font-bold text-slate-900">
         Ressources méthode — 6e
       </h1>

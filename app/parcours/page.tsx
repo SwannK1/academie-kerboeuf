@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getPublicStatus } from "@/content/public-status";
 import { LearningPathCatalog } from "./_components/learning-path-catalog";
 
-export const metadata: Metadata = {
-  title: "Parcours pédagogiques | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Parcours pédagogiques",
   description:
     "Des parcours progressifs pour organiser les missions de l’Académie Kerboeuf en séquences de classe.",
-};
+  path: "/parcours",
+});
 
 export default function ParcoursPage() {
   const paths = getLearningPathsWithSteps();
@@ -20,7 +21,7 @@ export default function ParcoursPage() {
   const missionCount = paths.reduce((total, path) => total + path.steps.length, 0);
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherEndOfPeriodClient } from "@/components/teacher-end-of-period/TeacherEndOfPeriodClient";
 
-export const metadata: Metadata = {
-  title: "Préparer ma fin de période | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer ma fin de période",
   description:
     "Organisez la clôture d'une période scolaire : checklist par catégorie, tâches personnalisées et notes de bilan. Sauvegarde sur cet appareil.",
-};
+  path: "/enseignants/fin-periode",
+  noIndex: true,
+});
 
 export default function TeacherEndOfPeriodPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

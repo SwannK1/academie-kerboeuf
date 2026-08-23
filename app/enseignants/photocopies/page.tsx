@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherPrintQueueClient } from "@/components/teacher-print-queue/TeacherPrintQueueClient";
 
-export const metadata: Metadata = {
-  title: "Préparer mes photocopies | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mes photocopies",
   description:
     "Organisez vos demandes de photocopies : titre, nombre de pages et d'exemplaires, recto-verso, couleur, statut de préparation.",
-};
+  path: "/enseignants/photocopies",
+  noIndex: true,
+});
 
 export default function TeacherPrintQueuePage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { CurriculumSubjectPanel } from "@/components/academy/curriculum-subject-panel";
 import { getCurriculumLevelMap } from "@/content/curriculum-map";
+import { buildPageMetadata } from "@/content/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -31,13 +32,19 @@ export async function generateMetadata({
   const { level } = await params;
 
   if (!isProgrammeLevelSlug(level)) {
-    return { title: "Programme introuvable | Académie Kerboeuf" };
+    return buildPageMetadata({
+      title: "Programme introuvable",
+      description: "Ce programme n'est pas publié dans le portail primaire.",
+      path: "/primaire",
+      noIndex: true,
+    });
   }
 
-  return {
-    title: `Programme complet ${levelMeta[level].label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `Programme complet ${levelMeta[level].label}`,
     description: `Carte structurée du programme de ${levelMeta[level].label} par matière, domaine et compétence attendue. Le site organise ; les PDF enseignent.`,
-  };
+    path: `/primaire/${level}/programme`,
+  });
 }
 
 export default async function ProgrammePage({ params }: PageProps) {
@@ -59,7 +66,7 @@ export default async function ProgrammePage({ params }: PageProps) {
   ).length;
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

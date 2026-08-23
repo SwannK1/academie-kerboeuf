@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { emblematicStudents } from "@/content/students";
 import { professorProfiles } from "@/content/professors";
 
-export const metadata: Metadata = {
-  title: "Personnages | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Personnages",
   description: "Les guides de niveau et les professeurs de l'Académie Kerboeuf.",
-};
+  path: "/personnages",
+});
 
 const breadcrumb = [
   { label: "Accueil", href: "/" },
@@ -57,7 +58,7 @@ export default function PersonnagesPage() {
   const secondaryBySubject = groupBySubject(secondaryCharacters);
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb items={breadcrumb} />

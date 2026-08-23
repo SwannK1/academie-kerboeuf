@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { maternelleLevels, maternelleWorld } from "@/content/students";
 
-export const metadata: Metadata = {
-  title: "Maternelle | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Maternelle",
   description:
     "Le Jardin des Premières Découvertes de l'Académie Kerboeuf, pour structurer les premiers apprentissages de maternelle.",
-};
+  path: "/maternelle",
+});
 
 const COMING_SOON = [
   "Séquences par domaine et sous-domaine",
@@ -18,7 +19,7 @@ const COMING_SOON = [
 
 export default function MaternellePage() {
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

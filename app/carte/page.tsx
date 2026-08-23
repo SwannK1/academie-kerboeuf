@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { lieuxTransversaux } from "@/content/lieux-transversaux";
+import { getLevelGroupAvailabilityById } from "@/content/site-availability";
 import type { AccentKey } from "@/content/universe";
 
-export const metadata: Metadata = {
-  title: "Carte de l'Académie | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Carte de l'Académie",
   description:
     "Vue d'ensemble de l'Académie Kerboeuf — les quatre univers, les lieux transversaux et toutes les portes d'entrée.",
-};
+  path: "/carte",
+});
 
 // ─── Données des univers ───────────────────────────────────────────────────────
 
@@ -27,6 +29,8 @@ type UniversEntry = {
   missionsHref?: string;
 };
 
+const levelGroupAvailability = getLevelGroupAvailabilityById();
+
 const universEntries: UniversEntry[] = [
   {
     id: "maternelle",
@@ -37,7 +41,7 @@ const universEntries: UniversEntry[] = [
     publicsConcernes: ["PS", "MS", "GS"],
     cycleLabel: "Cycle 1",
     lieuxPrincipaux: ["Jardin des Premières Découvertes"],
-    statut: "available",
+    statut: levelGroupAvailability.maternelle.status,
     href: "/maternelle",
     accentColor: "jade",
   },
@@ -56,7 +60,7 @@ const universEntries: UniversEntry[] = [
       "Cartothèque secrète",
       "Quartier général de Félix",
     ],
-    statut: "available",
+    statut: levelGroupAvailability.primaire.status,
     href: "/primaire",
     accentColor: "gold",
     missionsHref: "/primaire/cm2/missions",
@@ -75,7 +79,7 @@ const universEntries: UniversEntry[] = [
       "Bureau des enquêtes",
       "Salle du conseil final",
     ],
-    statut: "available",
+    statut: levelGroupAvailability.college.status,
     href: "/college",
     accentColor: "sky",
   },
@@ -92,7 +96,7 @@ const universEntries: UniversEntry[] = [
       "Archives des spécialités",
       "Conseil des synthèses",
     ],
-    statut: "available",
+    statut: levelGroupAvailability.lycee.status,
     href: "/lycee",
     accentColor: "ember",
   },
@@ -130,7 +134,7 @@ export default function CartePage() {
   const lieuxSansRoute = lieuxTransversaux.filter((lieu) => !lieu.route);
 
   return (
-    <main>
+    <main id="contenu-principal">
       {/* ── Breadcrumb ── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

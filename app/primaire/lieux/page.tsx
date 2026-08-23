@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -9,11 +9,12 @@ import {
   type PedagogicalPlaceQualityStatus,
 } from "@/content/pedagogical-places";
 
-export const metadata: Metadata = {
-  title: "Lieux pédagogiques élémentaires | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Lieux pédagogiques élémentaires",
   description:
     "Catalogue public des lieux pédagogiques élémentaires des Lisières des Explorateurs.",
-};
+  path: "/primaire/lieux",
+});
 
 const qualityStatusLabels = {
   draft: "Brouillon",
@@ -70,7 +71,7 @@ export default function ElementaryPedagogicalPlacesPage() {
   const places = getElementaryPedagogicalPlaces();
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

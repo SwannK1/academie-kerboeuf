@@ -10,6 +10,7 @@ import {
   type PublishedPrimaryLevelSlug,
 } from "@/content/levels/published-subdomain-pages";
 import type { ProgramDomain, ProgramSubdomain } from "@/content/program-types";
+import { buildPageMetadata } from "@/content/seo";
 
 type PageProps = {
   params: Promise<{
@@ -22,6 +23,7 @@ type PageProps = {
 type ResolvedSubdomainPage = {
   levelLabel: string;
   levelHref: string;
+  route: string;
   cycleLabel: string;
   domain: ProgramDomain;
   subdomain: ProgramSubdomain;
@@ -42,15 +44,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const resolved = resolvePrimarySubdomainPage(level, domain, subdomain);
 
   if (!resolved) {
-    return {
-      title: "Programme introuvable | Académie Kerboeuf",
-    };
+    return buildPageMetadata({
+      title: "Programme introuvable",
+      description: "Ce catalogue de ressources n'est pas publié.",
+      path: "/primaire",
+      noIndex: true,
+    });
   }
 
-  return {
-    title: `${resolved.subdomain.title} ${resolved.levelLabel} | Académie Kerboeuf`,
-    description: resolved.subdomain.description,
-  };
+  const description =
+    resolved.subdomain.description ||
+    `Catalogue des ressources prévues pour ${resolved.subdomain.title} en ${resolved.levelLabel}.`;
+
+  return buildPageMetadata({
+    title: `${resolved.subdomain.title} ${resolved.levelLabel}`,
+    description,
+    path: `/primaire/${level}/programmes/${domain}/${subdomain}`,
+  });
 }
 
 export default async function PrimaryProgramSubdomainPage({ params }: PageProps) {
@@ -98,6 +108,7 @@ function resolvePrimarySubdomainPage(
         levelLabel: "CP",
         domainSlug,
         subdomainSlug,
+        route: publishedPage.route,
         getDomain: getCpDomain,
         getSubdomain: getCpSubdomain,
       });
@@ -107,6 +118,7 @@ function resolvePrimarySubdomainPage(
         levelLabel: "CE1",
         domainSlug,
         subdomainSlug,
+        route: publishedPage.route,
         getDomain: getCe1Domain,
         getSubdomain: getCe1Subdomain,
       });
@@ -116,6 +128,7 @@ function resolvePrimarySubdomainPage(
         levelLabel: "CE2",
         domainSlug,
         subdomainSlug,
+        route: publishedPage.route,
         getDomain: getCe2Domain,
         getSubdomain: getCe2Subdomain,
       });
@@ -136,6 +149,7 @@ function resolveLevelSubdomainPage({
   levelLabel,
   domainSlug,
   subdomainSlug,
+  route,
   getDomain,
   getSubdomain,
 }: {
@@ -143,6 +157,7 @@ function resolveLevelSubdomainPage({
   levelLabel: string;
   domainSlug: string;
   subdomainSlug: string;
+  route: string;
   getDomain: (domainSlug: string) => ProgramDomain | undefined;
   getSubdomain: (
     domainSlug: string,
@@ -159,6 +174,7 @@ function resolveLevelSubdomainPage({
   return {
     levelLabel,
     levelHref: `/primaire/${level}`,
+    route,
     cycleLabel: getCycleLabelForLevel(level),
     domain,
     subdomain,

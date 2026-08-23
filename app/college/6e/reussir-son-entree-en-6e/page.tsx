@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getPublicStatus } from "@/content/public-status";
 
-export const metadata: Metadata = {
-  title: "Réussir son entrée en 6e | Collège | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Réussir son entrée en 6e | Collège",
   description:
     "Six repères pour aborder sereinement le passage du CM2 au collège : emploi du temps, changements de salle, matériel, devoirs, apprentissage et questions.",
-};
+  path: "/college/6e/reussir-son-entree-en-6e",
+});
 
 const reperes = [
   {
@@ -51,7 +52,7 @@ const reperes = [
 
 export default function ReussirEntree6ePage() {
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

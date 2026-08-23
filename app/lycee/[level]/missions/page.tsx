@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -23,13 +24,19 @@ export async function generateMetadata({
   const level = getAcademyLevel("lycee", levelSlug);
 
   if (!level) {
-    return { title: "Missions introuvables | Académie Kerboeuf" };
+    return buildPageMetadata({
+      title: "Missions introuvables",
+      description: "Ce catalogue de missions n'est pas publié dans le portail lycée.",
+      path: "/lycee",
+      noIndex: true,
+    });
   }
 
-  return {
-    title: `Missions ${level.label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `Missions ${level.label}`,
     description: `Catalogue de missions pédagogiques structurées pour le niveau ${level.label}.`,
-  };
+    path: `/lycee/${levelSlug}/missions`,
+  });
 }
 
 export default async function LyceeLevelMissionsPage({ params }: PageProps) {
@@ -47,7 +54,7 @@ export default async function LyceeLevelMissionsPage({ params }: PageProps) {
     const levelHref = `/lycee/${levelSlug}`;
 
     return (
-      <main>
+      <main id="contenu-principal">
         <div className="px-4 pt-24 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Breadcrumb

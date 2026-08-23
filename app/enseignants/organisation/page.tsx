@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassOrganizationClient } from "@/components/teacher-class-organization/TeacherClassOrganizationClient";
 
-export const metadata: Metadata = {
-  title: "Organisation de classe | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Organisation de classe",
   description:
     "Préparez votre semaine de classe : priorités par groupe, réorganisation à la souris ou au clavier. Aucune donnée élève. Sauvegarde sur cet appareil.",
-};
+  path: "/enseignants/organisation",
+  noIndex: true,
+});
 
 export default function TeacherClassOrganizationPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

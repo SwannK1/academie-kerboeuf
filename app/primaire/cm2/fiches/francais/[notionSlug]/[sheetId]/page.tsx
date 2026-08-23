@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!notion) return {};
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
   return {
-    title: `${notion.title} — ${label} — Fiches Français CM2 | Académie Kerboeuf`,
+    title: `${notion.title} — ${label} — Fiches Français CM2`,
   };
 }
 
@@ -54,7 +54,7 @@ export default async function FicheDetailPage({ params }: Props) {
   const sheetLabel = SHEET_LABELS[key] ?? key;
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Breadcrumb

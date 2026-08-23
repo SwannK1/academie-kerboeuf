@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherProfessionalMeetingsClient } from "@/components/teacher-professional-meetings/TeacherProfessionalMeetingsClient";
 
-export const metadata: Metadata = {
-  title: "Rendez-vous professionnels | Espace enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Rendez-vous professionnels | Espace enseignants",
   description:
     "Préparez vos rendez-vous professionnels : objectif, ordre du jour, notes, décisions et suivi, sans enregistrer de coordonnées.",
-};
+  path: "/enseignants/rendez-vous",
+  noIndex: true,
+});
 
 export default function TeacherProfessionalMeetingsPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

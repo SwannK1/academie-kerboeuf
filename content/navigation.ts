@@ -10,13 +10,15 @@ export type GlobalNavigationItemId =
   | "map"
   | "method"
   | "characters"
-  | "professors"
   | "recent-missions";
 
-export type GlobalNavigationItem = {
-  id: GlobalNavigationItemId;
+export type NavigationItem = {
   label: string;
   href: string;
+};
+
+export type GlobalNavigationItem = NavigationItem & {
+  id: GlobalNavigationItemId;
   order: number;
   inHeader: boolean;
   inMobileMenu: boolean;
@@ -35,8 +37,7 @@ export const globalNavigationItems = [
   { id: "map", label: "Carte", href: "/carte", order: 90, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "method", label: "Méthode", href: "/methode", order: 100, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "characters", label: "Personnages", href: "/personnages", order: 110, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "professors", label: "Professeurs", href: "/professeurs", order: 120, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "recent-missions", label: "Missions récentes", href: "/missions-recentes", order: 130, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "recent-missions", label: "Missions récentes", href: "/missions-recentes", order: 120, inHeader: false, inMobileMenu: false, inFooter: true },
 ] as const satisfies readonly GlobalNavigationItem[];
 
 function byOrder(a: GlobalNavigationItem, b: GlobalNavigationItem) {
@@ -48,12 +49,20 @@ export const headerNavigationItems = [...globalNavigationItems]
   .sort(byOrder);
 
 export const mobileNavigationItems = [...globalNavigationItems]
-  .filter((item) => item.inMobileMenu)
+  .filter((item) => item.inHeader && item.inMobileMenu)
   .sort(byOrder);
 
 export const footerNavigationItems = [...globalNavigationItems]
   .filter((item) => item.inFooter)
   .sort(byOrder);
+
+export const footerPrimaryNavigationItems = footerNavigationItems.filter(
+  (item) => item.inHeader,
+);
+
+export const footerSecondaryNavigationItems = footerNavigationItems.filter(
+  (item) => !item.inHeader,
+);
 
 export const mainNavigationItems = headerNavigationItems;
 

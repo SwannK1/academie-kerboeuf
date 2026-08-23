@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PrintBodyClass } from "@/components/print/print-body-class";
 import { TeacherCurriculumPlanner } from "@/components/academy/TeacherCurriculumPlannerClient";
 
-export const metadata: Metadata = {
-  title: "Programmation annuelle | Espace enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Programmation annuelle | Espace enseignants",
   description:
     "Choisissez un niveau, parcourez les matières et domaines du programme, puis organisez les compétences par période.",
-};
+  path: "/enseignants/programmation/annuelle",
+  noIndex: true,
+});
 
 export default function TeacherYearlyProgrammationPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
       <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-6xl">
         <Breadcrumb

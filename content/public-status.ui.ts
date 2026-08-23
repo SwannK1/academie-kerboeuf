@@ -10,10 +10,10 @@ export const publicStatusUi = {
     className: "border-jade/35 bg-jade/10 text-jade",
     dotClassName: "bg-jade",
   },
-  upcoming: {
-    label: "À venir",
-    ariaLabel: "Statut public : à venir",
-    variant: "upcoming",
+  partial: {
+    label: "Disponible partiellement",
+    ariaLabel: "Statut public : disponible partiellement",
+    variant: "partial",
     className: "border-gold/35 bg-gold/10 text-gold",
     dotClassName: "bg-gold",
   },
@@ -23,6 +23,13 @@ export const publicStatusUi = {
     variant: "in-progress",
     className: "border-sky/25 bg-sky/10 text-sky",
     dotClassName: "bg-sky",
+  },
+  upcoming: {
+    label: "À venir",
+    ariaLabel: "Statut public : à venir",
+    variant: "upcoming",
+    className: "border-white/20 bg-white/[0.04] text-muted",
+    dotClassName: "bg-muted",
   },
 } as const satisfies Record<
   PublicStatusKey,

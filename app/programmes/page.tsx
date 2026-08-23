@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
@@ -8,11 +8,12 @@ import {
 } from "@/content/curriculum";
 import { sanitizePublicPedagogicalItems } from "@/content/public-sanitization";
 
-export const metadata: Metadata = {
-  title: "Programmes | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Programmes",
   description:
     "Architecture pédagogique de l’Académie Kerboeuf, organisée par niveaux, domaines, compétences et missions associées.",
-};
+  path: "/programmes",
+});
 
 const groups: {
   title: string;
@@ -60,7 +61,7 @@ export default function ProgrammesPage() {
   );
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { getPublicStatus } from "@/content/public-status";
 
-export const metadata: Metadata = {
-  title: "Méthodologie | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Méthodologie",
   description:
     "Des repères pour apprendre, s'organiser et progresser. Ressources méthodologiques transversales pour le primaire, le collège et le lycée.",
-};
+  path: "/ressources/methodologie",
+});
 
 type MethodBlock = {
   title: string;
@@ -69,13 +70,13 @@ export default function MethodologiePage() {
   }));
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
             items={[
               { label: "Accueil", href: "/" },
-              { label: "Ressources", href: "/ressources" },
+              { label: "Ressources prêtes", href: "/ressources" },
               { label: "Méthodologie" },
             ]}
           />

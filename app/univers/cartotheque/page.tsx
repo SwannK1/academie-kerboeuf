@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
-export const metadata: Metadata = {
-  title: "Cartothèque des Lisières | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Cartothèque des Lisières",
   description:
     "La Cartothèque des Lisières — un lieu pour se repérer, relier les savoirs et construire des chemins d'apprentissage.",
-};
+  path: "/univers/cartotheque",
+});
 
 const competences = [
   "Se repérer dans l'espace et dans les savoirs",
@@ -27,7 +28,7 @@ const niveaux = ["Cycle 2", "Cycle 3", "Cycle 4"];
 
 export default function CartothequePage() {
   return (
-    <main>
+    <main id="contenu-principal">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

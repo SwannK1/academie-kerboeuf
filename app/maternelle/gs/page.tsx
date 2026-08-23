@@ -1,15 +1,19 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { MaternelleDomainCard } from "@/components/academy/MaternelleDomainCard";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { gsDomains } from "@/content/levels/maternelle/gs-domains";
-import { getPublicStatusKey } from "@/content/public-status";
+import {
+  getPublicStatusKey,
+  type PublicStatusKey,
+} from "@/content/public-status";
 
-export const metadata: Metadata = {
-  title: "Grande Section | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Grande Section",
   description:
     "Tableau de bord Grande Section : domaines, observables, situations et ressources prévues.",
-};
+  path: "/maternelle/gs",
+});
 
 export default function GsPage() {
   const statusCounts = gsDomains.reduce(
@@ -18,7 +22,10 @@ export default function GsPage() {
       counts[key] += 1;
       return counts;
     },
-    { available: 0, "in-progress": 0, upcoming: 0 },
+    { available: 0, partial: 0, "in-progress": 0, upcoming: 0 } satisfies Record<
+      PublicStatusKey,
+      number
+    >,
   );
   const sequenceCount = gsDomains.reduce(
     (total, domain) =>
@@ -28,7 +35,7 @@ export default function GsPage() {
   );
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

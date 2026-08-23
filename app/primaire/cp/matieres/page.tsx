@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { SubjectIndexPage } from "@/components/academy/SubjectMatterCatalog";
 import { cpSubjects } from "@/content/cp-subjects";
 import { CP_ACCENT } from "@/lib/cp-accent";
 
-export const metadata: Metadata = {
-  title: "Matières CP | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Matières CP",
   description:
     "Les matières du programme CP à l'Académie Kerboeuf : Français et Mathématiques. Structure en domaines, sous-domaines et séquences-compétences.",
-};
+  path: "/primaire/cp/matieres",
+});
 
 export default function CpMatieresPage() {
   return (

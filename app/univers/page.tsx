@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 
-export const metadata: Metadata = {
-  title: "Univers | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Univers",
   description:
     "L'Académie Kerboeuf — un univers pédagogique où personnages et lieux servent les apprentissages.",
-};
+  path: "/univers",
+});
 
 const entries = [
   {
@@ -45,7 +46,7 @@ const accentBorder: Record<(typeof entries)[number]["accent"], string> = {
 
 export default function UniversPage() {
   return (
-    <main>
+    <main id="contenu-principal">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherCycleMeetingsClient } from "@/components/teacher-cycle-meetings/TeacherCycleMeetingsClient";
 
-export const metadata: Metadata = {
-  title: "Préparer mes conseils de cycle | Espace enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mes conseils de cycle | Espace enseignants",
   description:
     "Préparez un conseil de cycle ou un conseil des maîtres : ordre du jour, décisions et tâches de suivi.",
-};
+  path: "/enseignants/conseils-cycle",
+  noIndex: true,
+});
 
 export default function TeacherCycleMeetingsPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <Breadcrumb
           items={[

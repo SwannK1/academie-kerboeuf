@@ -58,7 +58,7 @@ export async function generateMetadata({
   const place = getElementaryPedagogicalPlaceBySlug(slug);
 
   if (!place) {
-    return { title: "Lieu pédagogique introuvable | Académie Kerboeuf" };
+    return { title: "Lieu pédagogique introuvable" };
   }
 
   return {
@@ -88,7 +88,7 @@ export default async function ElementaryPedagogicalPlacePage({
     place.printability?.printable === true || printSupports.length > 0;
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

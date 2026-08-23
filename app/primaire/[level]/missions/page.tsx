@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { notFound } from "next/navigation";
 import { LevelMissions } from "@/components/academy/level-missions";
 import { getAcademyLevel, getLevelsByStage } from "@/content/academy";
@@ -20,13 +21,19 @@ export async function generateMetadata({
   const level = getAcademyLevel("primaire", levelSlug);
 
   if (!level) {
-    return { title: "Missions introuvables | Académie Kerboeuf" };
+    return buildPageMetadata({
+      title: "Missions introuvables",
+      description: "Ce catalogue de missions n'est pas publié dans le portail primaire.",
+      path: "/primaire",
+      noIndex: true,
+    });
   }
 
-  return {
-    title: `Missions ${level.label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `Missions ${level.label}`,
     description: `Catalogue de missions pédagogiques pour le niveau ${level.label}.`,
-  };
+    path: `/primaire/${levelSlug}/missions`,
+  });
 }
 
 export default async function PrimaireLevelMissionsPage({ params }: PageProps) {

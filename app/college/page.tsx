@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { LevelHub } from "@/components/academy/level-hub";
 import { getLevelsByStage } from "@/content/academy";
 import { getCollegeLevelStatus } from "@/content/levels/college-statuses";
 
-export const metadata: Metadata = {
-  title: "Collège | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Collège",
   description:
     "L’aile collège de l’Académie Kerboeuf, de la 6e à la 3e.",
-};
+  path: "/college",
+});
 
 export default function CollegePage() {
   return (

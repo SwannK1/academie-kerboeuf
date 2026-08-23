@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
@@ -7,12 +7,15 @@ import {
   getLevelsByStage,
   type AcademyLevel,
 } from "@/content/academy";
+import type { AcademyLevelSlug } from "@/content/program-types";
+import { getLevelAvailability } from "@/content/site-availability";
 
-export const metadata: Metadata = {
-  title: "Primaire — Les Lisières des Explorateurs | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Primaire — Les Lisières des Explorateurs",
   description:
     "Homepage du cycle élémentaire de l'Académie Kerboeuf : niveaux, professeurs, élèves repères et zones pédagogiques des Lisières des Explorateurs.",
-};
+  path: "/primaire",
+});
 
 // Narrative data per level slug — character species and posture, not in content files
 const LEVEL_GUIDES: Record<
@@ -46,15 +49,6 @@ const LEVEL_GUIDES: Record<
   },
 };
 
-// Conservative statuses — updated as content is published
-const LEVEL_STATUS: Record<string, string> = {
-  cp: "en construction",
-  ce1: "en construction",
-  ce2: "en construction",
-  cm1: "en construction",
-  cm2: "disponible",
-};
-
 // Routes that actually exist — no fictitious links
 const LEVEL_MATIERES: Record<string, string> = {
   cp: "/primaire/cp/matieres",
@@ -79,7 +73,7 @@ export default function PrimairePage() {
   const levels = getLevelsByStage("primaire");
 
   return (
-    <main>
+    <main id="contenu-principal">
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
@@ -141,7 +135,7 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     hoverBg: "hover:bg-gold/[0.08]",
     ring: "focus:ring-gold/60",
   };
-  const status = LEVEL_STATUS[level.slug] ?? "bientôt";
+  const status = getLevelAvailability(level.slug as AcademyLevelSlug);
   const matieresHref = LEVEL_MATIERES[level.slug] ?? null;
 
   return (

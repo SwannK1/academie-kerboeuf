@@ -21,6 +21,7 @@ import { felixProjects, getFelixProjectBySlug } from "@/content/felix-missions";
 import type { MissionEvidence } from "@/content/felix-types";
 import { getLearningPathsWithSteps } from "@/content/learning-paths";
 import { getPublicStatusLabel } from "@/content/public-status";
+import { buildPageMetadata } from "@/content/seo";
 
 type MissionPageProps = {
   params: Promise<{ slug: string }>;
@@ -38,17 +39,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const felix = getFelixProjectBySlug(slug);
   if (felix) {
-    return {
+    return buildPageMetadata({
       title: `${felix.title} | Projets CM2`,
       description: felix.subtitle,
-    };
+      path: `/primaire/cm2/missions/${slug}`,
+    });
   }
   const cm2 = getCm2MissionBySlug(slug);
-  if (!cm2) return { title: "Mission introuvable | Académie Kerboeuf" };
-  return {
+  if (!cm2) {
+    return buildPageMetadata({
+      title: "Mission introuvable",
+      description: "Cette mission CM2 n'est pas publiée dans le catalogue public.",
+      path: "/primaire/cm2/missions",
+      noIndex: true,
+    });
+  }
+  return buildPageMetadata({
     title: `${cm2.title} | Missions CM2`,
     description: cm2.description,
-  };
+    path: `/primaire/cm2/missions/${slug}`,
+  });
 }
 
 export default async function MissionDetailPage({ params }: MissionPageProps) {
@@ -73,7 +83,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
     );
 
     return (
-      <main className="mission-detail-page felix-project-detail">
+      <main id="contenu-principal" className="mission-detail-page felix-project-detail">
         <PrintBodyClass className="print-mission-detail" />
 
         <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
@@ -270,7 +280,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
   );
 
   return (
-    <main className="mission-detail-page">
+    <main id="contenu-principal" className="mission-detail-page">
       <PrintBodyClass className="print-mission-detail" />
       <div className="mission-detail-chrome px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

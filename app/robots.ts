@@ -1,10 +1,9 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://academie-kerboeuf.fr";
+import { getAbsoluteUrl } from "@/content/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: "*", allow: "/" },
-    sitemap: `${BASE_URL}/sitemap.xml`,
+    sitemap: getAbsoluteUrl("/sitemap.xml"),
   };
 }

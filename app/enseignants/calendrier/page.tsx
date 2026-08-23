@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherSchoolCalendar } from "@/components/teacher-school-calendar/TeacherSchoolCalendar";
 
-export const metadata: Metadata = {
-  title: "Mon calendrier scolaire | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Mon calendrier scolaire",
   description:
     "Organisez vos périodes, dates importantes et échéances personnelles dans un calendrier mensuel sauvegardé sur cet appareil.",
-};
+  path: "/enseignants/calendrier",
+  noIndex: true,
+});
 
 export default function TeacherSchoolCalendarPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { LevelHero } from "@/components/levels/level-hero";
@@ -14,11 +14,12 @@ import {
   type PublicStatusKey,
 } from "@/content/public-status";
 
-export const metadata: Metadata = {
-  title: "Missions CM2 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Missions CM2",
   description:
     "Vitrine pédagogique complète des missions CM2 de Félix : lecture, écriture, mathématiques, sciences, histoire-géographie et méthode.",
-};
+  path: "/primaire/cm2/missions",
+});
 
 const domainSections: {
   title: string;
@@ -83,8 +84,9 @@ const audienceCards = [
 
 const projectStatusSummary: PublicStatusKey[] = [
   "available",
-  "upcoming",
+  "partial",
   "in-progress",
+  "upcoming",
 ];
 
 function toMissionCardData(mission: Cm2Mission): MissionCardData {
@@ -118,7 +120,7 @@ export default function Cm2MissionsPage() {
   const projectionPrintMissions = cm2Missions.filter(hasProjectionAndPrint);
 
   return (
-    <main className="cm2-catalog-print">
+    <main id="contenu-principal" className="cm2-catalog-print">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

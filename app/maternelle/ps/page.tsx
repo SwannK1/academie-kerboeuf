@@ -1,15 +1,19 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { MaternelleDomainCard } from "@/components/academy/MaternelleDomainCard";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { psDomains } from "@/content/levels/maternelle/ps-domains";
-import { getPublicStatusKey } from "@/content/public-status";
+import {
+  getPublicStatusKey,
+  type PublicStatusKey,
+} from "@/content/public-status";
 
-export const metadata: Metadata = {
-  title: "Petite Section | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Petite Section",
   description:
     "Tableau de bord Petite Section : domaines, observables, situations et ressources prévues.",
-};
+  path: "/maternelle/ps",
+});
 
 export default function PsPage() {
   const statusCounts = psDomains.reduce(
@@ -18,7 +22,10 @@ export default function PsPage() {
       counts[key] += 1;
       return counts;
     },
-    { available: 0, "in-progress": 0, upcoming: 0 },
+    { available: 0, partial: 0, "in-progress": 0, upcoming: 0 } satisfies Record<
+      PublicStatusKey,
+      number
+    >,
   );
   const sequenceCount = psDomains.reduce(
     (total, domain) =>
@@ -28,7 +35,7 @@ export default function PsPage() {
   );
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

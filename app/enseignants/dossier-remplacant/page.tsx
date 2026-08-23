@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherSubstituteFolderClient } from "@/components/teacher-substitute-folder/TeacherSubstituteFolderClient";
 
-export const metadata: Metadata = {
-  title: "Préparer mon dossier remplaçant | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Préparer mon dossier remplaçant",
   description:
     "Préparez un dossier remplaçant clair et imprimable : horaires, matériel, rituels, déroulé de la journée, consignes collectives et contacts institutionnels.",
-};
+  path: "/enseignants/dossier-remplacant",
+  noIndex: true,
+});
 
 export default function TeacherSubstituteFolderPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pb-0 print:pt-0">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pb-0 print:pt-0">
       <div className="mx-auto max-w-5xl">
         <div className="print:hidden">
           <Breadcrumb

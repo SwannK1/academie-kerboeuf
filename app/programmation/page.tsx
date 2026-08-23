@@ -3,6 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import {
+  getLevelAvailability,
+  getMaternelleAvailability,
+} from "@/content/site-availability";
+import type { PublicStatusKey } from "@/content/public-status";
 
 type ProgrammingPeriod = {
   id: string;
@@ -18,22 +23,22 @@ type ProgrammingItem = {
 type LevelProgramming = {
   levelId: string;
   label: string;
-  status: "available" | "upcoming" | "in-progress";
+  status: PublicStatusKey;
   order: number;
   periods: ProgrammingPeriod[];
   items: ProgrammingItem[];
 };
 
 const levels: LevelProgramming[] = [
-  { levelId: "maternelle", label: "Maternelle", status: "in-progress", order: 1, periods: [], items: [] },
-  { levelId: "cp", label: "CP", status: "in-progress", order: 2, periods: [], items: [] },
-  { levelId: "ce1", label: "CE1", status: "in-progress", order: 3, periods: [], items: [] },
-  { levelId: "ce2", label: "CE2", status: "in-progress", order: 4, periods: [], items: [] },
-  { levelId: "cm1", label: "CM1", status: "in-progress", order: 5, periods: [], items: [] },
+  { levelId: "maternelle", label: "Maternelle", status: getMaternelleAvailability(), order: 1, periods: [], items: [] },
+  { levelId: "cp", label: "CP", status: getLevelAvailability("cp"), order: 2, periods: [], items: [] },
+  { levelId: "ce1", label: "CE1", status: getLevelAvailability("ce1"), order: 3, periods: [], items: [] },
+  { levelId: "ce2", label: "CE2", status: getLevelAvailability("ce2"), order: 4, periods: [], items: [] },
+  { levelId: "cm1", label: "CM1", status: getLevelAvailability("cm1"), order: 5, periods: [], items: [] },
   {
     levelId: "cm2",
     label: "CM2",
-    status: "available",
+    status: getLevelAvailability("cm2"),
     order: 6,
     periods: [
       { id: "periode-1", label: "Période 1" },
@@ -48,8 +53,8 @@ const levels: LevelProgramming[] = [
       { id: "sciences-technologie", label: "Sciences et technologie", href: "/primaire/cm2/matieres/sciences-technologie" },
     ],
   },
-  { levelId: "college", label: "Collège", status: "in-progress", order: 7, periods: [], items: [] },
-  { levelId: "lycee", label: "Lycée", status: "in-progress", order: 8, periods: [], items: [] },
+  { levelId: "college", label: "Collège", status: getLevelAvailability("6e"), order: 7, periods: [], items: [] },
+  { levelId: "lycee", label: "Lycée", status: getLevelAvailability("seconde"), order: 8, periods: [], items: [] },
 ];
 
 export default function ProgrammingPage() {
@@ -57,7 +62,7 @@ export default function ProgrammingPage() {
   const selectedLevel = levels.find((level) => level.levelId === selectedLevelId)!;
 
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <header className="max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">

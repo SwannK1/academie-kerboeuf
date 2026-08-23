@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { SubjectIndexPage } from "@/components/academy/SubjectMatterCatalog";
 import { cm1Subjects } from "@/content/cm1-subjects";
 import { CM1_ACCENT } from "@/lib/cm1-accent";
 
-export const metadata: Metadata = {
-  title: "Matières CM1 | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Matières CM1",
   description:
     "Les 8 matières du programme CM1 à l'Académie Kerboeuf : Français, Mathématiques, Histoire-Géographie, Sciences, EMC, Anglais, Arts, EPS.",
-};
+  path: "/primaire/cm1/matieres",
+});
 
 export default function Cm1MatieresPage() {
   return (

@@ -1,7 +1,8 @@
 export const publicStatusKeys = {
   available: "available",
-  upcoming: "upcoming",
+  partial: "partial",
   "in-progress": "in-progress",
+  upcoming: "upcoming",
 } as const;
 
 export type PublicStatusKey =
@@ -13,8 +14,9 @@ export type PublicStatus = {
 
 const publicStatuses: Record<PublicStatusKey, PublicStatus> = {
   available: { key: "available" },
-  upcoming: { key: "upcoming" },
+  partial: { key: "partial" },
   "in-progress": { key: "in-progress" },
+  upcoming: { key: "upcoming" },
 };
 
 const internalStatusMap = {
@@ -24,32 +26,33 @@ const internalStatusMap = {
   valide: publicStatuses.available,
   validated: publicStatuses.available,
 
+  partial: publicStatuses.partial,
+  partiel: publicStatuses.partial,
+  "disponible partiellement": publicStatuses.partial,
+  "premières ressources disponibles": publicStatuses.partial,
+  "premieres ressources disponibles": publicStatuses.partial,
+
   upcoming: publicStatuses.upcoming,
+  "coming-soon": publicStatuses.upcoming,
   "à venir": publicStatuses.upcoming,
   "a venir": publicStatuses.upcoming,
-  // "a-venir" avec tiret — valeur de CurriculumStatus dans academy-curriculum.types.ts
   "a-venir": publicStatuses.upcoming,
   bientôt: publicStatuses.upcoming,
   bientot: publicStatuses.upcoming,
   "coming soon": publicStatuses.upcoming,
   planned: publicStatuses.upcoming,
-  // "missing" — ressource volontairement absente pour une leçon (PedagogicalResourceStatus)
-  // Affiché comme "À venir" : la ressource n'existe pas encore publiquement
   missing: publicStatuses.upcoming,
 
   "in-progress": publicStatuses["in-progress"],
+  preparing: publicStatuses["in-progress"],
   "en construction": publicStatuses["in-progress"],
   "en préparation": publicStatuses["in-progress"],
   "en preparation": publicStatuses["in-progress"],
-  // "en-cours" avec tiret — valeur de CurriculumStatus dans academy-curriculum.types.ts
   "en-cours": publicStatuses["in-progress"],
   "à vérifier": publicStatuses["in-progress"],
   "a verifier": publicStatuses["in-progress"],
   draft: publicStatuses["in-progress"],
-  // "brouillon" — synonyme français de "draft", valeur de CurriculumStatus
   brouillon: publicStatuses["in-progress"],
-  partial: publicStatuses["in-progress"],
-  partiel: publicStatuses["in-progress"],
 } satisfies Record<string, PublicStatus>;
 
 export const fallbackPublicStatus = publicStatuses["in-progress"];
@@ -78,4 +81,26 @@ export function normalizePublicStatus(status: unknown): PublicStatus {
       status.trim().toLowerCase()
     ] ?? fallbackPublicStatus
   );
+}
+
+export function aggregatePublicStatus(statuses: readonly unknown[]): PublicStatus {
+  const keys = statuses.map((status) => normalizePublicStatus(status).key);
+
+  if (keys.length === 0) {
+    return publicStatuses.upcoming;
+  }
+
+  if (keys.every((key) => key === "available")) {
+    return publicStatuses.available;
+  }
+
+  if (keys.some((key) => key === "available" || key === "partial")) {
+    return publicStatuses.partial;
+  }
+
+  if (keys.some((key) => key === "in-progress")) {
+    return publicStatuses["in-progress"];
+  }
+
+  return publicStatuses.upcoming;
 }

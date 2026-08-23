@@ -94,9 +94,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const professor = getProfessorBySlug(slug);
-  if (!professor) return { title: "Professeur introuvable | Académie Kerboeuf" };
+  if (!professor) return { title: "Professeur introuvable" };
   return {
-    title: `${professor.name} — ${professor.role} | Académie Kerboeuf`,
+    title: `${professor.name} — ${professor.role}`,
     description: professor.bio,
   };
 }
@@ -123,7 +123,7 @@ export default async function ProfesseurPage({ params }: PageProps) {
     professor.coreValues;
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

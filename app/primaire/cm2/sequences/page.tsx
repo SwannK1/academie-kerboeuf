@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import {
   SequenceRegistry,
@@ -11,11 +11,12 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 
-export const metadata: Metadata = {
-  title: "Séquences CM2 — Cartographie des compétences | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Séquences CM2 — Cartographie des compétences",
   description:
     "Cartographie des séquences CM2 par domaine, sous-domaine et compétence principale.",
-};
+  path: "/primaire/cm2/sequences",
+});
 
 type SequenceGroup = {
   domain: string;
@@ -53,7 +54,7 @@ const stats = getCm2SequencesStats();
 
 export default function Cm2SequencesPage() {
   return (
-    <main className="cm2-catalog-print">
+    <main id="contenu-principal" className="cm2-catalog-print">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

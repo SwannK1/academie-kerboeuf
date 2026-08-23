@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { ce2Subjects, getCe2SubjectBySlug } from "@/content/ce2-subjects";
@@ -17,11 +18,20 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const subject = getCe2SubjectBySlug(slug);
-  if (!subject) return { title: "Matière introuvable | Académie Kerboeuf" };
-  return {
-    title: `${subject.title} CE2 | Académie Kerboeuf`,
+  if (!subject) {
+    return buildPageMetadata({
+      title: "Matière introuvable",
+      description: "Cette matière n'est pas publiée dans le catalogue public.",
+      path: "/primaire/ce2/matieres",
+      noIndex: true,
+    });
+  }
+
+  return buildPageMetadata({
+    title: `${subject.title} CE2`,
     description: subject.shortDescription,
-  };
+    path: `/primaire/ce2/matieres/${slug}`,
+  });
 }
 
 export default async function Ce2SubjectPage({ params }: PageProps) {

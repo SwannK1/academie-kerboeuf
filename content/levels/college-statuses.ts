@@ -1,23 +1,23 @@
-import type { ProgramStatus } from "@/content/program-types";
+import type { PublicStatusKey } from "@/content/public-status";
 
 export const collegeLevelSlugs = ["6e", "5e", "4e", "3e"] as const;
 
 export type CollegeLevelSlug = (typeof collegeLevelSlugs)[number];
 
-export const collegeLevelStatuses: Record<CollegeLevelSlug, ProgramStatus> = {
+export const collegeLevelStatuses: Record<CollegeLevelSlug, PublicStatusKey> = {
   "6e": "in-progress",
   "5e": "upcoming",
   "4e": "upcoming",
   "3e": "upcoming",
 };
 
-export const defaultCollegeLevelStatus: ProgramStatus = "upcoming";
+export const defaultCollegeLevelStatus: PublicStatusKey = "upcoming";
 
 export function isCollegeLevelSlug(levelSlug: string): levelSlug is CollegeLevelSlug {
   return (collegeLevelSlugs as readonly string[]).includes(levelSlug);
 }
 
-export function getCollegeLevelStatus(levelSlug: string): ProgramStatus {
+export function getCollegeLevelStatus(levelSlug: string): PublicStatusKey {
   if (!isCollegeLevelSlug(levelSlug)) return defaultCollegeLevelStatus;
   return collegeLevelStatuses[levelSlug];
 }

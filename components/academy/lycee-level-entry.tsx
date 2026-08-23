@@ -9,11 +9,11 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AcademyLevel } from "@/content/academy";
 import { getAcademyLevelBySlugOnly } from "@/content/academy-curriculum";
-import type { ProgramStatus } from "@/content/program-types";
+import type { PublicStatusKey } from "@/content/public-status";
 
 type Props = {
   level: AcademyLevel;
-  status: ProgramStatus;
+  status: PublicStatusKey;
 };
 
 // Ressources prévues — aucun href : elles n'existent pas encore.
@@ -30,7 +30,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
   const curriculumSubjects = curriculumLevel?.subjects ?? [];
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

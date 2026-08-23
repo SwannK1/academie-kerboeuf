@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherTemplateLibraryClient } from "@/components/teacher-template-library/TeacherTemplateLibraryClient";
 
-export const metadata: Metadata = {
-  title: "Mes modèles enseignants | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Mes modèles enseignants",
   description:
     "Créez et organisez vos modèles personnels réutilisables : séance, réunion parents, commande, projet, checklist ou document.",
-};
+  path: "/enseignants/modeles",
+  noIndex: true,
+});
 
 export default function TeacherTemplateLibraryPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

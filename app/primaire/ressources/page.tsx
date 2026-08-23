@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 
-export const metadata: Metadata = {
-  title: "Ressources primaire | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources primaire",
   description:
     "Supports pédagogiques pour le primaire : leçons, exercices, évaluations, corrigés et méthodologie, par niveau.",
-};
+  path: "/primaire/ressources",
+});
 
 const LEVELS = [
   {
@@ -77,7 +78,7 @@ const RESOURCE_TYPES = [
 
 export default function RessourcesPrimairePage() {
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

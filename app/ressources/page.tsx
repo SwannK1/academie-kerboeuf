@@ -1,37 +1,41 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getClassroomResources } from "@/content/resources";
-import { getPublicStatus } from "@/content/public-status";
+import { getPublicStatus, getPublicStatusKey } from "@/content/public-status";
 import { ResourcesCatalog } from "./_components/resources-catalog";
 
-export const metadata: Metadata = {
-  title: "Ressources | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Ressources",
   description:
     "Toutes les missions pédagogiques prêtes à projeter, imprimer ou corriger en classe.",
-};
+  path: "/ressources",
+});
 
 export default function RessourcesPage() {
   const resources = getClassroomResources().map((resource) => ({
     ...resource,
     status: getPublicStatus(resource.status),
   }));
-  const projectionCount = resources.filter((resource) =>
+  const availableResources = resources.filter(
+    (resource) => getPublicStatusKey(resource.status) === "available",
+  );
+  const projectionCount = availableResources.filter((resource) =>
     resource.modes.includes("projection"),
   ).length;
-  const printCount = resources.filter((resource) =>
+  const printCount = availableResources.filter((resource) =>
     resource.modes.includes("impression"),
   ).length;
-  const correctionCount = resources.filter((resource) =>
+  const correctionCount = availableResources.filter((resource) =>
     resource.modes.includes("correction"),
   ).length;
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
-            items={[{ label: "Accueil", href: "/" }, { label: "Ressources" }]}
+            items={[{ label: "Accueil", href: "/" }, { label: "Ressources prêtes" }]}
           />
         </div>
       </div>

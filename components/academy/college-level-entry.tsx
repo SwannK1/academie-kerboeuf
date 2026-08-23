@@ -27,7 +27,7 @@ export function CollegeLevelEntry({ level }: Props) {
   const accompagnementCards = isSixieme ? getSixiemeAccompagnementCards() : [];
 
   return (
-    <main>
+    <main id="contenu-principal">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb

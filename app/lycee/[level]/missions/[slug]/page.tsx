@@ -18,6 +18,7 @@ import {
 } from "@/content/public-academy";
 import { getLyceeLevelStatus } from "@/content/levels/lycee-statuses";
 import { getPublicStatusKey } from "@/content/public-status";
+import { buildPageMetadata } from "@/content/seo";
 
 type PageProps = {
   params: Promise<{ level: string; slug: string }>;
@@ -34,29 +35,42 @@ export async function generateMetadata({
   const academyMission = getAcademyMission("lycee", levelSlug, slug);
 
   if (!academyMission) {
-    return { title: "Mission introuvable | Académie Kerboeuf" };
+    return buildPageMetadata({
+      title: "Mission introuvable",
+      description: "Cette mission n'est pas publiée dans le catalogue public.",
+      path: `/lycee/${levelSlug}/missions`,
+      noIndex: true,
+    });
   }
 
   const { mission } = academyMission;
 
   if (!isMissionPubliclyAvailable(mission)) {
-    return { title: "Mission introuvable | Académie Kerboeuf" };
+    return buildPageMetadata({
+      title: "Mission introuvable",
+      description: "Cette mission n'est pas publiée dans le catalogue public.",
+      path: `/lycee/${levelSlug}/missions`,
+      noIndex: true,
+    });
   }
 
   const levelStatus = getLyceeLevelStatus(levelSlug);
 
   if (getPublicStatusKey(levelStatus) === "upcoming") {
-    return {
-      title: "Mission en préparation | Académie Kerboeuf",
+    return buildPageMetadata({
+      title: "Mission en préparation",
       description:
         "Cette mission sera publiée lorsque le niveau lycée sera prêt avec ses matières, domaines et ressources associées.",
-    };
+      path: `/lycee/${levelSlug}/missions/${slug}`,
+      noIndex: true,
+    });
   }
 
-  return {
-    title: `${mission.title} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: mission.title,
     description: mission.description,
-  };
+    path: `/lycee/${levelSlug}/missions/${slug}`,
+  });
 }
 
 export default async function LyceeMissionDetailPage({ params }: PageProps) {
@@ -81,7 +95,7 @@ export default async function LyceeMissionDetailPage({ params }: PageProps) {
     const levelHref = `/lycee/${levelSlug}`;
 
     return (
-      <main>
+      <main id="contenu-principal">
         <div className="px-4 pt-24 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <Breadcrumb

@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherRoutinesLibrary } from "@/components/teacher-routines-library/TeacherRoutinesLibrary";
 
-export const metadata: Metadata = {
-  title: "Mes rituels de classe | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Mes rituels de classe",
   description:
     "Organisez vos rituels quotidiens, hebdomadaires, mensuels ou ponctuels : créez, filtrez, dupliquez et imprimez vos rituels de classe.",
-};
+  path: "/enseignants/rituels",
+  noIndex: true,
+});
 
 export default function TeacherRoutinesLibraryPage() {
   return (
-    <main className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-6">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-6">
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[

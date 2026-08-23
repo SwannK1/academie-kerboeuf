@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { lieuxAcademie } from "@/content/lieux-academie";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AccentKey } from "@/content/universe";
 
-export const metadata: Metadata = {
-  title: "Les lieux de l'Académie | Académie Kerboeuf",
+export const metadata = buildPageMetadata({
+  title: "Les lieux de l'Académie",
   description:
     "Chaque lieu de l'Académie Kerboeuf correspond à une manière d'apprendre — découvrez les espaces pédagogiques et leurs fonctions.",
-};
+  path: "/univers/lieux",
+});
 
 const accentText: Record<AccentKey, string> = {
   gold: "text-gold",
@@ -32,7 +33,7 @@ const accentBg: Record<AccentKey, string> = {
 
 export default function LieuxPage() {
   return (
-    <main>
+    <main id="contenu-principal">
       {/* ── Breadcrumb ──────────────────────────────────────────────────────── */}
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">

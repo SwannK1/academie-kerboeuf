@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { getCompetenciesForLevel } from "@/content/competencies";
 import { getCurriculumMapForLevel } from "@/content/curriculum-map";
 import type { LearningCompetency } from "@/content/learning-architecture-types";
+import { buildPageMetadata } from "@/content/seo";
 
 type PageProps = {
   params: Promise<{ level: string }>;
@@ -42,16 +43,20 @@ export async function generateMetadata({
   const { level } = await params;
 
   if (!isPrimaryCompetencyLevelSlug(level)) {
-    return {
-      title: "Compétences introuvables | Académie Kerboeuf",
-    };
+    return buildPageMetadata({
+      title: "Compétences introuvables",
+      description: "Ces compétences ne sont pas publiées dans le portail primaire.",
+      path: "/primaire",
+      noIndex: true,
+    });
   }
 
-  return {
-    title: `Compétences observables ${primaryCompetencyLevels[level].label} | Académie Kerboeuf`,
+  return buildPageMetadata({
+    title: `Compétences observables ${primaryCompetencyLevels[level].label}`,
     description:
       "Repères de compétences observables, critères de réussite et ressources associées pour organiser le travail sans remplacer les supports PDF.",
-  };
+    path: `/primaire/${level}/competences`,
+  });
 }
 
 export default async function PrimaryLevelCompetenciesPage({ params }: PageProps) {
@@ -66,7 +71,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
   const curriculumMap = getCurriculumMapForLevel(level);
 
   return (
-    <main className="primary-competencies-page">
+    <main id="contenu-principal" className="primary-competencies-page">
       <div className="px-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <Breadcrumb
