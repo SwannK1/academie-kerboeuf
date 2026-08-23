@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SubdomainResourcePage } from "@/components/academy/subdomain-resource-page";
 import { getCe1Domain, getCe1Subdomain } from "@/content/levels/ce1-learning-tree";
 import { getCe2Domain, getCe2Subdomain } from "@/content/levels/ce2-learning-tree";
+import { getCm1Domain, getCm1Subdomain } from "@/content/levels/cm1";
 import { getCpDomain, getCpSubdomain } from "@/content/levels/cp-learning-tree";
 import {
   getPublishedSubdomainPage,
@@ -132,6 +133,16 @@ function resolvePrimarySubdomainPage(
         getDomain: getCe2Domain,
         getSubdomain: getCe2Subdomain,
       });
+    case "cm1":
+      return resolveLevelSubdomainPage({
+        level: publishedPage.level,
+        levelLabel: "CM1",
+        domainSlug,
+        subdomainSlug,
+        route: publishedPage.route,
+        getDomain: getCm1Domain,
+        getSubdomain: getCm1Subdomain,
+      });
   }
 }
 
@@ -141,6 +152,8 @@ function getCycleLabelForLevel(level: PublishedPrimaryLevelSlug): string {
     case "ce1":
     case "ce2":
       return "Cycle 2";
+    case "cm1":
+      return "Cycle 3";
   }
 }
 

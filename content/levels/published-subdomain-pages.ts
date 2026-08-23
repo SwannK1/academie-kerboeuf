@@ -1,4 +1,4 @@
-export type PublishedPrimaryLevelSlug = "cp" | "ce1" | "ce2";
+export type PublishedPrimaryLevelSlug = "cp" | "ce1" | "ce2" | "cm1";
 
 export type PublishedSubdomainPage = {
   level: PublishedPrimaryLevelSlug;
@@ -29,6 +29,20 @@ export const publishedSubdomainPages = [
     subdomain: "nombres-calcul",
     route: "/primaire/ce2/programmes/mathematiques/nombres-calcul",
     label: "CE2 — Mathématiques — Nombres et calculs",
+  },
+  {
+    level: "cm1",
+    domain: "francais",
+    subdomain: "lecture-comprehension",
+    route: "/primaire/cm1/programmes/francais/lecture-comprehension",
+    label: "CM1 — Français — Lecture et compréhension",
+  },
+  {
+    level: "cm1",
+    domain: "mathematiques",
+    subdomain: "calcul-pose",
+    route: "/primaire/cm1/programmes/mathematiques/calcul-pose",
+    label: "CM1 — Mathématiques — Calcul posé",
   },
 ] as const satisfies readonly PublishedSubdomainPage[];
 

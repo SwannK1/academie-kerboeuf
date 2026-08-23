@@ -410,3 +410,16 @@ export function getCm1Lesson(lessonSlug: string): Lesson | undefined {
 export function getCm1Exercises(lessonSlug: string): Exercise[] {
   return getCm1Lesson(lessonSlug)?.exercises ?? [];
 }
+
+export function getCm1Domain(domainSlug: string): ProgramDomain | undefined {
+  return cm1Level.domains.find((domain) => domain.slug === domainSlug);
+}
+
+export function getCm1Subdomain(
+  domainSlug: string,
+  subdomainSlug: string,
+): ProgramSubdomain | undefined {
+  return getCm1Domain(domainSlug)?.subdomains.find(
+    (subdomain) => subdomain.slug === subdomainSlug,
+  );
+}

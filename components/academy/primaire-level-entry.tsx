@@ -14,6 +14,7 @@ const SUBDOMAIN_LABELS: Record<string, string> = {
   "lecture-comprehension": "Lecture-compréhension",
   "etude-de-la-langue": "Étude de la langue",
   "nombres-calcul": "Nombres et calcul",
+  "calcul-pose": "Calcul posé",
 };
 
 type Props = {
