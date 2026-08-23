@@ -1,5 +1,3 @@
-import { existsSync, readdirSync } from "fs";
-import { join } from "path";
 import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
@@ -19,6 +17,7 @@ import {
   getPublicStatusKey,
   type PublicStatusKey,
 } from "@/content/public-status";
+import pdfCounts from "@/content/pdf-counts.generated.json";
 
 export const metadata = buildPageMetadata({
   title: "État du site",
@@ -54,8 +53,6 @@ type TeacherTool = {
   href?: string;
 };
 
-const pdfRoot = join(process.cwd(), "public", "fiches");
-
 const teacherToolsAvailable: TeacherTool[] = [
   { title: "Programmation annuelle", status: "available", href: "/enseignants/programmation" },
   { title: "Progression par période", status: "available", href: "/enseignants/progression" },
@@ -72,25 +69,6 @@ const teacherToolsRetired: TeacherTool[] = [
   { title: "Aujourd'hui", status: "in-progress" },
   { title: "Cahier-journal par classe", status: "in-progress" },
 ];
-
-function collectPdfFiles(directory: string): string[] {
-  if (!existsSync(directory)) return [];
-
-  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const fullPath = join(directory, entry.name);
-    if (entry.isDirectory()) return collectPdfFiles(fullPath);
-    return entry.isFile() && entry.name.endsWith(".pdf") ? [fullPath] : [];
-  });
-}
-
-function countPdfFilesFor(prefixes: string[]) {
-  const normalizedRoot = `${pdfRoot}/`;
-
-  return collectPdfFiles(pdfRoot).filter((file) => {
-    const relativePath = file.replace(normalizedRoot, "");
-    return prefixes.some((prefix) => relativePath.startsWith(prefix));
-  }).length;
-}
 
 function countItemsByStatus(items: LeafItem[], statusKey: PublicStatusKey) {
   return items.filter((item) => getPublicStatusKey(item.status) === statusKey)
@@ -245,7 +223,7 @@ function buildSections(): SectionStatus[] {
     {
       title: "Maternelle",
       status: "in-progress",
-      availableFiles: countPdfFilesFor(["maternelle/"]),
+      availableFiles: pdfCounts.maternelle,
       preparingItems: countItemsByStatus(maternelleItems, "in-progress"),
       availableSubjects: unique(availableSubjectLabels(maternelleSubjects)),
       visibleSubjects: unique(visibleSubjectLabels(maternelleSubjects)),
@@ -255,7 +233,7 @@ function buildSections(): SectionStatus[] {
     {
       title: "Primaire",
       status: "available",
-      availableFiles: countPdfFilesFor(["cp/", "ce1/", "ce2/", "cm1/", "cm2/"]),
+      availableFiles: pdfCounts.primaire,
       preparingItems: countItemsByStatus(primaryItems, "in-progress"),
       availableSubjects: unique(availableSubjectLabels(primarySubjects)),
       visibleSubjects: unique(visibleSubjectLabels(primarySubjects)),
@@ -265,7 +243,7 @@ function buildSections(): SectionStatus[] {
     {
       title: "Collège",
       status: "in-progress",
-      availableFiles: countPdfFilesFor(["college/", "6e/", "5e/", "4e/", "3e/"]),
+      availableFiles: pdfCounts.college,
       preparingItems: countItemsByStatus(collegeItems, "in-progress"),
       availableSubjects: unique(availableSubjectLabels(collegeSubjects)),
       visibleSubjects: unique(visibleSubjectLabels(collegeSubjects)),
@@ -275,7 +253,7 @@ function buildSections(): SectionStatus[] {
     {
       title: "Lycée",
       status: "in-progress",
-      availableFiles: countPdfFilesFor(["lycee/", "seconde/", "premiere/", "terminale/"]),
+      availableFiles: pdfCounts.lycee,
       preparingItems: countItemsByStatus(lyceeItems, "in-progress"),
       availableSubjects: unique(availableSubjectLabels(lyceeSubjects)),
       visibleSubjects: unique(visibleSubjectLabels(lyceeSubjects)),

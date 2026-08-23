@@ -12,7 +12,8 @@
     "lint": "eslint",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "import:resources": "node scripts/import-ce1-resources.mjs"
+    "import:resources": "node scripts/import-ce1-resources.mjs",
+    "generate:pdf-counts": "node scripts/generate-pdf-counts.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
