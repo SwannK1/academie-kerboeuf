@@ -68,23 +68,38 @@ function readStoredDataChecked(): {
 export function TeacherClassOrganizationClient() {
   const [level, setLevel] = useState<TeacherLevel>(teacherLevels[0].id);
   const [period, setPeriod] = useState<TeacherPeriod>(teacherPeriods[0].id);
-  const initialData = useMemo(() => readStoredDataChecked(), []);
-  const [data, setData] = useState<StoredData>(initialData.data);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialData.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialData.wasReset
-        ? "Certaines priorités enregistrées étaient illisibles et ont été ignorées."
-        : null,
-  );
+  // Le rendu initial (SSR et première passe client) doit être identique pour
+  // éviter une erreur d'hydratation : on démarre vide, puis on charge le
+  // stockage local après montage, une fois "window" réellement disponible.
+  const [data, setData] = useState<StoredData>({} as StoredData);
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
   const [newLabel, setNewLabel] = useState("");
   const [newGroup, setNewGroup] = useState<ClassOrgGroupId>(
     classOrgGroups[0].id,
   );
   const dragIndexRef = useRef<number | null>(null);
+  const hasHydratedRef = useRef(false);
   const listInstructionsId = useId();
 
   useEffect(() => {
+    const initial = readStoredDataChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage, jamais lu pendant le rendu SSR
+    setData(initial.data);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+    setStorageNotice(
+      !initial.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : initial.wasReset
+          ? "Certaines priorités enregistrées étaient illisibles et ont été ignorées."
+          : null,
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!hasHydratedRef.current) {
+      hasHydratedRef.current = true;
+      return;
+    }
     writeLocalStorageJson(STORAGE_KEY, data);
   }, [data]);
 

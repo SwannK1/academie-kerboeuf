@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CompetencyCard } from "@/components/academy/learning-architecture-cards";
 import { CurriculumMapPreview } from "@/components/academy/CurriculumMapPreview";
@@ -105,7 +106,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
       {curriculumMap && (
         <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="mb-6 flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
                   Programme détaillé
@@ -114,6 +115,12 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
                   Squelette — {levelInfo.label}
                 </h2>
               </div>
+              <Link
+                href={`/primaire/${level}/programme`}
+                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+              >
+                Voir le programme complet →
+              </Link>
             </div>
             <CurriculumMapPreview curriculumMap={curriculumMap} />
           </div>

@@ -50,20 +50,22 @@ function readSaves(): StoredLayout[] {
 }
 
 export function TeacherClassroomLayoutClient() {
-  const [saves, setSaves] = useState<StoredLayout[]>(() => readSaves());
-  const [initialDefault] = useState<StoredLayout>(() => {
-    const initial = readSaves();
-    return initial.find((s) => s.isDefault) ?? initial[0] ?? emptyLayout("Configuration 1");
-  });
-  const [currentId, setCurrentId] = useState<string>(initialDefault.id);
+  // Le rendu initial (SSR et première passe client) doit être identique pour
+  // éviter une erreur d'hydratation : on démarre sur une configuration vide
+  // déterministe, puis on charge le stockage local après montage, une fois
+  // "window" réellement disponible.
+  const fallbackDefault = useMemo(() => emptyLayout("Configuration 1"), []);
 
-  const [tables, setTables] = useState<TableShape[]>(initialDefault.tables);
-  const [labels, setLabels] = useState<Label[]>(initialDefault.labels);
-  const [groups, setGroups] = useState<Group[]>(initialDefault.groups);
+  const [saves, setSaves] = useState<StoredLayout[]>([]);
+  const [currentId, setCurrentId] = useState<string>(fallbackDefault.id);
+
+  const [tables, setTables] = useState<TableShape[]>(fallbackDefault.tables);
+  const [labels, setLabels] = useState<Label[]>(fallbackDefault.labels);
+  const [groups, setGroups] = useState<Group[]>(fallbackDefault.groups);
   const [roleAssignment, setRoleAssignment] = useState<RoleAssignment>(
-    initialDefault.roleAssignment,
+    fallbackDefault.roleAssignment,
   );
-  const [configName, setConfigName] = useState(initialDefault.name);
+  const [configName, setConfigName] = useState(fallbackDefault.name);
 
   const [tab, setTab] = useState<Tab>("plan");
   const [showLegend, setShowLegend] = useState(true);
@@ -88,6 +90,27 @@ export function TeacherClassroomLayoutClient() {
   const dragLabelRef = useRef<string | null>(null);
 
   const hydratedRef = useRef(false);
+
+  useEffect(() => {
+    const initial = readSaves();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage, jamais lu pendant le rendu SSR
+    setSaves(initial);
+    const defaultLayout = initial.find((s) => s.isDefault) ?? initial[0];
+    if (defaultLayout) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+      setCurrentId(defaultLayout.id);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+      setTables(defaultLayout.tables);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+      setLabels(defaultLayout.labels);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+      setGroups(defaultLayout.groups);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+      setRoleAssignment(defaultLayout.roleAssignment);
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+      setConfigName(defaultLayout.name);
+    }
+  }, []);
 
   function persistCurrent(next: Partial<StoredLayout> = {}) {
     setSaves((prev) => {

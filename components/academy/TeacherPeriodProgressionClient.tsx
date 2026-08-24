@@ -5,6 +5,7 @@ import {
   useEffect,
   useId,
   useMemo,
+  useRef,
   useState,
   type DragEvent,
 } from "react";
@@ -70,15 +71,26 @@ type ImportScope = "all" | "subject";
 export function TeacherPeriodProgressionClient() {
   const [niveau, setNiveau] = useState<TeacherLevel>("cp");
   const [periode, setPeriode] = useState<TeacherPeriod>("periode-1");
-  const initialCards = useMemo(() => readStoredCardsChecked(), []);
-  const [cards, setCards] = useState<PeriodCard[]>(initialCards.cards);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialCards.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialCards.wasReset
-        ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
-        : null,
-  );
+  // Le rendu initial (SSR et première passe client) doit être identique pour
+  // éviter une erreur d'hydratation : on démarre vide, puis on charge le
+  // stockage local après montage, une fois "window" réellement disponible.
+  const [cards, setCards] = useState<PeriodCard[]>([]);
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
+  const hasHydratedRef = useRef(false);
+
+  useEffect(() => {
+    const initial = readStoredCardsChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage, jamais lu pendant le rendu SSR
+    setCards(initial.cards);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
+    setStorageNotice(
+      !initial.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : initial.wasReset
+          ? "Certaines cartes enregistrées étaient illisibles et ont été ignorées."
+          : null,
+    );
+  }, []);
 
   const [filterMatiere, setFilterMatiere] = useState<TeacherSubjectId | "all">(
     "all",
@@ -110,6 +122,10 @@ export function TeacherPeriodProgressionClient() {
   } | null>(null);
 
   useEffect(() => {
+    if (!hasHydratedRef.current) {
+      hasHydratedRef.current = true;
+      return;
+    }
     writeStoredCards(cards);
   }, [cards]);
 
