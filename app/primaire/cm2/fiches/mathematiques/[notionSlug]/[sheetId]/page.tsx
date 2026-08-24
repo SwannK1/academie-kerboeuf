@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/content/seo";
 import {
   cm2FichesMaths,
   getCm2FicheMath,
@@ -28,10 +29,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const notion = getCm2FicheMath(notionSlug);
   if (!notion) return { title: "Fiche introuvable" };
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
+  return buildPageMetadata({
     title: `${notion.title} — ${label} | CM2 Mathématiques`,
     description: `${notion.skill} (${label})`,
-  };
+    path: `/primaire/cm2/fiches/mathematiques/${notionSlug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: PageProps) {

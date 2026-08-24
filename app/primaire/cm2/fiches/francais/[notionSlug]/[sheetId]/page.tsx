@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { buildPageMetadata } from "@/content/seo";
 import {
   cm2FrancaisFiches,
   getFicheNotionBySlug,
@@ -33,9 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const notion = getFicheNotionBySlug(notionSlug);
   if (!notion) return {};
   const label = SHEET_LABELS[sheetId as SheetId] ?? sheetId;
-  return {
+  return buildPageMetadata({
     title: `${notion.title} — ${label} — Fiches Français CM2`,
-  };
+    description: `${FICHE_DOMAIN_LABELS[notion.domain]} CM2 — ${notion.title} (${label}). Fiche pédagogique avec aperçu et PDF téléchargeable.`,
+    path: `/primaire/cm2/fiches/francais/${notion.slug}/${sheetId}`,
+  });
 }
 
 export default async function FicheDetailPage({ params }: Props) {
