@@ -74,20 +74,10 @@ type SubjectDetailPageProps<TSubject extends MatterSubject> = {
   tree?: MatterTree;
   accent: Record<string, AccentTokens>;
   sequences: MatterSequence[];
-  linkedCards?: LinkedCard[];
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel?: string;
   bottomSection?: React.ReactNode;
   layout?: "default" | "compact";
-};
-
-type LinkedCard = {
-  href: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  accentText: string;
-  accentBorder: string;
 };
 
 export function SubjectIndexPage<TSubject extends MatterSubject>({
@@ -181,7 +171,6 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
   tree,
   accent,
   sequences,
-  linkedCards = [],
   footerLinks,
   cycleLabel = "Cycle 3",
   bottomSection,
@@ -201,7 +190,6 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
         t={t}
         sequenceGroups={sequenceGroups}
         sequences={sequences}
-        linkedCards={linkedCards}
         footerLinks={footerLinks}
         cycleLabel={cycleLabel}
         bottomSection={bottomSection}
@@ -300,69 +288,40 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
         </section>
       )}
 
-      {linkedCards.length > 0 ? (
-        <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-              <div>
-                <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
-                  Missions
-                </p>
-                <h2 className="mt-2 text-2xl font-black text-foreground">
-                  Missions disponibles en {subject.title}
-                </h2>
-              </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {linkedCards.map((card) => (
-                <Link
-                  key={card.href}
-                  href={card.href}
-                  className={`group flex flex-col rounded-md border ${card.accentBorder} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
-                >
-                  <p className={`text-xs font-bold uppercase tracking-[0.18em] ${card.accentText}`}>
-                    {card.eyebrow}
-                  </p>
-                  <h3 className="mt-3 text-lg font-black text-foreground">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-muted">
-                    {card.description}
-                  </p>
-                  <span className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${card.accentText}`}>
-                    Ouvrir la mission →
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       {sequenceGroups.length > 0 ? (
         <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 border-b border-white/10 pb-5">
-              <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
-                1 séquence = 1 compétence
-              </p>
-              <h2 className="mt-2 text-2xl font-black text-foreground">
-                Séquences-compétences
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-muted">
-                Architecture pédagogique · Supports en cours de création.
-              </p>
-            </div>
-            <div className="space-y-6">
-              {sequenceGroups.map(({ domain, subdomains }) => (
-                <SequenceDomainBlock
-                  key={domain}
-                  domain={domain}
-                  subdomains={subdomains}
-                  t={t}
-                />
-              ))}
-            </div>
+            <details className={`group rounded-md border ${t.border} bg-white/[0.025]`}>
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70">
+                <span>
+                  <span className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
+                    1 séquence = 1 compétence
+                  </span>
+                  <span className="mt-2 block text-2xl font-black text-foreground">
+                    Voir le programme détaillé
+                  </span>
+                  <span className="mt-2 block text-sm leading-6 text-muted">
+                    Séquences-compétences · Architecture pédagogique.
+                  </span>
+                </span>
+                <span
+                  className={`mt-1 shrink-0 text-sm font-black ${t.text} transition group-open:rotate-90`}
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </summary>
+              <div className="space-y-5 border-t border-white/10 p-5 pt-0">
+                {sequenceGroups.map(({ domain, subdomains }) => (
+                  <SequenceDomainBlock
+                    key={domain}
+                    domain={domain}
+                    subdomains={subdomains}
+                    t={t}
+                  />
+                ))}
+              </div>
+            </details>
           </div>
         </section>
       ) : null}
@@ -421,7 +380,6 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
   t,
   sequenceGroups,
   sequences,
-  linkedCards,
   footerLinks,
   cycleLabel,
   bottomSection,
@@ -434,7 +392,6 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
   t: AccentTokens;
   sequenceGroups: ReturnType<typeof groupSequences>;
   sequences: MatterSequence[];
-  linkedCards: LinkedCard[];
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
   cycleLabel: string;
   bottomSection?: React.ReactNode;
@@ -488,9 +445,8 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
           <dl
             id="resume"
             aria-label={`Résumé ${subject.title} ${levelLabel}`}
-            className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1"
+            className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1"
           >
-            <SubjectMetric label="missions disponibles" value={linkedCards.length} />
             <SubjectMetric label="domaines" value={domainCount} />
             <SubjectMetric label="progressions en cours" value={inProgressCount} />
           </dl>
@@ -499,13 +455,7 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
 
       <SubjectTeacherSection subjectSlug={subject.slug} t={t} />
 
-      {linkedCards.length > 0 ? (
-        <CompactMissionsSection
-          subjectTitle={subject.title}
-          linkedCards={linkedCards}
-          t={t}
-        />
-      ) : null}
+      {bottomSection}
 
       {tree && tree.domains.length > 0 ? (
         <section
@@ -629,8 +579,6 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
         </section>
       ) : null}
 
-      {bottomSection}
-
       <SubjectFooter subjectsHref={subjectsHref} footerLinks={footerLinks} />
     </main>
   );
@@ -644,62 +592,6 @@ function SubjectMetric({ label, value }: { label: string; value: number }) {
       </dt>
       <dd className="mt-2 text-3xl font-black text-foreground">{value}</dd>
     </div>
-  );
-}
-
-function CompactMissionsSection({
-  subjectTitle,
-  linkedCards,
-  t,
-}: {
-  subjectTitle: string;
-  linkedCards: LinkedCard[];
-  t: AccentTokens;
-}) {
-  return (
-    <section
-      id="missions-disponibles"
-      aria-labelledby="missions-disponibles-title"
-      className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
-    >
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
-              Missions prêtes
-            </p>
-            <h2
-              id="missions-disponibles-title"
-              className="mt-2 text-2xl font-black text-foreground"
-            >
-              Accès rapide en {subjectTitle}
-            </h2>
-          </div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {linkedCards.map((card) => (
-            <Link
-              key={card.href}
-              href={card.href}
-              className={`group flex flex-col rounded-md border ${card.accentBorder} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
-            >
-              <p className={`text-xs font-bold uppercase tracking-[0.18em] ${card.accentText}`}>
-                {card.eyebrow}
-              </p>
-              <h3 className="mt-3 text-lg font-black text-foreground">
-                {card.title}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-6 text-muted">
-                {card.description}
-              </p>
-              <span className={`mt-4 text-sm font-black transition group-hover:translate-x-1 ${card.accentText}`}>
-                Ouvrir la mission →
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -929,12 +821,19 @@ function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
 }
 
 function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
+  const sortedItems = [...subdomain.items].sort((a, b) => {
+    const aAvailable = getPublicStatusKey(a.status) === "available";
+    const bAvailable = getPublicStatusKey(b.status) === "available";
+    if (aAvailable === bAvailable) return 0;
+    return aAvailable ? -1 : 1;
+  });
+
   return (
     <li className="rounded border border-white/10 bg-white/[0.03] px-3 py-3">
       <h4 className="text-sm font-semibold text-foreground">{subdomain.title}</h4>
-      {subdomain.items.length > 0 ? (
+      {sortedItems.length > 0 ? (
         <ul className="mt-2 space-y-2">
-          {subdomain.items.map((item) => (
+          {sortedItems.map((item) => (
             <li key={item.id} className="flex items-start gap-2 text-xs text-muted">
               <span className="mt-1 shrink-0 text-white/25" aria-hidden="true">
                 ·

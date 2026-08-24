@@ -136,18 +136,6 @@ export default function Home() {
               >
                 Voir les ressources prêtes
               </Link>
-              <Link
-                href="/carte"
-                className="rounded-md border border-sky/35 bg-sky/10 px-5 py-3 text-sm font-black text-sky transition hover:bg-sky hover:text-ink"
-              >
-                Accéder par niveau
-              </Link>
-              <Link
-                href="/univers"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
-              >
-                Explorer l&apos;univers
-              </Link>
             </div>
           </div>
 
@@ -248,8 +236,10 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {levelGroups.map((group) => {
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {levelGroups
+              .filter((group) => group.id !== "enseignants")
+              .map((group) => {
               const copy = levelCopy[group.id];
               const accent = accentClasses[copy.accent];
 

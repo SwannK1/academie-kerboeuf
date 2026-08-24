@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { Cm2MathFichesEmbed } from "@/components/academy/Cm2MathFichesEmbed";
 import { Cm2FrancaisFichesEmbed } from "@/components/academy/Cm2FrancaisFichesEmbed";
-import { getCm2MissionBySlug } from "@/content/cm2";
 import { cm2Subjects, getCm2SubjectBySlug } from "@/content/cm2-subjects";
 import {
   getCm2SubjectTree,
@@ -15,7 +14,6 @@ import {
   type Cm2Sequence,
 } from "@/content/cm2-sequences";
 import { CM2_ACCENT } from "@/lib/cm2-accent";
-import { getPublicStatusKey } from "@/content/public-status";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -49,18 +47,6 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
   if (!subject) notFound();
 
   const tree = getCm2SubjectTree(slug);
-  const linkedCards = (subject.missionSlugs ?? [])
-    .map((missionSlug) => getCm2MissionBySlug(missionSlug))
-    .filter((mission): mission is NonNullable<typeof mission> => mission !== undefined)
-    .filter((mission) => getPublicStatusKey(mission.status) === "available")
-    .map((mission) => ({
-      href: `/primaire/cm2/missions/${mission.slug}`,
-      eyebrow: mission.subject,
-      title: mission.title,
-      description: mission.objective,
-      accentText: mission.theme.textClass,
-      accentBorder: mission.theme.ringClass ?? "border-white/10",
-    }));
 
   let bottomSection: React.ReactNode = undefined;
   if (slug === "francais") bottomSection = <Cm2FrancaisFichesEmbed />;
@@ -76,7 +62,6 @@ export default async function Cm2SubjectPage({ params }: PageProps) {
       accent={CM2_ACCENT}
       sequences={mapCm2Sequences(getCm2SequencesBySubjectSlug(slug))}
       cycleLabel="Cycle 3"
-      linkedCards={linkedCards}
       footerLinks={[
         { href: "/primaire/cm2/missions", label: "Toutes les missions CM2", tone: "gold" },
         { href: "/primaire/cm2/parcours", label: "Parcours de l'année", tone: "jade" },

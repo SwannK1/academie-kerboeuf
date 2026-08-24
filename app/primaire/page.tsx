@@ -49,15 +49,6 @@ const LEVEL_GUIDES: Record<
   },
 };
 
-// Routes that actually exist — no fictitious links
-const LEVEL_MATIERES: Record<string, string> = {
-  cp: "/primaire/cp/matieres",
-  ce1: "/primaire/ce1/matieres",
-  ce2: "/primaire/ce2/matieres",
-  cm1: "/primaire/cm1/matieres",
-  cm2: "/primaire/cm2/matieres",
-};
-
 const LEVEL_ACCENT: Record<
   string,
   { text: string; border: string; hoverBorder: string; hoverBg: string; ring: string }
@@ -136,7 +127,6 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
     ring: "focus:ring-gold/60",
   };
   const status = getLevelAvailability(level.slug as AcademyLevelSlug);
-  const matieresHref = LEVEL_MATIERES[level.slug] ?? null;
 
   return (
     <div
@@ -156,21 +146,13 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
         ) : null}
       </p>
       <p className="mt-4 flex-1 text-sm leading-7 text-muted">{guide.focus}</p>
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-white/10 pt-4">
+      <div className="mt-5 border-t border-white/10 pt-4">
         <Link
           href={getLevelPath(level)}
-          className={`inline-flex items-center gap-1.5 rounded border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-bold text-foreground transition hover:bg-white/[0.08] focus:outline-none focus:ring-2 ${accent.ring}`}
+          className={`inline-flex items-center gap-1.5 rounded border ${accent.border} bg-transparent px-3 py-1.5 text-xs font-bold ${accent.text} transition ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}
         >
-          Portail {level.label} →
+          Découvrir {level.label} →
         </Link>
-        {matieresHref && (
-          <Link
-            href={matieresHref}
-            className={`inline-flex items-center gap-1.5 rounded border ${accent.border} bg-transparent px-3 py-1.5 text-xs font-bold ${accent.text} transition ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}
-          >
-            Matières →
-          </Link>
-        )}
       </div>
     </div>
   );

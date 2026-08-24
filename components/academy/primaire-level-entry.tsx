@@ -26,24 +26,8 @@ export function PrimaireLevelEntry({ level }: Props) {
 
   const subjects = getCurriculumSubjectsForLevel(slug);
 
-  const secondaryLinks = [
-    {
-      label: "Matières",
-      href: `/primaire/${slug}/matieres`,
-    },
-    {
-      label: "Programme",
-      href: `/primaire/${slug}/programme`,
-    },
-    {
-      label: "Compétences",
-      href: `/primaire/${slug}/competences`,
-    },
-    {
-      label: "Missions",
-      href: `/primaire/${slug}/missions`,
-    },
-  ];
+  const programHref = `/primaire/${slug}/competences`;
+  const missionsHref = `/primaire/${slug}/missions`;
 
   const resources = publishedSubdomainPages
     .filter((p) => (p.level as string) === slug)
@@ -146,32 +130,34 @@ export function PrimaireLevelEntry({ level }: Props) {
         </div>
       </section>
 
-      {/* ── Accès complémentaires ── */}
+      {/* ── Missions transversales ── */}
       <section className="px-4 pb-10 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="border-t border-white/10 pt-6">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-muted">
-              Accès complémentaires
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-jade">
+              Missions transversales
             </p>
-            <div className="flex flex-wrap gap-3">
-              {secondaryLinks.map((link, i) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`group inline-flex items-center gap-2 rounded-md border px-5 py-3 text-sm font-bold transition ${
-                    i === 0
-                      ? "border-jade/35 bg-jade/[0.06] text-jade hover:bg-jade/[0.10]"
-                      : "border-white/10 bg-white/[0.03] text-muted hover:border-white/20 hover:bg-white/[0.06] hover:text-foreground"
-                  }`}
-                >
-                  {link.label}
-                  <span className="transition group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <Link
+              href={missionsHref}
+              className="group inline-flex items-center gap-2 rounded-md border border-jade/35 bg-jade/[0.06] px-5 py-3 text-sm font-bold text-jade transition hover:bg-jade/[0.10]"
+            >
+              Découvrir les missions {level.label}
+              <span className="transition group-hover:translate-x-0.5">→</span>
+            </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── Programme (secondaire) ── */}
+      <section className="px-4 pb-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Link
+            href={programHref}
+            className="group inline-flex items-center gap-2 text-sm font-bold text-muted transition hover:text-foreground"
+          >
+            Voir le programme et les compétences complètes
+            <span className="transition group-hover:translate-x-0.5">→</span>
+          </Link>
         </div>
       </section>
 

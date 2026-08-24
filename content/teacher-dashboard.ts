@@ -12,7 +12,7 @@ export type TeacherDashboardSection = {
 
 export const teacherDashboardSections: TeacherDashboardSection[] = [
   {
-    title: "Organiser l'année",
+    title: "Préparer l'année",
     cards: [
       {
         title: "Programmation",
@@ -26,6 +26,17 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/progression",
         icon: "🗂️",
       },
+      {
+        title: "Calendrier",
+        description: "Visualisez les échéances et les périodes de l'année scolaire.",
+        href: "/enseignants/calendrier",
+        icon: "🗓️",
+      },
+    ],
+  },
+  {
+    title: "Organiser la semaine",
+    cards: [
       {
         title: "Emploi du temps",
         description: "Construisez une semaine type et suivez le total d'heures.",
@@ -43,12 +54,6 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         description: "Construire une séance complète, puis la réutiliser.",
         href: "/enseignants/preparer-une-seance",
         icon: "🧑‍🏫",
-      },
-      {
-        title: "Calendrier",
-        description: "Visualisez les échéances et les périodes de l'année scolaire.",
-        href: "/enseignants/calendrier",
-        icon: "🗓️",
       },
       {
         title: "Fin de période",

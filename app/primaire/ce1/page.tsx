@@ -63,29 +63,6 @@ export default function Ce1Page() {
 
       {/* ── Carte des espaces pédagogiques ──────────────────────────────── */}
       <Ce1GastonLearningMap />
-
-      {/* ── Navigation rapide ────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-muted">
-            Accès direct
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/primaire/ce1/matieres"
-              className="group inline-flex items-center gap-2 rounded-md border border-sky/25 bg-sky/[0.05] px-4 py-2.5 text-sm font-bold text-sky transition hover:bg-sky/[0.09]"
-            >
-              Matières CE1 <span className="transition group-hover:translate-x-0.5">→</span>
-            </Link>
-            <Link
-              href="/primaire/ce1/programmes/francais/etude-de-la-langue"
-              className="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
-            >
-              Étude de la langue CE1 <span className="transition group-hover:translate-x-0.5">→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

@@ -83,6 +83,6 @@ export const ce1GastonZones: Ce1GastonZone[] = [
     tagline: "Organiser son travail et relever de petits défis.",
     domains: ["Méthode de travail", "Autonomie", "Défis courts"],
     status: "in-progress",
-    href: "/primaire/ce1/lecons",
+    href: "/primaire/ce1/matieres",
   },
 ];
