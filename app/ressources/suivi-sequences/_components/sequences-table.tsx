@@ -2,16 +2,10 @@
 
 import { useState, useMemo, type ChangeEvent } from "react";
 import type { SequenceRow, ResourceCellStatus } from "@/content/suivi-sequences-data";
-import { getPublicStatusKey } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 
 type Props = {
   rows: SequenceRow[];
-};
-
-const STATUS_LABELS: Record<string, string> = {
-  available: "Disponible",
-  "in-progress": "En préparation",
-  upcoming: "À venir",
 };
 
 const RESOURCE_LABELS: Record<ResourceCellStatus, string> = {
@@ -52,7 +46,7 @@ function StatusBadge({ status }: { status: string }) {
         : "bg-amber-100 text-amber-800 border border-amber-300";
   return (
     <span className={`inline-block rounded px-1.5 py-0.5 text-xs ${cls}`}>
-      {STATUS_LABELS[key] ?? key}
+      {getPublicStatusLabel(status)}
     </span>
   );
 }
@@ -148,9 +142,9 @@ export function SequencesTable({ rows }: Props) {
             className="rounded border border-gray-300 bg-white px-2 py-1 text-sm"
           >
             <option value="">Tous</option>
-            <option value="available">Disponible</option>
-            <option value="in-progress">En préparation</option>
-            <option value="upcoming">À venir</option>
+            <option value="available">{getPublicStatusLabel("available")}</option>
+            <option value="in-progress">{getPublicStatusLabel("in-progress")}</option>
+            <option value="upcoming">{getPublicStatusLabel("upcoming")}</option>
           </select>
         </div>
 

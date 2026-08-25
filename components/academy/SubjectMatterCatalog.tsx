@@ -839,7 +839,7 @@ function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
                 ·
               </span>
               <div className="min-w-0 flex-1">
-                {item.href ? (
+                {item.href && getPublicStatusKey(item.status) === "available" ? (
                   <Link
                     href={item.href}
                     className="font-semibold text-foreground transition hover:underline"

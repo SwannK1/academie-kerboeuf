@@ -183,25 +183,6 @@ function CompetencyResourceItem({
         <PublicStatusBadge status={competency.status} className="shrink-0" />
       </div>
 
-      {competency.successCriteria?.length ? (
-        <div className="mt-5 rounded border border-white/10 bg-ink/25 p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
-            Critères de réussite
-          </p>
-          <ul className="mt-3 grid gap-2">
-            {competency.successCriteria.map((criterion) => (
-              <li key={criterion} className="flex gap-2 text-sm text-muted">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 size-1.5 shrink-0 rounded-full bg-jade/60"
-                />
-                <span className="leading-6">{criterion}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
       {resourceRefs.length > 0 ? (
         <div className="mt-5">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">

@@ -94,6 +94,12 @@ function missionHref(mission: Mission) {
     return `/primaire/${mission.levelSlug}/missions`;
   }
 
+  if (mission.stage === "college") {
+    // Collège has no per-mission detail route yet — link to the level page
+    // instead of a slug that would 404 (see `/college/[level]/page.tsx`).
+    return `/college/${mission.levelSlug}`;
+  }
+
   return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
 }
 

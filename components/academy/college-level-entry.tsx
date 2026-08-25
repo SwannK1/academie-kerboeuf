@@ -6,18 +6,15 @@ import {
   getCollegeMatiereCards,
   getSixiemeAccompagnementCards,
 } from "@/content/college-curriculum";
-import { getPublicStatusKey } from "@/content/public-status";
+import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
 
 type Props = {
   level: AcademyLevel;
 };
 
-function cardLabel(
-  isLinked: boolean,
-  statusKey: string,
-): string | null {
+function cardLabel(isLinked: boolean, status: unknown): string | null {
   if (isLinked) return null;
-  return statusKey === "in-progress" ? "En préparation" : "À venir";
+  return getPublicStatusLabel(status);
 }
 
 export function CollegeLevelEntry({ level }: Props) {
@@ -68,7 +65,7 @@ export function CollegeLevelEntry({ level }: Props) {
               const statusKey = getPublicStatusKey(matiere.status);
               const isLinked =
                 !!matiere.href && statusKey === "available";
-              const tag = cardLabel(isLinked, statusKey);
+              const tag = cardLabel(isLinked, matiere.status);
 
               const cardContent = (
                 <div
@@ -149,7 +146,7 @@ export function CollegeLevelEntry({ level }: Props) {
               {accompagnementCards.map((card) => {
                 const statusKey = getPublicStatusKey(card.status);
                 const isLinked = !!card.href && statusKey === "available";
-                const tag = cardLabel(isLinked, statusKey);
+                const tag = cardLabel(isLinked, card.status);
 
                 const cardContent = (
                   <div

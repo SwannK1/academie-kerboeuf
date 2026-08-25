@@ -1,5 +1,6 @@
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import {
+  isPedagogicalResourceAbsent,
   isPedagogicalResourceLinkable,
 } from "@/content/pedagogical-resources";
 import type { CurriculumEntry } from "@/content/curriculum-map-types";
@@ -60,7 +61,7 @@ function ResourceSlotList({ slots }: ResourceSlotListProps) {
   );
   const plannedCount = slots.filter(
     (slot) =>
-      slot.resource?.status !== "missing" &&
+      !isPedagogicalResourceAbsent(slot.resource) &&
       !isPedagogicalResourceLinkable(slot.resource),
   ).length;
 

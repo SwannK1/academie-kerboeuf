@@ -60,7 +60,11 @@ function missionHref(mission: Mission) {
 }
 
 function isLinkableMission(mission: Mission) {
-  return mission.stage !== "primaire" || mission.levelSlug === "cm2";
+  // Only stages with a real per-mission detail route belong here: CM2
+  // (`/primaire/cm2/missions/[slug]`) and lycée (`/lycee/[level]/missions/[slug]`).
+  // Collège has no such route yet, so its missions must not be exposed as
+  // clickable classroom resources (see `/college/[level]/page.tsx`).
+  return mission.stage === "lycee" || mission.levelSlug === "cm2";
 }
 
 function resourceFromMission(mission: Mission): ClassroomResource {
