@@ -1,6 +1,6 @@
-// Arbre pedagogique CP - Cycle 2, primaire.
-// Structure de catalogue : niveau -> matieres -> domaines -> sequences-competences.
-// Une sequence correspond a une seule competence, sans lecon detaillee ni exercice.
+// Arbre pédagogique CP — Cycle 2, primaire.
+// Structure de catalogue : niveau -> matières -> domaines -> séquences-compétences.
+// Une séquence correspond à une seule compétence, sans leçon détaillée ni exercice.
 
 import type {
   AcademyLevelProgram,
@@ -90,29 +90,29 @@ function createSubdomain(
 const domainFrancais: ProgramDomain = {
   id: "cp-francais",
   slug: "francais",
-  title: "Francais",
-  officialLabel: "Francais - Cycle 2",
+  title: "Français",
+  officialLabel: "Français - Cycle 2",
   description:
-    "Decodage, combinatoire, fluence, comprehension et premieres ecritures.",
+    "Décodage, combinatoire, fluence, compréhension et premières écritures.",
   subdomains: [
     createSubdomain(
       "francais",
       "decodage",
-      "Decodage",
-      "Entrer progressivement dans le code alphabetique.",
+      "Décodage",
+      "Entrer progressivement dans le code alphabétique.",
       [
         {
           slug: "reconnaitre-les-lettres-en-differentes-ecritures",
-          title: "Reconnaitre les lettres dans differentes ecritures",
+          title: "Reconnaître les lettres dans différentes écritures",
           objective:
-            "Identifier une meme lettre ecrite en script, cursive, majuscule et minuscule.",
+            "Identifier une même lettre écrite en script, cursive, majuscule et minuscule.",
           status: "upcoming",
         },
         {
           slug: "associer-une-lettre-et-son-son",
           title: "Associer une lettre et son son",
           objective:
-            "Dire le son correspondant a une lettre isolee ou a une graphie etudiee.",
+            "Dire le son correspondant à une lettre isolée ou à une graphie étudiée.",
           status: "upcoming",
         },
         {
@@ -124,23 +124,23 @@ const domainFrancais: ProgramDomain = {
         },
         {
           slug: "reconnaitre-les-lettres-et-les-sons-frequents",
-          title: "Reconnaitre les lettres et les sons frequents",
+          title: "Reconnaître les lettres et les sons fréquents",
           objective:
-            "Associer les lettres et graphies etudiees a leur son le plus frequent.",
+            "Associer les lettres et graphies étudiées à leur son le plus fréquent.",
           status: "in-progress",
         },
         {
           slug: "lire-des-syllabes-simples",
           title: "Lire des syllabes simples",
           objective:
-            "Decoder des syllabes consonne-voyelle et voyelle-consonne avec appui oral.",
+            "Décoder des syllabes consonne-voyelle et voyelle-consonne avec appui oral.",
           status: "upcoming",
         },
         {
           slug: "lire-des-mots-reguliers-courts",
-          title: "Lire des mots reguliers courts",
+          title: "Lire des mots réguliers courts",
           objective:
-            "Assembler les syllabes pour lire des mots reguliers d'une ou deux syllabes.",
+            "Assembler les syllabes pour lire des mots réguliers d'une ou deux syllabes.",
           status: "upcoming",
         },
       ],
@@ -160,16 +160,16 @@ const domainFrancais: ProgramDomain = {
         },
         {
           slug: "lire-des-mots-avec-digraphes-frequents",
-          title: "Lire des mots avec digraphes frequents",
+          title: "Lire des mots avec digraphes fréquents",
           objective:
-            "Decoder des mots contenant des graphemes frequents comme ou, on, an ou ch.",
+            "Décoder des mots contenant des graphèmes fréquents comme ou, on, an ou ch.",
           status: "upcoming",
         },
         {
           slug: "encoder-des-syllabes-entendues",
           title: "Encoder des syllabes entendues",
           objective:
-            "Ecrire une syllabe simple en choisissant les lettres correspondant aux sons entendus.",
+            "Écrire une syllabe simple en choisissant les lettres correspondant aux sons entendus.",
           status: "upcoming",
         },
       ],
@@ -182,14 +182,14 @@ const domainFrancais: ProgramDomain = {
       [
         {
           slug: "lire-des-mots-frequents-sans-segmenter",
-          title: "Lire des mots frequents sans segmenter",
+          title: "Lire des mots fréquents sans segmenter",
           objective:
-            "Reconnaitre rapidement des mots tres frequents deja rencontres.",
+            "Reconnaître rapidement des mots très fréquents déjà rencontrés.",
           status: "upcoming",
         },
         {
           slug: "lire-une-phrase-courte-avec-fluidite",
-          title: "Lire une phrase courte avec fluidite",
+          title: "Lire une phrase courte avec fluidité",
           objective:
             "Lire une phrase courte en respectant l'ordre des mots et une prosodie simple.",
           status: "upcoming",
@@ -199,28 +199,28 @@ const domainFrancais: ProgramDomain = {
     createSubdomain(
       "francais",
       "lecture-comprehension",
-      "Comprehension orale puis ecrite",
-      "Comprendre des enonces entendus puis lus.",
+      "Compréhension orale puis écrite",
+      "Comprendre des énoncés entendus puis lus.",
       [
         {
           slug: "comprendre-une-consigne-orale-simple",
           title: "Comprendre une consigne orale simple",
           objective:
-            "Reformuler ou executer une consigne courte donnee oralement.",
+            "Reformuler ou exécuter une consigne courte donnée oralement.",
           status: "upcoming",
         },
         {
           slug: "identifier-les-personnages-dun-texte-entendu",
           title: "Identifier les personnages d'un texte entendu",
           objective:
-            "Nommer les personnages principaux apres l'ecoute d'un recit court.",
+            "Nommer les personnages principaux après l'écoute d'un récit court.",
           status: "upcoming",
         },
         {
           slug: "prelever-une-information-dans-une-phrase-lue",
-          title: "Prelever une information dans une phrase lue",
+          title: "Prélever une information dans une phrase lue",
           objective:
-            "Repondre a une question simple a partir d'une phrase decodee.",
+            "Répondre à une question simple à partir d'une phrase décodée.",
           status: "upcoming",
         },
       ],
@@ -228,27 +228,27 @@ const domainFrancais: ProgramDomain = {
     createSubdomain(
       "francais",
       "ecriture",
-      "Ecriture de mots et phrases",
-      "Passer de l'encodage de mots simples a l'ecriture de phrases tres courtes.",
+      "Écriture de mots et phrases",
+      "Passer de l'encodage de mots simples à l'écriture de phrases très courtes.",
       [
         {
           slug: "copier-des-mots-courts-lisiblement",
           title: "Copier des mots courts lisiblement",
           objective:
-            "Copier des mots courts en respectant l'ordre des lettres et la lisibilite.",
+            "Copier des mots courts en respectant l'ordre des lettres et la lisibilité.",
           status: "upcoming",
         },
         {
           slug: "encoder-un-mot-simple-entendu",
           title: "Encoder un mot simple entendu",
-          objective: "Ecrire un mot regulier court a partir des sons entendus.",
+          objective: "Écrire un mot régulier court à partir des sons entendus.",
           status: "upcoming",
         },
         {
           slug: "ecrire-une-phrase-simple-guidee",
-          title: "Ecrire une phrase simple guidee",
+          title: "Écrire une phrase simple guidée",
           objective:
-            "Produire une phrase courte avec une structure donnee et un sens clair.",
+            "Produire une phrase courte avec une structure donnée et un sens clair.",
           status: "upcoming",
         },
       ],
@@ -263,14 +263,14 @@ const domainFrancais: ProgramDomain = {
           slug: "enrichir-le-vocabulaire-courant",
           title: "Enrichir le vocabulaire courant",
           objective:
-            "Comprendre et utiliser des mots nouveaux rencontres dans des textes ou des situations de classe.",
+            "Comprendre et utiliser des mots nouveaux rencontrés dans des textes ou des situations de classe.",
           status: "upcoming",
         },
         {
           slug: "categoriser-des-mots-par-theme",
-          title: "Categoriser des mots par theme",
+          title: "Catégoriser des mots par thème",
           objective:
-            "Regrouper des mots appartenant a un meme domaine semantique (animaux, aliments, vetements...).",
+            "Regrouper des mots appartenant à un même domaine sémantique (animaux, aliments, vêtements...).",
           status: "upcoming",
         },
       ],
@@ -279,20 +279,20 @@ const domainFrancais: ProgramDomain = {
       "francais",
       "oral",
       "Langage oral",
-      "S'exprimer clairement et ecouter les autres.",
+      "S'exprimer clairement et écouter les autres.",
       [
         {
           slug: "dire-clairement-une-phrase-a-l-oral",
-          title: "Dire clairement une phrase a l'oral",
+          title: "Dire clairement une phrase à l'oral",
           objective:
-            "Prononcer une phrase complete, audible et comprehensible devant la classe.",
+            "Prononcer une phrase complète, audible et compréhensible devant la classe.",
           status: "upcoming",
         },
         {
           slug: "ecouter-et-comprendre-un-enonce-oral",
-          title: "Ecouter et comprendre un enonce oral",
+          title: "Écouter et comprendre un énoncé oral",
           objective:
-            "Executer une consigne ou reformuler une information entendue sans demander repetition.",
+            "Exécuter une consigne ou reformuler une information entendue sans demander répétition.",
           status: "upcoming",
         },
       ],
@@ -304,28 +304,28 @@ const domainFrancais: ProgramDomain = {
 const domainMathematiques: ProgramDomain = {
   id: "cp-mathematiques",
   slug: "mathematiques",
-  title: "Mathematiques",
-  officialLabel: "Mathematiques - Cycle 2",
-  description: "Nombres, calculs simples et premiers problemes tres guides.",
+  title: "Mathématiques",
+  officialLabel: "Mathématiques - Cycle 2",
+  description: "Nombres, calculs simples et premiers problèmes très guidés.",
   subdomains: [
     createSubdomain(
       "mathematiques",
       "nombres",
       "Nombres",
-      "Construire progressivement la numeration.",
+      "Construire progressivement la numération.",
       [
         {
           slug: "denombrer-une-collection-jusqua-20",
-          title: "Denombrer une collection jusqu'a 20",
+          title: "Dénombrer une collection jusqu'à 20",
           objective:
-            "Compter une collection en pointant chaque element une seule fois.",
+            "Compter une collection en pointant chaque élément une seule fois.",
           status: "upcoming",
         },
         {
           slug: "lire-et-ecrire-les-nombres-jusqua-100",
-          title: "Lire et ecrire les nombres jusqu'a 100",
+          title: "Lire et écrire les nombres jusqu'à 100",
           objective:
-            "Associer l'ecriture chiffree, le nom oral et la quantite representee.",
+            "Associer l'écriture chiffrée, le nom oral et la quantité représentée.",
           status: "upcoming",
         },
         {
@@ -339,7 +339,7 @@ const domainMathematiques: ProgramDomain = {
           slug: "ranger-des-nombres",
           title: "Ranger des nombres dans l'ordre",
           objective:
-            "Placer une liste de nombres dans l'ordre croissant ou decroissant.",
+            "Placer une liste de nombres dans l'ordre croissant ou décroissant.",
           status: "upcoming",
         },
       ],
@@ -352,23 +352,23 @@ const domainMathematiques: ProgramDomain = {
       [
         {
           slug: "composer-et-decomposer-les-petits-nombres",
-          title: "Composer et decomposer les petits nombres",
+          title: "Composer et décomposer les petits nombres",
           objective:
-            "Decomposer un nombre jusqu'a 10 en deux parties complementaires.",
+            "Décomposer un nombre jusqu'à 10 en deux parties complémentaires.",
           status: "upcoming",
         },
         {
           slug: "calculer-une-addition-simple",
           title: "Calculer une addition simple",
           objective:
-            "Trouver la somme de deux petits nombres avec dessin, materiel ou surcomptage.",
+            "Trouver la somme de deux petits nombres avec dessin, matériel ou surcomptage.",
           status: "upcoming",
         },
         {
           slug: "calculer-une-soustraction-simple",
           title: "Calculer une soustraction simple",
           objective:
-            "Resoudre un retrait simple avec dessin, materiel ou comptage en arriere.",
+            "Résoudre un retrait simple avec dessin, matériel ou comptage en arrière.",
           status: "upcoming",
         },
       ],
@@ -376,21 +376,21 @@ const domainMathematiques: ProgramDomain = {
     createSubdomain(
       "mathematiques",
       "problemes-guides",
-      "Problemes tres guides",
-      "Entrer dans la resolution de problemes par des situations courtes.",
+      "Problèmes très guidés",
+      "Entrer dans la résolution de problèmes par des situations courtes.",
       [
         {
           slug: "resoudre-un-probleme-additif-guide",
-          title: "Resoudre un probleme additif guide",
+          title: "Résoudre un problème additif guidé",
           objective:
-            "Identifier une situation ou l'on ajoute et choisir un calcul adapte.",
+            "Identifier une situation où l'on ajoute et choisir un calcul adapté.",
           status: "upcoming",
         },
         {
           slug: "resoudre-un-probleme-de-retrait-guide",
-          title: "Resoudre un probleme de retrait guide",
+          title: "Résoudre un problème de retrait guidé",
           objective:
-            "Identifier une situation ou l'on enleve et choisir un calcul adapte.",
+            "Identifier une situation où l'on enlève et choisir un calcul adapté.",
           status: "upcoming",
         },
       ],
@@ -398,28 +398,28 @@ const domainMathematiques: ProgramDomain = {
     createSubdomain(
       "mathematiques",
       "geometrie",
-      "Geometrie",
-      "Reconnaitre des formes et se reperer dans l'espace.",
+      "Géométrie",
+      "Reconnaître des formes et se repérer dans l'espace.",
       [
         {
           slug: "reconnaitre-des-formes-simples",
-          title: "Reconnaitre des formes simples",
+          title: "Reconnaître des formes simples",
           objective:
-            "Nommer et identifier le carre, le rectangle, le triangle et le cercle dans son environnement.",
+            "Nommer et identifier le carré, le rectangle, le triangle et le cercle dans son environnement.",
           status: "upcoming",
         },
         {
           slug: "se-reperer-sur-un-quadrillage",
-          title: "Se reperer sur un quadrillage",
+          title: "Se repérer sur un quadrillage",
           objective:
-            "Localiser une case ou decrire un deplacement sur un quadrillage simple.",
+            "Localiser une case ou décrire un déplacement sur un quadrillage simple.",
           status: "upcoming",
         },
         {
           slug: "utiliser-le-vocabulaire-spatial",
           title: "Utiliser le vocabulaire spatial",
           objective:
-            "Decrire la position d'un objet avec les mots devant, derriere, a gauche, a droite, dessus, dessous.",
+            "Décrire la position d'un objet avec les mots devant, derrière, à gauche, à droite, dessus, dessous.",
           status: "upcoming",
         },
       ],
@@ -434,21 +434,21 @@ const domainMathematiques: ProgramDomain = {
           slug: "comparer-des-longueurs",
           title: "Comparer des longueurs",
           objective:
-            "Dire lequel de deux objets est le plus long en utilisant une bande ou une regle.",
+            "Dire lequel de deux objets est le plus long en utilisant une bande ou une règle.",
           status: "upcoming",
         },
         {
           slug: "utiliser-la-monnaie-simplement",
           title: "Utiliser la monnaie simplement",
           objective:
-            "Reconnaitre les pieces et les billets courants et calculer un total tres simple.",
+            "Reconnaître les pièces et les billets courants et calculer un total très simple.",
           status: "upcoming",
         },
         {
           slug: "lire-l-heure-exacte",
           title: "Lire l'heure exacte",
           objective:
-            "Lire l'heure juste sur une horloge analogique et numerique.",
+            "Lire l'heure juste sur une horloge analogique et numérique.",
           status: "upcoming",
         },
       ],
@@ -462,7 +462,7 @@ const domainQuestionnerLeMonde: ProgramDomain = {
   slug: "questionner-le-monde",
   title: "Questionner le monde",
   officialLabel: "Questionner le monde - Cycle 2",
-  description: "Premiers questionnements sur le vivant, la matiere, le temps et l'espace.",
+  description: "Premiers questionnements sur le vivant, la matière, le temps et l'espace.",
   subdomains: [
     createSubdomain(
       "questionner-le-monde",
@@ -474,28 +474,28 @@ const domainQuestionnerLeMonde: ProgramDomain = {
           slug: "distinguer-vivant-et-non-vivant",
           title: "Distinguer le vivant du non-vivant",
           objective:
-            "L'eleve classe des elements en vivants ou non-vivants en s'appuyant sur des criteres simples.",
+            "L'élève classe des éléments en vivants ou non-vivants en s'appuyant sur des critères simples.",
           status: "upcoming",
         },
         {
           slug: "connaitre-les-besoins-des-etres-vivants",
-          title: "Connaitre les besoins des etres vivants",
+          title: "Connaître les besoins des êtres vivants",
           objective:
-            "L'eleve nomme les besoins essentiels d'un animal ou d'une plante : nourriture, eau, lumiere.",
+            "L'élève nomme les besoins essentiels d'un animal ou d'une plante : nourriture, eau, lumière.",
           status: "upcoming",
         },
         {
           slug: "observer-une-croissance-vegetale",
-          title: "Observer une croissance vegetale",
+          title: "Observer une croissance végétale",
           objective:
-            "L'eleve observe et decrit les etapes de la pousse d'une plante au fil du temps.",
+            "L'élève observe et décrit les étapes de la pousse d'une plante au fil du temps.",
           status: "upcoming",
         },
         {
           slug: "observer-les-saisons",
           title: "Observer les saisons",
           objective:
-            "L'eleve associe des caracteristiques observables de la nature a chacune des quatre saisons.",
+            "L'élève associe des caractéristiques observables de la nature à chacune des quatre saisons.",
           status: "upcoming",
         },
       ],
@@ -503,21 +503,21 @@ const domainQuestionnerLeMonde: ProgramDomain = {
     createSubdomain(
       "questionner-le-monde",
       "matiere-et-objets",
-      "Matiere et objets",
-      "Explorer les proprietes simples des matieres et des objets.",
+      "Matière et objets",
+      "Explorer les propriétés simples des matières et des objets.",
       [
         {
           slug: "classer-des-matieres",
-          title: "Classer des matieres selon leurs proprietes",
+          title: "Classer des matières selon leurs propriétés",
           objective:
-            "L'eleve observe des matieres et les classe selon un critere simple (dur, souple, transparent...).",
+            "L'élève observe des matières et les classe selon un critère simple (dur, souple, transparent...).",
           status: "upcoming",
         },
         {
           slug: "decrire-un-objet-technique",
-          title: "Decrire un objet technique simple",
+          title: "Décrire un objet technique simple",
           objective:
-            "L'eleve nomme les parties d'un objet simple et explique a quoi chacune sert.",
+            "L'élève nomme les parties d'un objet simple et explique à quoi chacune sert.",
           status: "upcoming",
         },
       ],
@@ -526,34 +526,34 @@ const domainQuestionnerLeMonde: ProgramDomain = {
       "questionner-le-monde",
       "temps-et-espace",
       "Temps et espace",
-      "Se reperer dans le temps de la semaine et dans l'espace proche.",
+      "Se repérer dans le temps de la semaine et dans l'espace proche.",
       [
         {
           slug: "se-reperer-dans-la-journee",
-          title: "Se reperer dans la journee",
+          title: "Se repérer dans la journée",
           objective:
-            "L'eleve distingue le matin, l'apres-midi et le soir et situe ses activites dans la journee.",
+            "L'élève distingue le matin, l'après-midi et le soir et situe ses activités dans la journée.",
           status: "upcoming",
         },
         {
           slug: "se-reperer-dans-la-semaine",
-          title: "Se reperer dans la semaine",
+          title: "Se repérer dans la semaine",
           objective:
-            "L'eleve nomme les jours de la semaine dans l'ordre et situe une activite dans la journee.",
+            "L'élève nomme les jours de la semaine dans l'ordre et situe une activité dans la journée.",
           status: "upcoming",
         },
         {
           slug: "identifier-les-espaces-proches",
           title: "Identifier les espaces proches",
           objective:
-            "L'eleve decrit les espaces qu'il frequente (ecole, quartier, maison) et les situe les uns par rapport aux autres.",
+            "L'élève décrit les espaces qu'il fréquente (école, quartier, maison) et les situe les uns par rapport aux autres.",
           status: "upcoming",
         },
         {
           slug: "situer-son-ecole-dans-l-espace",
-          title: "Situer son ecole dans l'espace proche",
+          title: "Situer son école dans l'espace proche",
           objective:
-            "L'eleve indique ou se trouve son ecole par rapport a des reperes connus.",
+            "L'élève indique où se trouve son école par rapport à des repères connus.",
           status: "upcoming",
         },
       ],
@@ -561,21 +561,21 @@ const domainQuestionnerLeMonde: ProgramDomain = {
     createSubdomain(
       "questionner-le-monde",
       "hygiene-securite",
-      "Hygiene et securite",
-      "Adopter des gestes simples pour sa sante et sa securite.",
+      "Hygiène et sécurité",
+      "Adopter des gestes simples pour sa santé et sa sécurité.",
       [
         {
           slug: "adopter-des-gestes-d-hygiene",
-          title: "Adopter des gestes d'hygiene",
+          title: "Adopter des gestes d'hygiène",
           objective:
-            "L'eleve applique les regles d'hygiene corporelle de base : se laver les mains, se moucher, tousser dans son coude.",
+            "L'élève applique les règles d'hygiène corporelle de base : se laver les mains, se moucher, tousser dans son coude.",
           status: "upcoming",
         },
         {
           slug: "reconnaitre-les-situations-de-danger",
-          title: "Reconnaitre des situations de danger",
+          title: "Reconnaître des situations de danger",
           objective:
-            "L'eleve identifie des situations dangereuses simples et dit ce qu'il faut faire ou ne pas faire.",
+            "L'élève identifie des situations dangereuses simples et dit ce qu'il faut faire ou ne pas faire.",
           status: "upcoming",
         },
       ],
@@ -589,40 +589,40 @@ const domainEnseignementsArtistiques: ProgramDomain = {
   slug: "enseignements-artistiques",
   title: "Enseignements artistiques",
   officialLabel: "Enseignements artistiques - Cycle 2",
-  description: "Premiers gestes artistiques : arts plastiques et education musicale.",
+  description: "Premiers gestes artistiques : arts plastiques et éducation musicale.",
   subdomains: [
     createSubdomain(
       "enseignements-artistiques",
       "arts-plastiques",
       "Arts plastiques",
-      "Explorer les couleurs, les matieres et les outils pour creer.",
+      "Explorer les couleurs, les matières et les outils pour créer.",
       [
         {
           slug: "utiliser-differents-outils-pour-tracer",
-          title: "Utiliser differents outils pour tracer",
+          title: "Utiliser différents outils pour tracer",
           objective:
-            "L'eleve trace des lignes et des formes avec des outils varies : crayon, pinceau, feutre, doigt.",
+            "L'élève trace des lignes et des formes avec des outils variés : crayon, pinceau, feutre, doigt.",
           status: "upcoming",
         },
         {
           slug: "explorer-couleurs-et-matieres",
-          title: "Explorer les couleurs et les matieres",
+          title: "Explorer les couleurs et les matières",
           objective:
-            "L'eleve experimente differents outils et matieres pour produire des effets plastiques varies.",
+            "L'élève expérimente différents outils et matières pour produire des effets plastiques variés.",
           status: "upcoming",
         },
         {
           slug: "composer-une-image-simple",
           title: "Composer une image simple",
           objective:
-            "L'eleve organise des formes et des couleurs dans un espace de production.",
+            "L'élève organise des formes et des couleurs dans un espace de production.",
           status: "upcoming",
         },
         {
           slug: "observer-une-oeuvre",
-          title: "Observer une oeuvre",
+          title: "Observer une œuvre",
           objective:
-            "L'eleve regarde une oeuvre d'art, la decrit avec ses mots et dit ce qu'elle lui evoque.",
+            "L'élève regarde une œuvre d'art, la décrit avec ses mots et dit ce qu'elle lui évoque.",
           status: "upcoming",
         },
       ],
@@ -630,35 +630,35 @@ const domainEnseignementsArtistiques: ProgramDomain = {
     createSubdomain(
       "enseignements-artistiques",
       "education-musicale",
-      "Education musicale",
-      "Chanter, ecouter et reproduire des rythmes simples.",
+      "Éducation musicale",
+      "Chanter, écouter et reproduire des rythmes simples.",
       [
         {
           slug: "chanter-avec-le-groupe",
           title: "Chanter avec le groupe",
           objective:
-            "L'eleve chante une chanson apprise en respectant le rythme et le tempo collectif.",
+            "L'élève chante une chanson apprise en respectant le rythme et le tempo collectif.",
           status: "upcoming",
         },
         {
           slug: "ecouter-un-extrait-musical",
-          title: "Ecouter un extrait musical",
+          title: "Écouter un extrait musical",
           objective:
-            "L'eleve ecoute un extrait musical court et exprime ce qu'il ressent ou ce qu'il entend.",
+            "L'élève écoute un extrait musical court et exprime ce qu'il ressent ou ce qu'il entend.",
           status: "upcoming",
         },
         {
           slug: "reproduire-un-rythme-simple",
           title: "Reproduire un rythme simple",
           objective:
-            "L'eleve reproduit par frapper dans les mains ou sur une table un rythme entendu.",
+            "L'élève reproduit en frappant dans les mains ou sur une table un rythme entendu.",
           status: "upcoming",
         },
         {
           slug: "memoriser-une-courte-chanson",
-          title: "Memoriser une courte chanson",
+          title: "Mémoriser une courte chanson",
           objective:
-            "L'eleve retient les paroles et la melodie d'une chanson courte.",
+            "L'élève retient les paroles et la mélodie d'une chanson courte.",
           status: "upcoming",
         },
       ],
@@ -671,41 +671,41 @@ const domainEPS: ProgramDomain = {
   id: "cp-eps",
   slug: "eps",
   title: "EPS",
-  officialLabel: "Education physique et sportive - Cycle 2",
+  officialLabel: "Éducation physique et sportive - Cycle 2",
   description: "Premiers apprentissages moteurs : courir, lancer, jouer ensemble.",
   subdomains: [
     createSubdomain(
       "eps",
       "activites-motrices",
-      "Activites motrices de base",
-      "Courir, lancer, sauter et realiser un parcours en securite.",
+      "Activités motrices de base",
+      "Courir, lancer, sauter et réaliser un parcours en sécurité.",
       [
         {
           slug: "courir-sauter-lancer",
           title: "Courir, sauter et lancer",
           objective:
-            "L'eleve court, saute et lance un engin en controlant ses deplacements.",
+            "L'élève court, saute et lance un engin en contrôlant ses déplacements.",
           status: "upcoming",
         },
         {
           slug: "courir-et-sarreter-en-securite",
-          title: "Courir et s'arreter en securite",
+          title: "Courir et s'arrêter en sécurité",
           objective:
-            "L'eleve court, change de direction et s'arrete sur un signal sans mettre en danger.",
+            "L'élève court, change de direction et s'arrête sur un signal sans mettre en danger.",
           status: "upcoming",
         },
         {
           slug: "realiser-un-parcours-moteur",
-          title: "Realiser un parcours moteur",
+          title: "Réaliser un parcours moteur",
           objective:
-            "L'eleve enchaine plusieurs actions motrices dans un parcours en respectant l'ordre des obstacles.",
+            "L'élève enchaîne plusieurs actions motrices dans un parcours en respectant l'ordre des obstacles.",
           status: "upcoming",
         },
         {
           slug: "lancer-et-attraper",
           title: "Lancer et attraper un engin",
           objective:
-            "L'eleve lance un engin vers une cible et tente de l'attraper.",
+            "L'élève lance un engin vers une cible et tente de l'attraper.",
           status: "upcoming",
         },
       ],
@@ -714,20 +714,20 @@ const domainEPS: ProgramDomain = {
       "eps",
       "jeux-collectifs",
       "Jeux collectifs",
-      "Jouer ensemble en respectant des regles simples.",
+      "Jouer ensemble en respectant des règles simples.",
       [
         {
           slug: "respecter-les-regles-d-un-jeu",
-          title: "Respecter les regles d'un jeu simple",
+          title: "Respecter les règles d'un jeu simple",
           objective:
-            "L'eleve comprend et applique les regles d'un jeu collectif simple.",
+            "L'élève comprend et applique les règles d'un jeu collectif simple.",
           status: "upcoming",
         },
         {
           slug: "cooperer-dans-un-jeu-collectif",
-          title: "Cooperer dans un jeu collectif",
+          title: "Coopérer dans un jeu collectif",
           objective:
-            "L'eleve aide ses partenaires et cherche a cooperer pour reussir le jeu.",
+            "L'élève aide ses partenaires et cherche à coopérer pour réussir le jeu.",
           status: "upcoming",
         },
       ],
@@ -742,7 +742,7 @@ const domainEPS: ProgramDomain = {
           slug: "s-exprimer-avec-son-corps",
           title: "S'exprimer avec son corps",
           objective:
-            "L'eleve utilise des gestes et des postures pour communiquer une emotion ou raconter une situation simple.",
+            "L'élève utilise des gestes et des postures pour communiquer une émotion ou raconter une situation simple.",
           status: "upcoming",
         },
       ],
@@ -756,47 +756,47 @@ const domainEMC: ProgramDomain = {
   slug: "emc",
   title: "EMC",
   officialLabel: "Enseignement moral et civique - Cycle 2",
-  description: "Premiers reperes pour vivre ensemble et connaitre la Republique.",
+  description: "Premiers repères pour vivre ensemble et connaître la République.",
   subdomains: [
     createSubdomain(
       "emc",
       "vie-collective",
       "Vie collective",
-      "Comprendre et respecter les regles de la vie de classe.",
+      "Comprendre et respecter les règles de la vie de classe.",
       [
         {
           slug: "respecter-les-regles-de-classe",
-          title: "Respecter les regles de la classe",
+          title: "Respecter les règles de la classe",
           objective:
-            "L'eleve connait les regles de la classe et les applique en situation.",
+            "L'élève connaît les règles de la classe et les applique en situation.",
           status: "upcoming",
         },
         {
           slug: "ecouter-les-autres",
-          title: "Ecouter les autres",
+          title: "Écouter les autres",
           objective:
-            "L'eleve ecoute sans couper la parole et attend son tour pour s'exprimer.",
+            "L'élève écoute sans couper la parole et attend son tour pour s'exprimer.",
           status: "upcoming",
         },
         {
           slug: "cooperer-dans-une-activite",
-          title: "Cooperer dans une activite",
+          title: "Coopérer dans une activité",
           objective:
-            "L'eleve participe a une tache commune en partageant le travail et en aidant ses camarades.",
+            "L'élève participe à une tâche commune en partageant le travail et en aidant ses camarades.",
           status: "upcoming",
         },
         {
           slug: "identifier-une-emotion",
-          title: "Identifier une emotion",
+          title: "Identifier une émotion",
           objective:
-            "L'eleve nomme ce qu'il ressent et reconnait les emotions de ses camarades dans une situation simple.",
+            "L'élève nomme ce qu'il ressent et reconnaît les émotions de ses camarades dans une situation simple.",
           status: "upcoming",
         },
         {
           slug: "respecter-le-materiel-commun",
-          title: "Respecter le materiel commun",
+          title: "Respecter le matériel commun",
           objective:
-            "L'eleve utilise et range le materiel collectif avec soin et le restitue en bon etat.",
+            "L'élève utilise et range le matériel collectif avec soin et le restitue en bon état.",
           status: "upcoming",
         },
       ],
@@ -804,21 +804,21 @@ const domainEMC: ProgramDomain = {
     createSubdomain(
       "emc",
       "premiers-reperes-civiques",
-      "Premiers reperes civiques",
-      "Connaitre quelques symboles et valeurs de la Republique.",
+      "Premiers repères civiques",
+      "Connaître quelques symboles et valeurs de la République.",
       [
         {
           slug: "reconnaitre-les-symboles-de-la-republique",
-          title: "Reconnaitre les symboles de la Republique",
+          title: "Reconnaître les symboles de la République",
           objective:
-            "L'eleve nomme quelques symboles de la Republique francaise (drapeau, hymne, devise).",
+            "L'élève nomme quelques symboles de la République française (drapeau, hymne, devise).",
           status: "upcoming",
         },
         {
           slug: "distinguer-droits-et-devoirs-simples",
           title: "Distinguer droits et devoirs simples",
           objective:
-            "L'eleve donne un exemple de droit et un exemple de devoir dans la vie de classe.",
+            "L'élève donne un exemple de droit et un exemple de devoir dans la vie de classe.",
           status: "upcoming",
         },
       ],
@@ -836,7 +836,7 @@ export const cpLearningTree: AcademyLevelProgram = {
     characterSlug: "kiwi",
     name: "Kiwi",
     roleHint:
-      "Kiwi accompagne les premiers pas dans le decodage, l'ecriture et les nombres.",
+      "Kiwi accompagne les premiers pas dans le décodage, l'écriture et les nombres.",
   },
   domains: [
     domainFrancais,
