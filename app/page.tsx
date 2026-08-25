@@ -236,18 +236,21 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_0.9fr_0.9fr]">
             {levelGroups
               .filter((group) => group.id !== "enseignants")
               .map((group) => {
               const copy = levelCopy[group.id];
               const accent = accentClasses[copy.accent];
+              const isPrimaire = group.id === "primaire";
 
               return (
                 <Link
                   key={group.id}
                   href={group.href}
-                  className={`group flex min-h-64 flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-1 ${accent.hoverBg}`}
+                  className={`group flex flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-1 ${accent.hoverBg} ${
+                    isPrimaire ? "min-h-72 lg:p-6" : "min-h-64 opacity-90 hover:opacity-100"
+                  }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <span
@@ -257,7 +260,9 @@ export default function Home() {
                     </span>
                     <PublicStatusBadge status={group.status} />
                   </div>
-                  <h3 className="mt-5 text-2xl font-black text-foreground">
+                  <h3
+                    className={`mt-5 font-black text-foreground ${isPrimaire ? "text-3xl" : "text-2xl"}`}
+                  >
                     {group.label}
                   </h3>
                   <p className="mt-3 flex-1 text-sm leading-7 text-muted">

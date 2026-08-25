@@ -5,14 +5,21 @@ export type TeacherDashboardCard = {
   icon: string;
 };
 
+export type TeacherDashboardTier = "essentiels" | "classe" | "plus";
+
 export type TeacherDashboardSection = {
   title: string;
+  description?: string;
+  tier: TeacherDashboardTier;
   cards: TeacherDashboardCard[];
 };
 
 export const teacherDashboardSections: TeacherDashboardSection[] = [
   {
-    title: "Préparer l'année",
+    title: "Essentiels",
+    description:
+      "Les outils utilisés le plus souvent pour préparer et suivre l'année.",
+    tier: "essentiels",
     cards: [
       {
         title: "Programmation",
@@ -26,17 +33,6 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/progression",
         icon: "🗂️",
       },
-      {
-        title: "Calendrier",
-        description: "Visualisez les échéances et les périodes de l'année scolaire.",
-        href: "/enseignants/calendrier",
-        icon: "🗓️",
-      },
-    ],
-  },
-  {
-    title: "Organiser la semaine",
-    cards: [
       {
         title: "Emploi du temps",
         description: "Construisez une semaine type et suivez le total d'heures.",
@@ -56,6 +52,25 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         icon: "🧑‍🏫",
       },
       {
+        title: "Plan de classe et groupes",
+        description: "Disposez les tables et générez des groupes avec rôles, sans données élève.",
+        href: "/enseignants/organisation-classe",
+        icon: "🧑‍🤝‍🧑",
+      },
+    ],
+  },
+  {
+    title: "Classe",
+    description: "Organisation quotidienne et suivi de la classe.",
+    tier: "classe",
+    cards: [
+      {
+        title: "Calendrier",
+        description: "Visualisez les échéances et les périodes de l'année scolaire.",
+        href: "/enseignants/calendrier",
+        icon: "🗓️",
+      },
+      {
         title: "Fin de période",
         description: "Suivez la liste des tâches à boucler avant les vacances.",
         href: "/enseignants/fin-periode",
@@ -73,22 +88,11 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/apc",
         icon: "🎯",
       },
-    ],
-  },
-  {
-    title: "Organiser ma classe",
-    cards: [
       {
         title: "Organisation de classe",
         description: "Organisez vos priorités de semaine par groupe, à la souris ou au clavier.",
         href: "/enseignants/organisation",
         icon: "🧭",
-      },
-      {
-        title: "Plan de classe et groupes",
-        description: "Disposez les tables et générez des groupes avec rôles, sans données élève.",
-        href: "/enseignants/organisation-classe",
-        icon: "🧑‍🤝‍🧑",
       },
       {
         title: "Ateliers",
@@ -126,10 +130,18 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/materiel-classe",
         icon: "📦",
       },
+      {
+        title: "Liaison CM2-6e",
+        description: "Organisez les échanges et le suivi de la liaison CM2-6e.",
+        href: "/enseignants/liaison-cm2-6e",
+        icon: "🎓",
+      },
     ],
   },
   {
-    title: "Projets et réunions",
+    title: "Plus d'outils",
+    description: "Projets, réunions et ressources personnelles.",
+    tier: "plus",
     cards: [
       {
         title: "Projets et sorties",
@@ -142,12 +154,6 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         description: "Préparez et gardez une trace de vos conseils de cycle.",
         href: "/enseignants/conseils-cycle",
         icon: "🗒️",
-      },
-      {
-        title: "Liaison CM2-6e",
-        description: "Organisez les échanges et le suivi de la liaison CM2-6e.",
-        href: "/enseignants/liaison-cm2-6e",
-        icon: "🎓",
       },
       {
         title: "Communications",
@@ -167,11 +173,6 @@ export const teacherDashboardSections: TeacherDashboardSection[] = [
         href: "/enseignants/rendez-vous",
         icon: "🤝",
       },
-    ],
-  },
-  {
-    title: "Ressources personnelles",
-    cards: [
       {
         title: "Modèles",
         description: "Retrouvez vos modèles de documents prêts à réutiliser.",
