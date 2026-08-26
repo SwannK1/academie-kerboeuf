@@ -10,6 +10,10 @@ import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AcademyLevel } from "@/content/academy";
 import { getAcademyLevelBySlugOnly } from "@/content/academy-curriculum";
 import type { PublicStatusKey } from "@/content/public-status";
+import {
+  getSecondaryLevelBase,
+  getSecondarySubjects,
+} from "@/content/secondary-resource-catalog";
 
 type Props = {
   level: AcademyLevel;
@@ -28,6 +32,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
   const missionsHref = `/lycee/${slug}/missions`;
   const curriculumLevel = getAcademyLevelBySlugOnly(slug);
   const curriculumSubjects = curriculumLevel?.subjects ?? [];
+  const resourceSubjects = slug === "seconde" ? getSecondarySubjects(slug) : [];
 
   return (
     <main id="contenu-principal">
@@ -117,20 +122,19 @@ export function LyceeLevelEntry({ level, status }: Props) {
               </div>
             )}
 
-            {/* Ressources — à venir, non cliquable */}
-            <div
-              aria-label="Ressources — à venir"
-              className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60"
-            >
-              <h2 className="text-xl font-black text-foreground">Ressources</h2>
-              <p className="mt-3 flex-1 text-sm leading-7 text-muted">
-                Fiches méthode, exercices, corrections et supports de révision
-                en PDF.
-              </p>
-              <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                À venir
-              </span>
-            </div>
+            {resourceSubjects.length > 0 ? (
+              <a href="#ressources" className="group flex flex-col rounded-md border border-jade/30 bg-jade/[0.05] p-6 transition hover:-translate-y-0.5 hover:border-jade/50">
+                <h2 className="text-xl font-black text-foreground">Ressources PDF</h2>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted">{resourceSubjects.reduce((total, subject) => total + subject.competencies.length, 0)} compétences disponibles.</p>
+                <span className="mt-6 inline-flex text-sm font-black text-jade">Voir les ressources ↓</span>
+              </a>
+            ) : (
+              <div aria-label="Ressources — à venir" className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60">
+                <h2 className="text-xl font-black text-foreground">Ressources</h2>
+                <p className="mt-3 flex-1 text-sm leading-7 text-muted">Fiches et supports de révision en PDF.</p>
+                <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">À venir</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -183,8 +187,31 @@ export function LyceeLevelEntry({ level, status }: Props) {
         </section>
       )}
 
+      {resourceSubjects.length > 0 && (
+        <section id="ressources" className="px-4 pb-10 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-6 border-b border-white/10 pb-4">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">Ressources réelles</p>
+              <h2 className="mt-1.5 text-2xl font-black text-foreground">Matières et compétences disponibles</h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {resourceSubjects.map((subject) => (
+                <Link key={subject.slug} href={`${getSecondaryLevelBase("seconde")}/${subject.slug}`} className="group rounded-md border border-jade/25 bg-jade/[0.05] p-5 transition hover:-translate-y-0.5 hover:border-jade/50">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-black text-foreground">{subject.label}</h3>
+                    <PublicStatusBadge status="available" />
+                  </div>
+                  <p className="mt-3 text-sm text-muted">{subject.competencies.length} compétences · {subject.competencies.length * 3} PDF</p>
+                  <span className="mt-5 inline-flex text-sm font-black text-jade">Voir les compétences →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── En préparation ── */}
-      <section className="px-4 py-6 sm:px-6 lg:px-8">
+      {resourceSubjects.length === 0 && <section className="px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="rounded-md border border-white/10 bg-white/[0.025] p-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
@@ -209,7 +236,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
             </ul>
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* ── Retour ── */}
       <section className="px-4 pb-20 pt-4 sm:px-6 lg:px-8">

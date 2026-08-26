@@ -3,10 +3,12 @@ import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import type { AcademyLevel } from "@/content/academy";
 import {
-  getCollegeMatiereCards,
   getSixiemeAccompagnementCards,
 } from "@/content/college-curriculum";
 import { getPublicStatusKey, getPublicStatusLabel } from "@/content/public-status";
+import {
+  getSecondarySubjects,
+} from "@/content/secondary-resource-catalog";
 
 type Props = {
   level: AcademyLevel;
@@ -19,7 +21,14 @@ function cardLabel(isLinked: boolean, status: unknown): string | null {
 
 export function CollegeLevelEntry({ level }: Props) {
   const slug = level.slug;
-  const matiereCards = getCollegeMatiereCards(slug);
+  const catalogSubjects = getSecondarySubjects(slug);
+  const matiereCards = catalogSubjects.map((subject) => ({
+    slug: subject.slug,
+    label: subject.label,
+    description: `${subject.competencies.length} compétence${subject.competencies.length > 1 ? "s" : ""}, avec leçon, exercices et évaluation en PDF.`,
+    status: "available" as const,
+    href: `/college/${slug}/${subject.slug}`,
+  }));
   const isSixieme = slug === "6e";
   const accompagnementCards = isSixieme ? getSixiemeAccompagnementCards() : [];
 

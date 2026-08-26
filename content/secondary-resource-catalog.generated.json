@@ -1,0 +1,3118 @@
+[
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-ecr-connecteurs-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-ecr-connecteurs-entry/6e-francais-6e-fr-ecr-connecteurs-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-ecr-connecteurs-entry/6e-francais-6e-fr-ecr-connecteurs-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-ecr-connecteurs-entry/6e-francais-6e-fr-ecr-connecteurs-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-ecr-expansions-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-ecr-expansions-entry/6e-francais-6e-fr-ecr-expansions-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-ecr-expansions-entry/6e-francais-6e-fr-ecr-expansions-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-ecr-expansions-entry/6e-francais-6e-fr-ecr-expansions-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-ecr-paragraphe-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-ecr-paragraphe-entry/6e-francais-6e-fr-ecr-paragraphe-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-ecr-paragraphe-entry/6e-francais-6e-fr-ecr-paragraphe-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-ecr-paragraphe-entry/6e-francais-6e-fr-ecr-paragraphe-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-ecr-planifier-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-ecr-planifier-entry/6e-francais-6e-fr-ecr-planifier-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-ecr-planifier-entry/6e-francais-6e-fr-ecr-planifier-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-ecr-planifier-entry/6e-francais-6e-fr-ecr-planifier-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-ecr-relecture-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-ecr-relecture-entry/6e-francais-6e-fr-ecr-relecture-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-ecr-relecture-entry/6e-francais-6e-fr-ecr-relecture-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-ecr-relecture-entry/6e-francais-6e-fr-ecr-relecture-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-edl-accord-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-edl-accord-entry/6e-francais-6e-fr-edl-accord-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-edl-accord-entry/6e-francais-6e-fr-edl-accord-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-edl-accord-entry/6e-francais-6e-fr-edl-accord-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-edl-classes-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-edl-classes-entry/6e-francais-6e-fr-edl-classes-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-edl-classes-entry/6e-francais-6e-fr-edl-classes-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-edl-classes-entry/6e-francais-6e-fr-edl-classes-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-edl-groupes-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-edl-groupes-entry/6e-francais-6e-fr-edl-groupes-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-edl-groupes-entry/6e-francais-6e-fr-edl-groupes-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-edl-groupes-entry/6e-francais-6e-fr-edl-groupes-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-edl-sujet-verbe-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-edl-sujet-verbe-entry/6e-francais-6e-fr-edl-sujet-verbe-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-edl-sujet-verbe-entry/6e-francais-6e-fr-edl-sujet-verbe-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-edl-sujet-verbe-entry/6e-francais-6e-fr-edl-sujet-verbe-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-edl-temps-recit-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-edl-temps-recit-entry/6e-francais-6e-fr-edl-temps-recit-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-edl-temps-recit-entry/6e-francais-6e-fr-edl-temps-recit-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-edl-temps-recit-entry/6e-francais-6e-fr-edl-temps-recit-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-documentaire-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-documentaire-entry/6e-francais-6e-fr-lec-documentaire-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-documentaire-entry/6e-francais-6e-fr-lec-documentaire-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-documentaire-entry/6e-francais-6e-fr-lec-documentaire-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-inference-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-inference-entry/6e-francais-6e-fr-lec-inference-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-inference-entry/6e-francais-6e-fr-lec-inference-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-inference-entry/6e-francais-6e-fr-lec-inference-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-infos-explicites-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-infos-explicites-entry/6e-francais-6e-fr-lec-infos-explicites-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-infos-explicites-entry/6e-francais-6e-fr-lec-infos-explicites-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-infos-explicites-entry/6e-francais-6e-fr-lec-infos-explicites-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-justifier-indice-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-justifier-indice-entry/6e-francais-6e-fr-lec-justifier-indice-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-justifier-indice-entry/6e-francais-6e-fr-lec-justifier-indice-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-justifier-indice-entry/6e-francais-6e-fr-lec-justifier-indice-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-point-vue-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-point-vue-entry/6e-francais-6e-fr-lec-point-vue-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-point-vue-entry/6e-francais-6e-fr-lec-point-vue-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-point-vue-entry/6e-francais-6e-fr-lec-point-vue-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-texte-narratif-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-texte-narratif-entry/6e-francais-6e-fr-lec-texte-narratif-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-texte-narratif-entry/6e-francais-6e-fr-lec-texte-narratif-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-texte-narratif-entry/6e-francais-6e-fr-lec-texte-narratif-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-lec-vocabulaire-contexte-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-lec-vocabulaire-contexte-entry/6e-francais-6e-fr-lec-vocabulaire-contexte-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-lec-vocabulaire-contexte-entry/6e-francais-6e-fr-lec-vocabulaire-contexte-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-lec-vocabulaire-contexte-entry/6e-francais-6e-fr-lec-vocabulaire-contexte-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-oral-echange-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-oral-echange-entry/6e-francais-6e-fr-oral-echange-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-oral-echange-entry/6e-francais-6e-fr-oral-echange-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-oral-echange-entry/6e-francais-6e-fr-oral-echange-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-oral-justifier-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-oral-justifier-entry/6e-francais-6e-fr-oral-justifier-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-oral-justifier-entry/6e-francais-6e-fr-oral-justifier-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-oral-justifier-entry/6e-francais-6e-fr-oral-justifier-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-oral-lecture-voix-haute-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-oral-lecture-voix-haute-entry/6e-francais-6e-fr-oral-lecture-voix-haute-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-oral-lecture-voix-haute-entry/6e-francais-6e-fr-oral-lecture-voix-haute-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-oral-lecture-voix-haute-entry/6e-francais-6e-fr-oral-lecture-voix-haute-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-oral-reformuler-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-oral-reformuler-entry/6e-francais-6e-fr-oral-reformuler-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-oral-reformuler-entry/6e-francais-6e-fr-oral-reformuler-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-oral-reformuler-entry/6e-francais-6e-fr-oral-reformuler-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "francais",
+    "competency": "6e-fr-oral-reponse-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/francais/6e-fr-oral-reponse-entry/6e-francais-6e-fr-oral-reponse-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/francais/6e-fr-oral-reponse-entry/6e-francais-6e-fr-oral-reponse-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/francais/6e-fr-oral-reponse-entry/6e-francais-6e-fr-oral-reponse-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-geo-carte-simple-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-carte-simple-entry/6e-histoire-geographie-emc-6e-hgemc-geo-carte-simple-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-carte-simple-entry/6e-histoire-geographie-emc-6e-hgemc-geo-carte-simple-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-carte-simple-entry/6e-histoire-geographie-emc-6e-hgemc-geo-carte-simple-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-geo-croquis-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-croquis-entry/6e-histoire-geographie-emc-6e-hgemc-geo-croquis-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-croquis-entry/6e-histoire-geographie-emc-6e-hgemc-geo-croquis-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-croquis-entry/6e-histoire-geographie-emc-6e-hgemc-geo-croquis-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-geo-document-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-document-entry/6e-histoire-geographie-emc-6e-hgemc-geo-document-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-document-entry/6e-histoire-geographie-emc-6e-hgemc-geo-document-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-document-entry/6e-histoire-geographie-emc-6e-hgemc-geo-document-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-geo-echelles-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-echelles-entry/6e-histoire-geographie-emc-6e-hgemc-geo-echelles-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-echelles-entry/6e-histoire-geographie-emc-6e-hgemc-geo-echelles-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-echelles-entry/6e-histoire-geographie-emc-6e-hgemc-geo-echelles-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-geo-espace-habite-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-espace-habite-entry/6e-histoire-geographie-emc-6e-hgemc-geo-espace-habite-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-espace-habite-entry/6e-histoire-geographie-emc-6e-hgemc-geo-espace-habite-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-espace-habite-entry/6e-histoire-geographie-emc-6e-hgemc-geo-espace-habite-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-geo-lire-paysage-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-lire-paysage-entry/6e-histoire-geographie-emc-6e-hgemc-geo-lire-paysage-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-lire-paysage-entry/6e-histoire-geographie-emc-6e-hgemc-geo-lire-paysage-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-geo-lire-paysage-entry/6e-histoire-geographie-emc-6e-hgemc-geo-lire-paysage-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-hist-expliquer-fait-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-expliquer-fait-entry/6e-histoire-geographie-emc-6e-hgemc-hist-expliquer-fait-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-expliquer-fait-entry/6e-histoire-geographie-emc-6e-hgemc-hist-expliquer-fait-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-expliquer-fait-entry/6e-histoire-geographie-emc-6e-hgemc-hist-expliquer-fait-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-hist-frise-simple-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-frise-simple-entry/6e-histoire-geographie-emc-6e-hgemc-hist-frise-simple-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-frise-simple-entry/6e-histoire-geographie-emc-6e-hgemc-hist-frise-simple-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-frise-simple-entry/6e-histoire-geographie-emc-6e-hgemc-hist-frise-simple-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-hist-prelever-informations-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-prelever-informations-entry/6e-histoire-geographie-emc-6e-hgemc-hist-prelever-informations-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-prelever-informations-entry/6e-histoire-geographie-emc-6e-hgemc-hist-prelever-informations-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-prelever-informations-entry/6e-histoire-geographie-emc-6e-hgemc-hist-prelever-informations-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-hist-raconter-evenement-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-raconter-evenement-entry/6e-histoire-geographie-emc-6e-hgemc-hist-raconter-evenement-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-raconter-evenement-entry/6e-histoire-geographie-emc-6e-hgemc-hist-raconter-evenement-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-raconter-evenement-entry/6e-histoire-geographie-emc-6e-hgemc-hist-raconter-evenement-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-hist-source-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-source-entry/6e-histoire-geographie-emc-6e-hgemc-hist-source-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-source-entry/6e-histoire-geographie-emc-6e-hgemc-hist-source-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-source-entry/6e-histoire-geographie-emc-6e-hgemc-hist-source-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "histoire-geographie-emc",
+    "competency": "6e-hgemc-hist-temps-long-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-temps-long-entry/6e-histoire-geographie-emc-6e-hgemc-hist-temps-long-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-temps-long-entry/6e-histoire-geographie-emc-6e-hgemc-hist-temps-long-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/histoire-geographie-emc/6e-hgemc-hist-temps-long-entry/6e-histoire-geographie-emc-6e-hgemc-hist-temps-long-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-geo-paralleles-perpendiculaires-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-paralleles-perpendiculaires-entry/6e-mathematiques-6e-ma-geo-paralleles-perpendiculaires-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-paralleles-perpendiculaires-entry/6e-mathematiques-6e-ma-geo-paralleles-perpendiculaires-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-paralleles-perpendiculaires-entry/6e-mathematiques-6e-ma-geo-paralleles-perpendiculaires-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-geo-programme-construction-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-programme-construction-entry/6e-mathematiques-6e-ma-geo-programme-construction-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-programme-construction-entry/6e-mathematiques-6e-ma-geo-programme-construction-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-programme-construction-entry/6e-mathematiques-6e-ma-geo-programme-construction-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-geo-reconnaitre-figures-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-reconnaitre-figures-entry/6e-mathematiques-6e-ma-geo-reconnaitre-figures-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-reconnaitre-figures-entry/6e-mathematiques-6e-ma-geo-reconnaitre-figures-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-reconnaitre-figures-entry/6e-mathematiques-6e-ma-geo-reconnaitre-figures-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-geo-tracer-instruments-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-tracer-instruments-entry/6e-mathematiques-6e-ma-geo-tracer-instruments-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-tracer-instruments-entry/6e-mathematiques-6e-ma-geo-tracer-instruments-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-tracer-instruments-entry/6e-mathematiques-6e-ma-geo-tracer-instruments-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-geo-vocabulaire-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-vocabulaire-entry/6e-mathematiques-6e-ma-geo-vocabulaire-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-vocabulaire-entry/6e-mathematiques-6e-ma-geo-vocabulaire-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-geo-vocabulaire-entry/6e-mathematiques-6e-ma-geo-vocabulaire-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-gm-calculer-aire-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-calculer-aire-entry/6e-mathematiques-6e-ma-gm-calculer-aire-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-calculer-aire-entry/6e-mathematiques-6e-ma-gm-calculer-aire-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-calculer-aire-entry/6e-mathematiques-6e-ma-gm-calculer-aire-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-gm-calculer-perimetre-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-calculer-perimetre-entry/6e-mathematiques-6e-ma-gm-calculer-perimetre-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-calculer-perimetre-entry/6e-mathematiques-6e-ma-gm-calculer-perimetre-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-calculer-perimetre-entry/6e-mathematiques-6e-ma-gm-calculer-perimetre-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-gm-convertir-unites-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-convertir-unites-entry/6e-mathematiques-6e-ma-gm-convertir-unites-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-convertir-unites-entry/6e-mathematiques-6e-ma-gm-convertir-unites-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-convertir-unites-entry/6e-mathematiques-6e-ma-gm-convertir-unites-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-gm-utiliser-mesure-probleme-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-utiliser-mesure-probleme-entry/6e-mathematiques-6e-ma-gm-utiliser-mesure-probleme-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-utiliser-mesure-probleme-entry/6e-mathematiques-6e-ma-gm-utiliser-mesure-probleme-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-utiliser-mesure-probleme-entry/6e-mathematiques-6e-ma-gm-utiliser-mesure-probleme-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-gm-utiliser-unites-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-utiliser-unites-entry/6e-mathematiques-6e-ma-gm-utiliser-unites-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-utiliser-unites-entry/6e-mathematiques-6e-ma-gm-utiliser-unites-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-gm-utiliser-unites-entry/6e-mathematiques-6e-ma-gm-utiliser-unites-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-calcul-decimaux-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-calcul-decimaux-entry/6e-mathematiques-6e-ma-nc-calcul-decimaux-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-calcul-decimaux-entry/6e-mathematiques-6e-ma-nc-calcul-decimaux-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-calcul-decimaux-entry/6e-mathematiques-6e-ma-nc-calcul-decimaux-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-calcul-mental-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-calcul-mental-entry/6e-mathematiques-6e-ma-nc-calcul-mental-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-calcul-mental-entry/6e-mathematiques-6e-ma-nc-calcul-mental-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-calcul-mental-entry/6e-mathematiques-6e-ma-nc-calcul-mental-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-decimaux-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-decimaux-entry/6e-mathematiques-6e-ma-nc-decimaux-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-decimaux-entry/6e-mathematiques-6e-ma-nc-decimaux-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-decimaux-entry/6e-mathematiques-6e-ma-nc-decimaux-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-entiers-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-entiers-entry/6e-mathematiques-6e-ma-nc-entiers-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-entiers-entry/6e-mathematiques-6e-ma-nc-entiers-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-entiers-entry/6e-mathematiques-6e-ma-nc-entiers-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-fractions-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-fractions-entry/6e-mathematiques-6e-ma-nc-fractions-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-fractions-entry/6e-mathematiques-6e-ma-nc-fractions-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-fractions-entry/6e-mathematiques-6e-ma-nc-fractions-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-operations-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-operations-entry/6e-mathematiques-6e-ma-nc-operations-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-operations-entry/6e-mathematiques-6e-ma-nc-operations-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-operations-entry/6e-mathematiques-6e-ma-nc-operations-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-nc-vraisemblance-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-vraisemblance-entry/6e-mathematiques-6e-ma-nc-vraisemblance-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-vraisemblance-entry/6e-mathematiques-6e-ma-nc-vraisemblance-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-nc-vraisemblance-entry/6e-mathematiques-6e-ma-nc-vraisemblance-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-ogd-calculer-moyenne-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-calculer-moyenne-entry/6e-mathematiques-6e-ma-ogd-calculer-moyenne-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-calculer-moyenne-entry/6e-mathematiques-6e-ma-ogd-calculer-moyenne-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-calculer-moyenne-entry/6e-mathematiques-6e-ma-ogd-calculer-moyenne-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-ogd-completer-tableau-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-completer-tableau-entry/6e-mathematiques-6e-ma-ogd-completer-tableau-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-completer-tableau-entry/6e-mathematiques-6e-ma-ogd-completer-tableau-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-completer-tableau-entry/6e-mathematiques-6e-ma-ogd-completer-tableau-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-ogd-interpreter-donnees-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-interpreter-donnees-entry/6e-mathematiques-6e-ma-ogd-interpreter-donnees-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-interpreter-donnees-entry/6e-mathematiques-6e-ma-ogd-interpreter-donnees-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-interpreter-donnees-entry/6e-mathematiques-6e-ma-ogd-interpreter-donnees-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-ogd-lire-graphique-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-lire-graphique-entry/6e-mathematiques-6e-ma-ogd-lire-graphique-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-lire-graphique-entry/6e-mathematiques-6e-ma-ogd-lire-graphique-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-lire-graphique-entry/6e-mathematiques-6e-ma-ogd-lire-graphique-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-ogd-lire-tableau-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-lire-tableau-entry/6e-mathematiques-6e-ma-ogd-lire-tableau-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-lire-tableau-entry/6e-mathematiques-6e-ma-ogd-lire-tableau-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-ogd-lire-tableau-entry/6e-mathematiques-6e-ma-ogd-lire-tableau-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-rp-choisir-operation-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-choisir-operation-entry/6e-mathematiques-6e-ma-rp-choisir-operation-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-choisir-operation-entry/6e-mathematiques-6e-ma-rp-choisir-operation-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-choisir-operation-entry/6e-mathematiques-6e-ma-rp-choisir-operation-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-rp-comprendre-situation-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-comprendre-situation-entry/6e-mathematiques-6e-ma-rp-comprendre-situation-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-comprendre-situation-entry/6e-mathematiques-6e-ma-rp-comprendre-situation-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-comprendre-situation-entry/6e-mathematiques-6e-ma-rp-comprendre-situation-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-rp-organiser-etapes-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-organiser-etapes-entry/6e-mathematiques-6e-ma-rp-organiser-etapes-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-organiser-etapes-entry/6e-mathematiques-6e-ma-rp-organiser-etapes-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-organiser-etapes-entry/6e-mathematiques-6e-ma-rp-organiser-etapes-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-rp-phrase-reponse-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-phrase-reponse-entry/6e-mathematiques-6e-ma-rp-phrase-reponse-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-phrase-reponse-entry/6e-mathematiques-6e-ma-rp-phrase-reponse-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-phrase-reponse-entry/6e-mathematiques-6e-ma-rp-phrase-reponse-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-rp-plusieurs-etapes-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-plusieurs-etapes-entry/6e-mathematiques-6e-ma-rp-plusieurs-etapes-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-plusieurs-etapes-entry/6e-mathematiques-6e-ma-rp-plusieurs-etapes-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-plusieurs-etapes-entry/6e-mathematiques-6e-ma-rp-plusieurs-etapes-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "6e",
+    "subject": "mathematiques",
+    "competency": "6e-ma-rp-verifier-coherence-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-verifier-coherence-entry/6e-mathematiques-6e-ma-rp-verifier-coherence-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-verifier-coherence-entry/6e-mathematiques-6e-ma-rp-verifier-coherence-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/6e/mathematiques/6e-ma-rp-verifier-coherence-entry/6e-mathematiques-6e-ma-rp-verifier-coherence-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "anglais",
+    "competency": "5e-ang-comprehension-ecrite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/anglais/5e-ang-comprehension-ecrite/5e-anglais-5e-ang-comprehension-ecrite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/anglais/5e-ang-comprehension-ecrite/5e-anglais-5e-ang-comprehension-ecrite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/anglais/5e-ang-comprehension-ecrite/5e-anglais-5e-ang-comprehension-ecrite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "anglais",
+    "competency": "5e-ang-comprehension-orale",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/anglais/5e-ang-comprehension-orale/5e-anglais-5e-ang-comprehension-orale-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/anglais/5e-ang-comprehension-orale/5e-anglais-5e-ang-comprehension-orale-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/anglais/5e-ang-comprehension-orale/5e-anglais-5e-ang-comprehension-orale-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "anglais",
+    "competency": "5e-ang-culture-comparer",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/anglais/5e-ang-culture-comparer/5e-anglais-5e-ang-culture-comparer-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/anglais/5e-ang-culture-comparer/5e-anglais-5e-ang-culture-comparer-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/anglais/5e-ang-culture-comparer/5e-anglais-5e-ang-culture-comparer-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "anglais",
+    "competency": "5e-ang-expression-ecrite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/anglais/5e-ang-expression-ecrite/5e-anglais-5e-ang-expression-ecrite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/anglais/5e-ang-expression-ecrite/5e-anglais-5e-ang-expression-ecrite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/anglais/5e-ang-expression-ecrite/5e-anglais-5e-ang-expression-ecrite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "anglais",
+    "competency": "5e-ang-expression-orale",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/anglais/5e-ang-expression-orale/5e-anglais-5e-ang-expression-orale-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/anglais/5e-ang-expression-orale/5e-anglais-5e-ang-expression-orale-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/anglais/5e-ang-expression-orale/5e-anglais-5e-ang-expression-orale-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "francais",
+    "competency": "5e-fr-ecriture-recit",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/francais/5e-fr-ecriture-recit/5e-francais-5e-fr-ecriture-recit-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/francais/5e-fr-ecriture-recit/5e-francais-5e-fr-ecriture-recit-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/francais/5e-fr-ecriture-recit/5e-francais-5e-fr-ecriture-recit-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "francais",
+    "competency": "5e-fr-langue-phrase-complexe",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/francais/5e-fr-langue-phrase-complexe/5e-francais-5e-fr-langue-phrase-complexe-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/francais/5e-fr-langue-phrase-complexe/5e-francais-5e-fr-langue-phrase-complexe-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/francais/5e-fr-langue-phrase-complexe/5e-francais-5e-fr-langue-phrase-complexe-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "francais",
+    "competency": "5e-fr-lecture-aventure",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/francais/5e-fr-lecture-aventure/5e-francais-5e-fr-lecture-aventure-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/francais/5e-fr-lecture-aventure/5e-francais-5e-fr-lecture-aventure-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/francais/5e-fr-lecture-aventure/5e-francais-5e-fr-lecture-aventure-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "francais",
+    "competency": "5e-fr-oral-lecture",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/francais/5e-fr-oral-lecture/5e-francais-5e-fr-oral-lecture-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/francais/5e-fr-oral-lecture/5e-francais-5e-fr-oral-lecture-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/francais/5e-fr-oral-lecture/5e-francais-5e-fr-oral-lecture-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "histoire-geographie-emc",
+    "competency": "5e-hg-emc-solidarite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-emc-solidarite/5e-histoire-geographie-emc-5e-hg-emc-solidarite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-emc-solidarite/5e-histoire-geographie-emc-5e-hg-emc-solidarite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-emc-solidarite/5e-histoire-geographie-emc-5e-hg-emc-solidarite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "histoire-geographie-emc",
+    "competency": "5e-hg-geographie-ressources",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-geographie-ressources/5e-histoire-geographie-emc-5e-hg-geographie-ressources-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-geographie-ressources/5e-histoire-geographie-emc-5e-hg-geographie-ressources-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-geographie-ressources/5e-histoire-geographie-emc-5e-hg-geographie-ressources-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "histoire-geographie-emc",
+    "competency": "5e-hg-histoire-medieval",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-histoire-medieval/5e-histoire-geographie-emc-5e-hg-histoire-medieval-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-histoire-medieval/5e-histoire-geographie-emc-5e-hg-histoire-medieval-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-histoire-medieval/5e-histoire-geographie-emc-5e-hg-histoire-medieval-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "histoire-geographie-emc",
+    "competency": "5e-hg-methode-documents",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-methode-documents/5e-histoire-geographie-emc-5e-hg-methode-documents-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-methode-documents/5e-histoire-geographie-emc-5e-hg-methode-documents-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/histoire-geographie-emc/5e-hg-methode-documents/5e-histoire-geographie-emc-5e-hg-methode-documents-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "mathematiques",
+    "competency": "5e-ma-donnees-probabilites",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/mathematiques/5e-ma-donnees-probabilites/5e-mathematiques-5e-ma-donnees-probabilites-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/mathematiques/5e-ma-donnees-probabilites/5e-mathematiques-5e-ma-donnees-probabilites-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/mathematiques/5e-ma-donnees-probabilites/5e-mathematiques-5e-ma-donnees-probabilites-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "mathematiques",
+    "competency": "5e-ma-geometrie-triangle",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/mathematiques/5e-ma-geometrie-triangle/5e-mathematiques-5e-ma-geometrie-triangle-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/mathematiques/5e-ma-geometrie-triangle/5e-mathematiques-5e-ma-geometrie-triangle-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/mathematiques/5e-ma-geometrie-triangle/5e-mathematiques-5e-ma-geometrie-triangle-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "mathematiques",
+    "competency": "5e-ma-grandeurs-aires-volumes",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/mathematiques/5e-ma-grandeurs-aires-volumes/5e-mathematiques-5e-ma-grandeurs-aires-volumes-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/mathematiques/5e-ma-grandeurs-aires-volumes/5e-mathematiques-5e-ma-grandeurs-aires-volumes-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/mathematiques/5e-ma-grandeurs-aires-volumes/5e-mathematiques-5e-ma-grandeurs-aires-volumes-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "mathematiques",
+    "competency": "5e-ma-nombres-relatifs",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/mathematiques/5e-ma-nombres-relatifs/5e-mathematiques-5e-ma-nombres-relatifs-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/mathematiques/5e-ma-nombres-relatifs/5e-mathematiques-5e-ma-nombres-relatifs-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/mathematiques/5e-ma-nombres-relatifs/5e-mathematiques-5e-ma-nombres-relatifs-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "mathematiques",
+    "competency": "5e-ma-problemes-proportionnalite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/mathematiques/5e-ma-problemes-proportionnalite/5e-mathematiques-5e-ma-problemes-proportionnalite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/mathematiques/5e-ma-problemes-proportionnalite/5e-mathematiques-5e-ma-problemes-proportionnalite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/mathematiques/5e-ma-problemes-proportionnalite/5e-mathematiques-5e-ma-problemes-proportionnalite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "sciences-technologie",
+    "competency": "5e-sc-physique-mouvement",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-physique-mouvement/5e-sciences-technologie-5e-sc-physique-mouvement-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-physique-mouvement/5e-sciences-technologie-5e-sc-physique-mouvement-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-physique-mouvement/5e-sciences-technologie-5e-sc-physique-mouvement-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "sciences-technologie",
+    "competency": "5e-sc-technologie-systeme",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-technologie-systeme/5e-sciences-technologie-5e-sc-technologie-systeme-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-technologie-systeme/5e-sciences-technologie-5e-sc-technologie-systeme-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-technologie-systeme/5e-sciences-technologie-5e-sc-technologie-systeme-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "sciences-technologie",
+    "competency": "5e-sc-terre-risque",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-terre-risque/5e-sciences-technologie-5e-sc-terre-risque-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-terre-risque/5e-sciences-technologie-5e-sc-terre-risque-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-terre-risque/5e-sciences-technologie-5e-sc-terre-risque-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "5e",
+    "subject": "sciences-technologie",
+    "competency": "5e-sc-vivant-nutrition",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-vivant-nutrition/5e-sciences-technologie-5e-sc-vivant-nutrition-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-vivant-nutrition/5e-sciences-technologie-5e-sc-vivant-nutrition-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/5e/sciences-technologie/5e-sc-vivant-nutrition/5e-sciences-technologie-5e-sc-vivant-nutrition-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "anglais",
+    "competency": "4e-ang-ce-document-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/anglais/4e-ang-ce-document-entry/4e-anglais-4e-ang-ce-document-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/anglais/4e-ang-ce-document-entry/4e-anglais-4e-ang-ce-document-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/anglais/4e-ang-ce-document-entry/4e-anglais-4e-ang-ce-document-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "anglais",
+    "competency": "4e-ang-eo-opinion-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/anglais/4e-ang-eo-opinion-entry/4e-anglais-4e-ang-eo-opinion-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/anglais/4e-ang-eo-opinion-entry/4e-anglais-4e-ang-eo-opinion-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/anglais/4e-ang-eo-opinion-entry/4e-anglais-4e-ang-eo-opinion-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "arts-plastiques",
+    "competency": "4e-arts-cadrage-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/arts-plastiques/4e-arts-cadrage-entry/4e-arts-plastiques-4e-arts-cadrage-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/arts-plastiques/4e-arts-cadrage-entry/4e-arts-plastiques-4e-arts-cadrage-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/arts-plastiques/4e-arts-cadrage-entry/4e-arts-plastiques-4e-arts-cadrage-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "education-musicale",
+    "competency": "4e-mus-comparer-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/education-musicale/4e-mus-comparer-entry/4e-education-musicale-4e-mus-comparer-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/education-musicale/4e-mus-comparer-entry/4e-education-musicale-4e-mus-comparer-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/education-musicale/4e-mus-comparer-entry/4e-education-musicale-4e-mus-comparer-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "eps",
+    "competency": "4e-eps-strategie-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/eps/4e-eps-strategie-entry/4e-eps-4e-eps-strategie-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/eps/4e-eps-strategie-entry/4e-eps-4e-eps-strategie-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/eps/4e-eps-strategie-entry/4e-eps-4e-eps-strategie-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "francais",
+    "competency": "4e-fr-ecr-point-vue-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/francais/4e-fr-ecr-point-vue-entry/4e-francais-4e-fr-ecr-point-vue-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/francais/4e-fr-ecr-point-vue-entry/4e-francais-4e-fr-ecr-point-vue-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/francais/4e-fr-ecr-point-vue-entry/4e-francais-4e-fr-ecr-point-vue-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "francais",
+    "competency": "4e-fr-lang-discours-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/francais/4e-fr-lang-discours-entry/4e-francais-4e-fr-lang-discours-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/francais/4e-fr-lang-discours-entry/4e-francais-4e-fr-lang-discours-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/francais/4e-fr-lang-discours-entry/4e-francais-4e-fr-lang-discours-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "francais",
+    "competency": "4e-fr-lec-sentiments-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/francais/4e-fr-lec-sentiments-entry/4e-francais-4e-fr-lec-sentiments-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/francais/4e-fr-lec-sentiments-entry/4e-francais-4e-fr-lec-sentiments-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/francais/4e-fr-lec-sentiments-entry/4e-francais-4e-fr-lec-sentiments-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "histoire-geographie-emc",
+    "competency": "4e-hge-emc-liberte-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-emc-liberte-entry/4e-histoire-geographie-emc-4e-hge-emc-liberte-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-emc-liberte-entry/4e-histoire-geographie-emc-4e-hge-emc-liberte-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-emc-liberte-entry/4e-histoire-geographie-emc-4e-hge-emc-liberte-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "histoire-geographie-emc",
+    "competency": "4e-hge-geo-flux-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-geo-flux-entry/4e-histoire-geographie-emc-4e-hge-geo-flux-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-geo-flux-entry/4e-histoire-geographie-emc-4e-hge-geo-flux-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-geo-flux-entry/4e-histoire-geographie-emc-4e-hge-geo-flux-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "histoire-geographie-emc",
+    "competency": "4e-hge-hist-rupture-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-hist-rupture-entry/4e-histoire-geographie-emc-4e-hge-hist-rupture-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-hist-rupture-entry/4e-histoire-geographie-emc-4e-hge-hist-rupture-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/histoire-geographie-emc/4e-hge-hist-rupture-entry/4e-histoire-geographie-emc-4e-hge-hist-rupture-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "mathematiques",
+    "competency": "4e-ma-df-graphique-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/mathematiques/4e-ma-df-graphique-entry/4e-mathematiques-4e-ma-df-graphique-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/mathematiques/4e-ma-df-graphique-entry/4e-mathematiques-4e-ma-df-graphique-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/mathematiques/4e-ma-df-graphique-entry/4e-mathematiques-4e-ma-df-graphique-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "mathematiques",
+    "competency": "4e-ma-geo-pythagore-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/mathematiques/4e-ma-geo-pythagore-entry/4e-mathematiques-4e-ma-geo-pythagore-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/mathematiques/4e-ma-geo-pythagore-entry/4e-mathematiques-4e-ma-geo-pythagore-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/mathematiques/4e-ma-geo-pythagore-entry/4e-mathematiques-4e-ma-geo-pythagore-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "mathematiques",
+    "competency": "4e-ma-nc-developper-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/mathematiques/4e-ma-nc-developper-entry/4e-mathematiques-4e-ma-nc-developper-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/mathematiques/4e-ma-nc-developper-entry/4e-mathematiques-4e-ma-nc-developper-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/mathematiques/4e-ma-nc-developper-entry/4e-mathematiques-4e-ma-nc-developper-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "mathematiques",
+    "competency": "4e-ma-nc-puissances-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/mathematiques/4e-ma-nc-puissances-entry/4e-mathematiques-4e-ma-nc-puissances-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/mathematiques/4e-ma-nc-puissances-entry/4e-mathematiques-4e-ma-nc-puissances-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/mathematiques/4e-ma-nc-puissances-entry/4e-mathematiques-4e-ma-nc-puissances-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "sciences-technologie",
+    "competency": "4e-sci-pc-circuit-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-pc-circuit-entry/4e-sciences-technologie-4e-sci-pc-circuit-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-pc-circuit-entry/4e-sciences-technologie-4e-sci-pc-circuit-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-pc-circuit-entry/4e-sciences-technologie-4e-sci-pc-circuit-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "sciences-technologie",
+    "competency": "4e-sci-pc-transformation-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-pc-transformation-entry/4e-sciences-technologie-4e-sci-pc-transformation-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-pc-transformation-entry/4e-sciences-technologie-4e-sci-pc-transformation-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-pc-transformation-entry/4e-sciences-technologie-4e-sci-pc-transformation-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "sciences-technologie",
+    "competency": "4e-sci-svt-heredite-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-svt-heredite-entry/4e-sciences-technologie-4e-sci-svt-heredite-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-svt-heredite-entry/4e-sciences-technologie-4e-sci-svt-heredite-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-svt-heredite-entry/4e-sciences-technologie-4e-sci-svt-heredite-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "4e",
+    "subject": "sciences-technologie",
+    "competency": "4e-sci-tech-automatise-entry",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-tech-automatise-entry/4e-sciences-technologie-4e-sci-tech-automatise-entry-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-tech-automatise-entry/4e-sciences-technologie-4e-sci-tech-automatise-entry-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/4e/sciences-technologie/4e-sci-tech-automatise-entry/4e-sciences-technologie-4e-sci-tech-automatise-entry-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "anglais",
+    "competency": "3e-ang-comprehension-ecrite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/anglais/3e-ang-comprehension-ecrite/3e-anglais-3e-ang-comprehension-ecrite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/anglais/3e-ang-comprehension-ecrite/3e-anglais-3e-ang-comprehension-ecrite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/anglais/3e-ang-comprehension-ecrite/3e-anglais-3e-ang-comprehension-ecrite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "anglais",
+    "competency": "3e-ang-comprehension-orale",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/anglais/3e-ang-comprehension-orale/3e-anglais-3e-ang-comprehension-orale-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/anglais/3e-ang-comprehension-orale/3e-anglais-3e-ang-comprehension-orale-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/anglais/3e-ang-comprehension-orale/3e-anglais-3e-ang-comprehension-orale-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "anglais",
+    "competency": "3e-ang-culture-comparer",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/anglais/3e-ang-culture-comparer/3e-anglais-3e-ang-culture-comparer-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/anglais/3e-ang-culture-comparer/3e-anglais-3e-ang-culture-comparer-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/anglais/3e-ang-culture-comparer/3e-anglais-3e-ang-culture-comparer-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "anglais",
+    "competency": "3e-ang-expression-ecrite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/anglais/3e-ang-expression-ecrite/3e-anglais-3e-ang-expression-ecrite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/anglais/3e-ang-expression-ecrite/3e-anglais-3e-ang-expression-ecrite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/anglais/3e-ang-expression-ecrite/3e-anglais-3e-ang-expression-ecrite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "anglais",
+    "competency": "3e-ang-expression-orale",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/anglais/3e-ang-expression-orale/3e-anglais-3e-ang-expression-orale-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/anglais/3e-ang-expression-orale/3e-anglais-3e-ang-expression-orale-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/anglais/3e-ang-expression-orale/3e-anglais-3e-ang-expression-orale-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "francais",
+    "competency": "3e-fr-dnb-methode",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/francais/3e-fr-dnb-methode/3e-francais-3e-fr-dnb-methode-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/francais/3e-fr-dnb-methode/3e-francais-3e-fr-dnb-methode-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/francais/3e-fr-dnb-methode/3e-francais-3e-fr-dnb-methode-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "francais",
+    "competency": "3e-fr-ecriture-argumenter",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/francais/3e-fr-ecriture-argumenter/3e-francais-3e-fr-ecriture-argumenter-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/francais/3e-fr-ecriture-argumenter/3e-francais-3e-fr-ecriture-argumenter-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/francais/3e-fr-ecriture-argumenter/3e-francais-3e-fr-ecriture-argumenter-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "francais",
+    "competency": "3e-fr-langue-reecriture",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/francais/3e-fr-langue-reecriture/3e-francais-3e-fr-langue-reecriture-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/francais/3e-fr-langue-reecriture/3e-francais-3e-fr-langue-reecriture-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/francais/3e-fr-langue-reecriture/3e-francais-3e-fr-langue-reecriture-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "francais",
+    "competency": "3e-fr-lecture-interpreter",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/francais/3e-fr-lecture-interpreter/3e-francais-3e-fr-lecture-interpreter-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/francais/3e-fr-lecture-interpreter/3e-francais-3e-fr-lecture-interpreter-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/francais/3e-fr-lecture-interpreter/3e-francais-3e-fr-lecture-interpreter-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "francais",
+    "competency": "3e-fr-oral-argumenter",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/francais/3e-fr-oral-argumenter/3e-francais-3e-fr-oral-argumenter-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/francais/3e-fr-oral-argumenter/3e-francais-3e-fr-oral-argumenter-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/francais/3e-fr-oral-argumenter/3e-francais-3e-fr-oral-argumenter-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "histoire-geographie-emc",
+    "competency": "3e-hg-dnb-methode",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-dnb-methode/3e-histoire-geographie-emc-3e-hg-dnb-methode-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-dnb-methode/3e-histoire-geographie-emc-3e-hg-dnb-methode-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-dnb-methode/3e-histoire-geographie-emc-3e-hg-dnb-methode-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "histoire-geographie-emc",
+    "competency": "3e-hg-emc-democratie",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-emc-democratie/3e-histoire-geographie-emc-3e-hg-emc-democratie-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-emc-democratie/3e-histoire-geographie-emc-3e-hg-emc-democratie-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-emc-democratie/3e-histoire-geographie-emc-3e-hg-emc-democratie-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "histoire-geographie-emc",
+    "competency": "3e-hg-geographie-territoires",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-geographie-territoires/3e-histoire-geographie-emc-3e-hg-geographie-territoires-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-geographie-territoires/3e-histoire-geographie-emc-3e-hg-geographie-territoires-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-geographie-territoires/3e-histoire-geographie-emc-3e-hg-geographie-territoires-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "histoire-geographie-emc",
+    "competency": "3e-hg-histoire-monde-depuis-1914",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-histoire-monde-depuis-1914/3e-histoire-geographie-emc-3e-hg-histoire-monde-depuis-1914-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-histoire-monde-depuis-1914/3e-histoire-geographie-emc-3e-hg-histoire-monde-depuis-1914-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/histoire-geographie-emc/3e-hg-histoire-monde-depuis-1914/3e-histoire-geographie-emc-3e-hg-histoire-monde-depuis-1914-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "mathematiques",
+    "competency": "3e-ma-dnb-strategie",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/mathematiques/3e-ma-dnb-strategie/3e-mathematiques-3e-ma-dnb-strategie-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/mathematiques/3e-ma-dnb-strategie/3e-mathematiques-3e-ma-dnb-strategie-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/mathematiques/3e-ma-dnb-strategie/3e-mathematiques-3e-ma-dnb-strategie-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "mathematiques",
+    "competency": "3e-ma-donnees-probabilites",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/mathematiques/3e-ma-donnees-probabilites/3e-mathematiques-3e-ma-donnees-probabilites-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/mathematiques/3e-ma-donnees-probabilites/3e-mathematiques-3e-ma-donnees-probabilites-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/mathematiques/3e-ma-donnees-probabilites/3e-mathematiques-3e-ma-donnees-probabilites-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "mathematiques",
+    "competency": "3e-ma-fonctions-affines",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/mathematiques/3e-ma-fonctions-affines/3e-mathematiques-3e-ma-fonctions-affines-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/mathematiques/3e-ma-fonctions-affines/3e-mathematiques-3e-ma-fonctions-affines-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/mathematiques/3e-ma-fonctions-affines/3e-mathematiques-3e-ma-fonctions-affines-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "mathematiques",
+    "competency": "3e-ma-geometrie-theoremes",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/mathematiques/3e-ma-geometrie-theoremes/3e-mathematiques-3e-ma-geometrie-theoremes-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/mathematiques/3e-ma-geometrie-theoremes/3e-mathematiques-3e-ma-geometrie-theoremes-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/mathematiques/3e-ma-geometrie-theoremes/3e-mathematiques-3e-ma-geometrie-theoremes-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "mathematiques",
+    "competency": "3e-ma-grandeurs-trigonometrie",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/mathematiques/3e-ma-grandeurs-trigonometrie/3e-mathematiques-3e-ma-grandeurs-trigonometrie-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/mathematiques/3e-ma-grandeurs-trigonometrie/3e-mathematiques-3e-ma-grandeurs-trigonometrie-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/mathematiques/3e-ma-grandeurs-trigonometrie/3e-mathematiques-3e-ma-grandeurs-trigonometrie-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "mathematiques",
+    "competency": "3e-ma-nombres-equations",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/mathematiques/3e-ma-nombres-equations/3e-mathematiques-3e-ma-nombres-equations-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/mathematiques/3e-ma-nombres-equations/3e-mathematiques-3e-ma-nombres-equations-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/mathematiques/3e-ma-nombres-equations/3e-mathematiques-3e-ma-nombres-equations-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "sciences-technologie",
+    "competency": "3e-sc-dnb-dossier",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-dnb-dossier/3e-sciences-technologie-3e-sc-dnb-dossier-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-dnb-dossier/3e-sciences-technologie-3e-sc-dnb-dossier-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-dnb-dossier/3e-sciences-technologie-3e-sc-dnb-dossier-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "sciences-technologie",
+    "competency": "3e-sc-physique-modeliser",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-physique-modeliser/3e-sciences-technologie-3e-sc-physique-modeliser-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-physique-modeliser/3e-sciences-technologie-3e-sc-physique-modeliser-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-physique-modeliser/3e-sciences-technologie-3e-sc-physique-modeliser-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "sciences-technologie",
+    "competency": "3e-sc-technologie-systeme",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-technologie-systeme/3e-sciences-technologie-3e-sc-technologie-systeme-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-technologie-systeme/3e-sciences-technologie-3e-sc-technologie-systeme-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-technologie-systeme/3e-sciences-technologie-3e-sc-technologie-systeme-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "sciences-technologie",
+    "competency": "3e-sc-terre-risques-climat",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-terre-risques-climat/3e-sciences-technologie-3e-sc-terre-risques-climat-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-terre-risques-climat/3e-sciences-technologie-3e-sc-terre-risques-climat-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-terre-risques-climat/3e-sciences-technologie-3e-sc-terre-risques-climat-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "3e",
+    "subject": "sciences-technologie",
+    "competency": "3e-sc-vivant-donnees",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-vivant-donnees/3e-sciences-technologie-3e-sc-vivant-donnees-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-vivant-donnees/3e-sciences-technologie-3e-sc-vivant-donnees-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/3e/sciences-technologie/3e-sc-vivant-donnees/3e-sciences-technologie-3e-sc-vivant-donnees-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "arts",
+    "competency": "seconde-arts-decrire-oeuvre-vocabulaire-adapte",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/arts/seconde-arts-decrire-oeuvre-vocabulaire-adapte/seconde-arts-seconde-arts-decrire-oeuvre-vocabulaire-adapte-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/arts/seconde-arts-decrire-oeuvre-vocabulaire-adapte/seconde-arts-seconde-arts-decrire-oeuvre-vocabulaire-adapte-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/arts/seconde-arts-decrire-oeuvre-vocabulaire-adapte/seconde-arts-seconde-arts-decrire-oeuvre-vocabulaire-adapte-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "arts",
+    "competency": "seconde-arts-justifier-choix-creation",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/arts/seconde-arts-justifier-choix-creation/seconde-arts-seconde-arts-justifier-choix-creation-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/arts/seconde-arts-justifier-choix-creation/seconde-arts-seconde-arts-justifier-choix-creation-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/arts/seconde-arts-justifier-choix-creation/seconde-arts-seconde-arts-justifier-choix-creation-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "emc",
+    "competency": "seconde-emc-distinguer-droit-liberte-responsabilite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/emc/seconde-emc-distinguer-droit-liberte-responsabilite/seconde-emc-seconde-emc-distinguer-droit-liberte-responsabilite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/emc/seconde-emc-distinguer-droit-liberte-responsabilite/seconde-emc-seconde-emc-distinguer-droit-liberte-responsabilite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/emc/seconde-emc-distinguer-droit-liberte-responsabilite/seconde-emc-seconde-emc-distinguer-droit-liberte-responsabilite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "emc",
+    "competency": "seconde-emc-formuler-argument-respectueux",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/emc/seconde-emc-formuler-argument-respectueux/seconde-emc-seconde-emc-formuler-argument-respectueux-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/emc/seconde-emc-formuler-argument-respectueux/seconde-emc-seconde-emc-formuler-argument-respectueux-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/emc/seconde-emc-formuler-argument-respectueux/seconde-emc-seconde-emc-formuler-argument-respectueux-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "eps",
+    "competency": "seconde-eps-adapter-effort-situation",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/eps/seconde-eps-adapter-effort-situation/seconde-eps-seconde-eps-adapter-effort-situation-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/eps/seconde-eps-adapter-effort-situation/seconde-eps-seconde-eps-adapter-effort-situation-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/eps/seconde-eps-adapter-effort-situation/seconde-eps-seconde-eps-adapter-effort-situation-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "eps",
+    "competency": "seconde-eps-tenir-role-collectif",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/eps/seconde-eps-tenir-role-collectif/seconde-eps-seconde-eps-tenir-role-collectif-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/eps/seconde-eps-tenir-role-collectif/seconde-eps-seconde-eps-tenir-role-collectif-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/eps/seconde-eps-tenir-role-collectif/seconde-eps-seconde-eps-tenir-role-collectif-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-analyser-un-personnage",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-analyser-un-personnage/seconde-francais-seconde-francais-analyser-un-personnage-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-analyser-un-personnage/seconde-francais-seconde-francais-analyser-un-personnage-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-analyser-un-personnage/seconde-francais-seconde-francais-analyser-un-personnage-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-analyser-une-phrase-complexe",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-analyser-une-phrase-complexe/seconde-francais-seconde-francais-analyser-une-phrase-complexe-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-analyser-une-phrase-complexe/seconde-francais-seconde-francais-analyser-une-phrase-complexe-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-analyser-une-phrase-complexe/seconde-francais-seconde-francais-analyser-une-phrase-complexe-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-formuler-une-these",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-formuler-une-these/seconde-francais-seconde-francais-formuler-une-these-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-formuler-une-these/seconde-francais-seconde-francais-formuler-une-these-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-formuler-une-these/seconde-francais-seconde-francais-formuler-une-these-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-identifier-les-enjeux-d-une-scene",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-identifier-les-enjeux-d-une-scene/seconde-francais-seconde-francais-identifier-les-enjeux-d-une-scene-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-identifier-les-enjeux-d-une-scene/seconde-francais-seconde-francais-identifier-les-enjeux-d-une-scene-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-identifier-les-enjeux-d-une-scene/seconde-francais-seconde-francais-identifier-les-enjeux-d-une-scene-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-interpreter-une-image-poetique",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-interpreter-une-image-poetique/seconde-francais-seconde-francais-interpreter-une-image-poetique-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-interpreter-une-image-poetique/seconde-francais-seconde-francais-interpreter-une-image-poetique-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-interpreter-une-image-poetique/seconde-francais-seconde-francais-interpreter-une-image-poetique-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-mobiliser-un-lexique-d-analyse",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-mobiliser-un-lexique-d-analyse/seconde-francais-seconde-francais-mobiliser-un-lexique-d-analyse-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-mobiliser-un-lexique-d-analyse/seconde-francais-seconde-francais-mobiliser-un-lexique-d-analyse-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-mobiliser-un-lexique-d-analyse/seconde-francais-seconde-francais-mobiliser-un-lexique-d-analyse-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-organiser-un-paragraphe-argumente",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-organiser-un-paragraphe-argumente/seconde-francais-seconde-francais-organiser-un-paragraphe-argumente-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-organiser-un-paragraphe-argumente/seconde-francais-seconde-francais-organiser-un-paragraphe-argumente-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-organiser-un-paragraphe-argumente/seconde-francais-seconde-francais-organiser-un-paragraphe-argumente-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "francais",
+    "competency": "seconde-francais-situer-un-recit",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/francais/seconde-francais-situer-un-recit/seconde-francais-seconde-francais-situer-un-recit-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/francais/seconde-francais-situer-un-recit/seconde-francais-seconde-francais-situer-un-recit-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/francais/seconde-francais-situer-un-recit/seconde-francais-seconde-francais-situer-un-recit-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "histoire-geographie",
+    "competency": "seconde-histoire-geographie-analyser-document-historique",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-analyser-document-historique/seconde-histoire-geographie-seconde-histoire-geographie-analyser-document-historique-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-analyser-document-historique/seconde-histoire-geographie-seconde-histoire-geographie-analyser-document-historique-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-analyser-document-historique/seconde-histoire-geographie-seconde-histoire-geographie-analyser-document-historique-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "histoire-geographie",
+    "competency": "seconde-histoire-geographie-decrire-organisation-territoire",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-decrire-organisation-territoire/seconde-histoire-geographie-seconde-histoire-geographie-decrire-organisation-territoire-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-decrire-organisation-territoire/seconde-histoire-geographie-seconde-histoire-geographie-decrire-organisation-territoire-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-decrire-organisation-territoire/seconde-histoire-geographie-seconde-histoire-geographie-decrire-organisation-territoire-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "histoire-geographie",
+    "competency": "seconde-histoire-geographie-expliquer-enjeu-developpement-durable",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-expliquer-enjeu-developpement-durable/seconde-histoire-geographie-seconde-histoire-geographie-expliquer-enjeu-developpement-durable-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-expliquer-enjeu-developpement-durable/seconde-histoire-geographie-seconde-histoire-geographie-expliquer-enjeu-developpement-durable-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-expliquer-enjeu-developpement-durable/seconde-histoire-geographie-seconde-histoire-geographie-expliquer-enjeu-developpement-durable-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "histoire-geographie",
+    "competency": "seconde-histoire-geographie-situer-evenement-chronologie",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-situer-evenement-chronologie/seconde-histoire-geographie-seconde-histoire-geographie-situer-evenement-chronologie-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-situer-evenement-chronologie/seconde-histoire-geographie-seconde-histoire-geographie-situer-evenement-chronologie-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/histoire-geographie/seconde-histoire-geographie-situer-evenement-chronologie/seconde-histoire-geographie-seconde-histoire-geographie-situer-evenement-chronologie-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "langues-vivantes",
+    "competency": "seconde-langues-vivantes-comprendre-texte-court-authentique",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-comprendre-texte-court-authentique/seconde-langues-vivantes-seconde-langues-vivantes-comprendre-texte-court-authentique-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-comprendre-texte-court-authentique/seconde-langues-vivantes-seconde-langues-vivantes-comprendre-texte-court-authentique-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-comprendre-texte-court-authentique/seconde-langues-vivantes-seconde-langues-vivantes-comprendre-texte-court-authentique-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "langues-vivantes",
+    "competency": "seconde-langues-vivantes-identifier-sens-global-message-oral",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-identifier-sens-global-message-oral/seconde-langues-vivantes-seconde-langues-vivantes-identifier-sens-global-message-oral-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-identifier-sens-global-message-oral/seconde-langues-vivantes-seconde-langues-vivantes-identifier-sens-global-message-oral-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-identifier-sens-global-message-oral/seconde-langues-vivantes-seconde-langues-vivantes-identifier-sens-global-message-oral-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "langues-vivantes",
+    "competency": "seconde-langues-vivantes-rediger-texte-court-organise",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-rediger-texte-court-organise/seconde-langues-vivantes-seconde-langues-vivantes-rediger-texte-court-organise-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-rediger-texte-court-organise/seconde-langues-vivantes-seconde-langues-vivantes-rediger-texte-court-organise-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-rediger-texte-court-organise/seconde-langues-vivantes-seconde-langues-vivantes-rediger-texte-court-organise-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "langues-vivantes",
+    "competency": "seconde-langues-vivantes-tenir-echange-court",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-tenir-echange-court/seconde-langues-vivantes-seconde-langues-vivantes-tenir-echange-court-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-tenir-echange-court/seconde-langues-vivantes-seconde-langues-vivantes-tenir-echange-court-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/langues-vivantes/seconde-langues-vivantes-tenir-echange-court/seconde-langues-vivantes-seconde-langues-vivantes-tenir-echange-court-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-calculer-distance-repere",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-calculer-distance-repere/seconde-mathematiques-seconde-mathematiques-calculer-distance-repere-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-calculer-distance-repere/seconde-mathematiques-seconde-mathematiques-calculer-distance-repere-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-calculer-distance-repere/seconde-mathematiques-seconde-mathematiques-calculer-distance-repere-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-calculer-probabilite-simple",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-calculer-probabilite-simple/seconde-mathematiques-seconde-mathematiques-calculer-probabilite-simple-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-calculer-probabilite-simple/seconde-mathematiques-seconde-mathematiques-calculer-probabilite-simple-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-calculer-probabilite-simple/seconde-mathematiques-seconde-mathematiques-calculer-probabilite-simple-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-decrire-variations-fonction",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-decrire-variations-fonction/seconde-mathematiques-seconde-mathematiques-decrire-variations-fonction-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-decrire-variations-fonction/seconde-mathematiques-seconde-mathematiques-decrire-variations-fonction-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-decrire-variations-fonction/seconde-mathematiques-seconde-mathematiques-decrire-variations-fonction-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-developper-factoriser",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-developper-factoriser/seconde-mathematiques-seconde-mathematiques-developper-factoriser-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-developper-factoriser/seconde-mathematiques-seconde-mathematiques-developper-factoriser-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-developper-factoriser/seconde-mathematiques-seconde-mathematiques-developper-factoriser-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-identifier-ensemble-nombre",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-identifier-ensemble-nombre/seconde-mathematiques-seconde-mathematiques-identifier-ensemble-nombre-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-identifier-ensemble-nombre/seconde-mathematiques-seconde-mathematiques-identifier-ensemble-nombre-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-identifier-ensemble-nombre/seconde-mathematiques-seconde-mathematiques-identifier-ensemble-nombre-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-interpreter-serie-statistique",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-interpreter-serie-statistique/seconde-mathematiques-seconde-mathematiques-interpreter-serie-statistique-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-interpreter-serie-statistique/seconde-mathematiques-seconde-mathematiques-interpreter-serie-statistique-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-interpreter-serie-statistique/seconde-mathematiques-seconde-mathematiques-interpreter-serie-statistique-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-lire-image-antecedent",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-lire-image-antecedent/seconde-mathematiques-seconde-mathematiques-lire-image-antecedent-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-lire-image-antecedent/seconde-mathematiques-seconde-mathematiques-lire-image-antecedent-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-lire-image-antecedent/seconde-mathematiques-seconde-mathematiques-lire-image-antecedent-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-resoudre-equation-premier-degre",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-resoudre-equation-premier-degre/seconde-mathematiques-seconde-mathematiques-resoudre-equation-premier-degre-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-resoudre-equation-premier-degre/seconde-mathematiques-seconde-mathematiques-resoudre-equation-premier-degre-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-resoudre-equation-premier-degre/seconde-mathematiques-seconde-mathematiques-resoudre-equation-premier-degre-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-utiliser-relation-chasles",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-utiliser-relation-chasles/seconde-mathematiques-seconde-mathematiques-utiliser-relation-chasles-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-utiliser-relation-chasles/seconde-mathematiques-seconde-mathematiques-utiliser-relation-chasles-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-utiliser-relation-chasles/seconde-mathematiques-seconde-mathematiques-utiliser-relation-chasles-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "mathematiques",
+    "competency": "seconde-mathematiques-utiliser-valeurs-approchees",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-utiliser-valeurs-approchees/seconde-mathematiques-seconde-mathematiques-utiliser-valeurs-approchees-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-utiliser-valeurs-approchees/seconde-mathematiques-seconde-mathematiques-utiliser-valeurs-approchees-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/mathematiques/seconde-mathematiques-utiliser-valeurs-approchees/seconde-mathematiques-seconde-mathematiques-utiliser-valeurs-approchees-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "sciences",
+    "competency": "seconde-sciences-decrire-transformation-chimique",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/sciences/seconde-sciences-decrire-transformation-chimique/seconde-sciences-seconde-sciences-decrire-transformation-chimique-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/sciences/seconde-sciences-decrire-transformation-chimique/seconde-sciences-seconde-sciences-decrire-transformation-chimique-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/sciences/seconde-sciences-decrire-transformation-chimique/seconde-sciences-seconde-sciences-decrire-transformation-chimique-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "sciences",
+    "competency": "seconde-sciences-exploiter-mesure-avec-unite",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/sciences/seconde-sciences-exploiter-mesure-avec-unite/seconde-sciences-seconde-sciences-exploiter-mesure-avec-unite-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/sciences/seconde-sciences-exploiter-mesure-avec-unite/seconde-sciences-seconde-sciences-exploiter-mesure-avec-unite-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/sciences/seconde-sciences-exploiter-mesure-avec-unite/seconde-sciences-seconde-sciences-exploiter-mesure-avec-unite-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "sciences",
+    "competency": "seconde-sciences-interpreter-donnees-geologiques",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/sciences/seconde-sciences-interpreter-donnees-geologiques/seconde-sciences-seconde-sciences-interpreter-donnees-geologiques-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/sciences/seconde-sciences-interpreter-donnees-geologiques/seconde-sciences-seconde-sciences-interpreter-donnees-geologiques-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/sciences/seconde-sciences-interpreter-donnees-geologiques/seconde-sciences-seconde-sciences-interpreter-donnees-geologiques-evaluation.pdf"
+      }
+    ]
+  },
+  {
+    "level": "seconde",
+    "subject": "sciences",
+    "competency": "seconde-sciences-relier-structure-et-fonction-du-vivant",
+    "resources": [
+      {
+        "type": "lecon",
+        "href": "/fiches/seconde/sciences/seconde-sciences-relier-structure-et-fonction-du-vivant/seconde-sciences-seconde-sciences-relier-structure-et-fonction-du-vivant-lecon.pdf"
+      },
+      {
+        "type": "exercices",
+        "href": "/fiches/seconde/sciences/seconde-sciences-relier-structure-et-fonction-du-vivant/seconde-sciences-seconde-sciences-relier-structure-et-fonction-du-vivant-exercices.pdf"
+      },
+      {
+        "type": "evaluation",
+        "href": "/fiches/seconde/sciences/seconde-sciences-relier-structure-et-fonction-du-vivant/seconde-sciences-seconde-sciences-relier-structure-et-fonction-du-vivant-evaluation.pdf"
+      }
+    ]
+  }
+]
