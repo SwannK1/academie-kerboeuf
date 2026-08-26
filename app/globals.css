@@ -207,6 +207,11 @@ a {
     display: none !important;
   }
 
+  /* Some cards are buttons on screen but contain the printable content. */
+  body.print-teacher-tool button[data-print-content] {
+    display: block !important;
+  }
+
   /* ── Base: white background everywhere ── */
   .mission-detail-page,
   .mission-detail-hero,

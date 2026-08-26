@@ -165,9 +165,11 @@ function isPeriodCard(value: unknown): value is PeriodCard {
   if (!isPlainObject(value)) return false;
   return (
     typeof value.id === "string" &&
-    typeof value.niveau === "string" &&
-    typeof value.periode === "string" &&
-    typeof value.statut === "string"
+    ["cp", "ce1", "ce2", "cm1", "cm2"].includes(String(value.niveau)) &&
+    teacherPeriods.some((period) => period.id === value.periode) &&
+    SEQUENCE_STATUSES.some((status) => status.id === value.statut) &&
+    typeof value.matiere === "string" &&
+    typeof value.competenceLabel === "string"
   );
 }
 
@@ -194,7 +196,23 @@ export function readStoredCardsChecked(): {
     const sanitized = sanitizeObjectArray<PeriodCard>(raw.cards).filter(isPeriodCard);
     const wasReset = sanitized.length !== raw.cards.length;
     return {
-      cards: sanitized.map((card) => ({ ...card, priority: card.priority ?? "important" })),
+      cards: sanitized.map((card) => ({
+        ...card,
+        domaine: typeof card.domaine === "string" ? card.domaine : "",
+        competenceId: typeof card.competenceId === "string" ? card.competenceId : "",
+        dureeMinutes:
+          Number.isFinite(card.dureeMinutes) && card.dureeMinutes >= 5
+            ? card.dureeMinutes
+            : 45,
+        imprimablesDisponibles: Array.isArray(card.imprimablesDisponibles)
+          ? card.imprimablesDisponibles.filter(
+              (item) => item && typeof item.label === "string" && typeof item.href === "string",
+            )
+          : [],
+        priority: ["essential", "important", "optional"].includes(card.priority)
+          ? card.priority
+          : "important",
+      })),
       wasReset,
       storageAvailable,
     };

@@ -95,15 +95,8 @@ function groupLabel(id: LogbookSession["group"]): string {
 }
 
 export function TeacherLogbookClient() {
-  const initialData = useMemo(() => readStoredDataChecked(), []);
-  const [data, setData] = useState<StoredData>(initialData.data);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialData.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialData.wasReset
-        ? "Certaines séances enregistrées étaient illisibles et ont été ignorées."
-        : null,
-  );
+  const [data, setData] = useState<StoredData>({});
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
   const [currentWeekKey, setCurrentWeekKey] = useState(() =>
     getMondayKey(new Date()),
   );
@@ -112,9 +105,30 @@ export function TeacherLogbookClient() {
   );
   const dragSourceRef = useRef<string | null>(null);
   const instructionsId = useId();
+  const hydratedRef = useRef(false);
 
   useEffect(() => {
-    writeLocalStorageJson(STORAGE_KEY, data);
+    const initial = readStoredDataChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration-safe localStorage bootstrap
+    setData(initial.data);
+    setStorageNotice(
+      !initial.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : initial.wasReset
+          ? "Certaines séances enregistrées étaient illisibles et ont été ignorées."
+          : null,
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!hydratedRef.current) {
+      hydratedRef.current = true;
+      return;
+    }
+    if (!writeLocalStorageJson(STORAGE_KEY, data)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- report a synchronous localStorage write failure
+      setStorageNotice("Impossible d'enregistrer le cahier journal (stockage local indisponible ou plein).");
+    }
   }, [data]);
 
   const week = useMemo<LogbookWeekData>(
@@ -500,6 +514,7 @@ export function TeacherLogbookClient() {
                             >
                               <button
                                 type="button"
+                                data-print-content
                                 onClick={() => setEditingSession(session)}
                                 className="w-full min-h-8 text-left"
                               >

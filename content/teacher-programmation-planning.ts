@@ -1,6 +1,7 @@
 import {
   curriculumSubjects,
   getSubjectsForLevel,
+  schoolLevels,
   type CurriculumCompetency,
   type SchoolLevel,
 } from "@/content/teacher-programming-curriculum";
@@ -116,9 +117,9 @@ function readJson<T>(key: string): T | null {
 function isPlanningAssignment(value: unknown): value is PlanningAssignment {
   if (!isPlainObject(value)) return false;
   return (
-    typeof value.period === "number" &&
-    typeof value.status === "string" &&
-    typeof value.order === "number"
+    planningPeriodNumbers.includes(value.period as PlanningPeriodNumber) &&
+    PLANNING_STATUSES.some((status) => status.id === value.status) &&
+    typeof value.order === "number" && Number.isFinite(value.order)
   );
 }
 
@@ -131,9 +132,11 @@ function isPlanningFreeItem(value: unknown): value is PlanningFreeItem {
   if (!isPlainObject(value)) return false;
   return (
     typeof value.id === "string" &&
-    typeof value.level === "string" &&
-    typeof value.period === "number" &&
-    typeof value.status === "string"
+    schoolLevels.some((level) => level.id === value.level) &&
+    planningPeriodNumbers.includes(value.period as PlanningPeriodNumber) &&
+    PLANNING_STATUSES.some((status) => status.id === value.status) &&
+    typeof value.title === "string" &&
+    typeof value.subject === "string"
   );
 }
 
@@ -200,8 +203,34 @@ export function readPlanningStateChecked(): {
   if (isPlanningState(raw)) {
     return {
       state: {
-        assignments: isPlanningAssignments(raw.assignments) ? raw.assignments : {},
-        freeItems: sanitizeObjectArray<PlanningFreeItem>(raw.freeItems).filter(isPlanningFreeItem),
+        assignments: Object.fromEntries(
+          Object.entries(raw.assignments).map(([id, assignment]) => [
+            id,
+            {
+              ...assignment,
+              priority: PLANNING_PRIORITIES.some((item) => item.id === assignment.priority)
+                ? assignment.priority
+                : "important",
+              dureeMinutes:
+                Number.isFinite(assignment.dureeMinutes) && assignment.dureeMinutes >= 5
+                  ? assignment.dureeMinutes
+                  : 45,
+              teacherNote: typeof assignment.teacherNote === "string" ? assignment.teacherNote : "",
+              hidden: assignment.hidden === true,
+            },
+          ]),
+        ),
+        freeItems: sanitizeObjectArray<PlanningFreeItem>(raw.freeItems)
+          .filter(isPlanningFreeItem)
+          .map((item) => ({
+            ...item,
+            priority: PLANNING_PRIORITIES.some((priority) => priority.id === item.priority)
+              ? item.priority
+              : "important",
+            dureeMinutes: Number.isFinite(item.dureeMinutes) && item.dureeMinutes >= 5 ? item.dureeMinutes : 45,
+            teacherNote: typeof item.teacherNote === "string" ? item.teacherNote : "",
+            hidden: item.hidden === true,
+          })),
       },
       wasReset: false,
       storageAvailable,

@@ -148,15 +148,13 @@ export function TeacherCurriculumPlanner() {
   const [activeSubjectId, setActiveSubjectId] = useState<string | null>(null);
   const [activeDomainId, setActiveDomainId] = useState<string | null>(null);
   const [view, setView] = useState<PlanningView>("annuelle");
-  const initialPlanning = useMemo(() => readPlanningStateChecked(), []);
-  const [planningState, setPlanningState] = useState<PlanningState>(initialPlanning.state);
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialPlanning.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialPlanning.wasReset
-        ? "Les données de programmation enregistrées étaient illisibles et ont été réinitialisées."
-        : null,
-  );
+  // Client Components are prerendered by Next.js. Keep the server render and
+  // the first browser render deterministic, then hydrate from localStorage.
+  const [planningState, setPlanningState] = useState<PlanningState>({
+    assignments: {},
+    freeItems: [],
+  });
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
   const [showHidden, setShowHidden] = useState(false);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [resetConfirm, setResetConfirm] = useState<{ kind: "period"; period: PlanningPeriodNumber } | { kind: "subject"; subject: string } | null>(null);
@@ -168,13 +166,28 @@ export function TeacherCurriculumPlanner() {
   const [freePeriod, setFreePeriod] = useState<PlanningPeriodNumber>(1);
   const [freeDuree, setFreeDuree] = useState(45);
 
-  const [legacyEntries] = useState<LegacyEntry[]>(() => buildLegacyEntries(readLegacyOverrides()));
-  const [ignoredLegacyIds, setIgnoredLegacyIds] = useState<string[]>(() => readIgnoredLegacyIds());
+  const [legacyEntries, setLegacyEntries] = useState<LegacyEntry[]>([]);
+  const [ignoredLegacyIds, setIgnoredLegacyIds] = useState<string[]>([]);
   const [legacyDeletionConfirming, setLegacyDeletionConfirming] = useState(false);
   const [legacyDeleted, setLegacyDeleted] = useState(false);
 
   const [draggedKey, setDraggedKey] = useState<string | null>(null);
   const [dragOverPeriod, setDragOverPeriod] = useState<number | null>(null);
+
+  useEffect(() => {
+    const initial = readPlanningStateChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration-safe localStorage bootstrap
+    setPlanningState(initial.state);
+    setLegacyEntries(buildLegacyEntries(readLegacyOverrides()));
+    setIgnoredLegacyIds(readIgnoredLegacyIds());
+    setStorageNotice(
+      !initial.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : initial.wasReset
+          ? "Les données de programmation enregistrées étaient illisibles et ont été réinitialisées."
+          : null,
+    );
+  }, []);
 
   function persist(next: PlanningState) {
     setPlanningState(next);

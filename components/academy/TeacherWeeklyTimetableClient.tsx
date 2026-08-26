@@ -74,17 +74,11 @@ type DragPreview = { sessionId: string; dayId: TeacherTimetableDayId; startMinut
 type ResizePreview = { sessionId: string; durationMinutes: number };
 
 export function TeacherWeeklyTimetableClient() {
-  const initialTimetable = useMemo(() => readTeacherTimetableStateChecked(), []);
   const [state, setState] = useState<TeacherTimetableState>(
-    () => initialTimetable.state ?? createInitialTeacherTimetableState(DEFAULT_LEVEL_ID),
+    () => createInitialTeacherTimetableState(DEFAULT_LEVEL_ID),
   );
-  const [storageNotice, setStorageNotice] = useState<string | null>(
-    !initialTimetable.storageAvailable
-      ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
-      : initialTimetable.wasReset
-        ? "L'emploi du temps enregistré était illisible et a été réinitialisé."
-        : null,
-  );
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
+  const hydratedRef = useRef(false);
   const [view, setView] = useState<"reference" | "reelle">("reelle");
   const [newWeekLabel, setNewWeekLabel] = useState("");
   const [newWeekKind, setNewWeekKind] = useState<TeacherTimetableWeekKind>("sortie");
@@ -110,7 +104,27 @@ export function TeacherWeeklyTimetableClient() {
   const columnRefs = useRef<Partial<Record<TeacherTimetableDayId, HTMLDivElement | null>>>({});
 
   useEffect(() => {
-    writeTeacherTimetableState(state);
+    const initial = readTeacherTimetableStateChecked();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration-safe localStorage bootstrap
+    setState(initial.state ?? createInitialTeacherTimetableState(DEFAULT_LEVEL_ID));
+    setStorageNotice(
+      !initial.storageAvailable
+        ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
+        : initial.wasReset
+          ? "L'emploi du temps enregistré était illisible et a été réinitialisé."
+          : null,
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!hydratedRef.current) {
+      hydratedRef.current = true;
+      return;
+    }
+    if (!writeTeacherTimetableState(state)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- report a synchronous localStorage write failure
+      setStorageNotice("Impossible d'enregistrer l'emploi du temps (stockage local indisponible ou plein).");
+    }
   }, [state]);
 
   const subjects = teacherTimetableSubjectsByLevel[state.levelId];
@@ -137,7 +151,19 @@ export function TeacherWeeklyTimetableClient() {
   }, [config.dayStartMinutes, config.dayEndMinutes]);
 
   function updateConfig(patch: Partial<TeacherTimetableCalendarConfig>) {
-    setState((previous) => ({ ...previous, config: { ...previous.config, ...patch } }));
+    const candidate = { ...config, ...patch };
+    const isValid =
+      candidate.dayEndMinutes - candidate.dayStartMinutes >= 60 &&
+      candidate.lunchStartMinutes >= candidate.dayStartMinutes &&
+      candidate.lunchEndMinutes > candidate.lunchStartMinutes &&
+      candidate.lunchEndMinutes <= candidate.dayEndMinutes;
+    if (!isValid) {
+      setStorageNotice(
+        "Horaires non modifiés : la journée et la pause méridienne doivent rester dans l'ordre chronologique.",
+      );
+      return;
+    }
+    setState((previous) => ({ ...previous, config: candidate }));
   }
 
   function updateWeekSessions(
@@ -165,7 +191,21 @@ export function TeacherWeeklyTimetableClient() {
   ): boolean {
     const { week, session } = findWeekAndSession(weekId, sessionId);
     if (!week || !session) return false;
-    const candidate: TeacherTimetableSession = { ...session, ...patch };
+    const patched: TeacherTimetableSession = { ...session, ...patch };
+    const normalizedStart = clamp(
+      patched.startMinutes,
+      config.dayStartMinutes,
+      Math.max(config.dayStartMinutes, config.dayEndMinutes - config.gridStepMinutes),
+    );
+    const candidate: TeacherTimetableSession = {
+      ...patched,
+      startMinutes: normalizedStart,
+      durationMinutes: clamp(
+        patched.durationMinutes,
+        config.gridStepMinutes,
+        Math.max(config.gridStepMinutes, config.dayEndMinutes - normalizedStart),
+      ),
+    };
     const overlap = findOverlappingSession(week.sessions, candidate);
     if (overlap) {
       const proceed = window.confirm(
@@ -934,6 +974,7 @@ export function TeacherWeeklyTimetableClient() {
                   <input
                     type="text"
                     value={selectedSession.title}
+                    maxLength={120}
                     onChange={(event) => patchSelectedSession({ title: event.target.value })}
                     disabled={isReadOnlyView}
                     className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
@@ -974,6 +1015,7 @@ export function TeacherWeeklyTimetableClient() {
                     <input
                       type="number"
                       min={config.gridStepMinutes}
+                      max={config.dayEndMinutes - selectedSession.startMinutes}
                       step={config.gridStepMinutes}
                       value={selectedSession.durationMinutes}
                       disabled={isReadOnlyView}

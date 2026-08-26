@@ -82,7 +82,6 @@ export function TeacherPeriodProgressionClient() {
     const initial = readStoredCardsChecked();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage, jamais lu pendant le rendu SSR
     setCards(initial.cards);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
     setStorageNotice(
       !initial.storageAvailable
         ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
@@ -126,7 +125,10 @@ export function TeacherPeriodProgressionClient() {
       hasHydratedRef.current = true;
       return;
     }
-    writeStoredCards(cards);
+    if (!writeStoredCards(cards)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- report a synchronous localStorage write failure
+      setStorageNotice("Impossible d'enregistrer la progression (stockage local indisponible ou plein).");
+    }
   }, [cards]);
 
   const subjectsForLevel = useMemo(() => getSubjectsForLevel(niveau), [niveau]);

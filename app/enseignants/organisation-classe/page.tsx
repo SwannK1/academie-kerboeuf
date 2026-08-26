@@ -1,6 +1,7 @@
 import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { TeacherClassroomLayoutClient } from "@/components/teacher-classroom-layout/TeacherClassroomLayoutClient";
+import { PrintBodyClass } from "@/components/print/print-body-class";
 
 export const metadata = buildPageMetadata({
   title: "Plan de classe et groupes",
@@ -12,7 +13,8 @@ export const metadata = buildPageMetadata({
 
 export default function TeacherClassroomLayoutPage() {
   return (
-    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8 print:px-0 print:pt-4">
+      <PrintBodyClass className="print-teacher-tool" />
       <div className="mx-auto max-w-5xl">
         <Breadcrumb
           items={[
@@ -22,7 +24,7 @@ export default function TeacherClassroomLayoutPage() {
           ]}
         />
 
-        <header className="mt-6 max-w-3xl">
+        <header className="mt-6 max-w-3xl print:hidden">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Espace enseignants
           </p>

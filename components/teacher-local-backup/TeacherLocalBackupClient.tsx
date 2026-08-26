@@ -6,6 +6,10 @@ import {
   teacherBackupTools,
   type TeacherBackupToolId,
 } from "@/content/teacher-local-backup";
+import {
+  readLocalStorageRaw,
+  writeLocalStorageRaw,
+} from "@/content/teacher-local-storage";
 
 const HISTORY_STORAGE_KEY = "academie-kerboeuf-sauvegardes-historique-v1";
 const LAST_BACKUP_STORAGE_KEY = "academie-kerboeuf-sauvegardes-derniere-v1";
@@ -46,20 +50,19 @@ function readHistory(): HistoryEntry[] {
   }
 }
 
-function pushHistory(entry: HistoryEntry) {
-  if (typeof window === "undefined") return;
+function pushHistory(entry: HistoryEntry): boolean {
+  if (typeof window === "undefined") return false;
   const next = [entry, ...readHistory()].slice(0, HISTORY_LIMIT);
-  window.localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(next));
+  return writeLocalStorageRaw(HISTORY_STORAGE_KEY, JSON.stringify(next));
 }
 
 function readLastBackupDate(): string | null {
   if (typeof window === "undefined") return null;
-  return window.localStorage.getItem(LAST_BACKUP_STORAGE_KEY);
+  return readLocalStorageRaw(LAST_BACKUP_STORAGE_KEY);
 }
 
-function markBackupDate(date: string) {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(LAST_BACKUP_STORAGE_KEY, date);
+function markBackupDate(date: string): boolean {
+  return writeLocalStorageRaw(LAST_BACKUP_STORAGE_KEY, date);
 }
 
 function formatDate(iso: string | null): string {
@@ -83,10 +86,7 @@ function buildBackupFile(toolIds: TeacherBackupToolId[]): BackupFile {
   for (const id of toolIds) {
     const tool = teacherBackupTools.find((candidate) => candidate.id === id);
     if (!tool) continue;
-    data[id] =
-      typeof window === "undefined"
-        ? null
-        : window.localStorage.getItem(tool.storageKey);
+    data[id] = readLocalStorageRaw(tool.storageKey);
   }
   return {
     formatVersion: TEACHER_BACKUP_FORMAT_VERSION,
@@ -181,6 +181,7 @@ export function TeacherLocalBackupClient() {
     Record<string, ImportChoice>
   >({});
   const [importDone, setImportDone] = useState<string | null>(null);
+  const [storageError, setStorageError] = useState<string | null>(null);
   const [overwriteConfirmPending, setOverwriteConfirmPending] =
     useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -200,7 +201,7 @@ export function TeacherLocalBackupClient() {
       const incomingRaw = pendingFile.data[id] ?? null;
       const existingRaw =
         tool && typeof window !== "undefined"
-          ? window.localStorage.getItem(tool.storageKey)
+          ? readLocalStorageRaw(tool.storageKey)
           : null;
       return {
         id,
@@ -219,8 +220,11 @@ export function TeacherLocalBackupClient() {
 
   function recordExport(action: HistoryEntry["action"], tools: string[]) {
     const date = new Date().toISOString();
-    markBackupDate(date);
-    pushHistory({ date, action, tools });
+    const dateSaved = markBackupDate(date);
+    const historySaved = pushHistory({ date, action, tools });
+    if (!dateSaved || !historySaved) {
+      setStorageError("Le fichier a bien été téléchargé, mais l'historique local n'a pas pu être enregistré.");
+    }
     setLastBackupDate(date);
     setHistory(readHistory());
   }
@@ -290,23 +294,32 @@ export function TeacherLocalBackupClient() {
       const incomingRaw = pendingFile.data[detected.id] ?? null;
       if (incomingRaw === null) continue;
       if (choice === "remplacer") {
-        window.localStorage.setItem(tool.storageKey, incomingRaw);
-        appliedLabels.push(`${tool.label} (remplacé)`);
+        if (writeLocalStorageRaw(tool.storageKey, incomingRaw)) {
+          appliedLabels.push(`${tool.label} (remplacé)`);
+        } else {
+          setStorageError(`Impossible de restaurer ${tool.label} : le stockage local est indisponible ou plein.`);
+        }
       } else if (choice === "fusionner" && detected.canMerge) {
-        const existingRaw = window.localStorage.getItem(tool.storageKey);
-        window.localStorage.setItem(
+        const existingRaw = readLocalStorageRaw(tool.storageKey);
+        const saved = writeLocalStorageRaw(
           tool.storageKey,
           mergeArrayValues(existingRaw, incomingRaw),
         );
-        appliedLabels.push(`${tool.label} (fusionné)`);
+        if (saved) {
+          appliedLabels.push(`${tool.label} (fusionné)`);
+        } else {
+          setStorageError(`Impossible de restaurer ${tool.label} : le stockage local est indisponible ou plein.`);
+        }
       }
     }
     if (appliedLabels.length > 0) {
-      pushHistory({
+      if (!pushHistory({
         date: new Date().toISOString(),
         action: "import",
         tools: appliedLabels,
-      });
+      })) {
+        setStorageError("La restauration a réussi, mais son historique local n'a pas pu être enregistré.");
+      }
       setHistory(readHistory());
       setImportDone(
         `Restauration appliquée : ${appliedLabels.join(", ")}.`,
@@ -341,6 +354,12 @@ export function TeacherLocalBackupClient() {
 
   return (
     <div className="mt-8 space-y-6">
+      {storageError ? (
+        <div role="alert" className="flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber">
+          <p>{storageError}</p>
+          <button type="button" onClick={() => setStorageError(null)} className="shrink-0 font-bold underline">Fermer</button>
+        </div>
+      ) : null}
       <div className="rounded-lg border border-gold/40 bg-gold/10 p-4 text-sm leading-6 text-foreground">
         Vos données restent sur cet appareil tant que vous ne les exportez
         pas. Aucune donnée élève, aucun mot de passe et aucune information de

@@ -17,6 +17,11 @@ import {
   type StoredLayout,
   type TableShape,
 } from "@/content/teacher-classroom-layout";
+import {
+  isLocalStorageAvailable,
+  isPlainObject,
+  writeLocalStorageJson,
+} from "@/content/teacher-local-storage";
 
 const STORAGE_KEY = "academie-kerboeuf-organisation-classe-plan-v1";
 const CANVAS_WIDTH = 880;
@@ -42,11 +47,24 @@ function readSaves(): StoredLayout[] {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw) as unknown;
-    if (Array.isArray(parsed)) return parsed as StoredLayout[];
+    if (Array.isArray(parsed)) return parsed.filter(isStoredLayout);
     return [];
   } catch {
     return [];
   }
+}
+
+function isStoredLayout(value: unknown): value is StoredLayout {
+  if (!isPlainObject(value)) return false;
+  return (
+    typeof value.id === "string" &&
+    typeof value.name === "string" &&
+    Array.isArray(value.tables) &&
+    Array.isArray(value.labels) &&
+    Array.isArray(value.groups) &&
+    isPlainObject(value.roleAssignment) &&
+    typeof value.isDefault === "boolean"
+  );
 }
 
 export function TeacherClassroomLayoutClient() {
@@ -66,6 +84,7 @@ export function TeacherClassroomLayoutClient() {
     fallbackDefault.roleAssignment,
   );
   const [configName, setConfigName] = useState(fallbackDefault.name);
+  const [storageNotice, setStorageNotice] = useState<string | null>(null);
 
   const [tab, setTab] = useState<Tab>("plan");
   const [showLegend, setShowLegend] = useState(true);
@@ -92,25 +111,31 @@ export function TeacherClassroomLayoutClient() {
   const hydratedRef = useRef(false);
 
   useEffect(() => {
+    if (!isLocalStorageAvailable()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration-safe localStorage availability notice
+      setStorageNotice("Le stockage local n'est pas disponible : le plan et la liste ne seront pas sauvegardés.");
+      return;
+    }
     const initial = readSaves();
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage, jamais lu pendant le rendu SSR
     setSaves(initial);
     const defaultLayout = initial.find((s) => s.isDefault) ?? initial[0];
     if (defaultLayout) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
       setCurrentId(defaultLayout.id);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
       setTables(defaultLayout.tables);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
       setLabels(defaultLayout.labels);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
       setGroups(defaultLayout.groups);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
       setRoleAssignment(defaultLayout.roleAssignment);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
       setConfigName(defaultLayout.name);
     }
   }, []);
+
+  function writeSaves(next: StoredLayout[]): boolean {
+    const saved = writeLocalStorageJson(STORAGE_KEY, next);
+    if (!saved) {
+      setStorageNotice("Impossible d'enregistrer le plan de classe (stockage local indisponible ou plein).");
+    }
+    return saved;
+  }
 
   function persistCurrent(next: Partial<StoredLayout> = {}) {
     setSaves((prev) => {
@@ -129,7 +154,7 @@ export function TeacherClassroomLayoutClient() {
         existingIndex >= 0
           ? prev.map((s, i) => (i === existingIndex ? updated : s))
           : [...prev, updated];
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(nextList));
+      writeSaves(nextList);
       return nextList;
     });
   }
@@ -258,6 +283,14 @@ export function TeacherClassroomLayoutClient() {
     setNewLabelText("");
   }
 
+  function renameLabel(id: string, text: string) {
+    const normalized = text.trim();
+    if (!normalized) return;
+    setLabels((prev) =>
+      prev.map((label) => (label.id === id ? { ...label, text: normalized } : label)),
+    );
+  }
+
   function removeLabel(id: string) {
     setLabels((prev) => prev.filter((label) => label.id !== id));
     setAvoidPairs((prev) =>
@@ -383,7 +416,7 @@ export function TeacherClassroomLayoutClient() {
     };
     setSaves((prev) => {
       const list = [...prev, next];
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      writeSaves(list);
       return list;
     });
     setCurrentId(id);
@@ -405,7 +438,7 @@ export function TeacherClassroomLayoutClient() {
   function renameSave(id: string, name: string) {
     setSaves((prev) => {
       const list = prev.map((s) => (s.id === id ? { ...s, name } : s));
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      writeSaves(list);
       return list;
     });
     if (id === currentId) setConfigName(name);
@@ -422,23 +455,35 @@ export function TeacherClassroomLayoutClient() {
     };
     setSaves((prev) => {
       const list = [...prev, copy];
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      writeSaves(list);
       return list;
     });
   }
 
   function deleteSave(id: string) {
-    setSaves((prev) => {
-      const list = prev.filter((s) => s.id !== id);
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-      return list;
-    });
+    const remaining = saves.filter((save) => save.id !== id);
+    writeSaves(remaining);
+    setSaves(remaining);
+    if (id === currentId) {
+      const replacement = remaining.find((save) => save.isDefault) ?? remaining[0];
+      if (replacement) {
+        loadSave(replacement.id);
+      } else {
+        const empty = emptyLayout("Configuration 1");
+        setCurrentId(empty.id);
+        setConfigName(empty.name);
+        setTables([]);
+        setLabels([]);
+        setGroups([]);
+        setRoleAssignment({});
+      }
+    }
   }
 
   function setDefaultSave(id: string) {
     setSaves((prev) => {
       const list = prev.map((s) => ({ ...s, isDefault: s.id === id }));
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      writeSaves(list);
       return list;
     });
   }
@@ -474,7 +519,15 @@ export function TeacherClassroomLayoutClient() {
   );
 
   return (
-    <div className="mt-10 space-y-8">
+    <div className="mt-10 space-y-8 print:mt-4 print:text-black">
+      {storageNotice ? (
+        <div role="status" className="flex items-start justify-between gap-4 rounded-lg border border-amber/40 bg-amber/10 p-4 text-sm text-amber print:hidden">
+          <p>{storageNotice}</p>
+          <button type="button" onClick={() => setStorageNotice(null)} className="shrink-0 font-bold underline">
+            Fermer
+          </button>
+        </div>
+      ) : null}
       <p
         role="note"
         className="rounded-lg border border-ember/40 bg-ember/10 p-4 text-sm font-bold text-foreground print:hidden"
@@ -686,6 +739,10 @@ export function TeacherClassroomLayoutClient() {
                   type="text"
                   value={newLabelText}
                   onChange={(e) => setNewLabelText(e.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") addLabel();
+                  }}
+                  maxLength={80}
                   className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                   placeholder="Ex : Léo, ou Élève 4"
                 />
@@ -751,14 +808,20 @@ export function TeacherClassroomLayoutClient() {
             {labels.length > 0 && (
               <ul className="mt-4 flex flex-wrap gap-2" role="list">
                 {labels.map((label) => (
-                  <li key={`del-${label.id}`}>
-                    <button
-                      type="button"
-                      aria-label={`Supprimer l'étiquette ${label.text}`}
-                      onClick={() => removeLabel(label.id)}
-                      className="text-xs text-muted hover:text-ember"
-                    >
-                      Supprimer {label.text}
+                  <li key={`del-${label.id}`} className="flex min-w-0 items-center gap-2">
+                    <label className="sr-only" htmlFor={`label-name-${label.id}`}>
+                      Modifier {label.text}
+                    </label>
+                    <input
+                      id={`label-name-${label.id}`}
+                      type="text"
+                      defaultValue={label.text}
+                      maxLength={80}
+                      onBlur={(event) => renameLabel(label.id, event.currentTarget.value)}
+                      className="min-h-9 min-w-0 max-w-48 rounded border border-white/15 bg-background/50 px-2 text-sm text-foreground"
+                    />
+                    <button type="button" aria-label={`Supprimer l'étiquette ${label.text}`} onClick={() => removeLabel(label.id)} className="text-xs text-muted hover:text-ember">
+                      Supprimer
                     </button>
                   </li>
                 ))}
