@@ -11,6 +11,21 @@ import type {
   ProgramStatus,
   ProgramSubdomain,
 } from "@/content/program-types";
+import { createPrimaryPdfResources } from "@/content/levels/primary-pdf-resources";
+
+const availablePdfCompetencies = new Set([
+  "associer-une-lettre-et-son-son",
+  "combiner-consonnes-et-voyelles",
+  "identifier-les-lettres-de-l-alphabet",
+  "lire-des-mots-avec-digraphes-frequents",
+  "lire-des-mots-reguliers-courts",
+  "lire-des-syllabes-simples",
+  "reconnaitre-les-lettres-en-differentes-ecritures",
+  "comparer-des-nombres",
+  "denombrer-une-collection-jusqua-20",
+  "lire-et-ecrire-les-nombres-jusqua-100",
+  "ranger-des-nombres",
+]);
 
 const emptyParentGuidance: ParentGuidance = {
   summary: "",
@@ -31,6 +46,15 @@ function createCompetencySequence(
   definition: CompetencyDefinition,
 ): { lesson: Lesson; competency: LearningCompetency } {
   const id = `cp-${domainSlug}-${subdomainSlug}-${definition.slug}`;
+  const hasPdfResources = availablePdfCompetencies.has(definition.slug);
+  const resources = hasPdfResources
+    ? createPrimaryPdfResources({
+        level: "cp",
+        subject: domainSlug,
+        competencySlug: definition.slug,
+      })
+    : undefined;
+  const status = hasPdfResources ? "available" : definition.status;
 
   return {
     lesson: {
@@ -42,8 +66,9 @@ function createCompetencySequence(
       parentGuidance: emptyParentGuidance,
       successCriteria: [],
       exercises: [],
+      resources,
       competencyIds: [id],
-      status: definition.status,
+      status,
     },
     competency: {
       id,
@@ -55,7 +80,7 @@ function createCompetencySequence(
       domainSlug,
       subdomainSlug,
       objective: definition.objective,
-      status: definition.status,
+      status,
       lessonIds: [id],
       successCriteria: [],
     },
@@ -72,9 +97,7 @@ function createSubdomain(
   const sequences = definitions.map((definition) =>
     createCompetencySequence(domainSlug, slug, definition),
   );
-  const hasInProgress = definitions.some(
-    (definition) => definition.status === "in-progress",
-  );
+  const statuses = sequences.map((sequence) => sequence.lesson.status);
 
   return {
     id: `cp-${domainSlug}-${slug}`,
@@ -83,7 +106,11 @@ function createSubdomain(
     description,
     lessons: sequences.map((sequence) => sequence.lesson),
     competencies: sequences.map((sequence) => sequence.competency),
-    status: hasInProgress ? "in-progress" : "upcoming",
+    status: statuses.every((status) => status === "available")
+      ? "available"
+      : statuses.some((status) => status === "available" || status === "in-progress")
+        ? "in-progress"
+        : "upcoming",
   };
 }
 

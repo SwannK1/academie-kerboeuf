@@ -8,6 +8,7 @@ import {
   type Cm1SubjectNode,
 } from "@/content/cm1-learning-tree";
 import { CM1_ACCENT } from "@/lib/cm1-accent";
+import { getPublishedSubdomainPagesForDomain } from "@/content/levels/published-subdomain-pages";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -52,7 +53,9 @@ export default async function Cm1SubjectPage({ params }: PageProps) {
       accent={CM1_ACCENT}
       sequences={tree ? mapCm1Sequences(tree) : []}
       cycleLabel="Cycle 3"
-      footerLinks={[]}
+      footerLinks={getPublishedSubdomainPagesForDomain("cm1", slug).map(
+        (page) => ({ href: page.route, label: page.label }),
+      )}
     />
   );
 }

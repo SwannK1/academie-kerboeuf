@@ -7,7 +7,35 @@
  * Règle centrale : Le site organise. Les PDF enseignent.
  * Aucun contenu pédagogique complet ici — titres, objectifs et structure seulement.
  */
-import type { MaternelleSubdomain } from "@/content/levels/maternelle/types";
+import type {
+  MaternelleResourceRef,
+  MaternelleSubdomain,
+} from "@/content/levels/maternelle/types";
+
+function createMsLangageResources(slug: string): MaternelleResourceRef[] {
+  const basePath = `/fiches/maternelle/ms/langage/${slug}/ms-langage-${slug}`;
+
+  return [
+    {
+      kind: "fiche-atelier",
+      label: "Fiche atelier",
+      status: "available",
+      href: `${basePath}-fiche-atelier.pdf`,
+    },
+    {
+      kind: "grille-observation",
+      label: "Grille d'observation",
+      status: "available",
+      href: `${basePath}-grille-observation.pdf`,
+    },
+    {
+      kind: "fiche-parent",
+      label: "Fiche parent",
+      status: "available",
+      href: `${basePath}-fiche-parent.pdf`,
+    },
+  ];
+}
 
 export const msLangageSubdomains: MaternelleSubdomain[] = [
   // ── 1. Langage oral ────────────────────────────────────────────────────────
@@ -17,7 +45,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
     label: "Langage oral",
     description:
       "Raconter, reformuler, décrire. Premiers récits d'actions vécues et échanges guidés en petit groupe.",
-    status: "in-progress",
+    status: "available",
     sequences: [
       {
         id: "ms-langage-oral-seq1",
@@ -40,8 +68,8 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
         observableSkills: ["Raconte une action vécue en 2 ou 3 phrases."],
         observationFocus:
           "Observer si l'élève parle spontanément ou uniquement sur sollicitation directe.",
-        status: "in-progress",
-        resources: [],
+        status: "available",
+        resources: createMsLangageResources("raconter-une-action-vecue"),
         workshops: [
           {
             id: "ms-langage-oral-seq1-atelier1",
@@ -59,13 +87,13 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
               "L'élève produit 2 phrases minimum sur l'activité visible.",
             differentiation:
               "Allègement : l'enseignant pose des questions ouvertes. Renforcement : l'élève raconte sans support photo.",
-            status: "in-progress",
+            status: "available",
             observationGrid: {
               id: "ms-langage-oral-seq1-atelier1-grille",
               title: "Grille — Raconter une action vécue",
               teacherUse:
                 "Cocher pendant la séance pour chaque élève du groupe. Compléter après si nécessaire.",
-              status: "upcoming",
+              status: "available",
               criteria: [
                 {
                   id: "crit-ms-oral-1",
@@ -98,7 +126,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
     label: "Compréhension et vocabulaire",
     description:
       "Écouter, comprendre, mémoriser. Travail sur le sens des mots et la compréhension d'histoires courtes.",
-    status: "in-progress",
+    status: "available",
     sequences: [
       {
         id: "ms-langage-comprehension-seq1",
@@ -122,8 +150,8 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
         observableSkills: ["Nomme les personnages principaux d'une histoire courte."],
         observationFocus:
           "Observer si l'élève comprend implicitement ou seulement explicitement. Repérer les mots réinvestis.",
-        status: "in-progress",
-        resources: [],
+        status: "available",
+        resources: createMsLangageResources("comprendre-une-histoire-courte"),
         workshops: [
           {
             id: "ms-langage-comprehension-seq1-atelier1",
@@ -145,13 +173,13 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
               "L'élève nomme le personnage et le place correctement, en justifiant brièvement.",
             differentiation:
               "Allègement : les colonnes sont déjà étiquetées avec une image. Renforcement : l'élève nomme un rôle pour chaque personnage.",
-            status: "in-progress",
+            status: "available",
             observationGrid: {
               id: "ms-langage-comprehension-seq1-atelier1-grille",
               title: "Grille — Identification des personnages",
               teacherUse:
                 "Cocher pendant l'atelier. Un critère suffit pour valider la compréhension globale.",
-              status: "upcoming",
+              status: "available",
               criteria: [
                 {
                   id: "crit-ms-comp-1",
@@ -184,7 +212,7 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
     label: "Premiers écrits",
     description:
       "Prénom, lettres connues, premiers tracés intentionnels. Découverte de la fonction de l'écrit.",
-    status: "in-progress",
+    status: "available",
     sequences: [
       {
         id: "ms-langage-premiers-ecrits-seq1",
@@ -203,8 +231,8 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
         observableSkills: ["Reconnaît son prénom écrit parmi 4 étiquettes."],
         observationFocus:
           "Observer la prise d'outil et la direction du tracé. Repérer si l'élève identifie une lettre significative (initiale).",
-        status: "in-progress",
-        resources: [],
+        status: "available",
+        resources: createMsLangageResources("reconnaitre-son-prenom"),
         workshops: [
           {
             id: "ms-langage-premiers-ecrits-seq1-atelier1",
@@ -225,13 +253,13 @@ export const msLangageSubdomains: MaternelleSubdomain[] = [
               "L'élève sélectionne sa propre étiquette parmi des étiquettes proches.",
             differentiation:
               "Allègement : 3 étiquettes seulement. Renforcement : l'élève retrouve son prénom parmi davantage d'étiquettes proches.",
-            status: "in-progress",
+            status: "available",
             observationGrid: {
               id: "ms-langage-premiers-ecrits-seq1-atelier1-grille",
               title: "Grille — Reconnaître son prénom",
               teacherUse:
                 "Observer pendant la manipulation. Ne pas intervenir sur le tracé — observer uniquement.",
-              status: "upcoming",
+              status: "available",
               criteria: [
                 {
                   id: "crit-ms-ecrit-1",

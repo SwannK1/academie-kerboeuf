@@ -71,7 +71,16 @@ const sequence = (
   title: string,
   competency: string,
   status: Cm1LearningStatus = "upcoming",
-): Cm1SequenceNode => ({ id, title, competency, status, pdfSlots: defaultPdfSlots });
+): Cm1SequenceNode => ({
+  id,
+  title,
+  competency,
+  status:
+    id.startsWith("francais-") || id.startsWith("mathematiques-")
+      ? "available"
+      : status,
+  pdfSlots: defaultPdfSlots,
+});
 
 export const cm1LearningTree: Cm1LearningTree = [
   {
@@ -145,7 +154,6 @@ export const cm1LearningTree: Cm1LearningTree = [
               sequence("francais-ecriture-rediger-texte-structure", "Produire un texte structuré", "Rédiger un texte organisé avec un début, un développement et une fin."),
               sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Rédiger un paragraphe court qui énonce une idée et l'appuie par un exemple ou une raison."),
               sequence("francais-ecriture-rediger-reviser", "Relire pour améliorer la clarté", "Repérer une maladresse de sens ou d'organisation et proposer une correction."),
-              sequence("francais-ecriture-rediger-paragraphe-argumente", "Écrire un paragraphe argumenté court", "Donner une idée, une raison et un exemple."),
               sequence("francais-ecriture-rediger-reviser-grille", "Réviser un texte avec une grille", "Améliorer un texte à partir de critères simples."),
             ],
           },

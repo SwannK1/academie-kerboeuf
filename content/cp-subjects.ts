@@ -28,7 +28,7 @@ export const cpSubjects: CpSubject[] = [
     shortDescription:
       "Numération jusqu'à 100, calculs additifs et soustractifs, premiers problèmes guidés.",
     domains: ["Nombres", "Calculs simples", "Problèmes très guidés"],
-    status: "upcoming",
+    status: "in-progress",
     accent: "jade",
     teacherFocus:
       "Construire le sens des nombres avant d'automatiser les calculs.",

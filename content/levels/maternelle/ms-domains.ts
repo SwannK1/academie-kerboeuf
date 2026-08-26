@@ -17,13 +17,18 @@ export const msDomains: MaternelleDomainEntry[] = [
       "Cycle 1 - Domaine 1 : Mobiliser le langage dans toutes ses dimensions",
     description: "Récits courts, consignes, sons proches et premiers écrits.",
     href: "/maternelle/ms/domaines/langage",
-    status: "in-progress",
+    status: "partial",
     subdomains: msLangageSubdomains,
     observables: [
       {
         id: "ms-langage-raconter",
         title: "Raconter une action vécue",
-        status: "in-progress",
+        status: "available",
+      },
+      {
+        id: "ms-langage-comprendre-histoire",
+        title: "Comprendre une histoire courte",
+        status: "available",
       },
       {
         id: "ms-langage-reformuler",
@@ -38,7 +43,7 @@ export const msDomains: MaternelleDomainEntry[] = [
       {
         id: "ms-langage-prenom",
         title: "Identifier son prénom ou quelques lettres",
-        status: "upcoming",
+        status: "available",
       },
     ],
     situations: [

@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import { SubdomainResourcePage } from "@/components/academy/subdomain-resource-page";
 import { getCe1Domain, getCe1Subdomain } from "@/content/levels/ce1-learning-tree";
 import { getCe2Domain, getCe2Subdomain } from "@/content/levels/ce2-learning-tree";
-import { getCm1Domain, getCm1Subdomain } from "@/content/levels/cm1";
+import {
+  getCm1ResourceDomain,
+  getCm1ResourceSubdomain,
+} from "@/content/levels/cm1-resource-catalog";
 import { getCpDomain, getCpSubdomain } from "@/content/levels/cp-learning-tree";
 import {
   getPublishedSubdomainPage,
@@ -140,8 +143,8 @@ function resolvePrimarySubdomainPage(
         domainSlug,
         subdomainSlug,
         route: publishedPage.route,
-        getDomain: getCm1Domain,
-        getSubdomain: getCm1Subdomain,
+        getDomain: getCm1ResourceDomain,
+        getSubdomain: getCm1ResourceSubdomain,
       });
   }
 }

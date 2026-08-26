@@ -15,6 +15,18 @@ import type {
   ProgramStatus,
   ProgramSubdomain,
 } from "@/content/program-types";
+import { createPrimaryPdfResources } from "@/content/levels/primary-pdf-resources";
+
+const ce2PdfSubjectsByCompetency = new Map<string, string>([
+  ["ce2-fr-lc-comprendre-texte-long", "francais"],
+  ["ce2-fr-lc-prelever-information-precise", "francais"],
+  ["ce2-fr-lc-reperer-implicite", "francais"],
+  ["ce2-fr-lc-resumer-paragraphe", "francais"],
+  ["ce2-ma-nc-lire-ecrire-ordonner-nombres", "mathematiques"],
+  ["ce2-ma-nc-multiplier-2-5-10", "mathematiques"],
+  ["ce2-ma-nc-poser-operations", "mathematiques"],
+  ["ce2-ma-nc-utiliser-strategies-calcul-mental", "mathematiques"],
+]);
 
 const emptyParentGuidance: ParentGuidance = {
   summary: "",
@@ -302,7 +314,16 @@ function getAggregateStatus(statuses: ProgramStatus[]): ProgramStatus {
 function createCompetencySequence(
   entry: CurriculumEntry,
 ): { lesson: Lesson; competency: LearningCompetency } {
-  const resources = clonePlannedPdfResources();
+  const pdfSubject = ce2PdfSubjectsByCompetency.get(entry.id);
+  const resources = pdfSubject
+    ? createPrimaryPdfResources({
+        level: "ce2",
+        subject: pdfSubject,
+        competencySlug: entry.id,
+        filePrefix: `ce2-${pdfSubject}-${entry.id}`,
+      })
+    : clonePlannedPdfResources();
+  const status = pdfSubject ? "available" : entry.status;
 
   const sessions = CE2_SESSIONS[entry.id];
 
@@ -319,7 +340,7 @@ function createCompetencySequence(
       resources,
       ...(sessions ? { sessions } : {}),
       competencyIds: [entry.id],
-      status: entry.status,
+      status,
     },
     competency: {
       id: entry.id,
@@ -331,10 +352,9 @@ function createCompetencySequence(
       domainSlug: entry.domainSlug,
       subdomainSlug: entry.subdomainSlug,
       objective: entry.observableObjective,
-      status: entry.status,
+      status,
       lessonIds: [entry.id],
       successCriteria: entry.successCriteria,
-      resourceRefs: clonePlannedPdfResources(),
     },
   };
 }

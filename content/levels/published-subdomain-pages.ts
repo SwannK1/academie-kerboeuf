@@ -17,6 +17,27 @@ export const publishedSubdomainPages = [
     label: "CP — Français — Lecture-compréhension",
   },
   {
+    level: "cp",
+    domain: "francais",
+    subdomain: "decodage",
+    route: "/primaire/cp/programmes/francais/decodage",
+    label: "CP — Français — Décodage",
+  },
+  {
+    level: "cp",
+    domain: "francais",
+    subdomain: "combinatoire",
+    route: "/primaire/cp/programmes/francais/combinatoire",
+    label: "CP — Français — Combinatoire",
+  },
+  {
+    level: "cp",
+    domain: "mathematiques",
+    subdomain: "nombres",
+    route: "/primaire/cp/programmes/mathematiques/nombres",
+    label: "CP — Mathématiques — Nombres",
+  },
+  {
     level: "ce1",
     domain: "francais",
     subdomain: "etude-de-la-langue",
@@ -29,6 +50,13 @@ export const publishedSubdomainPages = [
     subdomain: "nombres-calcul",
     route: "/primaire/ce2/programmes/mathematiques/nombres-calcul",
     label: "CE2 — Mathématiques — Nombres et calculs",
+  },
+  {
+    level: "ce2",
+    domain: "francais",
+    subdomain: "lecture-comprehension",
+    route: "/primaire/ce2/programmes/francais/lecture-comprehension",
+    label: "CE2 — Français — Lecture et compréhension",
   },
   {
     level: "cm1",
@@ -44,7 +72,39 @@ export const publishedSubdomainPages = [
     route: "/primaire/cm1/programmes/mathematiques/calcul-pose",
     label: "CM1 — Mathématiques — Calcul posé",
   },
+  ...[
+    ["francais", "lecture-documentaire", "Français — Lecture documentaire"],
+    ["francais", "lecture-croiser-sources", "Français — Croiser des sources"],
+    ["francais", "ecriture-planifier", "Français — Préparer son écrit"],
+    ["francais", "ecriture-rediger", "Français — Rédiger et améliorer"],
+    ["francais", "etude-langue-grammaire", "Français — Grammaire de phrase"],
+    ["francais", "etude-langue-orthographe", "Français — Orthographe grammaticale"],
+    ["francais", "oral-participer", "Français — Participer à un échange"],
+    ["mathematiques", "numeration", "Mathématiques — Numération"],
+    ["mathematiques", "calcul-mental", "Mathématiques — Calcul mental"],
+    ["mathematiques", "demarche", "Mathématiques — Démarche de résolution"],
+    ["mathematiques", "donnees", "Mathématiques — Lire et interpréter des données"],
+    ["mathematiques", "longueurs-aires", "Mathématiques — Longueurs, périmètres et aires"],
+    ["mathematiques", "durees", "Mathématiques — Durées"],
+    ["mathematiques", "figures", "Mathématiques — Figures planes"],
+    ["mathematiques", "espace", "Mathématiques — Repérage dans l'espace"],
+  ].map(([domain, subdomain, label]) => ({
+    level: "cm1" as const,
+    domain,
+    subdomain,
+    route: `/primaire/cm1/programmes/${domain}/${subdomain}`,
+    label: `CM1 — ${label}`,
+  })),
 ] as const satisfies readonly PublishedSubdomainPage[];
+
+export function getPublishedSubdomainPagesForDomain(
+  level: string,
+  domain: string,
+): readonly PublishedSubdomainPage[] {
+  return publishedSubdomainPages.filter(
+    (page) => page.level === level && page.domain === domain,
+  );
+}
 
 export function isPublishedSubdomainPage(
   level: string,

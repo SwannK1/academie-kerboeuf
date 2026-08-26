@@ -5,6 +5,7 @@ import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { cpSubjects, getCpSubjectBySlug } from "@/content/cp-subjects";
 import { getCpSubjectTree, getCpSequences } from "@/content/levels/cp-learning-tree";
 import { CP_ACCENT } from "@/lib/cp-accent";
+import { getPublishedSubdomainPagesForDomain } from "@/content/levels/published-subdomain-pages";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -53,9 +54,9 @@ export default async function CpSubjectPage({ params }: PageProps) {
       accent={CP_ACCENT}
       sequences={sequences}
       cycleLabel="Cycle 2"
-      footerLinks={[
-        { href: "/primaire/cp/programmes/francais/lecture-comprehension", label: "Lecture-compréhension CP", tone: "gold" },
-      ]}
+      footerLinks={getPublishedSubdomainPagesForDomain("cp", slug).map(
+        (page) => ({ href: page.route, label: page.label, tone: "gold" as const }),
+      )}
     />
   );
 }

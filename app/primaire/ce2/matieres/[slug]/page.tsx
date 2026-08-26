@@ -8,6 +8,7 @@ import {
   getCe2Sequences,
 } from "@/content/levels/ce2-learning-tree";
 import { CE2_ACCENT } from "@/lib/ce2-accent";
+import { getPublishedSubdomainPagesForDomain } from "@/content/levels/published-subdomain-pages";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -44,14 +45,9 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
   const tree = getCe2SubjectTree(slug);
   const sequences = getCe2Sequences(slug);
 
-  const footerLinks: { href: string; label: string }[] = [];
-
-  if (slug === "mathematiques") {
-    footerLinks.push({
-      href: "/primaire/ce2/programmes/mathematiques/nombres-calcul",
-      label: "Nombres et calculs — séquences publiées",
-    });
-  }
+  const footerLinks = getPublishedSubdomainPagesForDomain("ce2", slug).map(
+    (page) => ({ href: page.route, label: page.label }),
+  );
 
   return (
     <SubjectDetailPage

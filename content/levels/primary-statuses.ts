@@ -8,7 +8,7 @@ export const primaryLevelStatuses: Record<PrimaryLevelSlug, ProgramStatus> = {
   cp: "partial",
   ce1: "partial",
   ce2: "partial",
-  cm1: "in-progress",
+  cm1: "partial",
   cm2: "available",
 };
 

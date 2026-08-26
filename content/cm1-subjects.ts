@@ -21,7 +21,7 @@ export const cm1Subjects: Cm1Subject[] = [
     shortDescription:
       "Lire avec méthode, écrire des textes organisés et consolider les accords essentiels.",
     domains: ["Lecture et compréhension", "Écriture", "Étude de la langue", "Langage oral"],
-    status: "in-progress",
+    status: "available",
     accent: "gold",
     yearlyPathLabel: "Installer les stratégies de cycle 3",
     teacherFocus:
@@ -33,7 +33,7 @@ export const cm1Subjects: Cm1Subject[] = [
     shortDescription:
       "Structurer les grands nombres, entrer dans les fractions et résoudre avec méthode.",
     domains: ["Nombres et calculs", "Résolution de problèmes", "Grandeurs et mesures", "Espace et géométrie"],
-    status: "upcoming",
+    status: "available",
     accent: "jade",
     yearlyPathLabel: "Consolider les bases du cycle 3",
     teacherFocus:

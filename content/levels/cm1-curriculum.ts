@@ -5,6 +5,23 @@
 
 import type { CurriculumLevelMap } from "@/content/curriculum-map-types";
 import type { ResourceSlot } from "@/content/learning-architecture-types";
+import { createPrimaryPdfResources } from "@/content/levels/primary-pdf-resources";
+
+function createCm1ResourceSlots(
+  subject: "francais" | "mathematiques",
+  competencySlug: string,
+): ResourceSlot[] {
+  return createPrimaryPdfResources({
+    level: "cm1",
+    subject,
+    competencySlug,
+    filePrefix: `cm1-${subject}-${competencySlug}`,
+  }).map((resource) => ({
+    kind: resource.kind,
+    label: resource.label,
+    resource,
+  }));
+}
 
 const PLANNED_PDF_RESOURCES: ResourceSlot[] = [
   {
@@ -77,8 +94,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je relève ce que le personnage fait.",
                 "Je formule une intention et je la justifie.",
               ],
-              status: "in-progress",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-lecture-recits-intentions-personnage",
+              ),
               competencyId: "cm1-fr-lc-intentions-personnage",
             },
             {
@@ -96,8 +116,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je formule ce que le texte suggère sans le dire.",
                 "Je justifie mon inférence brièvement.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-lecture-recits-inference-simple",
+              ),
               competencyId: "cm1-fr-lc-inference-simple",
             },
             {
@@ -115,8 +138,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "J'identifie l'organisation du texte (titres, paragraphes).",
                 "Je retrouve les informations principales sans recopier le texte.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-lecture-documentaire-informations",
+              ),
               competencyId: "cm1-fr-lc-texte-informatif",
             },
           ],
@@ -140,8 +166,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je les ordonne dans un plan ou une liste.",
                 "Je m'appuie sur ce plan pendant la rédaction.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-ecriture-planifier-idees",
+              ),
               competencyId: "cm1-fr-ecr-planifier",
             },
             {
@@ -159,8 +188,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je regroupe les phrases qui vont ensemble.",
                 "Je relis pour améliorer la clarté.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-ecriture-rediger-texte-structure",
+              ),
               competencyId: "cm1-fr-ecr-texte-structure",
             },
           ],
@@ -184,8 +216,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je retrouve son sujet.",
                 "Je vérifie l'accord sujet-verbe.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-etude-langue-grammaire-sujet-verbe",
+              ),
               competencyId: "cm1-fr-edl-sujet-verbe-accord",
             },
           ],
@@ -209,8 +244,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je donne au moins un argument.",
                 "Je m'appuie sur un exemple précis.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "francais",
+                "francais-oral-participer-avis",
+              ),
               competencyId: "cm1-fr-oral-avis-argumente",
             },
           ],
@@ -241,8 +279,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je lis une fraction (numérateur et dénominateur).",
                 "Je représente une fraction simple sur un dessin ou une droite graduée.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-nombres-calculs-numeration-fractions",
+              ),
               competencyId: "cm1-ma-num-fractions",
             },
             {
@@ -260,8 +301,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "J'écris un nombre dicté en chiffres.",
                 "Je compare deux nombres et je justifie.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-nombres-calculs-numeration-grands-nombres",
+              ),
               competencyId: "cm1-ma-num-grands-nombres",
             },
           ],
@@ -285,8 +329,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je multiplie chiffre par chiffre en gérant les retenues.",
                 "Je vérifie le résultat par une estimation.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-nombres-calculs-calcul-pose-multiplication",
+              ),
               competencyId: "cm1-ma-cal-multiplication",
             },
             {
@@ -304,8 +351,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je calcule quotient et reste étape par étape.",
                 "Je vérifie que le reste est inférieur au diviseur.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-nombres-calculs-calcul-pose-division",
+              ),
               competencyId: "cm1-ma-cal-division",
             },
           ],
@@ -329,8 +379,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je choisis l'ordre des calculs.",
                 "Je justifie ma démarche par une phrase courte.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-problemes-demarche-etapes",
+              ),
               competencyId: "cm1-ma-prob-etapes",
             },
           ],
@@ -354,8 +407,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je choisis l'unité adaptée.",
                 "J'explique mon choix en une phrase.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-grandeurs-mesures-longueurs-aires-perimetre",
+              ),
               competencyId: "cm1-ma-gm-aires-perimetres",
             },
           ],
@@ -379,8 +435,11 @@ export const cm1CurriculumLevelMap: CurriculumLevelMap = {
                 "J'utilise les outils adaptés.",
                 "Je vérifie la figure construite.",
               ],
-              status: "upcoming",
-              resourceSlots: PLANNED_PDF_RESOURCES,
+              status: "available",
+              resourceSlots: createCm1ResourceSlots(
+                "mathematiques",
+                "mathematiques-geometrie-figures-decrire",
+              ),
               competencyId: "cm1-ma-geo-decrire-construire-figures",
             },
           ],

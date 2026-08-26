@@ -1,9 +1,27 @@
 // Carte du programme CE2.
 // Structure legere : matiere -> domaine/sous-domaine -> competence attendue.
 // Aucun contenu pedagogique complet. Le site organise ; les PDF enseigneront.
-// Tous les statuts restent "upcoming" : aucun href, aucun lien PDF mort.
+// Les compétences couvertes par un triplet PDF sont publiées ; les autres restent à venir.
 
 import type { CurriculumLevelMap } from "@/content/curriculum-map-types";
+import type { ResourceSlot } from "@/content/learning-architecture-types";
+import { createPrimaryPdfResources } from "@/content/levels/primary-pdf-resources";
+
+function createCe2ResourceSlots(
+  subject: "francais" | "mathematiques",
+  competencySlug: string,
+): ResourceSlot[] {
+  return createPrimaryPdfResources({
+    level: "ce2",
+    subject,
+    competencySlug,
+    filePrefix: `ce2-${subject}-${competencySlug}`,
+  }).map((resource) => ({
+    kind: resource.kind,
+    label: resource.label,
+    resource,
+  }));
+}
 
 export const ce2CurriculumLevelMap: CurriculumLevelMap = {
   levelSlug: "ce2",
@@ -85,7 +103,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je peux dire de quoi parle le texte.",
                 "Je retrouve une information précise.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "francais",
+                "ce2-fr-lc-comprendre-texte-long",
+              ),
             },
             {
               id: "ce2-fr-lc-reperer-implicite",
@@ -101,7 +123,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je formule ce que le texte laisse comprendre.",
                 "Je justifie ma déduction.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "francais",
+                "ce2-fr-lc-reperer-implicite",
+              ),
             },
             {
               id: "ce2-fr-lc-prelever-information-precise",
@@ -117,7 +143,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je repère la phrase ou le passage utile.",
                 "Je formule la réponse avec mes mots.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "francais",
+                "ce2-fr-lc-prelever-information-precise",
+              ),
             },
             {
               id: "ce2-fr-lc-resumer-paragraphe",
@@ -133,7 +163,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je résume sans copier le texte.",
                 "Je n'ajoute pas d'informations absentes.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "francais",
+                "ce2-fr-lc-resumer-paragraphe",
+              ),
             },
             {
               id: "ce2-fr-lc-distinguer-types-textes",
@@ -334,7 +368,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "J'écris un nombre en chiffres et en lettres.",
                 "Je range plusieurs nombres dans l'ordre demandé.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "mathematiques",
+                "ce2-ma-nc-lire-ecrire-ordonner-nombres",
+              ),
             },
             {
               id: "ce2-ma-nc-utiliser-strategies-calcul-mental",
@@ -350,7 +388,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je calcule mentalement avec contrôle.",
                 "J'explique la stratégie utilisée.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "mathematiques",
+                "ce2-ma-nc-utiliser-strategies-calcul-mental",
+              ),
             },
             {
               id: "ce2-ma-nc-poser-operations",
@@ -366,7 +408,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je calcule étape par étape.",
                 "Je vérifie la vraisemblance du résultat.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "mathematiques",
+                "ce2-ma-nc-poser-operations",
+              ),
             },
             {
               id: "ce2-ma-nc-multiplier-2-5-10",
@@ -382,7 +428,11 @@ export const ce2CurriculumLevelMap: CurriculumLevelMap = {
                 "Je calcule un produit par 2, 5 ou 10 de tête.",
                 "Je vérifie mon résultat.",
               ],
-              status: "upcoming",
+              status: "available",
+              resourceSlots: createCe2ResourceSlots(
+                "mathematiques",
+                "ce2-ma-nc-multiplier-2-5-10",
+              ),
             },
             {
               id: "ce2-ma-nc-poser-multiplication",

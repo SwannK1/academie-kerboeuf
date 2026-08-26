@@ -8,6 +8,7 @@ import {
   getMsDomainBySlug,
   msDomains,
 } from "@/content/levels/maternelle/ms-domains";
+import { getPublicStatusKey } from "@/content/public-status";
 
 type PageProps = {
   params: Promise<{ domain: string }>;
@@ -132,6 +133,71 @@ export default async function MsDomainPage({ params }: PageProps) {
         title="Premières séquences structurées"
         description="Ces sous-domaines préparent les futures fiches ateliers et grilles d'observation."
       />
+
+      <section className="px-4 pb-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-5">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
+              Ressources disponibles
+            </p>
+            <h2 className="mt-1 text-xl font-black text-foreground">
+              Ateliers, observations et fiches parent
+            </h2>
+          </div>
+          {domain.subdomains?.some((subdomain) =>
+            subdomain.sequences.some((sequence) => sequence.resources?.length),
+          ) ? (
+            <div className="grid gap-4 lg:grid-cols-3">
+              {domain.subdomains.flatMap((subdomain) =>
+                subdomain.sequences
+                  .filter((sequence) => sequence.resources?.length)
+                  .map((sequence) => (
+                    <article
+                      key={sequence.id}
+                      className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+                    >
+                      <h3 className="text-base font-black text-foreground">
+                        {sequence.title}
+                      </h3>
+                      <div className="mt-4 grid gap-3">
+                        {sequence.resources?.map((resource) => {
+                          const isLinkable =
+                            getPublicStatusKey(resource.status) === "available" &&
+                            Boolean(resource.href);
+
+                          return (
+                            <div
+                              key={resource.kind}
+                              className="flex flex-wrap items-center justify-between gap-3 rounded border border-white/10 bg-ink/30 p-3"
+                            >
+                              <span className="text-xs font-bold text-foreground">
+                                {resource.label}
+                              </span>
+                              {isLinkable && resource.href ? (
+                                <Link
+                                  href={resource.href}
+                                  className="rounded border border-jade/35 bg-jade/10 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.1em] text-jade transition hover:bg-jade/20"
+                                >
+                                  Ouvrir le PDF
+                                </Link>
+                              ) : (
+                                <PublicStatusBadge status={resource.status} />
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </article>
+                  )),
+              )}
+            </div>
+          ) : (
+            <p className="rounded border border-white/10 bg-white/[0.025] p-5 text-sm text-muted">
+              Aucune ressource PDF n&apos;est encore publiée pour ce domaine.
+            </p>
+          )}
+        </div>
+      </section>
 
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
