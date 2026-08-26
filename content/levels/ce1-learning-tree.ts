@@ -68,6 +68,7 @@ function createSubdomain(
   title: string,
   description: string,
   definitions: CompetencyDefinition[],
+  additionalLessons: Lesson[] = [],
 ): ProgramSubdomain {
   const sequences = definitions.map((definition) =>
     createCompetencySequence(domainSlug, slug, definition),
@@ -75,17 +76,86 @@ function createSubdomain(
   const hasInProgress = definitions.some(
     (definition) => definition.status === "in-progress",
   );
+  const hasPartial =
+    definitions.some((definition) => definition.status === "partial") ||
+    additionalLessons.some((lesson) => lesson.status === "partial");
 
   return {
     id: `ce1-${domainSlug}-${slug}`,
     slug,
     title,
     description,
-    lessons: sequences.map((sequence) => sequence.lesson),
-    competencies: sequences.map((sequence) => sequence.competency),
-    status: hasInProgress ? "in-progress" : "upcoming",
+    lessons: [
+      ...sequences.map((sequence) => sequence.lesson),
+      ...additionalLessons,
+    ],
+    competencies: sequences.map((sequence) => ({
+      ...sequence.competency,
+      lessonIds: [
+        ...sequence.competency.lessonIds,
+        ...additionalLessons
+          .filter((lesson) => lesson.competencyIds?.includes(sequence.competency.id))
+          .map((lesson) => lesson.id),
+      ],
+    })),
+    status: hasPartial ? "partial" : hasInProgress ? "in-progress" : "upcoming",
   };
 }
+
+const ce1ReadingTexts = [
+  ["aventure-estivale", "Aventure estivale", "01_FRANCAIS_Litterature_Conte_Aventure-Estivale.pdf"],
+  ["les-becs", "Les Becs", "01_FRANCAIS_Litterature_Conte_Becs.pdf"],
+  ["belle-a-disparu", "Belle a disparu !", "01_FRANCAIS_Litterature_Conte_Belle-Disparu.pdf"],
+  ["la-chasse-au-tresor", "La chasse au trésor", "01_FRANCAIS_Litterature_Conte_Chasse-Tresor.pdf"],
+  ["eric-le-petit-porc-epic", "Éric, le petit porc-épic qui pique", "01_FRANCAIS_Litterature_Conte_Eric-Porc-Epic.pdf"],
+  ["experiences-meteo-anna", "Les fabuleuses expériences météo d'Anna", "01_FRANCAIS_Litterature_Conte_Experiences-Meteo-Anna.pdf"],
+  ["une-feuille-part-en-voyage", "Une feuille part en voyage", "01_FRANCAIS_Litterature_Conte_Feuille-Voyage.pdf"],
+  ["les-griffes", "Les Griffes", "01_FRANCAIS_Litterature_Conte_Griffes.pdf"],
+  ["premier-jour-ecole-ikru", "Premier jour d'école d'Ikru", "01_FRANCAIS_Litterature_Conte_Ikru-Premier-Jour.pdf"],
+  ["le-jouet-casse", "Le jouet cassé", "01_FRANCAIS_Litterature_Conte_Jouet-Casse.pdf"],
+  ["le-jouet-perdu", "Le jouet perdu", "01_FRANCAIS_Litterature_Conte_Jouet-Perdu.pdf"],
+  ["les-maisons-des-animaux", "Les maisons des animaux", "01_FRANCAIS_Litterature_Conte_Maisons-Animaux.pdf"],
+  ["mangouste-recherche-grenouille", "La petite mangouste recherche une grenouille", "01_FRANCAIS_Litterature_Conte_Mangouste-Grenouille.pdf"],
+  ["mystere-chaussettes-manquantes", "Le Mystère des chaussettes manquantes", "01_FRANCAIS_Litterature_Conte_Mystere-Chaussettes.pdf"],
+  ["grand-nettoyage-plage", "Le grand nettoyage de plage", "01_FRANCAIS_Litterature_Conte_Nettoyage-Plage.pdf"],
+  ["nouveau-camarade-classe", "Le nouveau camarade de classe", "01_FRANCAIS_Litterature_Conte_Nouveau-Camarade.pdf"],
+  ["la-petite-plante", "La petite plante", "01_FRANCAIS_Litterature_Conte_Petite-Plante.pdf"],
+  ["les-plantes-sont-partout", "Les plantes sont partout", "01_FRANCAIS_Litterature_Conte_Plantes-Partout.pdf"],
+  ["plastique-pas-chic", "Le plastique, c'est pas chic", "01_FRANCAIS_Litterature_Conte_Plastique-Chic.pdf"],
+  ["poisson-ne-savait-pas-nager", "Le poisson qui ne savait pas nager", "01_FRANCAIS_Litterature_Conte_Poisson-Nager.pdf"],
+  ["poochi-veut-des-amis", "Poochi veut se faire des amis", "01_FRANCAIS_Litterature_Conte_Poochi-Amis.pdf"],
+  ["pranav-le-detective", "Pranav le Détective", "01_FRANCAIS_Litterature_Conte_Pranav-Detective.pdf"],
+  ["une-rentree-de-reve", "Une rentrée de rêve", "01_FRANCAIS_Litterature_Conte_Rentree-Reve.pdf"],
+  ["les-tresors-de-sam", "Les trésors de Sam", "01_FRANCAIS_Litterature_Conte_Tresors-Sam.pdf"],
+  ["trier-reduire-reutiliser-recycler", "Trier ! Réduire, Réutiliser, Recycler", "01_FRANCAIS_Litterature_Conte_Trier-Recycler.pdf"],
+] as const;
+
+const ce1ReadingTextLessons: Lesson[] = ce1ReadingTexts.map(
+  ([slug, title, filename]) => ({
+    id: `ce1-francais-comprehension-lecture-${slug}`,
+    slug: `lecture-${slug}`,
+    title,
+    objective:
+      "Lire le texte intégral et repérer ses personnages, ses lieux et ses informations explicites.",
+    skill: "Lire et comprendre un texte narratif ou documentaire",
+    parentGuidance: emptyParentGuidance,
+    successCriteria: [],
+    exercises: [],
+    competencyIds: [
+      "ce1-francais-comprehension-identifier-les-personnages-et-les-lieux",
+    ],
+    resources: [
+      {
+        kind: "lesson-pdf",
+        label: `Tapuscrit - ${title}`,
+        status: "available",
+        href: `/fiches/ce1/francais/lecture-comprehension/tapuscrits/${filename}`,
+        audience: "student",
+      },
+    ],
+    status: "partial",
+  }),
+);
 
 const domainFrancais: ProgramDomain = {
   id: "ce1-francais",
@@ -135,7 +205,7 @@ const domainFrancais: ProgramDomain = {
           title: "Identifier les personnages et les lieux",
           objective:
             "Repérer les personnages, les lieux et les informations explicites d'un texte court.",
-          status: "upcoming",
+          status: "partial",
         },
         {
           slug: "repondre-a-une-question-par-une-information-du-texte",
@@ -151,6 +221,7 @@ const domainFrancais: ProgramDomain = {
           status: "upcoming",
         },
       ],
+      ce1ReadingTextLessons,
     ),
     createSubdomain(
       "francais",

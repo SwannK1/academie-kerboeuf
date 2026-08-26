@@ -40,6 +40,13 @@ export const publishedSubdomainPages = [
   {
     level: "ce1",
     domain: "francais",
+    subdomain: "comprehension",
+    route: "/primaire/ce1/programmes/francais/comprehension",
+    label: "CE1 — Français — Compréhension",
+  },
+  {
+    level: "ce1",
+    domain: "francais",
     subdomain: "etude-de-la-langue",
     route: "/primaire/ce1/programmes/francais/etude-de-la-langue",
     label: "CE1 — Français — Étude de la langue",

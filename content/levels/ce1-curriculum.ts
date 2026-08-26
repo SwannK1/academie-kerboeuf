@@ -31,7 +31,7 @@ export const ce1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je peux dire de qui ou de quoi parle le texte.",
                 "Je retrouve une information précise sans tout relire.",
               ],
-              status: "upcoming",
+              status: "partial",
             },
             {
               id: "ce1-fr-lc-identifier-infos-principales",
@@ -47,7 +47,7 @@ export const ce1CurriculumLevelMap: CurriculumLevelMap = {
                 "Je ne confonds pas une information principale et un détail.",
                 "Je peux résumer le texte en une phrase.",
               ],
-              status: "upcoming",
+              status: "partial",
             },
             {
               id: "ce1-fr-lc-justifier-reponse",
