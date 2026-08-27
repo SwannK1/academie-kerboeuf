@@ -6,9 +6,9 @@ export type CollegeLevelSlug = (typeof collegeLevelSlugs)[number];
 
 export const collegeLevelStatuses: Record<CollegeLevelSlug, PublicStatusKey> = {
   "6e": "in-progress",
-  "5e": "upcoming",
-  "4e": "upcoming",
-  "3e": "upcoming",
+  "5e": "in-progress",
+  "4e": "in-progress",
+  "3e": "in-progress",
 };
 
 export const defaultCollegeLevelStatus: PublicStatusKey = "upcoming";

@@ -1,4 +1,6 @@
 import catalogData from "@/content/secondary-resource-catalog.generated.json";
+import { sixiemeCurriculumLevelMap } from "@/content/levels/college/6e-curriculum";
+import { getLyceeCurriculumLevel } from "@/content/lycee-curriculum";
 
 export const SECONDARY_LEVEL_SLUGS = ["6e", "5e", "4e", "3e", "seconde"] as const;
 export type SecondaryLevelSlug = (typeof SECONDARY_LEVEL_SLUGS)[number];
@@ -40,6 +42,37 @@ const resourceLabels: Record<SecondaryResourceType, string> = {
 
 const catalog = catalogData as unknown as SecondaryCompetency[];
 
+const sixiemeTitles = new Map(
+  sixiemeCurriculumLevelMap.domains.flatMap((domain) =>
+    domain.subdomains.flatMap((subdomain) =>
+      subdomain.entries.map((entry) => [entry.id, entry.title] as const),
+    ),
+  ),
+);
+
+const secondeTitles = new Map<string, string>(
+  (getLyceeCurriculumLevel("seconde")?.parcours ?? []).flatMap((parcours) =>
+    parcours.subjects.flatMap((subject) =>
+      subject.domains.flatMap((domain) =>
+        domain.subdomains.flatMap((subdomain) =>
+          subdomain.sequences.map((sequence) => [
+            `seconde-${subject.slug}-${sequence.slug}`,
+            sequence.title,
+          ] as const),
+        ),
+      ),
+    ),
+  ),
+);
+
+const technicalPrefixes = /^(lec|ecr|edl|oral|hist|geo|emc|lang|nc|gm|ogd|rp|df|pc|svt|tech)-/;
+
+const readableTerms: Record<string, string> = {
+  ce: "Compréhension écrite",
+  eo: "Expression orale",
+  dnb: "Préparation au brevet",
+};
+
 export function isSecondaryLevelSlug(value: string): value is SecondaryLevelSlug {
   return (SECONDARY_LEVEL_SLUGS as readonly string[]).includes(value);
 }
@@ -57,11 +90,16 @@ export function getSecondaryResourceLabel(type: SecondaryResourceType): string {
 }
 
 export function humanizeSlug(slug: string): string {
-  const value = slug
+  const curriculumTitle = sixiemeTitles.get(slug) ?? secondeTitles.get(slug);
+  if (curriculumTitle) return curriculumTitle;
+
+  const normalized = slug
     .replace(/^(6e|5e|4e|3e)-(fr|ma|hg|hge|hgemc|sc|sci|ang|arts|mus|eps)-/, "")
     .replace(/^seconde-(histoire-geographie|langues-vivantes|mathematiques|francais|sciences|arts|emc|eps)-/, "")
     .replace(/-entry$/, "")
-    .replaceAll("-", " ");
+    .replace(technicalPrefixes, "");
+  const [first, ...rest] = normalized.split("-");
+  const value = [readableTerms[first] ?? first, ...rest].join(" ");
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
