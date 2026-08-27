@@ -65,6 +65,7 @@ export default function PrimairePage() {
 
   return (
     <main id="contenu-principal">
+      <h1 className="sr-only">Académie Primaire — Les Lisières des Explorateurs</h1>
       {/* ── Portail immersif ──────────────────────────────────────────────── */}
       {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
       {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}

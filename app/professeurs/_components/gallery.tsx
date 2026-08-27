@@ -134,6 +134,7 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
   return (
     <Link
       href={professor.profileHref}
+      prefetch={professor.slug === "felix" ? false : undefined}
       className={`group relative flex flex-col overflow-hidden rounded-md border bg-white/[0.03] transition-all duration-200 hover:-translate-y-px hover:bg-white/[0.055] ${a.borderMid}`}
     >
       {/* Glow au hover */}

@@ -167,6 +167,7 @@ function Hero({ professors, stats }: HeroProps) {
                   <Link
                     key={p.slug}
                     href={p.profileHref}
+                    prefetch={p.slug === "felix" ? false : undefined}
                     title={`${p.name} — ${p.role}`}
                     className={`group grid size-12 place-items-center overflow-hidden rounded-md border transition hover:-translate-y-px ${borderClass}`}
                     style={{

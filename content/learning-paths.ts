@@ -1,4 +1,5 @@
 import { getMission } from "@/content/mission-registry";
+import { getMissionPublicHref } from "@/content/mission-links";
 import type { ClassroomMode } from "@/content/resources";
 import type { Mission, MissionStatus } from "@/content/types";
 
@@ -191,7 +192,7 @@ function resolveLearningPath(path: LearningPath): LearningPathWithSteps {
       level: mission.levelLabel,
       subject: mission.subject,
       objective: mission.objective ?? mission.description,
-      href: missionHref(mission),
+      href: getMissionPublicHref(mission),
       status: normalizeMissionStatus(mission.status),
       modes: modesForMission(mission),
     }));
@@ -204,10 +205,6 @@ function resolveLearningPath(path: LearningPath): LearningPathWithSteps {
 
 function normalizeMissionStatus(status: MissionStatus): LearningPathStatus {
   return status === "bientôt" ? "à venir" : status;
-}
-
-function missionHref(mission: Mission) {
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
 }
 
 function modesForMission(mission: Mission): ClassroomMode[] {

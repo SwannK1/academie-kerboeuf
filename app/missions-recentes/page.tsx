@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { allMissions } from "@/content/mission-registry";
+import { getMissionPublicHref } from "@/content/mission-links";
 import {
   getPublicStatusKey,
   getPublicStatusLabel,
@@ -89,26 +90,12 @@ const teacherUses = [
   "Préparer une séance sans afficher de contenu placeholder.",
 ];
 
-function missionHref(mission: Mission) {
-  if (mission.stage === "primaire" && mission.levelSlug !== "cm2") {
-    return `/primaire/${mission.levelSlug}/missions`;
-  }
-
-  if (mission.stage === "college") {
-    // Collège has no per-mission detail route yet — link to the level page
-    // instead of a slug that would 404 (see `/college/[level]/page.tsx`).
-    return `/college/${mission.levelSlug}`;
-  }
-
-  return `/${mission.stage}/${mission.levelSlug}/missions/${mission.slug}`;
-}
-
 function MissionShowcaseCard({ mission }: { mission: Mission }) {
   const theme = themeClasses[mission.theme];
 
   return (
     <Link
-      href={missionHref(mission)}
+      href={getMissionPublicHref(mission)}
       className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
     >
       <div className="flex flex-wrap items-center gap-2">

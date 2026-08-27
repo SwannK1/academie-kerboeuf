@@ -50,7 +50,7 @@ const levels: LevelProgramming[] = [
     items: [
       { id: "mathematiques", label: "Mathématiques", href: "/primaire/cm2/matieres/mathematiques" },
       { id: "francais", label: "Français", href: "/primaire/cm2/matieres/francais" },
-      { id: "sciences-technologie", label: "Sciences et technologie", href: "/primaire/cm2/matieres/sciences-technologie" },
+      { id: "sciences", label: "Sciences et technologie", href: "/primaire/cm2/matieres/sciences" },
     ],
   },
   { levelId: "college", label: "Collège", status: getLevelAvailability("6e"), order: 7, periods: [], items: [] },
