@@ -90,7 +90,7 @@ function calculateFileHash(filePath) {
   try {
     const content = fs.readFileSync(filePath);
     return crypto.createHash("sha256").update(content).digest("hex");
-  } catch (err) {
+  } catch {
     return null;
   }
 }
@@ -209,7 +209,7 @@ function extractDomainFromPath(relativePath) {
 /**
  * Analyse un fichier et extrait ses métadonnées
  */
-function analyzeFile(file, baseDir) {
+function analyzeFile(file) {
   const { fullPath, relativePath, name } = file;
   const ext = path.extname(name).toLowerCase();
   const hash = calculateFileHash(fullPath);
@@ -552,7 +552,7 @@ ${
     ? `\n| Hash | Fichiers |
 |------|----------|
 ${Array.from(importState.duplicates.entries())
-  .filter(([_, files]) => files.length > 1)
+  .filter(([, files]) => files.length > 1)
   .map(
     ([hash, files]) =>
       `| \`${hash.substring(0, 16)}...\` | ${files.map((f) => `\`${f}\``).join(" / ")} |`
@@ -606,7 +606,7 @@ ${importState.errors.length > 20 ? `\n... et ${importState.errors.length - 20} a
 ### Domaines disponibles
 ${Array.from(Object.entries(CE1_CATALOG))
   .map(
-    ([key, domain]) =>
+    ([, domain]) =>
       `- **${domain.title}** (\`${domain.slug}\`): ${Object.values(domain.subdomains).length} sous-domaines`
   )
   .join("\n")}

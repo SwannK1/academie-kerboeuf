@@ -85,7 +85,6 @@ export function TeacherClassOrganizationClient() {
     const initial = readStoredDataChecked();
     // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage, jamais lu pendant le rendu SSR
     setData(initial.data);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- idem
     setStorageNotice(
       !initial.storageAvailable
         ? "Le stockage local n'est pas disponible (navigation privée ou bloqué) : vos modifications ne seront pas sauvegardées."
