@@ -24,10 +24,24 @@ const resourceSlots: Array<{
 export function getPedagogicalResourceSlots(
   resources: PedagogicalResourceRef[] = [],
 ): PedagogicalResourceSlot[] {
-  return resourceSlots.map((slot) => ({
+  const slots = resourceSlots.map((slot) => ({
     ...slot,
     resource: resources.find((resource) => resource.kind === slot.kind),
   }));
+  const assessment = resources.find(
+    (resource) => resource.kind === "assessment-pdf",
+  );
+
+  return assessment
+    ? [
+        ...slots,
+        {
+          kind: "assessment-pdf",
+          label: "Évaluation PDF",
+          resource: assessment,
+        },
+      ]
+    : slots;
 }
 
 export function isPedagogicalResourceAbsent(

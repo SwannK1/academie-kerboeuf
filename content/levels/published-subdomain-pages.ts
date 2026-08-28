@@ -52,6 +52,13 @@ export const publishedSubdomainPages = [
     label: "CE1 — Français — Étude de la langue",
   },
   {
+    level: "ce1",
+    domain: "francais",
+    subdomain: "orthographe",
+    route: "/primaire/ce1/programmes/francais/orthographe",
+    label: "CE1 — Français — Orthographe",
+  },
+  {
     level: "ce2",
     domain: "mathematiques",
     subdomain: "nombres-calcul",

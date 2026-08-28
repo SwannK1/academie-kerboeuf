@@ -157,6 +157,66 @@ const ce1ReadingTextLessons: Lesson[] = ce1ReadingTexts.map(
   }),
 );
 
+const ce1LanguageAssessmentLessons: Lesson[] = [
+  {
+    id: "ce1-francais-etude-de-la-langue-evaluation-reconnaitre-un-nom",
+    slug: "evaluation-reconnaitre-un-nom",
+    title: "Évaluation : reconnaître un nom",
+    objective: "Identifier les noms dans des phrases simples.",
+    skill: "Identifier le nom dans une phrase",
+    parentGuidance: emptyParentGuidance,
+    successCriteria: [],
+    exercises: [],
+    competencyIds: ["ce1-francais-etude-de-la-langue-identifier-le-nom-dans-une-phrase"],
+    resources: [{
+      kind: "assessment-pdf",
+      label: "Évaluation - Reconnaître un nom",
+      status: "available",
+      href: "/fiches/ce1/francais/etude-de-la-langue/evaluations/ce1-francais-reconnaitre-nom-evaluation.pdf",
+      audience: "student",
+    }],
+    status: "partial",
+  },
+  {
+    id: "ce1-francais-etude-de-la-langue-evaluation-nom-commun-propre",
+    slug: "evaluation-nom-commun-propre",
+    title: "Évaluation : nom commun et nom propre",
+    objective: "Distinguer les noms communs des noms propres.",
+    skill: "Identifier le nom dans une phrase",
+    parentGuidance: emptyParentGuidance,
+    successCriteria: [],
+    exercises: [],
+    competencyIds: ["ce1-francais-etude-de-la-langue-identifier-le-nom-dans-une-phrase"],
+    resources: [{
+      kind: "assessment-pdf",
+      label: "Évaluation - Nom commun et nom propre",
+      status: "available",
+      href: "/fiches/ce1/francais/etude-de-la-langue/evaluations/ce1-francais-nom-commun-propre-evaluation.pdf",
+      audience: "student",
+    }],
+    status: "partial",
+  },
+  {
+    id: "ce1-francais-orthographe-evaluation-pluriel-regulier",
+    slug: "evaluation-pluriel-regulier",
+    title: "Évaluation : singulier et pluriel",
+    objective: "Marquer le pluriel régulier des noms.",
+    skill: "Marquer le pluriel régulier du nom",
+    parentGuidance: emptyParentGuidance,
+    successCriteria: [],
+    exercises: [],
+    competencyIds: ["ce1-francais-orthographe-marquer-le-pluriel-regulier-du-nom"],
+    resources: [{
+      kind: "assessment-pdf",
+      label: "Évaluation - Singulier et pluriel",
+      status: "available",
+      href: "/fiches/ce1/francais/etude-de-la-langue/evaluations/ce1-francais-pluriel-regulier-evaluation.pdf",
+      audience: "student",
+    }],
+    status: "partial",
+  },
+];
+
 const domainFrancais: ProgramDomain = {
   id: "ce1-francais",
   slug: "francais",
@@ -284,7 +344,7 @@ const domainFrancais: ProgramDomain = {
           title: "Identifier le nom dans une phrase",
           objective:
             "Repérer les noms communs et propres dans une phrase simple.",
-          status: "upcoming",
+          status: "partial",
         },
         {
           slug: "identifier-le-sujet-dun-verbe-simple",
@@ -293,6 +353,9 @@ const domainFrancais: ProgramDomain = {
           status: "upcoming",
         },
       ],
+      ce1LanguageAssessmentLessons.filter((lesson) =>
+        lesson.competencyIds?.some((id) => id.includes("etude-de-la-langue")),
+      ),
     ),
     createSubdomain(
       "francais",
@@ -342,7 +405,7 @@ const domainFrancais: ProgramDomain = {
           title: "Marquer le pluriel régulier du nom",
           objective:
             "Ajouter la marque du pluriel sur des noms réguliers dans des groupes nominaux simples.",
-          status: "upcoming",
+          status: "partial",
         },
         {
           slug: "accorder-le-verbe-avec-il-ou-ils",
@@ -352,6 +415,9 @@ const domainFrancais: ProgramDomain = {
           status: "upcoming",
         },
       ],
+      ce1LanguageAssessmentLessons.filter((lesson) =>
+        lesson.competencyIds?.some((id) => id.includes("orthographe")),
+      ),
     ),
   ],
   status: "in-progress",
