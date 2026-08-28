@@ -73,6 +73,11 @@ const readableTerms: Record<string, string> = {
   dnb: "Préparation au brevet",
 };
 
+const readableTitles: Record<string, string> = {
+  "comprehension-ecrite": "Compréhension écrite",
+  "comprehension-orale": "Compréhension orale",
+};
+
 export function isSecondaryLevelSlug(value: string): value is SecondaryLevelSlug {
   return (SECONDARY_LEVEL_SLUGS as readonly string[]).includes(value);
 }
@@ -98,6 +103,8 @@ export function humanizeSlug(slug: string): string {
     .replace(/^seconde-(histoire-geographie|langues-vivantes|mathematiques|francais|sciences|arts|emc|eps)-/, "")
     .replace(/-entry$/, "")
     .replace(technicalPrefixes, "");
+  const readableTitle = readableTitles[normalized];
+  if (readableTitle) return readableTitle;
   const [first, ...rest] = normalized.split("-");
   const value = [readableTerms[first] ?? first, ...rest].join(" ");
   return value.charAt(0).toUpperCase() + value.slice(1);

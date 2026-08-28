@@ -4,6 +4,7 @@ import {
   type AcademyStage,
 } from "@/content/academy";
 import { cm2FichesMaths } from "@/content/cm2-fiches-maths";
+import { msDomains } from "@/content/levels/maternelle/ms-domains";
 import type { AcademyLevelSlug } from "@/content/program-types";
 import {
   getAggregatedPublicStatus,
@@ -61,6 +62,29 @@ function hasAvailableCm2Sheet() {
   );
 }
 
+function getAvailableMsResourceCount() {
+  return msDomains.reduce(
+    (domainTotal, domain) =>
+      domainTotal +
+      (domain.subdomains ?? []).reduce(
+        (subdomainTotal, subdomain) =>
+          subdomainTotal +
+          subdomain.sequences.reduce(
+            (sequenceTotal, sequence) =>
+              sequenceTotal +
+              (sequence.resources ?? []).filter(
+                (resource) =>
+                  getPublicStatusKey(resource.status) === "available" &&
+                  Boolean(resource.href),
+              ).length,
+            0,
+          ),
+        0,
+      ),
+    0,
+  );
+}
+
 function hasRealLevelContent(levelSlug: string) {
   if (levelSlug === "cm2" && hasAvailableCm2Sheet()) {
     return true;
@@ -84,6 +108,10 @@ export function getClassroomResourceStatusCounts() {
 }
 
 export function getLevelAvailability(levelSlug: AcademyLevelSlug): PublicStatusKey {
+  if (levelSlug === "ms" && getAvailableMsResourceCount() > 0) {
+    return "partial";
+  }
+
   if (hasRealLevelContent(levelSlug)) {
     return "partial";
   }
@@ -101,7 +129,11 @@ export function getLevelAvailability(levelSlug: AcademyLevelSlug): PublicStatusK
 }
 
 export function getMaternelleAvailability(): PublicStatusKey {
-  return "in-progress";
+  return statusFromCounts(
+    countByPublicStatus(
+      maternelleLevelSlugs.map((levelSlug) => getLevelAvailability(levelSlug)),
+    ),
+  );
 }
 
 export function getSchoolStageAvailability(
@@ -141,8 +173,10 @@ export function getLevelGroupAvailability(): LevelGroupAvailability[] {
       label: "Maternelle",
       href: "/maternelle",
       status: getMaternelleAvailability(),
-      availableResources: 0,
-      counts: { ...emptyCounts(), "in-progress": 3 },
+      availableResources: getAvailableMsResourceCount(),
+      counts: countByPublicStatus(
+        maternelleLevelSlugs.map((levelSlug) => getLevelAvailability(levelSlug)),
+      ),
     },
     getSchoolStageAvailability("primaire"),
     getSchoolStageAvailability("college"),
