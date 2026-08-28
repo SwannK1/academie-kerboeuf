@@ -57,7 +57,9 @@ ne contiennent ni exercices, ni corrections, ni évaluations. La compétence, le
 leçons et le sous-domaine restent donc `partial` ; aucun contenu n'est déclaré
 complet artificiellement.
 
-Les 657 PNG uniques valides ne sont pas importés. Les rapports historiques et
+Lors de ce premier audit, les 657 PNG uniques valides n'étaient pas importés. Le
+second chantier forensic est documenté dans `docs/ce1-png-forensic-report.md` et
+a résolu trois évaluations avec certitude forte. Les rapports historiques et
 `ressources.json` permettent souvent de retrouver une matière large, mais pas
 une compétence, une leçon, un rôle documentaire ou une version fiable. Les 29
 variantes de même nom renforcent ce risque. Une association plus précise serait
@@ -114,7 +116,7 @@ Aucun autre worktree n'a été modifié.
 
 ## Restes réellement ambigus ou refusés
 
-- 657 PNG uniques valides : ambiguïté de compétence, de rôle et souvent de version ;
+- 654 PNG uniques valides restent refusés après la classification forensic : ambiguïté de rôle, d'attribution ou de version ;
 - 1 PNG unique corrompu : refusé ;
 - 31 contenus techniques ou orphelins : refusés comme ressources pédagogiques publiables.
 
