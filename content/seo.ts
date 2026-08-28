@@ -5,7 +5,7 @@ export const SITE_TITLE_SEPARATOR = " | ";
 export const DEFAULT_SITE_DESCRIPTION =
   "Une plateforme pédagogique immersive pour élèves, enseignants et parents, de la maternelle à la Terminale.";
 
-const DEFAULT_SITE_URL = "https://academie-kerboeuf.fr";
+const DEFAULT_SITE_URL = "https://academie-kerboeuf.vercel.app";
 
 export function getPublicSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_BASE_URL ?? DEFAULT_SITE_URL;
