@@ -3,7 +3,7 @@ import { buildPageMetadata } from "@/content/seo";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { cpSubjects, getCpSubjectBySlug } from "@/content/cp-subjects";
-import { getCpSubjectTree, getCpSequences } from "@/content/levels/cp-learning-tree";
+import { getCpSubjectTree } from "@/content/levels/cp-learning-tree";
 import { CP_ACCENT } from "@/lib/cp-accent";
 import { getPublishedSubdomainPagesForDomain } from "@/content/levels/published-subdomain-pages";
 
@@ -42,7 +42,6 @@ export default async function CpSubjectPage({ params }: PageProps) {
 
   const resolvedSubject = subject as NonNullable<typeof subject>;
   const tree = getCpSubjectTree(slug);
-  const sequences = getCpSequences(slug);
 
   return (
     <SubjectDetailPage
@@ -52,7 +51,7 @@ export default async function CpSubjectPage({ params }: PageProps) {
       subject={resolvedSubject}
       tree={tree}
       accent={CP_ACCENT}
-      sequences={sequences}
+      sequences={[]}
       cycleLabel="Cycle 2"
       footerLinks={getPublishedSubdomainPagesForDomain("cp", slug).map(
         (page) => ({ href: page.route, label: page.label, tone: "gold" as const }),

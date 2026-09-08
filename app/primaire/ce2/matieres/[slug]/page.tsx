@@ -3,10 +3,7 @@ import { buildPageMetadata } from "@/content/seo";
 import { notFound } from "next/navigation";
 import { SubjectDetailPage } from "@/components/academy/SubjectMatterCatalog";
 import { ce2Subjects, getCe2SubjectBySlug } from "@/content/ce2-subjects";
-import {
-  getCe2SubjectTree,
-  getCe2Sequences,
-} from "@/content/levels/ce2-learning-tree";
+import { getCe2SubjectTree } from "@/content/levels/ce2-learning-tree";
 import { CE2_ACCENT } from "@/lib/ce2-accent";
 import { getPublishedSubdomainPagesForDomain } from "@/content/levels/published-subdomain-pages";
 
@@ -43,7 +40,6 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
 
   const safeSubject = subject!;
   const tree = getCe2SubjectTree(slug);
-  const sequences = getCe2Sequences(slug);
 
   const footerLinks = getPublishedSubdomainPagesForDomain("ce2", slug).map(
     (page) => ({ href: page.route, label: page.label }),
@@ -57,7 +53,7 @@ export default async function Ce2SubjectPage({ params }: PageProps) {
       subject={safeSubject}
       tree={tree}
       accent={CE2_ACCENT}
-      sequences={sequences}
+      sequences={[]}
       cycleLabel="Cycle 2"
       footerLinks={footerLinks}
     />

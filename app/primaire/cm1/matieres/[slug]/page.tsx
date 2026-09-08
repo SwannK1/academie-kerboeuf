@@ -51,7 +51,7 @@ export default async function Cm1SubjectPage({ params }: PageProps) {
       subject={subject}
       tree={tree ? mapCm1Tree(tree) : undefined}
       accent={CM1_ACCENT}
-      sequences={tree ? mapCm1Sequences(tree) : []}
+      sequences={[]}
       cycleLabel="Cycle 3"
       footerLinks={getPublishedSubdomainPagesForDomain("cm1", slug).map(
         (page) => ({ href: page.route, label: page.label }),
@@ -80,19 +80,4 @@ function mapCm1Tree(tree: Cm1SubjectNode) {
       })),
     })),
   };
-}
-
-function mapCm1Sequences(tree: Cm1SubjectNode) {
-  return tree.domains.flatMap((domain) =>
-    domain.subdomains.flatMap((subdomain) =>
-      subdomain.sequences.map((sequence) => ({
-        id: sequence.id,
-        title: sequence.title,
-        domain: domain.title,
-        subdomain: subdomain.title,
-        skill: sequence.competency,
-        status: sequence.status,
-      })),
-    ),
-  );
 }
