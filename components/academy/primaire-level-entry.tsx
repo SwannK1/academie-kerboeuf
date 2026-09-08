@@ -1,221 +1,102 @@
 import Link from "next/link";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import type { AcademyLevel } from "@/content/academy";
-import { publishedSubdomainPages } from "@/content/levels/published-subdomain-pages";
-import { getCurriculumSubjectsForLevel } from "@/content/curriculum-map";
+import { ce2Subjects } from "@/content/ce2-subjects";
+import { cm1Subjects } from "@/content/cm1-subjects";
+import { cpSubjects } from "@/content/cp-subjects";
+import { getSubjectTeacher } from "@/content/subject-teacher-link";
 
-const DOMAIN_LABELS: Record<string, string> = {
-  francais: "Français",
-  mathematiques: "Mathématiques",
-  qdm: "Questionner le monde",
-};
+type Props = { level: AcademyLevel };
 
-const SUBDOMAIN_LABELS: Record<string, string> = {
-  "lecture-comprehension": "Lecture-compréhension",
-  "etude-de-la-langue": "Étude de la langue",
-  "nombres-calcul": "Nombres et calcul",
-  "calcul-pose": "Calcul posé",
-};
-
-type Props = {
-  level: AcademyLevel;
-};
+const subjectsByLevel = {
+  cp: cpSubjects,
+  ce2: ce2Subjects,
+  cm1: cm1Subjects,
+} as const;
 
 export function PrimaireLevelEntry({ level }: Props) {
-  const slug = level.slug;
-
-  const subjects = getCurriculumSubjectsForLevel(slug);
-
-  const programHref = `/primaire/${slug}/competences`;
-  const missionsHref = `/primaire/${slug}/missions`;
-
-  const resources = publishedSubdomainPages
-    .filter((p) => (p.level as string) === slug)
-    .map((p) => ({
-      subject: DOMAIN_LABELS[p.domain] ?? p.domain,
-      label: SUBDOMAIN_LABELS[p.subdomain] ?? p.subdomain,
-      description:
-        "Index des ressources prévues : leçons, exercices et corrections PDF.",
-      href: p.route,
-    }));
+  const slug = level.slug as keyof typeof subjectsByLevel;
+  const subjects = subjectsByLevel[slug] ?? [];
 
   return (
-    <main id="contenu-principal">
-      <div className="px-4 pt-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Breadcrumb
-            items={[
-              { label: "Accueil", href: "/" },
-              { label: "Primaire", href: "/primaire" },
-              { label: level.label },
-            ]}
-          />
-        </div>
-      </div>
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <Breadcrumb
+          items={[
+            { label: "Accueil", href: "/" },
+            { label: "Primaire", href: "/primaire" },
+            { label: level.label },
+          ]}
+        />
 
-      <section className="px-4 pb-8 pt-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-jade">
-              {level.cycle} · {level.label}
-            </span>
-          </div>
-          <h1 className="mt-5 text-5xl font-black leading-none text-foreground sm:text-6xl">
-            {level.label}
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">
-            Retrouvez les matières, les compétences et les missions du{" "}
-            {level.label}. Le site organise&nbsp;; les PDF enseigneront.
-          </p>
-        </div>
-      </section>
+        <p className="mt-8 inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] text-jade">
+          {level.cycle} · avec {level.professor.name}
+        </p>
+        <h1 className="mt-5 text-4xl font-black text-foreground sm:text-5xl">
+          Ressources {level.label}
+        </h1>
+        <p className="mt-4 max-w-2xl text-base leading-8 text-muted">
+          Choisissez une matière pour accéder à ses domaines, compétences et
+          ressources. Les personnages restent vos guides, la matière reste
+          toujours explicite.
+        </p>
 
-      {/* ── Matières ── */}
-      <section className="px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-6 border-b border-white/10 pb-4">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
-              Matières du niveau
-            </p>
-            <h2 className="mt-1.5 text-xl font-black text-foreground">
-              Programme par matière
-            </h2>
-          </div>
+        <section aria-labelledby={`matieres-${slug}`} className="mt-10">
+          <h2 id={`matieres-${slug}`} className="text-xl font-black text-foreground">
+            Matières
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {subjects.map((subject) => {
+              const teacher = getSubjectTeacher(subject.slug);
 
-          {subjects.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {subjects.map((subject) => (
+              return (
                 <Link
                   key={subject.slug}
                   href={`/primaire/${slug}/matieres/${subject.slug}`}
-                  className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:border-white/20 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-jade/40"
+                  className="group flex min-h-52 min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-jade/35 hover:bg-jade/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade"
                 >
-                  <p className="text-lg font-black text-foreground">
-                    {subject.label}
-                  </p>
-                  <p className="mt-1 text-xs font-bold text-muted">
-                    {subject.domains.length} domaine
-                    {subject.domains.length > 1 ? "s" : ""}
-                  </p>
-                  <ul className="mt-4 flex flex-col gap-1.5">
-                    {subject.domains.map((domain) => (
-                      <li
-                        key={domain.slug}
-                        className="flex items-center gap-2 text-xs text-muted"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="size-1.5 shrink-0 rounded-full bg-jade/40"
-                        />
-                        {domain.label}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-4 text-xs font-bold text-jade opacity-0 transition group-hover:opacity-100">
-                    Voir les matières →
-                  </p>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                Contenu en préparation
-              </p>
-              <p className="mt-1 text-sm leading-6 text-muted">
-                Les matières de ce niveau sont en cours de structuration.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── Missions transversales ── */}
-      <section className="px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="border-t border-white/10 pt-6">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-jade">
-              Missions transversales
-            </p>
-            <Link
-              href={missionsHref}
-              className="group inline-flex items-center gap-2 rounded-md border border-jade/35 bg-jade/[0.06] px-5 py-3 text-sm font-bold text-jade transition hover:bg-jade/[0.10]"
-            >
-              Découvrir les missions {level.label}
-              <span className="transition group-hover:translate-x-0.5">→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Programme (secondaire) ── */}
-      <section className="px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Link
-            href={programHref}
-            className="group inline-flex items-center gap-2 text-sm font-bold text-muted transition hover:text-foreground"
-          >
-            Voir le programme et les compétences complètes
-            <span className="transition group-hover:translate-x-0.5">→</span>
-          </Link>
-        </div>
-      </section>
-
-      {resources.length > 0 && (
-        <section className="px-4 pb-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-5 border-b border-white/10 pb-4">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
-                Ressources disponibles
-              </p>
-              <h2 className="mt-1.5 text-xl font-black text-foreground">
-                Premiers contenus publiés
-              </h2>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {resources.map((resource) => (
-                <Link
-                  key={resource.href}
-                  href={resource.href}
-                  className="group flex items-start justify-between gap-4 rounded-md border border-white/10 bg-white/[0.035] p-5 transition hover:border-white/25 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-white/30"
-                >
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky">
-                      {resource.subject}
-                    </p>
-                    <p className="mt-1 font-black text-foreground">
-                      {resource.label}
-                    </p>
-                    <p className="mt-1.5 text-xs leading-5 text-muted">
-                      {resource.description}
-                    </p>
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <h3 className="min-w-0 text-xl font-black text-foreground">
+                      {subject.title}
+                    </h3>
+                    <PublicStatusBadge status={subject.status} />
                   </div>
-                  <span className="shrink-0 text-sm font-black text-muted transition group-hover:translate-x-1">
-                    →
+                  {teacher ? (
+                    <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                      avec {teacher.name}
+                    </p>
+                  ) : null}
+                  <p className="mt-4 flex-1 text-sm leading-7 text-muted">
+                    {subject.shortDescription}
+                  </p>
+                  <span className="mt-4 text-sm font-black text-jade">
+                    Voir les compétences →
                   </span>
                 </Link>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </section>
-      )}
 
-      {resources.length === 0 && (
-        <section className="px-4 pb-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                Ressources prévues
-              </p>
-              <p className="mt-1 text-sm leading-6 text-muted">
-                Les ressources PDF de ce niveau sont en cours de préparation.
-                Aucun lien n&apos;est affiché tant que la ressource n&apos;existe
-                pas.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
+        <nav
+          aria-label={`Liens secondaires ${level.label}`}
+          className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-6"
+        >
+          <Link
+            href={`/primaire/${slug}/competences`}
+            className="text-sm font-bold text-muted transition hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade"
+          >
+            Programme et compétences complets
+          </Link>
+          <Link
+            href={`/primaire/${slug}/missions`}
+            className="text-sm font-bold text-muted transition hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade"
+          >
+            Missions transversales
+          </Link>
+        </nav>
+      </div>
     </main>
   );
 }
