@@ -10,12 +10,14 @@
     "build": "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=4096' next build --webpack",
     "start": "next start",
     "lint": "eslint",
+    "test": "playwright test e2e/simplified-ux.spec.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "import:resources": "node scripts/import-ce1-resources.mjs",
     "generate:pdf-counts": "node scripts/generate-pdf-counts.mjs",
     "generate:secondary-catalog": "node scripts/generate-secondary-resource-catalog.mjs",
-    "audit:secondary-catalog": "node scripts/audit-secondary-resource-catalog.mjs"
+    "audit:secondary-catalog": "node scripts/audit-secondary-resource-catalog.mjs",
+    "audit:ux": "node scripts/audit-simplified-ux.mjs"
   },
   "dependencies": {
     "next": "16.3.3",
