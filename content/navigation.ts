@@ -28,14 +28,14 @@ export type GlobalNavigationItem = NavigationItem & {
 export const globalNavigationItems = [
   { id: "home", label: "Accueil", href: "/", order: 10, inHeader: true, inMobileMenu: true, inFooter: true },
   { id: "resources", label: "Ressources", href: "/ressources", order: 20, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "primary", label: "Primaire", href: "/primaire", order: 30, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "teachers", label: "Enseignants", href: "/enseignants", order: 40, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "universe", label: "Univers", href: "/univers", order: 50, inHeader: true, inMobileMenu: true, inFooter: true },
+  { id: "primary", label: "Primaire", href: "/primaire", order: 30, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "teachers", label: "Préparer ma classe", href: "/enseignants", order: 40, inHeader: true, inMobileMenu: true, inFooter: true },
+  { id: "universe", label: "Univers", href: "/univers", order: 50, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "maternelle", label: "Maternelle", href: "/maternelle", order: 60, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "college", label: "Collège", href: "/college", order: 70, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "lycee", label: "Lycée", href: "/lycee", order: 80, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "map", label: "Carte", href: "/carte", order: 90, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "method", label: "Méthode", href: "/methode", order: 100, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "method", label: "À propos", href: "/methode", order: 100, inHeader: true, inMobileMenu: true, inFooter: true },
   { id: "characters", label: "Personnages", href: "/personnages", order: 110, inHeader: false, inMobileMenu: false, inFooter: true },
   { id: "recent-missions", label: "Missions récentes", href: "/missions-recentes", order: 120, inHeader: false, inMobileMenu: false, inFooter: true },
 ] as const satisfies readonly GlobalNavigationItem[];

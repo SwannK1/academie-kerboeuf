@@ -1,6 +1,6 @@
 import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
-import { PrimairePortalMap } from "@/components/academy/primaire-portal-map";
+import { Breadcrumb } from "@/components/navigation/breadcrumb";
 import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
 import {
   getLevelPath,
@@ -65,26 +65,28 @@ export default function PrimairePage() {
 
   return (
     <main id="contenu-principal">
-      <h1 className="sr-only">Académie Primaire — Les Lisières des Explorateurs</h1>
-      {/* ── Portail immersif ──────────────────────────────────────────────── */}
-      {/* Desktop : image plein écran avec zones cliquables par personnage.   */}
-      {/* Mobile  : image 16:9 + 5 cartes accessibles sous l'image.           */}
-      <PrimairePortalMap />
-
-      {/* ── Accès par niveau ──────────────────────────────────────────────── */}
-      <section className="px-4 pb-16 pt-12 sm:px-6 lg:px-8">
+      <section className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
+          <Breadcrumb
+            items={[
+              { label: "Accueil", href: "/" },
+              { label: "Ressources", href: "/ressources" },
+              { label: "Primaire" },
+            ]}
+          />
           <div className="mb-8 border-b border-white/10 pb-6">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               CP · CE1 · CE2 · CM1 · CM2
             </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground sm:text-4xl">
-              Accès par niveau
-            </h2>
+            <h1 className="mt-3 text-4xl font-black text-foreground sm:text-5xl">
+              Ressources du primaire
+            </h1>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
-              Sélectionnez un niveau pour accéder à ses programmes et ressources.
+              Choisissez un niveau, puis une matière pour accéder aux compétences
+              et aux ressources disponibles.
             </p>
           </div>
+          <h2 className="sr-only">Choisir un niveau</h2>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {levels.map((level) => (
               <LevelGuideCard key={level.slug} level={level} />

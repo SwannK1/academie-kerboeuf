@@ -64,8 +64,9 @@ export default async function Ce1SubjectPage({ params }: PageProps) {
       subject={safeSubject}
       tree={tree}
       accent={CE1_ACCENT}
-      sequences={sequences}
+      sequences={tree ? [] : sequences}
       footerLinks={footerLinks}
+      cycleLabel="Cycle 2"
     />
   );
 }

@@ -1,68 +1,81 @@
-import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { ce1LearningTree } from "@/content/levels/ce1-learning-tree";
-import { Ce1GastonLearningMap } from "@/components/academy/Ce1GastonLearningMap";
+import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
+import { buildPageMetadata } from "@/content/seo";
+import { ce1Subjects } from "@/content/ce1-subjects";
+import { getSubjectTeacher } from "@/content/subject-teacher-link";
+import { CE1_ACCENT } from "@/lib/ce1-accent";
 
 export const metadata = buildPageMetadata({
-  title: "CE1 — Cycle 2",
-  description:
-    "Page niveau CE1 : matières, domaines et séquences-compétences du Cycle 2, guidées par Gaston le Hérisson.",
+  title: "CE1",
+  description: "Accès direct aux matières et ressources du CE1, Cycle 2.",
   path: "/primaire/ce1",
 });
 
 export default function Ce1Page() {
-  const domainCount = ce1LearningTree.domains.length;
-
   return (
-    <main id="contenu-principal">
-      <div className="px-4 pt-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Breadcrumb
-            items={[
-              { label: "Accueil", href: "/" },
-              { label: "Primaire", href: "/primaire" },
-              { label: "CE1" },
-            ]}
-          />
-        </div>
-      </div>
+    <main id="contenu-principal" className="px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <Breadcrumb
+          items={[
+            { label: "Accueil", href: "/" },
+            { label: "Primaire", href: "/primaire" },
+            { label: "CE1" },
+          ]}
+        />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.10),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
-        <div className="mx-auto max-w-7xl">
-          <p className="inline-flex rounded-md border border-sky/35 bg-sky/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-sky">
-            Cycle 2 · Guide : Gaston le Hérisson
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <p className="rounded-md border border-sky/35 bg-sky/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.2em] text-sky">
+            Cycle 2 · avec Gaston
           </p>
-          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-[0.98] text-foreground sm:text-6xl">
-            CE1 — Choisir une stratégie<br className="hidden sm:block" /> et l&apos;expliquer
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted">
-            En CE1, Gaston accompagne la consolidation de la lecture, de l&apos;écriture
-            et du raisonnement. Les séquences-compétences structurent les apprentissages
-            en {domainCount} grandes matières du Cycle 2.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/primaire/ce1/matieres"
-              className="rounded-md border border-sky/35 bg-sky/10 px-5 py-3 text-sm font-bold text-sky transition hover:bg-sky hover:text-ink"
-            >
-              Explorer les matières CE1
-            </Link>
-            <Link
-              href="/primaire"
-              className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
-            >
-              ← Primaire
-            </Link>
+        </div>
+        <h1 className="mt-5 text-4xl font-black text-foreground sm:text-5xl">
+          Ressources CE1
+        </h1>
+        <p className="mt-4 max-w-2xl text-base leading-8 text-muted">
+          Choisissez une matière pour accéder à ses domaines, compétences et
+          ressources. Les personnages restent vos guides, la matière reste
+          toujours explicite.
+        </p>
+
+        <section aria-labelledby="matieres-ce1" className="mt-10">
+          <h2 id="matieres-ce1" className="text-xl font-black text-foreground">
+            Matières
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {ce1Subjects.map((subject) => {
+              const accent = CE1_ACCENT[subject.accent] ?? CE1_ACCENT.gold;
+              const teacher = getSubjectTeacher(subject.slug);
+
+              return (
+                <Link
+                  key={subject.slug}
+                  href={`/primaire/ce1/matieres/${subject.slug}`}
+                  className={`group flex min-h-52 flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 ${accent.hoverBg} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <p className={`text-xl font-black ${accent.text}`}>
+                      {subject.title}
+                    </p>
+                    <PublicStatusBadge status={subject.status} />
+                  </div>
+                  {teacher ? (
+                    <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+                      avec {teacher.name}
+                    </p>
+                  ) : null}
+                  <p className="mt-4 flex-1 text-sm leading-7 text-muted">
+                    {subject.shortDescription}
+                  </p>
+                  <span className={`mt-4 text-sm font-black ${accent.text}`}>
+                    Voir les compétences →
+                  </span>
+                </Link>
+              );
+            })}
           </div>
-        </div>
-      </section>
-
-      {/* ── Carte des espaces pédagogiques ──────────────────────────────── */}
-      <Ce1GastonLearningMap />
+        </section>
+      </div>
     </main>
   );
 }
