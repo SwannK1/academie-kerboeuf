@@ -6,7 +6,33 @@ Dernière mise à jour : 9 septembre 2026.
 
 **Implémenté pour CP, CE1, CE2, CM1** (commit `fc8d9a6`, branche `chantier/v1-polish-local`) : `CompetencyCard` affiche désormais un CTA « Préparer cette compétence → » (masqué si la compétence est « à venir », conformément au principe « ne jamais tomber sur du vide ») qui ouvre `preparer-une-seance` avec une séance pré-remplie (titre, niveau, matière, domaine, objectif). `TeacherLessonPreparationClient` consomme ces paramètres une seule fois à l'arrivée puis nettoie l'URL pour qu'un rechargement ne duplique pas la séance. Testé bout en bout au navigateur (voir section « Vérification » en fin de document) ; `lint`, `tsc --noEmit` et `build` passent.
 
-**Reste ouvert : CM2.** Le niveau pilote n'a toujours pas de page compétence (modèle de données différent — voir point 1 des constats ci-dessous, inchangé). « Ajouter à ma semaine » au sens strict (action sur une ressource, pas seulement sur une séance déjà préparée) reste aussi à l'état de « Ajouter au cahier journal » existant, ce qui couvre l'usage principal mais pas exactement la formulation de la mission — jugé suffisant pour l'instant, à revisiter si un enseignant testeur signale un manque.
+**Cahier journal imprimable — implémenté** (commits `4740ef9`, `b6702bd`, `97e9341`) : les ressources PDF réelles (leçon/exercices/évaluation, filtrées par la même règle `isPedagogicalResourceLinkable` que le catalogue public) sont désormais transmises de la compétence vers la séance (`materials`), puis de la séance vers le cahier journal (`session.material` / `session.resourceLink` — un bug pré-existant qui les perdait silencieusement au passage a été corrigé au passage). Le cahier journal propose une seconde vue, « Voir mon cahier journal (imprimable) », qui liste chaque séance de la semaine avec horaire, objectif, déroulement, matériel et ressource — au lieu des seules cartes compactes de la vue grille. Couvert par `e2e/teacher-signature-flow.spec.ts` (9 tests, desktop/tablette/mobile) ; suite complète (377 tests) sans régression.
+
+## CM2 — audit d'adaptation (9 septembre 2026)
+
+Conclusion : **adaptation non sûre pour ce lot, gap documenté plutôt que forcé**, conformément à la consigne « si adaptation sûre : implémenter, sinon documenter — ne pas dupliquer toute l'architecture juste pour CM2 ».
+
+Constats après lecture du code réel (pas de supposition) :
+
+- CM2 n'a pas de page de détail par leçon : `app/primaire/cm2/matieres/[slug]/page.tsx` mappe explicitement chaque `Cm2LessonNode` vers un item sans `href` (« Pas de page de détail leçon CM2 — route [domain]/[subdomain]/[lesson] absente », commentaire déjà présent dans le code). Il n'y a donc pas d'équivalent direct à `/primaire/[level]/competences` sur lequel poser un CTA.
+- Le rendu des matières CM2 passe par `components/academy/SubjectMatterCatalog.tsx` (972 lignes), **partagé par les 5 niveaux primaires** (CP, CE1, CE2, CM1, CM2 utilisent tous `SubjectDetailPage`). Y ajouter un CTA « Préparer cette compétence » toucherait aussi CP/CE1/CE2/CM1 — qui ont déjà leur propre CTA fonctionnel et testé sur `/primaire/[level]/competences` — avec un risque réel de doublon d'UI ou de régression sur un composant aussi large et partagé, sans l'avoir lu intégralement.
+- Les ressources PDF réelles des leçons CM2 (triplet leçon/exercices/évaluation) ne transitent pas par `Cm2LessonNode.resources` dans ce rendu : elles vivent dans deux composants séparés, `Cm2FrancaisFichesEmbed.tsx` (168 lignes) et `Cm2MathFichesEmbed.tsx` (215 lignes), non encore lus. Le système de ressources CM2 est donc structurellement plus fragmenté que celui de CP/CE1/CE2/CM1 — un branchement propre demanderait de comprendre ces deux fichiers en plus, pas une simple ligne ajoutée.
+
+Piste pour une prochaine session, à valider avant d'implémenter :
+
+1. Lire intégralement `Cm2FrancaisFichesEmbed.tsx` et `Cm2MathFichesEmbed.tsx` pour voir si un point d'accroche naturel existe déjà là où le triplet PDF est affiché par leçon.
+2. Si oui, ajouter le CTA **uniquement dans ces deux composants CM2**, en réutilisant tel quel le même paramétrage d'URL (`competence`, `level`, `matiere`, `domaine`, `objectif`, `ressources`) et la même cible `/enseignants/preparer-une-seance` — aucun changement necessaire côté `TeacherLessonPreparationClient`, qui est déjà générique.
+3. Ne pas toucher `SubjectMatterCatalog.tsx` pour ce besoin : ce n'est pas le bon point d'intégration et le risque de régression sur les 4 autres niveaux ne se justifie pas.
+
+## Progression — compatibilité (9 septembre 2026)
+
+La mission demande seulement que le câblage reste *compatible* avec un futur statut de progression (À FAIRE / EN COURS / VUE), sans construire ce chantier maintenant. C'est déjà le cas sans modification :
+
+- `LessonStatus` (`content/teacher-lesson-preparation.ts`) : `a-preparer` / `prete` / `a-ajuster` / `faite`.
+- `LogbookStatus` (`content/teacher-logbook.ts`) : les quatre mêmes plus `a-reporter`.
+- Un outil dédié existe déjà et est testé : `/enseignants/progression` (« Progression de période », voir `e2e/teacher-tools-reliability.spec.ts`), indépendant de ce lot.
+
+Aucune action nécessaire pour ce lot au-delà de cette vérification.
 
 Le reste de ce document est conservé tel qu'écrit avant l'implémentation, pour traçabilité.
 
