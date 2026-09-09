@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 85 (33 CP + **28 CE1 — niveau clos** + 24 CE2) |
-| PDF restant à auditer | 886 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 97 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 12 CM1 en cours) |
+| PDF restant à auditer | 874 |
 | PDF modifiés | 5 |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -330,6 +330,39 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 - La page `/primaire/[level]/competences` ne couvre que `cp`, `ce1`, `ce2`, `cm1` (`primaryCompetencyLevels` dans `app/primaire/[level]/competences/page.tsx`). **CM2 n'a pas de page compétence dans ce système**, alors que c'est le niveau mis en avant dans la navigation principale depuis mai 2026.
 - Ce constat ne bloque pas l'audit PDF en cours mais doit être traité avant de considérer la fonction signature « Préparer cette compétence » comme fonctionnelle sur le niveau pilote. Détails et priorisation dans `docs/parcours-signature-audit.md`.
 
+## Lot CM1 — inventaire, cartographie et premier sous-lot français (9 septembre 2026)
+
+### Inventaire complet
+
+- 126 PDF CM1 : 75 français (25 compétences × 3) + 51 mathématiques (17 compétences × 3).
+- Domaines français : écriture (7 compétences, `francais-ecriture-*`), étude de la langue/grammaire (4), lecture-récits (3), lecture-documentaire (4), lecture-croiser-sources (3), oral (2), orthographe (2).
+- Domaines mathématiques : nombres-calculs (7 compétences dont numération et calcul posé), grandeurs-mesures (3), géométrie (3), problèmes (4).
+- **Aucun PDF** histoire-géographie, sciences ou EMC (0 sur 126 — les 9 résultats initiaux d'une recherche par mot-clé « geo » étaient tous de la géométrie mathématique, faux positifs corrigés après vérification).
+
+### Cartographie programme — différence notable avec CP/CE1/CE2
+
+Contrairement aux trois niveaux précédents, `content/levels/cm1-competencies.ts` **contient déjà** des compétences dans les domaines `histoire-geographie`, `geographie`, `antiquite`, `sciences` et `vivant` (au moins 8 compétences à cheval sur ces domaines). Le sous-investissement du curriculum map n'est donc **pas** un problème à CM1 pour histoire-géo/sciences — c'est bien la production de PDF qui manque, pas la cartographie du programme. **EMC reste à 0 compétence** dans `cm1-competencies.ts` malgré la matière déclarée dans `cm1-subjects.ts` — le constat systémique CP/CE1/CE2/CM1 se confirme donc sur ce seul point.
+
+### Sous-lot français — domaine écriture (4/7 compétences auditées intégralement, 12 PDF)
+
+Compétences auditées : adapter son écrit au destinataire, planifier son écrit avant de rédiger, écrire un paragraphe argumenté court (« idée-raison-exemple »), écrire un paragraphe argumenté court (« rédiger »). Toutes contrôlées page par page (texte + rendu visuel), contenu exact, barèmes `/10` recalculés et corrects, aucune faute de français.
+
+**Constat important — pas une simple faute, une question de structure du catalogue** : les compétences `francais-ecriture-rediger-idee-raison-exemple` et `francais-ecriture-rediger-paragraphe-argumente` sont **quasiment identiques** :
+
+- même titre affiché sur les trois fiches : « Écrire un paragraphe argumenté court » ;
+- même domaine (« ÉCRITURE - RÉDIGER ») ;
+- objectifs formulés différemment mais fonctionnellement identiques (« donner une idée, une raison et un exemple » vs « rédiger un paragraphe court qui énonce une idée et l'appuie par un exemple ou une raison ») ;
+- exercices structurellement identiques (mêmes 4 paliers : formuler un avis → choisir une raison → ajouter un exemple → rédiger un paragraphe complet), seul le sujet contextuel change (l'ombre dans la cour / un coin lecture dans la cour).
+
+Cela représente 6 PDF (2 compétences × 3) qui enseignent et évaluent la même compétence sous deux étiquettes différentes du catalogue. **Ce n'est pas corrigé dans ce lot** : fusionner ou différencier deux compétences touche le curriculum map, les routes et potentiellement des liens existants — une décision d'architecture de contenu, pas une simple faute de PDF, qui mérite un avis avant modification (cf. mission : signaler plutôt que trancher seul une décision pédagogique/structurelle significative). Recommandation pour la suite : soit fusionner les deux fiches en une seule compétence plus riche, soit clarifier nettement leur différence (par exemple l'une centrée sur la structure du paragraphe, l'autre sur la justification), soit vérifier s'il s'agit d'un vestige du nettoyage déjà entamé ailleurs dans le dépôt (commit historique « refactor(primary): remove duplicate competency inventories »).
+
+### QA du sous-lot
+
+- 12/12 PDF ouverts et lus intégralement (texte + rendu visuel).
+- Barèmes recalculés (4 évaluations, tous corrects).
+- Aucun PDF modifié dans ce sous-lot (aucune faute de contenu isolée trouvée ; la redondance identifiée est une décision de catalogue, pas une correction de fiche).
+- Aucune suppression, aucun renommage.
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -344,5 +377,6 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 10. ~~Constater l'absence de PDF mathématiques CE1.~~ Fait le 9 septembre 2026 : confirmé, `public/fiches/ce1/mathematiques` n'existe pas. Décision de création à prendre séparément (pas engagée dans ce lot, cf. mission : ne créer qu'après vérification qu'une compétence officielle existe et n'est pas déjà couverte).
 11. ~~Avancer sur CE2 (français ET mathématiques).~~ Fait le 9 septembre 2026 : 24/24 PDF CE2 audités intégralement (4 compétences français + 4 compétences mathématiques). 1 défaut cosmétique trouvé et corrigé (titre dupliqué). Zéro erreur de calcul sur l'ensemble des exercices de mathématiques recomptés à la main. CE2 est maintenant le niveau le plus complètement audité après CP.
 12. ~~Finir les 18 tapuscrits CE1 restants.~~ Fait le 9 septembre 2026 : **CE1 clos, 28/28 PDF audités intégralement** (voir section dédiée « CE1 — niveau clos » ci-dessus). 2 erreurs trouvées et corrigées (fait scientifique sur le toucan, accord grammatical). Couverture réelle par matière documentée : français lecture-compréhension solide, mathématiques absentes à 100 %, QLM quasi absente, EMC absente.
-13. **Prochain lot : CM1** (126 PDF, le plus gros corpus primaire après CM2). Ordre : inventaire complet → cartographie programme → audit par matière (français puis mathématiques puis histoire-géo puis sciences puis EMC) → corrections → amélioration des C/D/E → rendu visuel page par page → QA → commits par lots.
-14. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
+13. **CM1 démarré** le 9 septembre 2026 : inventaire complet fait (126 PDF, 75 français + 51 mathématiques, 0 HG/sciences/EMC), cartographie programme faite (curriculum map CM1 déjà correctement structuré sur HG/sciences, contrairement à CP/CE1/CE2 ; EMC reste à 0). 4/7 compétences du domaine écriture auditées intégralement (12 PDF) — voir section dédiée ci-dessus. **Trouvaille à traiter avant de continuer** : deux compétences écriture quasi identiques (`rediger-idee-raison-exemple` et `rediger-paragraphe-argumente`), décision de fusion/différenciation nécessaire.
+14. **Reste ouvert pour CM1** : 3 compétences écriture restantes (`rediger-reviser`, `rediger-reviser-grille`, `rediger-texte-structure`), puis étude de la langue (4 compétences), lecture-récits (3), lecture-documentaire (4), lecture-croiser-sources (3), oral (2), orthographe (2) en français ; puis les 17 compétences mathématiques ; 114 PDF CM1 non encore audités au total.
+15. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
