@@ -67,13 +67,13 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 43 (33 CP + 10 CE1) |
-| PDF restant à auditer | 928 |
-| PDF modifiés | 2 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 67 (33 CP + 10 CE1 + 24 CE2) |
+| PDF restant à auditer | 904 |
+| PDF modifiés | 3 |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
-| Erreurs corrigées | 1 |
+| Erreurs corrigées | 2 |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
@@ -212,6 +212,41 @@ Aucune erreur trouvée dans ce sous-lot. Aucun PDF modifié dans ce sous-lot (à
 
 `public/fiches/ce1/mathematiques` **n'existe pas**. Les 28 PDF CE1 sont à 100 % du domaine français (étude de la langue + lecture-compréhension). Conforme au constat déjà fait dans la matrice de couverture initiale, désormais vérifié directement sur le système de fichiers plutôt que déduit. Aucune ressource PDF de mathématiques n'existe pour ce niveau — absence totale, pas seulement partielle.
 
+## Lot CE2 — audit intégral complet (9 septembre 2026, français ET mathématiques)
+
+Contrairement à CP et CE1, CE2 a une structure de triplets homogène (comme CP) et couvre déjà les deux matières prioritaires. **Les 24 PDF CE2 (4 compétences français, 4 compétences mathématiques, triplet leçon/exercices/évaluation) ont été audités intégralement dans ce lot — 24/24, aucun report.**
+
+### Français CE2 — lecture-compréhension (4 compétences, 12 PDF)
+
+Compétences : comprendre un texte plus long lu seul, prélever une information précise, repérer une information implicite, résumer un court paragraphe. Toutes construites sur le même gabarit rigoureux : texte support inédit à chaque palier/évaluation, 4 paliers de difficulté croissante, barème `/10` toujours cohérent avec le détail des points.
+
+**1 défaut trouvé et corrigé** : `ce2-francais-ce2-fr-lc-comprendre-texte-long-lecon.pdf` affichait le titre de section « JE COMPRENDS » en double (le titre de la section et celui de l'encadré interne, qui aurait dû porter un intitulé propre comme dans les 3 autres leçons de ce lot — ex. « JE CHERCHE », « JE CHERCHE LES INDICES », « JE CHERCHE L'ESSENTIEL »). Corrigé en supprimant le doublon (redaction + recoloriage exact du fond de l'encadré, `#f6f9f7`) ; rendu vérifié visuellement avant/après, aucun artefact.
+
+Aucune erreur de français, aucune incohérence de barème, aucun texte support incompatible avec sa question. Classification : **B** pour les 12 PDF (contenu et pédagogie solides ; même réserve mineure d'espace que d'autres niveaux, non bloquante).
+
+### Mathématiques CE2 — nombres et calculs (4 compétences, 12 PDF)
+
+Compétences : lire/écrire/ordonner les nombres entiers, multiplier par 2/5/10, poser et calculer une addition ou une soustraction, utiliser des stratégies de calcul mental. **Tous les calculs des 12 PDF ont été refaits à la main** (dénombrements, comparaisons, tables de multiplication, additions/soustractions posées avec et sans retenue, décompositions de calcul mental par passage à la dizaine) : **zéro erreur trouvée**. Points forts pédagogiques notables :
+- progressivité délibérée retenue/sans-retenue dans le lot « poser une addition/soustraction » (paliers 1-3 sans retenue pour l'automatisation du geste, palier 4 avec retenue pour le transfert) ;
+- stratégies de calcul mental correctement justifiées et vérifiées (`38 + 7 = 45`, `52 − 9 = 43`, etc.) ;
+- barèmes `/10` systématiquement exacts.
+
+Aucun PDF modifié dans ce sous-lot (aucun défaut trouvé). Classification : **B** pour les 12 PDF.
+
+### Couverture programme CE2 (mise à jour honnête)
+
+| Matière | Domaine couvert par les PDF existants | Couverture | Domaines encore absents |
+| --- | --- | --- | --- |
+| Français | Lecture-compréhension (4 sous-compétences) | **Partiel**, mais qualité vérifiée excellente | Écriture, oral, vocabulaire, grammaire/orthographe — non vérifiés dans ce lot, absence à confirmer transversalement (même méthode qu'au CP) |
+| Mathématiques | Nombres et calculs (4 sous-compétences) | **Partiel**, mais qualité vérifiée excellente | Grandeurs et mesures, espace et géométrie, organisation de données, résolution de problèmes autonome — non trouvés sous `public/fiches/ce2`, absence à confirmer |
+
+### QA du lot CE2
+
+- 24/24 PDF ouverts et lus intégralement (texte + rendu visuel).
+- Tous les calculs recomptés à la main (aucun script nécessaire, opérations simples à vérifier directement).
+- 1 PDF modifié et revérifié visuellement avant/après.
+- PDF supprimé : 0. PDF renommé : 0. URL modifiée : 0. Aucun des 105 PDF protégés ` 2.pdf` dans ce lot.
+
 ## Constat produit transversal — niveau pilote CM2 sans page compétence (9 septembre 2026)
 
 En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.md`), un constat dépasse le seul périmètre PDF et concerne directement la stratégie V1 (`docs/strategie-v1-academie-kerboeuf.md`, qui fait du CM2 le niveau pilote) :
@@ -231,4 +266,5 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 8. Ajouter CM2 à `primaryCompetencyLevels`... — **non repris dans ce lot sur consigne explicite** (diagnostic « adaptation non sûre » conservé tel quel, voir `docs/parcours-signature-audit.md`).
 9. ~~Lot CE1 français : auditer intégralement les 3 évaluations et un échantillon de tapuscrits.~~ Fait le 9 septembre 2026 : 3/3 évaluations et 7/25 tapuscrits audités intégralement (10/28 PDF CE1 au total). Aucune erreur trouvée dans ce sous-lot. **Reste ouvert** : 18 tapuscrits CE1 non encore audités individuellement (liste : Aventure-Estivale, Becs, Belle-Disparu, Chasse-Tresor, Eric-Porc-Epic, Experiences-Meteo-Anna, Griffes, Ikru-Premier-Jour, Jouet-Perdu, Mangouste-Grenouille, Nettoyage-Plage, Plantes-Partout, Plastique-Chic, Poisson-Nager, Poochi-Amis, Rentree-Reve, Tresors-Sam, Trier-Recycler) — à reprendre en priorité au prochain lot CE1, sans refaire les 10 déjà validés.
 10. ~~Constater l'absence de PDF mathématiques CE1.~~ Fait le 9 septembre 2026 : confirmé, `public/fiches/ce1/mathematiques` n'existe pas. Décision de création à prendre séparément (pas engagée dans ce lot, cf. mission : ne créer qu'après vérification qu'une compétence officielle existe et n'est pas déjà couverte).
-11. **Prochain lot recommandé** : soit finir les 18 tapuscrits CE1 restants, soit avancer sur CE2 (qui a déjà français ET mathématiques en triplets structurés type CP — donc plus rapide à auditer et mieux aligné sur la priorité Français → Mathématiques du niveau). Les deux sont légitimes ; CE2 offre une meilleure couverture programme par unité de temps d'audit.
+11. ~~Avancer sur CE2 (français ET mathématiques).~~ Fait le 9 septembre 2026 : 24/24 PDF CE2 audités intégralement (4 compétences français + 4 compétences mathématiques). 1 défaut cosmétique trouvé et corrigé (titre dupliqué). Zéro erreur de calcul sur l'ensemble des exercices de mathématiques recomptés à la main. CE2 est maintenant le niveau le plus complètement audité après CP.
+12. **Prochain lot recommandé** : au choix — (a) finir les 18 tapuscrits CE1 restants (liste au point 9) ; (b) CM1 (126 PDF, le plus gros corpus primaire après CM2, à explorer par domaine) ; (c) recherche transversale QLM/sciences/EMC pour CE1/CE2 sur le même modèle que le point 4 pour CP, avant de conclure à une absence pour ces niveaux. Les trois sont légitimes et non redondants.
