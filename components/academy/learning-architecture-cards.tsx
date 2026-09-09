@@ -16,6 +16,24 @@ type CompetencyCardProps = {
   competency: LearningCompetency;
 };
 
+/**
+ * Construit le lien vers l'outil "Préparer une séance", pré-rempli avec le
+ * contexte de la compétence. `TeacherLessonPreparationClient` lit ces
+ * paramètres une seule fois au montage pour créer une séance de départ.
+ */
+function buildPreparerSeanceHref(competency: LearningCompetency): string {
+  const params = new URLSearchParams({
+    competence: competency.title,
+    level: competency.levelSlug,
+    matiere: competency.subjectLabel ?? competency.subject,
+    domaine: formatTaxonomyLabel(competency.domainSlug),
+  });
+  if (competency.observableObjective) {
+    params.set("objectif", competency.observableObjective);
+  }
+  return `/enseignants/preparer-une-seance?${params.toString()}`;
+}
+
 type AnnualPathCardProps = {
   path: AnnualLearningPath;
 };
@@ -58,6 +76,15 @@ export function CompetencyCard({ competency }: CompetencyCardProps) {
       </div>
 
       <ResourceSlotsSummary slots={competency.resourceSlots} />
+
+      {!isUpcoming && (
+        <Link
+          href={buildPreparerSeanceHref(competency)}
+          className="mt-4 inline-flex min-h-11 items-center justify-center rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25"
+        >
+          Préparer cette compétence →
+        </Link>
+      )}
 
       <details className="mt-4 border-t border-white/10 pt-3">
         <summary className="cursor-pointer select-none text-xs font-bold uppercase tracking-[0.14em] text-muted transition hover:text-foreground">

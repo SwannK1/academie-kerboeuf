@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   createEmptyMaterialItem,
   createEmptyStep,
@@ -86,6 +87,55 @@ function mapToLessonSubject(matiere: string): LessonSubject {
   return known ? known.id : "autre";
 }
 
+/**
+ * Comme `mapToLessonSubject`, mais accepte aussi un libellé humain
+ * ("Français", "EMC"…) en plus d'un identifiant technique, pour les
+ * paramètres d'URL en provenance des pages compétence.
+ */
+function mapSubjectLabelOrIdToLessonSubject(value: string): LessonSubject {
+  const normalized = value.trim().toLowerCase();
+  const known = lessonSubjects.find(
+    (item) => item.id === value || item.label.toLowerCase() === normalized,
+  );
+  return known ? known.id : "autre";
+}
+
+function mapToLessonLevel(value: string | null): LessonLevel | null {
+  const known = lessonLevels.find((item) => item.id === value);
+  return known ? known.id : null;
+}
+
+/**
+ * Construit une séance de départ depuis les paramètres d'URL envoyés par une
+ * page compétence ("Préparer cette compétence"), ou `null` si la page a été
+ * ouverte normalement. Pure : n'est utilisée que dans des initialiseurs
+ * paresseux de `useState`, jamais dans un effet.
+ */
+function buildPrefillLesson(
+  searchParams: ReturnType<typeof useSearchParams>,
+): TeacherLesson | null {
+  const competenceTitle = searchParams.get("competence");
+  if (!competenceTitle) return null;
+
+  const lesson = createLessonFromTemplate("libre");
+  lesson.title = competenceTitle;
+  lesson.competency = competenceTitle;
+
+  const levelParam = mapToLessonLevel(searchParams.get("level"));
+  if (levelParam) lesson.level = levelParam;
+
+  const matiereParam = searchParams.get("matiere");
+  if (matiereParam) lesson.subject = mapSubjectLabelOrIdToLessonSubject(matiereParam);
+
+  const domaineParam = searchParams.get("domaine");
+  if (domaineParam) lesson.domain = domaineParam;
+
+  const objectifParam = searchParams.get("objectif");
+  if (objectifParam) lesson.objective = objectifParam;
+
+  return lesson;
+}
+
 function readLogbookData(): Record<string, LogbookWeekData> {
   if (typeof window === "undefined") return {};
   try {
@@ -112,9 +162,21 @@ function subjectLabel(subject: LessonSubject): string {
 }
 
 export function TeacherLessonPreparationClient() {
-  const [lessons, setLessons] = useState<TeacherLesson[]>(() => readLessons());
-  const [view, setView] = useState<"liste" | "edition">("liste");
-  const [currentId, setCurrentId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  // Calculée à chaque rendu (pure, bon marché) mais seule la valeur du tout
+  // premier rendu compte : elle n'est consultée que par les initialiseurs
+  // paresseux de useState ci-dessous, jamais par un effet, pour éviter de
+  // recréer une séance à chaque changement d'état ou de paramètres.
+  const prefillLesson = buildPrefillLesson(searchParams);
+
+  const [lessons, setLessons] = useState<TeacherLesson[]>(() => {
+    const existing = readLessons();
+    return prefillLesson ? [prefillLesson, ...existing] : existing;
+  });
+  const [view, setView] = useState<"liste" | "edition">(() =>
+    prefillLesson ? "edition" : "liste",
+  );
+  const [currentId, setCurrentId] = useState<string | null>(() => prefillLesson?.id ?? null);
   const [showArchived, setShowArchived] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<LessonTemplateId>("libre");
   const [showImportPicker, setShowImportPicker] = useState(false);
@@ -123,6 +185,20 @@ export function TeacherLessonPreparationClient() {
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ lessons } satisfies StoredData));
   }, [lessons]);
+
+  // Nettoie les paramètres de pré-remplissage de l'URL une fois consommés
+  // (uniquement l'historique du navigateur, aucun état React) : sans cela,
+  // un rechargement de page recréerait une nouvelle séance à chaque fois.
+  useEffect(() => {
+    if (!window.location.search.includes("competence=")) return;
+    const url = new URL(window.location.href);
+    for (const key of ["competence", "level", "matiere", "domaine", "objectif"]) {
+      url.searchParams.delete(key);
+    }
+    window.history.replaceState(null, "", url.pathname + url.search);
+    // Volontairement exécuté une seule fois au montage : ce nettoyage ne doit
+    // porter que sur l'URL d'arrivée, pas sur des changements ultérieurs.
+  }, []);
 
   const currentLesson = useMemo(
     () => lessons.find((item) => item.id === currentId) ?? null,
