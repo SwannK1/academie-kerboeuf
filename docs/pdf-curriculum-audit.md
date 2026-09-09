@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 38 (33 CP + 5 CE1) |
-| PDF restant à auditer | 933 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 43 (33 CP + 10 CE1) |
+| PDF restant à auditer | 928 |
 | PDF modifiés | 2 |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -196,6 +196,22 @@ Autres documents contrôlés intégralement :
 - Les deux évaluations accessibles sont des pages image et nécessitent un contrôle haute résolution séparé.
 - Aucun PDF CE1 n'a été modifié, renommé ou supprimé.
 
+### Continuation du lot CE1 (9 septembre 2026, après-midi) — 5 PDF supplémentaires audités intégralement
+
+Sans reprendre les 5 PDF déjà validés ci-dessus. Tous les PDF CE1 sont désormais matérialisés (plus de blocage `dataless`), 33 PDF sur 28 restent donc à traiter au-delà de ce sous-lot (18 tapuscrits non encore audités individuellement).
+
+- `ce1-francais-nom-commun-propre-evaluation.pdf` : page unique, gabarit illustré différent des évaluations précédentes (mascotte, cases « Je sais faire seul »), contenu exact (classement nom commun/propre, majuscules) sans ambiguïté ; classe **B**.
+- `01_FRANCAIS_Litterature_Conte_Nouveau-Camarade.pdf` (11 pages) : récit inclusif (personnage en fauteuil roulant), contexte himalayen/bouddhiste traité avec respect, page finale « Nos sens » scientifiquement correcte (cinq sens), aucune erreur de français relevée, licence CC BY 4.0 complète et correcte ; classe **B**.
+- `01_FRANCAIS_Litterature_Conte_Mystere-Chaussettes.pdf` (12 pages) : conte fantaisiste sans prétention factuelle, aucune erreur de français, licence correcte ; classe **B**.
+- `01_FRANCAIS_Litterature_Conte_Feuille-Voyage.pdf` (13 pages) : Level 1 (démarrage lecture autonome), phrases courtes et correctes, licence correcte. **Vérification méthodologique notable** : la couche texte de la page 4 extrait « a ëotté » au lieu de « a flotté » (mapping ToUnicode défaillant sur la ligature « fl ») ; un zoom du rendu réel à x3 confirme que **le rendu visuel affiche bien « a flotté »**, sans coupure ni artefact — conformément à la règle du lot, ceci n'est pas compté comme une faute de contenu, seulement noté comme une limite d'accessibilité (copier-coller, lecteur d'écran) qui n'affecte pas l'impression ; classe **B**.
+- `01_FRANCAIS_Litterature_Conte_Maisons-Animaux.pdf` (12 pages) : documentaire animalier Level 1, toutes les affirmations factuelles vérifiées exactes (nids d'oiseaux et abeilles en hauteur, toiles d'araignées, termitières, croissance de la coquille d'escargot/carapace de tortue avec l'animal, terriers de lapins/rats, vie arboricole des singes, tanières d'ours/loups, marais des crocodiles, forêts des cerfs/tigres), conclusion pédagogique simple et correcte (« la planète Terre ») ; classe **B**, aucune réserve factuelle contrairement à `Petite-Plante.pdf`.
+
+Aucune erreur trouvée dans ce sous-lot. Aucun PDF modifié dans ce sous-lot (à la différence du lot CP).
+
+### Mathématiques CE1 — absence confirmée
+
+`public/fiches/ce1/mathematiques` **n'existe pas**. Les 28 PDF CE1 sont à 100 % du domaine français (étude de la langue + lecture-compréhension). Conforme au constat déjà fait dans la matrice de couverture initiale, désormais vérifié directement sur le système de fichiers plutôt que déduit. Aucune ressource PDF de mathématiques n'existe pour ce niveau — absence totale, pas seulement partielle.
+
 ## Constat produit transversal — niveau pilote CM2 sans page compétence (9 septembre 2026)
 
 En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.md`), un constat dépasse le seul périmètre PDF et concerne directement la stratégie V1 (`docs/strategie-v1-academie-kerboeuf.md`, qui fait du CM2 le niveau pilote) :
@@ -213,4 +229,6 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 6. ~~Corriger uniquement après compréhension complète des triplets concernés.~~ Fait le 9 septembre 2026 : les 33 PDF CP audités intégralement, 1 erreur trouvée et corrigée (glyphe Unicode incorrect), aucune autre correction jugée nécessaire (faiblesses restantes = cosmétiques, faible impact).
 7. ~~Rapatrier les 2 commits non poussés de `chantier/v1-polish`...~~ Fait le 9 septembre 2026 : rien à rapatrier (déjà présent sur `origin/main`).
 8. Ajouter CM2 à `primaryCompetencyLevels`... — **non repris dans ce lot sur consigne explicite** (diagnostic « adaptation non sûre » conservé tel quel, voir `docs/parcours-signature-audit.md`).
-9. **Lot suivant (en cours)** : CE1 — terminer l'audit intégral des PDF déjà triés visuellement (25 tapuscrits + 3 évaluations, 5 déjà audités intégralement, 15 restants côté français), puis constater/combler l'absence totale de PDF mathématiques CE1 (0 PDF trouvé sous `public/fiches/ce1/mathematiques` — le dossier n'existe même pas), en respectant l'ordre de priorité Français → Mathématiques → Histoire-Géo/QLM → Sciences → EMC.
+9. ~~Lot CE1 français : auditer intégralement les 3 évaluations et un échantillon de tapuscrits.~~ Fait le 9 septembre 2026 : 3/3 évaluations et 7/25 tapuscrits audités intégralement (10/28 PDF CE1 au total). Aucune erreur trouvée dans ce sous-lot. **Reste ouvert** : 18 tapuscrits CE1 non encore audités individuellement (liste : Aventure-Estivale, Becs, Belle-Disparu, Chasse-Tresor, Eric-Porc-Epic, Experiences-Meteo-Anna, Griffes, Ikru-Premier-Jour, Jouet-Perdu, Mangouste-Grenouille, Nettoyage-Plage, Plantes-Partout, Plastique-Chic, Poisson-Nager, Poochi-Amis, Rentree-Reve, Tresors-Sam, Trier-Recycler) — à reprendre en priorité au prochain lot CE1, sans refaire les 10 déjà validés.
+10. ~~Constater l'absence de PDF mathématiques CE1.~~ Fait le 9 septembre 2026 : confirmé, `public/fiches/ce1/mathematiques` n'existe pas. Décision de création à prendre séparément (pas engagée dans ce lot, cf. mission : ne créer qu'après vérification qu'une compétence officielle existe et n'est pas déjà couverte).
+11. **Prochain lot recommandé** : soit finir les 18 tapuscrits CE1 restants, soit avancer sur CE2 (qui a déjà français ET mathématiques en triplets structurés type CP — donc plus rapide à auditer et mieux aligné sur la priorité Français → Mathématiques du niveau). Les deux sont légitimes ; CE2 offre une meilleure couverture programme par unité de temps d'audit.
