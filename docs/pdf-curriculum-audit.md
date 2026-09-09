@@ -247,6 +247,18 @@ Aucun PDF modifié dans ce sous-lot (aucun défaut trouvé). Classification : **
 - 1 PDF modifié et revérifié visuellement avant/après.
 - PDF supprimé : 0. PDF renommé : 0. URL modifiée : 0. Aucun des 105 PDF protégés ` 2.pdf` dans ce lot.
 
+## Recherche transversale QLM/EMC — CE1 et CE2 (9 septembre 2026)
+
+Même méthode que pour CP (voir plus haut), appliquée à CE1 et CE2 :
+
+| Niveau | Compétences « questionner-le-monde »/QLM dans le curriculum map | Compétences EMC dans le curriculum map | PDF QLM/sciences/EMC trouvés |
+| --- | ---: | ---: | ---: |
+| CP | 1 sur 89 | 0 sur 89 | 0 |
+| CE1 | 4 sur 36 (2 `questionner-le-monde` + 2 `matiere-objets`) | 0 sur 36 | 0 |
+| CE2 | 4 (2 `questionner-le-monde` + 2 `espace-temps`) | 0 | 0 |
+
+**Constat systémique, pas isolé à un niveau** : l'EMC est totalement absent du curriculum map à CP, CE1 et CE2 (0 compétence sur les trois niveaux), alors que la matière `emc` est bien déclarée dans la navigation (`cp-subjects.ts`, `ce1-subjects.ts`, `ce2-subjects.ts`). QLM est présent mais très minoritaire partout. Aucun PDF QLM/sciences/EMC n'existe pour aucun de ces trois niveaux. Cette absence répétée aux trois premiers niveaux primaires suggère une décision ou un oubli au niveau de la conception du curriculum map lui-même, pas un simple retard de production de PDF niveau par niveau — à signaler explicitement comme point nécessitant une décision produit (créer les compétences EMC dans les curriculum maps avant tout PDF, cf. mission section EMC : rester conforme aux textes officiels, éviter les formulations militantes).
+
 ## Constat produit transversal — niveau pilote CM2 sans page compétence (9 septembre 2026)
 
 En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.md`), un constat dépasse le seul périmètre PDF et concerne directement la stratégie V1 (`docs/strategie-v1-academie-kerboeuf.md`, qui fait du CM2 le niveau pilote) :
