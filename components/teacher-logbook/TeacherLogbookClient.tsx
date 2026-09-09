@@ -103,6 +103,7 @@ export function TeacherLogbookClient() {
   const [editingSession, setEditingSession] = useState<LogbookSession | null>(
     null,
   );
+  const [viewMode, setViewMode] = useState<"grille" | "journal">("grille");
   const dragSourceRef = useRef<string | null>(null);
   const instructionsId = useId();
   const hydratedRef = useRef(false);
@@ -404,6 +405,45 @@ export function TeacherLogbookClient() {
       </section>
 
       <section
+        aria-labelledby="mode-affichage"
+        className="flex flex-wrap items-center gap-2 print:hidden"
+      >
+        <h2 id="mode-affichage" className="sr-only">
+          Mode d&apos;affichage
+        </h2>
+        <button
+          type="button"
+          onClick={() => setViewMode("grille")}
+          aria-pressed={viewMode === "grille"}
+          className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
+            viewMode === "grille"
+              ? "border-jade/60 bg-jade/15 text-jade"
+              : "border-white/15 text-foreground hover:border-jade/40"
+          }`}
+        >
+          Vue grille (organiser)
+        </button>
+        <button
+          type="button"
+          onClick={() => setViewMode("journal")}
+          aria-pressed={viewMode === "journal"}
+          className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
+            viewMode === "journal"
+              ? "border-jade/60 bg-jade/15 text-jade"
+              : "border-white/15 text-foreground hover:border-jade/40"
+          }`}
+        >
+          Voir mon cahier journal (imprimable)
+        </button>
+      </section>
+
+      {viewMode === "journal" && (
+        <JournalView weekKey={currentWeekKey} sessions={week.sessions} />
+      )}
+
+      {viewMode === "grille" && (
+      <>
+      <section
         aria-labelledby="semaine-speciale"
         className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
       >
@@ -668,6 +708,8 @@ export function TeacherLogbookClient() {
           </ul>
         )}
       </section>
+      </>
+      )}
 
       {editingSession && (
         <SessionEditorModal
@@ -681,6 +723,122 @@ export function TeacherLogbookClient() {
         />
       )}
     </div>
+  );
+}
+
+/**
+ * Vue détaillée et imprimable du cahier journal : chaque séance de la
+ * semaine, dans l'ordre chronologique, avec horaire, matière, objectif,
+ * déroulement, matériel et ressource. Réutilise les séances déjà saisies
+ * dans la vue grille — aucune donnée ni stockage séparé.
+ */
+function JournalView({
+  weekKey,
+  sessions,
+}: {
+  weekKey: string;
+  sessions: LogbookSession[];
+}) {
+  return (
+    <section aria-labelledby="cahier-journal-titre" className="print:border-black/40">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2
+          id="cahier-journal-titre"
+          className="text-xl font-black text-foreground print:text-base"
+        >
+          Cahier journal — {formatWeekRangeLabel(weekKey)}
+        </h2>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 print:hidden"
+        >
+          Imprimer (A4 N&amp;B)
+        </button>
+      </div>
+
+      {sessions.length === 0 ? (
+        <p className="mt-4 text-sm text-muted">
+          Aucune séance planifiée cette semaine. Ajoutez-en depuis la vue
+          grille, ou depuis « Préparer cette compétence » sur une page
+          compétence.
+        </p>
+      ) : (
+        <div className="mt-4 space-y-6">
+          {logbookDays.map((day) => {
+            const daySessions = logbookSlots.flatMap((slot) =>
+              sessions
+                .filter((item) => item.day === day.id && item.slotId === slot.id)
+                .map((item) => ({ session: item, slotLabel: slot.label })),
+            );
+            if (daySessions.length === 0) return null;
+
+            return (
+              <div key={day.id} className="print:break-inside-avoid">
+                <h3 className="border-b border-white/15 pb-1 text-lg font-black text-foreground print:border-black/40 print:text-sm">
+                  {day.label}
+                </h3>
+                <ul className="mt-3 space-y-4" role="list">
+                  {daySessions.map(({ session, slotLabel }) => (
+                    <li
+                      key={session.id}
+                      className="rounded-lg border border-white/10 bg-background/40 p-4 print:break-inside-avoid print:border-black/30"
+                    >
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <p className="text-sm font-black text-foreground">
+                          {slotLabel} — {session.title || "(sans titre)"}
+                        </p>
+                        <span className="text-xs font-bold text-muted">
+                          {subjectLabel(session.subject)} · {levelLabel(session.level)}
+                          {session.durationLabel ? ` · ${session.durationLabel}` : ""}
+                        </span>
+                      </div>
+                      {session.objective ? (
+                        <p className="mt-2 text-sm text-foreground">
+                          <span className="font-bold">Objectif : </span>
+                          {session.objective}
+                        </p>
+                      ) : null}
+                      {session.outline ? (
+                        <p className="mt-2 text-sm text-foreground">
+                          <span className="font-bold">Déroulement : </span>
+                          {session.outline}
+                        </p>
+                      ) : null}
+                      {session.material ? (
+                        <p className="mt-2 text-sm text-foreground">
+                          <span className="font-bold">Matériel : </span>
+                          {session.material}
+                        </p>
+                      ) : null}
+                      {session.resourceLink ? (
+                        <p className="mt-2 text-sm">
+                          <span className="font-bold text-foreground">Ressource : </span>
+                          <a
+                            href={session.resourceLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-jade underline"
+                          >
+                            {session.resourceLink}
+                          </a>
+                        </p>
+                      ) : null}
+                      {session.personalNote ? (
+                        <p className="mt-2 text-sm text-foreground">
+                          <span className="font-bold">Note : </span>
+                          {session.personalNote}
+                        </p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
   );
 }
 
