@@ -133,7 +133,37 @@ function buildPrefillLesson(
   const objectifParam = searchParams.get("objectif");
   if (objectifParam) lesson.objective = objectifParam;
 
+  const ressourcesParam = searchParams.get("ressources");
+  if (ressourcesParam) {
+    lesson.materials = parseResourceMaterials(ressourcesParam);
+  }
+
   return lesson;
+}
+
+/**
+ * Ressources pédagogiques réelles (leçon, exercices, évaluation…) transmises
+ * en JSON par une page compétence, converties en éléments de "Matériel et
+ * supports". Ignore silencieusement toute entrée malformée : mieux vaut une
+ * séance sans matériel pré-rempli qu'une page qui casse sur un paramètre
+ * d'URL inattendu.
+ */
+function parseResourceMaterials(raw: string): TeacherLesson["materials"] {
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .filter(
+        (entry): entry is { label: string; href: string } =>
+          Boolean(entry) &&
+          typeof entry === "object" &&
+          typeof (entry as { label?: unknown }).label === "string" &&
+          typeof (entry as { href?: unknown }).href === "string",
+      )
+      .map((entry) => ({ ...createEmptyMaterialItem(entry.label), link: entry.href }));
+  } catch {
+    return [];
+  }
 }
 
 function readLogbookData(): Record<string, LogbookWeekData> {
@@ -192,7 +222,7 @@ export function TeacherLessonPreparationClient() {
   useEffect(() => {
     if (!window.location.search.includes("competence=")) return;
     const url = new URL(window.location.href);
-    for (const key of ["competence", "level", "matiere", "domaine", "objectif"]) {
+    for (const key of ["competence", "level", "matiere", "domaine", "objectif", "ressources"]) {
       url.searchParams.delete(key);
     }
     window.history.replaceState(null, "", url.pathname + url.search);
@@ -566,6 +596,8 @@ function AddToLogbookModal({
     session.durationLabel = lesson.duration;
     session.objective = lesson.objective;
     session.outline = lesson.steps.map((step) => step.instruction).filter(Boolean).join(" → ");
+    session.material = lesson.materials.map((item) => item.label).filter(Boolean).join(", ");
+    session.resourceLink = lesson.materials.find((item) => item.link)?.link ?? "";
 
     const updatedWeek: LogbookWeekData = { ...week, sessions: [...week.sessions, session] };
     const updatedData = { ...data, [weekKey]: updatedWeek };
@@ -1135,7 +1167,10 @@ function LessonEditor({
         </div>
       </details>
 
-      <details className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details
+        open={lesson.materials.some((item) => item.link)}
+        className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30"
+      >
         <summary className="cursor-pointer text-lg font-black text-foreground">
           6. Matériel et supports
         </summary>

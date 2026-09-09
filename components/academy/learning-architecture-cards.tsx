@@ -31,6 +31,17 @@ function buildPreparerSeanceHref(competency: LearningCompetency): string {
   if (competency.observableObjective) {
     params.set("objectif", competency.observableObjective);
   }
+
+  // Ne transmettre que les ressources réellement cliquables (jamais de faux
+  // PDF) : même règle que la page catalogue (AGENTS.md, "Règles de lien
+  // PDF"). La séance préparée les reçoit en tant que "matériel" avec lien.
+  const linkableResources = (competency.resourceSlots ?? [])
+    .filter((slot) => isPedagogicalResourceLinkable(slot.resource))
+    .map((slot) => ({ label: slot.label, href: slot.resource!.href }));
+  if (linkableResources.length > 0) {
+    params.set("ressources", JSON.stringify(linkableResources));
+  }
+
   return `/enseignants/preparer-une-seance?${params.toString()}`;
 }
 
