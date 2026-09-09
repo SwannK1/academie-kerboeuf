@@ -67,13 +67,13 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 67 (33 CP + 10 CE1 + 24 CE2) |
-| PDF restant à auditer | 904 |
-| PDF modifiés | 3 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 85 (33 CP + **28 CE1 — niveau clos** + 24 CE2) |
+| PDF restant à auditer | 886 |
+| PDF modifiés | 5 |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
-| Erreurs corrigées | 2 |
+| Erreurs corrigées | 4 |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
@@ -212,6 +212,70 @@ Aucune erreur trouvée dans ce sous-lot. Aucun PDF modifié dans ce sous-lot (à
 
 `public/fiches/ce1/mathematiques` **n'existe pas**. Les 28 PDF CE1 sont à 100 % du domaine français (étude de la langue + lecture-compréhension). Conforme au constat déjà fait dans la matrice de couverture initiale, désormais vérifié directement sur le système de fichiers plutôt que déduit. Aucune ressource PDF de mathématiques n'existe pour ce niveau — absence totale, pas seulement partielle.
 
+## CE1 — niveau clos (9 septembre 2026, fin de journée) : 28/28 PDF audités intégralement
+
+**Le CE1 est maintenant entièrement audité.** Les 18 tapuscrits restants (listés au point 9 de « Prochaines étapes sûres » de la section précédente) ont été ouverts, lus intégralement et contrôlés page par page dans ce lot, sans reprendre les 10 PDF déjà validés lors des lots précédents.
+
+### Résultat du sous-lot (18 tapuscrits)
+
+| Fichier | Pages | Classe | Constat |
+| --- | ---: | --- | --- |
+| Aventure-Estivale | 15 | B | Album sans texte (0 mot sur les pages de récit, vérifié par script) — genre légitime pour un travail de narration à partir des images, mais à étiqueter clairement « sans texte » côté catalogue si ce n'est pas déjà le cas. |
+| Becs | 16 | B | **1 erreur factuelle trouvée et corrigée** : la fiche affirmait que le bec coloré du toucan lui permet de « se camoufler parmi les fleurs » — c'est scientifiquement erroné (un bec aussi voyant n'est pas un camouflage ; la fonction reste débattue mais penche vers la thermorégulation et la séduction). Remplacé par « un bec léger et coloré qui leur sert à attraper des fruits et à attirer un partenaire ». Le reste du documentaire (pics, martins-pêcheurs, moineaux, spatules, flamants, perroquets, calaos, souïmangas, colibris, pélicans, macareux) vérifié exact. |
+| Belle-Disparu | 28 | A | Excellente enquête policière, logique de l'indice rigoureuse, aucune erreur de français. |
+| Chasse-Tresor | 22 | B | Filtre à eau en sable/gravier scientifiquement correct (ordre des couches, rappel de faire bouillir l'eau) ; incohérence mineure de prénom (« Babu » puis « Badu » page 16), non corrigée (impact quasi nul). |
+| Eric-Porc-Epic | 18 | B | Histoire d'inclusion, aucune erreur de français ; morale légèrement ambiguë (le personnage change son apparence pour être accepté) mais reste une histoire d'amitié positive et cohérente. |
+| Experiences-Meteo-Anna | 22 | A | Biographie d'Anna Mani (vraie scientifique indienne, météorologue) vérifiée exacte (C.V. Raman, Imperial College, India Meteorological Department) ; explication de la couche d'ozone correcte. |
+| Griffes | 19 | A | Documentaire zoologique, 12 exemples d'usage des griffes/serres tous vérifiés exacts. |
+| Ikru-Premier-Jour | 14 | B | Album sans texte, **correctement étiqueté comme tel** dans sa notice (« ce livre sans paroles... »). |
+| Jouet-Perdu | 15 | B | Album sans texte ; notice indique par erreur « moins de 50 mots » alors que 0 mot sur les pages de récit (incohérence de métadonnée héritée du gabarit anglophone, non corrigée — impact faible, jaquette uniquement). |
+| Mangouste-Grenouille | 17 | B | Conte à devinettes zoologiques, six animaux correctement décrits. |
+| Nettoyage-Plage | 25 | A | **Toutes les fractions vérifiées exactes à la main** (1/4, 3/4, 1/2 recalculés sur les données de l'histoire) ; contenu civique/environnemental de qualité. |
+| Plantes-Partout | 18 | B | Documentaire botanique, toutes les affirmations vérifiées exactes. |
+| Plastique-Chic | 29 | A | Statistiques environnementales vérifiées (450 ans de dégradation, incident réel de la baleine échouée en Indonésie en 2018). |
+| Poisson-Nager | 18 | B | Conte fantaisiste, aucune erreur. |
+| Poochi-Amis | 29 | B | Conte fantaisiste positif sur l'acceptation de soi ; le raccourci « les chenilles fabriquent du compost » est scientifiquement approximatif mais reste dans un cadre assumé de fiction (créature à 100 pattes, six yeux), non corrigé. |
+| Rentree-Reve | 15 | B | **1 erreur de grammaire trouvée et corrigée** : « nous somme retournés » → « nous sommes retournés » (accord du verbe être, 1re personne du pluriel). Calculs du tableau (13+13=26, 30-4=26) vérifiés exacts. |
+| Tresors-Sam | 17 | B | Conte sur l'honnêteté, aucune erreur. |
+| Trier-Recycler | 22 | A | Documentaire sur le tri/recyclage, les 5 R corrects, message de sécurité sur les médicaments pertinent. |
+
+**Bilan du sous-lot** : 18/18 audités, 5 classe A, 13 classe B, 0 C/D/E, 2 PDF modifiés (`Becs.pdf`, `Rentree-Reve.pdf`), 2 erreurs corrigées, 2 imperfections mineures identifiées et documentées sans correction (impact jugé trop faible pour justifier une édition binaire : un prénom, une jaquette de métadonnée tierce).
+
+### Bilan complet CE1 (28/28)
+
+| Indicateur | Valeur |
+| --- | ---: |
+| PDF CE1 audités | 28 / 28 (100 %) |
+| PDF CE1 modifiés | 2 |
+| PDF CE1 inchangés (déjà conformes) | 26 |
+| PDF CE1 créés | 0 |
+| PDF CE1 restants | 0 |
+| Classe A | 5 |
+| Classe B | 20 |
+| Classe C | 1 (`01_FRANCAIS_Litterature_Conte_Jouet-Casse.pdf`, lot précédent — corps de texte petit, conservé sans modification) |
+| Classe D | 1 (`01_FRANCAIS_Litterature_Conte_Pranav-Detective.pdf`, lot précédent — erreurs éditoriales dans le texte tiers, non corrigées faute de source éditable identifiée) |
+| Classe E | 0 |
+
+### Couverture réelle du programme CE1 par matière
+
+| Matière | Couverture | Détail |
+| --- | --- | --- |
+| Français — lecture-compréhension | **Couverte et auditée à 100 %**, qualité majoritairement A/B | 25 tapuscrits (albums de littérature jeunesse CC BY, majoritairement StoryWeaver/Book Dash) + 3 évaluations d'étude de la langue. 2 erreurs de contenu trouvées et corrigées sur l'ensemble du corpus. |
+| Français — écriture, oral, vocabulaire, grammaire (hors étude de la langue évaluée) | **Non couverte par des PDF** | Aucun PDF trouvé sous `public/fiches/ce1` pour ces domaines ; à confirmer transversalement (même méthode que pour CP) avant de conclure définitivement. |
+| Mathématiques (tous domaines) | **Absente à 100 %** | `public/fiches/ce1/mathematiques` n'existe pas. Aucune ressource. |
+| Questionner le monde | **Quasi absente** | 4 compétences dans le curriculum map (`questionner-le-monde` + `matiere-objets`), 0 PDF. |
+| EMC | **Absente à 100 %, y compris dans le curriculum map** | 0 compétence, 0 PDF (constat systémique CP/CE1/CE2, voir section dédiée plus haut). |
+
+**Conclusion honnête** : le CE1 est un niveau très solide en lecture-compréhension (qualité vérifiée, peu d'erreurs, corrigées) mais **structurellement déséquilibré** — aucune ressource en mathématiques, très peu en questionner-le-monde, rien en EMC. « CE1 audité à 100 % » signifie que tout ce qui existe a été contrôlé, pas que le programme CE1 est couvert à 100 %.
+
+### QA de clôture CE1
+
+- 18/18 PDF de ce sous-lot ouverts et lus intégralement (texte + rendu visuel), soit 28/28 pour l'ensemble du niveau.
+- 2 corrections appliquées, chacune rendue et vérifiée visuellement avant/après (voir détail par fichier ci-dessus).
+- Aucune suppression, aucun renommage, aucune modification hors périmètre.
+- Aucun des 105 PDF protégés ` 2.pdf` dans ce niveau.
+- `git diff --check` exécuté avant commit (voir ci-dessous).
+
 ## Lot CE2 — audit intégral complet (9 septembre 2026, français ET mathématiques)
 
 Contrairement à CP et CE1, CE2 a une structure de triplets homogène (comme CP) et couvre déjà les deux matières prioritaires. **Les 24 PDF CE2 (4 compétences français, 4 compétences mathématiques, triplet leçon/exercices/évaluation) ont été audités intégralement dans ce lot — 24/24, aucun report.**
@@ -279,4 +343,6 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 9. ~~Lot CE1 français : auditer intégralement les 3 évaluations et un échantillon de tapuscrits.~~ Fait le 9 septembre 2026 : 3/3 évaluations et 7/25 tapuscrits audités intégralement (10/28 PDF CE1 au total). Aucune erreur trouvée dans ce sous-lot. **Reste ouvert** : 18 tapuscrits CE1 non encore audités individuellement (liste : Aventure-Estivale, Becs, Belle-Disparu, Chasse-Tresor, Eric-Porc-Epic, Experiences-Meteo-Anna, Griffes, Ikru-Premier-Jour, Jouet-Perdu, Mangouste-Grenouille, Nettoyage-Plage, Plantes-Partout, Plastique-Chic, Poisson-Nager, Poochi-Amis, Rentree-Reve, Tresors-Sam, Trier-Recycler) — à reprendre en priorité au prochain lot CE1, sans refaire les 10 déjà validés.
 10. ~~Constater l'absence de PDF mathématiques CE1.~~ Fait le 9 septembre 2026 : confirmé, `public/fiches/ce1/mathematiques` n'existe pas. Décision de création à prendre séparément (pas engagée dans ce lot, cf. mission : ne créer qu'après vérification qu'une compétence officielle existe et n'est pas déjà couverte).
 11. ~~Avancer sur CE2 (français ET mathématiques).~~ Fait le 9 septembre 2026 : 24/24 PDF CE2 audités intégralement (4 compétences français + 4 compétences mathématiques). 1 défaut cosmétique trouvé et corrigé (titre dupliqué). Zéro erreur de calcul sur l'ensemble des exercices de mathématiques recomptés à la main. CE2 est maintenant le niveau le plus complètement audité après CP.
-12. **Prochain lot recommandé** : au choix — (a) finir les 18 tapuscrits CE1 restants (liste au point 9) ; (b) CM1 (126 PDF, le plus gros corpus primaire après CM2, à explorer par domaine) ; (c) recherche transversale QLM/sciences/EMC pour CE1/CE2 sur le même modèle que le point 4 pour CP, avant de conclure à une absence pour ces niveaux. Les trois sont légitimes et non redondants.
+12. ~~Finir les 18 tapuscrits CE1 restants.~~ Fait le 9 septembre 2026 : **CE1 clos, 28/28 PDF audités intégralement** (voir section dédiée « CE1 — niveau clos » ci-dessus). 2 erreurs trouvées et corrigées (fait scientifique sur le toucan, accord grammatical). Couverture réelle par matière documentée : français lecture-compréhension solide, mathématiques absentes à 100 %, QLM quasi absente, EMC absente.
+13. **Prochain lot : CM1** (126 PDF, le plus gros corpus primaire après CM2). Ordre : inventaire complet → cartographie programme → audit par matière (français puis mathématiques puis histoire-géo puis sciences puis EMC) → corrections → amélioration des C/D/E → rendu visuel page par page → QA → commits par lots.
+14. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
