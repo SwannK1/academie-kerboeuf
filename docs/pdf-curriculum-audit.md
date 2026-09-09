@@ -8,7 +8,12 @@ Ce document est le journal de reprise du chantier. Une ressource n'est comptée 
 
 Ce fichier a été recréé à l'identique depuis la version lue en tête de branche `chantier/v1-polish` (HEAD `da9dea5a`) sur le checkout original synchronisé iCloud, car l'accès Git à ce checkout (log, branch -vv, fetch) est devenu bloquant (attente I/O de plusieurs minutes, cause probable : synchronisation iCloud Drive de `~/Desktop`). Le travail se poursuit depuis un clone local hors iCloud (`~/dev/academie-kerboeuf`, branche `chantier/v1-polish-local`, basée sur `origin/main`).
 
-Deux commits du checkout original (`b7ef056e refactor(product): clarify teacher-first positioning`, `a340d16d fix(availability): derive collège/lycée status from the real PDF catalog`) n'ont pas encore pu être rapatriés dans ce clone (le `git fetch` déclenche le même blocage). Ils restent intacts sur le checkout original — rien n'a été perdu — mais ne sont pas encore reflétés ici. À rapatrier dès que l'accès Git au volume iCloud redevient réactif (`git fetch <chemin-icloud> chantier/v1-polish`), ou en poussant `chantier/v1-polish` vers `origin` pour fiabiliser l'accès.
+**Mise à jour** : le checkout iCloud est redevenu réactif environ 20 minutes plus tard. Les deux commits de code non poussés ont pu être inspectés directement (`git show`, en ciblant les fichiers précis pour éviter un sous-arbre `public/` resté partiellement illisible) :
+
+- `b7ef056e refactor(product): clarify teacher-first positioning` (metadata SEO de la home + `DEFAULT_SITE_DESCRIPTION`) — **déjà présent à l'identique sur `origin/main`**, vraisemblablement fusionné via une autre branche entre-temps.
+- `a340d16d fix(availability): derive collège/lycée status from the real PDF catalog` (`hasRealSecondaryCatalogContent` dans `content/site-availability.ts`) — **également déjà présent à l'identique sur `origin/main`**, même constat.
+
+Conclusion : aucun contenu de code n'est réellement perdu ni à rapatrier. Le dépôt a une telle activité parallèle (150+ branches distantes recensées) que ces deux correctifs ont visiblement déjà été réintégrés par un autre chemin. Seuls les 3 commits de documentation (`docs(curriculum): ...`) étaient uniques à `chantier/v1-polish` et sont maintenant repris dans ce fichier et les deux nouveaux documents associés.
 
 ## Périmètre et protections
 
@@ -209,5 +214,5 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 4. ~~Rechercher transversalement les ressources CP QLM/sciences/EMC avant de conclure à une absence.~~ Fait le 9 septembre 2026 (voir section dédiée ci-dessus) : absence confirmée, cause identifiée (curriculum map CP sous-développé sur QLM/EMC, pas seulement absence de PDF).
 5. Étoffer `content/levels/cp-competencies.ts` sur QLM et EMC à partir des textes officiels avant toute création de PDF sur ces domaines.
 6. Corriger uniquement après compréhension complète des triplets concernés.
-7. Rapatrier les 2 commits non poussés de `chantier/v1-polish` (`b7ef056e`, `a340d16d`) dans le clone de travail dès que l'accès Git au volume iCloud redevient fiable.
+7. ~~Rapatrier les 2 commits non poussés de `chantier/v1-polish` (`b7ef056e`, `a340d16d`) dans le clone de travail dès que l'accès Git au volume iCloud redevient fiable.~~ Fait le 9 septembre 2026 : les deux commits ont été inspectés directement sur le checkout redevenu réactif — leur contenu est déjà présent à l'identique sur `origin/main` via une autre branche. Rien à rapatrier.
 8. Ajouter CM2 à `primaryCompetencyLevels` (ou au système équivalent) pour que le niveau pilote dispose d'une page compétence — voir `docs/parcours-signature-audit.md`.
