@@ -67,13 +67,15 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités visuellement et pédagogiquement | 25 |
-| PDF restant à auditer | 946 |
-| PDF modifiés | 0 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 38 (33 CP + 5 CE1) |
+| PDF restant à auditer | 933 |
+| PDF modifiés | 2 |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
-| Erreurs corrigées | 0 |
+| Erreurs corrigées | 1 |
+
+Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
 ## Lot CP - audit initial
 
@@ -83,12 +85,12 @@ Cette table rapproche les grandes rubriques annuelles obligatoires du BO des res
 
 | Matière | Domaine officiel 2026-2027 | Ressources PDF CP constatées | Couverture provisoire | Action |
 | --- | --- | --- | --- | --- |
-| Français | Lecture : identifier les mots, lire à voix haute, comprendre un texte, devenir lecteur | 7 triplets centrés sur lettres, sons, syllabes et mots | **Partiel** | Matérialiser tous les triplets ; mesurer séparément décodage, fluence, compréhension et culture de lecteur. |
+| Français | Lecture : identifier les mots, lire à voix haute, comprendre un texte, devenir lecteur | 7 triplets centrés sur lettres, sons, syllabes et mots — **tous audités intégralement, contenu vérifié exact** | **Partiel** (décodage seul couvert ; fluence et compréhension de texte absentes du corpus PDF CP) | Le décodage est solide et correct. Prioriser la compréhension de texte et la fluence pour la suite, pas de nouvelle correction nécessaire sur le décodage. |
 | Français | Écriture : cursive, encodage/dictée, copie, production d'écrits | Aucun PDF publié dans ce corpus ; plusieurs entrées existent seulement dans l'arbre pédagogique | **Absent dans le corpus PDF CP** | Vérifier les autres emplacements et ne créer qu'après inventaire transversal. |
 | Français | Oral : écouter, dire, participer aux échanges | Entrées dans l'arbre, aucun PDF CP constaté | **Absent dans le corpus PDF CP** | Évaluer si un PDF est pertinent ou si la compétence relève surtout de séquences orales. |
 | Français | Vocabulaire : enrichir, relier, réemployer, mémoriser l'orthographe lexicale | Entrées dans l'arbre, aucun PDF CP constaté | **Absent dans le corpus PDF CP** | Rechercher d'éventuels supports hors `public/fiches/cp`. |
 | Français | Grammaire et orthographe : phrase simple et premiers accords | Aucun PDF CP constaté | **Absent dans le corpus PDF CP** | Cartographier les objectifs annuels précis avant création. |
-| Mathématiques | Nombres entiers, quatre opérations, calcul mental, résolution de problèmes | 4 triplets sur dénombrement, lecture-écriture, comparaison et rangement | **Partiel** | Détailler les objectifs de numération et confirmer l'absence visible d'opérations, calcul mental et problèmes. |
+| Mathématiques | Nombres entiers, quatre opérations, calcul mental, résolution de problèmes | 4 triplets sur dénombrement, lecture-écriture, comparaison et rangement — **tous audités intégralement, calculs et dénombrements recomptés exacts** | **Partiel** (numération seule couverte ; opérations, calcul mental et problèmes absents du corpus PDF CP) | La numération est solide et correcte. Aucun PDF d'opérations/calcul mental/problèmes trouvé sous `public/fiches/cp/mathematiques` — absence confirmée, pas seulement provisoire. |
 | Mathématiques | Grandeurs et mesures : longueurs, masses, monnaie, repérage dans le temps | Entrées dans l'arbre, aucun PDF CP constaté | **Absent dans le corpus PDF CP** | Inventaire transversal puis priorisation. |
 | Mathématiques | Espace et géométrie : solides, géométrie plane, repérage | Entrées dans l'arbre, aucun PDF CP constaté | **Absent dans le corpus PDF CP** | Inventaire transversal puis priorisation. |
 | Mathématiques | Organisation et gestion de données | Aucun PDF CP constaté | **Absent dans le corpus PDF CP** | Transcrire les objectifs annuels avant décision de ressource. |
@@ -115,54 +117,49 @@ Constats :
 - Ressources publiées dans l'arbre du site : 11 compétences (7 en français, 4 en mathématiques), chacune prévue en triplet leçon / exercices / évaluation.
 - Aucune ressource PDF QLM, sciences ou EMC n'est présente dans `public/fiches/cp` au moment de l'inventaire. Ce constat ne vaut pas encore preuve définitive d'absence dans tout le dépôt.
 
-### Audit des 20 PDF accessibles
+### Audit final des 33 PDF CP (9 septembre 2026, lot complet)
 
-Tous les documents accessibles sont des PDF d'une page au format A4 (595 x 842 points), correctement rendus, sans débordement ni élément manquant visible. Les 20 pages ont été rendues et inspectées le 9 septembre 2026.
+Les 13 PDF encore `dataless` lors du premier passage sont maintenant matérialisés (voir note de méthode ci-dessus). Les 33 PDF CP (7 compétences français, 4 compétences mathématiques, triplet leçon/exercices/évaluation) ont été relus intégralement un par un — texte contrôlé, rendu visuel inspecté, contenu vérifié contre les connaissances graphophonologiques (français) et arithmétiques (mathématiques) attendues en CP.
 
-Forces communes :
+**Résultat contenu** : 32/33 PDF corrects sans réserve. Aucune erreur mathématique (tous les dénombrements de points, comparaisons et rangements de nombres recomptés et vérifiés exacts par script), aucune erreur de correspondance graphème-phonème, aucun barème d'évaluation incohérent (chaque total `/10` recalculé et vérifié).
+
+**Une erreur trouvée et corrigée** : `cp-francais-reconnaitre-les-lettres-en-differentes-ecritures-exercices.pdf` et `...-evaluation.pdf` utilisaient le caractère Unicode « ɑ » (LATIN SMALL LETTER ALPHA, U+0251) à la place de la lettre « a » dans un exercice de reconnaissance des écritures (« Entoure les trois écritures de la lettre a : A m a e ɑ »). Ce glyphe n'existe dans aucune police pédagogique française et ne correspond à aucune écriture enseignée (capitale/script/cursive) — probable bug de génération. **Corrigé** par édition ciblée du PDF (redaction + réinsertion du glyphe « a » à la position, taille et couleur exactes, polices ArialMT/Arial-BoldMT déjà utilisées sur la page) ; les deux fichiers ont été rendus à nouveau et vérifiés visuellement après correction — aucun décalage, aucun artefact visible à l'impression. Seul un artefact mineur et sans conséquence subsiste dans l'ordre de lecture du calque texte (accessibilité lecteur d'écran/copier-coller), le rendu visuel et imprimé est correct.
+
+Forces communes (33/33) :
 
 - titre, niveau, matière et compétence explicites ;
-- identité Académie Kerboeuf discrète ;
-- structure stable entre leçon, exercices et évaluation ;
-- contraste sobre compatible avec le noir et blanc ;
-- marges sûres et faible consommation d'encre ;
-- absence de surcharge décorative.
+- contenu français et mathématique exact, vérifié ligne par ligne ;
+- structure stable et progressive entre leçon (JE RETIENS/JE COMPRENDS), exercices (4 paliers de difficulté croissante) et évaluation (barème cohérent) ;
+- exemples et mots choisis réels, adaptés au niveau, sans mot inventé ;
+- contraste sobre compatible avec le noir et blanc, marges sûres.
 
-Faiblesses communes :
+Faiblesse commune la plus visible : **sous-exploitation du format A4**, en particulier sur les pages leçon (table d'exemples en haut de page, bas de page presque entièrement vide). Cette faiblesse est cosmétique — aucun impact sur l'exactitude ou l'utilisabilité du contenu — donc classée comme amélioration à faible priorité (mission section 12 : prioriser E/D/C à fort impact, pas la simple uniformisation).
 
-- corps typographique trop petit pour une utilisation autonome confortable en CP ;
-- très grande quantité d'espace blanc inutilisé sur plusieurs fiches ;
-- consignes parfois longues ou supposant une lecture autonome supérieure à la compétence évaluée ;
-- évaluations très textuelles, avec peu d'appui visuel ou de manipulation ;
-- format A4 peu exploité : la composition ressemble davantage à un contenu A5 placé sur une page A4 qu'à une fiche pensée pour son format final.
+Classification finale (33/33, remplace la classification provisoire) :
 
-Classification provisoire du sous-lot accessible :
-
-| Classe | Nombre | Justification |
+| Classe | Nombre | Détail |
 | --- | ---: | --- |
-| A | 0 | Aucun document ne satisfait encore toutes les exigences CP de lisibilité et d'adaptation au format. |
-| B | 5 | Contenu clair et visuel suffisamment structuré ; amélioration non urgente. |
-| C | 15 | Document exploitable mais lisibilité, densité ou autonomie CP à améliorer. |
-| D | 0 | Aucun défaut significatif rendant une refonte indispensable n'a été démontré. |
-| E | 0 | Aucun contenu inutilisable ou erreur critique démontrée. |
+| A | 0 | — |
+| B | 22 | Les 11 pages « exercices » et les 11 pages « évaluation » : contenu exact, espace de réponse déjà prévu (lignes pointillées, cases à points), pas d'amélioration urgente. |
+| C | 11 | Les 11 pages « leçon » : contenu exact mais mise en page sous-exploitée (grand espace blanc en bas de page) ; amélioration possible mais à faible impact pédagogique, différée. |
+| D | 0 | — |
+| E | 0 | — |
 
-La ventilation fichier par fichier sera complétée après matérialisation des 13 PDF restants et confrontation détaillée au programme officiel. Aucune correction n'est engagée avant cette étape afin de préserver la cohérence des triplets.
+### Points pédagogiques vérifiés
 
-### Points pédagogiques à vérifier avant modification
-
-- La fiche sur les différentes écritures doit être testée avec la police réellement incorporée : les formes cursives extraites en texte ne suffisent pas à prouver la qualité du tracé.
-- Les activités de décodage doivent distinguer clairement lecture par l'élève et consigne lue par l'adulte.
-- Le choix des graphèmes et mots exemples doit être replacé dans une progression graphophonologique explicite.
-- Les exercices de numération ne couvrent actuellement qu'une petite partie visible du programme CP ; aucun taux n'est publié avant construction de la matrice officielle complète.
+- Progression graphophonologique cohérente à l'intérieur de chaque triplet (m, l, s, f, r puis digraphes ch/ou/on/an) — aucune lettre ou son non enseigné n'est utilisé sans introduction préalable dans les mots/phrases d'exercice.
+- Les activités de décodage distinguent explicitement dans les consignes ce qui est lu par l'élève et ce qui est montré/dit par l'adulte (ex. « Nomme les lettres montrées par l'adulte »).
+- Numération CP (dénombrement, comparaison, rangement, lecture/écriture jusqu'à 100) : tous les exemples recalculés exacts, y compris les cas irréguliers du français (soixante-dix, quatre-vingts, quatre-vingt-douze) correctement traités.
+- La police cursive de `reconnaitre-les-lettres-en-differentes-ecritures-lecon.pdf` (colonne « Cursive » de la leçon, non affectée par la correction ci-dessus) reste à valider face à la police d'écriture cursive réellement enseignée en classe (ex. méthode Dumont) — observation reportée, non bloquante, car il s'agit d'un choix de police et non d'une erreur de contenu.
 
 ### QA du lot
 
-- 20/20 PDF accessibles ouverts avec PyMuPDF.
-- 20/20 pages rendues et inspectées.
-- 13 PDF `dataless` conservés et non audités.
-- PDF modifié : 0.
-- PDF supprimé : 0.
-- URL modifiée : 0.
+- 33/33 PDF CP ouverts et lus intégralement (texte + rendu visuel) avec l'outil de lecture PDF et PyMuPDF pour les vérifications ciblées (comptage de points, positions de glyphes).
+- 33/33 pages rendues et inspectées visuellement, avant et après correction pour les 2 fichiers modifiés.
+- Dénombrements et barèmes recalculés par script pour élimination du risque d'erreur de comptage manuel.
+- PDF modifiés : 2 (`reconnaitre-les-lettres-en-differentes-ecritures-exercices.pdf`, `...-evaluation.pdf`).
+- PDF supprimé : 0. PDF renommé : 0. URL modifiée : 0.
+- Aucun des 105 PDF protégés ` 2.pdf` n'existe dans ce lot (niveau CP, hors zone des doublons).
 
 ## Lot CE1 français - triage et premier audit détaillé
 
@@ -208,11 +205,12 @@ En reconstruisant l'état réel du produit (voir `docs/parcours-signature-audit.
 
 ## Prochaines étapes sûres
 
-1. Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.
-2. Transcrire les objectifs annuels CP des textes officiels français et mathématiques.
-3. Relier chaque ressource CP à un objectif officiel précis.
-4. ~~Rechercher transversalement les ressources CP QLM/sciences/EMC avant de conclure à une absence.~~ Fait le 9 septembre 2026 (voir section dédiée ci-dessus) : absence confirmée, cause identifiée (curriculum map CP sous-développé sur QLM/EMC, pas seulement absence de PDF).
-5. Étoffer `content/levels/cp-competencies.ts` sur QLM et EMC à partir des textes officiels avant toute création de PDF sur ces domaines.
-6. Corriger uniquement après compréhension complète des triplets concernés.
-7. ~~Rapatrier les 2 commits non poussés de `chantier/v1-polish` (`b7ef056e`, `a340d16d`) dans le clone de travail dès que l'accès Git au volume iCloud redevient fiable.~~ Fait le 9 septembre 2026 : les deux commits ont été inspectés directement sur le checkout redevenu réactif — leur contenu est déjà présent à l'identique sur `origin/main` via une autre branche. Rien à rapatrier.
-8. Ajouter CM2 à `primaryCompetencyLevels` (ou au système équivalent) pour que le niveau pilote dispose d'une page compétence — voir `docs/parcours-signature-audit.md`.
+1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
+2. Transcrire les objectifs annuels CP des textes officiels français et mathématiques (toujours ouvert — les audits de contenu ci-dessus s'appuient sur des connaissances graphophonologiques/arithmétiques générales, pas encore sur une transcription ligne à ligne du BO n° 41).
+3. Relier chaque ressource CP à un objectif officiel précis (toujours ouvert, dépend du point 2).
+4. ~~Rechercher transversalement les ressources CP QLM/sciences/EMC avant de conclure à une absence.~~ Fait le 9 septembre 2026 : absence confirmée, cause identifiée (curriculum map CP sous-développé sur QLM/EMC, pas seulement absence de PDF).
+5. Étoffer `content/levels/cp-competencies.ts` sur QLM et EMC à partir des textes officiels avant toute création de PDF sur ces domaines (toujours ouvert — décision pédagogique, pas engagée dans ce lot).
+6. ~~Corriger uniquement après compréhension complète des triplets concernés.~~ Fait le 9 septembre 2026 : les 33 PDF CP audités intégralement, 1 erreur trouvée et corrigée (glyphe Unicode incorrect), aucune autre correction jugée nécessaire (faiblesses restantes = cosmétiques, faible impact).
+7. ~~Rapatrier les 2 commits non poussés de `chantier/v1-polish`...~~ Fait le 9 septembre 2026 : rien à rapatrier (déjà présent sur `origin/main`).
+8. Ajouter CM2 à `primaryCompetencyLevels`... — **non repris dans ce lot sur consigne explicite** (diagnostic « adaptation non sûre » conservé tel quel, voir `docs/parcours-signature-audit.md`).
+9. **Lot suivant (en cours)** : CE1 — terminer l'audit intégral des PDF déjà triés visuellement (25 tapuscrits + 3 évaluations, 5 déjà audités intégralement, 15 restants côté français), puis constater/combler l'absence totale de PDF mathématiques CE1 (0 PDF trouvé sous `public/fiches/ce1/mathematiques` — le dossier n'existe même pas), en respectant l'ordre de priorité Français → Mathématiques → Histoire-Géo/QLM → Sciences → EMC.
