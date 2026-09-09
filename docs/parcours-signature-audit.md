@@ -2,6 +2,14 @@
 
 Dernière mise à jour : 9 septembre 2026.
 
+## Statut (mise à jour du 9 septembre 2026, plus tard dans la journée)
+
+**Implémenté pour CP, CE1, CE2, CM1** (commit `fc8d9a6`, branche `chantier/v1-polish-local`) : `CompetencyCard` affiche désormais un CTA « Préparer cette compétence → » (masqué si la compétence est « à venir », conformément au principe « ne jamais tomber sur du vide ») qui ouvre `preparer-une-seance` avec une séance pré-remplie (titre, niveau, matière, domaine, objectif). `TeacherLessonPreparationClient` consomme ces paramètres une seule fois à l'arrivée puis nettoie l'URL pour qu'un rechargement ne duplique pas la séance. Testé bout en bout au navigateur (voir section « Vérification » en fin de document) ; `lint`, `tsc --noEmit` et `build` passent.
+
+**Reste ouvert : CM2.** Le niveau pilote n'a toujours pas de page compétence (modèle de données différent — voir point 1 des constats ci-dessous, inchangé). « Ajouter à ma semaine » au sens strict (action sur une ressource, pas seulement sur une séance déjà préparée) reste aussi à l'état de « Ajouter au cahier journal » existant, ce qui couvre l'usage principal mais pas exactement la formulation de la mission — jugé suffisant pour l'instant, à revisiter si un enseignant testeur signale un manque.
+
+Le reste de ce document est conservé tel qu'écrit avant l'implémentation, pour traçabilité.
+
 ## Pourquoi ce document
 
 La mission produit d'Académie Kerboeuf définit deux fonctions signature (P0) :
@@ -46,4 +54,12 @@ Avant toute implémentation, cette recommandation est volontairement limitée à
 4. Ajouter une action « Ajouter à ma semaine » qui écrit dans le stockage local déjà utilisé par les outils de planification (`content/teacher-programmation.ts` / `content/teacher-class-organization.ts` — structure exacte à confirmer avant implémentation).
 5. Valider avec le persona 1 (mission section 43) : chronométrer le parcours compétence → séance préparée → ajout à la semaine, cible < 3 minutes.
 
-Ce plan n'a pas été implémenté ce jour faute de temps de lecture suffisant du composant existant ; il est documenté ici pour reprise immédiate lors de la prochaine session, conformément au principe de continuité de la mission (« ne pas s'arrêter après un rapport intermédiaire »).
+Ce plan n'a pas été implémenté au moment de sa rédaction faute de temps de lecture suffisant du composant existant ; les points 2 et 3 ont depuis été réalisés (voir statut en tête de document). Le point 1 (CM2) et le point 4 tel que formulé (action « Ajouter à ma semaine » indépendante d'une séance déjà préparée) restent ouverts.
+
+## Vérification (9 septembre 2026)
+
+- `rm -rf .next && npm run lint && npx tsc --noEmit && npm run build` : tous clean.
+- Test navigateur (serveur de dev local) : `/primaire/ce1/competences` → clic sur « Préparer cette compétence → » sur « Reconnaître une phrase » → atterrissage direct sur `/enseignants/preparer-une-seance` en vue édition, avec Titre/Niveau/Matière/Domaine/Objectif tous pré-remplis correctement, URL nettoyée des paramètres de requête.
+- Test anti-duplication : navigation directe vers l'URL avec paramètres, puis rechargement de l'URL nettoyée obtenue → une seule séance créée, pas de doublon.
+- « Ajouter au cahier journal » depuis une séance pré-remplie : modale s'ouvre correctement (semaine/jour/créneau) ; non poussé jusqu'à la confirmation finale pour éviter un `window.confirm` bloquant pendant les tests automatisés, mais le comportement pré-existant n'a pas été modifié par ce changement.
+- CTA absent (comme voulu) sur les compétences au statut « À venir » : vérifié visuellement sur la page CE1.
