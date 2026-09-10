@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 106 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 21 CM1 : domaine écriture clos, 7/25 compétences français) |
-| PDF restant à auditer | 865 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 124 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 39 CM1 : écriture + étude de la langue clos, 13/25 compétences français) |
+| PDF restant à auditer | 847 |
 | PDF modifiés | 11 (5 corrections d'erreurs + 6 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -393,6 +393,14 @@ Méthode technique : édition ciblée de chaque PDF (redaction + réinsertion du
 Les 3 compétences restantes du domaine écriture ont été auditées intégralement : `rediger-reviser` (« Relire pour améliorer la clarté » — repérer une maladresse ponctuelle et la corriger), `rediger-reviser-grille` (« Réviser un texte avec une grille » — application méthodique de 5 critères), `rediger-texte-structure` (« Produire un texte structuré » — début/développement/fin). Vérification spécifique que `rediger-reviser` et `rediger-reviser-grille` ne forment pas un nouveau doublon malgré leur proximité de nom : **confirmé distinctes** (l'une cible un défaut précis à corriger, l'autre applique une grille de critères multiples ; textes supports, méthodes et exercices différents). Aucune erreur trouvée dans ces 9 PDF ; les trois évaluations recalculées sont exactes (2+2+4+2=10 chacune). Aucun PDF modifié dans ce sous-lot.
 
 **Domaine écriture CM1 entièrement audité : 7/7 compétences, 21/21 PDF**, dont 6 différenciés sur décision explicite (voir ci-dessus). Aucune compétence du domaine écriture manquante par rapport au catalogue (`content/levels/cm1-competencies.ts`, domaine `ecriture` : 7 entrées, toutes couvertes par un triplet PDF).
+
+### Domaine étude de la langue CM1 — clos (9 septembre 2026) : 6/6 compétences, 18 PDF
+
+Grammaire (4) : `grammaire-sujet-verbe` (identifier sujet/verbe, y compris sujet inversé), `grammaire-accord-sujet-verbe` (accord à distance avec noyau du sujet, groupes nominaux enrichis), `grammaire-complements` (compléments essentiels vs facultatifs), `grammaire-fonctions-phrase` (synthèse sujet/verbe/complément du verbe/complément de phrase). Orthographe (2) : `orthographe-groupe-nominal` (accord déterminant-nom-adjectif), `orthographe-homophones` (a/à, et/est, son/sont par manipulation).
+
+**Vérification spécifique de doublon** : `grammaire-sujet-verbe` et `grammaire-accord-sujet-verbe` ont des noms très proches. Après lecture intégrale des deux : **confirmées distinctes**, sans ambiguïté cette fois (contrairement au cas écriture précédent) — la première enseigne l'identification de base (y compris sujet inversé), la seconde l'accord à distance avec un groupe nominal enrichi entre le sujet et le verbe (piège du nom le plus proche) ; supports, méthodes et exercices entièrement différents dans les deux cas. `grammaire-fonctions-phrase` chevauche partiellement `grammaire-sujet-verbe` et `grammaire-complements` mais de façon légitime : c'est une compétence de synthèse qui réinvestit les deux précédentes plutôt qu'un doublon (progression partie → tout normale dans une programmation).
+
+Tous les exemples grammaticaux vérifiés exacts (accords sujet-verbe, accords dans le groupe nominal y compris cas irréguliers comme « renard/renarde », tests de substitution des homophones a/à, et/est, son/sont — les 3 tests correspondent à l'enseignement standard du français). Les phrases supports contenant des erreurs volontaires (ex. « Mes deux amis arrive enfin » à corriger par l'élève) sont bien intentionnelles et cohérentes avec la consigne, pas des erreurs de fiche. Les 6 barèmes `/10` recalculés sont tous exacts. **Aucune erreur trouvée, aucun PDF modifié dans ce sous-lot.**
 
 ## Prochaines étapes sûres
 
