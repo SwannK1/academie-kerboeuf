@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 97 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 12 CM1 en cours) |
-| PDF restant à auditer | 874 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 106 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 21 CM1 : domaine écriture clos, 7/25 compétences français) |
+| PDF restant à auditer | 865 |
 | PDF modifiés | 11 (5 corrections d'erreurs + 6 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -387,7 +387,12 @@ Méthode technique : édition ciblée de chaque PDF (redaction + réinsertion du
 - Barèmes recalculés sur les 2 évaluations modifiées : 2+2+3+3=10 (`rediger-idee-raison-exemple`) et 2+3+3+2=10 (`rediger-paragraphe-argumente`), tous deux corrects après correction de l'incident décrit ci-dessus.
 - Recherche de texte résiduel de l'ancien titre commun (« Écrire un paragraphe argumenté court ») sur les 6 fichiers : aucune occurrence restante.
 - Aucune suppression, aucun renommage de fichier, aucun changement de route ou de slug.
-- Aucune suppression, aucun renommage.
+
+### Domaine écriture CM1 — clos (9 septembre 2026) : 7/7 compétences, 21 PDF
+
+Les 3 compétences restantes du domaine écriture ont été auditées intégralement : `rediger-reviser` (« Relire pour améliorer la clarté » — repérer une maladresse ponctuelle et la corriger), `rediger-reviser-grille` (« Réviser un texte avec une grille » — application méthodique de 5 critères), `rediger-texte-structure` (« Produire un texte structuré » — début/développement/fin). Vérification spécifique que `rediger-reviser` et `rediger-reviser-grille` ne forment pas un nouveau doublon malgré leur proximité de nom : **confirmé distinctes** (l'une cible un défaut précis à corriger, l'autre applique une grille de critères multiples ; textes supports, méthodes et exercices différents). Aucune erreur trouvée dans ces 9 PDF ; les trois évaluations recalculées sont exactes (2+2+4+2=10 chacune). Aucun PDF modifié dans ce sous-lot.
+
+**Domaine écriture CM1 entièrement audité : 7/7 compétences, 21/21 PDF**, dont 6 différenciés sur décision explicite (voir ci-dessus). Aucune compétence du domaine écriture manquante par rapport au catalogue (`content/levels/cm1-competencies.ts`, domaine `ecriture` : 7 entrées, toutes couvertes par un triplet PDF).
 
 ## Prochaines étapes sûres
 
