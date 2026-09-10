@@ -69,7 +69,7 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 | --- | ---: |
 | PDF audités intégralement (toutes pages, contenu contrôlé) | 97 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 12 CM1 en cours) |
 | PDF restant à auditer | 874 |
-| PDF modifiés | 5 |
+| PDF modifiés | 11 (5 corrections d'erreurs + 6 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
@@ -354,13 +354,39 @@ Compétences auditées : adapter son écrit au destinataire, planifier son écri
 - objectifs formulés différemment mais fonctionnellement identiques (« donner une idée, une raison et un exemple » vs « rédiger un paragraphe court qui énonce une idée et l'appuie par un exemple ou une raison ») ;
 - exercices structurellement identiques (mêmes 4 paliers : formuler un avis → choisir une raison → ajouter un exemple → rédiger un paragraphe complet), seul le sujet contextuel change (l'ombre dans la cour / un coin lecture dans la cour).
 
-Cela représente 6 PDF (2 compétences × 3) qui enseignent et évaluent la même compétence sous deux étiquettes différentes du catalogue. **Ce n'est pas corrigé dans ce lot** : fusionner ou différencier deux compétences touche le curriculum map, les routes et potentiellement des liens existants — une décision d'architecture de contenu, pas une simple faute de PDF, qui mérite un avis avant modification (cf. mission : signaler plutôt que trancher seul une décision pédagogique/structurelle significative). Recommandation pour la suite : soit fusionner les deux fiches en une seule compétence plus riche, soit clarifier nettement leur différence (par exemple l'une centrée sur la structure du paragraphe, l'autre sur la justification), soit vérifier s'il s'agit d'un vestige du nettoyage déjà entamé ailleurs dans le dépôt (commit historique « refactor(primary): remove duplicate competency inventories »).
+Cela représentait 6 PDF (2 compétences × 3) qui enseignaient et évaluaient la même compétence sous deux étiquettes différentes du catalogue.
+
+### Doublon résolu par différenciation pédagogique (9 septembre 2026, décision explicite)
+
+**Décision reçue : ne pas fusionner ni supprimer. Différencier nettement les deux compétences.** Les 6 PDF ont été modifiés en conséquence, sans toucher au curriculum map, aux routes ni aux slugs (uniquement le contenu visible des fiches) :
+
+| | `rediger-idee-raison-exemple` (avant) | `rediger-idee-raison-exemple` (après) |
+| --- | --- | --- |
+| Titre | « Écrire un paragraphe argumenté court » | **« Structurer une idée, une raison, un exemple »** |
+| En-tête de domaine | ÉCRITURE - RÉDIGER | **ÉCRITURE - STRUCTURER SON ARGUMENT** |
+| Objectif | Donner une idée, une raison et un exemple | Reconnaître et **compléter** la structure idée → raison → exemple (guidé) |
+| Nature des exercices | Production libre à 4 paliers | **Reconnaissance, remise en ordre, texte à trous, puis courte production guidée** |
+
+| | `rediger-paragraphe-argumente` (avant) | `rediger-paragraphe-argumente` (après) |
+| --- | --- | --- |
+| Titre | « Écrire un paragraphe argumenté court » | **« Rédiger un paragraphe argumenté avec des connecteurs »** |
+| En-tête de domaine | ÉCRITURE - RÉDIGER (inchangé, volontairement — signale le niveau « production ») | ÉCRITURE - RÉDIGER |
+| Objectif | Rédiger un paragraphe court avec idée + exemple ou raison | Rédiger un **paragraphe cohérent de plusieurs phrases**, avec **connecteurs**, en réinvestissant la structure de la fiche précédente |
+| Nature des exercices | Production libre à 4 paliers, structure identique à l'autre fiche | **Repérer des connecteurs dans un modèle, produire des phrases reliées, rédiger un paragraphe complet avec objection (palier défi)** |
+
+La fiche « Prérequis » de `rediger-paragraphe-argumente` renvoie désormais explicitement à `rediger-idee-raison-exemple` (« Connaître la structure idée → raison → exemple »), rendant la progression entre les deux compétences explicite pour l'enseignant.
+
+Méthode technique : édition ciblée de chaque PDF (redaction + réinsertion du texte à la position, taille, police et couleur d'origine — même technique que les corrections précédentes), sans toucher aux cadres, couleurs de fond ni éléments graphiques. Chaque fichier rendu et inspecté visuellement après modification ; deux incidents mineurs détectés et corrigés en cours de travail avant validation finale :
+- un fragment de texte résiduel (« o » isolé) laissé par une redaction trop étroite sur une case à cocher — corrigé par une redaction élargie et réinsertion propre ;
+- un barème d'évaluation temporairement décalé (11/10 au lieu de 10/10) après qu'une redaction a recouvert par erreur une étiquette de points existante — détecté par recalcul systématique du barème, corrigé avant validation.
 
 ### QA du sous-lot
 
-- 12/12 PDF ouverts et lus intégralement (texte + rendu visuel).
-- Barèmes recalculés (4 évaluations, tous corrects).
-- Aucun PDF modifié dans ce sous-lot (aucune faute de contenu isolée trouvée ; la redondance identifiée est une décision de catalogue, pas une correction de fiche).
+- 12/12 PDF ouverts et lus intégralement (texte + rendu visuel) lors de l'audit initial.
+- 6/6 PDF différenciés relus et inspectés visuellement après modification (page complète + zooms ciblés sur chaque zone éditée).
+- Barèmes recalculés sur les 2 évaluations modifiées : 2+2+3+3=10 (`rediger-idee-raison-exemple`) et 2+3+3+2=10 (`rediger-paragraphe-argumente`), tous deux corrects après correction de l'incident décrit ci-dessus.
+- Recherche de texte résiduel de l'ancien titre commun (« Écrire un paragraphe argumenté court ») sur les 6 fichiers : aucune occurrence restante.
+- Aucune suppression, aucun renommage de fichier, aucun changement de route ou de slug.
 - Aucune suppression, aucun renommage.
 
 ## Prochaines étapes sûres
