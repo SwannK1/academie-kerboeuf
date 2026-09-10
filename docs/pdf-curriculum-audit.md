@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 124 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 39 CM1 : écriture + étude de la langue clos, 13/25 compétences français) |
-| PDF restant à auditer | 847 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 145 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 60 CM1 : écriture, étude de la langue, lecture-récits, lecture-documentaire clos ; 20/25 compétences français) |
+| PDF restant à auditer | 826 (dont 9 PDF `lecture-croiser-sources` non encore ouverts, en attente de décision sur le doublon ci-dessus) |
 | PDF modifiés | 11 (5 corrections d'erreurs + 6 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -401,6 +401,28 @@ Grammaire (4) : `grammaire-sujet-verbe` (identifier sujet/verbe, y compris sujet
 **Vérification spécifique de doublon** : `grammaire-sujet-verbe` et `grammaire-accord-sujet-verbe` ont des noms très proches. Après lecture intégrale des deux : **confirmées distinctes**, sans ambiguïté cette fois (contrairement au cas écriture précédent) — la première enseigne l'identification de base (y compris sujet inversé), la seconde l'accord à distance avec un groupe nominal enrichi entre le sujet et le verbe (piège du nom le plus proche) ; supports, méthodes et exercices entièrement différents dans les deux cas. `grammaire-fonctions-phrase` chevauche partiellement `grammaire-sujet-verbe` et `grammaire-complements` mais de façon légitime : c'est une compétence de synthèse qui réinvestit les deux précédentes plutôt qu'un doublon (progression partie → tout normale dans une programmation).
 
 Tous les exemples grammaticaux vérifiés exacts (accords sujet-verbe, accords dans le groupe nominal y compris cas irréguliers comme « renard/renarde », tests de substitution des homophones a/à, et/est, son/sont — les 3 tests correspondent à l'enseignement standard du français). Les phrases supports contenant des erreurs volontaires (ex. « Mes deux amis arrive enfin » à corriger par l'élève) sont bien intentionnelles et cohérentes avec la consigne, pas des erreurs de fiche. Les 6 barèmes `/10` recalculés sont tous exacts. **Aucune erreur trouvée, aucun PDF modifié dans ce sous-lot.**
+
+### Domaine lecture-récits CM1 — clos (9 septembre 2026) : 3/3 compétences, 9 PDF
+
+`lecture-recits-chronologie` (reconstituer l'ordre des événements), `lecture-recits-inference-simple` (inférer une information implicite à partir d'indices), `lecture-recits-intentions-personnage` (déduire l'intention d'un personnage). Trois compétences bien différenciées (ordre des faits / inférence factuelle générale / psychologie du personnage), aucun chevauchement. Tous les textes supports et corrigés vérifiés cohérents (ex. le « moins probable » de l'évaluation inférence teste explicitement le raisonnement par élimination, pas une simple restitution). Les 3 barèmes `/10` recalculés exacts. Aucune erreur, aucun PDF modifié.
+
+### Domaine lecture-documentaire CM1 — clos (9 septembre 2026) : 4/4 compétences, 12 PDF
+
+`lecture-documentaire-informations` (repérer l'essentiel), `-organisation` (utiliser titres/intertitres/mots-clés pour naviguer), `-deux-documents` (croiser deux sources courtes), `-justifier-preuve` (citer une preuve précise). Quatre compétences bien différenciées par la nature de la tâche (identifier l'essentiel / naviguer dans la structure / croiser deux sources / citer une preuve). **Faits documentaires vérifiés exacts sur des sujets exigeants** : dénombrement volcanique, manchot empereur (plumage + graisse + regroupement contre le froid), castor (hutte, écorces, pattes palmées), hérisson (vie nocturne, défense en boule), martinet (vol prolongé, pattes inadaptées au sol), lynx/renard (masses et longueurs plausibles), loutre (pattes palmées, narines fermables, queue-gouvernail), et surtout le **gypaète barbu** (technique réelle et peu connue consistant à casser les os en les laissant tomber sur des rochers pour en manger la moelle) — fait exact et bien choisi. Les 4 barèmes `/10` recalculés exacts. Aucune erreur, aucun PDF modifié.
+
+### Domaine lecture-croiser-sources CM1 — doublon partiel détecté, en attente de décision (9 septembre 2026)
+
+En commençant l'audit des 3 compétences de ce domaine, un **nouveau doublon apparent** a été détecté, du même type que celui déjà traité en écriture — mais cette fois à l'échelle de 2 compétences sur 3 d'un domaine entier, avec un domaine homonyme existant :
+
+| Compétence `lecture-croiser-sources-*` | Titre affiché | Compétence `lecture-documentaire-*` équivalente | Même titre ? |
+| --- | --- | --- | --- |
+| `deux-documents` | « Lire deux documents pour répondre à une question » | `deux-documents` | **Oui, identique** |
+| `justifier-preuve` | « Justifier une réponse par une preuve » | `justifier-preuve` | **Oui, identique** |
+| `comparer-textes` | « Comparer deux textes » | *(aucune équivalente)* | Non — compétence unique, pas de doublon |
+
+Seules les leçons (3/9 PDF du domaine) ont été lues à ce stade pour établir ce diagnostic ; les exercices et évaluations de `lecture-croiser-sources-*` n'ont pas encore été ouverts, et aucun fichier n'a été modifié. Nuance par rapport au cas écriture : l'en-tête de domaine diffère bien (« LECTURE - CROISER DES SOURCES » vs « LECTURE - TEXTE DOCUMENTAIRE ») et l'objectif de `lecture-croiser-sources-deux-documents` ajoute une nuance réelle (garder la trace de l'origine de chaque information, pas seulement croiser leur contenu) — mais le titre identique et le squelette de méthode très proche rendent la distinction peu visible pour un enseignant qui parcourrait le catalogue.
+
+**Décision nécessaire avant de poursuivre ce domaine** (question ouverte, pas tranchée unilatéralement) : différencier `deux-documents` et `justifier-preuve` comme pour le cas écriture (même méthode : distinguer nettement titre/objectif/nature des exercices) ; ou regrouper `lecture-croiser-sources` et `lecture-documentaire` en un domaine unique évitant la redite ; ou une autre option. `comparer-textes` n'est pas concernée et peut être auditée sans attendre.
 
 ## Prochaines étapes sûres
 
