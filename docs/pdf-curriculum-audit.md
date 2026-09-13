@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 656 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 30 collège 4e : français 3/3 + mathématiques 4/4 + HG-EMC 3/3 closes) |
-| PDF restant à auditer | 210 sur les 866 suivis par Git (4e restant : 27 — sciences-techno 12, anglais 6, arts-plastiques 3, éducation musicale 3, EPS 3 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 668 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 42 collège 4e : français 3/3 + mathématiques 4/4 + HG-EMC 3/3 + sciences-techno 4/4 closes) |
+| PDF restant à auditer | 198 sur les 866 suivis par Git (4e restant : 15 — anglais 6, arts-plastiques 3, éducation musicale 3, EPS 3 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -596,6 +596,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Histoire-Géographie-EMC 4e clos (3/3 compétences, 9/9 PDF)
 
 `emc-liberte` (EMC — tension liberté d'expression/droit à l'image, encore une compétence EMC réelle et bien conçue), `geo-flux` (flux de mondialisation, exemple porte-conteneurs Asie→Europe réaliste), `hist-rupture` (rupture révolutionnaire française 1789-1791, dates et contenu historiquement exacts, nuance sur la persistance des inégalités sociales bien amenée). Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
+
+### Sciences et technologie 4e clos (4/4 compétences, 12/12 PDF)
+
+`svt-heredite` (groupe sanguin héréditaire, cicatrice acquise, taille gène+environnement — génétique exacte, bon garde-fou « sans déterminisme abusif »), `pc-circuit` (ampèremètre en série, voltmètre en dérivation — physique exacte, distinction série/dérivation correctement testée avec l'exemple de la lampe dévissée), `pc-transformation` (réaction vinaigre-bicarbonate, conservation de la masse en système fermé — chimie exacte), `tech-automatise` (chaîne d'information/chaîne d'énergie, algorithme conditionnel). Rigueur scientifique notée à nouveau. Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Collège 5e — démarrage (9 septembre 2026)
 
