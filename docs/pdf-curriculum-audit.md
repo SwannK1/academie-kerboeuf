@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 668 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 42 collège 4e : français 3/3 + mathématiques 4/4 + HG-EMC 3/3 + sciences-techno 4/4 closes) |
-| PDF restant à auditer | 198 sur les 866 suivis par Git (4e restant : 15 — anglais 6, arts-plastiques 3, éducation musicale 3, EPS 3 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 674 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 48 collège 4e : français 3/3 + mathématiques 4/4 + HG-EMC 3/3 + sciences-techno 4/4 + anglais 2/2 closes) |
+| PDF restant à auditer | 192 sur les 866 suivis par Git (4e restant : 9 — arts-plastiques 3, éducation musicale 3, EPS 3 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -600,6 +600,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Sciences et technologie 4e clos (4/4 compétences, 12/12 PDF)
 
 `svt-heredite` (groupe sanguin héréditaire, cicatrice acquise, taille gène+environnement — génétique exacte, bon garde-fou « sans déterminisme abusif »), `pc-circuit` (ampèremètre en série, voltmètre en dérivation — physique exacte, distinction série/dérivation correctement testée avec l'exemple de la lampe dévissée), `pc-transformation` (réaction vinaigre-bicarbonate, conservation de la masse en système fermé — chimie exacte), `tech-automatise` (chaîne d'information/chaîne d'énergie, algorithme conditionnel). Rigueur scientifique notée à nouveau. Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
+
+### Anglais 4e clos (2/2 compétences, 6/6 PDF)
+
+`ce-document` (extraire l'essentiel d'un document authentique, niveau A2+/B1), `eo-opinion` (exprimer et nuancer une opinion à l'oral, sujet des uniformes scolaires). Anglais grammaticalement correct sur les deux fiches. Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Collège 5e — démarrage (9 septembre 2026)
 
