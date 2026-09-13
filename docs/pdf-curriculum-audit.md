@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 683 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + **57 collège 4e — niveau intégralement clos, 8 matières**) |
-| PDF restant à auditer | 183 sur les 866 suivis par Git (3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 698 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 57 collège 4e + 15 collège 3e : **français 5/5 clos**) |
+| PDF restant à auditer | 168 sur les 866 suivis par Git (3e restant : 60 ; seconde : 108). |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
@@ -578,6 +578,16 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 25. ~~Collège 6e (français, mathématiques, histoire-géographie-EMC).~~ Fait le 9 septembre 2026 : **6e intégralement clos, 62 compétences, 186/186 PDF** (français 22/22 = 66 PDF ; mathématiques 28/28 = 84 PDF ; histoire-géographie-EMC 12/12 = 36 PDF, dont 0 compétence EMC — cohérent avec CP→CM2). PDF vectoriels comme CP-CM1 (pas de limite raster). Défauts confirmés en français (écriture : 1 faute de conjugaison ; étude de la langue : 3 écarts objectif/contenu) et en mathématiques (« données de travail » génériques non pertinentes sur les 28 compétences ; support de lecture manquant sur 4 compétences OGD/résolution-problèmes) ; aucun défaut en histoire-géographie-EMC. 0 PDF modifié dans ce lot (corrections groupées non encore engagées). **Prochaine étape : 5e (66 PDF), puis 4e (57), 3e (75), puis seconde (108).**
 26. ~~Collège 5e (français, mathématiques, histoire-géographie-EMC, sciences-technologie, anglais).~~ Fait le 9 septembre 2026 : **5e intégralement clos, 22 compétences, 66/66 PDF.** Niveau le plus propre audité à ce stade : aucune erreur factuelle/scientifique/historique/mathématique/linguistique trouvée. Seul défaut récurrent : un « brouillon à réviser » ou une « suite à comparer » décrits en consigne mais jamais fournis dans le fichier (3 items notés au total, français et anglais). Première compétence EMC réelle de tout le chantier trouvée ici (`5e-hg-emc-solidarite`), correcte et bien conçue. Deux nouvelles matières rencontrées pour la première fois (sciences-technologie, anglais), toutes deux closes sans erreur. **Prochaine étape : 4e (57 PDF).**
 27. ~~Collège 4e (français, mathématiques, histoire-géographie-EMC, sciences-technologie, anglais, arts plastiques, éducation musicale, EPS).~~ Fait le 9 septembre 2026 : **4e intégralement clos, 8 matières, 57/57 PDF.** Aucune erreur factuelle en français/mathématiques/HG-EMC/sciences-technologie/anglais (24 compétences). **Défaut majeur confirmé** dans les 3 nouvelles matières à compétence unique (arts plastiques, éducation musicale, EPS, 9 PDF) : tout le contenu spécifique à la tâche est rédigé en anglais au lieu du français — défaut systémique, sûr à corriger (traduction directe) mais non corrigé dans ce lot (réservé à une correction groupée). Confirmation du motif « inédit »/« original » comme conception intentionnelle du niveau (contenu apporté par l'enseignant), pas un défaut. **Prochaine étape : 3e (75 PDF).**
+
+## Collège 3e — démarrage (9 septembre 2026)
+
+### Inventaire
+
+3e, dernière année du collège, inclut des compétences dédiées à la préparation du Brevet (DNB) dans chaque matière. 75 PDF : français (5×3=15, dont `dnb-methode`), mathématiques (6×3=18, dont `dnb-strategie`), histoire-géographie-EMC (4×3=12, dont `dnb-methode`), sciences-technologie (5×3=15, dont `dnb-dossier`), anglais (5×3=15). Pas de reprise des matières à compétence unique de 4e (arts plastiques, musique, EPS absentes à ce niveau). PDF vectoriels comme 4e/5e/6e (pas de limite raster). Mascotte « Rosa le Flamant rose » de retour pour le français (comme CM1/CM2).
+
+### Français 3e clos (5/5 compétences, 15/15 PDF)
+
+`dnb-methode` (organisation réelle de l'épreuve : 3h, texte+image, dictée, rédaction — format correct), `ecriture-argumenter` (thèse nuancée sur le travail de groupe), `langue-reecriture` (accord du participe passé avec COD antéposé : « la place que la pluie avait vidée » — règle sophistiquée correctement appliquée deux fois), `lecture-interpreter` (double sens de « lourd », très bien conçu), `oral-argumenter` (question de type oral du DNB : fiction et compréhension historique). Aucune erreur trouvée, entièrement en français (pas de défaut de langue ici). Barèmes `/10` tous exacts (2+4+3+1).
 
 ## Collège 4e — démarrage (9 septembre 2026)
 
