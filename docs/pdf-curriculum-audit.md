@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 249 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 38 CM2 : mathématiques géométrie 12/20 compétences) |
-| PDF restant à auditer | 722 (dont 116 CM2) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 272 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 59 CM2 : **mathématiques CM2 closes, 20/20 compétences**) |
+| PDF restant à auditer | 699 (dont 95 CM2 français, prochain sous-lot) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -489,6 +489,12 @@ Compétences auditées sans erreur (contenu, définitions, calculs et raisonneme
 - `f3.pdf`, Exercice 2 (patron de pavé droit) : figure E semble compter **5 carrés** (croix « plus » à 5, comme l'icône de la mini-méthode d'Hector en Partie 2 de `f1.pdf`, elle aussi vérifiée à 5 carrés plutôt que 6).
 
 Ce n'est pas une erreur ponctuelle isolable par une correction de texte : ces pages sont des illustrations générées (probablement par un outil d'IA image-à-image) sans contrôle géométrique précis du nombre de cases, contrairement aux gabarits vectoriels texte+formes utilisés pour CP/CE1/CE2/CM1 et pour le reste des fiches CM2 audité ci-dessus (angles, outils, symétrie, triangles, etc., qui n'ont pas ce problème car ils ne dépendent pas d'un comptage exact de cases). **Correction non tentée dans ce lot** : contrairement aux corrections PDF précédentes (redaction de texte + réinsertion), il ne s'agit pas ici de texte mais d'une illustration raster intégrée en une seule image par page — une correction fiable demanderait de régénérer ou redessiner précisément la grille concernée, ce qui dépasse la méthode d'édition sûre utilisée jusqu'ici (risque de dégrader visuellement la page sans outil de dessin vectoriel adapté). **Limite technique documentée, conformément au critère d'arrêt de la mission** — recommandation : régénérer ces 3 illustrations (une nouvelle demande à l'outil de génération d'images, ou un redessin manuel) avant publication si ce niveau de précision géométrique est jugé important pédagogiquement pour cette compétence spécifique.
+
+### Mathématiques CM2 — géométrie clos (9 septembre 2026) : 20/20 compétences, 59/59 PDF — **MATHÉMATIQUES CM2 INTÉGRALEMENT AUDITÉES (100 % du contenu PDF existant)**
+
+Les 8 compétences restantes ont été auditées sans erreur : `rediger-un-programme-de-construction`, `reproduire-une-figure-geometrique`, `resoudre-une-mission-geometrique-complete`, `se-reperer-sur-un-plan`, `tracer-des-droites-perpendiculaires` (l'évaluation couvre aussi les droites parallèles, synthèse cohérente), `utiliser-plusieurs-outils-geometriques`. Missions de construction toutes vérifiées faisables (mesures cohérentes : cercles de rayon toujours inférieur aux segments porteurs, angles et perpendiculaires non contradictoires) ; figures « erreur à corriger » (Félix/Hector) toutes cohérentes avec leur situation textuelle (ex. diagonale n'atteignant pas le bon sommet, angle non droit visiblement penché, lieu D4 vs E4 sur un plan quadrillé) ; grilles de repérage sur plan toutes exactes.
+
+**CM2 mathématiques est maintenant intégralement audité pour tout le contenu PDF existant : 20/20 compétences de géométrie, 59/59 PDF** (aucune compétence nombres-calculs/mesures/problèmes n'a de PDF à ce niveau — gap déjà documenté ci-dessus, pas un oubli d'audit). Bilan : 0 PDF modifié, 1 défaut confirmé mais non corrigé pour limite technique (`reconnaitre-le-patron-dun-solide`, 3 PDF, illustrations raster), 1 triplet nativement incomplet déjà connu du code (`reconnaitre-et-decrire-des-triangles`, pas de f3).
 
 ## Prochaines étapes sûres
 
