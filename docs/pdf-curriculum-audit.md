@@ -67,9 +67,9 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 145 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 60 CM1 : écriture, étude de la langue, lecture-récits, lecture-documentaire clos ; 20/25 compétences français) |
-| PDF restant à auditer | 826 (dont 9 PDF `lecture-croiser-sources` non encore ouverts, en attente de décision sur le doublon ci-dessus) |
-| PDF modifiés | 11 (5 corrections d'erreurs + 6 différenciation pédagogique CM1) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 154 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 69 CM1 : écriture, étude de la langue, lecture-récits, lecture-documentaire, lecture-croiser-sources clos ; 23/25 compétences français) |
+| PDF restant à auditer | 817 |
+| PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
@@ -410,7 +410,7 @@ Tous les exemples grammaticaux vérifiés exacts (accords sujet-verbe, accords d
 
 `lecture-documentaire-informations` (repérer l'essentiel), `-organisation` (utiliser titres/intertitres/mots-clés pour naviguer), `-deux-documents` (croiser deux sources courtes), `-justifier-preuve` (citer une preuve précise). Quatre compétences bien différenciées par la nature de la tâche (identifier l'essentiel / naviguer dans la structure / croiser deux sources / citer une preuve). **Faits documentaires vérifiés exacts sur des sujets exigeants** : dénombrement volcanique, manchot empereur (plumage + graisse + regroupement contre le froid), castor (hutte, écorces, pattes palmées), hérisson (vie nocturne, défense en boule), martinet (vol prolongé, pattes inadaptées au sol), lynx/renard (masses et longueurs plausibles), loutre (pattes palmées, narines fermables, queue-gouvernail), et surtout le **gypaète barbu** (technique réelle et peu connue consistant à casser les os en les laissant tomber sur des rochers pour en manger la moelle) — fait exact et bien choisi. Les 4 barèmes `/10` recalculés exacts. Aucune erreur, aucun PDF modifié.
 
-### Domaine lecture-croiser-sources CM1 — doublon partiel détecté, en attente de décision (9 septembre 2026)
+### Domaine lecture-croiser-sources CM1 — doublon résolu, domaine clos (9 septembre 2026)
 
 En commençant l'audit des 3 compétences de ce domaine, un **nouveau doublon apparent** a été détecté, du même type que celui déjà traité en écriture — mais cette fois à l'échelle de 2 compétences sur 3 d'un domaine entier, avec un domaine homonyme existant :
 
@@ -420,9 +420,20 @@ En commençant l'audit des 3 compétences de ce domaine, un **nouveau doublon ap
 | `justifier-preuve` | « Justifier une réponse par une preuve » | `justifier-preuve` | **Oui, identique** |
 | `comparer-textes` | « Comparer deux textes » | *(aucune équivalente)* | Non — compétence unique, pas de doublon |
 
-Seules les leçons (3/9 PDF du domaine) ont été lues à ce stade pour établir ce diagnostic ; les exercices et évaluations de `lecture-croiser-sources-*` n'ont pas encore été ouverts, et aucun fichier n'a été modifié. Nuance par rapport au cas écriture : l'en-tête de domaine diffère bien (« LECTURE - CROISER DES SOURCES » vs « LECTURE - TEXTE DOCUMENTAIRE ») et l'objectif de `lecture-croiser-sources-deux-documents` ajoute une nuance réelle (garder la trace de l'origine de chaque information, pas seulement croiser leur contenu) — mais le titre identique et le squelette de méthode très proche rendent la distinction peu visible pour un enseignant qui parcourrait le catalogue.
+**Audit complet effectué avant décision** (les 9/9 PDF ont été lus, comme demandé, avant toute modification) :
 
-**Décision nécessaire avant de poursuivre ce domaine** (question ouverte, pas tranchée unilatéralement) : différencier `deux-documents` et `justifier-preuve` comme pour le cas écriture (même méthode : distinguer nettement titre/objectif/nature des exercices) ; ou regrouper `lecture-croiser-sources` et `lecture-documentaire` en un domaine unique évitant la redite ; ou une autre option. `comparer-textes` n'est pas concernée et peut être auditée sans attendre.
+- `comparer-textes` : compétence unique confirmée, aucune faute, classe B. Faits vérifiés (photosynthèse des arbres, vie en meute des loups) exacts.
+- `deux-documents` : **quasi-doublon confirmé après lecture complète**. L'exercice utilisait déjà « source A/B, nature carte/article », proche mais pas identique à lecture-documentaire (documents A/B simples) ; l'évaluation, elle, était structurellement identique (2 faits courts à combiner + attribution de source), sans réelle mise en avant de la « nature » des sources.
+- `justifier-preuve` : **titre identique mais contenu déjà substantiellement distinct** — cet exercice oppose une donnée mesurée (tableau de nitrates) à un témoignage/opinion (« à mon avis, l'eau paraît plus sombre ») et demande de choisir la preuve la plus solide, alors que la version lecture-documentaire porte sur la simple citation d'un passage. Confirmé : compétence de niveau supérieur (évaluer la fiabilité d'une preuve), pas un doublon de fond.
+
+**Décision reçue et appliquée** : différencier les deux, sans toucher au curriculum map ni aux routes (uniquement le contenu visible des 6 PDF) :
+
+- `deux-documents` → renommé **« Distinguer et croiser deux types de sources »**, objectif recentré sur l'identification du type de chaque source (carte, tableau, article, témoignage) avant de les croiser. Leçon, exercices et évaluation alignés sur cette nouvelle emphase (l'évaluation cite désormais explicitement « Source 1 - Affiche », « Source 2 - Programme »).
+- `justifier-preuve` → renommé **« Choisir la preuve la plus solide »**, objectif recentré sur la comparaison donnée mesurée / opinion (contenu des exercices inchangé, il correspondait déjà à ce recentrage).
+
+Deux incidents mineurs détectés et corrigés en cours d'édition (même vigilance que pour le cas écriture) : une redaction trop large sur l'évaluation `deux-documents` a une nouvelle fois recouvert une étiquette de points existante (barème passé de 8/10 réel à 10/10 après correction) et laissé un fragment de texte résiduel (« 45 » isolé) — les deux corrigés et revérifiés visuellement. Recherche de texte résiduel des deux anciens titres sur les 6 fichiers : aucune occurrence restante. Barèmes recalculés : `deux-documents` 2+4+2+2=10, `justifier-preuve` 2+3+3+2=10.
+
+**Domaine lecture-croiser-sources CM1 clos : 3/3 compétences, 9/9 PDF audités, 6 modifiés (différenciation), 3 inchangés (`comparer-textes`).**
 
 ## Prochaines étapes sûres
 
@@ -439,5 +450,8 @@ Seules les leçons (3/9 PDF du domaine) ont été lues à ce stade pour établir
 11. ~~Avancer sur CE2 (français ET mathématiques).~~ Fait le 9 septembre 2026 : 24/24 PDF CE2 audités intégralement (4 compétences français + 4 compétences mathématiques). 1 défaut cosmétique trouvé et corrigé (titre dupliqué). Zéro erreur de calcul sur l'ensemble des exercices de mathématiques recomptés à la main. CE2 est maintenant le niveau le plus complètement audité après CP.
 12. ~~Finir les 18 tapuscrits CE1 restants.~~ Fait le 9 septembre 2026 : **CE1 clos, 28/28 PDF audités intégralement** (voir section dédiée « CE1 — niveau clos » ci-dessus). 2 erreurs trouvées et corrigées (fait scientifique sur le toucan, accord grammatical). Couverture réelle par matière documentée : français lecture-compréhension solide, mathématiques absentes à 100 %, QLM quasi absente, EMC absente.
 13. **CM1 démarré** le 9 septembre 2026 : inventaire complet fait (126 PDF, 75 français + 51 mathématiques, 0 HG/sciences/EMC), cartographie programme faite (curriculum map CM1 déjà correctement structuré sur HG/sciences, contrairement à CP/CE1/CE2 ; EMC reste à 0). 4/7 compétences du domaine écriture auditées intégralement (12 PDF) — voir section dédiée ci-dessus. **Trouvaille à traiter avant de continuer** : deux compétences écriture quasi identiques (`rediger-idee-raison-exemple` et `rediger-paragraphe-argumente`), décision de fusion/différenciation nécessaire.
-14. **Reste ouvert pour CM1** : 3 compétences écriture restantes (`rediger-reviser`, `rediger-reviser-grille`, `rediger-texte-structure`), puis étude de la langue (4 compétences), lecture-récits (3), lecture-documentaire (4), lecture-croiser-sources (3), oral (2), orthographe (2) en français ; puis les 17 compétences mathématiques ; 114 PDF CM1 non encore audités au total.
-15. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
+14. ~~Différencier `rediger-idee-raison-exemple`/`rediger-paragraphe-argumente`, finir écriture, étude de la langue, lecture-récits, lecture-documentaire.~~ Fait le 9 septembre 2026. Domaines clos, voir sections dédiées.
+15. ~~Auditer et trancher le doublon `lecture-croiser-sources` (deux-documents, justifier-preuve).~~ Fait le 9 septembre 2026 : 9/9 PDF audités, les deux compétences différenciées (voir section dédiée). Domaine clos.
+16. **Reste ouvert pour CM1 français** : domaine oral (2 compétences, `oral-participer-avis`, `oral-participer-ecoute` — 6 PDF, à vérifier eux aussi pour un éventuel chevauchement avant audit). C'est le dernier domaine français CM1 (23/25 compétences closes).
+17. **Reste ouvert pour CM1** : les 17 compétences mathématiques (51 PDF) — nombres-calculs (7), grandeurs-mesures (3), géométrie (3), problèmes (4) — non encore commencées.
+18. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
