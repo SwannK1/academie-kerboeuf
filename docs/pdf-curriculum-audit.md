@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 190 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 105 CM1 : français CM1 clos 25/25, mathématiques CM1 : nombres-calculs 7/7 + grandeurs-mesures 3/3 clos) |
-| PDF restant à auditer | 781 (dont 21 mathématiques CM1 restants : géométrie, problèmes) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 199 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 114 CM1 : français CM1 clos 25/25, mathématiques CM1 : nombres-calculs 7/7 + grandeurs-mesures 3/3 + géométrie 3/3 clos) |
+| PDF restant à auditer | 772 (dont 12 mathématiques CM1 restants : problèmes, dernier sous-domaine) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -453,6 +453,12 @@ Premier sous-lot du lot mathématiques CM1 (17 compétences, 51 PDF au total) : 
 
 Calculs recalculés à la main, tous exacts : 14 h 35 à 16 h 10 = 1 h 35 min (25 min + 1 h + 10 min) ; cour 20 m × 12 m → périmètre 64 m / aire 240 m² ; rectangle 8 cm × 3 cm → périmètre 22 cm ; rectangle 12 cm × 5 cm → 34 cm, carré 7 cm → 28 cm, polygone 3+4+6+5 → 18 cm. Point classiquement sensible (conversions d'unités) surveillé spécifiquement : aucune conversion erronée trouvée, unités toujours cohérentes (m/m², cm, h/min). Les 3 barèmes `/10` recalculés exacts (3+3+2+2, 2+3+2+3, 3+2+3+2). **Aucune erreur trouvée, aucun PDF modifié.**
 
+## Mathématiques CM1 — domaine géométrie clos (9 septembre 2026) : 3/3 compétences, 9/9 PDF
+
+`espace-programme` (coder/décrire un déplacement sur quadrillage avec vocabulaire de repérage), `figures-decrire` (utiliser les propriétés des figures planes — côtés, angles droits, parallélisme — pour les décrire ou les construire), `figures-symetrie` (construire le symétrique d'une figure sur quadrillage par rapport à un axe). Trois compétences bien différenciées (repérage/déplacement, propriétés/construction, symétrie), aucun chevauchement.
+
+Toutes les coordonnées de quadrillage et distances aux axes vérifiées cohérentes avec les rendus visuels (ex. leçon symétrie : point à 3 carreaux d'un axe se replace à 3 carreaux de l'autre côté ; exercices : sommets A(3;2)/B(5;2)/C(5;5)/D(4;4) avec axe en colonne 6, distances 3/1/1/2 conformes au rendu ; évaluation : triangle P(2;2)/Q(4;2)/R(3;5) avec axe en colonne 5, distances 3/1/2 conformes). Trajets de repérage vérifiés faisables malgré les obstacles (ex. évaluation : C(1;6) à D(6;2) avec obstacles en (4;6) et (4;3), chemin via la ligne 4 possible). Propriétés géométriques citées exactes (rectangle = quadrilatère à 4 angles droits et côtés opposés égaux ; carré reconnu comme « quadrilatère à 4 côtés égaux et 4 angles droits » dans l'évaluation figures-decrire). Les 3 barèmes `/10` recalculés exacts (3+3+2+2, 2+4+2+2, 2+4+2+2). **Aucune erreur trouvée, aucun PDF modifié.**
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -472,5 +478,6 @@ Calculs recalculés à la main, tous exacts : 14 h 35 à 16 h 10 = 1 h 35 min (2
 15. ~~Auditer et trancher le doublon `lecture-croiser-sources` (deux-documents, justifier-preuve).~~ Fait le 9 septembre 2026 : 9/9 PDF audités, les deux compétences différenciées (voir section dédiée). Domaine clos.
 16. ~~Domaine oral CM1.~~ Fait le 9 septembre 2026 : 2/2 compétences, 6 PDF, aucun chevauchement, aucune erreur. **Français CM1 clos à 100 % (25/25 compétences, 75/75 PDF).**
 17. ~~Prochain lot : mathématiques CM1 — domaine nombres-calculs (7 compétences, 21 PDF).~~ Fait le 9 septembre 2026 : 7/7 compétences auditées intégralement (numération grands nombres, décimaux, fractions, comparer fractions ; calcul posé multiplication, division ; calcul mental), toutes les opérations et exemples recalculés à la main, aucune erreur, aucun PDF modifié.
-18. ~~Domaine grandeurs-mesures CM1 (3 compétences, 9 PDF), conversions d'unités à surveiller.~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (durées, distinguer aire/périmètre, calculer un périmètre), doublon apparent `longueurs-aires-distinguer`/`longueurs-aires-perimetre` vérifié et confirmé non-doublon (progression légitime concept → calcul), toutes les conversions et calculs recalculés exacts, aucune erreur, aucun PDF modifié. **Reste : géométrie (3), problèmes (4) — 21 PDF.**
-19. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
+18. ~~Domaine grandeurs-mesures CM1 (3 compétences, 9 PDF), conversions d'unités à surveiller.~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (durées, distinguer aire/périmètre, calculer un périmètre), doublon apparent `longueurs-aires-distinguer`/`longueurs-aires-perimetre` vérifié et confirmé non-doublon (progression légitime concept → calcul), toutes les conversions et calculs recalculés exacts, aucune erreur, aucun PDF modifié.
+19. ~~Domaine géométrie CM1 (3 compétences, 9 PDF).~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (coder un déplacement, décrire/construire des figures, symétrie), toutes les coordonnées de quadrillage et distances aux axes vérifiées cohérentes avec les rendus, aucune erreur, aucun PDF modifié. **Reste : problèmes (4 compétences, 12 PDF) — dernier sous-domaine avant clôture complète de CM1.**
+20. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
