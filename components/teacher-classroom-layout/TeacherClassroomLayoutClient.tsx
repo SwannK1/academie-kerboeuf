@@ -20,8 +20,17 @@ import {
 import {
   isLocalStorageAvailable,
   isPlainObject,
+  readLocalStorageJson,
   writeLocalStorageJson,
 } from "@/content/teacher-local-storage";
+import {
+  STUDENT_TAG_STORAGE_KEY,
+  getStudentTag,
+  studentTagAccentClasses,
+  studentTags,
+  type StudentTagAssignments,
+  type StudentTagId,
+} from "@/content/teacher-student-tags";
 
 const STORAGE_KEY = "academie-kerboeuf-organisation-classe-plan-v1";
 const CANVAS_WIDTH = 880;
@@ -67,6 +76,17 @@ function isStoredLayout(value: unknown): value is StoredLayout {
   );
 }
 
+const studentTagIds = new Set(studentTags.map((tag) => tag.id));
+
+function isStudentTagAssignments(value: unknown): value is StudentTagAssignments {
+  if (!isPlainObject(value)) return false;
+  return Object.values(value).every(
+    (tagIds) =>
+      Array.isArray(tagIds) &&
+      tagIds.every((id) => typeof id === "string" && studentTagIds.has(id as StudentTagId)),
+  );
+}
+
 export function TeacherClassroomLayoutClient() {
   // Le rendu initial (SSR et première passe client) doit être identique pour
   // éviter une erreur d'hydratation : on démarre sur une configuration vide
@@ -100,6 +120,9 @@ export function TeacherClassroomLayoutClient() {
     null,
   );
 
+  const [tagAssignments, setTagAssignments] = useState<StudentTagAssignments>({});
+  const [openTagPickerFor, setOpenTagPickerFor] = useState<string | null>(null);
+
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const dragState = useRef<{
     tableId: string;
@@ -127,6 +150,12 @@ export function TeacherClassroomLayoutClient() {
       setRoleAssignment(defaultLayout.roleAssignment);
       setConfigName(defaultLayout.name);
     }
+    const { value: storedTags } = readLocalStorageJson(
+      STUDENT_TAG_STORAGE_KEY,
+      isStudentTagAssignments,
+      {},
+    );
+    setTagAssignments(storedTags);
   }, []);
 
   function writeSaves(next: StoredLayout[]): boolean {
@@ -296,6 +325,37 @@ export function TeacherClassroomLayoutClient() {
     setAvoidPairs((prev) =>
       prev.filter((pair) => pair.a !== id && pair.b !== id),
     );
+    if (tagAssignments[id]) {
+      setTagAssignments((prev) => {
+        const next = Object.fromEntries(
+          Object.entries(prev).filter(([labelId]) => labelId !== id),
+        );
+        writeLocalStorageJson(STUDENT_TAG_STORAGE_KEY, next);
+        return next;
+      });
+    }
+  }
+
+  function addStudentTag(labelId: string, tagId: StudentTagId) {
+    setTagAssignments((prev) => {
+      const current = prev[labelId] ?? [];
+      if (current.includes(tagId)) return prev;
+      const next = { ...prev, [labelId]: [...current, tagId] };
+      writeLocalStorageJson(STUDENT_TAG_STORAGE_KEY, next);
+      return next;
+    });
+    setOpenTagPickerFor(null);
+  }
+
+  function removeStudentTag(labelId: string, tagId: StudentTagId) {
+    setTagAssignments((prev) => {
+      const next = {
+        ...prev,
+        [labelId]: (prev[labelId] ?? []).filter((id) => id !== tagId),
+      };
+      writeLocalStorageJson(STUDENT_TAG_STORAGE_KEY, next);
+      return next;
+    });
   }
 
   function onLabelDragStart(id: string) {
@@ -806,25 +866,104 @@ export function TeacherClassroomLayoutClient() {
             )}
 
             {labels.length > 0 && (
-              <ul className="mt-4 flex flex-wrap gap-2" role="list">
-                {labels.map((label) => (
-                  <li key={`del-${label.id}`} className="flex min-w-0 items-center gap-2">
-                    <label className="sr-only" htmlFor={`label-name-${label.id}`}>
-                      Modifier {label.text}
-                    </label>
-                    <input
-                      id={`label-name-${label.id}`}
-                      type="text"
-                      defaultValue={label.text}
-                      maxLength={80}
-                      onBlur={(event) => renameLabel(label.id, event.currentTarget.value)}
-                      className="min-h-9 min-w-0 max-w-48 rounded border border-white/15 bg-background/50 px-2 text-sm text-foreground"
-                    />
-                    <button type="button" aria-label={`Supprimer l'étiquette ${label.text}`} onClick={() => removeLabel(label.id)} className="text-xs text-muted hover:text-ember">
-                      Supprimer
-                    </button>
-                  </li>
-                ))}
+              <ul className="mt-4 grid gap-2" role="list">
+                {labels.map((label) => {
+                  const assignedTagIds = tagAssignments[label.id] ?? [];
+                  const visibleTagIds = assignedTagIds.slice(0, 5);
+                  const hiddenTagCount = assignedTagIds.length - visibleTagIds.length;
+                  const availableTags = studentTags.filter(
+                    (tag) => !assignedTagIds.includes(tag.id),
+                  );
+                  const pickerOpen = openTagPickerFor === label.id;
+
+                  return (
+                    <li
+                      key={`del-${label.id}`}
+                      className="rounded-md border border-white/15 bg-background/50 p-3"
+                    >
+                      <div className="flex min-w-0 flex-wrap items-center gap-2">
+                        <label className="sr-only" htmlFor={`label-name-${label.id}`}>
+                          Modifier {label.text}
+                        </label>
+                        <input
+                          id={`label-name-${label.id}`}
+                          type="text"
+                          defaultValue={label.text}
+                          maxLength={80}
+                          onBlur={(event) => renameLabel(label.id, event.currentTarget.value)}
+                          className="min-h-9 min-w-0 max-w-48 rounded border border-white/15 bg-background/50 px-2 text-sm text-foreground"
+                        />
+                        <button type="button" aria-label={`Supprimer l'étiquette ${label.text}`} onClick={() => removeLabel(label.id)} className="text-xs text-muted hover:text-ember">
+                          Supprimer
+                        </button>
+                      </div>
+
+                      <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                        {visibleTagIds.map((tagId) => {
+                          const tag = getStudentTag(tagId);
+                          if (!tag) return null;
+                          return (
+                            <span
+                              key={tagId}
+                              className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-bold ${studentTagAccentClasses[tag.accent]}`}
+                            >
+                              {tag.title}
+                              <button
+                                type="button"
+                                aria-label={`Retirer le repère ${tag.title} de ${label.text}`}
+                                onClick={() => removeStudentTag(label.id, tagId)}
+                                className="-m-1 p-1 leading-none"
+                              >
+                                ✕
+                              </button>
+                            </span>
+                          );
+                        })}
+                        {hiddenTagCount > 0 && (
+                          <span className="rounded-full border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                            +{hiddenTagCount}
+                          </span>
+                        )}
+
+                        {pickerOpen ? (
+                          <>
+                            {availableTags.map((tag) => (
+                              <button
+                                key={tag.id}
+                                type="button"
+                                onClick={() => addStudentTag(label.id, tag.id)}
+                                className={`rounded-full border px-2 py-0.5 text-xs font-bold transition hover:opacity-80 ${studentTagAccentClasses[tag.accent]}`}
+                              >
+                                + {tag.title}
+                              </button>
+                            ))}
+                            {availableTags.length === 0 && (
+                              <span className="text-xs text-muted">
+                                Tous les repères sont déjà ajoutés.
+                              </span>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => setOpenTagPickerFor(null)}
+                              className="text-xs font-bold text-muted underline"
+                            >
+                              Fermer
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setOpenTagPickerFor(label.id)}
+                            aria-label={`Ajouter un repère à ${label.text}`}
+                            className="min-h-7 rounded-full border border-dashed border-white/25 px-2 py-0.5 text-xs font-bold text-muted transition hover:border-jade/50 hover:text-jade"
+                          >
+                            + Ajouter un repère
+                          </button>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </section>
