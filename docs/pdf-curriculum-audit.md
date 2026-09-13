@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 782 (365 CP→CM2 + 9 maternelle + 384 collège + 24 seconde : **français 8/8 clos**) |
-| PDF restant à auditer | 84 sur les 866 suivis par Git (seconde restant : mathématiques 30, HG 12, langues-vivantes 12, sciences 12, arts 6, EMC 6, EPS 6). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 812 (365 CP→CM2 + 9 maternelle + 384 collège + 54 seconde : français 8/8 + mathématiques 10/10 closes) |
+| PDF restant à auditer | 54 sur les 866 suivis par Git (seconde restant : HG 12, langues-vivantes 12, sciences 12, arts 6, EMC 6, EPS 6). |
 | Corrections appliquées (3e, cumulées) | 5 : 2 mathématiques/HG-EMC (références orphelines) + 3 anglais (texte/documents/sujet manquants) |
 | Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
@@ -562,6 +562,10 @@ Dernier périmètre du dépôt. 108 PDF, 8 matières : français (8×3=24), math
 ### Français seconde clos (8/8 compétences, 24/24 PDF)
 
 `analyser-un-personnage` (construction psychologique, distinction personnage/auteur), `analyser-une-phrase-complexe` (« Quand la salle se vide, Léa reste car elle attend le régisseur » — 3 propositions correctement analysées : circonstancielle de temps + coordonnée de cause), `formuler-une-these`, `identifier-les-enjeux-d-une-scene`, `interpreter-une-image-poetique` (« La ville avale les pas du matin », personnification bien analysée), `mobiliser-un-lexique-d-analyse` (méthodologie exigeante, évite le catalogue décoratif), `organiser-un-paragraphe-argumente`, `situer-un-recit` (évite explicitement le jugement anachronique). **Niveau d'exigence littéraire élevé et cohérent, aucune erreur trouvée.** Barèmes `/10` tous exacts (2+3+3+2).
+
+### Mathématiques seconde clos (10/10 compétences, 30/30 PDF)
+
+`identifier-ensemble-nombre` (N⊂Z⊂D⊂Q⊂R, √2 correctement irrationnel), `developper-factoriser` (5(2x-3)-4(x+2)=6x-23 ; 12x²-18x=6x(2x-3) ; vérification par substitution x=3 cohérente), `resoudre-equation-premier-degre` (7x-5=3x+19→x=6 ; 3(2x-1)=5x+8→x=11), `decrire-variations-fonction` (distinction signe/variation rigoureuse), `lire-image-antecedent` (f(x)=x²-1 : image de 3 = 8, deux antécédents de 0 = -1 et 1), `utiliser-relation-chasles` (AM+MB=AB ; AB-AC=CB vérifié algébriquement), `calculer-distance-repere` (AB=√(4²+3²)=5 exact ; évaluation AB=3√5, AC=5, mélange exact/approché cohérent avec la leçon), `interpreter-serie-statistique` (série 8,9,9,10,14 : médiane 9, étendue 6, moyenne 10 tirée par la valeur atypique), `calculer-probabilite-simple` (P(pair)=3/6=1/2, distinction modèle théorique/fréquences simulées). **Tous les calculs recalculés à la main, tous exacts. Aucune erreur trouvée.** Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Prochaines étapes sûres
 
