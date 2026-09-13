@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 440 (365 CP→CM2 + 9 maternelle + **66 collège 6e : français intégralement clos, 22/22 compétences**) |
-| PDF restant à auditer | 531 (6e : 120 restants — mathématiques 84, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 461 (365 CP→CM2 + 9 maternelle + 87 collège 6e : français 66/66 + mathématiques nombres-calculs 21/21) |
+| PDF restant à auditer | 510 (6e : 99 restants — mathématiques 63, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -603,3 +603,9 @@ Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le 
 `echange` (participer à un échange organisé), `justifier` (justifier brièvement son avis), `lecture-voix-haute` (lire à voix haute), `reformuler` (écouter et reformuler), `reponse` (présenter une réponse clairement). **Aucune erreur trouvée.** Barèmes `/10` tous exacts. Note de conception mineure (pas un défaut) : les évaluations de compétences orales utilisent le même gabarit générique à 4 questions écrites que les autres domaines, plutôt qu'une grille d'observation dédiée à une prestation orale réelle (comme en maternelle) — `lecture-voix-haute` demande de lire « un paragraphe de 80 mots » sans fournir ce texte dans la fiche.
 
 **FRANÇAIS 6E est maintenant intégralement audité : 22/22 compétences, 66/66 PDF** (écriture 5/5, étude de la langue 5/5, lecture 7/7, oral 5/5). Bilan : 0 PDF modifié à ce stade (corrections groupées prévues), défauts confirmés recensés sur écriture (1) et étude de la langue (3), aucun sur lecture ni oral.
+
+### Mathématiques 6e — domaine nombres-calculs clos (7/7 compétences, 21/21 PDF)
+
+`entiers` (lire/écrire/comparer des entiers jusqu'au milliard), `decimaux` (lire/écrire/comparer des décimaux), `fractions` (fractions simples comme partage), `operations` (poser +/−/×/÷), `calcul-decimaux` (addition/soustraction posée de décimaux), `calcul-mental` (stratégies de calcul mental), `vraisemblance` (contrôler un ordre de grandeur). Tous les exemples chiffrés recalculés à la main et exacts : 407 215 (7=milliers), 58 304 < 58 340, 12,47 (4=dixièmes, 7=centièmes), 36,205 rangé correctement avec 3,05/3,5/3,505, 4728+956, 6305−2487, 18,75+6,4, 32,6−7,85, 48+27=75, 125+99, 360÷10=36, 25×4=100, 397×4=1 488 correctement identifié comme impossible (vraie valeur 1 588, estimation 400×4=1 600). Barèmes `/10` tous exacts (2+3+3+2).
+
+**Défaut systémique confirmé sur les 7 compétences (14 fichiers exercices+évaluation)** : le Palier 1 de chaque fiche affiche « Données de travail : 12 ; 18 ; 25 ; 40 » et le Palier 3 « ces nouvelles données : 14 ; 35 ; 120 ; **2,5** » — des nombres **identiques mot pour mot d'une compétence à l'autre**, sans lien avec le sujet réel de la fiche (ex. « 2,5 » — un décimal — apparaît même dans la compétence `entiers`, qui porte spécifiquement sur les nombres ENTIERS), et sans qu'aucune question ne les exploite réellement (contrairement au Palier 2, toujours correctement adapté à la compétence). Ce constat, confirmé identique sur les 7 compétences de ce domaine, indique un gabarit générique de « données de travail » resté non personnalisé — vraisemblablement conçu pour un autre type d'exercice (problème générique) et copié tel quel dans chaque fiche mathématiques 6e. **Non corrigé dans ce lot** (correction groupée envisagée : soit remplacer par des données réellement utilisées et cohérentes avec chaque compétence, soit supprimer la mention si le Palier 1/3 n'a pas vocation à exploiter des données chiffrées).
