@@ -67,8 +67,9 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 698 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 57 collège 4e + 15 collège 3e : **français 5/5 clos**) |
-| PDF restant à auditer | 168 sur les 866 suivis par Git (3e restant : 60 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 716 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 57 collège 4e + 33 collège 3e : français 5/5 + mathématiques 6/6 closes) |
+| PDF restant à auditer | 150 sur les 866 suivis par Git (3e restant : 42 — HG-EMC 12, sciences-techno 15, anglais 15 ; seconde : 108). |
+| Corrections appliquées (3e) | 1 : `3e-ma-grandeurs-trigonometrie` évaluation — référence orpheline « le premier exercice » reformulée |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
@@ -588,6 +589,12 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Français 3e clos (5/5 compétences, 15/15 PDF)
 
 `dnb-methode` (organisation réelle de l'épreuve : 3h, texte+image, dictée, rédaction — format correct), `ecriture-argumenter` (thèse nuancée sur le travail de groupe), `langue-reecriture` (accord du participe passé avec COD antéposé : « la place que la pluie avait vidée » — règle sophistiquée correctement appliquée deux fois), `lecture-interpreter` (double sens de « lourd », très bien conçu), `oral-argumenter` (question de type oral du DNB : fiction et compréhension historique). Aucune erreur trouvée, entièrement en français (pas de défaut de langue ici). Barèmes `/10` tous exacts (2+4+3+1).
+
+### Mathématiques 3e clos (6/6 compétences, 18/18 PDF) — 1 correction appliquée
+
+`dnb-strategie` (volume de cuve cylindrique, π×1,2²×2×0,75 ; 6782,4 L ÷ 18 ≈ 377 L/famille ; 680 L correctement identifiable comme invraisemblable), `donnees-probabilites` (P(rouge)=3/10 ; séries A et B de moyenne identique 10 mais médiane et étendue différentes — excellent exemple), `fonctions-affines` (f(12)=25,6 € ; f(x)=31→x=15 km ; comparaison avec g(x)=2,1x résolue à x=40/3 km), `geometrie-theoremes` (Thalès : AN=4 ; Pythagore : 7,2²+9,6²=12² confirmé, triangle 3-4-5 mis à l'échelle), `grandeurs-trigonometrie` (échelle 5 m/68° ; rampe 0,75 m/6 m → arcsin(0,125)≈7,18°), `nombres-equations` (rectangle x+3/x, périmètre 34 → x=7 ; 0,00072=7,2×10⁻⁴ ; erreur intentionnelle 2³+2²=2⁵ bien conçue). Tous les calculs recalculés à la main, tous exacts.
+
+**Anomalie IMPORTANTE corrigée** : `grandeurs-trigonometrie`, évaluation, item 3 — la consigne demandait d'expliquer pourquoi utiliser la tangente « dans le premier exercice » donnerait besoin d'une donnée absente, mais **cette évaluation ne présente jamais ce « premier exercice »** (le scénario de l'échelle de 5 m à 68° n'existe que dans le fichier exercices séparé) : référence orpheline, potentiellement déroutante pour un élève travaillant uniquement sur la fiche d'évaluation. **Corrigé** par une reformulation minimale et locale (redaction + réinsertion du texte, même police/taille/couleur) : « Expliquer pourquoi utiliser la tangente pour l'échelle de 5 m formant un angle de 68° donnerait besoin d'une donnée absente. » Rendu vérifié visuellement (page complète), barème `/10` intact.
 
 ## Collège 4e — démarrage (9 septembre 2026)
 
