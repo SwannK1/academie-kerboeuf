@@ -67,8 +67,9 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 743 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 57 collège 4e + 60 collège 3e : français 5/5 + mathématiques 6/6 + HG-EMC 4/4 + sciences-techno 5/5 closes) |
-| PDF restant à auditer | 123 sur les 866 suivis par Git (3e restant : 15 — anglais ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 758 (365 CP→CM2 + 9 maternelle + **384 collège (6e+5e+4e+3e) — intégralement clos**) |
+| PDF restant à auditer | 108 sur les 866 suivis par Git (seconde : 108 — dernier périmètre). |
+| Corrections appliquées (3e, cumulées) | 5 : 2 mathématiques/HG-EMC (références orphelines) + 3 anglais (texte/documents/sujet manquants) |
 | Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
@@ -605,6 +606,21 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Sciences et technologie 3e clos (5/5 compétences, 15/15 PDF)
 
 `dnb-dossier` (panneau solaire 350W/420kWh/an/10 panneaux → 4200 kWh/an, 116,7 % des besoins couverts), `physique-modeliser` (E=P×t : 1,5kW×2/3h=1,0kWh=3,6×10⁶J exact ; équation méthane à équilibrer, volontairement non équilibrée en énoncé), `technologie-systeme` (arrosage automatique, algorithme à condition de sécurité, 4 cas de test bien choisis dont un capteur incohérent), `terre-risques-climat` (+18cm/50ans, distinction aléa/enjeu/risque, distinction climat/météo rigoureuse), `vivant-donnees` (réponse immunitaire primaire/secondaire 2→45→18 puis 90 après rappel — immunologie exacte, mise en garde correcte sur anticorps ≠ cellules). **Rigueur scientifique remarquable et constante sur tout le sous-lot.** Aucune erreur trouvée, aucune référence orpheline (contrairement aux deux évaluations mathématiques/HG-EMC corrigées plus haut — ce sous-lot est entièrement autonome). Barèmes `/10` tous exacts (2+4+3+1).
+
+### Anglais 3e clos (5/5 compétences, 15/15 PDF) — 3 corrections appliquées — **3E ET COLLÈGE (6e→3e) INTÉGRALEMENT CLOS**
+
+`comprehension-ecrite`, `comprehension-orale`, `culture-comparer`, `expression-ecrite`, `expression-orale`. Anglais grammaticalement correct partout.
+
+**Distinction méthodologique importante établie sur ce sous-lot** : pour les compétences de **compréhension/expression ORALE** (`comprehension-orale`, item 2/3 d'`expression-orale`), l'absence du script ou du sujet exact dans l'évaluation est **correcte et volontaire** — un script imprimé transformerait un test d'écoute en lecture, et une interaction orale vivante n'a pas besoin d'un sujet figé. Ce n'est **pas** le même défaut que pour les compétences ÉCRITES.
+
+**3 anomalies BLOQUANTES/IMPORTANTES corrigées** (le texte ou le contexte nécessaire à une tâche de lecture/écriture était absent de l'évaluation) :
+1. `comprehension-ecrite`, évaluation — items 2 (4 pts) et 3 (3 pts) demandaient d'analyser « the final sentence » et de résumer « the text », mais le texte original (Maya/laptops) n'apparaissait nulle part dans le fichier : **BLOQUANT**, 7/10 points rigoureusement infaisables. **Corrigé** en ajoutant une boîte « TEXTE SUPPORT » dans l'espace libre du bas de page, reproduisant le texte original (redaction + insertion, style cohérent avec le gabarit). Rendu vérifié, barème intact.
+2. `culture-comparer`, évaluation, item 2 — demandait d'expliquer « each viewpoint » sans jamais décrire les deux documents comparés. **Corrigé** par une boîte « DOCUMENTS » similaire.
+3. `expression-ecrite`, évaluation, item 2 — demandait d'écrire 120-150 mots sans rappeler le sujet (lettre au conseil municipal) établi seulement dans les fichiers séparés. **Corrigé** par réinsertion du rappel de tâche dans l'énoncé lui-même (fusion minimale, pas de nouvelle boîte nécessaire ici).
+
+**1 anomalie IMPORTANTE documentée, non corrigée** : `expression-ecrite`, évaluation, item 3 (3 pts) — demande de réviser « a draft containing repetitive vocabulary and unclear pronoun references », mais **ce brouillon n'existe dans aucun des 3 fichiers** de la compétence (ni leçon, ni exercices, ni évaluation) : contrairement aux 3 corrections ci-dessus, il ne s'agit pas d'une référence orpheline à un contenu existant ailleurs, mais d'un contenu jamais rédigé. Une correction sûre nécessiterait de créer un brouillon fautif inédit — décision de contenu, pas une simple correction locale ; non appliquée, conformément au principe de ne pas inventer de contenu pédagogique. Barèmes `/10` sinon tous exacts (2+4+3+1).
+
+**3E EST MAINTENANT INTÉGRALEMENT AUDITÉ : 25 compétences, 75/75 PDF** (français 5/5, mathématiques 6/6, histoire-géographie-EMC 4/4, sciences-technologie 5/5, anglais 5/5). Bilan cumulé 3e : 5 corrections appliquées (2 en mathématiques/HG-EMC, 3 en anglais), 1 anomalie documentée non corrigée (contenu à créer). **Avec la clôture de 3e, tout le collège (6e, 5e, 4e, 3e) est désormais intégralement audité : 384/384 PDF.**
 
 ## Collège 4e — démarrage (9 septembre 2026)
 
