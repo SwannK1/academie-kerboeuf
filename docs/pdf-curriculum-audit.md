@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 160 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 75 CM1 : **français CM1 intégralement clos, 25/25 compétences**) |
-| PDF restant à auditer | 811 (dont 51 mathématiques CM1, prochain sous-lot) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 181 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 96 CM1 : français CM1 clos 25/25, domaine nombres-calculs mathématiques clos 7/7) |
+| PDF restant à auditer | 790 (dont 30 mathématiques CM1 restants : grandeurs-mesures, géométrie, problèmes) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -441,6 +441,12 @@ Deux incidents mineurs détectés et corrigés en cours d'édition (même vigila
 
 **FRANÇAIS CM1 est maintenant intégralement audité : 25/25 compétences, 75/75 PDF.** Bilan : 12 PDF modifiés, tous pour différenciation pédagogique sur les 2 doublons résolus (`rediger-idee-raison-exemple`/`rediger-paragraphe-argumente` en écriture, `deux-documents`/`justifier-preuve` en lecture-croiser-sources) — **aucune erreur de contenu (facts, grammaire, calcul) trouvée dans l'ensemble du français CM1** ; 63 PDF inchangés. Aucune compétence du catalogue (`content/levels/cm1-competencies.ts`, domaine français) laissée sans triplet PDF.
 
+## Mathématiques CM1 — domaine nombres-calculs clos (9 septembre 2026) : 7/7 compétences, 21/21 PDF
+
+Premier sous-lot du lot mathématiques CM1 (17 compétences, 51 PDF au total) : `numeration-grands-nombres` (lire/écrire/décomposer/comparer jusqu'au million), `numeration-decimaux` (nombres décimaux simples, dixièmes/centièmes, lien fractions décimales), `numeration-fractions` (représenter une fraction comme partage équitable ou position sur une droite graduée), `numeration-comparer-fractions` (comparer des fractions à dénominateur égal), `calcul-pose-multiplication` (algorithme posé, produits partiels), `calcul-pose-division` (division euclidienne, quotient/reste), `calcul-mental-strategies` (décomposition, compensation, regroupement).
+
+**Vérification arithmétique intégrale, calcul par calcul, sur les 21 PDF** (leçons, exercices et évaluations) : tous les exemples résolus dans le corps des fiches ont été recalculés à la main et sont exacts — notamment 407 052 = 400 000+7 000+50+2 et 407 052 < 470 025 (numération) ; 604 017 en chiffres, décomposition de 708 090, rangement croissant de 87 900/708 090/708 900/780 009 (grands nombres, point classiquement sensible signalé par la mission) ; 2,35 = 2+3/10+5/100 = 235/100 (décimaux) ; 5/12 et 7/12 pour la tablette de 12 carrés dont 5 colorés (fractions) ; 6×26+1=157 (division euclidienne, exemple vérifié de la leçon) ; 156÷4=39 exact, 173÷5=34 reste 3, 294÷7=42 exact (évaluation division) ; 407×6, 235×14, 609×23 posés correctement, barème 2+3+3+2=10 (multiplication) ; 198+47=245 et 4×25×7=700 (calcul mental). **Aucune erreur de calcul trouvée.** Tous les barèmes `/10` recalculés et exacts (2+2+3+3, 2+3+2+3, 2+2+4+2, 2+2+3+3, 2+3+3+2 selon les fiches). Aucun doublon de compétence détecté dans ce sous-domaine (titres et objectifs des 7 compétences bien distincts). **Aucun PDF modifié : les 21 PDF de nombres-calculs étaient déjà corrects.**
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -459,5 +465,5 @@ Deux incidents mineurs détectés et corrigés en cours d'édition (même vigila
 14. ~~Différencier `rediger-idee-raison-exemple`/`rediger-paragraphe-argumente`, finir écriture, étude de la langue, lecture-récits, lecture-documentaire.~~ Fait le 9 septembre 2026. Domaines clos, voir sections dédiées.
 15. ~~Auditer et trancher le doublon `lecture-croiser-sources` (deux-documents, justifier-preuve).~~ Fait le 9 septembre 2026 : 9/9 PDF audités, les deux compétences différenciées (voir section dédiée). Domaine clos.
 16. ~~Domaine oral CM1.~~ Fait le 9 septembre 2026 : 2/2 compétences, 6 PDF, aucun chevauchement, aucune erreur. **Français CM1 clos à 100 % (25/25 compétences, 75/75 PDF).**
-17. **Prochain lot : mathématiques CM1** (17 compétences, 51 PDF) — nombres-calculs (7), grandeurs-mesures (3), géométrie (3), problèmes (4). Vérifier en particulier les calculs posés (multiplication/division) et les conversions d'unités, points classiquement sensibles.
+17. ~~Prochain lot : mathématiques CM1 — domaine nombres-calculs (7 compétences, 21 PDF).~~ Fait le 9 septembre 2026 : 7/7 compétences auditées intégralement (numération grands nombres, décimaux, fractions, comparer fractions ; calcul posé multiplication, division ; calcul mental), toutes les opérations et exemples recalculés à la main, aucune erreur, aucun PDF modifié. **Reste : grandeurs-mesures (3), géométrie (3), problèmes (4) — 30 PDF.** Vérifier en particulier les conversions d'unités, point classiquement sensible.
 18. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
