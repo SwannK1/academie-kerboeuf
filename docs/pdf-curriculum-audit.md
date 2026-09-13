@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 626 (365 CP→CM2 + 9 maternelle + 186 collège 6e + **66 collège 5e — niveau intégralement clos**) |
-| PDF restant à auditer | 240 sur les 866 suivis par Git (4e : 57 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 635 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 9 collège 4e : **français 3/3 clos**) |
+| PDF restant à auditer | 231 sur les 866 suivis par Git (4e restant : 48 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -576,6 +576,18 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 24. ~~Maternelle.~~ Fait le 9 septembre 2026 : **3/3 compétences existantes auditées, 9/9 PDF** (`ms/langage` : reconnaître son prénom, raconter une action vécue, comprendre une histoire courte — chacune en triplet fiche-atelier/fiche-parent/grille-observation, gabarit texte vectoriel comme CP-CM1, pas de limite raster ici). Aucune erreur trouvée. Note mineure sans gravité : la fiche « comprendre une histoire courte » liste « fleur » dans les mots utiles alors que le texte à lire ne va que jusqu'à « une tige verte apparaît » (mot non présent dans le texte, extension lexicale plausible mais non littérale — non corrigé, jugement pédagogique raisonnable). **Confirmé par lecture de `content/levels/maternelle/*.ts`** : le reste du curriculum maternelle (PS, GS, et les domaines MS autres que langage) est intégralement structuré mais chaque ressource y est déjà marquée `status: "upcoming"` dans le code — absence de PDF cohérente et auto-documentée, pas une lacune cachée. **Prochaine étape : collège (6e, 186 PDF — le plus gros lot restant).**
 25. ~~Collège 6e (français, mathématiques, histoire-géographie-EMC).~~ Fait le 9 septembre 2026 : **6e intégralement clos, 62 compétences, 186/186 PDF** (français 22/22 = 66 PDF ; mathématiques 28/28 = 84 PDF ; histoire-géographie-EMC 12/12 = 36 PDF, dont 0 compétence EMC — cohérent avec CP→CM2). PDF vectoriels comme CP-CM1 (pas de limite raster). Défauts confirmés en français (écriture : 1 faute de conjugaison ; étude de la langue : 3 écarts objectif/contenu) et en mathématiques (« données de travail » génériques non pertinentes sur les 28 compétences ; support de lecture manquant sur 4 compétences OGD/résolution-problèmes) ; aucun défaut en histoire-géographie-EMC. 0 PDF modifié dans ce lot (corrections groupées non encore engagées). **Prochaine étape : 5e (66 PDF), puis 4e (57), 3e (75), puis seconde (108).**
 26. ~~Collège 5e (français, mathématiques, histoire-géographie-EMC, sciences-technologie, anglais).~~ Fait le 9 septembre 2026 : **5e intégralement clos, 22 compétences, 66/66 PDF.** Niveau le plus propre audité à ce stade : aucune erreur factuelle/scientifique/historique/mathématique/linguistique trouvée. Seul défaut récurrent : un « brouillon à réviser » ou une « suite à comparer » décrits en consigne mais jamais fournis dans le fichier (3 items notés au total, français et anglais). Première compétence EMC réelle de tout le chantier trouvée ici (`5e-hg-emc-solidarite`), correcte et bien conçue. Deux nouvelles matières rencontrées pour la première fois (sciences-technologie, anglais), toutes deux closes sans erreur. **Prochaine étape : 4e (57 PDF).**
+
+## Collège 4e — démarrage (9 septembre 2026)
+
+### Inventaire et constat de gabarit
+
+4e est encore plus allégé que 5e : 57 PDF répartis en 8 matières, avec des matières à **une seule compétence** (arts-plastiques, éducation musicale, EPS — jamais rencontrées avant ce niveau). Français (3), mathématiques (4), histoire-géographie-EMC (3), sciences-technologie (4), anglais (2), arts-plastiques (1), éducation musicale (1), EPS (1) = 9+12+9+12+6+3+3+3 = 57. Nouveau gabarit « Savoir / Méthode / Exemple » (plus léger que 5e), mascotte « Équipe Collège ».
+
+**Constat important de conception, propre à ce niveau** : de nombreux items (Palier 1-4 et évaluation) demandent d'analyser un « extrait **original** », un « dialogue **inédit** » ou de « classer six mots »/« quatre paroles » sans fournir ce contenu dans le fichier. Contrairement aux niveaux précédents où cela ressemblait à un oubli, la formulation explicite « inédit »/« original » indique ici une **conception intentionnelle** : le professeur apporte un support neuf à chaque usage, pour évaluer un vrai transfert plutôt qu'un exercice pré-vu. **Non retenu comme défaut** à ce niveau, contrairement aux « brouillons à réviser » de 5e/6e qui ne portaient pas cette mention explicite.
+
+### Français 4e clos (3/3 compétences, 9/9 PDF)
+
+`ecr-point-vue` (texte argumenté, thèse/arguments/exemples), `lang-discours` (discours direct/indirect, transformation « Je partirai demain » → « qu'elle partira le lendemain » — concordance correcte pour un verbe introducteur au présent), `lec-sentiments` (analyse littéraire, exemple « Elle serra la lettre, hésita, puis sourit malgré elle » bien interprété). Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Collège 5e — démarrage (9 septembre 2026)
 
