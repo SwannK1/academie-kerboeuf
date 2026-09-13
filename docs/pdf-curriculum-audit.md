@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 758 (365 CP→CM2 + 9 maternelle + **384 collège (6e+5e+4e+3e) — intégralement clos**) |
-| PDF restant à auditer | 108 sur les 866 suivis par Git (seconde : 108 — dernier périmètre). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 782 (365 CP→CM2 + 9 maternelle + 384 collège + 24 seconde : **français 8/8 clos**) |
+| PDF restant à auditer | 84 sur les 866 suivis par Git (seconde restant : mathématiques 30, HG 12, langues-vivantes 12, sciences 12, arts 6, EMC 6, EPS 6). |
 | Corrections appliquées (3e, cumulées) | 5 : 2 mathématiques/HG-EMC (références orphelines) + 3 anglais (texte/documents/sujet manquants) |
 | Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
@@ -550,6 +550,18 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 4. `a-et-a` et `homonymes` (orthographe/vocabulaire, 2 items) — phrases déjà correctes annoncées à tort comme fautives dans un exercice de correction.
 5. `et-et-est` (orthographe, 1 item) — construction de phrase fautive indépendamment du choix d'homophone.
 6. Motif transversal (plusieurs fiches grammaire) — phrases à compléments/pronoms multiples dans des exercices à réponse unique.
+
+## Lycée Seconde — démarrage (9 septembre 2026)
+
+### Inventaire
+
+Dernier périmètre du dépôt. 108 PDF, 8 matières : français (8×3=24), mathématiques (10×3=30), histoire-géographie (4×3=12), langues-vivantes (4×3=12), sciences (4×3=12), arts (2×3=6), EMC (2×3=6), EPS (2×3=6). PDF vectoriels (pas de limite raster). Gabarit « Savoir/Méthode/Exemple » identique à celui rencontré en 4e/certaines fiches 3e, mascotte « Équipe Lycée ».
+
+**Motif de conception confirmé identique à 4e** : la quasi-totalité des évaluations réfèrent un « extrait original », un « récit original » ou des éléments « inédits » sans les fournir dans le fichier — conception intentionnelle (contenu apporté par l'enseignant à chaque usage), pas un défaut, sauf lorsqu'un contenu concret existe ailleurs (leçon/exercices) et est incohéremment absent de l'évaluation seule (motif déjà rencontré et corrigé 5 fois en 3e).
+
+### Français seconde clos (8/8 compétences, 24/24 PDF)
+
+`analyser-un-personnage` (construction psychologique, distinction personnage/auteur), `analyser-une-phrase-complexe` (« Quand la salle se vide, Léa reste car elle attend le régisseur » — 3 propositions correctement analysées : circonstancielle de temps + coordonnée de cause), `formuler-une-these`, `identifier-les-enjeux-d-une-scene`, `interpreter-une-image-poetique` (« La ville avale les pas du matin », personnification bien analysée), `mobiliser-un-lexique-d-analyse` (méthodologie exigeante, évite le catalogue décoratif), `organiser-un-paragraphe-argumente`, `situer-un-recit` (évite explicitement le jugement anachronique). **Niveau d'exigence littéraire élevé et cohérent, aucune erreur trouvée.** Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Prochaines étapes sûres
 
