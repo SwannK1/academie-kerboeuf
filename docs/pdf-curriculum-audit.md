@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 425 (365 CP→CM2 + 9 maternelle + 51 collège 6e : français écriture 15/15 + étude de la langue 15/15 + lecture 21/21) |
-| PDF restant à auditer | 546 (6e : 135 restants — oral 15, mathématiques 84, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 440 (365 CP→CM2 + 9 maternelle + **66 collège 6e : français intégralement clos, 22/22 compétences**) |
+| PDF restant à auditer | 531 (6e : 120 restants — mathématiques 84, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -597,3 +597,9 @@ Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le 
 ### Français 6e — domaine lecture clos (7/7 compétences, 21/21 PDF)
 
 `documentaire` (texte sur le martinet noir — faits revérifiés exacts : vit en vol, dort en planant, niche sous les toits, migre vers l'Afrique, cohérent avec l'audit CM1 du même oiseau), `inference`, `infos-explicites`, `justifier-indice`, `point-vue`, `texte-narratif` (ces cinq derniers réutilisent le même texte support « Lina et la boussole », un choix légitime : un texte bien construit sert plusieurs angles de lecture différents), `vocabulaire-contexte`. **Aucune erreur trouvée sur les 7 compétences.** Barèmes `/10` tous exacts (2+3+3+2). Bonne vérification de non-redondance entre compétences aux intitulés proches (inférence vs information explicite vs justification par indice — trois angles distincts et complémentaires sur la même compétence de lecture, pas des doublons).
+
+### Français 6e — domaine oral clos (5/5 compétences, 15/15 PDF) — **FRANÇAIS 6E INTÉGRALEMENT CLOS**
+
+`echange` (participer à un échange organisé), `justifier` (justifier brièvement son avis), `lecture-voix-haute` (lire à voix haute), `reformuler` (écouter et reformuler), `reponse` (présenter une réponse clairement). **Aucune erreur trouvée.** Barèmes `/10` tous exacts. Note de conception mineure (pas un défaut) : les évaluations de compétences orales utilisent le même gabarit générique à 4 questions écrites que les autres domaines, plutôt qu'une grille d'observation dédiée à une prestation orale réelle (comme en maternelle) — `lecture-voix-haute` demande de lire « un paragraphe de 80 mots » sans fournir ce texte dans la fiche.
+
+**FRANÇAIS 6E est maintenant intégralement audité : 22/22 compétences, 66/66 PDF** (écriture 5/5, étude de la langue 5/5, lecture 7/7, oral 5/5). Bilan : 0 PDF modifié à ce stade (corrections groupées prévues), défauts confirmés recensés sur écriture (1) et étude de la langue (3), aucun sur lecture ni oral.
