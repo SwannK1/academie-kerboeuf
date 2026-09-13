@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   getDefaultSubstituteFolderState,
   SUBSTITUTE_FOLDER_STORAGE_KEY,
@@ -66,11 +66,24 @@ function buildStateFromStatuses(
 }
 
 export function TeacherSubstituteFolderClient() {
+  // Le premier rendu reste identique côté serveur et côté client : les
+  // statuts stockés dans localStorage ne sont appliqués qu'après
+  // l'hydratation, pour éviter un mismatch React (#418).
   const [state, setState] = useState<SubstituteFolderState>(() =>
-    buildStateFromStatuses(readStoredStatuses()),
+    getDefaultSubstituteFolderState(),
   );
+  const isInitialWriteRef = useRef(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage
+    setState(buildStateFromStatuses(readStoredStatuses()));
+  }, []);
+
+  useEffect(() => {
+    if (isInitialWriteRef.current) {
+      isInitialWriteRef.current = false;
+      return;
+    }
     window.localStorage.setItem(
       SUBSTITUTE_FOLDER_STORAGE_KEY,
       JSON.stringify(state),
