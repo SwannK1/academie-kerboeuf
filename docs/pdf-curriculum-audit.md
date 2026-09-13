@@ -67,14 +67,14 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 272 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 59 CM2 : **mathématiques CM2 closes, 20/20 compétences**) |
-| PDF restant à auditer | 699 (dont 95 CM2 français, prochain sous-lot) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 291 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 78 CM2 : mathématiques 59/59 closes + français conjugaison 19/19 closes) |
+| PDF restant à auditer | 680 (dont 76 CM2 français restants) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
 | Erreurs corrigées | 4 |
-| Erreurs confirmées, non corrigées (limite technique) | 1 lot (3 PDF, illustrations raster — voir CM2 `reconnaitre-le-patron-dun-solide`) |
+| Erreurs confirmées, non corrigées (limite technique) | 2 lots, 4 PDF (voir CM2 `reconnaitre-le-patron-dun-solide` et `passe-compose-avoir`) |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
@@ -495,6 +495,16 @@ Ce n'est pas une erreur ponctuelle isolable par une correction de texte : ces pa
 Les 8 compétences restantes ont été auditées sans erreur : `rediger-un-programme-de-construction`, `reproduire-une-figure-geometrique`, `resoudre-une-mission-geometrique-complete`, `se-reperer-sur-un-plan`, `tracer-des-droites-perpendiculaires` (l'évaluation couvre aussi les droites parallèles, synthèse cohérente), `utiliser-plusieurs-outils-geometriques`. Missions de construction toutes vérifiées faisables (mesures cohérentes : cercles de rayon toujours inférieur aux segments porteurs, angles et perpendiculaires non contradictoires) ; figures « erreur à corriger » (Félix/Hector) toutes cohérentes avec leur situation textuelle (ex. diagonale n'atteignant pas le bon sommet, angle non droit visiblement penché, lieu D4 vs E4 sur un plan quadrillé) ; grilles de repérage sur plan toutes exactes.
 
 **CM2 mathématiques est maintenant intégralement audité pour tout le contenu PDF existant : 20/20 compétences de géométrie, 59/59 PDF** (aucune compétence nombres-calculs/mesures/problèmes n'a de PDF à ce niveau — gap déjà documenté ci-dessus, pas un oubli d'audit). Bilan : 0 PDF modifié, 1 défaut confirmé mais non corrigé pour limite technique (`reconnaitre-le-patron-dun-solide`, 3 PDF, illustrations raster), 1 triplet nativement incomplet déjà connu du code (`reconnaitre-et-decrire-des-triangles`, pas de f3).
+
+### Français CM2 — domaine conjugaison clos (9 septembre 2026) : 7/7 compétences, 19/19 PDF
+
+**Confirmation architecture** : comme pour les mathématiques CM2, chaque page `francais-pdf/*.pdf` est une image raster unique (`page.get_drawings()` vide, aucune couche de texte) — vérifié sur plusieurs fichiers de ce domaine. **Toute correction de contenu CM2 nécessiterait donc de régénérer l'illustration**, pas une simple redaction de texte comme pour CP/CE1/CE2/CM1. Ce constat s'applique à l'ensemble du corpus CM2 (français ET mathématiques), pas seulement à `reconnaitre-le-patron-dun-solide`.
+
+Compétences auditées : `futur-simple`, `imparfait`, `passe-compose-avoir`, `passe-compose-etre`, `distinguer-imparfait-passe-compose`, `imperatif`, `infinitif`. Conjugaisons, terminaisons et accords du participe passé (auxiliaire être) tous vérifiés exacts sur l'ensemble des exemples et corrigés implicites.
+
+**Défaut confirmé — `passe-compose-avoir`, feuille 3 (évaluation), exercice 2, item 4** : la phrase à compléter est *« L'année prochaine, j'___ en CM2. (être) »*. Or CM2 est la **dernière année de l'école primaire française** (CP-CE1-CE2-CM1-CM2, puis 6ème au collège) — un élève de CM2 sera en 6ème l'année suivante, pas en CM2 une seconde fois. La phrase est donc incohérente pour son public cible (elle induit une fausse continuité de niveau). **Non corrigé dans ce lot** : même limite technique que pour les mathématiques CM2 (page raster, pas de texte éditable par redaction) — documenté ici, correction à faire lors d'une régénération future de cette illustration (remplacer par exemple par « L'année prochaine, je ___ en 6ème » ou une phrase neutre sans référence de niveau).
+
+Aucune autre erreur trouvée sur les 19 PDF de conjugaison. Aucun PDF modifié (limite technique).
 
 ## Prochaines étapes sûres
 
