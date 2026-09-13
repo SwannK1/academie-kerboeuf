@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 404 (365 CP→CM2 + 9 maternelle + 30 collège 6e : français écriture 15/15 + étude de la langue 15/15) |
-| PDF restant à auditer | 567 (6e : 156 restants ; 5e/4e/3e : 384 ; seconde : 108) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 425 (365 CP→CM2 + 9 maternelle + 51 collège 6e : français écriture 15/15 + étude de la langue 15/15 + lecture 21/21) |
+| PDF restant à auditer | 546 (6e : 135 restants — oral 15, mathématiques 84, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -593,3 +593,7 @@ Défaut confirmé et corrigible (non corrigé dans ce lot, à corriger en lot gr
 - **`temps-recit`** : la compétence porte explicitement sur imparfait/passé composé, mais l'exemple utilisé dans l'exercice ET l'évaluation (« une lumière **apparut** ») est conjugué au **passé simple**, pas au passé composé (qui donnerait « est apparue ») — incohérence entre le temps enseigné et le temps illustré, confirmée dans les 2 fichiers qui réutilisent la même phrase.
 
 Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le niveau de gravité de chaque défaut confirmé sur l'ensemble du niveau 6e). Tous les barèmes `/10` recalculés exacts (2+3+3+2 sur toutes les évaluations de ce sous-lot).
+
+### Français 6e — domaine lecture clos (7/7 compétences, 21/21 PDF)
+
+`documentaire` (texte sur le martinet noir — faits revérifiés exacts : vit en vol, dort en planant, niche sous les toits, migre vers l'Afrique, cohérent avec l'audit CM1 du même oiseau), `inference`, `infos-explicites`, `justifier-indice`, `point-vue`, `texte-narratif` (ces cinq derniers réutilisent le même texte support « Lina et la boussole », un choix légitime : un texte bien construit sert plusieurs angles de lecture différents), `vocabulaire-contexte`. **Aucune erreur trouvée sur les 7 compétences.** Barèmes `/10` tous exacts (2+3+3+2). Bonne vérification de non-redondance entre compétences aux intitulés proches (inférence vs information explicite vs justification par indice — trois angles distincts et complémentaires sur la même compétence de lecture, pas des doublons).
