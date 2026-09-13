@@ -67,14 +67,14 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 291 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 78 CM2 : mathématiques 59/59 closes + français conjugaison 19/19 closes) |
-| PDF restant à auditer | 680 (dont 76 CM2 français restants) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 340 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 127 CM2 : mathématiques 59/59 closes + français conjugaison 19/19 + grammaire 49/49 closes) |
+| PDF restant à auditer | 631 (dont 27 CM2 français restants : orthographe, vocabulaire, lecture-compréhension) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
 | Erreurs corrigées | 4 |
-| Erreurs confirmées, non corrigées (limite technique) | 2 lots, 4 PDF (voir CM2 `reconnaitre-le-patron-dun-solide` et `passe-compose-avoir`) |
+| Erreurs confirmées, non corrigées (limite technique) | 3 lots — voir CM2 `reconnaitre-le-patron-dun-solide`, `passe-compose-avoir`, domaine grammaire (5 défauts + 1 motif transversal) |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
@@ -505,6 +505,22 @@ Compétences auditées : `futur-simple`, `imparfait`, `passe-compose-avoir`, `pa
 **Défaut confirmé — `passe-compose-avoir`, feuille 3 (évaluation), exercice 2, item 4** : la phrase à compléter est *« L'année prochaine, j'___ en CM2. (être) »*. Or CM2 est la **dernière année de l'école primaire française** (CP-CE1-CE2-CM1-CM2, puis 6ème au collège) — un élève de CM2 sera en 6ème l'année suivante, pas en CM2 une seconde fois. La phrase est donc incohérente pour son public cible (elle induit une fausse continuité de niveau). **Non corrigé dans ce lot** : même limite technique que pour les mathématiques CM2 (page raster, pas de texte éditable par redaction) — documenté ici, correction à faire lors d'une régénération future de cette illustration (remplacer par exemple par « L'année prochaine, je ___ en 6ème » ou une phrase neutre sans référence de niveau).
 
 Aucune autre erreur trouvée sur les 19 PDF de conjugaison. Aucun PDF modifié (limite technique).
+
+### Français CM2 — domaine grammaire clos (9 septembre 2026) : 21/21 compétences, 49/49 PDF
+
+Compétences auditées : `phrase-correcte`, `identifier-verbe-conjugue`, `identifier-sujet`, `accorder-verbe-sujet`, `nom-groupe-nominal`, `accorder-groupe-nominal`, `enrichir-groupe-nominal`, `identifier-complements-verbe`, `verbes-frequents-present`, `cod`, `coi`, `distinguer-cod-coi`, `complements-circonstanciels`, `distinguer-cv-cc`, `attribut-sujet`, `accord-attribut-sujet`, `nature-fonction`, `adverbes`, `adverbes-ment`, `pronoms-personnels`, `pronoms-repetitions`. Plusieurs couples de compétences aux noms proches vérifiés non redondants (`identifier-sujet` vs `accorder-verbe-sujet`, `cod`/`coi` vs `distinguer-cod-coi`, `attribut-sujet` vs `accord-attribut-sujet`, `pronoms-personnels` vs `pronoms-repetitions` — chacun cible un niveau ou un angle distinct, progression légitime).
+
+**Défauts confirmés (aucun corrigé — limite technique raster, cf. ci-dessus)** :
+
+1. **`pronoms-personnels`, feuille 3, exercice 2, item 5** : la phrase *« La pluie est tombée toute la nuit ; cela a inondé la rue. »* utilise **« cela », qui est un pronom démonstratif, pas un pronom personnel** — erreur de catégorie grammaticale dans une évaluation qui porte spécifiquement sur les pronoms personnels. Aggravant : « cela » reprend toute la proposition précédente (un événement), pas « un nom ou un groupe nominal » comme l'exige la propre définition de la mini-leçon — l'item ne correspond donc à aucun des deux critères de la compétence testée.
+2. **`adverbes-ment`** : la mini-leçon (feuille 1) n'enseigne que le schéma régulier « féminin de l'adjectif + -ment » (lent→lente→lentement). Or **l'exercice de la feuille 2 (item 1) et l'évaluation de la feuille 3 (items 4 et 6) testent `prudent` et `patient`**, qui suivent un schéma totalement différent et jamais enseigné (`-ent/-ant` → `-emment/-amment` : prudent**→prudemment**, patient**→patiemment**, pas « prudentement »/« patientement »). Un élève qui applique la règle telle qu'énoncée produira une forme incorrecte sur 2 items de l'évaluation. La feuille 1 teste aussi « poli » (→ poliment, pas poliement) sans expliquer l'exception, partiellement compensée par un encadré de prudence générique en feuille 2 seulement.
+3. **`verbes-frequents-present`, feuille 3** : le tableau de référence « Conjugaison » n'indique que les terminaisons régulières du présent (-e, -s, -e, -ons, -ez, -ent), alors que l'évaluation teste exclusivement des verbes irréguliers (**être, avoir, aller**) dont aucune forme ne suit ce patron (je suis, j'ai, je vais). Le tableau fourni est donc inutilisable, voire trompeur, pour l'exercice qu'il est censé accompagner.
+4. Deux coquilles orthographiques : « gramaticale » pour « grammaticale » (`enrichir-groupe-nominal`, feuille 3) et « Dons chaque phrase » pour « Dans chaque phrase » (`adverbes`, feuille 3).
+5. **`nature-fonction`, feuille 3, item 4** demande la fonction de « de Félix » dans « Le carnet de Félix est bien rangé » — la réponse attendue (complément du nom) n'est enseignée dans aucune mini-leçon de la série (qui couvre sujet/COD/COI/CC/attribut), pas un vrai défaut mais un léger dépassement du périmètre annoncé.
+
+**Observation transversale (pas un défaut à corriger, mais un motif récurrent)** : plusieurs exercices « automatismes » proposent des phrases naturelles contenant deux compléments ou pronoms valides (ex. une phrase avec un COD ET un COI alors que la consigne demande d'identifier « le » complément ; une phrase avec deux pronoms alors que la consigne est au singulier) — rencontré dans `distinguer-cod-coi` (f1 item 5), `complements-circonstanciels` (f1 item 3, f2 items 1 et 4), `distinguer-cv-cc` (f2, f3), `pronoms-personnels` (f1 items 3, 5, 6). Le format à réponse unique est alors ambiguë sur lequel des deux éléments valides est attendu ; sans incidence bloquante en classe avec l'enseignant, mais signalé pour une éventuelle relecture éditoriale.
+
+Aucun PDF modifié (limite technique raster). **Domaine grammaire CM2 clos : 21/21 compétences, 49/49 PDF.**
 
 ## Prochaines étapes sûres
 
