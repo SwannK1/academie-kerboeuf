@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 587 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 27 collège 5e : français 4/4 + mathématiques 5/5 closes) |
-| PDF restant à auditer | 279 sur les 866 suivis par Git (5e restant : 39 — HG-EMC 12, sciences-techno 12, anglais 15 ; 4e : 57 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 599 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 39 collège 5e : français 4/4 + mathématiques 5/5 + HG-EMC 4/4 closes) |
+| PDF restant à auditer | 267 sur les 866 suivis par Git (5e restant : 27 — sciences-techno 12, anglais 15 ; 4e : 57 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -591,6 +591,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Mathématiques 5e clos (5/5 compétences, 15/15 PDF)
 
 `nombres-relatifs` (comparaison/addition/soustraction, piège « -9 > -2 car 9>2 » correctement résolu), `geometrie-triangle` (inégalité triangulaire vérifiée deux fois : 6+4,5>7 constructible, 2+3<6 non constructible), `grandeurs-aires-volumes` (0,96 m³ pour le pavé, diagnostic à deux erreurs bien conçu — 96 au lieu de 0,96 et m² au lieu de m³), `donnees-probabilites` (fréquences 9/12/6/3 sur 30 sommant à 1 ; P(vert)=1/8 ; nuance équiprobabilité correcte sur {1,2,2,3}), `problemes-proportionnalite` (21 km/h × 3,5h=73,5 km ; non-proportionnalité âge/taille bien justifiée). **Tous les calculs recalculés à la main, tous exacts. Aucune erreur trouvée, aucun défaut de support manquant** (contrairement au français 5e et à l'OGD mathématiques 6e — ce sous-lot mathématiques 5e est le plus propre audité jusqu'ici). Barèmes `/10` tous exacts (2+4+3+1).
+
+### Histoire-Géographie-EMC 5e clos (4/4 compétences, 12/12 PDF) — **première compétence EMC réelle de tout l'audit**
+
+`solidarite` (EMC — **premier contenu EMC réel trouvé dans tout ce chantier**, sur toute matière et tout niveau confondus : dilemme éthique bien construit entre intention solidaire et respect de la vie privée lors d'une collecte scolaire, distinction équité/égalité correctement traitée), `geographie-ressources` (répartition eau 900mm/98% vs 180mm/62%, cohérence géographique réaliste, données explicitement « fictives »), `histoire-medieval` (ville portuaire méditerranéenne v.1200, commerce d'épices/tissus/monnaies — plausible historiquement), `methode-documents` (urbanisation 35%→57% entre 1950 et 2020, également « fictif » assumé). Nouveau personnage-guide « Elian le Renard » pour cette matière à ce niveau. **Aucune erreur trouvée sur les 4 compétences.** Barèmes `/10` tous exacts (2+4+3+1).
 
 ## Collège 6e — démarrage (9 septembre 2026)
 
