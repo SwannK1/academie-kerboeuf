@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 491 (365 CP→CM2 + 9 maternelle + 117 collège 6e : français 66/66 + mathématiques nombres-calculs 21/21 + grandeurs-mesures 15/15 + géométrie 15/15) |
-| PDF restant à auditer | 480 (6e : 69 restants — mathématiques OGD/résolution-problèmes 33, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 506 (365 CP→CM2 + 9 maternelle + 132 collège 6e : français 66/66 + mathématiques nombres-calculs 21/21 + grandeurs-mesures 15/15 + géométrie 15/15 + OGD 15/15) |
+| PDF restant à auditer | 465 (6e : 54 restants — mathématiques résolution-problèmes 18, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -617,3 +617,9 @@ Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le 
 ### Mathématiques 6e — domaine géométrie clos (5/5 compétences, 15/15 PDF)
 
 `vocabulaire` ((AB)/[AB]/[AB) correctement distingués), `reconnaitre-figures` (carré/rectangle/losange/triangle), `paralleles-perpendiculaires`, `tracer-instruments`, `programme-construction` (vérifié distinct de `tracer-instruments` : exécution d'un programme multi-étapes vs. tracé isolé). Tout le vocabulaire et les notations géométriques vérifiés exacts. Barèmes `/10` tous exacts (2+3+3+2). Même défaut systémique de « données de travail » génériques confirmé sur les 5 compétences (désormais avéré transversal à tout le niveau mathématiques 6e, pas propre à un domaine).
+
+### Mathématiques 6e — domaine organisation-gestion-données clos (5/5 compétences, 15/15 PDF)
+
+`lire-tableau`, `lire-graphique`, `completer-tableau`, `interpreter-donnees`, `calculer-moyenne` (12+15+9+16=52÷4=13, bien compris entre 9 et 16 — correct).
+
+**Défaut confirmé sur 3 des 5 compétences (`lire-tableau`, `lire-graphique`, `completer-tableau`), 6 fichiers** : la consigne du Palier 2 demande explicitement de lire une donnée dans un support (« Dans un tableau de fréquentation, relève la valeur d'une case » / « Lis trois valeurs sur un diagramme en barres gradué de 5 en 5 » / « Complète un tableau de scores à partir de quatre phrases ») **mais aucun tableau, graphique ni liste de phrases n'est fourni dans le fichier** — contrairement à tous les autres domaines mathématiques 6e où le Palier 2 contient toujours des données concrètes et exploitables (ex. « 7 cm sur 4 cm », « 4728 + 956 »). Une lecture ou un remplissage de données est par nature impossible sans le support à lire. **Hypothèse de cause probable** : les deux autres compétences du même domaine (`interpreter-donnees` : « 12, 18, 18 et 25 » ; `calculer-moyenne` : « 12, 15, 9 et 16 ») ont, elles, des données concrètes bien fournies — le nombre « 12 ; 18 ; 25 ; 40 » du Palier 1 générique (présent sur tout le niveau 6e, cf. plus haut) est très proche de celui d'`interpreter-donnees`, suggérant que ce jeu de données a servi de modèle avant d'être vidé de son contenu réel pour les 3 compétences de lecture de support. **Non corrigé dans ce lot** (nécessiterait de créer un tableau/graphique/liste de phrases inédit, ce qui dépasse une simple correction et relève d'une décision de contenu).
