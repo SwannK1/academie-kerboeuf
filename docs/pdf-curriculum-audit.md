@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 635 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 9 collège 4e : **français 3/3 clos**) |
-| PDF restant à auditer | 231 sur les 866 suivis par Git (4e restant : 48 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 647 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 21 collège 4e : français 3/3 + mathématiques 4/4 closes) |
+| PDF restant à auditer | 219 sur les 866 suivis par Git (4e restant : 36 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -588,6 +588,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Français 4e clos (3/3 compétences, 9/9 PDF)
 
 `ecr-point-vue` (texte argumenté, thèse/arguments/exemples), `lang-discours` (discours direct/indirect, transformation « Je partirai demain » → « qu'elle partira le lendemain » — concordance correcte pour un verbe introducteur au présent), `lec-sentiments` (analyse littéraire, exemple « Elle serra la lettre, hésita, puis sourit malgré elle » bien interprété). Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
+
+### Mathématiques 4e clos (4/4 compétences, 12/12 PDF)
+
+`nc-puissances` (notation scientifique : 4,56×10⁷, 7,2×10⁻⁴, 4,5×10⁻⁵, 7,82×10⁷ tous exacts ; 2,9×10⁶ > 3,2×10⁵ correctement comparé), `nc-developper` (distributivité : 6x-15+4x=10x-15 ; 4(2x-3)+5x=13x-12 ; -3(x+7)+2x=-x-21, tous exacts), `geo-pythagore` (6-8-10 et 7,2-5,4-9 : deux triplets vérifiés exacts par calcul), `df-graphique` (image/antécédent correctement expliqués ; confirmation supplémentaire du motif « inédit » : l'évaluation précise explicitement « sur un graphique **inédit** », confirmant la conception intentionnelle déjà notée pour ce niveau — le graphique est apporté par l'enseignant, pas un oubli). Tous les calculs recalculés à la main, tous exacts. Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Collège 5e — démarrage (9 septembre 2026)
 
