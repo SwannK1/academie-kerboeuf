@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 374 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + **154 CM2 — niveau clos, 57/57 compétences** + **9 maternelle — niveau clos, 3/3 compétences existantes**) |
-| PDF restant à auditer | 597 (collège 6e/5e/4e/3e : 384, lycée seconde : 108, hors périmètre primaire/maternelle) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 404 (365 CP→CM2 + 9 maternelle + 30 collège 6e : français écriture 15/15 + étude de la langue 15/15) |
+| PDF restant à auditer | 567 (6e : 156 restants ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -574,3 +574,22 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 22. ~~Prochain niveau : CM2.~~ Fait le 9 septembre 2026 : **CM2 intégralement audité, 57/57 compétences, 154/154 PDF** (mathématiques géométrie 20/20 + français 37/37 : conjugaison, grammaire, orthographe, vocabulaire, lecture-compréhension). 6 lots de défauts confirmés et documentés (voir section dédiée), 0 PDF modifié — limite technique architecturale : chaque PDF CM2 est une image raster sans source éditable dans ce dépôt (PNG téléchargés d'un Google Drive externe, `scripts/download-math-fiches.py`), contrairement au texte vectoriel de CP/CE1/CE2/CM1. Aucune compétence nombres-calculs/mesures/problèmes/HG/sciences/EMC n'a de PDF à ce niveau (gap déjà documenté, cohérent avec `cm2-subjects.ts` qui affiche ces matières en statut « in-progress »/« upcoming »).
 23. **Tous les PDF pédagogiques du périmètre CP → CM2 sont audités** (CP 33/33, CE1 28/28, CE2 24/24, CM1 126/126, CM2 154/154 = 365/365 PDF). Consigne explicite reçue le 9 septembre 2026 : poursuivre l'audit sur tout le reste du dépôt (maternelle, collège 6e/5e/4e/3e, lycée seconde — 501 PDF supplémentaires recensés sous `public/fiches/`), matière par matière, sans s'arrêter entre les niveaux.
 24. ~~Maternelle.~~ Fait le 9 septembre 2026 : **3/3 compétences existantes auditées, 9/9 PDF** (`ms/langage` : reconnaître son prénom, raconter une action vécue, comprendre une histoire courte — chacune en triplet fiche-atelier/fiche-parent/grille-observation, gabarit texte vectoriel comme CP-CM1, pas de limite raster ici). Aucune erreur trouvée. Note mineure sans gravité : la fiche « comprendre une histoire courte » liste « fleur » dans les mots utiles alors que le texte à lire ne va que jusqu'à « une tige verte apparaît » (mot non présent dans le texte, extension lexicale plausible mais non littérale — non corrigé, jugement pédagogique raisonnable). **Confirmé par lecture de `content/levels/maternelle/*.ts`** : le reste du curriculum maternelle (PS, GS, et les domaines MS autres que langage) est intégralement structuré mais chaque ressource y est déjà marquée `status: "upcoming"` dans le code — absence de PDF cohérente et auto-documentée, pas une lacune cachée. **Prochaine étape : collège (6e, 186 PDF — le plus gros lot restant).**
+
+## Collège 6e — démarrage (9 septembre 2026)
+
+### Inventaire
+
+186 PDF : français (22 compétences × 3 = 66 : écriture 5, étude de la langue 5, lecture 7, oral 5), mathématiques (28 compétences × 3 = 84 : nombres-calculs 7, grandeurs-mesures 5, géométrie 5, organisation-gestion-données 5, résolution-problèmes 6), histoire-géographie-EMC (12 compétences × 3 = 36, HG et EMC fusionnés en une seule matière à ce niveau, contrairement au primaire). **Vérifié : gabarit texte vectoriel comme CP→CM1** (`page.get_drawings()` non vide, texte extractible) — pas la limite raster de CM2, les erreurs trouvées ici sont corrigibles par la même méthode de redaction que CP-CM1.
+
+### Français 6e — domaines écriture et étude de la langue clos (10/22 compétences, 30/30 PDF)
+
+**Écriture (5/5)** : `connecteurs`, `expansions`, `paragraphe`, `planifier`, `relecture`. **Constat structurel important** : contrairement à CP-CM2, les fiches 6e réutilisent de larges blocs de texte **identiques mot pour mot** d'une compétence à l'autre (les encadrés « 1. Comprendre / 2. Agir », le corpus de travail « Les élèves préparent leur exposition… », la consigne Palier 3 « Justifie ta réponse par un calcul, un indice, une propriété ou une phrase précise selon la discipline » qui mentionne un « calcul » même en français — probablement un gabarit générique multi-matières, la clause « selon la discipline » en atténue la portée, pas retenu comme défaut). Seule la partie réellement spécifique à chaque compétence (titre, JE RETIENS, exemples chiffrés/phrases) change.
+
+Défaut confirmé et corrigible (non corrigé dans ce lot, à corriger en lot groupé) : **`connecteurs`, feuille leçon** — faute grammaticale « Je varies mes connecteurs » (devrait être « Je varie », 1re personne du singulier du verbe varier) présente deux fois dans le même fichier (encadré « 3. Vérifier » et « Critères de réussite »).
+
+**Étude de la langue (5/5)** : `accord` (accorder le verbe avec son sujet), `classes` (classes grammaticales), `groupes` (groupes syntaxiques), `sujet-verbe` (repérer sujet/verbe — vérifié distinct de `accord` : identification vs. accord, progression légitime), `temps-recit` (imparfait/passé composé). Deux défauts confirmés (non corrigés) :
+- **`accord`** : l'objectif annoncé (« y compris avec des sujets inversés ou éloignés ») n'est jamais illustré ni testé — les 3 fichiers ne contiennent que des phrases à sujet simple et adjacent. Écart entre promesse et contenu réel, pas une erreur de fait mais un vrai trou de couverture.
+- **`classes`** : l'objectif et le « JE RETIENS » annoncent 5 classes (nom, verbe, adjectif, **pronom**, déterminant), mais l'exercice et l'évaluation pratiquent en réalité nom/verbe/adjectif/déterminant/**adverbe** — le pronom n'apparaît jamais (la phrase support n'en contient même pas), et l'adverbe pratiqué n'est mentionné nulle part dans l'objectif. Incohérence confirmée sur les 3 fichiers.
+- **`temps-recit`** : la compétence porte explicitement sur imparfait/passé composé, mais l'exemple utilisé dans l'exercice ET l'évaluation (« une lumière **apparut** ») est conjugué au **passé simple**, pas au passé composé (qui donnerait « est apparue ») — incohérence entre le temps enseigné et le temps illustré, confirmée dans les 2 fichiers qui réutilisent la même phrase.
+
+Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le niveau de gravité de chaque défaut confirmé sur l'ensemble du niveau 6e). Tous les barèmes `/10` recalculés exacts (2+3+3+2 sur toutes les évaluations de ce sous-lot).
