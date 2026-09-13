@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 524 (365 CP→CM2 + 9 maternelle + 150 collège 6e : **français 66/66 + mathématiques 84/84 closes**) |
-| PDF restant à auditer | 447 (6e : 36 restants — histoire-géographie-EMC ; 5e/4e/3e : 384 ; seconde : 108) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 542 (365 CP→CM2 + 9 maternelle + 168 collège 6e : français 66/66 + mathématiques 84/84 + HG-EMC géographie 18/18) |
+| PDF restant à auditer | 429 (6e : 18 restants — histoire-géographie-EMC domaine histoire ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -629,3 +629,9 @@ Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le 
 `comprendre-situation` (même défaut de support manquant que l'OGD : « un énoncé de trajet » jamais fourni, 2 fichiers concernés), `choisir-operation` (8×24 feutres, choix cohérent), `organiser-etapes` (4×7+3×2=34 €), `plusieurs-etapes` (6×48−257=31 places, reste positif cohérent), `phrase-reponse` (transformation correcte, légère absence de question explicite compensée par la donnée+unité fournies), `verifier-coherence` (3 250 €/5 stylos = 650 €/stylo, incohérence bien choisie et explicite). Tous les calculs recalculés exacts, barèmes `/10` tous exacts.
 
 **MATHÉMATIQUES 6E intégralement auditées : 28/28 compétences, 84/84 PDF** (nombres-calculs 7/7, grandeurs-mesures 5/5, géométrie 5/5, organisation-gestion-données 5/5, résolution-problèmes 6/6). Bilan cumulé mathématiques 6e : 0 PDF modifié, défaut systémique de « données de travail » génériques confirmé sur l'ensemble du niveau (28 compétences), défaut de support de lecture manquant confirmé sur 4 compétences (`lire-tableau`, `lire-graphique`, `completer-tableau`, `comprendre-situation`).
+
+### 6e Histoire-Géographie-EMC — domaine géographie clos (6/6 compétences, 18/18 PDF)
+
+**Constat de cartographie important** : les 12 compétences de la matière « Histoire-Géographie-EMC » à ce niveau sont réparties 6 géographie / 6 histoire — **aucune compétence EMC** n'existe malgré le nom de la matière, cohérent avec l'absence systémique d'EMC déjà documentée à tous les niveaux précédents (CP à CM2).
+
+`carte-simple`, `croquis`, `document`, `echelles`, `espace-habite`, `lire-paysage`. Contrairement aux compétences de lecture de données mathématiques (OGD), **toutes les mises en situation géographiques sont entièrement décrites en texte** (ex. « le plan d'un quartier indique une rivière à l'ouest, des logements au centre, une gare au sud et un parc au nord » ; « au premier plan une route et des maisons, au second plan des champs, à l'arrière-plan des collines ») — pas besoin de carte/image jointe, donc **pas de défaut de support manquant dans ce domaine**, à la différence de l'OGD mathématiques. Convention grande échelle/petite échelle correctement utilisée (grande échelle = vue rapprochée/détaillée, petite échelle = vue large). Aucune erreur trouvée. Barèmes `/10` tous exacts.
