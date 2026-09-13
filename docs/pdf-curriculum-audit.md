@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 560 (365 CP→CM2 + 9 maternelle + **186 collège 6e — niveau intégralement clos, 62 compétences**) |
-| PDF restant à auditer | 306 sur les 866 suivis par Git (5e : 66 ; 4e : 57 ; 3e : 75 ; seconde : 108). **Correction d'une erreur d'addition antérieure** : une entrée précédente indiquait à tort « 5e/4e/3e : 384 » — ce chiffre correspondait en réalité à 6e+5e+4e+3e (186+198) et non aux seuls 5e/4e/3e (66+57+75=198). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 572 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 12 collège 5e : **français 5e clos, 4/4 compétences**) |
+| PDF restant à auditer | 294 sur les 866 suivis par Git (5e restant : 54 — mathématiques, HG-EMC, sciences-techno, anglais ; 4e : 57 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -575,6 +575,18 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 23. **Tous les PDF pédagogiques du périmètre CP → CM2 sont audités** (CP 33/33, CE1 28/28, CE2 24/24, CM1 126/126, CM2 154/154 = 365/365 PDF). Consigne explicite reçue le 9 septembre 2026 : poursuivre l'audit sur tout le reste du dépôt (maternelle, collège 6e/5e/4e/3e, lycée seconde — 501 PDF supplémentaires recensés sous `public/fiches/`), matière par matière, sans s'arrêter entre les niveaux.
 24. ~~Maternelle.~~ Fait le 9 septembre 2026 : **3/3 compétences existantes auditées, 9/9 PDF** (`ms/langage` : reconnaître son prénom, raconter une action vécue, comprendre une histoire courte — chacune en triplet fiche-atelier/fiche-parent/grille-observation, gabarit texte vectoriel comme CP-CM1, pas de limite raster ici). Aucune erreur trouvée. Note mineure sans gravité : la fiche « comprendre une histoire courte » liste « fleur » dans les mots utiles alors que le texte à lire ne va que jusqu'à « une tige verte apparaît » (mot non présent dans le texte, extension lexicale plausible mais non littérale — non corrigé, jugement pédagogique raisonnable). **Confirmé par lecture de `content/levels/maternelle/*.ts`** : le reste du curriculum maternelle (PS, GS, et les domaines MS autres que langage) est intégralement structuré mais chaque ressource y est déjà marquée `status: "upcoming"` dans le code — absence de PDF cohérente et auto-documentée, pas une lacune cachée. **Prochaine étape : collège (6e, 186 PDF — le plus gros lot restant).**
 25. ~~Collège 6e (français, mathématiques, histoire-géographie-EMC).~~ Fait le 9 septembre 2026 : **6e intégralement clos, 62 compétences, 186/186 PDF** (français 22/22 = 66 PDF ; mathématiques 28/28 = 84 PDF ; histoire-géographie-EMC 12/12 = 36 PDF, dont 0 compétence EMC — cohérent avec CP→CM2). PDF vectoriels comme CP-CM1 (pas de limite raster). Défauts confirmés en français (écriture : 1 faute de conjugaison ; étude de la langue : 3 écarts objectif/contenu) et en mathématiques (« données de travail » génériques non pertinentes sur les 28 compétences ; support de lecture manquant sur 4 compétences OGD/résolution-problèmes) ; aucun défaut en histoire-géographie-EMC. 0 PDF modifié dans ce lot (corrections groupées non encore engagées). **Prochaine étape : 5e (66 PDF), puis 4e (57), 3e (75), puis seconde (108).**
+
+## Collège 5e — démarrage (9 septembre 2026)
+
+### Inventaire
+
+5e a une structure très différente de 6e : **4 à 5 compétences par matière seulement** (pas de couverture exhaustive par domaine), et **2 matières supplémentaires** apparaissent (anglais, sciences-technologie), absentes de 6e. 66 PDF : français (4×3=12), mathématiques (5×3=15), histoire-géographie-EMC (4×3=12, **avec cette fois une compétence EMC réelle** : `solidarite`), sciences-technologie (4×3=12), anglais (5×3=15). PDF vectoriels comme 6e (pas de limite raster). Gabarit plus léger que 6e (une seule situation par fiche plutôt que 3 encadrés détaillés), cohérent avec un niveau à couverture d'échantillon plutôt qu'exhaustive.
+
+### Français 5e clos (4/4 compétences, 12/12 PDF)
+
+`ecriture-recit` (rédiger un épisode narratif cohérent), `langue-phrase-complexe` (analyser/transformer une phrase complexe — 3 propositions correctement identifiées : « lorsque » temporelle, « qui » relative), `lecture-aventure` (interpréter un texte à indices, bien conçu), `oral-lecture` (présenter et défendre une lecture, réutilise à bon droit le texte de `lecture-aventure`). Aucune erreur de fait ou de grammaire trouvée. Barèmes `/10` tous exacts (2+4+3+1 sur les 4 évaluations).
+
+**Défaut confirmé (2 occurrences, sur des items notés)** : `ecriture-recit` évaluation item 3 (3 pts) demande de réviser « un brouillon où l'objet change sans explication et où trois phrases commencent par ⟪ Il ⟫ » — ce brouillon fautif n'est jamais montré dans le fichier. `lecture-aventure` évaluation item 3 (3 pts) demande de « comparer deux suites possibles » — ces deux suites ne sont jamais fournies non plus. Même défaut de support manquant que l'OGD mathématiques 6e, ici sur des tâches littéraires plutôt que des données chiffrées. Non corrigé (nécessiterait de rédiger un contenu inédit).
 
 ## Collège 6e — démarrage (9 septembre 2026)
 
