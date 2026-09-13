@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 728 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 57 collège 4e + 45 collège 3e : français 5/5 + mathématiques 6/6 + HG-EMC 4/4 closes) |
-| PDF restant à auditer | 138 sur les 866 suivis par Git (3e restant : 30 — sciences-techno 15, anglais 15 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 743 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 66 collège 5e + 57 collège 4e + 60 collège 3e : français 5/5 + mathématiques 6/6 + HG-EMC 4/4 + sciences-techno 5/5 closes) |
+| PDF restant à auditer | 123 sur les 866 suivis par Git (3e restant : 15 — anglais ; seconde : 108). |
 | Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
@@ -601,6 +601,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 `dnb-methode` (graphique d'évolution urbaine 1960-2020 + entretien urbaniste, autonome), `emc-democratie` (EMC — vidéo de désinformation avant une élection locale, contenu civique mature et pertinent), `geographie-territoires` (métropole/ligne ferroviaire, acteurs/flux/aménagement), `histoire-monde-depuis-1914` (dossier 1914/1917, frise 1914-1918/1939-1945/1947-1991/1958 — toutes les dates vérifiées historiquement exactes). Mascotte « Elian le Renard » (comme en 5e). Aucune erreur factuelle.
 
 **Anomalie IMPORTANTE corrigée (même motif que `grandeurs-trigonometrie`)** : `emc-democratie`, évaluation, item 2 — demandait de proposer des vérifications « avant de partager cette vidéo », mais l'évaluation ne décrit jamais cette vidéo (le scénario n'existe que dans le fichier exercices). **Corrigé** par la même méthode (redaction + réinsertion) : « avant de partager une vidéo accusatrice sans source, utilisant une photo ancienne sortie de son contexte. » Rendu vérifié visuellement, barème intact. **Aucune récurrence trouvée dans les 3 autres évaluations HG-EMC 3e** (toutes autonomes).
+
+### Sciences et technologie 3e clos (5/5 compétences, 15/15 PDF)
+
+`dnb-dossier` (panneau solaire 350W/420kWh/an/10 panneaux → 4200 kWh/an, 116,7 % des besoins couverts), `physique-modeliser` (E=P×t : 1,5kW×2/3h=1,0kWh=3,6×10⁶J exact ; équation méthane à équilibrer, volontairement non équilibrée en énoncé), `technologie-systeme` (arrosage automatique, algorithme à condition de sécurité, 4 cas de test bien choisis dont un capteur incohérent), `terre-risques-climat` (+18cm/50ans, distinction aléa/enjeu/risque, distinction climat/météo rigoureuse), `vivant-donnees` (réponse immunitaire primaire/secondaire 2→45→18 puis 90 après rappel — immunologie exacte, mise en garde correcte sur anticorps ≠ cellules). **Rigueur scientifique remarquable et constante sur tout le sous-lot.** Aucune erreur trouvée, aucune référence orpheline (contrairement aux deux évaluations mathématiques/HG-EMC corrigées plus haut — ce sous-lot est entièrement autonome). Barèmes `/10` tous exacts (2+4+3+1).
 
 ## Collège 4e — démarrage (9 septembre 2026)
 
