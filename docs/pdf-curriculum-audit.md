@@ -67,13 +67,14 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 211 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** : 42/42 compétences, français 25/25 + mathématiques 17/17) |
-| PDF restant à auditer | 760 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 249 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 38 CM2 : mathématiques géométrie 12/20 compétences) |
+| PDF restant à auditer | 722 (dont 116 CM2) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
 | Erreurs corrigées | 4 |
+| Erreurs confirmées, non corrigées (limite technique) | 1 lot (3 PDF, illustrations raster — voir CM2 `reconnaitre-le-patron-dun-solide`) |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
@@ -466,6 +467,28 @@ Toutes les coordonnées de quadrillage et distances aux axes vérifiées cohére
 **Tous les calculs et énoncés recalculés à la main, tous exacts** : 55-38=17 places libres, 8×24=192 crayons, 4×26=104 élèves (évaluation données utiles) ; 3×24-18=54, 5×36-128=52, 6×25-87=63 livres/balles restants (problèmes à étapes, résultats intermédiaires toujours positifs et cohérents) ; 7×24=168 sièges, 18×9=162 bulbes, 14×28=392 sièges (problèmes multiplicatifs) ; graphiques en barres vérifiés fidèles aux données annoncées dans les deux fiches (exercices : lundi 20/mardi 35/mercredi 15/jeudi 40 sur une échelle de 5 en 5 — barres cohérentes visuellement ; évaluation : équipes A 30/B 45/C 25/D 40, même vérification). Les 3 barèmes `/10` recalculés exacts (2+2+3+3, 2+2+3+3, 2+2+4+2, 2+2+3+3). **Aucune erreur trouvée, aucun PDF modifié.**
 
 **MATHÉMATIQUES CM1 intégralement auditées : 17/17 compétences, 51/51 PDF, zéro erreur de calcul trouvée, aucun PDF modifié** (nombres-calculs 7/7, grandeurs-mesures 3/3, géométrie 3/3, problèmes 4/4). Combiné au français CM1 clos précédemment (25/25 compétences, 75/75 PDF, 12 PDF modifiés pour différenciation pédagogique), **CM1 est maintenant intégralement audité et clos : 42/42 compétences, 126/126 PDF**, sans aucune compétence du catalogue (`content/levels/cm1-competencies.ts`) restée sans triplet PDF vérifié. Aucune création de PDF EMC (aucune compétence EMC n'existe dans le catalogue CM1, conformément à la consigne de ne rien créer avant décision produit).
+
+## CM2 — démarrage (9 septembre 2026)
+
+### Inventaire et cartographie — architecture très différente de CP/CE1/CE2/CM1
+
+154 PDF CM2 au total : 95 `francais-pdf` (37 compétences réparties en conjugaison/grammaire/orthographe/vocabulaire/lecture-compréhension, `content/cm2-francais-fiches.ts`) + 59 `mathematiques-pdf` (20 compétences, **toutes en géométrie**, `content/cm2-fiches-maths.ts` — aucune compétence nombres-calculs/mesures/problèmes n'a de PDF à ce niveau). Chaque dossier `mathematiques/<slug>/` et `francais/<slug>/` en `.webp` est un doublon d'affichage (rendu image des mêmes pages, utilisé par le site pour la prévisualisation) du PDF source correspondant dans `mathematiques-pdf/`/`francais-pdf/` — **pas un doublon de contenu réel**, aucune action nécessaire dessus.
+
+Différence structurelle majeure avec CM1 : au lieu d'un triplet leçon/exercices/évaluation par compétence, CM2 utilise des « feuilles » `f1`/`f2`/`f3` (leçon/consolidation/évaluation) et **le code documente lui-même l'incomplétude** : `isNotionComplete()` dans `cm2-francais-fiches.ts` vérifie que les 3 feuilles existent. Sur les 37 compétences français, **12 n'ont pas leur triplet complet** (ex. `imparfait` n'a pas de f1, `nom-groupe-nominal` n'a que f1, `accorder-verbe-sujet` n'a que f3) — c'est un état déjà connu et reflété dans le code, pas une découverte de ce lot ; conformément à la consigne de ne jamais créer de PDF fictif, ces trous ne sont pas comblés, seulement documentés ici. `cm2-subjects.ts` confirme le statut `"in-progress"` pour mathématiques, histoire-géographie et sciences (`"upcoming"` pour EMC/anglais/arts/EPS), cohérent avec ce constat de contenu partiel — ce n'est pas un problème caché, c'est déjà su au niveau produit.
+
+Le parcours signature (`docs/parcours-signature-audit.md`) a déjà documenté que CM2 n'a pas de page compétence dédiée et un système de ressources fragmenté (`Cm2FrancaisFichesEmbed.tsx`, `Cm2MathFichesEmbed.tsx`) — non retouché dans ce lot, qui porte uniquement sur l'exactitude du contenu des PDF existants.
+
+### Mathématiques CM2 — sous-lot géométrie, 12/20 compétences auditées, 1 défaut confirmé et documenté
+
+Compétences auditées sans erreur (contenu, définitions, calculs et raisonnements tous exacts) : `identifier-et-comparer-des-angles`, `choisir-la-bonne-methode-en-geometrie`, `choisir-le-bon-outil-geometrique`, `completer-une-figure-par-symetrie-axiale`, `construire-un-carre-et-un-rectangle`, `construire-un-cercle-avec-un-compas`, `construire-un-triangle-a-partir-de-mesures` (inégalité triangulaire vérifiée sur chaque triplet de longueurs proposé), `lire-un-programme-de-construction`, `lire-une-maquette-ou-un-plan-simplifie`, `mesurer-un-angle-avec-un-rapporteur`, `reconnaitre-et-decrire-des-polygones`, `reconnaitre-et-decrire-des-triangles` (f3/évaluation absente du triplet — trou de contenu déjà connu du code, pas une erreur de contenu).
+
+**Défaut confirmé — `reconnaitre-le-patron-dun-solide` (patron de cube/pavé droit)** : ces fiches sont des images raster (une page = une seule image JPEG intégrée, pas de texte/formes vectoriels — vérifié via `page.get_drawings()` qui retourne une liste vide sur les 3 feuilles). L'exercice demande de reconnaître, parmi plusieurs figures en croix/quadrillage, celle(s) qui comportent exactement 6 carrés et peuvent se replier en cube. **Comptage pixel par pixel effectué** (détection des lignes de grille par analyse de densité de pixels sombres, sur l'image raster native) sur les figures présentées :
+
+- `f1.pdf`, Partie 3 : figure A (la croix « classique », présentée juste avant dans la mini-leçon comme LE modèle de patron valide) dessinée avec **7 carrés** au lieu de 6 (colonne de 5 + 2 bras au lieu d'une colonne de 4 + 2 bras) ; figure C (forme en E) également **7 carrés** au lieu de 6. Seule la figure D (6 carrés, ligne de 4 + 1 rabat en haut-gauche + 1 rabat en bas-droite) est un patron de cube valide à la fois par le compte et par la topologie.
+- `f2.pdf`, Exercice 1 : même défaut sur la figure C (forme en T/E, **7 carrés** au lieu de 6, ligne de 3 + colonne de 4 partageant une case).
+- `f3.pdf`, Exercice 2 (patron de pavé droit) : figure E semble compter **5 carrés** (croix « plus » à 5, comme l'icône de la mini-méthode d'Hector en Partie 2 de `f1.pdf`, elle aussi vérifiée à 5 carrés plutôt que 6).
+
+Ce n'est pas une erreur ponctuelle isolable par une correction de texte : ces pages sont des illustrations générées (probablement par un outil d'IA image-à-image) sans contrôle géométrique précis du nombre de cases, contrairement aux gabarits vectoriels texte+formes utilisés pour CP/CE1/CE2/CM1 et pour le reste des fiches CM2 audité ci-dessus (angles, outils, symétrie, triangles, etc., qui n'ont pas ce problème car ils ne dépendent pas d'un comptage exact de cases). **Correction non tentée dans ce lot** : contrairement aux corrections PDF précédentes (redaction de texte + réinsertion), il ne s'agit pas ici de texte mais d'une illustration raster intégrée en une seule image par page — une correction fiable demanderait de régénérer ou redessiner précisément la grille concernée, ce qui dépasse la méthode d'édition sûre utilisée jusqu'ici (risque de dégrader visuellement la page sans outil de dessin vectoriel adapté). **Limite technique documentée, conformément au critère d'arrêt de la mission** — recommandation : régénérer ces 3 illustrations (une nouvelle demande à l'outil de génération d'images, ou un redessin manuel) avant publication si ce niveau de précision géométrique est jugé important pédagogiquement pour cette compétence spécifique.
 
 ## Prochaines étapes sûres
 
