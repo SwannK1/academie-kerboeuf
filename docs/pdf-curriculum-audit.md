@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 599 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 39 collège 5e : français 4/4 + mathématiques 5/5 + HG-EMC 4/4 closes) |
-| PDF restant à auditer | 267 sur les 866 suivis par Git (5e restant : 27 — sciences-techno 12, anglais 15 ; 4e : 57 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 611 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 51 collège 5e : français 4/4 + mathématiques 5/5 + HG-EMC 4/4 + sciences-techno 4/4 closes) |
+| PDF restant à auditer | 255 sur les 866 suivis par Git (5e restant : 15 — anglais ; 4e : 57 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -595,6 +595,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 ### Histoire-Géographie-EMC 5e clos (4/4 compétences, 12/12 PDF) — **première compétence EMC réelle de tout l'audit**
 
 `solidarite` (EMC — **premier contenu EMC réel trouvé dans tout ce chantier**, sur toute matière et tout niveau confondus : dilemme éthique bien construit entre intention solidaire et respect de la vie privée lors d'une collecte scolaire, distinction équité/égalité correctement traitée), `geographie-ressources` (répartition eau 900mm/98% vs 180mm/62%, cohérence géographique réaliste, données explicitement « fictives »), `histoire-medieval` (ville portuaire méditerranéenne v.1200, commerce d'épices/tissus/monnaies — plausible historiquement), `methode-documents` (urbanisation 35%→57% entre 1950 et 2020, également « fictif » assumé). Nouveau personnage-guide « Elian le Renard » pour cette matière à ce niveau. **Aucune erreur trouvée sur les 4 compétences.** Barèmes `/10` tous exacts (2+4+3+1).
+
+### Sciences et technologie 5e clos (4/4 compétences, 12/12 PDF) — nouvelle matière, jamais rencontrée avant ce niveau
+
+`vivant-nutrition` (glucose 0,8→1,4 g/L à travers l'intestin, dioxygène 20→14 mL/100mL à travers le muscle — physiologie exacte, sens des échanges correct), `terre-risque` (aléa/enjeux/vulnérabilité, évite correctement d'affirmer qu'un séisme est prévisible à une date précise — fait sismologique exact), `physique-mouvement` (vitesses 6/9/7 m/s sur trois intervalles d'un trajet à vélo, exemple relativité du mouvement bus/piéton correct), `technologie-systeme` (chaîne d'information vs chaîne d'énergie sur une serre automatisée, algorithme à seuil avec arrêt de sécurité). **Rigueur scientifique notable sur l'ensemble du sous-lot** : plusieurs fiches évitent explicitement les généralisations abusives (« sans prouver seules toute la respiration cellulaire », « sans affirmer qu'un séisme est prévisible à une date précise ») — qualité pédagogique et épistémologique solide. Aucune erreur trouvée, aucun défaut de support manquant. Barèmes `/10` tous exacts (2+4+3+1).
 
 ## Collège 6e — démarrage (9 septembre 2026)
 
