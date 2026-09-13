@@ -80,6 +80,7 @@ export const teacherHubs: TeacherHub[] = [
       { title: "Conseils de cycle", description: "Préparer et consigner les conseils de cycle.", href: "/enseignants/conseils-cycle", icon: "🗒️" },
       { title: "Conseil d’école", description: "Préparer les décisions et leur suivi.", href: "/enseignants/conseil-ecole", icon: "🏫" },
       { title: "Liaison CM2-6e", description: "Organiser les échanges entre école et collège.", href: "/enseignants/liaison-cm2-6e", icon: "🎓" },
+      { title: "Réunion parents", description: "Préparer la date, l’ordre du jour et les documents.", href: "/enseignants/reunion-parents", icon: "👪" },
       { title: "Communications", description: "Préparer les messages destinés aux familles.", href: "/enseignants/communications", icon: "✉️" },
       { title: "Rendez-vous professionnels", description: "Organiser les échanges et leurs suivis.", href: "/enseignants/rendez-vous", icon: "🤝" },
       { title: "Modèles", description: "Retrouver les documents réutilisables.", href: "/enseignants/modeles", icon: "🗂️" },
