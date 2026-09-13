@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 154 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 69 CM1 : écriture, étude de la langue, lecture-récits, lecture-documentaire, lecture-croiser-sources clos ; 23/25 compétences français) |
-| PDF restant à auditer | 817 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 160 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 75 CM1 : **français CM1 intégralement clos, 25/25 compétences**) |
+| PDF restant à auditer | 811 (dont 51 mathématiques CM1, prochain sous-lot) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -435,6 +435,12 @@ Deux incidents mineurs détectés et corrigés en cours d'édition (même vigila
 
 **Domaine lecture-croiser-sources CM1 clos : 3/3 compétences, 9/9 PDF audités, 6 modifiés (différenciation), 3 inchangés (`comparer-textes`).**
 
+### Domaine oral CM1 — clos (9 septembre 2026) : 2/2 compétences, 6 PDF — **FRANÇAIS CM1 INTÉGRALEMENT CLOS**
+
+`oral-participer-avis` (présenter un avis argumenté à l'oral, structure avis-raison-exemple) et `oral-participer-ecoute` (répondre à une intervention : reformuler puis ajouter une idée liée, sans répéter ni changer de sujet). Deux compétences bien différenciées (produire un avis vs. réagir à celui d'autrui dans un échange), aucun chevauchement. Bonne adaptation du format évaluation à l'oral (grille d'observation plutôt que réponses écrites). Les 2 barèmes `/10` recalculés exacts. Aucune erreur, aucun PDF modifié.
+
+**FRANÇAIS CM1 est maintenant intégralement audité : 25/25 compétences, 75/75 PDF.** Bilan : 12 PDF modifiés, tous pour différenciation pédagogique sur les 2 doublons résolus (`rediger-idee-raison-exemple`/`rediger-paragraphe-argumente` en écriture, `deux-documents`/`justifier-preuve` en lecture-croiser-sources) — **aucune erreur de contenu (facts, grammaire, calcul) trouvée dans l'ensemble du français CM1** ; 63 PDF inchangés. Aucune compétence du catalogue (`content/levels/cm1-competencies.ts`, domaine français) laissée sans triplet PDF.
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -452,6 +458,6 @@ Deux incidents mineurs détectés et corrigés en cours d'édition (même vigila
 13. **CM1 démarré** le 9 septembre 2026 : inventaire complet fait (126 PDF, 75 français + 51 mathématiques, 0 HG/sciences/EMC), cartographie programme faite (curriculum map CM1 déjà correctement structuré sur HG/sciences, contrairement à CP/CE1/CE2 ; EMC reste à 0). 4/7 compétences du domaine écriture auditées intégralement (12 PDF) — voir section dédiée ci-dessus. **Trouvaille à traiter avant de continuer** : deux compétences écriture quasi identiques (`rediger-idee-raison-exemple` et `rediger-paragraphe-argumente`), décision de fusion/différenciation nécessaire.
 14. ~~Différencier `rediger-idee-raison-exemple`/`rediger-paragraphe-argumente`, finir écriture, étude de la langue, lecture-récits, lecture-documentaire.~~ Fait le 9 septembre 2026. Domaines clos, voir sections dédiées.
 15. ~~Auditer et trancher le doublon `lecture-croiser-sources` (deux-documents, justifier-preuve).~~ Fait le 9 septembre 2026 : 9/9 PDF audités, les deux compétences différenciées (voir section dédiée). Domaine clos.
-16. **Reste ouvert pour CM1 français** : domaine oral (2 compétences, `oral-participer-avis`, `oral-participer-ecoute` — 6 PDF, à vérifier eux aussi pour un éventuel chevauchement avant audit). C'est le dernier domaine français CM1 (23/25 compétences closes).
-17. **Reste ouvert pour CM1** : les 17 compétences mathématiques (51 PDF) — nombres-calculs (7), grandeurs-mesures (3), géométrie (3), problèmes (4) — non encore commencées.
+16. ~~Domaine oral CM1.~~ Fait le 9 septembre 2026 : 2/2 compétences, 6 PDF, aucun chevauchement, aucune erreur. **Français CM1 clos à 100 % (25/25 compétences, 75/75 PDF).**
+17. **Prochain lot : mathématiques CM1** (17 compétences, 51 PDF) — nombres-calculs (7), grandeurs-mesures (3), géométrie (3), problèmes (4). Vérifier en particulier les calculs posés (multiplication/division) et les conversions d'unités, points classiquement sensibles.
 18. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
