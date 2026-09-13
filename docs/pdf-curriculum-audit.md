@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 199 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + 114 CM1 : français CM1 clos 25/25, mathématiques CM1 : nombres-calculs 7/7 + grandeurs-mesures 3/3 + géométrie 3/3 clos) |
-| PDF restant à auditer | 772 (dont 12 mathématiques CM1 restants : problèmes, dernier sous-domaine) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 211 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** : 42/42 compétences, français 25/25 + mathématiques 17/17) |
+| PDF restant à auditer | 760 |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -459,6 +459,14 @@ Calculs recalculés à la main, tous exacts : 14 h 35 à 16 h 10 = 1 h 35 min (2
 
 Toutes les coordonnées de quadrillage et distances aux axes vérifiées cohérentes avec les rendus visuels (ex. leçon symétrie : point à 3 carreaux d'un axe se replace à 3 carreaux de l'autre côté ; exercices : sommets A(3;2)/B(5;2)/C(5;5)/D(4;4) avec axe en colonne 6, distances 3/1/1/2 conformes au rendu ; évaluation : triangle P(2;2)/Q(4;2)/R(3;5) avec axe en colonne 5, distances 3/1/2 conformes). Trajets de repérage vérifiés faisables malgré les obstacles (ex. évaluation : C(1;6) à D(6;2) avec obstacles en (4;6) et (4;3), chemin via la ligne 4 possible). Propriétés géométriques citées exactes (rectangle = quadrilatère à 4 angles droits et côtés opposés égaux ; carré reconnu comme « quadrilatère à 4 côtés égaux et 4 angles droits » dans l'évaluation figures-decrire). Les 3 barèmes `/10` recalculés exacts (3+3+2+2, 2+4+2+2, 2+4+2+2). **Aucune erreur trouvée, aucun PDF modifié.**
 
+## Mathématiques CM1 — domaine problèmes clos (9 septembre 2026) : 4/4 compétences, 12/12 PDF — **MATHÉMATIQUES CM1 INTÉGRALEMENT CLOSES, CM1 INTÉGRALEMENT CLOS**
+
+`demarche-donnees-utiles` (identifier les informations nécessaires, écarter les données inutiles d'un énoncé), `demarche-etapes` (organiser deux calculs successifs, le premier résultat devenant donnée du second), `demarche-multiplicatif` (choisir et organiser une multiplication dans une situation-problème), `donnees-graphique` (prélever et interpréter une donnée dans un graphique en barres). Quatre compétences bien différenciées, aucun chevauchement.
+
+**Tous les calculs et énoncés recalculés à la main, tous exacts** : 55-38=17 places libres, 8×24=192 crayons, 4×26=104 élèves (évaluation données utiles) ; 3×24-18=54, 5×36-128=52, 6×25-87=63 livres/balles restants (problèmes à étapes, résultats intermédiaires toujours positifs et cohérents) ; 7×24=168 sièges, 18×9=162 bulbes, 14×28=392 sièges (problèmes multiplicatifs) ; graphiques en barres vérifiés fidèles aux données annoncées dans les deux fiches (exercices : lundi 20/mardi 35/mercredi 15/jeudi 40 sur une échelle de 5 en 5 — barres cohérentes visuellement ; évaluation : équipes A 30/B 45/C 25/D 40, même vérification). Les 3 barèmes `/10` recalculés exacts (2+2+3+3, 2+2+3+3, 2+2+4+2, 2+2+3+3). **Aucune erreur trouvée, aucun PDF modifié.**
+
+**MATHÉMATIQUES CM1 intégralement auditées : 17/17 compétences, 51/51 PDF, zéro erreur de calcul trouvée, aucun PDF modifié** (nombres-calculs 7/7, grandeurs-mesures 3/3, géométrie 3/3, problèmes 4/4). Combiné au français CM1 clos précédemment (25/25 compétences, 75/75 PDF, 12 PDF modifiés pour différenciation pédagogique), **CM1 est maintenant intégralement audité et clos : 42/42 compétences, 126/126 PDF**, sans aucune compétence du catalogue (`content/levels/cm1-competencies.ts`) restée sans triplet PDF vérifié. Aucune création de PDF EMC (aucune compétence EMC n'existe dans le catalogue CM1, conformément à la consigne de ne rien créer avant décision produit).
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -479,5 +487,7 @@ Toutes les coordonnées de quadrillage et distances aux axes vérifiées cohére
 16. ~~Domaine oral CM1.~~ Fait le 9 septembre 2026 : 2/2 compétences, 6 PDF, aucun chevauchement, aucune erreur. **Français CM1 clos à 100 % (25/25 compétences, 75/75 PDF).**
 17. ~~Prochain lot : mathématiques CM1 — domaine nombres-calculs (7 compétences, 21 PDF).~~ Fait le 9 septembre 2026 : 7/7 compétences auditées intégralement (numération grands nombres, décimaux, fractions, comparer fractions ; calcul posé multiplication, division ; calcul mental), toutes les opérations et exemples recalculés à la main, aucune erreur, aucun PDF modifié.
 18. ~~Domaine grandeurs-mesures CM1 (3 compétences, 9 PDF), conversions d'unités à surveiller.~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (durées, distinguer aire/périmètre, calculer un périmètre), doublon apparent `longueurs-aires-distinguer`/`longueurs-aires-perimetre` vérifié et confirmé non-doublon (progression légitime concept → calcul), toutes les conversions et calculs recalculés exacts, aucune erreur, aucun PDF modifié.
-19. ~~Domaine géométrie CM1 (3 compétences, 9 PDF).~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (coder un déplacement, décrire/construire des figures, symétrie), toutes les coordonnées de quadrillage et distances aux axes vérifiées cohérentes avec les rendus, aucune erreur, aucun PDF modifié. **Reste : problèmes (4 compétences, 12 PDF) — dernier sous-domaine avant clôture complète de CM1.**
-20. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire tant que CM1 est en cours sur consigne explicite.
+19. ~~Domaine géométrie CM1 (3 compétences, 9 PDF).~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (coder un déplacement, décrire/construire des figures, symétrie), toutes les coordonnées de quadrillage et distances aux axes vérifiées cohérentes avec les rendus, aucune erreur, aucun PDF modifié.
+20. ~~Domaine problèmes CM1 (4 compétences, 12 PDF), dernier sous-domaine mathématiques.~~ Fait le 9 septembre 2026 : 4/4 compétences auditées (données utiles, problème à étapes, problème multiplicatif, lecture de graphique), tous les calculs et graphiques recalculés/vérifiés exacts, aucune erreur, aucun PDF modifié. **MATHÉMATIQUES CM1 closes (17/17), CM1 intégralement clos (126/126 PDF, 42/42 compétences).**
+21. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire.
+22. **Prochain niveau : CM2.** À démarrer selon la même méthode que CM1 (inventaire complet, cartographie programme, audit par matière en priorité français puis mathématiques). Rappel : ne pas toucher à l'adaptation CM2 du parcours signature (`docs/parcours-signature-audit.md`, diagnostic « adaptation non sûre » conservé) — ce chantier concerne uniquement l'audit et la correction du contenu pédagogique des PDF CM2, pas le câblage produit.
