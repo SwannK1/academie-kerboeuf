@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 476 (365 CP→CM2 + 9 maternelle + 102 collège 6e : français 66/66 + mathématiques nombres-calculs 21/21 + grandeurs-mesures 15/15) |
-| PDF restant à auditer | 495 (6e : 84 restants — mathématiques géométrie/OGD/résolution-problèmes 48, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 491 (365 CP→CM2 + 9 maternelle + 117 collège 6e : français 66/66 + mathématiques nombres-calculs 21/21 + grandeurs-mesures 15/15 + géométrie 15/15) |
+| PDF restant à auditer | 480 (6e : 69 restants — mathématiques OGD/résolution-problèmes 33, HG-EMC 36 ; 5e/4e/3e : 384 ; seconde : 108) |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -613,3 +613,7 @@ Aucun PDF modifié dans ce sous-lot (corrections groupées prévues une fois le 
 ### Mathématiques 6e — domaine grandeurs-mesures clos (5/5 compétences, 15/15 PDF)
 
 `calculer-aire` (7×4=28 cm²), `calculer-perimetre` (2×(8+3,5)=23 cm), `convertir-unites` (3,5 m=350 cm ; 2 750 g=2 kg 750 g), `utiliser-unites` (choix d'unité selon la grandeur — vérifié distinct de `convertir-unites` : choisir vs. convertir, pas un doublon), `utiliser-mesure-probleme` (2 km+750 m=2 750 m — vérifié distinct des deux précédentes : application en contexte de problème). Tous les calculs recalculés exacts, barèmes `/10` tous exacts (2+3+3+2). Même défaut systémique de « données de travail » génériques que nombres-calculs, confirmé identique sur les 5 compétences (non recompté en détail, déjà documenté ci-dessus).
+
+### Mathématiques 6e — domaine géométrie clos (5/5 compétences, 15/15 PDF)
+
+`vocabulaire` ((AB)/[AB]/[AB) correctement distingués), `reconnaitre-figures` (carré/rectangle/losange/triangle), `paralleles-perpendiculaires`, `tracer-instruments`, `programme-construction` (vérifié distinct de `tracer-instruments` : exécution d'un programme multi-étapes vs. tracé isolé). Tout le vocabulaire et les notations géométriques vérifiés exacts. Barèmes `/10` tous exacts (2+3+3+2). Même défaut systémique de « données de travail » génériques confirmé sur les 5 compétences (désormais avéré transversal à tout le niveau mathématiques 6e, pas propre à un domaine).
