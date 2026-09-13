@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   apcAxes,
   apcPeriods,
@@ -50,9 +50,10 @@ const axisLabel: Record<ApcAxis, string> = Object.fromEntries(
 ) as Record<ApcAxis, string>;
 
 export function TeacherApcPlanner() {
-  const [sessions, setSessions] = useState<ApcSession[]>(() =>
-    readStoredSessions(),
-  );
+  // Le premier rendu reste identique côté serveur et côté client. Le contenu
+  // de localStorage est restauré uniquement après l'hydratation.
+  const [sessions, setSessions] = useState<ApcSession[]>([]);
+  const isInitialWriteRef = useRef(true);
   const [search, setSearch] = useState("");
   const [axisFilter, setAxisFilter] = useState<ApcAxis | "all">("all");
   const [periodFilter, setPeriodFilter] = useState<string | "all">("all");
@@ -60,6 +61,15 @@ export function TeacherApcPlanner() {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- bootstrap hydration-safe depuis localStorage
+    setSessions(readStoredSessions());
+  }, []);
+
+  useEffect(() => {
+    if (isInitialWriteRef.current) {
+      isInitialWriteRef.current = false;
+      return;
+    }
     writeStoredSessions(sessions);
   }, [sessions]);
 
