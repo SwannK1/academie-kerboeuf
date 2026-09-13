@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 572 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 12 collège 5e : **français 5e clos, 4/4 compétences**) |
-| PDF restant à auditer | 294 sur les 866 suivis par Git (5e restant : 54 — mathématiques, HG-EMC, sciences-techno, anglais ; 4e : 57 ; 3e : 75 ; seconde : 108). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 587 (365 CP→CM2 + 9 maternelle + 186 collège 6e + 27 collège 5e : français 4/4 + mathématiques 5/5 closes) |
+| PDF restant à auditer | 279 sur les 866 suivis par Git (5e restant : 39 — HG-EMC 12, sciences-techno 12, anglais 15 ; 4e : 57 ; 3e : 75 ; seconde : 108). |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
@@ -587,6 +587,10 @@ Avec la clôture du français CM2 ci-dessus et la clôture antérieure des math�
 `ecriture-recit` (rédiger un épisode narratif cohérent), `langue-phrase-complexe` (analyser/transformer une phrase complexe — 3 propositions correctement identifiées : « lorsque » temporelle, « qui » relative), `lecture-aventure` (interpréter un texte à indices, bien conçu), `oral-lecture` (présenter et défendre une lecture, réutilise à bon droit le texte de `lecture-aventure`). Aucune erreur de fait ou de grammaire trouvée. Barèmes `/10` tous exacts (2+4+3+1 sur les 4 évaluations).
 
 **Défaut confirmé (2 occurrences, sur des items notés)** : `ecriture-recit` évaluation item 3 (3 pts) demande de réviser « un brouillon où l'objet change sans explication et où trois phrases commencent par ⟪ Il ⟫ » — ce brouillon fautif n'est jamais montré dans le fichier. `lecture-aventure` évaluation item 3 (3 pts) demande de « comparer deux suites possibles » — ces deux suites ne sont jamais fournies non plus. Même défaut de support manquant que l'OGD mathématiques 6e, ici sur des tâches littéraires plutôt que des données chiffrées. Non corrigé (nécessiterait de rédiger un contenu inédit).
+
+### Mathématiques 5e clos (5/5 compétences, 15/15 PDF)
+
+`nombres-relatifs` (comparaison/addition/soustraction, piège « -9 > -2 car 9>2 » correctement résolu), `geometrie-triangle` (inégalité triangulaire vérifiée deux fois : 6+4,5>7 constructible, 2+3<6 non constructible), `grandeurs-aires-volumes` (0,96 m³ pour le pavé, diagnostic à deux erreurs bien conçu — 96 au lieu de 0,96 et m² au lieu de m³), `donnees-probabilites` (fréquences 9/12/6/3 sur 30 sommant à 1 ; P(vert)=1/8 ; nuance équiprobabilité correcte sur {1,2,2,3}), `problemes-proportionnalite` (21 km/h × 3,5h=73,5 km ; non-proportionnalité âge/taille bien justifiée). **Tous les calculs recalculés à la main, tous exacts. Aucune erreur trouvée, aucun défaut de support manquant** (contrairement au français 5e et à l'OGD mathématiques 6e — ce sous-lot mathématiques 5e est le plus propre audité jusqu'ici). Barèmes `/10` tous exacts (2+4+3+1).
 
 ## Collège 6e — démarrage (9 septembre 2026)
 
