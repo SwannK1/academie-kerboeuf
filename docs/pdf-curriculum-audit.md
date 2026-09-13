@@ -67,14 +67,14 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 340 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + 127 CM2 : mathématiques 59/59 closes + français conjugaison 19/19 + grammaire 49/49 closes) |
-| PDF restant à auditer | 631 (dont 27 CM2 français restants : orthographe, vocabulaire, lecture-compréhension) |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 367 (33 CP + **28 CE1 — niveau clos** + 24 CE2 + **126 CM1 — niveau clos** + **154 CM2 — niveau intégralement audité, 57/57 compétences**) |
+| PDF restant à auditer | 604 |
 | PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
 | PDF reconstruits | 0 |
 | PDF créés | 0 |
 | PDF optimisés | 0 |
 | Erreurs corrigées | 4 |
-| Erreurs confirmées, non corrigées (limite technique) | 3 lots — voir CM2 `reconnaitre-le-patron-dun-solide`, `passe-compose-avoir`, domaine grammaire (5 défauts + 1 motif transversal) |
+| Erreurs confirmées, non corrigées (limite technique raster CM2) | 6 lots / défauts distincts — voir section « CM2 intégralement audité » |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
 
@@ -522,6 +522,32 @@ Compétences auditées : `phrase-correcte`, `identifier-verbe-conjugue`, `identi
 
 Aucun PDF modifié (limite technique raster). **Domaine grammaire CM2 clos : 21/21 compétences, 49/49 PDF.**
 
+### Français CM2 — domaines orthographe, vocabulaire, lecture-compréhension clos (9 septembre 2026) — **FRANÇAIS CM2 INTÉGRALEMENT CLOS**
+
+**Orthographe (2/2 compétences, 6/6 PDF)** : `a-et-a`, `et-et-est`. Méthode du test par substitution (« avait », « était ») vérifiée saine sur tous les items. Deux défauts confirmés (non corrigés — limite technique) :
+- `a-et-a`, feuille 3, exercice 2 : la consigne annonce que les 5 phrases « contiennent une erreur », mais **les items 1 et 3 sont déjà entièrement corrects** (« Félix a préparé une affiche à la classe. » / « Le message a été accroché à côté de la porte. ») — rien à corriger, contrairement à la consigne.
+- `et-et-est`, feuille 3, exercice 2, item 4 : « Rosa explique la consigne et très clairement. » — **ni « et » ni « est » ne produit une phrase grammaticalement correcte** ; la construction de la phrase elle-même semble fautive, indépendamment du choix de l'homophone.
+
+**Vocabulaire (6/6 compétences, 18/18 PDF)** : `synonymes`, `antonymes`, `homonymes`, `familles-mots`, `prefixes-suffixes`, `dictionnaire`. Contenu globalement très solide : synonymes/antonymes tous exacts, tris alphabétiques vérifiés lettre par lettre (aucune ambiguïté), définitions de dictionnaire toutes cohérentes avec le contexte, exercices « famille de mots » particulièrement bien conçus (chaque série inclut un « faux ami » qui partage l'orthographe mais pas le sens/l'étymologie — chausson/terrible/dedans/porte/fleuve/linge — cohérent avec la mise en garde de la mini-leçon). Un seul défaut confirmé (non corrigé) : `homonymes`, feuille 3, exercice 2, item 5 — « Ces crayons sont dans la trousse de Paul, ce sont ses crayons ? » est **déjà correcte**, alors que la consigne demande de corriger « l'homonyme mal employé » (même type de défaut que `a-et-a` ci-dessus — motif récurrent : au moins 2 fiches différentes annoncent une erreur dans chaque phrase d'un exercice alors qu'au moins une phrase est déjà correcte).
+
+**Lecture-compréhension (1/1 compétence, 3/3 PDF)** : `comprendre-texte-narratif`. Toutes les questions vérifiées répondables directement à partir du texte support fourni (personnages, lieu, objet, justification par citation). Aucune erreur. **Particularité notée sans gravité** : ce triplet utilise une maquette visuelle différente (bandeau bleu « Séquence CM2 — Français », mise en page couleur) du gabarit noir/blanc Félix/Rosa utilisé par tous les autres triplets CM2 — incohérence graphique mineure entre compétences, pas une erreur de contenu.
+
+**FRANÇAIS CM2 est maintenant intégralement audité : 37/37 compétences, 95/95 PDF** (conjugaison 7/7, grammaire 21/21, orthographe 2/2, vocabulaire 6/6, lecture-compréhension 1/1). Bilan cumulé français CM2 : 0 PDF modifié (limite technique raster sur l'ensemble du corpus CM2), 9 défauts de contenu confirmés et documentés (2 catégorisation/couverture, 2 phrases déjà correctes à tort annoncées fautives, 2 typos, 1 tableau de référence trompeur, 1 règle non enseignée testée deux fois, 1 construction de phrase fautive), 1 motif transversal récurrent (phrases à cibles multiples dans des exercices à réponse unique).
+
+## CM2 — INTÉGRALEMENT AUDITÉ (9 septembre 2026) : 57/57 compétences, 154/154 PDF
+
+Avec la clôture du français CM2 ci-dessus et la clôture antérieure des mathématiques CM2 (20/20 compétences de géométrie, 59/59 PDF — seul sous-domaine mathématique disposant de PDF à ce niveau), **CM2 est maintenant intégralement audité pour tout le contenu PDF existant dans le dépôt : 57/57 compétences (37 français + 20 mathématiques), 154/154 PDF**, sans aucune compétence du catalogue (`content/cm2-francais-fiches.ts`, `content/cm2-fiches-maths.ts`) laissée sans lecture intégrale.
+
+**Limite architecturale majeure de ce niveau** (voir plus haut) : contrairement à CP/CE1/CE2/CM1, chaque PDF CM2 est une image raster unique sans couche de texte, provenant de PNG téléchargés depuis un Google Drive externe (`scripts/download-math-fiches.py`) puis encapsulés via `img2pdf` — **aucune source éditable n'existe dans ce dépôt**. Tous les défauts trouvés ont donc été documentés avec précision (fichier, exercice, item, problème, correction recommandée) mais **aucun n'a pu être corrigé dans ce lot**, à la différence des niveaux précédents où la technique de redaction + réinsertion de texte vectoriel fonctionnait de façon fiable.
+
+**Récapitulatif des 6 défauts/lots de défauts confirmés sur CM2** (aucun corrigé) :
+1. `reconnaitre-le-patron-dun-solide` (mathématiques, 3 PDF) — illustrations de patrons de cube/pavé droit avec un nombre de carrés incorrect (5 ou 7 au lieu de 6).
+2. `passe-compose-avoir` (français, 1 item) — phrase contextuellement incohérente pour un élève de CM2 (« L'année prochaine, je serai en CM2 »).
+3. Domaine grammaire (5 défauts distincts + 1 motif transversal, détaillé plus haut) — catégorisation erronée d'un pronom, règles non enseignées testées, tableau de référence trompeur, 2 coquilles.
+4. `a-et-a` et `homonymes` (orthographe/vocabulaire, 2 items) — phrases déjà correctes annoncées à tort comme fautives dans un exercice de correction.
+5. `et-et-est` (orthographe, 1 item) — construction de phrase fautive indépendamment du choix d'homophone.
+6. Motif transversal (plusieurs fiches grammaire) — phrases à compléments/pronoms multiples dans des exercices à réponse unique.
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -544,5 +570,6 @@ Aucun PDF modifié (limite technique raster). **Domaine grammaire CM2 clos : 21/
 18. ~~Domaine grandeurs-mesures CM1 (3 compétences, 9 PDF), conversions d'unités à surveiller.~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (durées, distinguer aire/périmètre, calculer un périmètre), doublon apparent `longueurs-aires-distinguer`/`longueurs-aires-perimetre` vérifié et confirmé non-doublon (progression légitime concept → calcul), toutes les conversions et calculs recalculés exacts, aucune erreur, aucun PDF modifié.
 19. ~~Domaine géométrie CM1 (3 compétences, 9 PDF).~~ Fait le 9 septembre 2026 : 3/3 compétences auditées (coder un déplacement, décrire/construire des figures, symétrie), toutes les coordonnées de quadrillage et distances aux axes vérifiées cohérentes avec les rendus, aucune erreur, aucun PDF modifié.
 20. ~~Domaine problèmes CM1 (4 compétences, 12 PDF), dernier sous-domaine mathématiques.~~ Fait le 9 septembre 2026 : 4/4 compétences auditées (données utiles, problème à étapes, problème multiplicatif, lecture de graphique), tous les calculs et graphiques recalculés/vérifiés exacts, aucune erreur, aucun PDF modifié. **MATHÉMATIQUES CM1 closes (17/17), CM1 intégralement clos (126/126 PDF, 42/42 compétences).**
-21. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert, non prioritaire.
-22. **Prochain niveau : CM2.** À démarrer selon la même méthode que CM1 (inventaire complet, cartographie programme, audit par matière en priorité français puis mathématiques). Rappel : ne pas toucher à l'adaptation CM2 du parcours signature (`docs/parcours-signature-audit.md`, diagnostic « adaptation non sûre » conservé) — ce chantier concerne uniquement l'audit et la correction du contenu pédagogique des PDF CM2, pas le câblage produit.
+21. Recherche transversale QLM/sciences/EMC pour CE1/CE2 (même modèle que pour CP) — reste ouvert.
+22. ~~Prochain niveau : CM2.~~ Fait le 9 septembre 2026 : **CM2 intégralement audité, 57/57 compétences, 154/154 PDF** (mathématiques géométrie 20/20 + français 37/37 : conjugaison, grammaire, orthographe, vocabulaire, lecture-compréhension). 6 lots de défauts confirmés et documentés (voir section dédiée), 0 PDF modifié — limite technique architecturale : chaque PDF CM2 est une image raster sans source éditable dans ce dépôt (PNG téléchargés d'un Google Drive externe, `scripts/download-math-fiches.py`), contrairement au texte vectoriel de CP/CE1/CE2/CM1. Aucune compétence nombres-calculs/mesures/problèmes/HG/sciences/EMC n'a de PDF à ce niveau (gap déjà documenté, cohérent avec `cm2-subjects.ts` qui affiche ces matières en statut « in-progress »/« upcoming »).
+23. **Prochaine étape à décider** : reprendre l'item 21 (QLM/sciences/EMC CE1/CE2) resté ouvert, ou étendre l'audit à un autre niveau/matière du dépôt (CM2 n'a plus de PDF à auditer dans son périmètre actuel). Décision à prendre par la suite, hors périmètre immédiat de ce lot.
