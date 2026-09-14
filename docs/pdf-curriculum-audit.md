@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 836 (365 CP→CM2 + 9 maternelle + 384 collège + 78 seconde : français 8/8 + mathématiques 10/10 + HG 4/4 + langues-vivantes 4/4 closes) |
-| PDF restant à auditer | 30 sur les 866 suivis par Git (seconde restant : sciences 12, arts 6, EMC 6, EPS 6). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 848 (365 CP→CM2 + 9 maternelle + 384 collège + 90 seconde : français 8/8 + mathématiques 10/10 + HG 4/4 + langues-vivantes 4/4 + sciences 4/4 closes) |
+| PDF restant à auditer | 18 sur les 866 suivis par Git (seconde restant : arts 6, EMC 6, EPS 6 — dernier lot du dépôt). |
 | Corrections appliquées (3e, cumulées) | 5 : 2 mathématiques/HG-EMC (références orphelines) + 3 anglais (texte/documents/sujet manquants) |
 | Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
@@ -574,6 +574,10 @@ Dernier périmètre du dépôt. 108 PDF, 8 matières : français (8×3=24), math
 ### Langues vivantes seconde clos (4/4 compétences, 12/12 PDF)
 
 `comprendre-texte-court-authentique`, `identifier-sens-global-message-oral`, `rediger-texte-court-organise`, `tenir-echange-court`. Matière de langue-apprentissage : contenu spécifique correctement rédigé en anglais (illustratif, cohérent avec le fait que `anglais` lui-même est aussi en anglais — pas la même anomalie que celle trouvée en 4e pour arts plastiques/musique/EPS). Anglais grammaticalement correct partout, exemples de dialogue et de méthodologie cohérents (ex. échange réservation avec contrainte horaire bien résolu). Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
+
+### Sciences seconde clos (4/4 compétences, 12/12 PDF)
+
+`decrire-transformation-chimique` (2H₂+O₂→2H₂O correctement équilibrée), `exploiter-mesure-avec-unite` (12,4 cm = 0,124 m, discipline des chiffres significatifs bien enseignée), `interpreter-donnees-geologiques` (principe de recoupement correct, distingue chronologie relative et âge absolu), `relier-structure-et-fonction-du-vivant` (surface d'échange fine/étendue/vascularisée — principe SVT standard et exact). **Rigueur scientifique constante. Aucune erreur trouvée.** Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Prochaines étapes sûres
 
