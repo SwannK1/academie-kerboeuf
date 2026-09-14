@@ -89,6 +89,32 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
     expectNoAppErrors(errors);
   });
 
+  test("cahier journal : envoyer une séance imprimable vers Photocopies pré-remplit la demande", async ({ page }) => {
+    const errors = trackConsoleErrors(page);
+    await page.goto("/enseignants/cahier-journal");
+    await expectHealthyPage(page, "Cahier journal");
+    await page.getByRole("button", { name: /Ajouter une séance/i }).first().click();
+    await page.getByLabel("Titre court").fill("Fiche exercices fractions");
+    await page.getByLabel("Matière").selectOption("mathematiques");
+    await page.getByLabel("Niveau").selectOption("ce1");
+    await page.getByLabel("Support imprimable réellement disponible").check();
+    await page.getByLabel("Nom du support").fill("Fiche fractions CE1");
+    await page.getByLabel("Exemplaires").fill("26");
+    await page.getByRole("button", { name: "Enregistrer" }).click();
+
+    await expect(page.getByText("À imprimer cette semaine")).toBeVisible();
+    await page.getByRole("link", { name: "Envoyer vers Photocopies →" }).click();
+
+    await expectHealthyPage(page, "Préparer mes photocopies");
+    await expect(page).toHaveURL("/enseignants/photocopies");
+    await expect(page.getByLabel("Titre")).toHaveValue("Fiche fractions CE1");
+    await expect(page.getByLabel("Matière (facultatif)")).toHaveValue("Mathématiques");
+    await expect(page.getByLabel("Niveau (facultatif)")).toHaveValue("CE1");
+    await expect(page.getByLabel("Nombre d’exemplaires")).toHaveValue("26");
+    await expect(page.getByLabel("Nombre de pages")).toBeFocused();
+    expectNoAppErrors(errors);
+  });
+
   test("liste et plan de classe : ajout clavier, renommage, sauvegarde et refresh", async ({ page }) => {
     const errors = trackConsoleErrors(page);
     await page.goto("/enseignants/organisation-classe");

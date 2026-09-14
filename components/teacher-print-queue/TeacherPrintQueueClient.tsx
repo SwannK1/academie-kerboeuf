@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   computeTeacherPrintQueueSheetCount,
   createTeacherPrintQueueId,
@@ -46,15 +47,48 @@ const emptyDraft = {
   note: "",
 };
 
+const PREFILL_PARAM_KEYS = ["titre", "matiere", "niveau", "exemplaires"];
+
+/**
+ * Construit une demande de départ depuis les paramètres d'URL envoyés par le
+ * cahier journal ("Envoyer vers Photocopies" sur une séance imprimable), ou
+ * `null` si la page a été ouverte normalement. Pure : n'est utilisée que
+ * dans l'initialiseur paresseux de useState, jamais dans un effet.
+ */
+function buildPrefillDraft(
+  searchParams: ReturnType<typeof useSearchParams>,
+): typeof emptyDraft | null {
+  const title = searchParams.get("titre");
+  if (!title) return null;
+
+  const copies = Number(searchParams.get("exemplaires"));
+
+  return {
+    ...emptyDraft,
+    title,
+    subject: searchParams.get("matiere") ?? "",
+    level: searchParams.get("niveau") ?? "",
+    copyCount: Number.isFinite(copies) && copies > 0 ? String(copies) : "1",
+  };
+}
+
 export function TeacherPrintQueueClient() {
+  const searchParams = useSearchParams();
+  // Calculé à chaque rendu (pur, bon marché) mais seule la valeur du tout
+  // premier rendu compte : elle n'est consultée que par l'initialiseur
+  // paresseux de useState ci-dessous, jamais par un effet.
+  const prefillDraft = buildPrefillDraft(searchParams);
+
   const [items, setItems] = useState<TeacherPrintQueueItem[]>(() =>
     readStoredItems(),
   );
-  const [draft, setDraft] = useState(emptyDraft);
+  const [draft, setDraft] = useState(prefillDraft ?? emptyDraft);
+  const [wasPrefilled] = useState(() => prefillDraft !== null);
   const [statusFilter, setStatusFilter] =
     useState<TeacherPrintQueueStatusFilter>("tous");
   const [search, setSearch] = useState("");
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+  const pageCountRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -62,6 +96,25 @@ export function TeacherPrintQueueClient() {
       JSON.stringify(items),
     );
   }, [items]);
+
+  // Nettoie les paramètres de pré-remplissage de l'URL une fois consommés
+  // (uniquement l'historique du navigateur, aucun état React) : sans cela,
+  // un rechargement de page recréerait le même pré-remplissage à chaque
+  // fois. Place ensuite le focus sur "Nombre de pages", la seule
+  // information que le cahier journal ne connaît pas.
+  useEffect(() => {
+    if (!window.location.search.includes("titre=")) return;
+    const url = new URL(window.location.href);
+    for (const key of PREFILL_PARAM_KEYS) {
+      url.searchParams.delete(key);
+    }
+    window.history.replaceState(null, "", url.pathname + url.search);
+    pageCountRef.current?.focus();
+    pageCountRef.current?.select();
+    // Volontairement exécuté une seule fois au montage : ce nettoyage ne
+    // doit porter que sur l'URL d'arrivée, pas sur des changements
+    // ultérieurs.
+  }, []);
 
   const filteredItems = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -175,6 +228,15 @@ export function TeacherPrintQueueClient() {
         <h2 className="text-xl font-black text-foreground">
           Nouvelle demande
         </h2>
+        {wasPrefilled ? (
+          <p
+            role="status"
+            className="mt-2 text-sm font-bold text-jade"
+          >
+            Pré-rempli depuis le cahier journal — vérifiez le nombre de
+            pages puis ajoutez la demande.
+          </p>
+        ) : null}
         <form onSubmit={handleSubmit} className="mt-4 grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label
@@ -249,6 +311,7 @@ export function TeacherPrintQueueClient() {
             </label>
             <input
               id="ppq-pages"
+              ref={pageCountRef}
               type="number"
               min={1}
               value={draft.pageCount}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
   addDaysToKey,
   createBlankSession,
@@ -92,6 +93,21 @@ function levelLabel(id: LogbookSession["level"]): string {
 
 function groupLabel(id: LogbookSession["group"]): string {
   return logbookGroups.find((item) => item.id === id)?.label ?? id;
+}
+
+/**
+ * Construit le lien pré-rempli vers l'outil Photocopies pour une séance
+ * marquée imprimable : évite de ressaisir titre, matière, niveau et
+ * exemplaires déjà connus du cahier journal.
+ */
+function printQueueHref(session: LogbookSession): string {
+  const params = new URLSearchParams({
+    titre: session.printableLabel || session.title || "(sans titre)",
+    matiere: subjectLabel(session.subject),
+    niveau: levelLabel(session.level),
+    exemplaires: String(session.printableCopies),
+  });
+  return `/enseignants/photocopies?${params.toString()}`;
 }
 
 export function TeacherLogbookClient() {
@@ -663,6 +679,12 @@ export function TeacherLogbookClient() {
                 <span className="hidden text-sm font-bold text-foreground print:inline">
                   {session.printableCopies} exemplaire(s)
                 </span>
+                <Link
+                  href={printQueueHref(session)}
+                  className="min-h-8 shrink-0 rounded-md border border-jade/50 bg-jade/10 px-3 py-1 text-xs font-bold text-jade transition hover:bg-jade/20 print:hidden"
+                >
+                  Envoyer vers Photocopies →
+                </Link>
               </li>
             ))}
           </ul>
