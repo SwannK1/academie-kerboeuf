@@ -1,6 +1,6 @@
 import { buildPageMetadata } from "@/content/seo";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
-import { TeacherPrintQueueClient } from "@/components/teacher-print-queue/TeacherPrintQueueClient";
+import { TeacherPrintQueue } from "@/components/teacher-print-queue/TeacherPrintQueue";
 
 export const metadata = buildPageMetadata({
   title: "Préparer mes photocopies",
@@ -36,7 +36,7 @@ export default function TeacherPrintQueuePage() {
           </p>
         </header>
 
-        <TeacherPrintQueueClient />
+        <TeacherPrintQueue />
       </div>
     </main>
   );
