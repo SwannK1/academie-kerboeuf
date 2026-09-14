@@ -1,6 +1,7 @@
 import { buildPageMetadata } from "@/content/seo";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { Icon } from "@/components/icons/Icon";
 import { teacherHubs } from "@/content/teacher-hubs";
 
 export const metadata = buildPageMetadata({
@@ -41,7 +42,7 @@ export default function TeachersPage() {
                   : "border-white/12 bg-white/[0.04] hover:border-gold/30 hover:bg-white/[0.07]"
               }`}
             >
-              <span aria-hidden="true" className="text-3xl">{hub.icon}</span>
+              <Icon name={hub.icon} className="h-8 w-8 text-gold" />
               <h2 className="mt-4 text-2xl font-black text-foreground">
                 {hub.title}
               </h2>

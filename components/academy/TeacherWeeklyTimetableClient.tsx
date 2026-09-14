@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Icon } from "@/components/icons/Icon";
 import {
   computeHoursBySubject,
   createInitialTeacherTimetableState,
@@ -915,8 +916,9 @@ export function TeacherWeeklyTimetableClient() {
                         ].join(" ")}
                         style={{ top, height: Math.max(height, 18), touchAction: "none" }}
                       >
-                        <p className={["truncate text-xs font-black", colors.text].join(" ")}>
-                          <span aria-hidden="true">{visual.emoji}</span> {session.title || session.subject}
+                        <p className={["flex min-w-0 items-center gap-1 text-xs font-black", colors.text].join(" ")}>
+                          <Icon name={visual.icon} className="h-3 w-3 shrink-0" />
+                          <span className="min-w-0 truncate">{session.title || session.subject}</span>
                         </p>
                         <p className="truncate text-[11px] font-bold text-muted">
                           {formatMinutesAsTime(session.startMinutes)} ·{" "}
@@ -1222,8 +1224,9 @@ export function TeacherWeeklyTimetableClient() {
                       key={subject}
                       className="flex min-h-11 flex-wrap items-center justify-between gap-2 rounded-md border border-white/10 bg-background/45 px-4 text-sm font-bold text-foreground"
                     >
-                      <span>
-                        <span aria-hidden="true">{visual.emoji}</span> {subject}
+                      <span className="flex items-center gap-1.5">
+                        <Icon name={visual.icon} className="h-4 w-4 shrink-0" />
+                        {subject}
                       </span>
                       <span className="flex items-center gap-2">
                         <span className="text-muted">{hours.toFixed(2)} h</span>

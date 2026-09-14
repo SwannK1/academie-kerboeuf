@@ -1,3 +1,4 @@
+import type { IconName } from "@/components/icons/Icon";
 import {
   isLocalStorageAvailable,
   isPlainObject,
@@ -24,25 +25,25 @@ export const teacherTimetableSubjectsByLevel: Record<TeacherTimetableLevelId, st
 };
 
 export type SubjectVisual = {
-  emoji: string;
+  icon: IconName;
   colorKey: "jade" | "gold" | "sky" | "ember";
   pattern: "solid" | "dashed" | "dotted" | "double";
 };
 
 export const subjectVisuals: Record<string, SubjectVisual> = {
-  "Français": { emoji: "📖", colorKey: "jade", pattern: "solid" },
-  "Mathématiques": { emoji: "🔢", colorKey: "sky", pattern: "dashed" },
-  "Questionner le monde": { emoji: "🔍", colorKey: "gold", pattern: "dotted" },
-  "EPS": { emoji: "🤸", colorKey: "ember", pattern: "double" },
-  "Arts": { emoji: "🎨", colorKey: "jade", pattern: "dotted" },
-  "Musique": { emoji: "🎵", colorKey: "sky", pattern: "solid" },
-  "EMC": { emoji: "🤝", colorKey: "gold", pattern: "dashed" },
-  "Histoire-Géographie": { emoji: "🗺️", colorKey: "ember", pattern: "solid" },
-  "Sciences": { emoji: "🔬", colorKey: "jade", pattern: "double" },
+  "Français": { icon: "book-open", colorKey: "jade", pattern: "solid" },
+  "Mathématiques": { icon: "calculator", colorKey: "sky", pattern: "dashed" },
+  "Questionner le monde": { icon: "search", colorKey: "gold", pattern: "dotted" },
+  "EPS": { icon: "activity", colorKey: "ember", pattern: "double" },
+  "Arts": { icon: "palette", colorKey: "jade", pattern: "dotted" },
+  "Musique": { icon: "music-note", colorKey: "sky", pattern: "solid" },
+  "EMC": { icon: "message-circle", colorKey: "gold", pattern: "dashed" },
+  "Histoire-Géographie": { icon: "map", colorKey: "ember", pattern: "solid" },
+  "Sciences": { icon: "flask", colorKey: "jade", pattern: "double" },
 };
 
 export function getSubjectVisual(subject: string): SubjectVisual {
-  return subjectVisuals[subject] ?? { emoji: "📌", colorKey: "sky", pattern: "solid" };
+  return subjectVisuals[subject] ?? { icon: "bookmark", colorKey: "sky", pattern: "solid" };
 }
 
 export const TEACHER_TIMETABLE_WEEKLY_HOURS_TARGET = 24;

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/navigation/breadcrumb";
+import { Icon } from "@/components/icons/Icon";
 import type { TeacherHub } from "@/content/teacher-hubs";
 
 export function TeacherHubPage({ hub }: { hub: TeacherHub }) {
@@ -35,7 +36,7 @@ export function TeacherHubPage({ hub }: { hub: TeacherHub }) {
                 href={tool.href}
                 className="group flex min-h-44 flex-col rounded-md border border-white/12 bg-white/[0.04] p-5 transition hover:border-gold/40 hover:bg-gold/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
-                <span aria-hidden="true" className="text-2xl">{tool.icon}</span>
+                <Icon name={tool.icon} className="h-6 w-6 text-gold" />
                 <h3 className="mt-3 text-lg font-black text-foreground">{tool.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-6 text-muted">{tool.description}</p>
                 <span className="mt-4 text-sm font-black text-gold transition group-hover:translate-x-1">
