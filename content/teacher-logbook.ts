@@ -221,3 +221,27 @@ export function nextDay(day: LogbookDay): { day: LogbookDay; weekOffset: number 
   }
   return { day: logbookDays[index + 1].id, weekOffset: 0 };
 }
+
+/** Jour de la semaine (lundi-vendredi) pour une date donnée, `null` le week-end. */
+export function dayFromDate(date: Date): LogbookDay | null {
+  const dow = date.getDay();
+  if (dow === 0 || dow === 6) return null;
+  return logbookDays[dow - 1].id;
+}
+
+/** Date (AAAA-MM-JJ) du `day` dans la semaine dont le lundi est `weekKey`. */
+export function dateKeyForWeekDay(weekKey: string, day: LogbookDay): string {
+  const [year, month, monday] = weekKey.split("-").map(Number);
+  const date = new Date(year, month - 1, monday);
+  date.setDate(date.getDate() + dayOffset(day));
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+/** Libellé court d'une date (ex. "21 sept."), pour les messages de confirmation. */
+export function formatDayLabel(dateKey: string): string {
+  const [year, month, day] = dateKey.split("-").map(Number);
+  return weekDayDateFormatter.format(new Date(year, month - 1, day));
+}

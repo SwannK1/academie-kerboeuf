@@ -7,6 +7,9 @@ import {
   createBlankSession,
   createEmptyWeekData,
   createSessionId,
+  dateKeyForWeekDay,
+  dayFromDate,
+  formatDayLabel,
   formatWeekRangeLabel,
   getMondayKey,
   logbookDays,
@@ -296,19 +299,35 @@ export function TeacherLogbookClient() {
     moveSession(sourceId, targetDay, targetSlotId);
   }
 
-  function duplicateDay(sourceDay: LogbookDay, targetDay: LogbookDay) {
-    updateCurrentWeek((current) => {
-      const sourceSessions = current.sessions.filter(
-        (item) => item.day === sourceDay,
-      );
-      const copies = sourceSessions.map((item) => ({
-        ...item,
-        id: createSessionId(),
-        day: targetDay,
-        status: "a-preparer" as LogbookStatus,
-      }));
-      return { ...current, sessions: [...current.sessions, ...copies] };
-    });
+  /**
+   * Nombre de séances déjà présentes pour un (semaine, jour) donné, sans
+   * dépendre de la semaine actuellement affichée. Sert à avertir avant
+   * une duplication qui ajouterait des séances à une journée déjà préparée.
+   */
+  function sessionCountFor(weekKey: string, day: LogbookDay): number {
+    return (data[weekKey]?.sessions ?? []).filter((item) => item.day === day)
+      .length;
+  }
+
+  /**
+   * Duplique les séances d'une journée de la semaine affichée vers une
+   * date cible, quelle que soit sa semaine. N'écrase jamais : les copies
+   * s'ajoutent aux séances déjà présentes à la date cible. Navigue vers la
+   * semaine cible pour arriver directement sur la copie, prête à modifier.
+   */
+  function duplicateDayToDate(sourceDay: LogbookDay, targetWeekKey: string, targetDay: LogbookDay) {
+    const sourceSessions = week.sessions.filter((item) => item.day === sourceDay);
+    const copies = sourceSessions.map((item) => ({
+      ...item,
+      id: createSessionId(),
+      day: targetDay,
+      status: "a-preparer" as LogbookStatus,
+    }));
+    updateWeek(targetWeekKey, (current) => ({
+      ...current,
+      sessions: [...current.sessions, ...copies],
+    }));
+    goToWeek(targetWeekKey);
   }
 
   function duplicateWeekToNext() {
@@ -676,7 +695,12 @@ export function TeacherLogbookClient() {
         <h2 id="duplication-jour" className="text-xl font-black text-foreground">
           Dupliquer une journée
         </h2>
-        <DayDuplicationForm onDuplicate={duplicateDay} />
+        <DayDuplicationForm
+          currentWeekKey={currentWeekKey}
+          sourceSessionCount={(day) => sessionCountFor(currentWeekKey, day)}
+          targetSessionCount={sessionCountFor}
+          onDuplicate={duplicateDayToDate}
+        />
       </section>
 
       <section
@@ -865,51 +889,151 @@ function JournalView({
 }
 
 function DayDuplicationForm({
+  currentWeekKey,
+  sourceSessionCount,
+  targetSessionCount,
   onDuplicate,
 }: {
-  onDuplicate: (source: LogbookDay, target: LogbookDay) => void;
+  currentWeekKey: string;
+  sourceSessionCount: (day: LogbookDay) => number;
+  targetSessionCount: (weekKey: string, day: LogbookDay) => number;
+  onDuplicate: (source: LogbookDay, targetWeekKey: string, targetDay: LogbookDay) => void;
 }) {
   const [source, setSource] = useState<LogbookDay>(logbookDays[0].id);
-  const [target, setTarget] = useState<LogbookDay>(logbookDays[1].id);
+  const [targetDateStr, setTargetDateStr] = useState(() =>
+    dateKeyForWeekDay(addDaysToKey(currentWeekKey, 7), logbookDays[0].id),
+  );
+  const [pendingConfirm, setPendingConfirm] = useState(false);
+  const [feedback, setFeedback] = useState<string | null>(null);
+
+  const [y, m, d] = targetDateStr.split("-").map(Number);
+  const targetDateValid = Boolean(targetDateStr) && ![y, m, d].some(Number.isNaN);
+  const targetDate = targetDateValid ? new Date(y, m - 1, d) : null;
+  const targetDay = targetDate ? dayFromDate(targetDate) : null;
+  const targetWeekKey = targetDate ? getMondayKey(targetDate) : null;
+  const isWeekend = targetDateValid && targetDay === null;
+  const isSameDay =
+    targetDay !== null && targetWeekKey === currentWeekKey && targetDay === source;
+  const sourceCount = sourceSessionCount(source);
+  const existingCount =
+    targetDay && targetWeekKey ? targetSessionCount(targetWeekKey, targetDay) : 0;
+
+  function resetFeedback() {
+    setPendingConfirm(false);
+    setFeedback(null);
+  }
+
+  function runDuplicate() {
+    if (!targetDay || !targetWeekKey) return;
+    onDuplicate(source, targetWeekKey, targetDay);
+    setFeedback(
+      `${sourceCount} séance${sourceCount > 1 ? "s" : ""} dupliquée${sourceCount > 1 ? "s" : ""} vers ${logbookDays.find((day) => day.id === targetDay)?.label} ${formatDayLabel(dateKeyForWeekDay(targetWeekKey, targetDay)).replace(/\.$/, "")}.`,
+    );
+    setPendingConfirm(false);
+  }
+
+  function handleSubmit() {
+    if (!targetDay || !targetWeekKey || isWeekend || isSameDay || sourceCount === 0) return;
+    if (existingCount > 0) {
+      setPendingConfirm(true);
+      return;
+    }
+    runDuplicate();
+  }
 
   return (
-    <div className="mt-4 flex flex-wrap items-end gap-4">
-      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-        Journée source
-        <select
-          value={source}
-          onChange={(event) => setSource(event.target.value as LogbookDay)}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+    <div className="mt-4">
+      <div className="flex flex-wrap items-end gap-4">
+        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+          Journée source
+          <select
+            value={source}
+            onChange={(event) => {
+              setSource(event.target.value as LogbookDay);
+              resetFeedback();
+            }}
+            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          >
+            {logbookDays.map((day) => (
+              <option key={day.id} value={day.id}>
+                {day.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
+          Nouvelle date
+          <input
+            type="date"
+            value={targetDateStr}
+            onChange={(event) => {
+              setTargetDateStr(event.target.value);
+              resetFeedback();
+            }}
+            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          />
+        </label>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={!targetDateStr || isWeekend || isSameDay || sourceCount === 0}
+          className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {logbookDays.map((day) => (
-            <option key={day.id} value={day.id}>
-              {day.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
-        Journée cible
-        <select
-          value={target}
-          onChange={(event) => setTarget(event.target.value as LogbookDay)}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          Dupliquer vers cette date
+        </button>
+      </div>
+
+      {sourceCount === 0 && (
+        <p className="mt-2 text-sm text-muted">
+          {logbookDays.find((day) => day.id === source)?.label} de la semaine
+          affichée ne contient aucune séance à dupliquer.
+        </p>
+      )}
+      {isWeekend && (
+        <p className="mt-2 text-sm text-amber">
+          Choisissez un jour de semaine (lundi à vendredi).
+        </p>
+      )}
+      {isSameDay && (
+        <p className="mt-2 text-sm text-amber">
+          La date choisie correspond à la journée source.
+        </p>
+      )}
+      {pendingConfirm && targetDay && targetWeekKey && (
+        <div
+          role="alertdialog"
+          aria-label="Confirmer la duplication"
+          className="mt-3 rounded-md border border-amber/40 bg-amber/10 p-3"
         >
-          {logbookDays.map((day) => (
-            <option key={day.id} value={day.id}>
-              {day.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        type="button"
-        onClick={() => onDuplicate(source, target)}
-        disabled={source === target}
-        className="min-h-11 rounded-md border border-jade/60 bg-jade/15 px-4 text-sm font-bold text-jade transition hover:bg-jade/25 disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        Dupliquer la journée
-      </button>
+          <p className="text-sm font-bold text-foreground">
+            {logbookDays.find((day) => day.id === targetDay)?.label}{" "}
+            {formatDayLabel(dateKeyForWeekDay(targetWeekKey, targetDay))} contient déjà{" "}
+            {existingCount} séance{existingCount > 1 ? "s" : ""}. Ajouter quand même les{" "}
+            {sourceCount} séance{sourceCount > 1 ? "s" : ""} dupliquées ?
+          </p>
+          <div className="mt-2 flex gap-2">
+            <button
+              type="button"
+              onClick={runDuplicate}
+              className="min-h-11 rounded-md border border-amber/50 bg-amber/10 px-3 text-sm font-black text-amber"
+            >
+              Confirmer
+            </button>
+            <button
+              type="button"
+              onClick={resetFeedback}
+              className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
+      {feedback && !pendingConfirm && (
+        <p role="status" className="mt-2 text-sm font-bold text-jade">
+          {feedback}
+        </p>
+      )}
     </div>
   );
 }

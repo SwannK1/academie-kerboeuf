@@ -115,6 +115,71 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
     expectNoAppErrors(errors);
   });
 
+  test("cahier journal : dupliquer une journée vers une nouvelle date", async ({ page }) => {
+    const errors = trackConsoleErrors(page);
+    await page.goto("/enseignants/cahier-journal");
+    await expectHealthyPage(page, "Cahier journal");
+
+    // Séance d'origine, le lundi de la semaine affichée.
+    await page.getByRole("button", { name: /Ajouter une séance/i }).first().click();
+    await page.getByLabel("Titre court").fill("Séance originale — lecture");
+    await page.getByRole("button", { name: "Enregistrer" }).click();
+    await expect(page.getByText("Séance originale — lecture").first()).toBeVisible();
+
+    const sourceWeekHeading = await page.getByRole("heading", { level: 2 }).filter({ hasText: "Semaine du" }).textContent();
+
+    // Duplication : les valeurs par défaut ciblent déjà "lundi, semaine suivante".
+    await page.getByRole("button", { name: "Dupliquer vers cette date" }).click();
+
+    // La navigation vers la copie est automatique.
+    await expect(async () => {
+      const heading = await page.getByRole("heading", { level: 2 }).filter({ hasText: "Semaine du" }).textContent();
+      expect(heading).not.toEqual(sourceWeekHeading);
+    }).toPass();
+    await expect(page.getByText("Séance originale — lecture").first()).toBeVisible();
+    await expect(page.getByText(/séance.*dupliquée.*vers Lundi/i)).toBeVisible();
+
+    // L'original reste intact sur la semaine source.
+    await page.getByRole("button", { name: "← Semaine précédente" }).click();
+    await expect(page.getByText("Séance originale — lecture").first()).toBeVisible();
+
+    // Modifier la copie ne doit pas modifier l'original.
+    await page.getByRole("button", { name: "Semaine suivante →" }).click();
+    await page.getByText("Séance originale — lecture").first().click();
+    await page.getByLabel("Titre court").fill("Copie modifiée — lecture");
+    await page.getByRole("button", { name: "Enregistrer" }).click();
+    await expect(page.getByText("Copie modifiée — lecture").first()).toBeVisible();
+    await page.getByRole("button", { name: "← Semaine précédente" }).click();
+    await expect(page.getByText("Séance originale — lecture").first()).toBeVisible();
+    await expect(page.getByText("Copie modifiée — lecture", { exact: true })).toHaveCount(0);
+
+    // Persistance après rafraîchissement, des deux côtés.
+    await page.reload();
+    await expect(page.getByText("Séance originale — lecture").first()).toBeVisible();
+    await page.getByRole("button", { name: "Semaine suivante →" }).click();
+    await expect(page.getByText("Copie modifiée — lecture").first()).toBeVisible();
+    await page.getByRole("button", { name: "← Semaine précédente" }).click();
+
+    // Dupliquer à nouveau vers une date qui contient déjà une séance :
+    // avertissement, jamais d'écrasement silencieux.
+    await page.getByRole("button", { name: "Dupliquer vers cette date" }).click();
+    await expect(page.getByRole("alertdialog", { name: "Confirmer la duplication" })).toBeVisible();
+    await expect(page.getByText(/contient déjà 1 séance/i)).toBeVisible();
+    await page.getByRole("button", { name: "Confirmer" }).click();
+    // La confirmation duplique et navigue directement vers la copie.
+    await expect(page.getByText("Séance originale — lecture", { exact: true })).toHaveCount(1);
+    await expect(page.getByText("Copie modifiée — lecture", { exact: true })).toHaveCount(1);
+
+    // La vue imprimable fonctionne immédiatement sur la copie.
+    await page.getByRole("button", { name: "Voir mon cahier journal (imprimable)" }).click();
+    await expect(page.getByText("Copie modifiée — lecture").first()).toBeVisible();
+    await page.emulateMedia({ media: "print" });
+    await expect(page.getByText("Copie modifiée — lecture").first()).toBeVisible();
+    await expect(page.getByRole("button", { name: "Dupliquer vers cette date" })).not.toBeVisible();
+
+    expectNoAppErrors(errors);
+  });
+
   test("liste et plan de classe : ajout clavier, renommage, sauvegarde et refresh", async ({ page }) => {
     const errors = trackConsoleErrors(page);
     await page.goto("/enseignants/organisation-classe");
