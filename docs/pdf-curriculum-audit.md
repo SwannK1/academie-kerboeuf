@@ -67,16 +67,13 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 848 (365 CP→CM2 + 9 maternelle + 384 collège + 90 seconde : français 8/8 + mathématiques 10/10 + HG 4/4 + langues-vivantes 4/4 + sciences 4/4 closes) |
-| PDF restant à auditer | 18 sur les 866 suivis par Git (seconde restant : arts 6, EMC 6, EPS 6 — dernier lot du dépôt). |
-| Corrections appliquées (3e, cumulées) | 5 : 2 mathématiques/HG-EMC (références orphelines) + 3 anglais (texte/documents/sujet manquants) |
-| Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
-| Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
-| PDF modifiés | 17 (5 corrections d'erreurs + 12 différenciation pédagogique CM1) |
-| PDF reconstruits | 0 |
-| PDF créés | 0 |
-| PDF optimisés | 0 |
-| Erreurs corrigées | 4 |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | **866/866 — DÉPÔT INTÉGRALEMENT AUDITÉ** |
+| PDF restant à auditer | 0 |
+| Corrections appliquées au total (chantier complet) | 21 PDF (4 CP/CE1 + 12 CM1 + 5 mathématiques/HG-EMC/anglais 3e) |
+| Défauts confirmés non corrigés (limite technique ou décision de contenu) | 6 lots CM2 (raster) + 2 lots 6e (données génériques, grammaire) + 1 item 5e/3e (contenu à créer) + 1 lot majeur 4e (langue, 9 PDF) |
+| Détail des 21 PDF corrigés | 17 CP→CM1 (5 corrections d'erreurs + 12 différenciations pédagogiques CM1) + 4 évaluations 3e (`3e-ma-grandeurs-trigonometrie`, `3e-hg-emc-democratie`, `3e-ang-culture-comparer`, `3e-ang-expression-ecrite`) + 1 correction supplémentaire sur `3e-ang-comprehension-ecrite` (ajout d'un texte support complet, correction plus substantielle que les autres) |
+| PDF reconstruits / créés / optimisés | 0 / 0 / 0 |
+| Erreurs corrigées (CP/CE1, factuelles) | 4 |
 | Erreurs confirmées, non corrigées (limite technique raster CM2) | 6 lots / défauts distincts — voir section « CM2 intégralement audité » |
 
 Note de méthode : le total de référence reste 971 (base historique du checkout iCloud, 105 doublons ` 2.pdf` protégés inclus). Le clone de travail (`~/dev/academie-kerboeuf`) ne contient que les 866 PDF suivis par Git — les 105 doublons non suivis sont des copies de conflit iCloud du même contenu, jamais destinées à être commitées ; auditer la version suivie couvre donc le même contenu que son doublon non suivi. **Découverte importante du 9 septembre 2026 (après-midi) : le clone de travail n'a aucun PDF `dataless` — les 272 PDF bloqués sur le checkout iCloud sont tous matérialisés ici.** L'obstacle qui limitait l'audit à 20/33 PDF CP est donc levé.
@@ -579,6 +576,27 @@ Dernier périmètre du dépôt. 108 PDF, 8 matières : français (8×3=24), math
 
 `decrire-transformation-chimique` (2H₂+O₂→2H₂O correctement équilibrée), `exploiter-mesure-avec-unite` (12,4 cm = 0,124 m, discipline des chiffres significatifs bien enseignée), `interpreter-donnees-geologiques` (principe de recoupement correct, distingue chronologie relative et âge absolu), `relier-structure-et-fonction-du-vivant` (surface d'échange fine/étendue/vascularisée — principe SVT standard et exact). **Rigueur scientifique constante. Aucune erreur trouvée.** Barèmes `/10` tous exacts (2+3+3+2).
 
+### Arts, EMC, EPS seconde clos (6/6 compétences, 18/18 PDF) — **AUCUNE RÉCURRENCE DU DÉFAUT DE LANGUE TROUVÉ EN 4e**
+
+`arts-decrire-oeuvre-vocabulaire-adapte` (distinction observation/interprétation, lexique plastique précis), `arts-justifier-choix-creation` (intention, contraintes, écart projet/résultat), `emc-distinguer-droit-liberte-responsabilite` (EMC — distinction droit/liberté/responsabilité juridiquement solide, exemple protection des données bien choisi), `emc-formuler-argument-respectueux` (EMC — technique de concession argumentative bien illustrée, distingue désaccord et attaque personnelle), `eps-adapter-effort-situation` (physiologie de l'effort correcte : gestion d'allure, un départ trop rapide nuit à la performance), `eps-tenir-role-collectif` (méthodologie d'observation factuelle rigoureuse). **Vérification spécifique effectuée** : contrairement aux 3 compétences uniques équivalentes de 4e (arts plastiques/éducation musicale/EPS, où tout le contenu spécifique était fautivement en anglais), **ces 6 compétences de seconde sont intégralement et correctement rédigées en français** — aucune récurrence du défaut de langue. Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
+
+## SECONDE INTÉGRALEMENT AUDITÉ (9 septembre 2026) : 8 matières, 108/108 PDF
+
+Français 8/8, mathématiques 10/10, histoire-géographie 4/4, langues vivantes 4/4, sciences 4/4, arts 2/2, EMC 2/2, EPS 2/2 — 36 compétences au total, 108/108 PDF. Bilan cumulé seconde : 0 PDF modifié, aucune erreur factuelle/scientifique/mathématique/historique/linguistique trouvée sur l'ensemble du niveau — le niveau le plus propre de tout le chantier avec 5e. Deux compétences EMC réelles et bien conçues, cohérentes avec les précédentes rencontrées à 5e et 4e. Aucune récurrence du défaut de langue de 4e.
+
+## DÉPÔT INTÉGRALEMENT AUDITÉ (9 septembre 2026)
+
+**Avec la clôture de seconde, l'intégralité du corpus PDF pédagogique suivi par Git est désormais auditée : 866/866 PDF** (33 CP + 28 CE1 + 24 CE2 + 126 CM1 + 154 CM2 + 9 maternelle + 384 collège [186 6e + 66 5e + 57 4e + 75 3e] + 108 seconde). Chaque fichier a été lu intégralement (texte et rendu visuel de chaque page), chaque calcul recalculé à la main, chaque barème recontrôlé, et chaque compétence au nom proche vérifiée pour écarter un doublon réel avant de conclure à une différenciation légitime.
+
+**Récapitulatif des corrections effectivement appliquées dans ce dépôt (PDF vectoriels, CP→3e)** : 4 corrections de contenu (CP/CE1, fait scientifique et accords), 12 différenciations pédagogiques volontaires (CM1, doublons résolus sur demande explicite), 5 corrections de références orphelines/contexte manquant en 3e (mathématiques, HG-EMC, anglais ×3). **Total : 21 PDF corrigés et revérifiés visuellement sur ce chantier.**
+
+**Défauts confirmés mais non corrigés (documentés pour décision ou correction groupée future)** :
+- CM2 (154 PDF, architecture raster sans source éditable) : 6 lots de défauts distincts (illustrations de patron de solide, phrase contextuelle incohérente, 5 défauts de grammaire, phrases déjà correctes annoncées comme fautives, construction de phrase fautive).
+- 6e mathématiques : données de travail génériques non pertinentes sur les 28 compétences ; support de lecture manquant sur 4 compétences OGD/résolution-problèmes.
+- 6e français : 1 faute de conjugaison, 3 écarts objectif/contenu (étude de la langue).
+- 5e/anglais 3e : 1 brouillon à réviser jamais rédigé (nécessiterait un contenu inédit, non fabriqué par principe).
+- 4e arts plastiques/éducation musicale/EPS (9 PDF) : contenu spécifique intégralement en anglais au lieu du français — défaut majeur, sûr à corriger (traduction directe), volumineux, réservé à une correction groupée dédiée.
+
 ## Prochaines étapes sûres
 
 1. ~~Matérialiser ou récupérer sans altération les 13 PDF CP encore `dataless`.~~ Résolu le 9 septembre 2026 : le clone de travail n'a aucun PDF `dataless`, tous les 866 PDF suivis par Git sont accessibles.
@@ -608,6 +626,8 @@ Dernier périmètre du dépôt. 108 PDF, 8 matières : français (8×3=24), math
 25. ~~Collège 6e (français, mathématiques, histoire-géographie-EMC).~~ Fait le 9 septembre 2026 : **6e intégralement clos, 62 compétences, 186/186 PDF** (français 22/22 = 66 PDF ; mathématiques 28/28 = 84 PDF ; histoire-géographie-EMC 12/12 = 36 PDF, dont 0 compétence EMC — cohérent avec CP→CM2). PDF vectoriels comme CP-CM1 (pas de limite raster). Défauts confirmés en français (écriture : 1 faute de conjugaison ; étude de la langue : 3 écarts objectif/contenu) et en mathématiques (« données de travail » génériques non pertinentes sur les 28 compétences ; support de lecture manquant sur 4 compétences OGD/résolution-problèmes) ; aucun défaut en histoire-géographie-EMC. 0 PDF modifié dans ce lot (corrections groupées non encore engagées). **Prochaine étape : 5e (66 PDF), puis 4e (57), 3e (75), puis seconde (108).**
 26. ~~Collège 5e (français, mathématiques, histoire-géographie-EMC, sciences-technologie, anglais).~~ Fait le 9 septembre 2026 : **5e intégralement clos, 22 compétences, 66/66 PDF.** Niveau le plus propre audité à ce stade : aucune erreur factuelle/scientifique/historique/mathématique/linguistique trouvée. Seul défaut récurrent : un « brouillon à réviser » ou une « suite à comparer » décrits en consigne mais jamais fournis dans le fichier (3 items notés au total, français et anglais). Première compétence EMC réelle de tout le chantier trouvée ici (`5e-hg-emc-solidarite`), correcte et bien conçue. Deux nouvelles matières rencontrées pour la première fois (sciences-technologie, anglais), toutes deux closes sans erreur. **Prochaine étape : 4e (57 PDF).**
 27. ~~Collège 4e (français, mathématiques, histoire-géographie-EMC, sciences-technologie, anglais, arts plastiques, éducation musicale, EPS).~~ Fait le 9 septembre 2026 : **4e intégralement clos, 8 matières, 57/57 PDF.** Aucune erreur factuelle en français/mathématiques/HG-EMC/sciences-technologie/anglais (24 compétences). **Défaut majeur confirmé** dans les 3 nouvelles matières à compétence unique (arts plastiques, éducation musicale, EPS, 9 PDF) : tout le contenu spécifique à la tâche est rédigé en anglais au lieu du français — défaut systémique, sûr à corriger (traduction directe) mais non corrigé dans ce lot (réservé à une correction groupée). Confirmation du motif « inédit »/« original » comme conception intentionnelle du niveau (contenu apporté par l'enseignant), pas un défaut. **Prochaine étape : 3e (75 PDF).**
+28. ~~Collège 3e (français, mathématiques, histoire-géographie-EMC, sciences-technologie, anglais).~~ Fait le 9 septembre 2026 : **3e intégralement clos, 25 compétences, 75/75 PDF.** 5 corrections appliquées (références orphelines et supports manquants en mathématiques, HG-EMC et anglais — détail dans les sections dédiées). Aucune erreur factuelle ailleurs. **Ceci clôt tout le collège : 6e+5e+4e+3e = 384/384 PDF.**
+29. ~~Lycée seconde (français, mathématiques, histoire-géographie, langues vivantes, sciences, arts, EMC, EPS).~~ Fait le 9 septembre 2026 : **seconde intégralement clos, 36 compétences, 108/108 PDF, aucune erreur trouvée sur l'ensemble du niveau.** Vérification spécifique qu'arts/EMC/EPS de seconde ne reproduisent PAS le défaut de langue trouvé en 4e : confirmé, tout est correctement en français. **CECI CLÔT L'INTÉGRALITÉ DU DÉPÔT : 866/866 PDF suivis par Git intégralement audités.**
 
 ## Collège 3e — démarrage (9 septembre 2026)
 
