@@ -67,8 +67,8 @@ Ces deux vérifications confirment que le tableau ci-dessus était déjà exact.
 
 | Indicateur | Valeur actuelle |
 | --- | ---: |
-| PDF audités intégralement (toutes pages, contenu contrôlé) | 824 (365 CP→CM2 + 9 maternelle + 384 collège + 66 seconde : français 8/8 + mathématiques 10/10 + HG 4/4 closes) |
-| PDF restant à auditer | 42 sur les 866 suivis par Git (seconde restant : langues-vivantes 12, sciences 12, arts 6, EMC 6, EPS 6). |
+| PDF audités intégralement (toutes pages, contenu contrôlé) | 836 (365 CP→CM2 + 9 maternelle + 384 collège + 78 seconde : français 8/8 + mathématiques 10/10 + HG 4/4 + langues-vivantes 4/4 closes) |
+| PDF restant à auditer | 30 sur les 866 suivis par Git (seconde restant : sciences 12, arts 6, EMC 6, EPS 6). |
 | Corrections appliquées (3e, cumulées) | 5 : 2 mathématiques/HG-EMC (références orphelines) + 3 anglais (texte/documents/sujet manquants) |
 | Corrections appliquées (3e) | 2 : `3e-ma-grandeurs-trigonometrie` et `3e-hg-emc-democratie` évaluations — références orphelines reformulées |
 | Défauts confirmés, non corrigés — langue (nouveau, 4e) | 1 lot majeur : arts-plastiques/éducation musicale/EPS 4e, 9 PDF entièrement en anglais au lieu du français |
@@ -570,6 +570,10 @@ Dernier périmètre du dépôt. 108 PDF, 8 matières : français (8×3=24), math
 ### Histoire-Géographie seconde clos (4/4 compétences, 12/12 PDF)
 
 `situer-evenement-chronologie` (évite explicitement la confusion succession/causalité — méthodologie historique rigoureuse), `analyser-document-historique` (distingue information et point de vue, exemple affiche officielle bien choisi), `decrire-organisation-territoire` (pôles/réseaux/flux/échelles), `expliquer-enjeu-developpement-durable` (exemple circulation en centre-ville avec nuance sur les inégalités d'accès — évite le simplisme environnemental). **Rigueur méthodologique constante (évite systématiquement les raccourcis causals et les jugements simplistes). Aucune erreur trouvée.** Barèmes `/10` tous exacts (2+3+3+2).
+
+### Langues vivantes seconde clos (4/4 compétences, 12/12 PDF)
+
+`comprendre-texte-court-authentique`, `identifier-sens-global-message-oral`, `rediger-texte-court-organise`, `tenir-echange-court`. Matière de langue-apprentissage : contenu spécifique correctement rédigé en anglais (illustratif, cohérent avec le fait que `anglais` lui-même est aussi en anglais — pas la même anomalie que celle trouvée en 4e pour arts plastiques/musique/EPS). Anglais grammaticalement correct partout, exemples de dialogue et de méthodologie cohérents (ex. échange réservation avec contrainte horaire bien résolu). Aucune erreur trouvée. Barèmes `/10` tous exacts (2+3+3+2).
 
 ## Prochaines étapes sûres
 
