@@ -37,7 +37,7 @@ export default function MethodePage() {
           {principles.map((principle, index) => (
             <li
               key={principle}
-              className="flex gap-4 rounded-lg border border-white/10 bg-white/[0.04] p-4 sm:p-5"
+              className="flex gap-4 rounded-lg border border-ink/10 bg-ink/[0.04] p-4 sm:p-5"
             >
               <span className="grid size-8 shrink-0 place-items-center rounded-md bg-gold/10 text-xs font-black text-gold">
                 {String(index + 1).padStart(2, "0")}

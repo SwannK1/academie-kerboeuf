@@ -306,7 +306,7 @@ export default function SiteStatusPage() {
             </p>
           </div>
 
-          <div className="rounded-md border border-white/10 bg-panel/80 p-5">
+          <div className="rounded-md border border-ink/10 bg-panel/80 p-5">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
               Vue rapide
             </p>
@@ -317,7 +317,7 @@ export default function SiteStatusPage() {
           </div>
         </header>
 
-        <section className="mt-10 rounded-md border border-white/10 bg-white/[0.035] p-5">
+        <section className="mt-10 rounded-md border border-ink/10 bg-ink/[0.035] p-5">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-jade">
             Méthode de comptage
           </p>
@@ -341,8 +341,8 @@ export default function SiteStatusPage() {
             </h2>
           </div>
 
-          <div className="overflow-hidden rounded-md border border-white/10">
-            <div className="grid min-w-[860px] grid-cols-[1.1fr_0.7fr_0.7fr_0.9fr_1.3fr_0.9fr] bg-white/[0.055] text-xs font-bold uppercase tracking-[0.16em] text-muted">
+          <div className="overflow-hidden rounded-md border border-ink/10">
+            <div className="grid min-w-[860px] grid-cols-[1.1fr_0.7fr_0.7fr_0.9fr_1.3fr_0.9fr] bg-ink/[0.055] text-xs font-bold uppercase tracking-[0.16em] text-muted">
               <div className="p-4">Section</div>
               <div className="p-4">Statut</div>
               <div className="p-4">Fiches disponibles</div>
@@ -380,7 +380,7 @@ export default function SiteStatusPage() {
 
 function Metric({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded border border-white/10 bg-background/45 p-4">
+    <div className="rounded border border-ink/10 bg-background/45 p-4">
       <p className="font-mono text-3xl font-black text-gold">{value}</p>
       <p className="mt-2 text-xs font-bold uppercase tracking-[0.12em] text-muted">
         {label}
@@ -398,7 +398,7 @@ function StatusRow({ section }: { section: SectionStatus }) {
         : "Statut manuel : aucune matière disponible déclarée";
 
   return (
-    <div className="grid min-w-[860px] grid-cols-[1.1fr_0.7fr_0.7fr_0.9fr_1.3fr_0.9fr] border-t border-white/10 text-sm">
+    <div className="grid min-w-[860px] grid-cols-[1.1fr_0.7fr_0.7fr_0.9fr_1.3fr_0.9fr] border-t border-ink/10 text-sm">
       <div className="p-4">
         <p className="font-black text-foreground">{section.title}</p>
         <p className="mt-2 text-xs leading-5 text-muted">{section.note}</p>
@@ -433,14 +433,14 @@ function ToolGroup({
   note?: string;
 }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
       <h3 className="text-lg font-black text-foreground">{title}</h3>
       {note ? <p className="mt-2 text-xs leading-5 text-muted">{note}</p> : null}
       <div className="mt-4 grid gap-2">
         {tools.map((tool) => (
           <div
             key={tool.title}
-            className="flex min-h-12 items-center justify-between gap-3 rounded border border-white/10 bg-background/45 px-3 py-2"
+            className="flex min-h-12 items-center justify-between gap-3 rounded border border-ink/10 bg-background/45 px-3 py-2"
           >
             {tool.href ? (
               <Link

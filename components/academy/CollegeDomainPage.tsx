@@ -61,7 +61,7 @@ export function CollegeDomainPage({
       {/* ── En-tête ── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3">
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -77,14 +77,14 @@ export function CollegeDomainPage({
 
           {!isUpcoming && entries.length > 0 && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-3">
+              <div className="flex items-center gap-2 rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-3">
                 <span className="text-2xl font-black text-jade">{entries.length}</span>
                 <span className="text-sm font-bold text-muted">
                   compétence{entries.length > 1 ? "s" : ""} attendue{entries.length > 1 ? "s" : ""}
                 </span>
               </div>
               {inProgressCount > 0 && (
-                <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-3">
+                <div className="flex items-center gap-2 rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-3">
                   <span className="text-2xl font-black text-gold">{inProgressCount}</span>
                   <span className="text-sm font-bold text-muted">en préparation</span>
                 </div>
@@ -98,7 +98,7 @@ export function CollegeDomainPage({
         /* ── Notice "En préparation" ── */
         <section className="px-4 pb-20 pt-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="rounded-md border border-white/10 bg-white/[0.035] p-8">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-8">
               <h2 className="text-xl font-black text-foreground">En préparation</h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
                 Ce domaine est prévu dans l&rsquo;architecture 6e. Les sous-domaines et
@@ -113,7 +113,7 @@ export function CollegeDomainPage({
                 </Link>
                 <Link
                   href={levelHref}
-                  className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                  className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
                 >
                   {levelLabel}
                 </Link>
@@ -139,7 +139,7 @@ export function CollegeDomainPage({
                 {entries.map((entry, index) => (
                   <div
                     key={entry.id}
-                    className="rounded-md border border-white/[0.08] bg-white/[0.035] p-5"
+                    className="rounded-md border border-ink/[0.08] bg-ink/[0.035] p-5"
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex items-baseline gap-3">
@@ -204,7 +204,7 @@ export function CollegeDomainPage({
                 {plannedResources.map((resource) => (
                   <div
                     key={resource.kind}
-                    className="flex flex-col gap-2 rounded-md border border-white/[0.08] bg-white/[0.025] p-4"
+                    className="flex flex-col gap-2 rounded-md border border-ink/[0.08] bg-ink/[0.025] p-4"
                   >
                     <p className="text-xs font-bold leading-snug text-muted">
                       {resource.label}
@@ -235,7 +235,7 @@ export function CollegeDomainPage({
                   </Link>
                   <Link
                     href={levelHref}
-                    className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                    className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
                   >
                     {levelLabel}
                   </Link>

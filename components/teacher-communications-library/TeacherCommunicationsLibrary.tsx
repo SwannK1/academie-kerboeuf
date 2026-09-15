@@ -218,7 +218,7 @@ export function TeacherCommunicationsLibrary() {
 
         <form
           onSubmit={handleSubmit}
-          className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-5"
+          className="mt-4 grid gap-4 rounded-lg border border-ink/10 bg-ink/[0.03] p-5"
         >
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="flex flex-col gap-1 text-sm font-bold text-foreground">
@@ -230,7 +230,7 @@ export function TeacherCommunicationsLibrary() {
                   setDraft((current) => ({ ...current, title: event.target.value }))
                 }
                 required
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
               />
             </label>
 
@@ -244,7 +244,7 @@ export function TeacherCommunicationsLibrary() {
                     category: event.target.value as CommunicationCategory,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
               >
                 {communicationCategories.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -262,7 +262,7 @@ export function TeacherCommunicationsLibrary() {
                 onChange={(event) =>
                   setDraft((current) => ({ ...current, subject: event.target.value }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
               />
             </label>
 
@@ -277,7 +277,7 @@ export function TeacherCommunicationsLibrary() {
                     plannedDate: event.target.value,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
               />
             </label>
 
@@ -291,7 +291,7 @@ export function TeacherCommunicationsLibrary() {
                     status: event.target.value as CommunicationStatus,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
               >
                 {communicationStatuses.map((status) => (
                   <option key={status.id} value={status.id}>
@@ -311,7 +311,7 @@ export function TeacherCommunicationsLibrary() {
               }
               required
               rows={6}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-normal leading-6 text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-normal leading-6 text-foreground"
             />
           </label>
 
@@ -326,7 +326,7 @@ export function TeacherCommunicationsLibrary() {
               <button
                 type="button"
                 onClick={resetDraft}
-                className="min-h-11 rounded-md border border-white/15 px-5 text-sm font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
+                className="min-h-11 rounded-md border border-ink/15 px-5 text-sm font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
               >
                 Annuler
               </button>
@@ -351,7 +351,7 @@ export function TeacherCommunicationsLibrary() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Titre, objet ou contenu"
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
             />
           </label>
 
@@ -362,7 +362,7 @@ export function TeacherCommunicationsLibrary() {
               onChange={(event) =>
                 setCategoryFilter(event.target.value as CommunicationCategory | "all")
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
             >
               <option value="all">Toutes les catégories</option>
               {communicationCategories.map((category) => (
@@ -380,7 +380,7 @@ export function TeacherCommunicationsLibrary() {
               onChange={(event) =>
                 setStatusFilter(event.target.value as CommunicationStatus | "all")
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-normal text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-normal text-foreground"
             >
               <option value="all">Tous les statuts</option>
               {communicationStatuses.map((status) => (
@@ -402,7 +402,7 @@ export function TeacherCommunicationsLibrary() {
         </h2>
 
         {visibleCommunications.length === 0 ? (
-          <p className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+          <p className="mt-6 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
             Aucune communication ne correspond à votre recherche ou à vos filtres.
           </p>
         ) : (
@@ -410,7 +410,7 @@ export function TeacherCommunicationsLibrary() {
             {visibleCommunications.map((communication) => (
               <li
                 key={communication.id}
-                className="rounded-lg border border-white/10 bg-white/[0.03] p-5"
+                className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
@@ -440,7 +440,7 @@ export function TeacherCommunicationsLibrary() {
                       "min-h-9 rounded-md border px-3 text-sm font-bold transition",
                       communication.favorite
                         ? "border-amber/60 bg-amber/10 text-amber"
-                        : "border-white/15 text-muted hover:border-amber/40",
+                        : "border-ink/15 text-muted hover:border-amber/40",
                     ].join(" ")}
                   >
                     {communication.favorite ? "★ Favori" : "☆ Favori"}
@@ -452,7 +452,7 @@ export function TeacherCommunicationsLibrary() {
                 </p>
 
                 <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted">
-                  <span className="rounded-full border border-white/15 px-3 py-1 font-bold">
+                  <span className="rounded-full border border-ink/15 px-3 py-1 font-bold">
                     {getCommunicationStatusLabel(communication.status)}
                   </span>
                   {communication.plannedDate ? (
@@ -464,21 +464,21 @@ export function TeacherCommunicationsLibrary() {
                   <button
                     type="button"
                     onClick={() => startEdit(communication)}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
                   >
                     Modifier
                   </button>
                   <button
                     type="button"
                     onClick={() => duplicateCommunication(communication)}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40"
                   >
                     Dupliquer
                   </button>
                   <button
                     type="button"
                     onClick={() => window.print()}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40"
                   >
                     Imprimer
                   </button>
@@ -498,7 +498,7 @@ export function TeacherCommunicationsLibrary() {
                       <button
                         type="button"
                         onClick={() => setConfirmDeleteId(null)}
-                        className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground"
+                        className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground"
                       >
                         Annuler
                       </button>
@@ -507,7 +507,7 @@ export function TeacherCommunicationsLibrary() {
                     <button
                       type="button"
                       onClick={() => setConfirmDeleteId(communication.id)}
-                      className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                      className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
                     >
                       Supprimer
                     </button>

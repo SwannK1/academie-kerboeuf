@@ -75,14 +75,14 @@ export function SubdomainResourcePage({
           {guideCharacter || linkedMissions.length > 0 ? (
             <div className="mt-6 flex flex-wrap gap-2 text-xs text-muted">
               {guideCharacter ? (
-                <span className="rounded border border-white/10 bg-white/[0.03] px-2.5 py-1">
+                <span className="rounded border border-ink/10 bg-ink/[0.03] px-2.5 py-1">
                   Guide : {guideCharacter.name}
                 </span>
               ) : null}
               {linkedMissions.map((mission) => (
                 <span
                   key={mission.missionSlug}
-                  className="rounded border border-white/10 bg-white/[0.03] px-2.5 py-1"
+                  className="rounded border border-ink/10 bg-ink/[0.03] px-2.5 py-1"
                 >
                   Mission liée : {mission.title ?? mission.missionSlug}
                 </span>
@@ -92,9 +92,9 @@ export function SubdomainResourcePage({
         </div>
       </section>
 
-      <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-6 border-b border-white/10 pb-5">
+          <div className="mb-6 border-b border-ink/10 pb-5">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               {hasStructuredCompetencies
                 ? "Organisation pédagogique"
@@ -124,7 +124,7 @@ export function SubdomainResourcePage({
               ))}
             </ul>
           ) : (
-            <div className="rounded-md border border-white/10 bg-white/[0.025] p-8">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.025] p-8">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                 Leçons en préparation
               </p>
@@ -137,11 +137,11 @@ export function SubdomainResourcePage({
         </div>
       </section>
 
-      <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Link
             href={backHref}
-            className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+            className="rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
           >
             {backLabel}
           </Link>
@@ -162,7 +162,7 @@ function CompetencyResourceItem({
   const resourceRefs = competency.resourceRefs ?? [];
 
   return (
-    <li className="rounded-md border border-white/10 bg-white/[0.025] p-6">
+    <li className="rounded-md border border-ink/10 bg-ink/[0.025] p-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
@@ -201,7 +201,7 @@ function CompetencyResourceItem({
           linkedLessons.map((lesson) => (
             <div
               key={lesson.id}
-              className="rounded border border-white/10 bg-ink/25 p-4"
+              className="rounded border border-ink/10 bg-ink/25 p-4"
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
@@ -225,7 +225,7 @@ function CompetencyResourceItem({
             </div>
           ))
         ) : (
-          <div className="rounded border border-white/10 bg-ink/25 p-4">
+          <div className="rounded border border-ink/10 bg-ink/25 p-4">
             <p className="text-sm font-bold text-muted">
               Leçons liées en cours de structuration.
             </p>
@@ -240,7 +240,7 @@ function LessonResourceItem({ lesson }: { lesson: Lesson }) {
   const slots = getPedagogicalResourceSlots(lesson.resources);
 
   return (
-    <li className="rounded-md border border-white/10 bg-white/[0.025] p-6">
+    <li className="rounded-md border border-ink/10 bg-ink/[0.025] p-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 className="text-xl font-black text-foreground">{lesson.title}</h3>
@@ -275,13 +275,13 @@ function ResourceSlotRow({ slot }: { slot: PedagogicalResourceSlot }) {
   const isLinkable = isPedagogicalResourceLinkable(resource);
 
   return (
-    <div className="rounded border border-white/10 bg-ink/30 px-4 py-3">
+    <div className="rounded border border-ink/10 bg-ink/30 px-4 py-3">
       <dt className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
         {slot.label}
       </dt>
       <dd className="mt-2">
         {isAbsent ? (
-          <span className="inline-flex w-fit rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white/35">
+          <span className="inline-flex w-fit rounded border border-ink/10 bg-ink/[0.03] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-ink/35">
             Absente
           </span>
         ) : isLinkable ? (

@@ -51,7 +51,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
       {/* ── Hero ── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3">
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -109,14 +109,14 @@ export function LyceeLevelEntry({ level, status }: Props) {
             ) : (
               <div
                 aria-label="Matières du niveau"
-                className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60"
+                className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.025] p-6 opacity-60"
               >
                 <h2 className="text-xl font-black text-foreground">Matières</h2>
                 <p className="mt-3 flex-1 text-sm leading-7 text-muted">
                   Français, Mathématiques, Sciences, Langues et disciplines du
                   lycée.
                 </p>
-                <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                <span className="mt-6 inline-flex w-fit rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
                   À venir
                 </span>
               </div>
@@ -129,10 +129,10 @@ export function LyceeLevelEntry({ level, status }: Props) {
                 <span className="mt-6 inline-flex text-sm font-black text-jade">Voir les ressources ↓</span>
               </a>
             ) : (
-              <div aria-label="Ressources — à venir" className="flex flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60">
+              <div aria-label="Ressources — à venir" className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.025] p-6 opacity-60">
                 <h2 className="text-xl font-black text-foreground">Ressources</h2>
                 <p className="mt-3 flex-1 text-sm leading-7 text-muted">Fiches et supports de révision en PDF.</p>
-                <span className="mt-6 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">À venir</span>
+                <span className="mt-6 inline-flex w-fit rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">À venir</span>
               </div>
             )}
           </div>
@@ -143,7 +143,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
       {curriculumSubjects.length > 0 && (
         <section id="matieres" className="px-4 pb-10 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-6 border-b border-white/10 pb-4">
+            <div className="mb-6 border-b border-ink/10 pb-4">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
                 Programme {level.label}
               </p>
@@ -155,7 +155,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
               {curriculumSubjects.map((subject) => (
                 <div
                   key={subject.slug}
-                  className="flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5"
+                  className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5"
                 >
                   <p className="text-sm font-black text-foreground">
                     {subject.label}
@@ -190,7 +190,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
       {resourceSubjects.length > 0 && (
         <section id="ressources" className="px-4 pb-10 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-6 border-b border-white/10 pb-4">
+            <div className="mb-6 border-b border-ink/10 pb-4">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">Ressources réelles</p>
               <h2 className="mt-1.5 text-2xl font-black text-foreground">Matières et compétences disponibles</h2>
             </div>
@@ -213,7 +213,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
       {/* ── En préparation ── */}
       {resourceSubjects.length === 0 && <section className="px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-md border border-white/10 bg-white/[0.025] p-6">
+          <div className="rounded-md border border-ink/10 bg-ink/[0.025] p-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
               En préparation
             </p>
@@ -228,7 +228,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-white/25"
+                    className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ink/25"
                   />
                   <span>{item}</span>
                 </li>
@@ -243,7 +243,7 @@ export function LyceeLevelEntry({ level, status }: Props) {
         <div className="mx-auto max-w-7xl">
           <Link
             href="/lycee"
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+            className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
           >
             ← Retour Lycée
           </Link>

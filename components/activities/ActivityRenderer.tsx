@@ -106,13 +106,13 @@ function ActivityNotRegistered({
       <span className="font-bold text-ember">
         Type d&apos;activité non enregistré :
       </span>
-      <code className="ml-2 rounded bg-white/10 px-1 py-0.5 text-xs text-foreground">
+      <code className="ml-2 rounded bg-ink/10 px-1 py-0.5 text-xs text-foreground">
         {type}
       </code>
       {process.env.NODE_ENV === "development" && (
         <p className="mt-2 text-xs text-muted">
           Enregistrez ce type dans{" "}
-          <code className="rounded bg-white/10 px-1">
+          <code className="rounded bg-ink/10 px-1">
             components/activities/ActivityRenderer.tsx
           </code>
         </p>

@@ -54,7 +54,7 @@ export function PrimaireLevelEntry({ level }: Props) {
                 <Link
                   key={subject.slug}
                   href={`/primaire/${slug}/matieres/${subject.slug}`}
-                  className="group flex min-h-52 min-w-0 flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-jade/35 hover:bg-jade/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade"
+                  className="group flex min-h-52 min-w-0 flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-jade/35 hover:bg-jade/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jade"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="min-w-0 text-xl font-black text-foreground">
@@ -81,7 +81,7 @@ export function PrimaireLevelEntry({ level }: Props) {
 
         <nav
           aria-label={`Liens secondaires ${level.label}`}
-          className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-6"
+          className="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-ink/10 pt-6"
         >
           <Link
             href={`/primaire/${slug}/competences`}

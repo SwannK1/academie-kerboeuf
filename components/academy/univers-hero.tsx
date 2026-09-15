@@ -3,7 +3,7 @@ import type { AccentKey } from "@/content/universe";
 
 function Metric({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded border border-white/10 bg-white/[0.04] p-3">
+    <div className="rounded border border-ink/10 bg-ink/[0.04] p-3">
       <p className="font-mono text-2xl font-black text-gold">{value}</p>
       <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
         {label}
@@ -59,7 +59,7 @@ export function UniversHero({
     <section className="relative isolate overflow-hidden px-4 py-20 sm:px-6 lg:px-8">
       <div className="mission-grid absolute inset-0 -z-20 opacity-30" />
       <div className="map-line absolute inset-x-[-12%] top-[45%] -z-10 h-56 rotate-[-7deg] opacity-30" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.06),rgba(9,16,15,0.97))]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.06),rgba(245,239,224,0.97))]" />
 
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.68fr] lg:items-end">
         <div>
@@ -88,7 +88,7 @@ export function UniversHero({
         </div>
 
         {/* Métriques */}
-        <div className="rounded-md border border-white/12 bg-panel/75 p-5 shadow-2xl shadow-black/35">
+        <div className="rounded-md border border-ink/12 bg-panel/75 p-5 shadow-2xl shadow-black/35">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
             État du monde
           </p>

@@ -114,7 +114,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
               >
                 {student.level}
               </span>
-              <span className="rounded-md border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+              <span className="rounded-md border border-ink/10 bg-ink/[0.04] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-muted">
                 {student.cycle}
               </span>
             </div>
@@ -137,7 +137,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
               {student.missionsHref ? (
                 <Link
                   href={student.missionsHref}
-                  className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+                  className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
                 >
                   Voir les missions
                 </Link>
@@ -149,7 +149,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
 
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-3">
-          <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+          <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
             <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accent.textClass}`}>
               Univers
             </p>
@@ -161,7 +161,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
             </p>
           </article>
 
-          <article className="rounded-md border border-white/10 bg-white/[0.045] p-6 lg:col-span-2">
+          <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6 lg:col-span-2">
             <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accent.textClass}`}>
               Manière d’apprendre
             </p>
@@ -215,7 +215,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
 
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-          <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+          <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
             <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accent.textClass}`}>
               Ce que tu peux travailler avec ce personnage
             </p>
@@ -223,7 +223,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
               {student.progression.map((item) => (
                 <li
                   key={item}
-                  className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                  className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                 >
                   {item}
                 </li>
@@ -258,7 +258,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
               ) : null}
               <Link
                 href={student.levelHref}
-                className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-2 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Niveau {student.level}
               </Link>
@@ -269,7 +269,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
 
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-2">
-          <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+          <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
             <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accent.textClass}`}>
               Missions associées
             </p>
@@ -279,7 +279,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
                   <Link
                     key={mission.id}
                     href={mission.href}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+                    className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
                   >
                     <span className="font-bold text-foreground">{mission.title}</span>
                     <span className="block text-xs uppercase tracking-[0.12em] text-muted">
@@ -295,7 +295,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
             )}
           </article>
 
-          <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+          <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
             <p className={`text-xs font-bold uppercase tracking-[0.18em] ${accent.textClass}`}>
               Parcours associés
             </p>
@@ -305,7 +305,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
                   <Link
                     key={path.slug}
                     href={`/parcours/${path.slug}`}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+                    className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
                   >
                     <span className="font-bold text-foreground">{path.title}</span>
                     <span className="block text-xs uppercase tracking-[0.12em] text-muted">
@@ -336,19 +336,19 @@ export default async function EleveDetailPage({ params }: PageProps) {
             </div>
             <Link
               href="/eleves"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-10 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Retour à la galerie
             </Link>
             <Link
               href="/ressources"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-10 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Ressources
             </Link>
           </div>
 
-          <div className="grid gap-px overflow-hidden rounded-md border border-white/10 bg-white/[0.06] md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-md border border-ink/10 bg-ink/[0.06] md:grid-cols-2 lg:grid-cols-4">
             {student.progression.map((step, index) => (
               <div key={step} className="bg-ink/82 p-6">
                 <span
@@ -371,7 +371,7 @@ export default async function EleveDetailPage({ params }: PageProps) {
 
 function PersonalityItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded border border-white/10 bg-ink/35 p-4">
+    <div className="rounded border border-ink/10 bg-ink/35 p-4">
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
         {label}
       </p>

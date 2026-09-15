@@ -366,7 +366,7 @@ export function TeacherLocalBackupClient() {
         compte ne sont jamais inclus dans une sauvegarde.
       </div>
 
-      <section className="rounded-lg border border-white/10 bg-background/45 p-4">
+      <section className="rounded-lg border border-ink/10 bg-background/45 p-4">
         <h2 className="text-lg font-bold text-foreground">Exporter tout</h2>
         <p className="mt-2 text-sm leading-6 text-muted">
           Télécharge un fichier JSON unique contenant tous les outils
@@ -387,7 +387,7 @@ export function TeacherLocalBackupClient() {
         </button>
       </section>
 
-      <section className="rounded-lg border border-white/10 bg-background/45 p-4">
+      <section className="rounded-lg border border-ink/10 bg-background/45 p-4">
         <h2 className="text-lg font-bold text-foreground">
           Exporter un outil
         </h2>
@@ -400,7 +400,7 @@ export function TeacherLocalBackupClient() {
             onChange={(event) =>
               setSelectedToolId(event.target.value as TeacherBackupToolId)
             }
-            className="min-h-11 rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background px-3 text-sm text-foreground"
           >
             {teacherBackupTools.map((tool) => (
               <option key={tool.id} value={tool.id}>
@@ -418,7 +418,7 @@ export function TeacherLocalBackupClient() {
         </div>
       </section>
 
-      <section className="rounded-lg border border-white/10 bg-background/45 p-4">
+      <section className="rounded-lg border border-ink/10 bg-background/45 p-4">
         <h2 className="text-lg font-bold text-foreground">
           Importer une sauvegarde
         </h2>
@@ -434,7 +434,7 @@ export function TeacherLocalBackupClient() {
         />
 
         {importError && (
-          <p className="mt-3 rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          <p className="mt-3 rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-800">
             {importError}
           </p>
         )}
@@ -446,7 +446,7 @@ export function TeacherLocalBackupClient() {
         )}
 
         {pendingFile && (
-          <div className="mt-4 space-y-3 rounded-md border border-white/10 bg-background/60 p-3">
+          <div className="mt-4 space-y-3 rounded-md border border-ink/10 bg-background/60 p-3">
             <p className="text-sm font-bold text-foreground">
               Aperçu de la sauvegarde du{" "}
               {formatDate(pendingFile.createdAt)}
@@ -455,7 +455,7 @@ export function TeacherLocalBackupClient() {
               {detectedTools.map((detected) => (
                 <li
                   key={detected.id}
-                  className="rounded-md border border-white/10 p-3"
+                  className="rounded-md border border-ink/10 p-3"
                 >
                   <p className="text-sm font-bold text-foreground">
                     {detected.label}
@@ -509,10 +509,10 @@ export function TeacherLocalBackupClient() {
 
             {overwriteConfirmPending && (
               <div className="space-y-3 rounded-md border border-red-500/40 bg-red-500/10 p-3">
-                <p className="text-sm font-bold text-red-100">
+                <p className="text-sm font-bold text-red-800">
                   Confirmer le remplacement des données existantes ?
                 </p>
-                <p className="text-sm leading-6 text-red-100/90">
+                <p className="text-sm leading-6 text-red-800/90">
                   Les données locales actuelles seront définitivement
                   écrasées pour :{" "}
                   <span className="font-bold">
@@ -525,14 +525,14 @@ export function TeacherLocalBackupClient() {
                   <button
                     type="button"
                     onClick={handleConfirmImport}
-                    className="min-h-11 rounded-md border border-red-500/60 bg-red-500/20 px-4 text-sm font-bold text-red-100 transition hover:bg-red-500/30"
+                    className="min-h-11 rounded-md border border-red-500/60 bg-red-500/20 px-4 text-sm font-bold text-red-800 transition hover:bg-red-500/30"
                   >
                     Oui, remplacer ces données
                   </button>
                   <button
                     type="button"
                     onClick={handleCancelOverwriteConfirm}
-                    className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-muted transition hover:bg-white/5"
+                    className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-muted transition hover:bg-ink/5"
                   >
                     Annuler
                   </button>
@@ -552,7 +552,7 @@ export function TeacherLocalBackupClient() {
               <button
                 type="button"
                 onClick={handleCancelImport}
-                className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-muted transition hover:bg-white/5"
+                className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-muted transition hover:bg-ink/5"
               >
                 Annuler
               </button>
@@ -561,7 +561,7 @@ export function TeacherLocalBackupClient() {
         )}
       </section>
 
-      <section className="rounded-lg border border-white/10 bg-background/45 p-4">
+      <section className="rounded-lg border border-ink/10 bg-background/45 p-4">
         <h2 className="text-lg font-bold text-foreground">
           Historique local
         </h2>

@@ -203,7 +203,7 @@ export function TeacherLessonPreparationClient() {
               setView("liste");
               setCurrentId(null);
             }}
-            className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             ← Retour aux séances
           </button>
@@ -211,21 +211,21 @@ export function TeacherLessonPreparationClient() {
             <button
               type="button"
               onClick={() => handleDuplicate(currentLesson)}
-              className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+              className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
             >
               Dupliquer
             </button>
             <button
               type="button"
               onClick={() => setShowLogbookConfirm(true)}
-              className="min-h-11 rounded-md border border-sky-400/50 bg-sky-400/10 px-3 text-sm font-bold text-sky-300 transition hover:bg-sky-400/20"
+              className="min-h-11 rounded-md border border-sky/50 bg-sky/10 px-3 text-sm font-bold text-sky transition hover:bg-sky/20"
             >
               Ajouter au cahier journal
             </button>
             <button
               type="button"
               onClick={() => window.print()}
-              className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+              className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
             >
               Imprimer (A4 N&amp;B)
             </button>
@@ -257,7 +257,7 @@ export function TeacherLessonPreparationClient() {
 
       <section
         aria-labelledby="creer-seance"
-        className="flex flex-wrap items-end gap-4 rounded-lg border border-white/10 bg-background/45 p-4"
+        className="flex flex-wrap items-end gap-4 rounded-lg border border-ink/10 bg-background/45 p-4"
       >
         <h2 id="creer-seance" className="w-full text-xl font-black text-foreground">
           Créer une séance
@@ -274,7 +274,7 @@ export function TeacherLessonPreparationClient() {
           <select
             value={selectedTemplate}
             onChange={(event) => setSelectedTemplate(event.target.value as LessonTemplateId)}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
           >
             {lessonTemplates.map((template) => (
               <option key={template.id} value={template.id}>
@@ -286,14 +286,14 @@ export function TeacherLessonPreparationClient() {
         <button
           type="button"
           onClick={createFromTemplate}
-          className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+          className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
         >
           Créer depuis ce modèle
         </button>
         <button
           type="button"
           onClick={() => setShowImportPicker(true)}
-          className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+          className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
         >
           Importer depuis la progression
         </button>
@@ -307,7 +307,7 @@ export function TeacherLessonPreparationClient() {
           <button
             type="button"
             onClick={() => setShowArchived((value) => !value)}
-            className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
           >
             {showArchived ? "Voir les séances actives" : "Voir les séances archivées"}
           </button>
@@ -324,7 +324,7 @@ export function TeacherLessonPreparationClient() {
               return (
                 <li
                   key={lesson.id}
-                  className="flex flex-col gap-3 rounded-lg border border-white/10 bg-background/40 p-4"
+                  className="flex flex-col gap-3 rounded-lg border border-ink/10 bg-background/40 p-4"
                 >
                   <button
                     type="button"
@@ -339,7 +339,7 @@ export function TeacherLessonPreparationClient() {
                       {lesson.duration ? ` · ${lesson.duration}` : ""}
                     </span>
                     <span
-                      className="mt-2 inline-flex items-center gap-1 rounded border border-white/20 px-1.5 py-0.5 text-[11px] font-bold text-foreground"
+                      className="mt-2 inline-flex items-center gap-1 rounded border border-ink/20 px-1.5 py-0.5 text-[11px] font-bold text-foreground"
                       aria-label={`Statut : ${meta.label}`}
                     >
                       <span aria-hidden="true">{meta.symbol}</span>
@@ -350,14 +350,14 @@ export function TeacherLessonPreparationClient() {
                     <button
                       type="button"
                       onClick={() => handleDuplicate(lesson)}
-                      className="min-h-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/40"
+                      className="min-h-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/40"
                     >
                       Dupliquer
                     </button>
                     <button
                       type="button"
                       onClick={() => handleArchiveToggle(lesson.id)}
-                      className="min-h-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/40"
+                      className="min-h-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/40"
                     >
                       {lesson.archived ? "Désarchiver" : "Archiver"}
                     </button>
@@ -406,7 +406,7 @@ function ImportFromProgressionModal({
         if (event.key === "Escape") onClose();
       }}
     >
-      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg border border-white/15 bg-background p-6">
+      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg border border-ink/15 bg-background p-6">
         <div className="flex items-start justify-between gap-4">
           <h2 id={titleId} className="text-xl font-black text-foreground">
             Importer depuis la progression de période
@@ -416,7 +416,7 @@ function ImportFromProgressionModal({
             onClick={onClose}
             aria-label="Fermer"
             autoFocus
-            className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
+            className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-sm font-bold text-foreground"
           >
             ✕
           </button>
@@ -432,7 +432,7 @@ function ImportFromProgressionModal({
             {cards.map((card) => (
               <li
                 key={card.id}
-                className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-white/10 bg-background/30 p-3"
+                className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-ink/10 bg-background/30 p-3"
               >
                 <span className="text-sm font-bold text-foreground">
                   {card.competenceLabel || "(sans intitulé)"}
@@ -507,7 +507,7 @@ function AddToLogbookModal({
         if (event.key === "Escape") onClose();
       }}
     >
-      <div className="w-full max-w-lg rounded-lg border border-white/15 bg-background p-6">
+      <div className="w-full max-w-lg rounded-lg border border-ink/15 bg-background p-6">
         <div className="flex items-start justify-between gap-4">
           <h2 id={titleId} className="text-xl font-black text-foreground">
             Ajouter au cahier journal
@@ -517,7 +517,7 @@ function AddToLogbookModal({
             onClick={onClose}
             aria-label="Fermer"
             autoFocus
-            className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
+            className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-sm font-bold text-foreground"
           >
             ✕
           </button>
@@ -538,7 +538,7 @@ function AddToLogbookModal({
                   const [y, m, d] = event.target.value.split("-").map(Number);
                   setWeekKey(getMondayKey(new Date(y, m - 1, d)));
                 }}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
               <span className="text-xs text-muted">{formatWeekRangeLabel(weekKey)}</span>
               <button
@@ -554,7 +554,7 @@ function AddToLogbookModal({
               <select
                 value={day}
                 onChange={(event) => setDay(event.target.value as LogbookDay)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 {logbookDays.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -568,7 +568,7 @@ function AddToLogbookModal({
               <select
                 value={slotId}
                 onChange={(event) => setSlotId(event.target.value as LogbookSlotId)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 {logbookSlots.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -663,7 +663,7 @@ function LessonEditor({
 
   return (
     <div className="space-y-6 print:space-y-3">
-      <details open className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details open className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           1. Informations essentielles
         </summary>
@@ -674,7 +674,7 @@ function LessonEditor({
               type="text"
               value={lesson.title}
               onChange={(event) => set("title", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -682,7 +682,7 @@ function LessonEditor({
             <select
               value={lesson.level}
               onChange={(event) => set("level", event.target.value as LessonLevel)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {lessonLevels.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -696,7 +696,7 @@ function LessonEditor({
             <select
               value={lesson.subject}
               onChange={(event) => set("subject", event.target.value as LessonSubject)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {lessonSubjects.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -711,7 +711,7 @@ function LessonEditor({
               type="text"
               value={lesson.domain}
               onChange={(event) => set("domain", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -720,7 +720,7 @@ function LessonEditor({
               type="text"
               value={lesson.competency}
               onChange={(event) => set("competency", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -729,7 +729,7 @@ function LessonEditor({
               value={lesson.objective}
               onChange={(event) => set("objective", event.target.value)}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -737,7 +737,7 @@ function LessonEditor({
             <select
               value={lesson.period}
               onChange={(event) => set("period", event.target.value as LessonPeriod | "")}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               <option value="">—</option>
               {lessonPeriods.map((item) => (
@@ -754,7 +754,7 @@ function LessonEditor({
               value={lesson.duration}
               onChange={(event) => set("duration", event.target.value)}
               placeholder="45 min"
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -762,7 +762,7 @@ function LessonEditor({
             <select
               value={lesson.status}
               onChange={(event) => set("status", event.target.value as LessonStatus)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {lessonStatuses.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -774,7 +774,7 @@ function LessonEditor({
         </div>
       </details>
 
-      <details className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           2. Situation de départ
         </summary>
@@ -785,7 +785,7 @@ function LessonEditor({
               value={lesson.context}
               onChange={(event) => set("context", event.target.value)}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -794,7 +794,7 @@ function LessonEditor({
               type="text"
               value={lesson.startingQuestion}
               onChange={(event) => set("startingQuestion", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -803,7 +803,7 @@ function LessonEditor({
               value={lesson.initialInstruction}
               onChange={(event) => set("initialInstruction", event.target.value)}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -812,13 +812,13 @@ function LessonEditor({
               value={lesson.expectedOutput}
               onChange={(event) => set("expectedOutput", event.target.value)}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
         </div>
       </details>
 
-      <details open className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details open className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           3. Déroulé modulable
         </summary>
@@ -826,7 +826,7 @@ function LessonEditor({
           {lesson.steps.map((step, index) => (
             <li
               key={step.id}
-              className="rounded-md border border-white/15 bg-background/30 p-3 print:border-black/30"
+              className="rounded-md border border-ink/15 bg-background/30 p-3 print:border-black/30"
             >
               <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
                 <span className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
@@ -838,7 +838,7 @@ function LessonEditor({
                     onClick={() => moveStep(step.id, -1)}
                     disabled={index === 0}
                     aria-label="Monter l'étape"
-                    className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
+                    className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     ↑
                   </button>
@@ -847,14 +847,14 @@ function LessonEditor({
                     onClick={() => moveStep(step.id, 1)}
                     disabled={index === lesson.steps.length - 1}
                     aria-label="Descendre l'étape"
-                    className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
+                    className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     ↓
                   </button>
                   <button
                     type="button"
                     onClick={() => duplicateStep(step.id)}
-                    className="min-h-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/40"
+                    className="min-h-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/40"
                   >
                     Dupliquer
                   </button>
@@ -878,7 +878,7 @@ function LessonEditor({
                       setStep(step.id, (current) => ({ ...current, durationLabel: event.target.value }))
                     }
                     placeholder="10 min"
-                    className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -891,7 +891,7 @@ function LessonEditor({
                         modality: event.target.value as LessonStep["modality"],
                       }))
                     }
-                    className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                   >
                     {lessonModalities.map((item) => (
                       <option key={item.id} value={item.id}>
@@ -908,7 +908,7 @@ function LessonEditor({
                       setStep(step.id, (current) => ({ ...current, instruction: event.target.value }))
                     }
                     rows={2}
-                    className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+                    className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -919,7 +919,7 @@ function LessonEditor({
                       setStep(step.id, (current) => ({ ...current, teacherRole: event.target.value }))
                     }
                     rows={2}
-                    className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+                    className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -930,7 +930,7 @@ function LessonEditor({
                       setStep(step.id, (current) => ({ ...current, studentActivity: event.target.value }))
                     }
                     rows={2}
-                    className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+                    className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -941,7 +941,7 @@ function LessonEditor({
                     onChange={(event) =>
                       setStep(step.id, (current) => ({ ...current, material: event.target.value }))
                     }
-                    className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -952,7 +952,7 @@ function LessonEditor({
                     onChange={(event) =>
                       setStep(step.id, (current) => ({ ...current, vigilance: event.target.value }))
                     }
-                    className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                    className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                   />
                 </label>
               </div>
@@ -962,13 +962,13 @@ function LessonEditor({
         <button
           type="button"
           onClick={addStep}
-          className="mt-3 min-h-9 rounded-md border border-dashed border-white/20 px-3 text-xs font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
+          className="mt-3 min-h-9 rounded-md border border-dashed border-ink/20 px-3 text-xs font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
         >
           + Ajouter une étape
         </button>
       </details>
 
-      <details className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           4. Différenciation
         </summary>
@@ -981,7 +981,7 @@ function LessonEditor({
                 set("differentiation", { ...lesson.differentiation, reinforcedGuidance: event.target.value })
               }
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -992,7 +992,7 @@ function LessonEditor({
                 set("differentiation", { ...lesson.differentiation, standardPath: event.target.value })
               }
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1003,13 +1003,13 @@ function LessonEditor({
                 set("differentiation", { ...lesson.differentiation, autonomyExtension: event.target.value })
               }
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
         </div>
       </details>
 
-      <details className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           5. Évaluation
         </summary>
@@ -1022,7 +1022,7 @@ function LessonEditor({
                 set("evaluation", { ...lesson.evaluation, successCriteria: event.target.value })
               }
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1033,7 +1033,7 @@ function LessonEditor({
                 set("evaluation", { ...lesson.evaluation, expectedErrors: event.target.value })
               }
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1044,7 +1044,7 @@ function LessonEditor({
                 set("evaluation", { ...lesson.evaluation, observation: event.target.value })
               }
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1053,13 +1053,13 @@ function LessonEditor({
               value={lesson.evaluation.followUp}
               onChange={(event) => set("evaluation", { ...lesson.evaluation, followUp: event.target.value })}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
         </div>
       </details>
 
-      <details className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           6. Matériel et supports
         </summary>
@@ -1081,7 +1081,7 @@ function LessonEditor({
                   setMaterial(item.id, (current) => ({ ...current, label: event.target.value }))
                 }
                 placeholder="Manuel, fiche, matériel de manipulation..."
-                className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-9 flex-1 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
               <input
                 type="text"
@@ -1090,7 +1090,7 @@ function LessonEditor({
                   setMaterial(item.id, (current) => ({ ...current, link: event.target.value }))
                 }
                 placeholder="Lien réel (optionnel)"
-                className="min-h-9 w-48 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground print:hidden"
+                className="min-h-9 w-48 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground print:hidden"
               />
               {item.link ? (
                 <a
@@ -1115,7 +1115,7 @@ function LessonEditor({
         <button
           type="button"
           onClick={addMaterial}
-          className="mt-3 min-h-9 rounded-md border border-dashed border-white/20 px-3 text-xs font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
+          className="mt-3 min-h-9 rounded-md border border-dashed border-ink/20 px-3 text-xs font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
         >
           + Ajouter un élément
         </button>
@@ -1124,7 +1124,7 @@ function LessonEditor({
         </p>
       </details>
 
-      <details className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/30">
+      <details className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/30">
         <summary className="cursor-pointer text-lg font-black text-foreground">
           7. Trace écrite et bilan enseignant
         </summary>
@@ -1135,7 +1135,7 @@ function LessonEditor({
               value={lesson.wrapUp.writtenTrace}
               onChange={(event) => set("wrapUp", { ...lesson.wrapUp, writtenTrace: event.target.value })}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -1144,7 +1144,7 @@ function LessonEditor({
               type="text"
               value={lesson.wrapUp.homework}
               onChange={(event) => set("wrapUp", { ...lesson.wrapUp, homework: event.target.value })}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -1153,7 +1153,7 @@ function LessonEditor({
               value={lesson.wrapUp.feedbackAfter}
               onChange={(event) => set("wrapUp", { ...lesson.wrapUp, feedbackAfter: event.target.value })}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1162,7 +1162,7 @@ function LessonEditor({
               type="text"
               value={lesson.wrapUp.actualDuration}
               onChange={(event) => set("wrapUp", { ...lesson.wrapUp, actualDuration: event.target.value })}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
@@ -1171,7 +1171,7 @@ function LessonEditor({
               value={lesson.wrapUp.adjustments}
               onChange={(event) => set("wrapUp", { ...lesson.wrapUp, adjustments: event.target.value })}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
         </div>

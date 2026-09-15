@@ -64,7 +64,7 @@ function ReadingInteractive({
   return (
     <div className="space-y-6">
       {/* Texte support */}
-      <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
           Texte support
         </p>
@@ -124,7 +124,7 @@ function QuestionItem({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="rounded border border-white/10 bg-white/[0.035] p-4">
+    <div className="rounded border border-ink/10 bg-ink/[0.035] p-4">
       <div className="flex items-start gap-3">
         <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded bg-jade/10 font-mono text-xs font-black text-jade">
           {index + 1}
@@ -142,7 +142,7 @@ function QuestionItem({
             disabled={submitted}
             rows={3}
             placeholder="Ta réponse…"
-            className="w-full rounded border border-white/15 bg-white/[0.03] p-2 text-sm leading-6 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-1 focus:ring-jade/40 disabled:cursor-not-allowed disabled:opacity-60 resize-y"
+            className="w-full rounded border border-ink/15 bg-ink/[0.03] p-2 text-sm leading-6 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-1 focus:ring-jade/40 disabled:cursor-not-allowed disabled:opacity-60 resize-y"
             aria-label={`Réponse à la question ${index + 1}`}
           />
           {(submitted || showCorrection) && question.expectedAnswer && (
@@ -171,7 +171,7 @@ function ReadingReading({
 }) {
   return (
     <div className="space-y-5">
-      <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
           Texte support
         </p>
@@ -180,7 +180,7 @@ function ReadingReading({
 
       <div className="space-y-3">
         {activity.questions.map((question, index) => (
-          <div key={question.id} className="rounded border border-white/10 bg-white/[0.035] p-4">
+          <div key={question.id} className="rounded border border-ink/10 bg-ink/[0.035] p-4">
             <div className="flex items-start gap-3">
               <span className="grid size-5 shrink-0 place-items-center rounded bg-jade/10 font-mono text-xs font-black text-jade">
                 {index + 1}
@@ -242,7 +242,7 @@ function ReadingPrint({ activity }: { activity: ReadingComprehensionActivityData
 function ReadingProjection({ activity }: { activity: ReadingComprehensionActivityData }) {
   return (
     <div className="space-y-6">
-      <div className="rounded-md border border-white/15 bg-white/[0.04] p-6">
+      <div className="rounded-md border border-ink/15 bg-ink/[0.04] p-6">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
           Texte
         </p>
@@ -255,7 +255,7 @@ function ReadingProjection({ activity }: { activity: ReadingComprehensionActivit
         {activity.questions.map((question, index) => (
           <div
             key={question.id}
-            className="flex items-start gap-4 rounded border border-white/10 bg-white/[0.035] p-4"
+            className="flex items-start gap-4 rounded border border-ink/10 bg-ink/[0.035] p-4"
           >
             <span className="grid size-8 shrink-0 place-items-center rounded-full bg-jade/10 font-mono text-sm font-bold text-jade">
               {index + 1}

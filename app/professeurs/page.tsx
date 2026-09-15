@@ -91,8 +91,8 @@ function Hero({ professors, stats }: HeroProps) {
         style={{
           inset: 0,
           background: `
-            radial-gradient(ellipse 50% 60% at 0% 20%, rgba(80,200,164,0.10), transparent 65%),
-            radial-gradient(ellipse 40% 50% at 100% 90%, rgba(243,196,91,0.08), transparent 60%)
+            radial-gradient(ellipse 50% 60% at 0% 20%, rgba(63,107,82,0.10), transparent 65%),
+            radial-gradient(ellipse 40% 50% at 100% 90%, rgba(143,84,23,0.08), transparent 60%)
           `,
         }}
       />
@@ -194,7 +194,7 @@ function Hero({ professors, stats }: HeroProps) {
           </div>
 
           {/* Panneau de stats */}
-          <aside className="rounded-md border border-white/10 bg-white/[0.035] p-6">
+          <aside className="rounded-md border border-ink/10 bg-ink/[0.035] p-6">
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-gold">
               Conseil pédagogique
             </p>
@@ -206,7 +206,7 @@ function Hero({ professors, stats }: HeroProps) {
               <StatBlock value={String(stats.college)} label="Niveau collège" />
             </div>
 
-            <div className="mt-5 border-t border-white/10 pt-5">
+            <div className="mt-5 border-t border-ink/10 pt-5">
               <p className="text-xs leading-6 text-muted">
                 Chaque professeur est un repère visuel et méthodologique, pas un
                 compte ou une progression sauvegardée. Ils structurent l&rsquo;univers
@@ -218,19 +218,19 @@ function Hero({ professors, stats }: HeroProps) {
             <div className="mt-4 flex flex-col gap-2">
               <Link
                 href="/primaire"
-                className="inline-flex h-9 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="inline-flex h-9 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Niveaux Primaire
               </Link>
               <Link
                 href="/college"
-                className="inline-flex h-9 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="inline-flex h-9 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Niveaux Collège
               </Link>
               <Link
                 href="/lycee"
-                className="inline-flex h-9 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="inline-flex h-9 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-xs font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Niveaux Lycée
               </Link>
@@ -244,7 +244,7 @@ function Hero({ professors, stats }: HeroProps) {
 
 function StatBlock({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-md border border-white/8 bg-white/[0.03] px-4 py-3">
+    <div className="rounded-md border border-ink/8 bg-ink/[0.03] px-4 py-3">
       <p className="text-2xl font-black text-foreground">{value}</p>
       <p className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
         {label}
@@ -259,14 +259,14 @@ function ClosingSection() {
   return (
     <section className="px-4 pb-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="relative overflow-hidden rounded-md border border-white/10 bg-white/[0.025] p-10">
+        <div className="relative overflow-hidden rounded-md border border-ink/10 bg-ink/[0.025] p-10">
           {/* Glow de fond */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               background:
-                "radial-gradient(ellipse 60% 80% at 0% 100%, rgba(80,200,164,0.05), transparent 60%)",
+                "radial-gradient(ellipse 60% 80% at 0% 100%, rgba(63,107,82,0.05), transparent 60%)",
             }}
           />
 
@@ -304,19 +304,19 @@ function ClosingSection() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/primaire/cm2/missions"
-              className="inline-flex h-11 items-center justify-center rounded-md bg-gold px-6 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+              className="inline-flex h-11 items-center justify-center rounded-md bg-gold px-6 text-sm font-extrabold text-background transition hover:brightness-110"
             >
               Missions CM2 avec Félix
             </Link>
             <Link
               href="/primaire"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
             >
               Niveaux primaire
             </Link>
             <Link
               href="/college"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
             >
               Niveaux collège
             </Link>

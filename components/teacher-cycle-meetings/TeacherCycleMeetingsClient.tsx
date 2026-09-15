@@ -147,7 +147,7 @@ export function TeacherCycleMeetingsClient() {
     <div>
       <section
         aria-labelledby="nouvelle-reunion-titre"
-        className="rounded-lg border border-white/10 bg-white/[0.03] p-5"
+        className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5"
       >
         <h2
           id="nouvelle-reunion-titre"
@@ -170,7 +170,7 @@ export function TeacherCycleMeetingsClient() {
               onChange={(event) =>
                 setType(event.target.value as TeacherCycleMeetingType)
               }
-              className="mt-2 min-h-11 w-full rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
+              className="mt-2 min-h-11 w-full rounded-md border border-ink/15 bg-background px-3 text-sm text-foreground"
             >
               {teacherCycleMeetingTypes.map((option) => (
                 <option key={option.id} value={option.id}>
@@ -192,7 +192,7 @@ export function TeacherCycleMeetingsClient() {
               type="date"
               value={date}
               onChange={(event) => setDate(event.target.value)}
-              className="mt-2 min-h-11 w-full rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
+              className="mt-2 min-h-11 w-full rounded-md border border-ink/15 bg-background px-3 text-sm text-foreground"
             />
           </div>
 
@@ -208,7 +208,7 @@ export function TeacherCycleMeetingsClient() {
               value={agenda}
               onChange={(event) => setAgenda(event.target.value)}
               rows={4}
-              className="mt-2 w-full rounded-md border border-white/15 bg-background px-3 py-2 text-sm text-foreground"
+              className="mt-2 w-full rounded-md border border-ink/15 bg-background px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -224,7 +224,7 @@ export function TeacherCycleMeetingsClient() {
               value={decisions}
               onChange={(event) => setDecisions(event.target.value)}
               rows={4}
-              className="mt-2 w-full rounded-md border border-white/15 bg-background px-3 py-2 text-sm text-foreground"
+              className="mt-2 w-full rounded-md border border-ink/15 bg-background px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -244,12 +244,12 @@ export function TeacherCycleMeetingsClient() {
                   }
                 }}
                 placeholder="Ex. : préparer le bilan de période"
-                className="min-h-11 flex-1 rounded-md border border-white/15 bg-background px-3 text-sm text-foreground"
+                className="min-h-11 flex-1 rounded-md border border-ink/15 bg-background px-3 text-sm text-foreground"
               />
               <button
                 type="button"
                 onClick={addDraftTask}
-                className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+                className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
               >
                 Ajouter
               </button>
@@ -260,7 +260,7 @@ export function TeacherCycleMeetingsClient() {
                 {draftTasks.map((task) => (
                   <li
                     key={task.id}
-                    className="flex items-center justify-between gap-3 rounded-md border border-white/10 bg-white/[0.03] px-3 py-2"
+                    className="flex items-center justify-between gap-3 rounded-md border border-ink/10 bg-ink/[0.03] px-3 py-2"
                   >
                     <span className="text-sm text-foreground">
                       {task.label}
@@ -301,7 +301,7 @@ export function TeacherCycleMeetingsClient() {
         </h2>
 
         {sortedMeetings.length === 0 ? (
-          <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+          <p className="mt-4 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
             Aucune réunion enregistrée pour le moment.
           </p>
         ) : (
@@ -314,7 +314,7 @@ export function TeacherCycleMeetingsClient() {
               return (
                 <li
                   key={meeting.id}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-5"
+                  className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -332,7 +332,7 @@ export function TeacherCycleMeetingsClient() {
                       <button
                         type="button"
                         onClick={printMeeting}
-                        className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
+                        className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
                       >
                         Imprimer
                       </button>
@@ -349,7 +349,7 @@ export function TeacherCycleMeetingsClient() {
                           <button
                             type="button"
                             onClick={() => setMeetingPendingDeletionId(null)}
-                            className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted"
+                            className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted"
                           >
                             Annuler
                           </button>
@@ -360,7 +360,7 @@ export function TeacherCycleMeetingsClient() {
                           onClick={() =>
                             setMeetingPendingDeletionId(meeting.id)
                           }
-                          className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                          className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
                         >
                           Supprimer
                         </button>
@@ -396,7 +396,7 @@ export function TeacherCycleMeetingsClient() {
                         {meeting.tasks.map((task) => (
                           <li
                             key={task.id}
-                            className="flex items-center justify-between gap-3 rounded-md border border-white/10 bg-background/40 px-3 py-2"
+                            className="flex items-center justify-between gap-3 rounded-md border border-ink/10 bg-background/40 px-3 py-2"
                           >
                             <span className="text-sm text-foreground">
                               {task.label}
@@ -411,7 +411,7 @@ export function TeacherCycleMeetingsClient() {
                                 "min-h-9 rounded border px-3 text-xs font-bold transition",
                                 task.status === "fait"
                                   ? "border-jade/60 bg-jade/10 text-jade"
-                                  : "border-white/15 text-muted hover:border-jade/40",
+                                  : "border-ink/15 text-muted hover:border-jade/40",
                               ].join(" ")}
                             >
                               {

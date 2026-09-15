@@ -94,7 +94,7 @@ export default function RessourcesPrimairePage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.10),transparent_32%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(59,106,138,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(63,107,82,0.10),transparent_32%),linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Primaire · CP au CM2
@@ -108,7 +108,7 @@ export default function RessourcesPrimairePage() {
           <div className="mt-8">
             <Link
               href="/primaire"
-              className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="rounded-md border border-ink/15 bg-ink/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               ← Primaire
             </Link>
@@ -117,7 +117,7 @@ export default function RessourcesPrimairePage() {
       </section>
 
       {/* ── Niveaux ──────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-muted">
             Par niveau
@@ -127,7 +127,7 @@ export default function RessourcesPrimairePage() {
               <Link
                 key={level.slug}
                 href={level.href}
-                className="group flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.06]"
+                className="group flex flex-col gap-3 rounded-xl border border-ink/10 bg-ink/[0.03] p-5 transition hover:border-ink/20 hover:bg-ink/[0.06]"
               >
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-lg font-black text-foreground">
@@ -148,7 +148,7 @@ export default function RessourcesPrimairePage() {
       </section>
 
       {/* ── Types de ressources ───────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="mb-6 text-xs font-bold uppercase tracking-[0.22em] text-muted">
             Types de ressources
@@ -157,7 +157,7 @@ export default function RessourcesPrimairePage() {
             {RESOURCE_TYPES.map((type) => (
               <div
                 key={type.label}
-                className="rounded-xl border border-white/10 bg-white/[0.03] p-5"
+                className="rounded-xl border border-ink/10 bg-ink/[0.03] p-5"
               >
                 <p className="mb-2 font-bold text-foreground">{type.label}</p>
                 <p className="text-sm leading-6 text-muted">
@@ -170,7 +170,7 @@ export default function RessourcesPrimairePage() {
       </section>
 
       {/* ── Rappel ───────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="rounded-xl border border-gold/25 bg-gold/[0.05] p-6 sm:p-8">
             <p className="mb-1 text-xs font-bold uppercase tracking-[0.22em] text-gold">

@@ -162,10 +162,10 @@ export function ProfessorHero({ professor }: { professor: ProfessorProfile }) {
               <span className={`rounded-md border px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] ${a.badge}`}>
                 {professor.mainSubject}
               </span>
-              <span className="rounded-md border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+              <span className="rounded-md border border-ink/10 bg-ink/[0.04] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-muted">
                 {professor.levelLabel} · {professor.cycle}
               </span>
-              <span className="rounded-md border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+              <span className="rounded-md border border-ink/10 bg-ink/[0.04] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-muted">
                 {professor.moodName}
               </span>
               {professor.headquarters ? (

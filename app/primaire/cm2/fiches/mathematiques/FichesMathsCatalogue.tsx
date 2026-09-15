@@ -34,7 +34,7 @@ export function FichesMathsCatalogue() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(80,200,164,0.15),transparent_34%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(63,107,82,0.15),transparent_34%),linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             CM2 · Mathématiques · Cycle 3
@@ -51,7 +51,7 @@ export function FichesMathsCatalogue() {
                 <a
                   key={domain}
                   href={`#${domainAnchor(domain)}`}
-                  className="rounded-sm border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-muted transition hover:bg-white/[0.06] hover:text-foreground"
+                  className="rounded-sm border border-ink/10 bg-ink/[0.03] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-muted transition hover:bg-ink/[0.06] hover:text-foreground"
                 >
                   {domain}
                 </a>
@@ -99,7 +99,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
   const completeness = getNotionCompleteness(notion);
 
   return (
-    <article className="flex flex-col rounded-md border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]">
+    <article className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.03] p-5 transition hover:border-ink/20 hover:bg-ink/[0.05]">
       {/* Header */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex-1">
@@ -109,7 +109,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
           <p className="mt-1 text-xs leading-5 text-muted">{notion.skill}</p>
         </div>
         {completeness === "partial" && (
-          <span className="shrink-0 rounded-sm border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-400">
+          <span className="shrink-0 rounded-sm border border-gold/30 bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
             Partielle
           </span>
         )}
@@ -121,7 +121,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
       </div>
 
       {/* Sheets */}
-      <div className="mt-auto space-y-2 border-t border-white/10 pt-4">
+      <div className="mt-auto space-y-2 border-t border-ink/10 pt-4">
         {SHEET_IDS.map((sheetId, index) => {
           const sheet = notion.sheets.find((s) => s.id === sheetId);
           if (!sheet) return null;
@@ -165,7 +165,7 @@ function SheetRow({
       {clickable ? (
         <span className="text-xs font-bold text-jade">Ouvrir →</span>
       ) : (
-        <span className="text-xs text-white/25">À venir</span>
+        <span className="text-xs text-ink/25">À venir</span>
       )}
     </span>
   );
@@ -182,7 +182,7 @@ function SheetRow({
   }
 
   return (
-    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
+    <div className="block rounded-sm border border-ink/8 bg-ink/[0.02] px-3 py-2 text-ink/35">
       {inner}
     </div>
   );

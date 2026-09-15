@@ -40,7 +40,7 @@ export function CollegeSubjectPortal({
       {/* ── En-tête ── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             {cycleLabel}
@@ -74,7 +74,7 @@ export function CollegeSubjectPortal({
                   className={`group flex h-full flex-col rounded-md border p-6 transition ${
                     isLinked
                       ? "border-jade/30 bg-jade/[0.05] hover:-translate-y-0.5 hover:bg-jade/[0.09]"
-                      : "border-white/10 bg-white/[0.035]"
+                      : "border-ink/10 bg-ink/[0.035]"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -89,7 +89,7 @@ export function CollegeSubjectPortal({
                       Accéder au domaine →
                     </span>
                   ) : (
-                    <span className="mt-5 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                    <span className="mt-5 inline-flex w-fit rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
                       À venir
                     </span>
                   )}
@@ -136,7 +136,7 @@ export function CollegeSubjectPortal({
               </Link>
               <Link
                 href="/college"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Collège
               </Link>

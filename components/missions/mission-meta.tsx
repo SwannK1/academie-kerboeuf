@@ -21,7 +21,7 @@ export function MissionMeta({ label, value, href }: MissionMetaProps) {
     return (
       <Link
         href={href}
-        className="mission-detail-card flex items-center justify-between gap-4 rounded border border-white/10 bg-white/[0.04] p-3 transition hover:border-gold/30 hover:bg-white/[0.07]"
+        className="mission-detail-card flex items-center justify-between gap-4 rounded border border-ink/10 bg-ink/[0.04] p-3 transition hover:border-gold/30 hover:bg-ink/[0.07]"
       >
         {content}
       </Link>
@@ -29,7 +29,7 @@ export function MissionMeta({ label, value, href }: MissionMetaProps) {
   }
 
   return (
-    <div className="mission-detail-card flex items-center justify-between gap-4 rounded border border-white/10 bg-white/[0.04] p-3">
+    <div className="mission-detail-card flex items-center justify-between gap-4 rounded border border-ink/10 bg-ink/[0.04] p-3">
       {content}
     </div>
   );

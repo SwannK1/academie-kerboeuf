@@ -69,7 +69,7 @@ export default function ReussirEntree6ePage() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <div className="flex items-center gap-3">
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -98,7 +98,7 @@ export default function ReussirEntree6ePage() {
             {reperes.map((repere) => (
               <div
                 key={repere.numero}
-                className="rounded-md border border-white/10 bg-white/[0.04] p-5"
+                className="rounded-md border border-ink/10 bg-ink/[0.04] p-5"
               >
                 <p className="text-xs font-black tracking-[0.18em] text-jade/60">
                   {repere.numero}
@@ -120,7 +120,7 @@ export default function ReussirEntree6ePage() {
         <div className="mx-auto max-w-7xl">
           <Link
             href="/college/6e"
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+            className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
           >
             ← Retour à la 6e
           </Link>

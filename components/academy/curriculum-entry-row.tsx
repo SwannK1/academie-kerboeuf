@@ -12,7 +12,7 @@ type CurriculumEntryRowProps = {
 
 export function CurriculumEntryRow({ entry }: CurriculumEntryRowProps) {
   return (
-    <article className="flex h-full flex-col gap-3 rounded border border-white/[0.08] bg-white/[0.03] p-3">
+    <article className="flex h-full flex-col gap-3 rounded border border-ink/[0.08] bg-ink/[0.03] p-3">
       <div className="flex-1">
         <div className="flex items-start justify-between gap-3">
           <p className="text-sm font-bold leading-5 text-foreground">
@@ -80,7 +80,7 @@ function ResourceSlotList({ slots }: ResourceSlotListProps) {
       {plannedCount > 0 && (
         <>
           <span
-            className="inline-flex items-center rounded border border-white/[0.08] bg-ink/40 px-2 py-0.5 text-xs text-muted"
+            className="inline-flex items-center rounded border border-ink/[0.08] bg-ink/40 px-2 py-0.5 text-xs text-muted"
           >
             {plannedCount} ressource{plannedCount > 1 ? "s" : ""} PDF
           </span>

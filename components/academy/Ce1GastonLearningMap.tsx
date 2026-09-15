@@ -7,7 +7,7 @@ export function Ce1GastonLearningMap() {
   return (
     <section
       aria-label="Carte des espaces pédagogiques CE1, guidée par Gaston le Hérisson"
-      className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
+      className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center gap-4">
@@ -35,7 +35,7 @@ export function Ce1GastonLearningMap() {
             <Link
               key={zone.id}
               href={zone.href}
-              className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-sky/35 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky/60"
+              className="group flex flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5 transition hover:border-sky/35 hover:bg-ink/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky/60"
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="text-lg font-black text-foreground">
@@ -52,7 +52,7 @@ export function Ce1GastonLearningMap() {
                   {zone.domains.map((domain) => (
                     <li
                       key={domain}
-                      className="rounded border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs font-medium text-muted"
+                      className="rounded border border-ink/10 bg-ink/[0.03] px-2.5 py-1 text-xs font-medium text-muted"
                     >
                       {domain}
                     </li>

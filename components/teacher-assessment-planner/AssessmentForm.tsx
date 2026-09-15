@@ -118,7 +118,7 @@ export function AssessmentForm({
             required
             value={values.title}
             onChange={(event) => update("title", event.target.value)}
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           />
         </Field>
 
@@ -129,7 +129,7 @@ export function AssessmentForm({
             onChange={(event) =>
               update("level", event.target.value as AssessmentLevel | "")
             }
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           >
             <option value="">—</option>
             {assessmentLevels.map((level) => (
@@ -147,7 +147,7 @@ export function AssessmentForm({
             onChange={(event) =>
               update("subject", event.target.value as AssessmentSubject)
             }
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           >
             {assessmentSubjects.map((subject) => (
               <option key={subject.id} value={subject.id}>
@@ -164,7 +164,7 @@ export function AssessmentForm({
             required
             value={values.skill}
             onChange={(event) => update("skill", event.target.value)}
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           />
         </Field>
 
@@ -175,7 +175,7 @@ export function AssessmentForm({
             onChange={(event) =>
               update("period", event.target.value as AssessmentPeriod)
             }
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           >
             {assessmentPeriods.map((period) => (
               <option key={period.id} value={period.id}>
@@ -191,7 +191,7 @@ export function AssessmentForm({
             type="date"
             value={values.date}
             onChange={(event) => update("date", event.target.value)}
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           />
         </Field>
 
@@ -203,7 +203,7 @@ export function AssessmentForm({
             placeholder="Ex : 30 min"
             value={values.durationLabel}
             onChange={(event) => update("durationLabel", event.target.value)}
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           />
         </Field>
 
@@ -214,7 +214,7 @@ export function AssessmentForm({
             onChange={(event) =>
               update("status", event.target.value as AssessmentStatus)
             }
-            className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+            className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
           >
             {assessmentStatuses.map((status) => (
               <option key={status.id} value={status.id}>
@@ -230,7 +230,7 @@ export function AssessmentForm({
             rows={2}
             value={values.materials}
             onChange={(event) => update("materials", event.target.value)}
-            className="w-full rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm text-foreground"
+            className="w-full rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm text-foreground"
           />
         </Field>
 
@@ -240,7 +240,7 @@ export function AssessmentForm({
             rows={3}
             value={values.preparationNotes}
             onChange={(event) => update("preparationNotes", event.target.value)}
-            className="w-full rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm text-foreground"
+            className="w-full rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm text-foreground"
           />
         </Field>
       </div>
@@ -255,7 +255,7 @@ export function AssessmentForm({
         <button
           type="button"
           onClick={onCancel}
-          className="min-h-11 rounded-md border border-white/15 px-5 text-sm font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
+          className="min-h-11 rounded-md border border-ink/15 px-5 text-sm font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
         >
           Annuler
         </button>

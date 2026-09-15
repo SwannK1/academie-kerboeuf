@@ -42,7 +42,7 @@ export default function MaternelleRessourcesPage() {
       {/* ── Hero ── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Cycle 1
@@ -63,7 +63,7 @@ export default function MaternelleRessourcesPage() {
             {SECTIONS.map(({ slug, label, short }) => (
               <div
                 key={slug}
-                className="rounded-md border border-white/10 bg-white/[0.03] p-6"
+                className="rounded-md border border-ink/10 bg-ink/[0.03] p-6"
               >
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex rounded border border-jade/30 bg-jade/10 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-jade">
@@ -107,7 +107,7 @@ export default function MaternelleRessourcesPage() {
       {/* ── Rappel ── */}
       <section className="px-4 pb-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-md border border-white/10 bg-white/[0.025] p-6">
+          <div className="rounded-md border border-ink/10 bg-ink/[0.025] p-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
               Rappel
             </p>
@@ -115,7 +115,7 @@ export default function MaternelleRessourcesPage() {
               <li className="flex items-start gap-2.5 text-sm text-muted">
                 <span
                   aria-hidden="true"
-                  className="mt-1.5 size-1.5 shrink-0 rounded-full bg-white/25"
+                  className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ink/25"
                 />
                 <span>
                   Les grilles d&apos;observation seront intégrées aux fiches ateliers.
@@ -124,7 +124,7 @@ export default function MaternelleRessourcesPage() {
               <li className="flex items-start gap-2.5 text-sm text-muted">
                 <span
                   aria-hidden="true"
-                  className="mt-1.5 size-1.5 shrink-0 rounded-full bg-white/25"
+                  className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ink/25"
                 />
                 <span>
                   Les supports écran ne sont pas prioritaires — le geste et la manipulation priment en maternelle.

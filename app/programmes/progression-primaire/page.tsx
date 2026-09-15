@@ -66,7 +66,7 @@ export default function ProgressionPrimairePage() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(99,196,143,0.12),transparent_34%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(63,107,82,0.12),transparent_34%),linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Cycles 2 et 3
@@ -83,7 +83,7 @@ export default function ProgressionPrimairePage() {
       {/* Level grid */}
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 border-b border-white/10 pb-5">
+          <div className="mb-8 border-b border-ink/10 pb-5">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               CP · CE1 · CE2 · CM1 · CM2
             </p>
@@ -101,7 +101,7 @@ export default function ProgressionPrimairePage() {
               return (
                 <article
                   key={level.slug}
-                  className="flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5"
+                  className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -121,7 +121,7 @@ export default function ProgressionPrimairePage() {
                     {mainSubjects.map((subject) => (
                       <span
                         key={subject}
-                        className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold uppercase tracking-[0.1em] text-muted"
+                        className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-0.5 text-xs font-bold uppercase tracking-[0.1em] text-muted"
                       >
                         {subject}
                       </span>
@@ -131,7 +131,7 @@ export default function ProgressionPrimairePage() {
                   <div className="mt-auto pt-5">
                     <Link
                       href={href}
-                      className="block rounded border border-white/15 bg-white/[0.04] px-3 py-2 text-center text-xs font-bold uppercase tracking-[0.14em] text-foreground transition hover:bg-white/[0.08]"
+                      className="block rounded border border-ink/15 bg-ink/[0.04] px-3 py-2 text-center text-xs font-bold uppercase tracking-[0.14em] text-foreground transition hover:bg-ink/[0.08]"
                     >
                       Portail {level.label}
                     </Link>
@@ -146,7 +146,7 @@ export default function ProgressionPrimairePage() {
       {/* Methodological pillars */}
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 border-b border-white/10 pb-5">
+          <div className="mb-8 border-b border-ink/10 pb-5">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               1 séquence = 1 compétence
             </p>
@@ -163,7 +163,7 @@ export default function ProgressionPrimairePage() {
             {METHODOLOGICAL_PILLARS.map((pillar, i) => (
               <div
                 key={pillar.key}
-                className="rounded-md border border-white/10 bg-white/[0.04] p-5"
+                className="rounded-md border border-ink/10 bg-ink/[0.04] p-5"
               >
                 <p className="font-mono text-3xl font-black text-gold">
                   {String(i + 1).padStart(2, "0")}
@@ -185,7 +185,7 @@ export default function ProgressionPrimairePage() {
         <div className="mx-auto max-w-7xl">
           <Link
             href="/programmes"
-            className="inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+            className="inline-flex items-center gap-2 rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
           >
             ← Retour aux programmes
           </Link>

@@ -617,7 +617,7 @@ export function TeacherClassroomLayoutClient() {
             className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
               tab === t.id
                 ? "border-jade/60 bg-jade/15 text-jade"
-                : "border-white/15 text-foreground hover:border-jade/40"
+                : "border-ink/15 text-foreground hover:border-jade/40"
             }`}
           >
             {t.label}
@@ -629,7 +629,7 @@ export function TeacherClassroomLayoutClient() {
         <>
           <section
             aria-labelledby="configs-rapides"
-            className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+            className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
           >
             <h2
               id="configs-rapides"
@@ -643,7 +643,7 @@ export function TeacherClassroomLayoutClient() {
                   key={k.id}
                   type="button"
                   onClick={() => applyQuickLayout(k.id)}
-                  className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                  className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
                 >
                   {k.label}
                 </button>
@@ -679,7 +679,7 @@ export function TeacherClassroomLayoutClient() {
                   <button
                     type="button"
                     onClick={() => setPendingLayout(null)}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground"
                   >
                     Annuler
                   </button>
@@ -696,7 +696,7 @@ export function TeacherClassroomLayoutClient() {
               ref={canvasRef}
               onPointerMove={onCanvasPointerMove}
               onPointerUp={onCanvasPointerUp}
-              className="relative mt-4 overflow-hidden rounded-lg border border-white/15 bg-background/30"
+              className="relative mt-4 overflow-hidden rounded-lg border border-ink/15 bg-background/30"
               style={{ width: "100%", maxWidth: CANVAS_WIDTH, height: CANVAS_HEIGHT }}
             >
               {tables.map((table) => {
@@ -736,7 +736,7 @@ export function TeacherClassroomLayoutClient() {
                         type="button"
                         aria-label="Pivoter la table"
                         onClick={() => rotateTable(table.id)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
+                        className="min-h-6 min-w-6 rounded border border-ink/20 text-[10px]"
                       >
                         ⟳
                       </button>
@@ -744,7 +744,7 @@ export function TeacherClassroomLayoutClient() {
                         type="button"
                         aria-label="Agrandir la table"
                         onClick={() => resizeTable(table.id, 12)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
+                        className="min-h-6 min-w-6 rounded border border-ink/20 text-[10px]"
                       >
                         +
                       </button>
@@ -752,7 +752,7 @@ export function TeacherClassroomLayoutClient() {
                         type="button"
                         aria-label="Réduire la table"
                         onClick={() => resizeTable(table.id, -12)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
+                        className="min-h-6 min-w-6 rounded border border-ink/20 text-[10px]"
                       >
                         −
                       </button>
@@ -760,7 +760,7 @@ export function TeacherClassroomLayoutClient() {
                         type="button"
                         aria-label="Dupliquer la table"
                         onClick={() => duplicateTable(table.id)}
-                        className="min-h-6 min-w-6 rounded border border-white/20 text-[10px]"
+                        className="min-h-6 min-w-6 rounded border border-ink/20 text-[10px]"
                       >
                         ⧉
                       </button>
@@ -787,7 +787,7 @@ export function TeacherClassroomLayoutClient() {
 
           <section
             aria-labelledby="etiquettes"
-            className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+            className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
           >
             <h2 id="etiquettes" className="text-xl font-black text-foreground">
               Étiquettes
@@ -803,7 +803,7 @@ export function TeacherClassroomLayoutClient() {
                     if (event.key === "Enter") addLabel();
                   }}
                   maxLength={80}
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                   placeholder="Ex : Léo, ou Élève 4"
                 />
               </label>
@@ -827,7 +827,7 @@ export function TeacherClassroomLayoutClient() {
                   key={label.id}
                   draggable
                   onDragStart={() => onLabelDragStart(label.id)}
-                  className="cursor-grab rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
+                  className="cursor-grab rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
                 >
                   {label.text}
                 </li>
@@ -848,7 +848,7 @@ export function TeacherClassroomLayoutClient() {
                     .map((label) => (
                       <li
                         key={label.id}
-                        className="flex items-center gap-2 rounded-md border border-white/15 bg-background/30 px-3 py-2 text-sm font-bold text-foreground"
+                        className="flex items-center gap-2 rounded-md border border-ink/15 bg-background/30 px-3 py-2 text-sm font-bold text-foreground"
                       >
                         {label.text}
                         <button
@@ -879,7 +879,7 @@ export function TeacherClassroomLayoutClient() {
                   return (
                     <li
                       key={`del-${label.id}`}
-                      className="rounded-md border border-white/15 bg-background/50 p-3"
+                      className="rounded-md border border-ink/15 bg-background/50 p-3"
                     >
                       <div className="flex min-w-0 flex-wrap items-center gap-2">
                         <label className="sr-only" htmlFor={`label-name-${label.id}`}>
@@ -891,7 +891,7 @@ export function TeacherClassroomLayoutClient() {
                           defaultValue={label.text}
                           maxLength={80}
                           onBlur={(event) => renameLabel(label.id, event.currentTarget.value)}
-                          className="min-h-9 min-w-0 max-w-48 rounded border border-white/15 bg-background/50 px-2 text-sm text-foreground"
+                          className="min-h-9 min-w-0 max-w-48 rounded border border-ink/15 bg-background/50 px-2 text-sm text-foreground"
                         />
                         <button type="button" aria-label={`Supprimer l'étiquette ${label.text}`} onClick={() => removeLabel(label.id)} className="text-xs text-muted hover:text-ember">
                           Supprimer
@@ -920,7 +920,7 @@ export function TeacherClassroomLayoutClient() {
                           );
                         })}
                         {hiddenTagCount > 0 && (
-                          <span className="rounded-full border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                          <span className="rounded-full border border-ink/15 px-2 py-0.5 text-xs font-bold text-muted">
                             +{hiddenTagCount}
                           </span>
                         )}
@@ -955,7 +955,7 @@ export function TeacherClassroomLayoutClient() {
                             type="button"
                             onClick={() => setOpenTagPickerFor(label.id)}
                             aria-label={`Ajouter un repère à ${label.text}`}
-                            className="min-h-7 rounded-full border border-dashed border-white/25 px-2 py-0.5 text-xs font-bold text-muted transition hover:border-jade/50 hover:text-jade"
+                            className="min-h-7 rounded-full border border-dashed border-ink/25 px-2 py-0.5 text-xs font-bold text-muted transition hover:border-jade/50 hover:text-jade"
                           >
                             + Ajouter un repère
                           </button>
@@ -974,7 +974,7 @@ export function TeacherClassroomLayoutClient() {
         <>
           <section
             aria-labelledby="creer-groupes"
-            className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+            className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
           >
             <h2 id="creer-groupes" className="text-xl font-black text-foreground">
               Créer des groupes
@@ -985,7 +985,7 @@ export function TeacherClassroomLayoutClient() {
                   key={n}
                   type="button"
                   onClick={() => createGroupSet(n)}
-                  className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                  className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
                 >
                   {n} groupes
                 </button>
@@ -995,7 +995,7 @@ export function TeacherClassroomLayoutClient() {
 
           <section
             aria-labelledby="generateur"
-            className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+            className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
           >
             <h2 id="generateur" className="text-xl font-black text-foreground">
               Générateur de groupes
@@ -1006,7 +1006,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={groupSize}
                   onChange={(e) => setGroupSize(Number(e.target.value))}
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   {[2, 3, 4, 5].map((n) => (
                     <option key={n} value={n}>
@@ -1022,7 +1022,7 @@ export function TeacherClassroomLayoutClient() {
                   onChange={(e) =>
                     setGenMode(e.target.value as GroupGenerationMode)
                   }
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="heterogene">Hétérogène (mélangé)</option>
                   <option value="homogene">Homogène (ordre conservé)</option>
@@ -1038,7 +1038,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={avoidA}
                   onChange={(e) => setAvoidA(e.target.value)}
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="">Étiquette 1</option>
                   {labels.map((l) => (
@@ -1050,7 +1050,7 @@ export function TeacherClassroomLayoutClient() {
                 <select
                   value={avoidB}
                   onChange={(e) => setAvoidB(e.target.value)}
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   <option value="">Étiquette 2</option>
                   {labels.map((l) => (
@@ -1063,7 +1063,7 @@ export function TeacherClassroomLayoutClient() {
                   type="button"
                   onClick={addAvoidPair}
                   disabled={!avoidA || !avoidB || avoidA === avoidB}
-                  className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+                  className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   Ajouter
                 </button>
@@ -1075,7 +1075,7 @@ export function TeacherClassroomLayoutClient() {
                   return (
                     <li
                       key={`${pair.a}-${pair.b}`}
-                      className="flex items-center gap-2 rounded-md border border-white/15 bg-background/30 px-3 py-1 text-xs font-bold text-foreground"
+                      className="flex items-center gap-2 rounded-md border border-ink/15 bg-background/30 px-3 py-1 text-xs font-bold text-foreground"
                     >
                       {a} ≠ {b}
                       <button
@@ -1128,7 +1128,7 @@ export function TeacherClassroomLayoutClient() {
                   <button
                     type="button"
                     onClick={discardProposal}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground"
                   >
                     Ignorer
                   </button>
@@ -1146,7 +1146,7 @@ export function TeacherClassroomLayoutClient() {
                 <button
                   type="button"
                   onClick={assignRolesToGroups}
-                  className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                  className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
                 >
                   Répartir les rôles
                 </button>
@@ -1178,7 +1178,7 @@ export function TeacherClassroomLayoutClient() {
                         type="text"
                         value={group.name}
                         onChange={(e) => renameGroup(group.id, e.target.value)}
-                        className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/60 px-2 text-sm font-bold text-foreground print:hidden"
+                        className="min-h-9 flex-1 rounded-md border border-ink/15 bg-background/60 px-2 text-sm font-bold text-foreground print:hidden"
                         aria-label={`Renommer ${group.name}`}
                       />
                       <span className="hidden text-sm font-bold text-foreground print:inline">
@@ -1194,7 +1194,7 @@ export function TeacherClassroomLayoutClient() {
                             key={label.id}
                             draggable
                             onDragStart={() => onLabelDragStart(label.id)}
-                            className="flex items-center justify-between gap-2 rounded-md border border-white/10 bg-background/30 px-2 py-1 text-sm font-bold text-foreground"
+                            className="flex items-center justify-between gap-2 rounded-md border border-ink/10 bg-background/30 px-2 py-1 text-sm font-bold text-foreground"
                           >
                             <span>{label.text}</span>
                             {roleLabel && (
@@ -1217,7 +1217,7 @@ export function TeacherClassroomLayoutClient() {
                 <div
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={() => onGroupDrop(null)}
-                  className="mt-4 rounded-lg border border-white/15 bg-background/30 p-3 print:hidden"
+                  className="mt-4 rounded-lg border border-ink/15 bg-background/30 p-3 print:hidden"
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                     Étiquettes sans groupe (déposer ici pour retirer d&apos;un groupe)
@@ -1228,7 +1228,7 @@ export function TeacherClassroomLayoutClient() {
                         key={label.id}
                         draggable
                         onDragStart={() => onLabelDragStart(label.id)}
-                        className="cursor-grab rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
+                        className="cursor-grab rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-bold text-foreground"
                       >
                         {label.text}
                       </li>
@@ -1243,7 +1243,7 @@ export function TeacherClassroomLayoutClient() {
 
       <section
         aria-labelledby="sauvegardes"
-        className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
       >
         <h2 id="sauvegardes" className="text-xl font-black text-foreground">
           Sauvegardes locales
@@ -1255,7 +1255,7 @@ export function TeacherClassroomLayoutClient() {
               type="text"
               value={configName}
               onChange={(e) => setConfigName(e.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
           <button
@@ -1271,7 +1271,7 @@ export function TeacherClassroomLayoutClient() {
           {saves.map((save) => (
             <li
               key={save.id}
-              className="flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-background/30 p-2"
+              className="flex flex-wrap items-center gap-2 rounded-md border border-ink/10 bg-background/30 p-2"
             >
               <button
                 type="button"
@@ -1279,7 +1279,7 @@ export function TeacherClassroomLayoutClient() {
                 className={`min-h-9 rounded-md border px-3 text-sm font-bold ${
                   save.id === currentId
                     ? "border-jade/60 bg-jade/15 text-jade"
-                    : "border-white/15 text-foreground hover:border-jade/40"
+                    : "border-ink/15 text-foreground hover:border-jade/40"
                 }`}
               >
                 {save.name}
@@ -1291,21 +1291,21 @@ export function TeacherClassroomLayoutClient() {
                   const name = window.prompt("Nouveau nom", save.name);
                   if (name) renameSave(save.id, name);
                 }}
-                className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground"
+                className="min-h-9 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground"
               >
                 Renommer
               </button>
               <button
                 type="button"
                 onClick={() => duplicateSave(save.id)}
-                className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground"
+                className="min-h-9 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground"
               >
                 Dupliquer
               </button>
               <button
                 type="button"
                 onClick={() => setDefaultSave(save.id)}
-                className="min-h-9 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground"
+                className="min-h-9 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground"
               >
                 Définir par défaut
               </button>
@@ -1334,7 +1334,7 @@ export function TeacherClassroomLayoutClient() {
 
       <section
         aria-labelledby="impression"
-        className="rounded-lg border border-white/10 bg-background/45 p-4"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4"
       >
         <h2 id="impression" className="text-xl font-black text-foreground print:hidden">
           Impression

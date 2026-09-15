@@ -82,7 +82,7 @@ export default function UniversPage() {
               <Link
                 key={entry.href}
                 href={entry.href}
-                className={`group rounded-md border p-6 transition hover:-translate-y-1 hover:bg-white/[0.06] ${accentBorder[entry.accent]} bg-white/[0.04]`}
+                className={`group rounded-md border p-6 transition hover:-translate-y-1 hover:bg-ink/[0.06] ${accentBorder[entry.accent]} bg-ink/[0.04]`}
               >
                 <h2 className={`text-2xl font-black ${accentText[entry.accent]}`}>
                   {entry.title}

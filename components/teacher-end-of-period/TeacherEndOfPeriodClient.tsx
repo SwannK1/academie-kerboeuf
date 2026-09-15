@@ -177,7 +177,7 @@ export function TeacherEndOfPeriodClient() {
               className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
                 period === option.id
                   ? "border-jade/60 bg-jade/15 text-jade"
-                  : "border-white/15 text-foreground hover:border-jade/40"
+                  : "border-ink/15 text-foreground hover:border-jade/40"
               }`}
             >
               {option.label}
@@ -188,7 +188,7 @@ export function TeacherEndOfPeriodClient() {
 
       <section
         aria-labelledby="resume-global"
-        className="rounded-lg border border-white/10 bg-background/45 p-4"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4"
       >
         <h2 id="resume-global" className="text-xl font-black text-foreground">
           Avancement global —{" "}
@@ -217,7 +217,7 @@ export function TeacherEndOfPeriodClient() {
             return (
               <div
                 key={category.id}
-                className="rounded-lg border border-white/10 bg-background/45 p-4"
+                className="rounded-lg border border-ink/10 bg-background/45 p-4"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h3 className="text-base font-black text-foreground">
@@ -232,7 +232,7 @@ export function TeacherEndOfPeriodClient() {
                   {tasks.map((task) => (
                     <li
                       key={task.id}
-                      className="flex items-start justify-between gap-3 rounded-md border border-white/10 bg-background/30 p-3"
+                      className="flex items-start justify-between gap-3 rounded-md border border-ink/10 bg-background/30 p-3"
                     >
                       <label className="flex flex-1 items-start gap-3 text-sm">
                         <input
@@ -260,7 +260,7 @@ export function TeacherEndOfPeriodClient() {
                             type="button"
                             onClick={() => removeCustomTask(task.id)}
                             aria-label={`Supprimer la tâche ${task.label}`}
-                            className="print:hidden min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+                            className="print:hidden min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
                           >
                             ✕
                           </button>
@@ -277,7 +277,7 @@ export function TeacherEndOfPeriodClient() {
 
       <section
         aria-labelledby="ajout-tache"
-        className="print:hidden rounded-lg border border-white/10 bg-background/45 p-4"
+        className="print:hidden rounded-lg border border-ink/10 bg-background/45 p-4"
       >
         <h2 id="ajout-tache" className="text-xl font-black text-foreground">
           Ajouter une tâche personnalisée
@@ -289,7 +289,7 @@ export function TeacherEndOfPeriodClient() {
               type="text"
               value={newTaskLabel}
               onChange={(event) => setNewTaskLabel(event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="Ex : Préparer la réunion de fin de période"
             />
           </label>
@@ -302,7 +302,7 @@ export function TeacherEndOfPeriodClient() {
                   event.target.value as EndOfPeriodCategoryId,
                 )
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {endOfPeriodCategories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -318,7 +318,7 @@ export function TeacherEndOfPeriodClient() {
               onChange={(event) =>
                 setNewTaskPriority(event.target.value as EndOfPeriodPriority)
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {PRIORITY_OPTIONS.map((priority) => (
                 <option key={priority} value={priority}>
@@ -347,7 +347,7 @@ export function TeacherEndOfPeriodClient() {
           onChange={(event) => setNotes(event.target.value)}
           rows={6}
           placeholder="Notez vos observations, points de vigilance et ajustements pour la suite."
-          className="mt-4 w-full rounded-md border border-white/15 bg-background/60 p-3 text-sm leading-6 text-foreground"
+          className="mt-4 w-full rounded-md border border-ink/15 bg-background/60 p-3 text-sm leading-6 text-foreground"
         />
       </section>
 
@@ -355,7 +355,7 @@ export function TeacherEndOfPeriodClient() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+          className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
         >
           Imprimer
         </button>

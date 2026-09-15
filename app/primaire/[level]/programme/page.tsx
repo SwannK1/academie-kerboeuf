@@ -107,9 +107,9 @@ export default async function ProgrammePage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-5 flex flex-col gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-5 flex flex-col gap-2 border-b border-ink/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
                 Carte du programme

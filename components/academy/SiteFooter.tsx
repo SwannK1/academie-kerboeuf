@@ -14,7 +14,7 @@ const footerSections = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-ink/70 px-4 py-10 sm:px-6 lg:px-8 print:hidden">
+    <footer className="border-t border-ink/10 bg-panel/70 px-4 py-10 sm:px-6 lg:px-8 print:hidden">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_auto_auto_auto]">
         <div>
           <Link
@@ -34,9 +34,8 @@ export function SiteFooter() {
             </span>
           </Link>
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted">
-            Une académie secrète pédagogique pour structurer les niveaux,
-            les élèves, les matières et les missions de la maternelle à la
-            Terminale.
+            Un espace pédagogique pour structurer les niveaux, les élèves,
+            les matières et les missions, de la maternelle à la Terminale.
           </p>
         </div>
 

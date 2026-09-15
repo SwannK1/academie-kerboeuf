@@ -104,7 +104,7 @@ export default async function ElementaryPedagogicalPlacePage({
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.96))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.96))]" />
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.62fr] lg:items-end">
           <div>
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -120,7 +120,7 @@ export default async function ElementaryPedagogicalPlacePage({
             ) : null}
           </div>
 
-          <aside className="rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+          <aside className="rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
             <div className="mb-5 h-1 rounded-full bg-jade" aria-hidden="true" />
             <dl className="space-y-4">
               <MetaRow label="Univers" value={place.parentUniverse.name} />
@@ -219,7 +219,7 @@ export default async function ElementaryPedagogicalPlacePage({
 
 function MetaRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
+    <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4 last:border-b-0 last:pb-0">
       <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         {label}
       </dt>
@@ -289,14 +289,14 @@ function PeoplePanel({
             <Link
               key={person.slug}
               href={href}
-              className="rounded border border-white/10 bg-ink/35 p-3 transition hover:border-gold/30 hover:bg-white/[0.06]"
+              className="rounded border border-ink/10 bg-ink/35 p-3 transition hover:border-gold/30 hover:bg-ink/[0.06]"
             >
               {content}
             </Link>
           ) : (
             <div
               key={person.slug}
-              className="rounded border border-white/10 bg-ink/35 p-3"
+              className="rounded border border-ink/10 bg-ink/35 p-3"
             >
               {content}
             </div>
@@ -318,7 +318,7 @@ function ZonePanel({ zones }: { zones: PedagogicalPlaceInteractiveZone[] }) {
         {zones.map((zone) => (
           <article
             key={zone.id}
-            className="rounded border border-white/10 bg-ink/35 p-4"
+            className="rounded border border-ink/10 bg-ink/35 p-4"
           >
             <h2 className="text-sm font-bold text-foreground">{zone.name}</h2>
             {zone.description ? (
@@ -356,7 +356,7 @@ function SupportList({ supports }: { supports: PedagogicalPlaceSupport[] }) {
       {supports.map((support) => (
         <article
           key={support.id}
-          className="rounded border border-white/10 bg-ink/35 p-4"
+          className="rounded border border-ink/10 bg-ink/35 p-4"
         >
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold">
             {supportTypeLabels[support.type]}
@@ -401,7 +401,7 @@ function AccessibilityPanel({
           return (
             <div
               key={key}
-              className="rounded border border-white/10 bg-ink/35 p-3"
+              className="rounded border border-ink/10 bg-ink/35 p-3"
             >
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold">
                 {label}
@@ -415,7 +415,7 @@ function AccessibilityPanel({
         {accessibility.notes?.map((note) => (
           <div
             key={note}
-            className="rounded border border-white/10 bg-ink/35 p-3 md:col-span-2"
+            className="rounded border border-ink/10 bg-ink/35 p-3 md:col-span-2"
           >
             <p className="text-sm leading-6 text-muted">{note}</p>
           </div>
@@ -437,7 +437,7 @@ function PrintabilityPanel({
   return (
     <DetailPanel title="Imprimabilité">
       <div className="grid gap-3 md:grid-cols-2">
-        <div className="rounded border border-white/10 bg-ink/35 p-3">
+        <div className="rounded border border-ink/10 bg-ink/35 p-3">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold">
             Support imprimable
           </p>
@@ -446,7 +446,7 @@ function PrintabilityPanel({
           </p>
         </div>
         {printability.format ? (
-          <div className="rounded border border-white/10 bg-ink/35 p-3">
+          <div className="rounded border border-ink/10 bg-ink/35 p-3">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-gold">
               Format
             </p>
@@ -456,7 +456,7 @@ function PrintabilityPanel({
           </div>
         ) : null}
         {printability.notes ? (
-          <p className="rounded border border-white/10 bg-ink/35 p-3 text-sm leading-6 text-muted md:col-span-2">
+          <p className="rounded border border-ink/10 bg-ink/35 p-3 text-sm leading-6 text-muted md:col-span-2">
             {printability.notes}
           </p>
         ) : null}
@@ -489,14 +489,14 @@ function LinksPanel({ links }: { links: PedagogicalPlaceActivityLink[] }) {
             <Link
               key={`${link.type}-${link.slug}`}
               href={link.href}
-              className="rounded border border-white/10 bg-ink/35 p-4 transition hover:border-jade/30 hover:bg-white/[0.06]"
+              className="rounded border border-ink/10 bg-ink/35 p-4 transition hover:border-jade/30 hover:bg-ink/[0.06]"
             >
               {content}
             </Link>
           ) : (
             <article
               key={`${link.type}-${link.slug}`}
-              className="rounded border border-white/10 bg-ink/35 p-4"
+              className="rounded border border-ink/10 bg-ink/35 p-4"
             >
               {content}
             </article>

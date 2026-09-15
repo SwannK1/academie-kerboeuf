@@ -32,7 +32,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.95))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.95))]" />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3">
             <p
@@ -54,7 +54,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
       <section className="px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.72fr_1.28fr]">
           <div className="space-y-5">
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
               <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accentText}`}>
                 Fonction pédagogique
               </p>
@@ -63,7 +63,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
               </p>
             </div>
 
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                 Disciplines
               </p>
@@ -71,7 +71,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
                 {place.disciplines.map((d) => (
                   <span
                     key={d}
-                    className="rounded border border-white/10 bg-ink/35 px-2 py-1 text-xs font-bold text-muted"
+                    className="rounded border border-ink/10 bg-ink/35 px-2 py-1 text-xs font-bold text-muted"
                   >
                     {d}
                   </span>
@@ -80,7 +80,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
             </div>
 
             {place.professors.length > 0 && (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                   Professeurs
                 </p>
@@ -103,7 +103,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
             )}
 
             {place.students.length > 0 && (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                   Élèves emblématiques
                 </p>
@@ -128,7 +128,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
 
           <div className="space-y-5">
             {place.interactiveZones.length > 0 && (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
                 <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accentText}`}>
                   Zones interactives
                 </p>
@@ -144,7 +144,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
             )}
 
             {place.pedagogicalUses.length > 0 && (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
                   Usages pédagogiques
                 </p>
@@ -160,7 +160,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
             )}
 
             {place.visibleSupports.length > 0 && (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
                   Supports visibles
                 </p>
@@ -177,7 +177,7 @@ export function ElementaryPlaceDetail({ place }: Props) {
 
             <Link
               href="/primaire/lieux"
-              className="inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+              className="inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-background transition hover:brightness-110"
             >
               Retour aux lieux
             </Link>

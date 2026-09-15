@@ -15,7 +15,7 @@ export function StudentCard({ student }: StudentCardProps) {
   return (
     <Link
       href={`/eleves/${student.slug}`}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-md border bg-white/[0.035] transition hover:-translate-y-1 hover:bg-white/[0.06] ${accent.borderSoftClass}`}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-md border bg-ink/[0.035] transition hover:-translate-y-1 hover:bg-ink/[0.06] ${accent.borderSoftClass}`}
     >
       <div
         aria-hidden="true"
@@ -53,7 +53,7 @@ export function StudentCard({ student }: StudentCardProps) {
           >
             {student.level}
           </span>
-          <span className="rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+          <span className="rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
             {student.cycle}
           </span>
         </div>
@@ -72,14 +72,14 @@ export function StudentCard({ student }: StudentCardProps) {
           {student.personalityProfile.dominantTraits.slice(0, 3).map((trait) => (
             <span
               key={trait}
-              className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.1em] text-muted"
+              className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.1em] text-muted"
             >
               {trait}
             </span>
           ))}
         </div>
 
-        <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+        <div className="mt-6 flex items-center justify-between border-t border-ink/10 pt-4">
           <span className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
             Profil élève
           </span>

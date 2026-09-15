@@ -47,7 +47,7 @@ export function LegalSection({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-md border border-white/10 bg-white/[0.035] p-5 sm:p-6">
+    <section className="rounded-md border border-ink/10 bg-ink/[0.035] p-5 sm:p-6">
       <h2 className="text-lg font-black text-foreground">{title}</h2>
       <div className="mt-3 space-y-3">{children}</div>
     </section>

@@ -96,7 +96,7 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
+        <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             <SelectFilter
               label="Niveau"
@@ -137,7 +137,7 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-2 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mt-8 flex flex-col gap-2 border-b border-ink/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
               Catalogue classe
@@ -156,7 +156,7 @@ export function ResourcesCatalog({ resources }: ResourcesCatalogProps) {
               setDifficulty(allLabel);
               setMode(allLabel);
             }}
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+            className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
           >
             Réinitialiser
           </button>
@@ -193,7 +193,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 rounded-md border border-ink/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>
@@ -209,7 +209,7 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
   return (
     <Link
       href={resource.href}
-      className="group flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+      className="group flex min-h-full flex-col rounded-md border border-ink/10 bg-ink/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-ink/[0.07]"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -250,7 +250,7 @@ function ResourceCard({ resource }: { resource: PublicClassroomResource }) {
 
 function Badge({ children }: { children: string }) {
   return (
-    <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
+    <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
       {children}
     </span>
   );

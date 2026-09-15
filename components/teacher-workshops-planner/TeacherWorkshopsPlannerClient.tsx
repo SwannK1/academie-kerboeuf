@@ -290,7 +290,7 @@ export function TeacherWorkshopsPlannerClient() {
           <button
             type="button"
             onClick={printWorkshops}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
           >
             Imprimer
           </button>
@@ -311,7 +311,7 @@ export function TeacherWorkshopsPlannerClient() {
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Rechercher un atelier…"
           aria-label="Rechercher un atelier"
-          className="min-h-11 w-full max-w-xs rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground placeholder:text-muted"
+          className="min-h-11 w-full max-w-xs rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground placeholder:text-muted"
         />
 
         <select
@@ -320,7 +320,7 @@ export function TeacherWorkshopsPlannerClient() {
             setSubjectFilter(event.target.value as TeacherWorkshopSubject | "tous")
           }
           aria-label="Filtrer par matière"
-          className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
         >
           <option value="tous">Toutes les matières</option>
           {teacherWorkshopSubjects.map((subject) => (
@@ -336,7 +336,7 @@ export function TeacherWorkshopsPlannerClient() {
             setStatusFilter(event.target.value as TeacherWorkshopStatus | "tous")
           }
           aria-label="Filtrer par statut"
-          className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
         >
           <option value="tous">Tous les statuts</option>
           {teacherWorkshopStatuses.map((status) => (
@@ -350,7 +350,7 @@ export function TeacherWorkshopsPlannerClient() {
       {isFormOpen ? (
         <form
           onSubmit={handleSubmit}
-          className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5 print:hidden"
+          className="mt-6 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 print:hidden"
         >
           <h3 className="text-lg font-black text-foreground">
             {editingId ? "Modifier l'atelier" : "Nouvel atelier"}
@@ -364,7 +364,7 @@ export function TeacherWorkshopsPlannerClient() {
                 required
                 value={form.title}
                 onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
             </label>
 
@@ -380,7 +380,7 @@ export function TeacherWorkshopsPlannerClient() {
                       : null,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               >
                 <option value="">Tous niveaux</option>
                 {teacherWorkshopLevels.map((level) => (
@@ -402,7 +402,7 @@ export function TeacherWorkshopsPlannerClient() {
                     subject: event.target.value as TeacherWorkshopSubject,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               >
                 {teacherWorkshopSubjects.map((subject) => (
                   <option key={subject.id} value={subject.id}>
@@ -418,7 +418,7 @@ export function TeacherWorkshopsPlannerClient() {
                 type="text"
                 value={form.domain}
                 onChange={(event) => setForm((current) => ({ ...current, domain: event.target.value }))}
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
             </label>
 
@@ -428,7 +428,7 @@ export function TeacherWorkshopsPlannerClient() {
                 type="text"
                 value={form.objective}
                 onChange={(event) => setForm((current) => ({ ...current, objective: event.target.value }))}
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
             </label>
 
@@ -438,7 +438,7 @@ export function TeacherWorkshopsPlannerClient() {
                 value={form.materials}
                 onChange={(event) => setForm((current) => ({ ...current, materials: event.target.value }))}
                 rows={2}
-                className="rounded-md border border-white/15 bg-white/[0.03] px-3 py-2 text-sm text-foreground"
+                className="rounded-md border border-ink/15 bg-ink/[0.03] px-3 py-2 text-sm text-foreground"
               />
             </label>
 
@@ -451,7 +451,7 @@ export function TeacherWorkshopsPlannerClient() {
                   setForm((current) => ({ ...current, durationLabel: event.target.value }))
                 }
                 placeholder="ex. 30 min"
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
             </label>
 
@@ -462,7 +462,7 @@ export function TeacherWorkshopsPlannerClient() {
                 value={form.week}
                 onChange={(event) => setForm((current) => ({ ...current, week: event.target.value }))}
                 placeholder="ex. Semaine 3"
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
             </label>
 
@@ -476,7 +476,7 @@ export function TeacherWorkshopsPlannerClient() {
                     status: event.target.value as TeacherWorkshopStatus,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               >
                 {teacherWorkshopStatuses.map((status) => (
                   <option key={status.id} value={status.id}>
@@ -498,7 +498,7 @@ export function TeacherWorkshopsPlannerClient() {
                     groupCount: Number(event.target.value) || 1,
                   }))
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
             </label>
 
@@ -510,7 +510,7 @@ export function TeacherWorkshopsPlannerClient() {
                   setForm((current) => ({ ...current, instructions: event.target.value }))
                 }
                 rows={2}
-                className="rounded-md border border-white/15 bg-white/[0.03] px-3 py-2 text-sm text-foreground"
+                className="rounded-md border border-ink/15 bg-ink/[0.03] px-3 py-2 text-sm text-foreground"
               />
             </label>
           </div>
@@ -545,12 +545,12 @@ export function TeacherWorkshopsPlannerClient() {
                   setForm((current) => ({ ...current, newTaskLabel: event.target.value }))
                 }
                 placeholder="Nouvelle tâche de préparation"
-                className="min-h-11 flex-1 rounded-md border border-white/15 bg-white/[0.03] px-3 text-sm text-foreground"
+                className="min-h-11 flex-1 rounded-md border border-ink/15 bg-ink/[0.03] px-3 text-sm text-foreground"
               />
               <button
                 type="button"
                 onClick={addTaskToForm}
-                className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground hover:border-jade/40"
+                className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground hover:border-jade/40"
               >
                 Ajouter
               </button>
@@ -567,7 +567,7 @@ export function TeacherWorkshopsPlannerClient() {
             <button
               type="button"
               onClick={closeForm}
-              className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground hover:border-rose/40"
+              className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground hover:border-rose/40"
             >
               Annuler
             </button>
@@ -576,7 +576,7 @@ export function TeacherWorkshopsPlannerClient() {
       ) : null}
 
       {filteredWorkshops.length === 0 ? (
-        <p className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+        <p className="mt-6 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
           Aucun atelier ne correspond à cette recherche ou à ces filtres.
         </p>
       ) : (
@@ -584,7 +584,7 @@ export function TeacherWorkshopsPlannerClient() {
           {filteredWorkshops.map((workshop) => (
             <li
               key={workshop.id}
-              className="rounded-lg border border-white/10 bg-white/[0.03] p-5 print:break-inside-avoid"
+              className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5 print:break-inside-avoid"
             >
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <p className="text-base font-black text-foreground">{workshop.title}</p>
@@ -655,21 +655,21 @@ export function TeacherWorkshopsPlannerClient() {
                 <button
                   type="button"
                   onClick={() => openEditForm(workshop)}
-                  className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground hover:border-sky/40"
+                  className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground hover:border-sky/40"
                 >
                   Modifier
                 </button>
                 <button
                   type="button"
                   onClick={() => duplicateWorkshop(workshop)}
-                  className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground hover:border-jade/40"
+                  className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground hover:border-jade/40"
                 >
                   Dupliquer
                 </button>
                 <button
                   type="button"
                   onClick={() => requestDelete(workshop.id)}
-                  className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-rose hover:border-rose/40"
+                  className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-rose hover:border-rose/40"
                 >
                   Supprimer
                 </button>
@@ -689,7 +689,7 @@ export function TeacherWorkshopsPlannerClient() {
                     <button
                       type="button"
                       onClick={cancelDelete}
-                      className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground"
+                      className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground"
                     >
                       Annuler
                     </button>

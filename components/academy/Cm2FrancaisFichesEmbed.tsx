@@ -36,9 +36,9 @@ export function Cm2FrancaisFichesEmbed() {
   return (
     <>
       {/* ── Filtres ──────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6 border-b border-white/10 pb-5">
+          <div className="mb-6 border-b border-ink/10 pb-5">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Fiches PDF
             </p>
@@ -61,7 +61,7 @@ export function Cm2FrancaisFichesEmbed() {
               Partielles
             </FilterChip>
 
-            <span className="mx-1 self-center text-white/20" aria-hidden="true">|</span>
+            <span className="mx-1 self-center text-ink/20" aria-hidden="true">|</span>
 
             <FilterChip active={domainFilter === "all"} onClick={() => setDomainFilter("all")}>
               Tous les domaines
@@ -106,7 +106,7 @@ function NotionCard({ notion }: { notion: FicheNotion }) {
   const sheetKeys = (["f1", "f2", "f3"] as const).filter((k) => notion.sheets[k]);
 
   return (
-    <article className="flex flex-col rounded-md border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]">
+    <article className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.03] p-5 transition hover:border-ink/20 hover:bg-ink/[0.05]">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex-1">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-jade">
@@ -120,14 +120,14 @@ function NotionCard({ notion }: { notion: FicheNotion }) {
           className={`shrink-0 rounded-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
             complete
               ? "border border-jade/30 bg-jade/10 text-jade"
-              : "border border-amber-500/30 bg-amber-500/10 text-amber-400"
+              : "border border-gold/30 bg-gold/10 text-gold"
           }`}
         >
           {complete ? "Complète" : "Partielle"}
         </span>
       </div>
 
-      <div className="mt-auto space-y-2 border-t border-white/10 pt-4">
+      <div className="mt-auto space-y-2 border-t border-ink/10 pt-4">
         {sheetKeys.map((key, index) => (
           <Link
             key={key}
@@ -159,7 +159,7 @@ function FilterChip({
       className={`rounded-sm px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] transition ${
         active
           ? "border border-jade/40 bg-jade/20 text-jade"
-          : "border border-white/10 bg-white/[0.03] text-muted hover:bg-white/[0.06] hover:text-foreground"
+          : "border border-ink/10 bg-ink/[0.03] text-muted hover:bg-ink/[0.06] hover:text-foreground"
       }`}
     >
       {children}

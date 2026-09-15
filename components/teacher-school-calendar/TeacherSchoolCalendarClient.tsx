@@ -187,7 +187,7 @@ export function TeacherSchoolCalendarClient() {
                     event.target.value,
                   )
                 }
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+                className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
               />
               <label
                 htmlFor={`${period.id}-fin`}
@@ -206,7 +206,7 @@ export function TeacherSchoolCalendarClient() {
                     event.target.value,
                   )
                 }
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+                className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
               />
             </div>
           ))}
@@ -215,7 +215,7 @@ export function TeacherSchoolCalendarClient() {
 
       <section
         aria-label="Créer un événement"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
       >
         <h2 className="text-xl font-black text-foreground">
           Ajouter un événement
@@ -237,7 +237,7 @@ export function TeacherSchoolCalendarClient() {
               required
               value={formDate}
               onChange={(event) => setFormDate(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
             />
           </div>
 
@@ -256,7 +256,7 @@ export function TeacherSchoolCalendarClient() {
                   event.target.value as TeacherCalendarEventCategoryId,
                 )
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
             >
               {teacherCalendarEventCategories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -279,7 +279,7 @@ export function TeacherSchoolCalendarClient() {
               required
               value={formTitle}
               onChange={(event) => setFormTitle(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -295,7 +295,7 @@ export function TeacherSchoolCalendarClient() {
               value={formNote}
               onChange={(event) => setFormNote(event.target.value)}
               rows={2}
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -312,7 +312,7 @@ export function TeacherSchoolCalendarClient() {
 
       <section
         aria-label="Calendrier mensuel"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6 print:border-none print:bg-transparent"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6 print:border-none print:bg-transparent"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -320,7 +320,7 @@ export function TeacherSchoolCalendarClient() {
               type="button"
               onClick={handlePreviousMonth}
               aria-label="Mois précédent"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-white/15 text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ink/15 text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
             >
               ←
             </button>
@@ -331,7 +331,7 @@ export function TeacherSchoolCalendarClient() {
               type="button"
               onClick={handleNextMonth}
               aria-label="Mois suivant"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-white/15 text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-ink/15 text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
             >
               →
             </button>
@@ -351,7 +351,7 @@ export function TeacherSchoolCalendarClient() {
                     | typeof ALL_CATEGORIES_FILTER,
                 )
               }
-              className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+              className="min-h-11 rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
             >
               <option value={ALL_CATEGORIES_FILTER}>Toutes catégories</option>
               {teacherCalendarEventCategories.map((category) => (
@@ -364,7 +364,7 @@ export function TeacherSchoolCalendarClient() {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
             >
               Imprimer
             </button>
@@ -385,7 +385,7 @@ export function TeacherSchoolCalendarClient() {
                       "rounded-md border p-4",
                       event.done
                         ? "border-jade/30 bg-jade/[0.06]"
-                        : "border-white/10 bg-background/45",
+                        : "border-ink/10 bg-background/45",
                     ].join(" ")}
                   >
                     <div className="flex flex-wrap items-start justify-between gap-3">
@@ -418,7 +418,7 @@ export function TeacherSchoolCalendarClient() {
                             "min-h-11 rounded-md border px-3 text-sm font-bold transition",
                             event.done
                               ? "border-jade/50 bg-jade/10 text-jade"
-                              : "border-white/15 text-foreground hover:border-jade/40",
+                              : "border-ink/15 text-foreground hover:border-jade/40",
                           ].join(" ")}
                         >
                           {event.done ? "Fait" : "À faire"}
@@ -427,7 +427,7 @@ export function TeacherSchoolCalendarClient() {
                           type="button"
                           onClick={() => handleDeleteEvent(event.id)}
                           aria-label="Supprimer l’événement"
-                          className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+                          className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
                         >
                           Supprimer
                         </button>

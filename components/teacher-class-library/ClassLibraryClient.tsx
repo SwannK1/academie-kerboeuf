@@ -254,7 +254,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setForm((previous) => ({ ...previous, title: event.target.value }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -272,7 +272,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setForm((previous) => ({ ...previous, author: event.target.value }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -293,7 +293,7 @@ export function ClassLibraryClient() {
                   categoryId: event.target.value as ClassLibraryCategoryId,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               {classLibraryCategories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -319,7 +319,7 @@ export function ClassLibraryClient() {
                   levelId: event.target.value as ClassLibraryLevelId | "",
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               <option value="">—</option>
               {classLibraryLevels.map((level) => (
@@ -345,7 +345,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setForm((previous) => ({ ...previous, theme: event.target.value }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -365,7 +365,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setForm((previous) => ({ ...previous, copies: event.target.value }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -383,7 +383,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setForm((previous) => ({ ...previous, location: event.target.value }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -401,7 +401,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setForm((previous) => ({ ...previous, note: event.target.value }))
               }
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -416,7 +416,7 @@ export function ClassLibraryClient() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
               >
                 Annuler
               </button>
@@ -427,7 +427,7 @@ export function ClassLibraryClient() {
 
       <section
         aria-label="Recherche et filtres"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6 print:hidden"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6 print:hidden"
       >
         <h2 className="text-xl font-black text-foreground">
           Rechercher et filtrer
@@ -445,7 +445,7 @@ export function ClassLibraryClient() {
               type="text"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -462,7 +462,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setCategoryFilter(event.target.value as ClassLibraryCategoryId | "")
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               <option value="">Toutes</option>
               {classLibraryCategories.map((category) => (
@@ -486,7 +486,7 @@ export function ClassLibraryClient() {
               onChange={(event) =>
                 setLevelFilter(event.target.value as ClassLibraryLevelId | "")
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               <option value="">Tous</option>
               {classLibraryLevels.map((level) => (
@@ -508,7 +508,7 @@ export function ClassLibraryClient() {
               id="cl-filter-theme"
               value={themeFilter}
               onChange={(event) => setThemeFilter(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               <option value="">Tous</option>
               {themes.map((theme) => (
@@ -536,7 +536,7 @@ export function ClassLibraryClient() {
 
       <section
         aria-label="Inventaire de la bibliothèque de classe"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
       >
         <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
           <h2 className="text-xl font-black text-foreground">
@@ -545,7 +545,7 @@ export function ClassLibraryClient() {
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
           >
             Imprimer l’inventaire
           </button>
@@ -563,7 +563,7 @@ export function ClassLibraryClient() {
             {filteredItems.map((item) => (
               <li
                 key={item.id}
-                className="rounded-md border border-white/10 bg-background/45 p-4 print:break-inside-avoid"
+                className="rounded-md border border-ink/10 bg-background/45 p-4 print:break-inside-avoid"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
@@ -601,7 +601,7 @@ export function ClassLibraryClient() {
                         "inline-flex min-h-9 items-center justify-center rounded-md border px-3 text-xs font-bold transition",
                         item.isFavorite
                           ? "border-gold/50 bg-gold/10 text-gold"
-                          : "border-white/15 text-foreground hover:border-gold/40",
+                          : "border-ink/15 text-foreground hover:border-gold/40",
                       ].join(" ")}
                     >
                       {item.isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
@@ -609,7 +609,7 @@ export function ClassLibraryClient() {
                     <button
                       type="button"
                       onClick={() => handleEdit(item)}
-                      className="inline-flex min-h-9 items-center justify-center rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                      className="inline-flex min-h-9 items-center justify-center rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
                     >
                       Modifier
                     </button>
@@ -635,7 +635,7 @@ export function ClassLibraryClient() {
           aria-label="Confirmer la suppression"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 print:hidden"
         >
-          <div className="max-w-sm rounded-lg border border-white/10 bg-background p-6">
+          <div className="max-w-sm rounded-lg border border-ink/10 bg-background p-6">
             <p className="text-base font-black text-foreground">
               Supprimer cette ressource ?
             </p>
@@ -653,7 +653,7 @@ export function ClassLibraryClient() {
               <button
                 type="button"
                 onClick={handleDeleteCancel}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
               >
                 Annuler
               </button>

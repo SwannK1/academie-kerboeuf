@@ -113,7 +113,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.03),rgba(9,16,15,0.95))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.03),rgba(245,239,224,0.95))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Programmes {levelLabel}
@@ -127,7 +127,7 @@ export function SubjectIndexPage<TSubject extends MatterSubject>({
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href={levelHref}
-              className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="rounded-md border border-ink/15 bg-ink/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               ← Retour {levelLabel}
             </Link>
@@ -215,7 +215,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.03),rgba(9,16,15,0.95))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.03),rgba(245,239,224,0.95))]" />
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-2">
             <p
@@ -242,7 +242,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
               {tree.guides.map((guide) => (
                 <span
                   key={guide.id}
-                  className="inline-flex items-center rounded-md border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-muted"
+                  className="inline-flex items-center rounded-md border border-ink/15 bg-ink/[0.04] px-3 py-1.5 text-xs font-semibold text-muted"
                 >
                   {guide.name}
                 </span>
@@ -257,7 +257,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
       {tree && tree.domains.length > 0 ? (
         <section className="px-4 pb-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 border-b border-white/10 pb-5">
+            <div className="mb-8 border-b border-ink/10 pb-5">
               <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
                 Structure
               </p>
@@ -275,7 +275,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
       ) : (
         <section className="px-4 pb-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="rounded-md border border-white/10 bg-white/[0.025] p-8">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.025] p-8">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                 En cours de structuration
               </p>
@@ -289,9 +289,9 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
       )}
 
       {sequenceGroups.length > 0 ? (
-        <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+        <section className="border-t border-ink/10 px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <details className={`group rounded-md border ${t.border} bg-white/[0.025]`}>
+            <details className={`group rounded-md border ${t.border} bg-ink/[0.025]`}>
               <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70">
                 <span>
                   <span className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
@@ -311,7 +311,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
                   →
                 </span>
               </summary>
-              <div className="space-y-5 border-t border-white/10 p-5 pt-0">
+              <div className="space-y-5 border-t border-ink/10 p-5 pt-0">
                 {sequenceGroups.map(({ domain, subdomains }) => (
                   <SequenceDomainBlock
                     key={domain}
@@ -327,9 +327,9 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
       ) : null}
 
       {subject.teacherFocus ? (
-        <section className="border-t border-white/10 px-4 py-14 sm:px-6 lg:px-8">
+        <section className="border-t border-ink/10 px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                 Pour l&apos;enseignant
               </p>
@@ -343,7 +343,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
 
       {bottomSection}
 
-      <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-muted">
             Aller plus loin
@@ -351,7 +351,7 @@ export function SubjectDetailPage<TSubject extends MatterSubject>({
           <div className="flex flex-wrap gap-3">
             <Link
               href={subjectsHref}
-              className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+              className="rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
             >
               ← Toutes les matières
             </Link>
@@ -423,7 +423,7 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
         className="relative isolate overflow-hidden px-4 py-12 sm:px-6 lg:px-8"
       >
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.03),rgba(9,16,15,0.95))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.03),rgba(245,239,224,0.95))]" />
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -464,7 +464,7 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
           className="px-4 pb-12 sm:px-6 lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="mb-6 border-b border-white/10 pb-5">
+            <div className="mb-6 border-b border-ink/10 pb-5">
               <p className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
                 Structure
               </p>
@@ -495,7 +495,7 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
           className="px-4 pb-12 sm:px-6 lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="rounded-md border border-white/10 bg-white/[0.025] p-8">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.025] p-8">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                 En cours de structuration
               </p>
@@ -515,10 +515,10 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
         <section
           id="progression-detaillee"
           aria-labelledby="progression-detaillee-title"
-          className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
+          className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-            <details className={`group rounded-md border ${t.border} bg-white/[0.025]`}>
+            <details className={`group rounded-md border ${t.border} bg-ink/[0.025]`}>
               <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70">
                 <span>
                   <span className={`text-xs font-bold uppercase tracking-[0.22em] ${t.text}`}>
@@ -542,7 +542,7 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
                   →
                 </span>
               </summary>
-              <div className="space-y-5 border-t border-white/10 p-5 pt-0">
+              <div className="space-y-5 border-t border-ink/10 p-5 pt-0">
                 {sequenceGroups.map(({ domain, subdomains }) => (
                   <SequenceDomainBlock
                     key={domain}
@@ -561,10 +561,10 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
         <section
           id="outils-enseignants"
           aria-labelledby="outils-enseignants-title"
-          className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8"
+          className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted">
                 Pour l&apos;enseignant
               </p>
@@ -586,7 +586,7 @@ function CompactSubjectDetailPage<TSubject extends MatterSubject>({
 
 function SubjectMetric({ label, value }: { label: string; value: number }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-4">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-4">
       <dt className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
         {label}
       </dt>
@@ -612,7 +612,7 @@ function DomainDetailsBlock({
   return (
     <details
       open={open}
-      className={`group rounded-md border ${t.border} bg-white/[0.025]`}
+      className={`group rounded-md border ${t.border} bg-ink/[0.025]`}
     >
       <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70">
         <span>
@@ -638,7 +638,7 @@ function DomainDetailsBlock({
       </summary>
 
       {domain.subdomains.length > 0 ? (
-        <div className="grid gap-3 border-t border-white/10 p-5 pt-0 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 border-t border-ink/10 p-5 pt-0 sm:grid-cols-2 lg:grid-cols-3">
           {domain.subdomains.map((subdomain) => (
             <SubdomainItem key={subdomain.id} subdomain={subdomain} />
           ))}
@@ -697,12 +697,12 @@ function SubjectGridSection<TSubject extends MatterSubject>({
   return (
     <section
       className={[
-        separated ? "border-t border-white/10 py-14" : "pb-14",
+        separated ? "border-t border-ink/10 py-14" : "pb-14",
         "px-4 sm:px-6 lg:px-8",
       ].join(" ")}
     >
       <div className="mx-auto max-w-7xl">
-        <div className={separated ? "mb-6 pb-5" : "mb-6 border-b border-white/10 pb-5"}>
+        <div className={separated ? "mb-6 pb-5" : "mb-6 border-b border-ink/10 pb-5"}>
           <p
             className={[
               "text-xs font-bold uppercase tracking-[0.22em]",
@@ -743,7 +743,7 @@ function SubjectCard<TSubject extends MatterSubject>({
   return (
     <Link
       href={href}
-      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-white/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
+      className={`group flex min-h-full flex-col rounded-md border p-5 transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-gold/60 ${t.border} bg-ink/[0.04] ${t.hoverBorder} ${t.hoverBg}`}
     >
       <div className="flex items-start justify-between gap-3">
         <h3
@@ -766,7 +766,7 @@ function SubjectCard<TSubject extends MatterSubject>({
               key={domain}
               className="flex items-start gap-2 text-xs leading-5 text-muted"
             >
-              <span className="mt-0.5 shrink-0 text-white/30" aria-hidden="true">
+              <span className="mt-0.5 shrink-0 text-ink/30" aria-hidden="true">
                 ·
               </span>
               {domain}
@@ -775,7 +775,7 @@ function SubjectCard<TSubject extends MatterSubject>({
         </ul>
       ) : null}
 
-      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
+      <div className="mt-4 flex items-center justify-between border-t border-ink/10 pt-3">
         <span className={`text-xs font-bold uppercase tracking-[0.12em] ${t.text}`}>
           Voir la structure
         </span>
@@ -792,7 +792,7 @@ function SubjectCard<TSubject extends MatterSubject>({
 
 function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
   return (
-    <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
+    <div className={`rounded-md border ${t.border} bg-ink/[0.025] p-5`}>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
@@ -803,7 +803,7 @@ function DomainBlock({ domain, t }: { domain: MatterDomain; t: AccentTokens }) {
             <p className="mt-1 text-xs text-muted">Zone · {domain.zone}</p>
           ) : null}
         </div>
-        <span className="shrink-0 rounded border border-white/10 bg-white/[0.03] px-2 py-1 text-xs text-white/35">
+        <span className="shrink-0 rounded border border-ink/10 bg-ink/[0.03] px-2 py-1 text-xs text-ink/35">
           {domain.subdomains.length}&nbsp;sous-domaine
           {domain.subdomains.length > 1 ? "s" : ""}
         </span>
@@ -829,13 +829,13 @@ function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
   });
 
   return (
-    <li className="rounded border border-white/10 bg-white/[0.03] px-3 py-3">
+    <li className="rounded border border-ink/10 bg-ink/[0.03] px-3 py-3">
       <h4 className="text-sm font-semibold text-foreground">{subdomain.title}</h4>
       {sortedItems.length > 0 ? (
         <ul className="mt-2 space-y-2">
           {sortedItems.map((item) => (
             <li key={item.id} className="flex items-start gap-2 text-xs text-muted">
-              <span className="mt-1 shrink-0 text-white/25" aria-hidden="true">
+              <span className="mt-1 shrink-0 text-ink/25" aria-hidden="true">
                 ·
               </span>
               <div className="min-w-0 flex-1">
@@ -858,7 +858,7 @@ function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
           ))}
         </ul>
       ) : (
-        <p className="mt-1 text-xs text-white/30">À structurer</p>
+        <p className="mt-1 text-xs text-ink/30">À structurer</p>
       )}
     </li>
   );
@@ -866,7 +866,7 @@ function SubdomainItem({ subdomain }: { subdomain: MatterSubdomain }) {
 
 function SequenceRow({ sequence }: { sequence: MatterSequence }) {
   return (
-    <li className="flex flex-col gap-1 rounded border border-white/10 bg-white/[0.025] px-4 py-3 sm:flex-row sm:items-start sm:gap-4">
+    <li className="flex flex-col gap-1 rounded border border-ink/10 bg-ink/[0.025] px-4 py-3 sm:flex-row sm:items-start sm:gap-4">
       <div className="flex-1">
         <p className="text-sm font-semibold text-foreground">{sequence.title}</p>
         <p className="mt-0.5 text-xs leading-5 text-muted">{sequence.skill}</p>
@@ -886,7 +886,7 @@ function SequenceDomainBlock({
   t: AccentTokens;
 }) {
   return (
-    <div className={`rounded-md border ${t.border} bg-white/[0.025] p-5`}>
+    <div className={`rounded-md border ${t.border} bg-ink/[0.025] p-5`}>
       <p className={`text-xs font-bold uppercase tracking-[0.18em] ${t.text}`}>
         Domaine
       </p>
@@ -934,7 +934,7 @@ function SubjectFooter({
   footerLinks: { href: string; label: string; tone?: "gold" | "jade" }[];
 }) {
   return (
-    <section className="border-t border-white/10 px-4 py-12 sm:px-6 lg:px-8">
+    <section className="border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-muted">
           Aller plus loin
@@ -942,7 +942,7 @@ function SubjectFooter({
         <div className="flex flex-wrap gap-3">
           <Link
             href={subjectsHref}
-            className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+            className="rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
           >
             ← Toutes les matières
           </Link>
@@ -968,5 +968,5 @@ function footerLinkClassName(tone?: "gold" | "jade") {
   if (tone === "jade") {
     return "rounded-md border border-jade/25 bg-jade/[0.05] px-4 py-2.5 text-sm font-bold text-jade transition hover:bg-jade/[0.09]";
   }
-  return "rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground";
+  return "rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground";
 }

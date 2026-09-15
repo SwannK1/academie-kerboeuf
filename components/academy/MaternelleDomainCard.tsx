@@ -14,9 +14,9 @@ export function MaternelleDomainCard({
 }: MaternelleDomainCardProps) {
   const observables = domain.observables.slice(0, 3);
   const card = (
-    <article className="group flex h-full min-h-[22rem] flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:border-jade/30 hover:bg-white/[0.065]">
+    <article className="group flex h-full min-h-[22rem] flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5 transition hover:border-jade/30 hover:bg-ink/[0.065]">
       <div className="flex items-start justify-between gap-3">
-        <span className="flex size-8 shrink-0 items-center justify-center rounded border border-white/10 bg-ink/40 text-xs font-black text-muted">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded border border-ink/10 bg-ink/40 text-xs font-black text-muted">
           {index + 1}
         </span>
         <PublicStatusBadge status={domain.status} className="shrink-0" />
@@ -30,7 +30,7 @@ export function MaternelleDomainCard({
       </h2>
       <p className="mt-3 text-sm leading-6 text-muted">{domain.description}</p>
 
-      <div className="mt-4 border-t border-white/10 pt-4">
+      <div className="mt-4 border-t border-ink/10 pt-4">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
           Observables
         </p>
@@ -49,7 +49,7 @@ export function MaternelleDomainCard({
         </ul>
       </div>
 
-      <div className="mt-4 border-t border-white/10 pt-4">
+      <div className="mt-4 border-t border-ink/10 pt-4">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
           Ressources prévues
         </p>
@@ -57,7 +57,7 @@ export function MaternelleDomainCard({
           {domain.resourceSlots.slice(0, 3).map((slot) => (
             <span
               key={slot.kind}
-              className="rounded border border-white/10 bg-ink/35 px-2 py-1 text-xs text-muted"
+              className="rounded border border-ink/10 bg-ink/35 px-2 py-1 text-xs text-muted"
             >
               {slot.label}
             </span>

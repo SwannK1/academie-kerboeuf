@@ -20,12 +20,12 @@ export function AssessmentPanel({
 }: AssessmentPanelProps) {
   const typeInfo = typeLabel[assessment.type] ?? {
     label: assessment.type,
-    color: "border-white/20 bg-white/[0.04] text-muted",
+    color: "border-ink/20 bg-ink/[0.04] text-muted",
   };
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
         <div className="flex items-center gap-3">
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
             Évaluation
@@ -44,7 +44,7 @@ export function AssessmentPanel({
           {assessment.criteria.map((criterion) => (
             <li
               key={criterion}
-              className="rounded border border-white/10 bg-ink/35 p-2 text-sm leading-6 text-muted"
+              className="rounded border border-ink/10 bg-ink/35 p-2 text-sm leading-6 text-muted"
             >
               {criterion}
             </li>
@@ -59,7 +59,7 @@ export function AssessmentPanel({
             <ul className="mt-2 space-y-2" aria-label="Auto-évaluation">
               {assessment.selfEvaluation.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm leading-6 text-muted">
-                  <span className="mt-1.5 size-1.5 shrink-0 rounded-sm border border-white/30" aria-hidden="true" />
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-sm border border-ink/30" aria-hidden="true" />
                   {item}
                 </li>
               ))}
@@ -69,7 +69,7 @@ export function AssessmentPanel({
       </div>
 
       <div className="space-y-4">
-        <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
             Critères de réussite
           </h2>
@@ -85,7 +85,7 @@ export function AssessmentPanel({
           </ul>
         </div>
 
-        <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+        <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
             Restitution
           </h2>
@@ -94,7 +94,7 @@ export function AssessmentPanel({
               <h3 className="text-sm font-bold text-foreground">Pour les familles</h3>
               <p className="mt-1 text-sm leading-6 text-muted">{restitution.family}</p>
             </div>
-            <div className="border-t border-white/10 pt-3">
+            <div className="border-t border-ink/10 pt-3">
               <h3 className="text-sm font-bold text-foreground">Pour l&apos;enseignant</h3>
               <p className="mt-1 text-sm leading-6 text-muted">{restitution.teacher}</p>
             </div>

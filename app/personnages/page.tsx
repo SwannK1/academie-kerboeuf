@@ -140,7 +140,7 @@ export default function PersonnagesPage() {
                     <li key={character.slug}>
                       <Link
                         href={`/professeurs/${character.slug}`}
-                        className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm font-bold text-foreground transition hover:border-white/25"
+                        className="inline-flex items-center gap-2 rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm font-bold text-foreground transition hover:border-ink/25"
                       >
                         {character.name}
                         <span className="text-xs font-medium text-muted">
@@ -169,7 +169,7 @@ function PersonnagesSection({
   children: ReactNode;
 }) {
   return (
-    <section className="border-t border-white/10 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <section className="border-t border-ink/10 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-2xl font-black text-foreground sm:text-3xl">
           {title}
@@ -214,12 +214,12 @@ function CharacterCard({
   );
 
   const className =
-    "rounded-lg border border-white/10 bg-white/[0.03] p-5 sm:p-6";
+    "rounded-lg border border-ink/10 bg-ink/[0.03] p-5 sm:p-6";
 
   return href ? (
     <Link
       href={href}
-      className={`${className} block transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.06]`}
+      className={`${className} block transition hover:-translate-y-0.5 hover:border-ink/25 hover:bg-ink/[0.06]`}
     >
       {content}
     </Link>

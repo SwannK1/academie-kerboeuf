@@ -55,7 +55,7 @@ function FreeTextInteractive({
         placeholder={activity.placeholder ?? "Écris ta réponse ici…"}
         maxLength={activity.maxLength}
         rows={4}
-        className="w-full rounded border border-white/15 bg-white/[0.035] p-3 text-sm leading-6 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-1 focus:ring-jade/40 disabled:cursor-not-allowed disabled:opacity-60 resize-y"
+        className="w-full rounded border border-ink/15 bg-ink/[0.035] p-3 text-sm leading-6 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-1 focus:ring-jade/40 disabled:cursor-not-allowed disabled:opacity-60 resize-y"
         aria-label="Zone de réponse"
       />
 
@@ -119,7 +119,7 @@ function FreeTextReading({
           </p>
         </div>
       ) : (
-        <div className="rounded border border-white/10 bg-white/[0.035] p-4 text-sm text-muted italic">
+        <div className="rounded border border-ink/10 bg-ink/[0.035] p-4 text-sm text-muted italic">
           Réponse libre.
         </div>
       )}
@@ -161,7 +161,7 @@ function FreeTextProjection({ activity }: { activity: FreeTextActivityData }) {
       <p className="text-2xl font-bold leading-snug text-foreground sm:text-3xl">
         {activity.prompt}
       </p>
-      <div className="rounded-md border-2 border-dashed border-white/20 p-6 text-center text-muted">
+      <div className="rounded-md border-2 border-dashed border-ink/20 p-6 text-center text-muted">
         Zone de réponse des élèves
       </div>
     </div>

@@ -63,13 +63,13 @@ export default function LieuxPage() {
       </section>
 
       {/* ── Grille des lieux ────────────────────────────────────────────────── */}
-      <section className="border-y border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-y border-ink/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {lieuxAcademie.map((lieu) => (
               <article
                 key={lieu.id}
-                className={`rounded-md border p-6 ${accentBorder[lieu.accentColor]} bg-white/[0.04]`}
+                className={`rounded-md border p-6 ${accentBorder[lieu.accentColor]} bg-ink/[0.04]`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <p
@@ -116,7 +116,7 @@ export default function LieuxPage() {
                   {lieu.niveaux.map((niveau) => (
                     <span
                       key={niveau}
-                      className="rounded bg-white/[0.06] px-2 py-0.5 font-mono text-xs font-bold text-muted"
+                      className="rounded bg-ink/[0.06] px-2 py-0.5 font-mono text-xs font-bold text-muted"
                     >
                       {niveau}
                     </span>
@@ -139,7 +139,7 @@ export default function LieuxPage() {
           </h2>
 
           <div className="mt-8 space-y-6">
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <h3 className="text-base font-black text-foreground">
                 Donner une identité aux apprentissages
               </h3>
@@ -152,7 +152,7 @@ export default function LieuxPage() {
               </p>
             </div>
 
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <h3 className="text-base font-black text-foreground">
                 Aider à organiser les missions
               </h3>
@@ -164,7 +164,7 @@ export default function LieuxPage() {
               </p>
             </div>
 
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <h3 className="text-base font-black text-foreground">
                 Ne pas remplacer les programmes
               </h3>

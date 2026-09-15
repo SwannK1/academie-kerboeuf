@@ -16,7 +16,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
   const c = colorMap[place.accentColor];
   return (
     <article
-      className={`rounded-md border bg-white/[0.04] p-5 ${c.ring}`}
+      className={`rounded-md border bg-ink/[0.04] p-5 ${c.ring}`}
       aria-label={place.name}
     >
       {place.image ? (

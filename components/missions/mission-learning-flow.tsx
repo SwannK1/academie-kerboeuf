@@ -47,7 +47,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
 
   return (
     <div className="mx-auto mb-14 max-w-7xl">
-      <div className="mb-8 border-b border-white/10 pb-6">
+      <div className="mb-8 border-b border-ink/10 pb-6">
         <h2 className="text-3xl font-black text-foreground sm:text-4xl">
           Déroulement de la séance
         </h2>
@@ -85,7 +85,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
                   {pedagogy.materials.map((item) => (
                     <li
                       key={item}
-                      className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                      className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                     >
                       {item}
                     </li>
@@ -158,7 +158,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
               {questions.map((question, index) => (
                 <li
                   key={`${question.level}-${question.prompt}`}
-                  className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                  className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                 >
                   <span className="mr-2 font-mono font-bold text-gold">
                     {index + 1}.
@@ -175,7 +175,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
       </div>
 
       {hasTeacherContent ? (
-        <div className="mt-10 border-t border-white/10 pt-8">
+        <div className="mt-10 border-t border-ink/10 pt-8">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
             Pour l&apos;enseignant
           </p>
@@ -251,7 +251,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
                   {correction.map((item, index) => (
                     <li
                       key={`${item.prompt}-${item.answer}`}
-                      className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                      className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                     >
                       <span className="mr-2 font-mono font-bold text-gold">
                         {index + 1}.
@@ -320,7 +320,7 @@ export function MissionLearningFlow({ pedagogy }: MissionLearningFlowProps) {
 
 function SessionMeta({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded border border-white/10 bg-white/[0.035] p-3">
+    <div className="rounded border border-ink/10 bg-ink/[0.035] p-3">
       <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         {label}
       </dt>
@@ -337,7 +337,7 @@ function ClassroomVersion({
   accentClass: string;
 }) {
   return (
-    <div className="rounded border border-white/10 bg-white/[0.035] p-4">
+    <div className="rounded border border-ink/10 bg-ink/[0.035] p-4">
       <h4 className={`text-xs font-bold uppercase tracking-[0.18em] ${accentClass}`}>
         {version.title}
       </h4>

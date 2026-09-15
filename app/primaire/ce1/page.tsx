@@ -51,7 +51,7 @@ export default function Ce1Page() {
                 <Link
                   key={subject.slug}
                   href={`/primaire/ce1/matieres/${subject.slug}`}
-                  className={`group flex min-h-52 flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5 transition hover:-translate-y-0.5 ${accent.hoverBg} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
+                  className={`group flex min-h-52 flex-col rounded-md border ${accent.border} bg-ink/[0.04] p-5 transition hover:-translate-y-0.5 ${accent.hoverBg} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <p className={`text-xl font-black ${accent.text}`}>

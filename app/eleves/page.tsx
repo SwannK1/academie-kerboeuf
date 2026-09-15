@@ -47,31 +47,31 @@ export default function ElevesPage() {
               </Link>
               <Link
                 href="/primaire"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
               >
                 Explorer le primaire
               </Link>
               <Link
                 href="/college"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
               >
                 Explorer le collège
               </Link>
               <Link
                 href="/lycee"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
               >
                 Explorer le lycée
               </Link>
             </div>
           </div>
 
-          <aside className="grid gap-3 rounded-md border border-white/10 bg-panel/70 p-5 backdrop-blur">
+          <aside className="grid gap-3 rounded-md border border-ink/10 bg-panel/70 p-5 backdrop-blur">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Repères du parcours
             </p>
             <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-md bg-white/[0.045] p-4">
+              <div className="rounded-md bg-ink/[0.045] p-4">
                 <p className="text-3xl font-black text-foreground">
                   {emblematicStudents.length}
                 </p>
@@ -79,7 +79,7 @@ export default function ElevesPage() {
                   Élèves
                 </p>
               </div>
-              <div className="rounded-md bg-white/[0.045] p-4">
+              <div className="rounded-md bg-ink/[0.045] p-4">
                 <p className="text-3xl font-black text-foreground">
                   {cycles.length}
                 </p>

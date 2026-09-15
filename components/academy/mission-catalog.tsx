@@ -59,7 +59,7 @@ export function MissionCatalog({ missions, linkBasePath }: MissionCatalogProps) 
               className={`rounded-md px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 ${
                 selectedSubject === subject
                   ? "bg-gold text-ink"
-                  : "border border-white/15 bg-white/[0.04] text-muted hover:bg-white/[0.08] hover:text-foreground"
+                  : "border border-ink/15 bg-ink/[0.04] text-muted hover:bg-ink/[0.08] hover:text-foreground"
               }`}
             >
               {subject}
@@ -84,7 +84,7 @@ export function MissionCatalog({ missions, linkBasePath }: MissionCatalogProps) 
 
           return (
             <section key={section.key}>
-              <div className="mb-4 flex flex-col gap-1 border-b border-white/10 pb-3 sm:flex-row sm:items-end sm:justify-between">
+              <div className="mb-4 flex flex-col gap-1 border-b border-ink/10 pb-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <h3 className="text-xl font-black text-foreground">
                     {section.title ?? getPublicStatusLabel(section.key)}

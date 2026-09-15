@@ -74,7 +74,7 @@ export default function PrimairePage() {
               { label: "Primaire" },
             ]}
           />
-          <div className="mb-8 border-b border-white/10 pb-6">
+          <div className="mb-8 border-b border-ink/10 pb-6">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               CP · CE1 · CE2 · CM1 · CM2
             </p>
@@ -96,17 +96,17 @@ export default function PrimairePage() {
       </section>
 
       {/* ── Liens secondaires ─────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-wrap gap-4">
           <Link
             href="/professeurs"
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+            className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-ink/[0.07] hover:text-foreground"
           >
             Équipe pédagogique →
           </Link>
           <Link
             href="/primaire/lieux"
-            className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-white/[0.07] hover:text-foreground"
+            className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-muted transition hover:bg-ink/[0.07] hover:text-foreground"
           >
             Lieux des Lisières →
           </Link>
@@ -133,7 +133,7 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
 
   return (
     <div
-      className={`flex min-h-full flex-col rounded-md border ${accent.border} bg-white/[0.04] p-5`}
+      className={`flex min-h-full flex-col rounded-md border ${accent.border} bg-ink/[0.04] p-5`}
     >
       <div className="flex items-start justify-between gap-2">
         <p className={`font-mono text-xs font-bold uppercase tracking-[0.18em] ${accent.text}`}>
@@ -149,7 +149,7 @@ function LevelGuideCard({ level }: { level: AcademyLevel }) {
         ) : null}
       </p>
       <p className="mt-4 flex-1 text-sm leading-7 text-muted">{guide.focus}</p>
-      <div className="mt-5 border-t border-white/10 pt-4">
+      <div className="mt-5 border-t border-ink/10 pt-4">
         <Link
           href={getLevelPath(level)}
           className={`inline-flex items-center gap-1.5 rounded border ${accent.border} bg-transparent px-3 py-1.5 text-xs font-bold ${accent.text} transition ${accent.hoverBg} focus:outline-none focus:ring-2 ${accent.ring}`}

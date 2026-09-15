@@ -31,9 +31,9 @@ export function CurriculumMapPreview({
         <section
           key={subject.slug}
           aria-labelledby={`subject-${subject.slug}`}
-          className="rounded-md border border-white/10 bg-white/[0.025]"
+          className="rounded-md border border-ink/10 bg-ink/[0.025]"
         >
-          <div className="flex flex-col gap-2 border-b border-white/10 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+          <div className="flex flex-col gap-2 border-b border-ink/10 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
             <h3
               id={`subject-${subject.slug}`}
               className="text-sm font-black uppercase tracking-[0.2em] text-sky"
@@ -74,14 +74,14 @@ function CurriculumDomainSection({
   const competencyCount = countDomainCompetencies(domain);
 
   return (
-    <div className="rounded-md border border-white/[0.09] bg-ink/20">
-      <div className="flex flex-col gap-1 border-b border-white/[0.08] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="rounded-md border border-ink/[0.09] bg-ink/20">
+      <div className="flex flex-col gap-1 border-b border-ink/[0.08] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm font-bold text-foreground">{domain.label}</p>
         <p className="text-xs font-bold text-muted">
           {competencyCount} compétence{competencyCount > 1 ? "s" : ""}
         </p>
       </div>
-      <div className="divide-y divide-white/[0.06] px-4">
+      <div className="divide-y divide-ink/[0.06] px-4">
         {domain.subdomains.map((subdomain) => (
           <CurriculumSubdomainSection
             key={subdomain.slug}
@@ -136,7 +136,7 @@ type ExpectedCompetencyRowProps = {
 
 function ExpectedCompetencyRow({ competency, isLinked }: ExpectedCompetencyRowProps) {
   return (
-    <div className="flex flex-col gap-3 rounded border border-white/[0.08] bg-white/[0.03] p-3.5 sm:flex-row sm:items-start sm:justify-between">
+    <div className="flex flex-col gap-3 rounded border border-ink/[0.08] bg-ink/[0.03] p-3.5 sm:flex-row sm:items-start sm:justify-between">
       <div className="flex-1">
         <div className="flex flex-wrap items-baseline gap-2">
           <p className="text-sm font-bold leading-6 text-foreground">
@@ -144,7 +144,7 @@ function ExpectedCompetencyRow({ competency, isLinked }: ExpectedCompetencyRowPr
           </p>
           {isLinked && (
             <span
-              className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/[0.08] px-2 py-0.5 text-xs font-bold text-emerald-400"
+              className="inline-flex items-center gap-1 rounded border border-jade/30 bg-jade/[0.08] px-2 py-0.5 text-xs font-bold text-jade"
               aria-label="Compétence observable déjà structurée dans le site"
             >
               <span aria-hidden="true">✓</span>
@@ -168,7 +168,7 @@ function ExpectedCompetencyRow({ competency, isLinked }: ExpectedCompetencyRowPr
               {competency.plannedResources.map((resource) => (
                 <span
                   key={resource.kind}
-                  className="inline-flex items-center rounded border border-white/[0.08] bg-ink/35 px-2 py-0.5 text-xs text-muted"
+                  className="inline-flex items-center rounded border border-ink/[0.08] bg-ink/35 px-2 py-0.5 text-xs text-muted"
                   title={resourceKindLabels[resource.kind] ?? resource.label}
                 >
                   {resource.label}

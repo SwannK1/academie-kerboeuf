@@ -114,7 +114,7 @@ export function TeacherDashboard({ missions, projects }: TeacherDashboardProps) 
   return (
     <section className="px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="teacher-dashboard-title">
       <div className="mx-auto max-w-7xl">
-        <div className="border-b border-white/10 pb-6">
+        <div className="border-b border-ink/10 pb-6">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
             Pilotage pédagogique
           </p>
@@ -179,7 +179,7 @@ function DashboardGroup({
 }) {
   return (
     <section className="mt-10">
-      <div className="mb-5 flex flex-col justify-between gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end">
+      <div className="mb-5 flex flex-col justify-between gap-2 border-b border-ink/10 pb-4 sm:flex-row sm:items-end">
         <div>
           <h3 className="text-2xl font-black text-foreground">{title}</h3>
           <p className="mt-2 text-sm leading-7 text-muted">{description}</p>
@@ -199,7 +199,7 @@ function DashboardGroup({
 
 function TeacherItemCard({ item }: { item: TeacherItem }) {
   return (
-    <article className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <article className="flex min-h-full flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
@@ -266,7 +266,7 @@ function TeacherItemCard({ item }: { item: TeacherItem }) {
 
 function InfoLine({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded border border-white/10 bg-ink/30 p-3">
+    <div className="rounded border border-ink/10 bg-ink/30 p-3">
       <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
         {label}
       </p>
@@ -283,7 +283,7 @@ function TagList({ label, items }: { label: string; items: string[] }) {
       </p>
       <div className="mt-2 flex flex-wrap gap-1.5">
         {items.map((item) => (
-          <span key={item} className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs leading-5 text-muted">
+          <span key={item} className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs leading-5 text-muted">
             {item}
           </span>
         ))}
@@ -294,13 +294,13 @@ function TagList({ label, items }: { label: string; items: string[] }) {
 
 function ReferencePanel({ title, items }: { title: string; items: string[] }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         {title}
       </h3>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {items.map((item, index) => (
-          <div key={item} className="flex items-center gap-3 rounded border border-white/10 bg-ink/35 p-3">
+          <div key={item} className="flex items-center gap-3 rounded border border-ink/10 bg-ink/35 p-3">
             <span className="grid size-7 shrink-0 place-items-center rounded bg-sky/10 font-mono text-xs font-black text-sky">
               {index + 1}
             </span>
@@ -314,7 +314,7 @@ function ReferencePanel({ title, items }: { title: string; items: string[] }) {
 
 function SummaryCard({ title, lines }: { title: string; lines: string[] }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <h3 className="text-sm font-black text-foreground">{title}</h3>
       <ul className="mt-3 space-y-2">
         {lines.map((line) => (
@@ -329,7 +329,7 @@ function SummaryCard({ title, lines }: { title: string; lines: string[] }) {
 
 function Metric({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.045] p-4">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.045] p-4">
       <p className="text-2xl font-black text-foreground">{value}</p>
       <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
         {label}

@@ -58,7 +58,7 @@ export default function Cm2Page() {
               <Link
                 key={subject.slug}
                 href={`/primaire/cm2/matieres/${subject.slug}`}
-                className={`group flex flex-col gap-2 rounded-md border ${t.border} bg-white/[0.04] p-6 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
+                className={`group flex flex-col gap-2 rounded-md border ${t.border} bg-ink/[0.04] p-6 transition hover:-translate-y-0.5 hover:bg-ink/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/60`}
               >
                 <p className={`text-lg font-black ${t.text}`}>{subject.title}</p>
                 <span className="mt-2 text-sm font-bold text-muted transition group-hover:translate-x-1 group-hover:text-foreground">
@@ -69,7 +69,7 @@ export default function Cm2Page() {
           })}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
+        <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-ink/10 pt-5">
           {otherSubjects.map((subject) => (
             <span key={subject.slug} className="flex items-center gap-2">
               <span className="text-sm font-bold text-muted">{subject.title}</span>

@@ -44,7 +44,7 @@ export function CurriculumLinkPanel({
   }
 
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
       <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
         Lien au programme
       </p>
@@ -82,7 +82,7 @@ export function CurriculumLinkPanel({
               {resolvedSkillTags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold uppercase tracking-[0.1em] text-muted"
+                  className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-0.5 text-xs font-bold uppercase tracking-[0.1em] text-muted"
                 >
                   {tag}
                 </span>

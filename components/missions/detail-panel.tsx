@@ -16,7 +16,7 @@ export function DetailPanel({
   const Heading = titleLevel;
 
   return (
-    <article className="mission-detail-card rounded-md border border-white/10 bg-white/[0.045] p-5">
+    <article className="mission-detail-card rounded-md border border-ink/10 bg-ink/[0.045] p-5">
       {eyebrow ? (
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-muted">
           {eyebrow}

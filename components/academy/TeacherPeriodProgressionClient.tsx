@@ -482,7 +482,7 @@ export function TeacherPeriodProgressionClient() {
                 setNiveau(event.target.value as TeacherLevel);
                 resetForm();
               }}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {schoolLevels.map((option) => (
                 <option key={option.id} value={option.id}>
@@ -496,7 +496,7 @@ export function TeacherPeriodProgressionClient() {
             <select
               value={periode}
               onChange={(event) => setPeriode(event.target.value as TeacherPeriod)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {teacherPeriods.map((option) => (
                 <option key={option.id} value={option.id}>
@@ -520,7 +520,7 @@ export function TeacherPeriodProgressionClient() {
               onChange={(event) =>
                 setFilterMatiere(event.target.value as TeacherSubjectId | "all")
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               <option value="all">Toutes les matières</option>
               {availableMatieres.map((subject) => (
@@ -543,14 +543,14 @@ export function TeacherPeriodProgressionClient() {
             onClick={() =>
               setCreationMode((mode) => (mode === "catalogue" ? null : "catalogue"))
             }
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/50 hover:text-sky"
           >
             Carte depuis le catalogue
           </button>
           <button
             type="button"
             onClick={() => setCreationMode((mode) => (mode === "libre" ? null : "libre"))}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky-400/50 hover:text-sky-300"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/50 hover:text-sky"
           >
             Carte libre
           </button>
@@ -570,7 +570,7 @@ export function TeacherPeriodProgressionClient() {
               <select
                 value={importScope}
                 onChange={(event) => setImportScope(event.target.value as ImportScope)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 <option value="all">Importer tout</option>
                 <option value="subject">Importer une seule matière</option>
@@ -582,7 +582,7 @@ export function TeacherPeriodProgressionClient() {
                 <select
                   value={importSubject}
                   onChange={(event) => setImportSubject(event.target.value)}
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 >
                   {subjectsForLevel.map((option) => (
                     <option key={option.id} value={option.id}>
@@ -617,7 +617,7 @@ export function TeacherPeriodProgressionClient() {
         ) : null}
 
         {creationMode === "catalogue" ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4 grid gap-4 rounded-lg border border-ink/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Matière
               <select
@@ -627,7 +627,7 @@ export function TeacherPeriodProgressionClient() {
                   setFormDomaine("");
                   setFormCompetenceId("");
                 }}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 {subjectsForLevel.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -644,7 +644,7 @@ export function TeacherPeriodProgressionClient() {
                   setFormDomaine(event.target.value);
                   setFormCompetenceId("");
                 }}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 <option value="">Choisir un domaine</option>
                 {domainesForFormMatiere.map((domainId) => (
@@ -660,7 +660,7 @@ export function TeacherPeriodProgressionClient() {
                 value={formCompetenceId}
                 onChange={(event) => setFormCompetenceId(event.target.value)}
                 disabled={!formDomaine}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground disabled:opacity-40"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground disabled:opacity-40"
               >
                 <option value="">Choisir une compétence</option>
                 {competencesForFormDomaine.map((item) => (
@@ -678,7 +678,7 @@ export function TeacherPeriodProgressionClient() {
                 step={5}
                 value={formDuree}
                 onChange={(event) => setFormDuree(Number(event.target.value) || 0)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
             <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
@@ -695,13 +695,13 @@ export function TeacherPeriodProgressionClient() {
         ) : null}
 
         {creationMode === "libre" ? (
-          <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4 grid gap-4 rounded-lg border border-ink/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
               Matière
               <select
                 value={formMatiere}
                 onChange={(event) => setFormMatiere(event.target.value as TeacherSubjectId)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 {subjectsForLevel.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -717,7 +717,7 @@ export function TeacherPeriodProgressionClient() {
                 value={formCompetenceLibre}
                 onChange={(event) => setFormCompetenceLibre(event.target.value)}
                 placeholder="Ex : Réviser les tables de multiplication"
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
             <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -728,7 +728,7 @@ export function TeacherPeriodProgressionClient() {
                 step={5}
                 value={formDuree}
                 onChange={(event) => setFormDuree(Number(event.target.value) || 0)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
             <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
@@ -755,7 +755,7 @@ export function TeacherPeriodProgressionClient() {
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[28rem] border-collapse text-left text-sm print:border print:border-black">
               <thead>
-                <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wide text-muted print:border-black print:text-black">
+                <tr className="border-b border-ink/10 text-xs font-bold uppercase tracking-wide text-muted print:border-black print:text-black">
                   <th className="py-2 pr-4">Matière</th>
                   <th className="py-2 pr-4">Cartes</th>
                   <th className="py-2 pr-4">Terminées</th>
@@ -764,7 +764,7 @@ export function TeacherPeriodProgressionClient() {
               </thead>
               <tbody>
                 {Array.from(syntheseByMatiere.entries()).map(([subject, stats]) => (
-                  <tr key={subject} className="border-b border-white/5 print:border-black">
+                  <tr key={subject} className="border-b border-ink/5 print:border-black">
                     <td className="py-2 pr-4 font-bold text-foreground">
                       {subjectLabelById.get(subject) ?? subject}
                     </td>
@@ -866,14 +866,14 @@ function StatusColumn({
     <div
       onDragOver={(event) => onDragOverColumn(event, status)}
       onDrop={onDrop}
-      className="flex flex-col gap-3 rounded-lg border border-white/10 bg-background/30 p-3 print:break-inside-avoid print:border-black print:bg-transparent"
+      className="flex flex-col gap-3 rounded-lg border border-ink/10 bg-background/30 p-3 print:break-inside-avoid print:border-black print:bg-transparent"
     >
       <h3
         id={`${formId}-status-${status}`}
         className="flex items-center justify-between text-sm font-black uppercase tracking-wide text-foreground print:text-black"
       >
         <span>{label}</span>
-        <span className="rounded-full border border-white/15 px-2 py-0.5 text-xs font-bold text-muted print:border-black print:text-black">
+        <span className="rounded-full border border-ink/15 px-2 py-0.5 text-xs font-bold text-muted print:border-black print:text-black">
           {cards.length}
         </span>
       </h3>
@@ -883,7 +883,7 @@ function StatusColumn({
         aria-labelledby={`${formId}-status-${status}`}
       >
         {cards.length === 0 ? (
-          <li className="rounded-md border border-dashed border-white/15 p-3 text-xs text-muted print:hidden">
+          <li className="rounded-md border border-dashed border-ink/15 p-3 text-xs text-muted print:hidden">
             Aucune carte.
           </li>
         ) : null}
@@ -946,7 +946,7 @@ function ProgressionCard({
       tabIndex={0}
       role="button"
       aria-label={`Ouvrir la carte ${card.competenceLabel}`}
-      className="cursor-pointer rounded-md border border-white/10 bg-background/50 p-3 text-sm transition hover:border-jade/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade/60 print:cursor-default print:border-black"
+      className="cursor-pointer rounded-md border border-ink/10 bg-background/50 p-3 text-sm transition hover:border-jade/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-jade/60 print:cursor-default print:border-black"
     >
       <p className="text-xs font-bold uppercase tracking-wide text-muted print:text-black">
         {matiereLabel}
@@ -1009,7 +1009,7 @@ function CardSidePanel({
       role="dialog"
       aria-label={`Détails de la carte ${card.competenceLabel}`}
       onClick={(event) => event.stopPropagation()}
-      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-ink/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Détails de la carte</h3>
@@ -1017,7 +1017,7 @@ function CardSidePanel({
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"
-          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+          className="min-h-9 min-w-9 rounded-md border border-ink/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           ✕
         </button>
@@ -1043,7 +1043,7 @@ function CardSidePanel({
         <select
           value={card.statut}
           onChange={(event) => onUpdate({ statut: event.target.value as SequenceStatus })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         >
           {SEQUENCE_STATUSES.map((option) => (
             <option key={option.id} value={option.id}>
@@ -1059,7 +1059,7 @@ function CardSidePanel({
           defaultValue={card.objectif ?? ""}
           onBlur={(event) => onUpdate({ objectif: event.target.value })}
           rows={2}
-          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+          className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1071,7 +1071,7 @@ function CardSidePanel({
           step={5}
           value={card.dureeMinutes}
           onChange={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1083,7 +1083,7 @@ function CardSidePanel({
           step={1}
           defaultValue={card.nombreSeances ?? 1}
           onBlur={(event) => onUpdate({ nombreSeances: Number(event.target.value) || 1 })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1094,7 +1094,7 @@ function CardSidePanel({
           defaultValue={card.tracesPrevues ?? ""}
           onBlur={(event) => onUpdate({ tracesPrevues: event.target.value })}
           placeholder="Ex : cahier du jour, affichage"
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1105,7 +1105,7 @@ function CardSidePanel({
           defaultValue={card.evaluationPrevue ?? ""}
           onBlur={(event) => onUpdate({ evaluationPrevue: event.target.value })}
           placeholder="Ex : exercices d'application, dictée"
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1116,7 +1116,7 @@ function CardSidePanel({
           defaultValue={card.differenciation ?? ""}
           onBlur={(event) => onUpdate({ differenciation: event.target.value })}
           placeholder="Ex : groupe de besoin, étayage"
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1126,7 +1126,7 @@ function CardSidePanel({
           defaultValue={card.noteEnseignant ?? ""}
           onBlur={(event) => onUpdate({ noteEnseignant: event.target.value })}
           rows={2}
-          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+          className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1152,7 +1152,7 @@ function CardSidePanel({
         )}
       </div>
 
-      <div className="rounded-md border border-white/10 bg-white/[0.03] p-3">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.03] p-3">
         <button
           type="button"
           disabled={!canPrepareLogbook}
@@ -1161,7 +1161,7 @@ function CardSidePanel({
               ? undefined
               : "Renseigner au moins l'objectif pour préparer cette carte"
           }
-          className="min-h-11 w-full rounded-md border border-white/15 px-4 text-sm font-bold text-muted opacity-60"
+          className="min-h-11 w-full rounded-md border border-ink/15 px-4 text-sm font-bold text-muted opacity-60"
         >
           Préparer en cahier journal
         </button>

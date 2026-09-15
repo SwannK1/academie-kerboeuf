@@ -135,7 +135,7 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
     <Link
       href={professor.profileHref}
       prefetch={professor.slug === "felix" ? false : undefined}
-      className={`group relative flex flex-col overflow-hidden rounded-md border bg-white/[0.03] transition-all duration-200 hover:-translate-y-px hover:bg-white/[0.055] ${a.borderMid}`}
+      className={`group relative flex flex-col overflow-hidden rounded-md border bg-ink/[0.03] transition-all duration-200 hover:-translate-y-px hover:bg-ink/[0.055] ${a.borderMid}`}
     >
       {/* Glow au hover */}
       <div
@@ -160,7 +160,7 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
             <span className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${a.badge}`}>
               {professor.mainSubject}
             </span>
-            <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
+            <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-muted">
               {professor.levelLabel} · {professor.cycle}
             </span>
           </div>
@@ -170,7 +170,7 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
           {professor.dominantTraits.slice(0, 3).map((trait) => (
             <span
               key={trait}
-              className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-muted"
+              className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-muted"
             >
               {trait}
             </span>
@@ -206,7 +206,7 @@ function ProfessorCard({ professor }: { professor: ProfessorCardData }) {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between border-t border-white/[0.07] px-6 py-4">
+      <div className="flex items-center justify-between border-t border-ink/[0.07] px-6 py-4">
         <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted/60">
           {professor.symbol}
         </span>
@@ -269,7 +269,7 @@ export function ProfessorGallery({ professors }: { professors: ProfessorCardData
   return (
     <section className="px-4 pb-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
+        <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
             <SelectFilter label="Cycle" value={cycle} options={cycles} onChange={setCycle} />
             <SelectFilter label="Niveau" value={level} options={levels} onChange={setLevel} />
@@ -285,7 +285,7 @@ export function ProfessorGallery({ professors }: { professors: ProfessorCardData
                 setType(allLabel);
                 setTrait(allLabel);
               }}
-              className="h-11 self-end rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+              className="h-11 self-end rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
             >
               Réinitialiser
             </button>
@@ -332,7 +332,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 rounded-md border border-ink/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>

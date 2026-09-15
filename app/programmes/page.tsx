@@ -72,7 +72,7 @@ export default function ProgrammesPage() {
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(243,196,91,0.16),transparent_34%),linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(143,84,23,0.16),transparent_34%),linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.68fr] lg:items-end">
           <div>
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
@@ -89,7 +89,7 @@ export default function ProgrammesPage() {
             </p>
           </div>
 
-          <aside className="rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+          <aside className="rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Vue pédagogique
             </p>
@@ -115,7 +115,7 @@ export default function ProgrammesPage() {
 
             return (
               <section key={group.title}>
-                <div className="mb-6 flex flex-col gap-3 border-b border-white/10 pb-5 lg:flex-row lg:items-end lg:justify-between">
+                <div className="mb-6 flex flex-col gap-3 border-b border-ink/10 pb-5 lg:flex-row lg:items-end lg:justify-between">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
                       {group.eyebrow}
@@ -141,7 +141,7 @@ export default function ProgrammesPage() {
       </div>
 
       <section className="px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-md border border-white/10 bg-white/[0.035] p-8">
+        <div className="mx-auto max-w-7xl rounded-md border border-ink/10 bg-ink/[0.035] p-8">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
             Continuer l&apos;exploration
           </p>
@@ -154,13 +154,13 @@ export default function ProgrammesPage() {
             </Link>
             <Link
               href="/parcours"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               Parcours progressifs
             </Link>
             <Link
               href="/missions-recentes"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               Missions récentes
             </Link>
@@ -173,7 +173,7 @@ export default function ProgrammesPage() {
 
 function CurriculumCard({ level }: { level: CurriculumLevel }) {
   return (
-    <article className="rounded-md border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/10">
+    <article className="rounded-md border border-ink/10 bg-ink/[0.04] p-5 shadow-2xl shadow-black/10">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
@@ -237,7 +237,7 @@ function CurriculumCard({ level }: { level: CurriculumLevel }) {
 
 function Metric({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded border border-white/10 bg-white/[0.04] p-4">
+    <div className="rounded border border-ink/10 bg-ink/[0.04] p-4">
       <p className="font-mono text-3xl font-black text-gold">{value}</p>
       <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-muted">
         {label}
@@ -258,7 +258,7 @@ function TagSection({ title, items }: { title: string; items: string[] }) {
         {items.map((item) => (
           <span
             key={item}
-            className="rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.1em] text-muted"
+            className="rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold uppercase tracking-[0.1em] text-muted"
           >
             {item}
           </span>
@@ -280,7 +280,7 @@ function ListSection({ title, items }: { title: string; items: string[] }) {
         {items.map((item) => (
           <li
             key={item}
-            className="rounded border border-white/10 bg-ink/35 p-3 text-sm leading-6 text-muted"
+            className="rounded border border-ink/10 bg-ink/35 p-3 text-sm leading-6 text-muted"
           >
             {item}
           </li>
@@ -309,7 +309,7 @@ function LinkSection({
           <Link
             key={`${link.href}-${link.title}`}
             href={link.href}
-            className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+            className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
           >
             <span className="font-bold text-foreground">{link.title}</span>
             <span className="block text-xs uppercase tracking-[0.12em] text-muted">

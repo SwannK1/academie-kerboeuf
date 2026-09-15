@@ -70,31 +70,31 @@ export function ProfessorNavigation({ professor }: { professor: ProfessorProfile
             </Link>
             <Link
               href="/missions-recentes"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Missions récentes
             </Link>
             <Link
               href="/ressources"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Ressources
             </Link>
             <Link
               href="/parcours"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Parcours
             </Link>
             <Link
               href={professor.levelPath}
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Niveau {professor.levelLabel}
             </Link>
             <Link
               href="/professeurs"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               Galerie
             </Link>

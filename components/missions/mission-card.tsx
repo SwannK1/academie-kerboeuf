@@ -30,8 +30,8 @@ type MissionCardProps = {
 };
 
 export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) {
-  const cardClassName = `group relative block overflow-hidden rounded-md border bg-white/[0.045] p-5 ${mission.theme.ringClass}`;
-  const linkedClassName = `${cardClassName} transition hover:-translate-y-1 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/70`;
+  const cardClassName = `group relative block overflow-hidden rounded-md border bg-ink/[0.045] p-5 ${mission.theme.ringClass}`;
+  const linkedClassName = `${cardClassName} transition hover:-translate-y-1 hover:bg-ink/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/70`;
   const staticClassName = `${cardClassName} cursor-default`;
   const content = (
     <>
@@ -64,13 +64,13 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
       {mission.objective || mission.skill ? (
         <div className="mt-5 grid gap-3">
           {mission.objective ? (
-            <p className="rounded border border-white/10 bg-ink/35 p-3 text-xs leading-6 text-muted">
+            <p className="rounded border border-ink/10 bg-ink/35 p-3 text-xs leading-6 text-muted">
               <span className="font-bold text-foreground">Objectif : </span>
               {mission.objective}
             </p>
           ) : null}
           {mission.skill ? (
-            <p className="rounded border border-white/10 bg-ink/35 p-3 text-xs leading-6 text-muted">
+            <p className="rounded border border-ink/10 bg-ink/35 p-3 text-xs leading-6 text-muted">
               <span className="font-bold text-foreground">Compétence : </span>
               {mission.skill}
             </p>
@@ -78,7 +78,7 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
         </div>
       ) : null}
 
-      <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+      <div className="mt-6 flex items-center justify-between border-t border-ink/10 pt-4">
         <span className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
           Thème
         </span>
@@ -90,7 +90,7 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
       {mission.difficulty || mission.professorName ? (
         <div className="mt-4 flex flex-wrap gap-2">
           {mission.difficulty ? (
-            <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
+            <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
               {mission.difficulty}
             </span>
           ) : null}
@@ -124,7 +124,7 @@ export function MissionCard({ mission, index, linkBasePath }: MissionCardProps) 
   return (
     <article className={staticClassName} aria-label={mission.title}>
       {content}
-      <div className="mt-4 inline-flex rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
+      <div className="mt-4 inline-flex rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
         Détail non disponible
       </div>
     </article>

@@ -96,10 +96,10 @@ function MissionShowcaseCard({ mission }: { mission: Mission }) {
   return (
     <Link
       href={getMissionPublicHref(mission)}
-      className={`group flex h-full flex-col rounded-md border bg-white/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-white/[0.075] ${theme.ringClass}`}
+      className={`group flex h-full flex-col rounded-md border bg-ink/[0.045] p-5 transition duration-200 hover:-translate-y-1 hover:bg-ink/[0.075] ${theme.ringClass}`}
     >
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded bg-white/[0.06] px-2.5 py-1 text-xs font-black uppercase tracking-[0.16em] text-foreground">
+        <span className="rounded bg-ink/[0.06] px-2.5 py-1 text-xs font-black uppercase tracking-[0.16em] text-foreground">
           {mission.levelLabel}
         </span>
         <span
@@ -124,7 +124,7 @@ function MissionShowcaseCard({ mission }: { mission: Mission }) {
         </p>
       </div>
 
-      <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4 text-sm">
+      <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-ink/10 pt-4 text-sm">
         <span className="font-bold text-muted">
           {mission.professor.name}
         </span>
@@ -150,7 +150,7 @@ function UsagePanel({
   accentClass: string;
 }) {
   return (
-    <article className={`rounded-md border bg-white/[0.045] p-6 ${accentClass}`}>
+    <article className={`rounded-md border bg-ink/[0.045] p-6 ${accentClass}`}>
       <h2 className="text-2xl font-black text-foreground">{title}</h2>
       <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
       <ul className="mt-6 space-y-3">
@@ -179,7 +179,7 @@ function MissionSection({
   }
 
   return (
-    <section className="border-t border-white/10 pt-10">
+    <section className="border-t border-ink/10 pt-10">
       <div className="mb-6 flex flex-col justify-between gap-3 md:flex-row md:items-end">
         <div>
           <h2 className="text-3xl font-black text-foreground">{title}</h2>
@@ -264,14 +264,14 @@ export default function MissionsRecentesPage() {
               </Link>
               <Link
                 href="/professeurs"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
               >
                 Voir les professeurs
               </Link>
             </div>
           </div>
 
-          <div className="grid gap-3 rounded-md border border-white/10 bg-panel/70 p-5 backdrop-blur">
+          <div className="grid gap-3 rounded-md border border-ink/10 bg-panel/70 p-5 backdrop-blur">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               État du catalogue
             </p>
@@ -320,7 +320,7 @@ export default function MissionsRecentesPage() {
       </section>
 
       <section className="px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-md border border-white/10 bg-white/[0.045] p-8 text-center">
+        <div className="mx-auto max-w-7xl rounded-md border border-ink/10 bg-ink/[0.045] p-8 text-center">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
             Continuer l’exploration
           </p>
@@ -342,13 +342,13 @@ export default function MissionsRecentesPage() {
             </Link>
             <Link
               href="/professeurs"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               Professeurs
             </Link>
             <Link
               href="/ressources"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               Ressources classe
             </Link>
@@ -361,7 +361,7 @@ export default function MissionsRecentesPage() {
 
 function Metric({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-md bg-white/[0.045] p-4">
+    <div className="rounded-md bg-ink/[0.045] p-4">
       <p className="text-3xl font-black text-foreground">{value}</p>
       <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
         {label}

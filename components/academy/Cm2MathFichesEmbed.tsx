@@ -33,9 +33,9 @@ export function Cm2MathFichesEmbed() {
   return (
     <>
       {/* ── Filtres ──────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6 border-b border-white/10 pb-5">
+          <div className="mb-6 border-b border-ink/10 pb-5">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Fiches PDF
             </p>
@@ -58,7 +58,7 @@ export function Cm2MathFichesEmbed() {
               Partielles
             </FilterChip>
 
-            <span className="mx-1 self-center text-white/20" aria-hidden="true">|</span>
+            <span className="mx-1 self-center text-ink/20" aria-hidden="true">|</span>
 
             <FilterChip active={domainFilter === "all"} onClick={() => setDomainFilter("all")}>
               Tous les domaines
@@ -102,7 +102,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
   const completeness = getNotionCompleteness(notion);
 
   return (
-    <article className="flex flex-col rounded-md border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]">
+    <article className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.03] p-5 transition hover:border-ink/20 hover:bg-ink/[0.05]">
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex-1">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-jade">
@@ -114,7 +114,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
           <p className="mt-1 text-xs leading-5 text-muted">{notion.skill}</p>
         </div>
         {completeness === "partial" && (
-          <span className="shrink-0 rounded-sm border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-400">
+          <span className="shrink-0 rounded-sm border border-gold/30 bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-gold">
             Partielle
           </span>
         )}
@@ -125,7 +125,7 @@ function NotionCard({ notion }: { notion: Cm2FicheMath }) {
         )}
       </div>
 
-      <div className="mt-auto space-y-2 border-t border-white/10 pt-4">
+      <div className="mt-auto space-y-2 border-t border-ink/10 pt-4">
         {SHEET_IDS.map((sheetId, index) => {
           const sheet = notion.sheets.find((s) => s.id === sheetId);
           if (!sheet) return null;
@@ -167,7 +167,7 @@ function SheetRow({
       {clickable ? (
         <span className="text-xs font-bold text-jade">Ouvrir →</span>
       ) : (
-        <span className="text-xs text-white/25">À venir</span>
+        <span className="text-xs text-ink/25">À venir</span>
       )}
     </span>
   );
@@ -184,7 +184,7 @@ function SheetRow({
   }
 
   return (
-    <div className="block rounded-sm border border-white/8 bg-white/[0.02] px-3 py-2 text-white/35">
+    <div className="block rounded-sm border border-ink/8 bg-ink/[0.02] px-3 py-2 text-ink/35">
       {inner}
     </div>
   );
@@ -206,7 +206,7 @@ function FilterChip({
       className={`rounded-sm px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] transition ${
         active
           ? "bg-jade/20 text-jade border border-jade/40"
-          : "border border-white/10 bg-white/[0.03] text-muted hover:bg-white/[0.06] hover:text-foreground"
+          : "border border-ink/10 bg-ink/[0.03] text-muted hover:bg-ink/[0.06] hover:text-foreground"
       }`}
     >
       {children}

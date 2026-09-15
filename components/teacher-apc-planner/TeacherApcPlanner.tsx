@@ -170,7 +170,7 @@ export function TeacherApcPlanner() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40"
           >
             Imprimer
           </button>
@@ -191,7 +191,7 @@ export function TeacherApcPlanner() {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Titre, objectif, niveau…"
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           />
         </label>
 
@@ -202,7 +202,7 @@ export function TeacherApcPlanner() {
             onChange={(event) =>
               setAxisFilter(event.target.value as ApcAxis | "all")
             }
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           >
             <option value="all">Tous les axes</option>
             {apcAxes.map((axis) => (
@@ -218,7 +218,7 @@ export function TeacherApcPlanner() {
           <select
             value={periodFilter}
             onChange={(event) => setPeriodFilter(event.target.value)}
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           >
             <option value="all">Toutes les périodes</option>
             {apcPeriods.map((period) => (
@@ -236,7 +236,7 @@ export function TeacherApcPlanner() {
             onChange={(event) =>
               setStatusFilter(event.target.value as ApcStatus | "all")
             }
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           >
             <option value="all">Tous les statuts</option>
             {apcStatuses.map((status) => (
@@ -249,7 +249,7 @@ export function TeacherApcPlanner() {
       </section>
 
       {visibleSessions.length === 0 ? (
-        <p className="mt-8 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+        <p className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
           Aucune séance ou cycle d&apos;APC pour ces filtres. Créez-en un avec le
           bouton ci-dessus.
         </p>
@@ -258,7 +258,7 @@ export function TeacherApcPlanner() {
           {visibleSessions.map((session) => (
             <li
               key={session.id}
-              className="rounded-lg border border-white/10 bg-background/40 p-4 print:break-inside-avoid print:border-black"
+              className="rounded-lg border border-ink/10 bg-background/40 p-4 print:break-inside-avoid print:border-black"
             >
               {editingSession?.id === session.id ? (
                 <ApcSessionForm
@@ -320,7 +320,7 @@ function ApcSessionSummary({
               .join(" · ")}
           </p>
         </div>
-        <span className="rounded-full border border-white/15 px-3 py-1 text-xs font-bold text-foreground">
+        <span className="rounded-full border border-ink/15 px-3 py-1 text-xs font-bold text-foreground">
           {statusLabel[session.status]}
         </span>
       </div>
@@ -337,7 +337,7 @@ function ApcSessionSummary({
                 type="checkbox"
                 checked={item.done}
                 onChange={() => onToggleChecklistItem(item.id)}
-                className="h-4 w-4 rounded border-white/30"
+                className="h-4 w-4 rounded border-ink/30"
                 id={`${session.id}-${item.id}`}
               />
               <label
@@ -358,21 +358,21 @@ function ApcSessionSummary({
         <button
           type="button"
           onClick={onEdit}
-          className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
+          className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
         >
           Modifier
         </button>
         <button
           type="button"
           onClick={onDuplicate}
-          className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40"
+          className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40"
         >
           Dupliquer
         </button>
         <button
           type="button"
           onClick={onDelete}
-          className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+          className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
         >
           Supprimer
         </button>
@@ -400,7 +400,7 @@ function ApcSessionForm({
           type="text"
           value={session.title}
           onChange={(event) => onChange({ title: event.target.value })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
         />
       </label>
 
@@ -412,7 +412,7 @@ function ApcSessionForm({
             value={session.level}
             onChange={(event) => onChange({ level: event.target.value })}
             placeholder="Ex. CE1"
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           />
         </label>
 
@@ -423,7 +423,7 @@ function ApcSessionForm({
             onChange={(event) =>
               onChange({ axis: event.target.value as ApcAxis })
             }
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           >
             {apcAxes.map((axis) => (
               <option key={axis.id} value={axis.id}>
@@ -440,7 +440,7 @@ function ApcSessionForm({
           value={session.objective}
           onChange={(event) => onChange({ objective: event.target.value })}
           rows={2}
-          className="rounded-md border border-white/15 bg-background/40 px-3 py-2 text-sm text-foreground"
+          className="rounded-md border border-ink/15 bg-background/40 px-3 py-2 text-sm text-foreground"
         />
       </label>
 
@@ -450,7 +450,7 @@ function ApcSessionForm({
           <select
             value={session.period}
             onChange={(event) => onChange({ period: event.target.value })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           >
             {apcPeriods.map((period) => (
               <option key={period.id} value={period.id}>
@@ -467,7 +467,7 @@ function ApcSessionForm({
             value={session.duration}
             onChange={(event) => onChange({ duration: event.target.value })}
             placeholder="Ex. 30 min"
-            className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
           />
         </label>
       </div>
@@ -478,7 +478,7 @@ function ApcSessionForm({
           value={session.material}
           onChange={(event) => onChange({ material: event.target.value })}
           rows={2}
-          className="rounded-md border border-white/15 bg-background/40 px-3 py-2 text-sm text-foreground"
+          className="rounded-md border border-ink/15 bg-background/40 px-3 py-2 text-sm text-foreground"
         />
       </label>
 
@@ -488,7 +488,7 @@ function ApcSessionForm({
           value={session.outline}
           onChange={(event) => onChange({ outline: event.target.value })}
           rows={4}
-          className="rounded-md border border-white/15 bg-background/40 px-3 py-2 text-sm text-foreground"
+          className="rounded-md border border-ink/15 bg-background/40 px-3 py-2 text-sm text-foreground"
         />
       </label>
 
@@ -500,7 +500,7 @@ function ApcSessionForm({
             onChange({ collectiveSummary: event.target.value })
           }
           rows={2}
-          className="rounded-md border border-white/15 bg-background/40 px-3 py-2 text-sm text-foreground"
+          className="rounded-md border border-ink/15 bg-background/40 px-3 py-2 text-sm text-foreground"
         />
       </label>
 
@@ -511,7 +511,7 @@ function ApcSessionForm({
           onChange={(event) =>
             onChange({ status: event.target.value as ApcStatus })
           }
-          className="min-h-11 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
         >
           {apcStatuses.map((status) => (
             <option key={status.id} value={status.id}>
@@ -530,7 +530,7 @@ function ApcSessionForm({
                 type="checkbox"
                 checked={item.done}
                 onChange={() => onToggleChecklistItem(item.id)}
-                className="h-4 w-4 rounded border-white/30"
+                className="h-4 w-4 rounded border-ink/30"
                 id={`edit-${session.id}-${item.id}`}
               />
               <label htmlFor={`edit-${session.id}-${item.id}`} className="text-foreground">

@@ -36,7 +36,7 @@ export type PlanningStatus =
   | "a-reprendre";
 
 export const PLANNING_STATUSES: { id: PlanningStatus; label: string; className: string }[] = [
-  { id: "a-prevoir", label: "À prévoir", className: "border-white/15 bg-white/[0.04] text-muted" },
+  { id: "a-prevoir", label: "À prévoir", className: "border-ink/15 bg-ink/[0.04] text-muted" },
   { id: "pret", label: "Prêt", className: "border-sky/40 bg-sky/10 text-sky" },
   { id: "en-cours", label: "En cours", className: "border-amber/40 bg-amber/10 text-amber" },
   { id: "termine", label: "Terminé", className: "border-jade/40 bg-jade/10 text-jade" },

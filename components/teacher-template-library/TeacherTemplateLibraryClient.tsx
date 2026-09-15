@@ -199,7 +199,7 @@ export function TeacherTemplateLibraryClient() {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Rechercher un modèle…"
-          className="min-h-11 flex-1 rounded-md border border-white/10 bg-background/45 px-4 text-sm text-foreground"
+          className="min-h-11 flex-1 rounded-md border border-ink/10 bg-background/45 px-4 text-sm text-foreground"
         />
 
         <label htmlFor="template-category-filter" className="sr-only">
@@ -213,7 +213,7 @@ export function TeacherTemplateLibraryClient() {
               event.target.value as TeacherTemplateCategoryId | "tous",
             )
           }
-          className="min-h-11 rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+          className="min-h-11 rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
         >
           <option value="tous">Toutes les catégories</option>
           {teacherTemplateCategories.map((category) => (
@@ -259,7 +259,7 @@ export function TeacherTemplateLibraryClient() {
                     title: event.target.value,
                   }))
                 }
-                className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
               />
             </div>
 
@@ -281,7 +281,7 @@ export function TeacherTemplateLibraryClient() {
                         .value as TeacherTemplateCategoryId,
                     }))
                   }
-                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                  className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                 >
                   {teacherTemplateCategories.map((category) => (
                     <option key={category.id} value={category.id}>
@@ -309,7 +309,7 @@ export function TeacherTemplateLibraryClient() {
                         : null,
                     }))
                   }
-                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                  className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                 >
                   <option value="">—</option>
                   {teacherTemplateLevels.map((level) => (
@@ -338,7 +338,7 @@ export function TeacherTemplateLibraryClient() {
                         : null,
                     }))
                   }
-                  className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                  className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                 >
                   <option value="">—</option>
                   {teacherTemplateSubjects.map((subject) => (
@@ -367,7 +367,7 @@ export function TeacherTemplateLibraryClient() {
                     content: event.target.value,
                   }))
                 }
-                className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
+                className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
               />
             </div>
 
@@ -395,7 +395,7 @@ export function TeacherTemplateLibraryClient() {
               <button
                 type="button"
                 onClick={closeForm}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-ember/50 hover:text-ember"
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-ember/50 hover:text-ember"
               >
                 Annuler
               </button>
@@ -413,7 +413,7 @@ export function TeacherTemplateLibraryClient() {
           filteredTemplates.map((template) => (
             <article
               key={template.id}
-              className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+              className="rounded-lg border border-ink/10 bg-ink/[0.04] p-5"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
@@ -455,7 +455,7 @@ export function TeacherTemplateLibraryClient() {
                     "min-h-11 min-w-11 rounded-md border text-lg transition",
                     template.favorite
                       ? "border-gold/40 bg-gold/10 text-gold"
-                      : "border-white/10 text-muted hover:border-gold/30",
+                      : "border-ink/10 text-muted hover:border-gold/30",
                   ].join(" ")}
                 >
                   {template.favorite ? "★" : "☆"}
@@ -477,14 +477,14 @@ export function TeacherTemplateLibraryClient() {
                 <button
                   type="button"
                   onClick={() => handleDuplicate(template)}
-                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40 hover:text-jade"
+                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40 hover:text-jade"
                 >
                   Dupliquer
                 </button>
                 <button
                   type="button"
                   onClick={() => handlePrint(template)}
-                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40 hover:text-jade"
+                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40 hover:text-jade"
                 >
                   Imprimer
                 </button>
@@ -504,7 +504,7 @@ export function TeacherTemplateLibraryClient() {
                     <button
                       type="button"
                       onClick={() => setPendingDeleteId(null)}
-                      className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+                      className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground"
                     >
                       Annuler
                     </button>
@@ -513,7 +513,7 @@ export function TeacherTemplateLibraryClient() {
                   <button
                     type="button"
                     onClick={() => setPendingDeleteId(template.id)}
-                    className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+                    className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
                   >
                     Supprimer
                   </button>

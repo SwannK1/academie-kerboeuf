@@ -45,7 +45,7 @@ export function MaternelleSubdomainList({
 
 function SubdomainCard({ subdomain }: { subdomain: MaternelleSubdomain }) {
   return (
-    <article className="flex flex-col rounded-md border border-white/10 bg-white/[0.035] p-5">
+    <article className="flex flex-col rounded-md border border-ink/10 bg-ink/[0.035] p-5">
       {/* En-tête */}
       <div className="flex items-start justify-between gap-3">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-jade">
@@ -60,7 +60,7 @@ function SubdomainCard({ subdomain }: { subdomain: MaternelleSubdomain }) {
 
       {/* Séquences */}
       {subdomain.sequences.length > 0 && (
-        <div className="mt-4 border-t border-white/10 pt-4">
+        <div className="mt-4 border-t border-ink/10 pt-4">
           <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
             {subdomain.sequences.length === 1
               ? "Séquence prévue"
@@ -83,7 +83,7 @@ function SequenceRow({ sequence }: { sequence: MaternelleSequence }) {
     workshop?.observationGrid;
 
   return (
-    <div className="rounded border border-white/10 bg-ink/20 p-3">
+    <div className="rounded border border-ink/10 bg-ink/20 p-3">
       <div className="flex items-start justify-between gap-2">
         <p className="text-sm font-bold leading-snug text-foreground">
           {sequence.title}
@@ -103,7 +103,7 @@ function SequenceRow({ sequence }: { sequence: MaternelleSequence }) {
 
       {/* Atelier principal */}
       {workshop && (
-        <div className="mt-2 border-t border-white/10 pt-2">
+        <div className="mt-2 border-t border-ink/10 pt-2">
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-muted">
             Atelier
           </p>
@@ -126,7 +126,7 @@ function SequenceRow({ sequence }: { sequence: MaternelleSequence }) {
 
       {/* Grille d'observation */}
       {grid && (
-        <div className="mt-2 border-t border-white/10 pt-2">
+        <div className="mt-2 border-t border-ink/10 pt-2">
           <div className="flex items-center justify-between gap-2">
             <p className="text-xs text-muted">{grid.title}</p>
             <PublicStatusBadge status={grid.status} />

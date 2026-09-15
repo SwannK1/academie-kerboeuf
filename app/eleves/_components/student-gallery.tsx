@@ -54,7 +54,7 @@ export function StudentGallery({ students }: { students: EmblematicStudent[] }) 
   return (
     <section className="px-4 pb-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 rounded-md border border-white/10 bg-white/[0.035] p-5">
+        <div className="mb-8 rounded-md border border-ink/10 bg-ink/[0.035] p-5">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             <SelectFilter label="Cycle" value={cycle} options={cycles} onChange={setCycle} />
             <SelectFilter label="Niveau" value={level} options={levels} onChange={setLevel} />
@@ -73,7 +73,7 @@ export function StudentGallery({ students }: { students: EmblematicStudent[] }) 
                 setType(allLabel);
                 setTrait(allLabel);
               }}
-              className="h-11 self-end rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+              className="h-11 self-end rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-sm font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
             >
               Réinitialiser
             </button>
@@ -118,7 +118,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-11 rounded-md border border-white/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
+        className="h-11 rounded-md border border-ink/15 bg-ink/80 px-3 text-sm font-bold text-foreground outline-none transition focus:border-gold/60"
       >
         {options.map((option) => (
           <option key={option} value={option}>

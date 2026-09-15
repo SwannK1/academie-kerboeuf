@@ -48,7 +48,7 @@ function writeStoredAssessments(assessments: Assessment[]) {
 }
 
 const STATUS_BADGE_CLASSES: Record<AssessmentStatus, string> = {
-  "a-preparer": "border-white/20 bg-white/[0.05] text-foreground",
+  "a-preparer": "border-ink/20 bg-ink/[0.05] text-foreground",
   prete: "border-jade/40 bg-jade/10 text-jade",
   realisee: "border-sky/40 bg-sky/10 text-sky",
   "a-corriger": "border-amber/40 bg-amber/10 text-amber",
@@ -159,7 +159,7 @@ export function AssessmentPlanner() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
           >
             Imprimer
           </button>
@@ -223,7 +223,7 @@ export function AssessmentPlanner() {
       </section>
 
       {filteredAssessments.length === 0 ? (
-        <p className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+        <p className="mt-6 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
           Aucune évaluation ne correspond à ces filtres.
         </p>
       ) : (
@@ -235,7 +235,7 @@ export function AssessmentPlanner() {
             return (
               <li
                 key={assessment.id}
-                className="rounded-lg border border-white/10 bg-background/40 p-5 print:break-inside-avoid print:border-black/30"
+                className="rounded-lg border border-ink/10 bg-background/40 p-5 print:break-inside-avoid print:border-black/30"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
@@ -272,7 +272,7 @@ export function AssessmentPlanner() {
                 </dl>
 
                 {assessment.preparationNotes ? (
-                  <p className="mt-3 rounded-md border border-white/10 bg-white/[0.03] p-3 text-sm leading-6 text-muted">
+                  <p className="mt-3 rounded-md border border-ink/10 bg-ink/[0.03] p-3 text-sm leading-6 text-muted">
                     {assessment.preparationNotes}
                   </p>
                 ) : null}
@@ -315,14 +315,14 @@ export function AssessmentPlanner() {
                       setEditingId(assessment.id);
                       setIsCreating(false);
                     }}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
                   >
                     Modifier
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDuplicate(assessment)}
-                    className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40 hover:text-jade"
+                    className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40 hover:text-jade"
                   >
                     Dupliquer
                   </button>
@@ -340,7 +340,7 @@ export function AssessmentPlanner() {
                       <button
                         type="button"
                         onClick={() => setPendingDeleteId(null)}
-                        className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground"
+                        className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground"
                       >
                         Annuler
                       </button>
@@ -349,7 +349,7 @@ export function AssessmentPlanner() {
                     <button
                       type="button"
                       onClick={() => setPendingDeleteId(assessment.id)}
-                      className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
+                      className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
                     >
                       Supprimer
                     </button>
@@ -394,7 +394,7 @@ function FilterSelect<T extends string>({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-1 min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+        className="mt-1 min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
       >
         <option value="all">Tous</option>
         {options.map((option) => (

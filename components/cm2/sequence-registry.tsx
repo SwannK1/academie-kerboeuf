@@ -20,10 +20,10 @@ export function SequenceRegistry({ groups }: SequenceRegistryProps) {
         <section
           key={group.domain}
           id={domainId(group.domain)}
-          className="cm2-print-section scroll-mt-24 rounded-md border border-white/10 bg-white/[0.035] p-5 sm:p-6"
+          className="cm2-print-section scroll-mt-24 rounded-md border border-ink/10 bg-ink/[0.035] p-5 sm:p-6"
           aria-labelledby={`${domainId(group.domain)}-title`}
         >
-          <div className="flex flex-col gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-2 border-b border-ink/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
                 Domaine
@@ -45,7 +45,7 @@ export function SequenceRegistry({ groups }: SequenceRegistryProps) {
             {group.subdomains.map((subdomain) => (
               <section
                 key={subdomain.subdomain}
-                className="rounded border border-white/10 bg-ink/35 p-4"
+                className="rounded border border-ink/10 bg-ink/35 p-4"
                 aria-labelledby={`${domainId(group.domain)}-${domainId(subdomain.subdomain)}-title`}
               >
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
@@ -65,7 +65,7 @@ export function SequenceRegistry({ groups }: SequenceRegistryProps) {
                   {subdomain.sequences.map((sequence) => (
                     <li
                       key={sequence.slug}
-                      className="grid gap-3 rounded border border-white/10 bg-white/[0.035] p-4 md:grid-cols-[minmax(0,1fr)_auto]"
+                      className="grid gap-3 rounded border border-ink/10 bg-ink/[0.035] p-4 md:grid-cols-[minmax(0,1fr)_auto]"
                     >
                       <div>
                         <p className="text-sm font-black text-foreground">

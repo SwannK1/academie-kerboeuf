@@ -78,7 +78,7 @@ export default function RessourcesPage() {
           </div>
         </section>
 
-        <section aria-labelledby="autres-niveaux" className="mt-12 border-t border-white/10 pt-8">
+        <section aria-labelledby="autres-niveaux" className="mt-12 border-t border-ink/10 pt-8">
           <h2 id="autres-niveaux" className="text-xl font-black text-foreground">
             Autres niveaux
           </h2>
@@ -90,7 +90,7 @@ export default function RessourcesPage() {
               <Link
                 key={stage.id}
                 href={stage.href}
-                className="rounded-md border border-white/12 bg-white/[0.035] p-5 transition hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                className="rounded-md border border-ink/12 bg-ink/[0.035] p-5 transition hover:bg-ink/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 <h3 className="text-lg font-black text-foreground">{stage.label}</h3>
                 <p className="mt-2 text-sm text-muted">{stage.levels}</p>

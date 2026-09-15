@@ -613,7 +613,7 @@ export function TeacherWeeklyTimetableClient() {
                 "min-h-11 rounded-md border px-3 text-sm font-bold transition",
                 level.id === state.levelId
                   ? "border-jade/60 bg-jade/10 text-jade"
-                  : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                  : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
               ].join(" ")}
             >
               {level.label}
@@ -624,7 +624,7 @@ export function TeacherWeeklyTimetableClient() {
 
       <section
         aria-label="Configuration de la grille horaire"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 print:hidden"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 print:hidden"
       >
         <h2 className="text-lg font-black text-foreground">Grille horaire</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -634,7 +634,7 @@ export function TeacherWeeklyTimetableClient() {
               type="time"
               value={minutesToTimeInput(config.dayStartMinutes)}
               onChange={(event) => updateConfig({ dayStartMinutes: timeToMinutes(event.target.value) })}
-              className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm font-normal text-foreground"
+              className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm font-normal text-foreground"
             />
           </label>
           <label className="text-xs font-bold uppercase tracking-wide text-muted">
@@ -643,7 +643,7 @@ export function TeacherWeeklyTimetableClient() {
               type="time"
               value={minutesToTimeInput(config.dayEndMinutes)}
               onChange={(event) => updateConfig({ dayEndMinutes: timeToMinutes(event.target.value) })}
-              className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm font-normal text-foreground"
+              className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm font-normal text-foreground"
             />
           </label>
           <label className="text-xs font-bold uppercase tracking-wide text-muted">
@@ -652,7 +652,7 @@ export function TeacherWeeklyTimetableClient() {
               type="time"
               value={minutesToTimeInput(config.lunchStartMinutes)}
               onChange={(event) => updateConfig({ lunchStartMinutes: timeToMinutes(event.target.value) })}
-              className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm font-normal text-foreground"
+              className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm font-normal text-foreground"
             />
           </label>
           <label className="text-xs font-bold uppercase tracking-wide text-muted">
@@ -661,7 +661,7 @@ export function TeacherWeeklyTimetableClient() {
               type="time"
               value={minutesToTimeInput(config.lunchEndMinutes)}
               onChange={(event) => updateConfig({ lunchEndMinutes: timeToMinutes(event.target.value) })}
-              className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-2 text-sm font-normal text-foreground"
+              className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-2 text-sm font-normal text-foreground"
             />
           </label>
         </div>
@@ -686,7 +686,7 @@ export function TeacherWeeklyTimetableClient() {
               "min-h-11 rounded-md border px-4 text-sm font-bold transition",
               view === "reference"
                 ? "border-jade/60 bg-jade/10 text-jade"
-                : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
             ].join(" ")}
           >
             Emploi du temps de référence
@@ -699,7 +699,7 @@ export function TeacherWeeklyTimetableClient() {
               "min-h-11 rounded-md border px-4 text-sm font-bold transition",
               view === "reelle"
                 ? "border-jade/60 bg-jade/10 text-jade"
-                : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
             ].join(" ")}
           >
             Semaines réelles
@@ -707,7 +707,7 @@ export function TeacherWeeklyTimetableClient() {
         </div>
 
         {view === "reelle" ? (
-          <div className="mt-4 rounded-lg border border-white/10 bg-white/[0.04] p-4">
+          <div className="mt-4 rounded-lg border border-ink/10 bg-ink/[0.04] p-4">
             <label htmlFor="week-select" className="block text-xs font-bold uppercase tracking-wide text-muted">
               Semaine affichée
             </label>
@@ -718,7 +718,7 @@ export function TeacherWeeklyTimetableClient() {
                 onChange={(event) =>
                   setState((previous) => ({ ...previous, activeWeekId: event.target.value }))
                 }
-                className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+                className="min-h-11 rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
               >
                 {realWeeks.map((week) => (
                   <option key={week.id} value={week.id}>
@@ -729,7 +729,7 @@ export function TeacherWeeklyTimetableClient() {
               <button
                 type="button"
                 onClick={() => activeWeek && handleDuplicateWeek(activeWeek)}
-                className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
               >
                 Dupliquer cette semaine
               </button>
@@ -737,7 +737,7 @@ export function TeacherWeeklyTimetableClient() {
                 <button
                   type="button"
                   onClick={() => handleResetRealWeekFromReference(activeWeek)}
-                  className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                  className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
                 >
                   Réinitialiser depuis la référence
                 </button>
@@ -746,14 +746,14 @@ export function TeacherWeeklyTimetableClient() {
                 <button
                   type="button"
                   onClick={() => handleDeleteWeek(activeWeek.id)}
-                  className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+                  className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
                 >
                   Supprimer cette semaine
                 </button>
               ) : null}
             </div>
 
-            <div className="mt-4 border-t border-white/10 pt-4">
+            <div className="mt-4 border-t border-ink/10 pt-4">
               <p className="text-xs font-bold uppercase tracking-wide text-muted">
                 Créer une semaine spéciale
               </p>
@@ -763,12 +763,12 @@ export function TeacherWeeklyTimetableClient() {
                   value={newWeekLabel}
                   onChange={(event) => setNewWeekLabel(event.target.value)}
                   placeholder="Nom de la semaine"
-                  className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+                  className="min-h-11 rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
                 />
                 <select
                   value={newWeekKind}
                   onChange={(event) => setNewWeekKind(event.target.value as TeacherTimetableWeekKind)}
-                  className="min-h-11 rounded-md border border-white/10 bg-background/45 px-2 text-sm text-foreground"
+                  className="min-h-11 rounded-md border border-ink/10 bg-background/45 px-2 text-sm text-foreground"
                 >
                   {specialTeacherTimetableWeekKinds.map((kind) => (
                     <option key={kind} value={kind}>
@@ -791,7 +791,7 @@ export function TeacherWeeklyTimetableClient() {
             <button
               type="button"
               onClick={handleResetReference}
-              className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+              className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
             >
               Réinitialiser la référence conseillée
             </button>
@@ -825,7 +825,7 @@ export function TeacherWeeklyTimetableClient() {
               {enabledDays.map((dayId) => (
                 <div
                   key={dayId}
-                  className="border-b border-white/10 px-2 pb-2 text-center text-xs font-bold uppercase tracking-wide text-muted"
+                  className="border-b border-ink/10 px-2 pb-2 text-center text-xs font-bold uppercase tracking-wide text-muted"
                 >
                   {teacherTimetableDayLabels[dayId]}
                 </div>
@@ -852,14 +852,14 @@ export function TeacherWeeklyTimetableClient() {
                   role={isReadOnlyView ? undefined : "button"}
                   tabIndex={-1}
                   onClick={(event) => handleColumnClick(event, dayId)}
-                  className="relative border-l border-white/5 bg-background/20"
+                  className="relative border-l border-ink/5 bg-background/20"
                   style={{ height: totalHeight, cursor: isReadOnlyView ? "default" : "copy" }}
                 >
                   {hourMarks.map((minute) => (
                     <div
                       key={minute}
                       aria-hidden="true"
-                      className="absolute left-0 right-0 border-t border-white/5"
+                      className="absolute left-0 right-0 border-t border-ink/5"
                       style={{ top: (minute - config.dayStartMinutes) * PX_PER_MINUTE }}
                     />
                   ))}
@@ -867,7 +867,7 @@ export function TeacherWeeklyTimetableClient() {
                   {config.lunchEndMinutes > config.lunchStartMinutes ? (
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute left-0 right-0 border-y border-dashed border-white/15 bg-white/[0.04]"
+                      className="pointer-events-none absolute left-0 right-0 border-y border-dashed border-ink/15 bg-ink/[0.04]"
                       style={{
                         top: (config.lunchStartMinutes - config.dayStartMinutes) * PX_PER_MINUTE,
                         height: (config.lunchEndMinutes - config.lunchStartMinutes) * PX_PER_MINUTE,
@@ -940,7 +940,7 @@ export function TeacherWeeklyTimetableClient() {
                             className="absolute bottom-0 left-0 right-0 h-2 cursor-ns-resize"
                             style={{ touchAction: "none" }}
                           >
-                            <span className="mx-auto mt-0.5 block h-0.5 w-6 rounded-full bg-white/40" />
+                            <span className="mx-auto mt-0.5 block h-0.5 w-6 rounded-full bg-ink/40" />
                           </button>
                         ) : null}
                       </div>
@@ -953,7 +953,7 @@ export function TeacherWeeklyTimetableClient() {
 
           <aside
             aria-label="Édition de la séance sélectionnée"
-            className="w-full shrink-0 rounded-lg border border-white/10 bg-background/40 p-4 lg:w-80"
+            className="w-full shrink-0 rounded-lg border border-ink/10 bg-background/40 p-4 lg:w-80"
           >
             {selectedSession ? (
               <div className="space-y-3">
@@ -979,7 +979,7 @@ export function TeacherWeeklyTimetableClient() {
                     maxLength={120}
                     onChange={(event) => patchSelectedSession({ title: event.target.value })}
                     disabled={isReadOnlyView}
-                    className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                   />
                 </label>
 
@@ -989,7 +989,7 @@ export function TeacherWeeklyTimetableClient() {
                     value={selectedSession.subject}
                     onChange={(event) => patchSelectedSession({ subject: event.target.value })}
                     disabled={isReadOnlyView}
-                    className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                   >
                     {subjects.map((subject) => (
                       <option key={subject} value={subject}>
@@ -1009,7 +1009,7 @@ export function TeacherWeeklyTimetableClient() {
                       onChange={(event) =>
                         patchSelectedSession({ startMinutes: timeToMinutes(event.target.value) })
                       }
-                      className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                      className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                     />
                   </label>
                   <label className="block text-xs font-bold uppercase tracking-wide text-muted">
@@ -1024,7 +1024,7 @@ export function TeacherWeeklyTimetableClient() {
                       onChange={(event) =>
                         patchSelectedSession({ durationMinutes: Number(event.target.value) || selectedSession.durationMinutes })
                       }
-                      className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                      className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                     />
                   </label>
                 </div>
@@ -1036,7 +1036,7 @@ export function TeacherWeeklyTimetableClient() {
                     value={selectedSession.group}
                     disabled={isReadOnlyView}
                     onChange={(event) => patchSelectedSession({ group: event.target.value })}
-                    className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                   />
                 </label>
 
@@ -1047,7 +1047,7 @@ export function TeacherWeeklyTimetableClient() {
                     value={selectedSession.location}
                     disabled={isReadOnlyView}
                     onChange={(event) => patchSelectedSession({ location: event.target.value })}
-                    className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                   />
                 </label>
 
@@ -1058,7 +1058,7 @@ export function TeacherWeeklyTimetableClient() {
                     value={selectedSession.material}
                     disabled={isReadOnlyView}
                     onChange={(event) => patchSelectedSession({ material: event.target.value })}
-                    className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                   />
                 </label>
 
@@ -1070,7 +1070,7 @@ export function TeacherWeeklyTimetableClient() {
                     onChange={(event) =>
                       patchSelectedSession({ status: event.target.value as TeacherTimetableSessionStatus })
                     }
-                    className="mt-1 block min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-normal text-foreground disabled:opacity-60"
                   >
                     {teacherTimetableSessionStatuses.map((status) => (
                       <option key={status} value={status}>
@@ -1087,12 +1087,12 @@ export function TeacherWeeklyTimetableClient() {
                     disabled={isReadOnlyView}
                     onChange={(event) => patchSelectedSession({ note: event.target.value })}
                     rows={2}
-                    className="mt-1 block w-full rounded-md border border-white/10 bg-background/60 px-2 py-1 text-sm font-normal text-foreground disabled:opacity-60"
+                    className="mt-1 block w-full rounded-md border border-ink/10 bg-background/60 px-2 py-1 text-sm font-normal text-foreground disabled:opacity-60"
                   />
                 </label>
 
                 {!isReadOnlyView ? (
-                  <div className="border-t border-white/10 pt-3">
+                  <div className="border-t border-ink/10 pt-3">
                     <p className="text-xs font-bold uppercase tracking-wide text-muted">
                       Actions clavier (sans glisser-déposer)
                     </p>
@@ -1100,56 +1100,56 @@ export function TeacherWeeklyTimetableClient() {
                       <button
                         type="button"
                         onClick={() => moveSelectedDayBy(-1)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         ← Jour précédent
                       </button>
                       <button
                         type="button"
                         onClick={() => moveSelectedDayBy(1)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         Jour suivant →
                       </button>
                       <button
                         type="button"
                         onClick={() => moveSelectedTimeBy(-config.gridStepMinutes)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         ↑ Créneau précédent
                       </button>
                       <button
                         type="button"
                         onClick={() => moveSelectedTimeBy(config.gridStepMinutes)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         ↓ Créneau suivant
                       </button>
                       <button
                         type="button"
                         onClick={() => changeSelectedDurationBy(-config.gridStepMinutes)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         − Durée
                       </button>
                       <button
                         type="button"
                         onClick={() => changeSelectedDurationBy(config.gridStepMinutes)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         + Durée
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDuplicateSession(displayedWeek.id, selectedSession)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-jade/50 hover:text-jade"
                       >
                         Dupliquer
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDeleteSession(displayedWeek.id, selectedSession)}
-                        className="min-h-11 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground hover:border-ember/50 hover:text-ember"
+                        className="min-h-11 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground hover:border-ember/50 hover:text-ember"
                       >
                         Supprimer
                       </button>
@@ -1169,7 +1169,7 @@ export function TeacherWeeklyTimetableClient() {
 
       <section
         aria-label="Compteurs d'heures"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6 print:hidden"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6 print:hidden"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-xl font-black text-foreground">
@@ -1178,7 +1178,7 @@ export function TeacherWeeklyTimetableClient() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
           >
             Imprimer (noir et blanc)
           </button>
@@ -1222,7 +1222,7 @@ export function TeacherWeeklyTimetableClient() {
                   return (
                     <li
                       key={subject}
-                      className="flex min-h-11 flex-wrap items-center justify-between gap-2 rounded-md border border-white/10 bg-background/45 px-4 text-sm font-bold text-foreground"
+                      className="flex min-h-11 flex-wrap items-center justify-between gap-2 rounded-md border border-ink/10 bg-background/45 px-4 text-sm font-bold text-foreground"
                     >
                       <span className="flex items-center gap-1.5">
                         <Icon name={visual.icon} className="h-4 w-4 shrink-0" />

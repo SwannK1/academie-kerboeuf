@@ -129,7 +129,7 @@ function QcmOptionItem({
   const isCorrectOption = option.id === correctOptionId;
   const revealResult = submitted || showCorrection;
 
-  let borderClass = "border-white/15 bg-white/[0.035]";
+  let borderClass = "border-ink/15 bg-ink/[0.035]";
   if (revealResult && isCorrectOption) {
     borderClass = "border-jade/40 bg-jade/10";
   } else if (revealResult && selected && !isCorrectOption) {
@@ -184,7 +184,7 @@ function QcmReading({
               className={`flex items-center justify-between rounded border p-3 text-sm leading-6 ${
                 showCorrection && isCorrect
                   ? "border-jade/35 bg-jade/10 font-bold text-foreground"
-                  : "border-white/10 bg-white/[0.035] text-muted"
+                  : "border-ink/10 bg-ink/[0.035] text-muted"
               }`}
             >
               {option.label}
@@ -238,10 +238,10 @@ function QcmProjection({ activity }: { activity: QcmActivityData }) {
         {activity.options.map((option, index) => (
           <li
             key={option.id}
-            className="flex items-center gap-4 rounded-md border border-white/15 bg-white/[0.04] p-4 text-lg text-foreground"
+            className="flex items-center gap-4 rounded-md border border-ink/15 bg-ink/[0.04] p-4 text-lg text-foreground"
           >
             <span
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-white/10 font-mono text-sm font-bold text-muted"
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-ink/10 font-mono text-sm font-bold text-muted"
               aria-hidden="true"
             >
               {String.fromCharCode(65 + index)}

@@ -166,7 +166,7 @@ export function TeacherRoutinesLibraryClient() {
         <button
           type="button"
           onClick={() => setPrintMode((previous) => !previous)}
-          className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+          className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
         >
           {printMode ? "Quitter la vue imprimable" : "Vue imprimable"}
         </button>
@@ -184,7 +184,7 @@ export function TeacherRoutinesLibraryClient() {
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder="Titre, consigne, matériel, objectif…"
-              className="min-h-11 w-64 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 w-64 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             />
           </label>
 
@@ -196,7 +196,7 @@ export function TeacherRoutinesLibraryClient() {
               className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
                 frequencyFilter === "all"
                   ? "border-jade/60 bg-jade/15 text-jade"
-                  : "border-white/15 text-foreground hover:border-jade/40"
+                  : "border-ink/15 text-foreground hover:border-jade/40"
               }`}
             >
               Toutes ({routines.length})
@@ -210,7 +210,7 @@ export function TeacherRoutinesLibraryClient() {
                 className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
                   frequencyFilter === option.id
                     ? "border-jade/60 bg-jade/15 text-jade"
-                    : "border-white/15 text-foreground hover:border-jade/40"
+                    : "border-ink/15 text-foreground hover:border-jade/40"
                 }`}
               >
                 {option.label} (
@@ -240,7 +240,7 @@ export function TeacherRoutinesLibraryClient() {
                 onChange={(event) =>
                   setFormRoutine({ ...formRoutine, title: event.target.value })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
 
@@ -254,7 +254,7 @@ export function TeacherRoutinesLibraryClient() {
                     frequency: event.target.value as RoutineFrequency,
                   })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 {routineFrequencyOptions.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -274,7 +274,7 @@ export function TeacherRoutinesLibraryClient() {
                     day: (event.target.value || null) as TeacherRoutine["day"],
                   })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 <option value="">—</option>
                 {routineDayOptions.map((option) => (
@@ -296,7 +296,7 @@ export function TeacherRoutinesLibraryClient() {
                       null) as TeacherRoutine["level"],
                   })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 <option value="">—</option>
                 {routineLevelOptions.map((option) => (
@@ -318,7 +318,7 @@ export function TeacherRoutinesLibraryClient() {
                       null) as TeacherRoutine["subject"],
                   })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               >
                 <option value="">—</option>
                 {routineSubjectOptions.map((option) => (
@@ -339,7 +339,7 @@ export function TeacherRoutinesLibraryClient() {
                 onChange={(event) =>
                   setFormRoutine({ ...formRoutine, duration: event.target.value })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
 
@@ -354,7 +354,7 @@ export function TeacherRoutinesLibraryClient() {
                   })
                 }
                 rows={3}
-                className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+                className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
               />
             </label>
 
@@ -366,7 +366,7 @@ export function TeacherRoutinesLibraryClient() {
                 onChange={(event) =>
                   setFormRoutine({ ...formRoutine, materials: event.target.value })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
 
@@ -378,7 +378,7 @@ export function TeacherRoutinesLibraryClient() {
                 onChange={(event) =>
                   setFormRoutine({ ...formRoutine, objective: event.target.value })
                 }
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               />
             </label>
 
@@ -392,7 +392,7 @@ export function TeacherRoutinesLibraryClient() {
               <button
                 type="button"
                 onClick={closeForm}
-                className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-ember/40"
+                className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-ember/40"
               >
                 Annuler
               </button>
@@ -413,8 +413,8 @@ export function TeacherRoutinesLibraryClient() {
                 key={routine.id}
                 className={`rounded-lg border p-5 sm:p-6 print:break-inside-avoid print:border-black/20 print:p-3 ${
                   routine.active
-                    ? "border-white/10 bg-background/45"
-                    : "border-white/5 bg-background/20 opacity-60"
+                    ? "border-ink/10 bg-background/45"
+                    : "border-ink/5 bg-background/20 opacity-60"
                 }`}
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
@@ -451,28 +451,28 @@ export function TeacherRoutinesLibraryClient() {
                       <button
                         type="button"
                         onClick={() => handleToggleActive(routine.id)}
-                        className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+                        className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
                       >
                         {routine.active ? "Désactiver" : "Activer"}
                       </button>
                       <button
                         type="button"
                         onClick={() => openEditForm(routine)}
-                        className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+                        className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
                       >
                         Modifier
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDuplicate(routine)}
-                        className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+                        className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
                       >
                         Dupliquer
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDelete(routine.id)}
-                        className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+                        className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
                       >
                         Supprimer
                       </button>

@@ -103,7 +103,7 @@ function CharacterPanel({
 }) {
   const c = colorMap[color];
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-4">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-4">
       <p className={`text-xs font-bold uppercase tracking-[0.18em] ${c.accent}`}>
         {title}
       </p>
@@ -129,7 +129,7 @@ function InfoBlock({
   accentClass: string;
 }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-4">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-4">
       <div className={`mb-3 h-0.5 w-8 rounded-full ${accentClass}`} aria-hidden="true" />
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">{title}</p>
       <p className="mt-2 text-sm leading-7 text-foreground">{text}</p>

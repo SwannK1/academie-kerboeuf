@@ -104,9 +104,9 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
       </section>
 
       {curriculumMap && (
-        <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+        <section className="border-t border-ink/10 px-4 py-8 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-6 flex flex-col gap-3 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mb-6 flex flex-col gap-3 border-b border-ink/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
                   Programme détaillé
@@ -117,7 +117,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
               </div>
               <Link
                 href={`/primaire/${level}/programme`}
-                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-bold text-muted transition hover:bg-white/[0.08] hover:text-foreground"
+                className="inline-flex w-fit items-center gap-1.5 rounded-md border border-ink/10 bg-ink/[0.04] px-4 py-2 text-xs font-bold text-muted transition hover:bg-ink/[0.08] hover:text-foreground"
               >
                 Voir le programme complet →
               </Link>
@@ -127,9 +127,9 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
         </section>
       )}
 
-      <section className="border-t border-white/10 px-4 py-8 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="mb-6 flex items-center justify-between border-b border-ink/10 pb-4">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
                 Compétences structurées
@@ -157,7 +157,7 @@ export default async function PrimaryLevelCompetenciesPage({ params }: PageProps
               ))}
             </div>
           ) : (
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-8 text-center">
               <p className="text-sm font-bold text-muted">
                 Les compétences de ce niveau sont en cours de structuration.
               </p>

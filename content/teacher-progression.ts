@@ -62,7 +62,7 @@ export const SEQUENCE_STATUSES: { id: SequenceStatus; label: string }[] = [
 ];
 
 const STATUS_STYLES: Record<SequenceStatus, string> = {
-  "a-prevoir": "border-white/20 bg-white/5 text-muted",
+  "a-prevoir": "border-ink/20 bg-ink/5 text-muted",
   pret: "border-sky-400/50 bg-sky-400/10 text-sky-300",
   "en-cours": "border-gold/50 bg-gold/10 text-gold",
   termine: "border-jade/50 bg-jade/10 text-jade",

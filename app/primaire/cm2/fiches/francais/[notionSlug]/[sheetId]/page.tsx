@@ -96,7 +96,7 @@ export default async function FicheDetailPage({ params }: Props) {
                   className={`rounded-md px-4 py-2 text-sm font-bold transition ${
                     k === key
                       ? "bg-jade text-ink"
-                      : "border border-white/15 bg-white/[0.05] text-foreground hover:bg-white/10"
+                      : "border border-ink/15 bg-ink/[0.05] text-foreground hover:bg-ink/10"
                   }`}
                 >
                   {SHEET_LABELS[k]}
@@ -106,7 +106,7 @@ export default async function FicheDetailPage({ params }: Props) {
           )}
 
           {/* Image */}
-          <div className="mt-8 overflow-hidden rounded-lg border border-white/10 bg-white">
+          <div className="mt-8 overflow-hidden rounded-lg border border-ink/10 bg-white">
             <Image
               src={sheet.href}
               alt={`${notion.title} — ${sheetLabel}`}
@@ -122,7 +122,7 @@ export default async function FicheDetailPage({ params }: Props) {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link
               href="/primaire/cm2/matieres/francais"
-              className="rounded-md border border-white/15 bg-white/[0.05] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-white/10"
+              className="rounded-md border border-ink/15 bg-ink/[0.05] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-ink/10"
             >
               ← Retour au catalogue
             </Link>
@@ -147,11 +147,11 @@ export default async function FicheDetailPage({ params }: Props) {
 
           {/* Navigation feuilles */}
           {(prevKey || nextKey) && (
-            <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
+            <div className="mt-8 flex items-center justify-between border-t border-ink/10 pt-6">
               {prevKey ? (
                 <Link
                   href={`/primaire/cm2/fiches/francais/${notion.slug}/${prevKey}`}
-                  className="flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-white/[0.07]"
+                  className="flex items-center gap-2 rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-ink/[0.07]"
                 >
                   ← {SHEET_LABELS[prevKey]}
                 </Link>
@@ -161,7 +161,7 @@ export default async function FicheDetailPage({ params }: Props) {
               {nextKey ? (
                 <Link
                   href={`/primaire/cm2/fiches/francais/${notion.slug}/${nextKey}`}
-                  className="flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-white/[0.07]"
+                  className="flex items-center gap-2 rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-ink/[0.07]"
                 >
                   {SHEET_LABELS[nextKey]} →
                 </Link>

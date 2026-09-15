@@ -182,7 +182,7 @@ export function TeacherClassroomMaterialsClient() {
                   name: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -202,7 +202,7 @@ export function TeacherClassroomMaterialsClient() {
                   categoryId: event.target.value as ClassroomMaterialCategoryId,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
             >
               {classroomMaterialCategories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -228,7 +228,7 @@ export function TeacherClassroomMaterialsClient() {
                   status: event.target.value as ClassroomMaterialStatusId,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
             >
               {classroomMaterialStatuses.map((status) => (
                 <option key={status.id} value={status.id}>
@@ -257,7 +257,7 @@ export function TeacherClassroomMaterialsClient() {
                   quantity: Number(event.target.value),
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -282,7 +282,7 @@ export function TeacherClassroomMaterialsClient() {
                       : Number(event.target.value),
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -303,7 +303,7 @@ export function TeacherClassroomMaterialsClient() {
                   location: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -324,7 +324,7 @@ export function TeacherClassroomMaterialsClient() {
                 }))
               }
               rows={2}
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/60 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/60 px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -339,7 +339,7 @@ export function TeacherClassroomMaterialsClient() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/40"
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/40"
               >
                 Annuler
               </button>
@@ -365,7 +365,7 @@ export function TeacherClassroomMaterialsClient() {
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
             placeholder="Nom du matériel"
-            className="mt-1 min-h-11 w-56 rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-56 rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
           />
         </div>
 
@@ -384,7 +384,7 @@ export function TeacherClassroomMaterialsClient() {
                 event.target.value as ClassroomMaterialCategoryId | "toutes",
               )
             }
-            className="mt-1 min-h-11 rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
           >
             <option value="toutes">Toutes</option>
             {classroomMaterialCategories.map((category) => (
@@ -410,7 +410,7 @@ export function TeacherClassroomMaterialsClient() {
                 event.target.value as ClassroomMaterialStatusId | "tous",
               )
             }
-            className="mt-1 min-h-11 rounded-md border border-white/10 bg-background/60 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 rounded-md border border-ink/10 bg-background/60 px-3 text-sm text-foreground"
           >
             <option value="tous">Tous</option>
             {classroomMaterialStatuses.map((status) => (
@@ -424,7 +424,7 @@ export function TeacherClassroomMaterialsClient() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/40"
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/40"
         >
           Imprimer
         </button>
@@ -457,7 +457,7 @@ export function TeacherClassroomMaterialsClient() {
             {filteredItems.map((item) => (
               <li
                 key={item.id}
-                className="rounded-md border border-white/10 bg-white/[0.04] p-4"
+                className="rounded-md border border-ink/10 bg-ink/[0.04] p-4"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
@@ -486,7 +486,7 @@ export function TeacherClassroomMaterialsClient() {
                     <button
                       type="button"
                       onClick={() => handleEdit(item)}
-                      className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-xs font-black text-foreground transition hover:border-jade/40"
+                      className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-xs font-black text-foreground transition hover:border-jade/40"
                     >
                       Modifier
                     </button>
@@ -502,7 +502,7 @@ export function TeacherClassroomMaterialsClient() {
                         <button
                           type="button"
                           onClick={() => setPendingDeleteId(null)}
-                          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-xs font-black text-foreground transition hover:border-jade/40"
+                          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-xs font-black text-foreground transition hover:border-jade/40"
                         >
                           Annuler
                         </button>
@@ -511,7 +511,7 @@ export function TeacherClassroomMaterialsClient() {
                       <button
                         type="button"
                         onClick={() => setPendingDeleteId(item.id)}
-                        className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-3 text-xs font-black text-foreground transition hover:border-ember/40 hover:text-ember"
+                        className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-3 text-xs font-black text-foreground transition hover:border-ember/40 hover:text-ember"
                       >
                         Supprimer
                       </button>

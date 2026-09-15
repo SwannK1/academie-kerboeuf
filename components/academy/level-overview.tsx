@@ -88,7 +88,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
       >
         <div className="space-y-4">
           <p className="text-sm leading-7 text-muted">{level.mood.description}</p>
-          <div className="rounded border border-white/10 bg-white/[0.04] p-3">
+          <div className="rounded border border-ink/10 bg-ink/[0.04] p-3">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
               Professeur
             </p>
@@ -105,8 +105,8 @@ export function LevelOverview({ level }: LevelOverviewProps) {
       {/* ── Univers narratif + Professeur + Aperçu missions ── */}
       <section className="px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-6">
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,rgba(243,196,91,0.12),transparent_38%)]" />
+          <div className="relative overflow-hidden rounded-md border border-ink/10 bg-ink/[0.04] p-6">
+            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_0%,rgba(143,84,23,0.12),transparent_38%)]" />
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Univers narratif
             </p>
@@ -125,7 +125,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
             <Link
               href={`/professeurs/${level.professor.slug}`}
               aria-label={`Voir la fiche du professeur ${level.professor.name}`}
-              className="group rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07]"
+              className="group rounded-md border border-ink/10 bg-ink/[0.04] p-6 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-ink/[0.07]"
             >
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
                 Professeur associé
@@ -151,7 +151,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               </span>
             </Link>
 
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
                 Missions à venir
               </p>
@@ -159,7 +159,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 {level.missions.slice(0, 3).map((mission) => (
                   <div
                     key={mission.slug}
-                    className="rounded border border-white/10 bg-ink/35 p-3"
+                    className="rounded border border-ink/10 bg-ink/35 p-3"
                   >
                     <p className="text-sm font-bold text-foreground">
                       {mission.title}
@@ -213,7 +213,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                     className={`group flex h-full flex-col rounded-md border p-5 transition ${
                       isLinked
                         ? "border-jade/30 bg-jade/[0.05] hover:-translate-y-0.5 hover:border-jade/45 hover:bg-jade/[0.08]"
-                        : "border-white/10 bg-white/[0.025] opacity-60"
+                        : "border-ink/10 bg-ink/[0.025] opacity-60"
                     }`}
                   >
                     <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -227,7 +227,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                         Accéder →
                       </span>
                     ) : (
-                      <span className="mt-4 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                      <span className="mt-4 inline-flex w-fit rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
                         À venir
                       </span>
                     )}
@@ -278,7 +278,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                   Voir les ressources →
                 </span>
               </Link>
-              <div className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.025] p-6 opacity-60">
+              <div className="flex min-h-full flex-col rounded-md border border-ink/10 bg-ink/[0.025] p-6 opacity-60">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
                   Français
                 </p>
@@ -289,7 +289,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                   Préparer les futures ressources PDF pour écrire des mots et
                   des phrases courtes en CP.
                 </p>
-                <span className="mt-5 inline-flex w-fit rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                <span className="mt-5 inline-flex w-fit rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
                   À venir
                 </span>
               </div>
@@ -335,7 +335,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
 
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Grands domaines */}
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
                 Domaines principaux
               </p>
@@ -358,7 +358,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
             </div>
 
             {/* Compétences clés */}
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
                 Compétences clés
               </p>
@@ -385,7 +385,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
       {observableCompetencies.length > 0 ? (
         <section className="px-4 py-8 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mb-8 flex flex-col gap-3 border-b border-ink/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
                   Compétences observables
@@ -416,7 +416,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
       {annualPaths.length > 0 ? (
         <section className="px-4 py-8 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mb-8 flex flex-col gap-3 border-b border-ink/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
                   Parcours annuels
@@ -495,7 +495,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                 <Link
                   key={resource.id}
                   href={resource.href}
-                  className="group flex flex-col rounded-md border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-ember/25 hover:bg-white/[0.07]"
+                  className="group flex flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5 transition hover:-translate-y-0.5 hover:border-ember/25 hover:bg-ink/[0.07]"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <p className="text-sm font-bold text-foreground leading-snug">
@@ -526,7 +526,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               ))}
             </div>
           ) : (
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-8 text-center">
               <p className="text-sm font-bold text-muted">
                 Ressources en construction pour ce niveau.
               </p>
@@ -568,9 +568,9 @@ export function LevelOverview({ level }: LevelOverviewProps) {
                   key={path.slug}
                   href={`/parcours/${path.slug}`}
                   aria-label={`Ouvrir le parcours : ${path.title}`}
-                  className="group relative overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-6 transition hover:-translate-y-0.5 hover:border-gold/30 hover:bg-white/[0.07]"
+                  className="group relative overflow-hidden rounded-md border border-ink/10 bg-ink/[0.04] p-6 transition hover:-translate-y-0.5 hover:border-gold/30 hover:bg-ink/[0.07]"
                 >
-                  <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_100%,rgba(243,196,91,0.08),transparent_50%)]" />
+                  <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_100%,rgba(143,84,23,0.08),transparent_50%)]" />
                   <div className="flex items-center justify-between gap-4">
                     <PublicStatusBadge status={path.status} />
                     <span className="text-xs text-muted">{path.estimatedDuration}</span>
@@ -599,7 +599,7 @@ export function LevelOverview({ level }: LevelOverviewProps) {
               ))}
             </div>
           ) : (
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-8 text-center">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-8 text-center">
               <p className="text-sm font-bold text-muted">
                 Parcours en construction pour ce niveau.
               </p>
@@ -629,25 +629,25 @@ export function LevelOverview({ level }: LevelOverviewProps) {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/professeurs"
-                className="rounded-md bg-gold px-4 py-3 text-sm font-bold text-ink transition hover:bg-[#ffd778]"
+                className="rounded-md bg-gold px-4 py-3 text-sm font-bold text-background transition hover:brightness-110"
               >
                 Professeurs
               </Link>
               <Link
                 href="/eleves"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Élèves
               </Link>
               <Link
                 href="/ressources"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Ressources
               </Link>
               <Link
                 href="/parcours"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Parcours
               </Link>

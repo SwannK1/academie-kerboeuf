@@ -101,7 +101,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
 
         <section className="mission-detail-hero relative isolate overflow-hidden px-4 pb-16 pt-16 sm:px-6 lg:px-8">
           <div className="mission-detail-effects mission-grid absolute inset-0 -z-20 opacity-30" />
-          <div className="mission-detail-effects absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.05),rgba(9,16,15,0.94))]" />
+          <div className="mission-detail-effects absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.05),rgba(245,239,224,0.94))]" />
 
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-start">
             <div>
@@ -124,7 +124,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                   {felixProject.associatedSubjects.map((subject) => (
                     <span
                       key={subject}
-                      className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold text-muted"
+                      className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold text-muted"
                     >
                       {subject}
                     </span>
@@ -133,28 +133,28 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
               ) : null}
             </div>
 
-            <aside className="mission-detail-card rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+            <aside className="mission-detail-card rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
               <div
                 className={`mb-5 h-1 rounded-full ${felixProject.theme.accentClass}`}
                 aria-hidden="true"
               />
               <dl className="space-y-4">
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Statut</dt>
                   <dd><PublicStatusBadge status={felixProject.status} /></dd>
                 </div>
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Durée</dt>
                   <dd className="text-sm font-bold text-foreground">{felixProject.duration}</dd>
                 </div>
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Discipline</dt>
                   <dd className={`text-sm font-bold ${felixProject.theme.textClass}`}>
                     {felixProject.mainSubject}
                   </dd>
                 </div>
                 {place ? (
-                  <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                  <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                     <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Lieu</dt>
                     <dd className="text-sm font-bold text-foreground">{place.name}</dd>
                   </div>
@@ -200,7 +200,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
               <SuccessCriteriaPanel criteria={felixProject.successCriteria} />
             </div>
 
-            <div className="border-t border-white/10 pt-6">
+            <div className="border-t border-ink/10 pt-6">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
                 Pour l&apos;enseignant
               </p>
@@ -226,7 +226,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
             </div>
 
             {hasInstitutionalContent ? (
-              <div className="border-t border-white/10 pt-6">
+              <div className="border-t border-ink/10 pt-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
                   Repères pédagogiques
                 </p>
@@ -250,7 +250,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
             </div>
 
             {badges.length > 0 ? (
-              <div className="felix-teacher-detail mission-detail-card rounded-md border border-white/10 bg-white/[0.04] p-5">
+              <div className="felix-teacher-detail mission-detail-card rounded-md border border-ink/10 bg-ink/[0.04] p-5">
                 <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Badges associés à ce projet
                 </h2>
@@ -297,7 +297,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
 
       <section className="mission-detail-hero relative isolate overflow-hidden px-4 pb-16 pt-16 sm:px-6 lg:px-8">
         <div className="mission-detail-effects mission-grid absolute inset-0 -z-20 opacity-30" />
-        <div className="mission-detail-effects absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.05),rgba(9,16,15,0.94))]" />
+        <div className="mission-detail-effects absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.05),rgba(245,239,224,0.94))]" />
 
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-start">
           <div>
@@ -314,25 +314,25 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
             </p>
           </div>
 
-          <aside className="mission-detail-card rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+          <aside className="mission-detail-card rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
             <div className={`mb-5 h-1 rounded-full ${mission.theme.accentClass}`} aria-hidden="true" />
             <dl className="space-y-5">
-              <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                 <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Statut</dt>
                 <dd><PublicStatusBadge status={mission.status} /></dd>
               </div>
-              <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                 <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Matière</dt>
                 <dd className="text-sm font-bold text-foreground">{mission.subject}</dd>
               </div>
               {mission.pedagogy.level ? (
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Niveau</dt>
                   <dd className="text-sm font-bold text-foreground">{mission.pedagogy.level}</dd>
                 </div>
               ) : null}
               {mission.pedagogy.duration ? (
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
                   <dt className="text-xs font-bold uppercase tracking-[0.18em] text-muted">Durée</dt>
                   <dd className="text-sm font-bold text-foreground">{mission.pedagogy.duration}</dd>
                 </div>
@@ -364,7 +364,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                 {mission.competencies.map((competency) => (
                   <li
                     key={competency}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                    className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                   >
                     {competency}
                   </li>
@@ -379,7 +379,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                 {mission.upcomingActivities.map((activity) => (
                   <li
                     key={activity}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                    className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                   >
                     {activity}
                   </li>
@@ -401,7 +401,7 @@ export default async function MissionDetailPage({ params }: MissionPageProps) {
                   <Link
                     key={path.slug}
                     href={`/parcours/${path.slug}`}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+                    className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
                   >
                     <span className="font-bold text-foreground">{path.title}</span>
                     <span className="block text-xs uppercase tracking-[0.12em] text-muted">
@@ -456,7 +456,7 @@ function ExpectedProductionPanel({
               {evidence.map((item) => (
                 <li
                   key={`${item.type}-${item.description}`}
-                  className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                  className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                 >
                   <span className="font-bold text-foreground">
                     {evidenceTypeLabels[item.type]}

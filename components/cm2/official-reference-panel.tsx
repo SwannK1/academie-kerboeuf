@@ -30,7 +30,7 @@ export function OfficialReferencePanel({
   if (!hasContent) return null;
 
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         Ancrages officiels
       </h2>
@@ -44,7 +44,7 @@ export function OfficialReferencePanel({
             <span className="rounded border border-jade/30 bg-jade/10 px-2 py-0.5 text-xs font-bold text-jade">
               {officialReference.level}
             </span>
-            <span className="rounded border border-white/15 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
+            <span className="rounded border border-ink/15 bg-ink/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
               {officialReference.domain}
             </span>
           </div>
@@ -80,7 +80,7 @@ export function OfficialReferencePanel({
       ) : null}
 
       {lsuLinks && lsuLinks.length > 0 ? (
-        <div className="mt-5 border-t border-white/10 pt-4">
+        <div className="mt-5 border-t border-ink/10 pt-4">
           <h3 className="text-sm font-bold text-foreground">
             Livret Scolaire Unique (LSU)
           </h3>
@@ -97,7 +97,7 @@ export function OfficialReferencePanel({
                       className="flex items-start gap-2 text-sm leading-6 text-muted"
                     >
                       <span
-                        className="mt-1.5 size-1 shrink-0 rounded-full bg-white/25"
+                        className="mt-1.5 size-1 shrink-0 rounded-full bg-ink/25"
                         aria-hidden="true"
                       />
                       {item}
@@ -111,13 +111,13 @@ export function OfficialReferencePanel({
       ) : null}
 
       {crossCurricular && crossCurricular.length > 0 ? (
-        <div className="mt-5 border-t border-white/10 pt-4">
+        <div className="mt-5 border-t border-ink/10 pt-4">
           <h3 className="text-sm font-bold text-foreground">Liens transversaux</h3>
           <div className="mt-3 space-y-3">
             {crossCurricular.map((link) => (
               <div key={link.framework} className="flex items-start gap-3">
                 <span
-                  className={`shrink-0 rounded border px-1.5 py-0.5 font-mono text-[10px] font-black uppercase ${frameworkStyle[link.framework] ?? "border-white/15 bg-white/[0.04] text-muted"}`}
+                  className={`shrink-0 rounded border px-1.5 py-0.5 font-mono text-[10px] font-black uppercase ${frameworkStyle[link.framework] ?? "border-ink/15 bg-ink/[0.04] text-muted"}`}
                 >
                   {link.framework}
                 </span>

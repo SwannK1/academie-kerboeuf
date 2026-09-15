@@ -59,7 +59,7 @@ export default function CartothequePage() {
       </section>
 
       {/* ── À quoi sert ce lieu ? ────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
             Fonction pédagogique
@@ -83,7 +83,7 @@ export default function CartothequePage() {
       </section>
 
       {/* ── Compétences travaillées ──────────────────────────────────────────── */}
-      <section className="border-t border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-sky">
@@ -97,7 +97,7 @@ export default function CartothequePage() {
             {competences.map((comp) => (
               <div
                 key={comp}
-                className="rounded-md border border-sky/35 bg-white/[0.04] p-5"
+                className="rounded-md border border-sky/35 bg-ink/[0.04] p-5"
               >
                 <p className="text-sm leading-7 text-foreground">{comp}</p>
               </div>
@@ -107,7 +107,7 @@ export default function CartothequePage() {
       </section>
 
       {/* ── Matières et niveaux ──────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
@@ -121,7 +121,7 @@ export default function CartothequePage() {
                 {matieres.map((matiere) => (
                   <span
                     key={matiere}
-                    className="rounded border border-sky/35 bg-white/[0.04] px-3 py-1 text-sm font-semibold text-foreground"
+                    className="rounded border border-sky/35 bg-ink/[0.04] px-3 py-1 text-sm font-semibold text-foreground"
                   >
                     {matiere}
                   </span>
@@ -139,7 +139,7 @@ export default function CartothequePage() {
                 {niveaux.map((niveau) => (
                   <span
                     key={niveau}
-                    className="rounded bg-white/[0.06] px-3 py-1 font-mono text-sm font-bold text-muted"
+                    className="rounded bg-ink/[0.06] px-3 py-1 font-mono text-sm font-bold text-muted"
                   >
                     {niveau}
                   </span>
@@ -151,12 +151,12 @@ export default function CartothequePage() {
       </section>
 
       {/* ── Navigation ──────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/10 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <div className="flex flex-wrap gap-4">
             <Link
               href="/univers"
-              className="rounded-md border border-white/20 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/20 bg-ink/[0.04] px-5 py-3 text-sm font-semibold text-foreground transition hover:bg-ink/[0.08]"
             >
               ← Retour à l&apos;Univers
             </Link>

@@ -27,7 +27,7 @@ export function CompetencyCard({ competency }: CompetencyCardProps) {
   return (
     <article
       className={[
-        "flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.04] p-4",
+        "flex min-h-full flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-4",
         isUpcoming ? "opacity-65" : "",
       ]
         .filter(Boolean)
@@ -46,10 +46,10 @@ export function CompetencyCard({ competency }: CompetencyCardProps) {
       </div>
 
       <div className="mt-3 flex flex-wrap gap-1.5">
-        <span className="rounded border border-white/10 bg-ink/30 px-2 py-1 text-xs font-bold text-muted">
+        <span className="rounded border border-ink/10 bg-ink/30 px-2 py-1 text-xs font-bold text-muted">
           {formatTaxonomyLabel(competency.domainSlug)}
         </span>
-        <span className="rounded border border-white/10 bg-ink/30 px-2 py-1 text-xs font-bold text-muted">
+        <span className="rounded border border-ink/10 bg-ink/30 px-2 py-1 text-xs font-bold text-muted">
           {formatTaxonomyLabel(competency.subdomainSlug)}
         </span>
         <span className="rounded border border-sky/25 bg-sky/10 px-2 py-1 text-xs font-bold text-sky">
@@ -59,7 +59,7 @@ export function CompetencyCard({ competency }: CompetencyCardProps) {
 
       <ResourceSlotsSummary slots={competency.resourceSlots} />
 
-      <details className="mt-4 border-t border-white/10 pt-3">
+      <details className="mt-4 border-t border-ink/10 pt-3">
         <summary className="cursor-pointer select-none text-xs font-bold uppercase tracking-[0.14em] text-muted transition hover:text-foreground">
           Détail de structuration
         </summary>
@@ -112,7 +112,7 @@ export function AnnualPathCard({ path }: AnnualPathCardProps) {
   return (
     <article
       className={[
-        "flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.04] p-5",
+        "flex min-h-full flex-col rounded-md border border-ink/10 bg-ink/[0.04] p-5",
         isUpcoming ? "opacity-65" : "",
       ]
         .filter(Boolean)
@@ -135,10 +135,10 @@ export function AnnualPathCard({ path }: AnnualPathCardProps) {
       </p>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
+        <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
           {path.durationLabel}
         </span>
-        <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
+        <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-1 text-xs font-bold uppercase tracking-[0.12em] text-muted">
           {path.weekCount} semaines
         </span>
       </div>
@@ -147,7 +147,7 @@ export function AnnualPathCard({ path }: AnnualPathCardProps) {
         {path.weeks.slice(0, 3).map((week) => (
           <li
             key={`${path.id}-${week.week}`}
-            className="rounded border border-white/10 bg-ink/30 px-3 py-2"
+            className="rounded border border-ink/10 bg-ink/30 px-3 py-2"
           >
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
@@ -205,7 +205,7 @@ export function TeachingSequencePreview({
 function ResourceSlotsSummary({ slots }: { slots?: ResourceSlot[] }) {
   if (!slots?.length) {
     return (
-      <p className="mt-3 rounded border border-white/10 bg-ink/30 px-3 py-2 text-xs font-bold text-muted">
+      <p className="mt-3 rounded border border-ink/10 bg-ink/30 px-3 py-2 text-xs font-bold text-muted">
         Ressources PDF prévues
       </p>
     );
@@ -215,7 +215,7 @@ function ResourceSlotsSummary({ slots }: { slots?: ResourceSlot[] }) {
   const remainingCount = Math.max(slots.length - visibleLabels.length, 0);
 
   return (
-    <div className="mt-3 rounded border border-white/10 bg-ink/30 px-3 py-2">
+    <div className="mt-3 rounded border border-ink/10 bg-ink/30 px-3 py-2">
       <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
         {slots.length} ressources PDF prévues
       </p>
@@ -242,7 +242,7 @@ function ResourceSlotsDetail({ slots }: { slots?: ResourceSlot[] }) {
           {slots.map((slot) => (
             <span
               key={slot.kind}
-              className="rounded border border-white/10 bg-ink/30 px-2 py-1 text-xs text-muted"
+              className="rounded border border-ink/10 bg-ink/30 px-2 py-1 text-xs text-muted"
             >
               {slot.label}
             </span>
@@ -266,14 +266,14 @@ export function ResourceSlotList({ slots }: { slots: ResourceSlot[] }) {
         return (
           <div
             key={slot.kind}
-            className="rounded border border-white/10 bg-ink/30 px-3 py-2"
+            className="rounded border border-ink/10 bg-ink/30 px-3 py-2"
           >
             <dt className="text-xs font-bold uppercase tracking-[0.14em] text-muted">
               {slot.label}
             </dt>
             <dd className="mt-2">
               {isAbsent ? (
-                <span className="text-xs font-bold text-white/40">Absente</span>
+                <span className="text-xs font-bold text-ink/40">Absente</span>
               ) : isLinkable ? (
                 <Link
                   href={resource.href}

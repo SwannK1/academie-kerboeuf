@@ -27,7 +27,7 @@ export function LevelHero({
   return (
     <section className="relative isolate overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8">
       <div className="mission-grid absolute inset-0 -z-20 opacity-35" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.12),rgba(9,16,15,0.92))]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.12),rgba(245,239,224,0.92))]" />
 
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.86fr] lg:items-center">
         <div>
@@ -43,15 +43,15 @@ export function LevelHero({
           {ctaHref && ctaLabel ? (
             <Link
               href={ctaHref}
-              className="mt-8 inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+              className="mt-8 inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-background transition hover:brightness-110"
             >
               {ctaLabel}
             </Link>
           ) : null}
         </div>
 
-        <div className="rounded-md border border-white/12 bg-panel/70 p-5 shadow-2xl shadow-black/35">
-          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div className="rounded-md border border-ink/12 bg-panel/70 p-5 shadow-2xl shadow-black/35">
+          <div className="flex items-center justify-between gap-4 border-b border-ink/10 pb-4">
             <span className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Dossier niveau
             </span>

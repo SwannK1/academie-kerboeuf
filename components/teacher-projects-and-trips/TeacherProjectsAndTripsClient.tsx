@@ -120,7 +120,7 @@ export function TeacherProjectsAndTripsClient() {
           type="button"
           onClick={handlePrint}
           disabled={projects.length === 0}
-          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-40"
         >
           Imprimer
         </button>
@@ -136,7 +136,7 @@ export function TeacherProjectsAndTripsClient() {
           {projects.map((project) => (
             <li
               key={project.id}
-              className="rounded-lg border border-white/10 bg-background/45 p-5 sm:p-6 print:break-inside-avoid print:border-black/30"
+              className="rounded-lg border border-ink/10 bg-background/45 p-5 sm:p-6 print:break-inside-avoid print:border-black/30"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <label className="flex-1 min-w-[14rem]">
@@ -150,13 +150,13 @@ export function TeacherProjectsAndTripsClient() {
                       updateProject(project.id, { title: event.target.value })
                     }
                     placeholder="Ex. Sortie au musée"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   />
                 </label>
                 <button
                   type="button"
                   onClick={() => handleRemoveProject(project.id)}
-                  className="min-h-11 shrink-0 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember print:hidden"
+                  className="min-h-11 shrink-0 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember print:hidden"
                   aria-label={`Supprimer ${project.title || "ce projet"}`}
                 >
                   Supprimer
@@ -175,7 +175,7 @@ export function TeacherProjectsAndTripsClient() {
                         type: event.target.value as TeacherProjectType,
                       })
                     }
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   >
                     {teacherProjectTypes.map((option) => (
                       <option key={option.id} value={option.id}>
@@ -196,7 +196,7 @@ export function TeacherProjectsAndTripsClient() {
                         state: event.target.value as TeacherProjectState,
                       })
                     }
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   >
                     {teacherProjectStates.map((option) => (
                       <option key={option.id} value={option.id}>
@@ -216,7 +216,7 @@ export function TeacherProjectsAndTripsClient() {
                     onChange={(event) =>
                       updateProject(project.id, { date: event.target.value })
                     }
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   />
                 </label>
 
@@ -230,7 +230,7 @@ export function TeacherProjectsAndTripsClient() {
                     onChange={(event) =>
                       updateProject(project.id, { location: event.target.value })
                     }
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   />
                 </label>
 
@@ -246,7 +246,7 @@ export function TeacherProjectsAndTripsClient() {
                       })
                     }
                     rows={2}
-                    className="mt-1 w-full rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm text-foreground"
+                    className="mt-1 w-full rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm text-foreground"
                   />
                 </label>
 
@@ -260,7 +260,7 @@ export function TeacherProjectsAndTripsClient() {
                       updateProject(project.id, { materials: event.target.value })
                     }
                     rows={2}
-                    className="mt-1 w-full rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm text-foreground"
+                    className="mt-1 w-full rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm text-foreground"
                   />
                 </label>
 
@@ -277,7 +277,7 @@ export function TeacherProjectsAndTripsClient() {
                       })
                     }
                     placeholder="Ex. 150 €"
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   />
                 </label>
 
@@ -297,7 +297,7 @@ export function TeacherProjectsAndTripsClient() {
                         ),
                       })
                     }
-                    className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   />
                 </label>
 
@@ -314,7 +314,7 @@ export function TeacherProjectsAndTripsClient() {
                     }
                     rows={2}
                     placeholder="Ex. Autorisation de sortie scolaire"
-                    className="mt-1 w-full rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm text-foreground"
+                    className="mt-1 w-full rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm text-foreground"
                   />
                 </label>
               </div>
@@ -327,7 +327,7 @@ export function TeacherProjectsAndTripsClient() {
                   <button
                     type="button"
                     onClick={() => addTask(project.id)}
-                    className="min-h-11 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
+                    className="min-h-11 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
                   >
                     + Ajouter une tâche
                   </button>
@@ -351,13 +351,13 @@ export function TeacherProjectsAndTripsClient() {
                             updateTaskAt(project.id, index, event.target.value)
                           }
                           placeholder={`Tâche ${index + 1}`}
-                          className="min-h-11 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                          className="min-h-11 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                         />
                         <button
                           type="button"
                           onClick={() => removeTask(project.id, index)}
                           aria-label={`Supprimer la tâche ${index + 1}`}
-                          className="min-h-11 shrink-0 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember print:hidden"
+                          className="min-h-11 shrink-0 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember print:hidden"
                         >
                           ✕
                         </button>

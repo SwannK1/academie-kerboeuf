@@ -27,7 +27,7 @@ const tiers = [
 
 export function DifferentiationPanel({ differentiation }: DifferentiationPanelProps) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-sky">
         Différenciation
       </h2>
@@ -38,7 +38,7 @@ export function DifferentiationPanel({ differentiation }: DifferentiationPanelPr
           return (
             <div
               key={tier.key}
-              className="rounded border border-white/10 bg-ink/35 p-4"
+              className="rounded border border-ink/10 bg-ink/35 p-4"
             >
               <h3
                 className={`inline-flex rounded border px-2 py-0.5 text-xs font-bold uppercase tracking-[0.12em] ${tier.color}`}

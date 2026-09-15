@@ -14,7 +14,7 @@ export function LevelCard({ level, status }: LevelCardProps) {
     <Link
       href={getLevelPath(level)}
       aria-label={`Explorer ${level.label} – Professeur référent : ${level.professor.name}`}
-      className="group rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/70"
+      className="group rounded-md border border-ink/10 bg-ink/[0.045] p-5 transition hover:-translate-y-1 hover:border-gold/35 hover:bg-ink/[0.07] focus:outline-none focus:ring-2 focus:ring-gold/70"
     >
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -33,7 +33,7 @@ export function LevelCard({ level, status }: LevelCardProps) {
         </div>
       </div>
       <p className="mt-5 text-sm leading-7 text-muted">{level.description}</p>
-      <div className="mt-6 border-t border-white/10 pt-4">
+      <div className="mt-6 border-t border-ink/10 pt-4">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
           Professeur référent
         </p>

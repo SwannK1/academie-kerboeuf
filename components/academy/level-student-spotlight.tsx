@@ -16,7 +16,7 @@ export function LevelStudentSpotlight({ student }: LevelStudentSpotlightProps) {
     <section className="px-4 pb-6 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div
-          className={`grid gap-6 overflow-hidden rounded-md border bg-white/[0.04] p-5 md:grid-cols-[14rem_1fr] md:items-center ${accent.borderSoftClass}`}
+          className={`grid gap-6 overflow-hidden rounded-md border bg-ink/[0.04] p-5 md:grid-cols-[14rem_1fr] md:items-center ${accent.borderSoftClass}`}
         >
           <div
             className={`relative aspect-[3/2] overflow-hidden rounded-md border ${accent.borderSoftClass}`}
@@ -64,7 +64,7 @@ export function LevelStudentSpotlight({ student }: LevelStudentSpotlightProps) {
               {student.missionsHref ? (
                 <Link
                   href={student.missionsHref}
-                  className="rounded-md border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                  className="rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-2 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
                 >
                   Missions de {student.name}
                 </Link>

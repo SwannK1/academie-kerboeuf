@@ -43,7 +43,7 @@ export default function Home() {
     <main id="contenu-principal">
       <section className="relative isolate overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-30 opacity-45" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.1),rgba(9,16,15,0.96))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.1),rgba(245,239,224,0.96))]" />
 
         <div className="mx-auto max-w-6xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
@@ -75,7 +75,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-white/10 bg-panel/30 px-4 py-14 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 bg-panel/30 px-4 py-14 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted">
@@ -98,7 +98,7 @@ export default function Home() {
                 <Link
                   key={group.id}
                   href={group.href}
-                  className={`group flex min-h-48 flex-col rounded-md border ${accent.border} bg-white/[0.035] p-5 transition hover:-translate-y-0.5 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
+                  className={`group flex min-h-48 flex-col rounded-md border ${accent.border} bg-ink/[0.035] p-5 transition hover:-translate-y-0.5 hover:bg-ink/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <span className={`rounded px-2 py-1 text-xs font-black ${accent.bg} ${accent.text}`}>
@@ -120,7 +120,7 @@ export default function Home() {
             })}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-sm">
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-ink/10 pt-6 text-sm">
             <Link href="/univers" className="font-bold text-muted transition hover:text-foreground">
               Découvrir l&apos;univers pédagogique
             </Link>

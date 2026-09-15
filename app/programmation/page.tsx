@@ -89,13 +89,13 @@ export default function ProgrammingPage() {
           </Link>
           <Link
             href="#progression"
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-5 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-5 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
           >
             Créer ma progression
           </Link>
           <Link
             href="#organisation"
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-5 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-5 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
           >
             Organiser mes classes
           </Link>
@@ -116,7 +116,7 @@ export default function ProgrammingPage() {
                   "min-h-11 rounded-md border px-3 text-sm font-bold transition",
                   level.levelId === selectedLevelId
                     ? "border-jade/60 bg-jade/10 text-jade"
-                    : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                    : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
                 ].join(" ")}
               >
                 {level.label}
@@ -147,7 +147,7 @@ export default function ProgrammingPage() {
                     <Link
                       key={item.id}
                       href={item.href}
-                      className="flex min-h-11 items-center justify-between rounded-md border border-white/10 bg-background/45 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:bg-sky/[0.08]"
+                      className="flex min-h-11 items-center justify-between rounded-md border border-ink/10 bg-background/45 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:bg-sky/[0.08]"
                     >
                       {item.label}
                       <span aria-hidden="true">→</span>
@@ -155,7 +155,7 @@ export default function ProgrammingPage() {
                   ) : (
                     <span
                       key={item.id}
-                      className="flex min-h-11 items-center rounded-md border border-white/10 bg-background/45 px-4 text-sm font-bold text-muted"
+                      className="flex min-h-11 items-center rounded-md border border-ink/10 bg-background/45 px-4 text-sm font-bold text-muted"
                     >
                       {item.label}
                     </span>
@@ -172,7 +172,7 @@ export default function ProgrammingPage() {
                     {selectedLevel.periods.map((period) => (
                       <span
                         key={period.id}
-                        className="rounded-md border border-white/10 bg-background/45 px-3 py-1 text-xs font-bold text-muted"
+                        className="rounded-md border border-ink/10 bg-background/45 px-3 py-1 text-xs font-bold text-muted"
                       >
                         {period.label}
                       </span>
@@ -192,7 +192,7 @@ export default function ProgrammingPage() {
 
         <section
           id="progression"
-          className="mt-10 scroll-mt-24 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+          className="mt-10 scroll-mt-24 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
         >
           <h2 className="text-xl font-black text-foreground">
             Organiser une progression
@@ -205,7 +205,7 @@ export default function ProgrammingPage() {
 
         <section
           id="organisation"
-          className="mt-6 scroll-mt-24 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+          className="mt-6 scroll-mt-24 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
         >
           <h2 className="text-xl font-black text-foreground">
             Organiser mes classes

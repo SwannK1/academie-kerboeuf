@@ -39,7 +39,7 @@ export default function TeachersPage() {
               className={`group flex min-h-56 flex-col rounded-md border p-6 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                 index === 0
                   ? "border-gold/40 bg-gold/[0.07] hover:bg-gold/[0.11]"
-                  : "border-white/12 bg-white/[0.04] hover:border-gold/30 hover:bg-white/[0.07]"
+                  : "border-ink/12 bg-ink/[0.04] hover:border-gold/30 hover:bg-ink/[0.07]"
               }`}
             >
               <Icon name={hub.icon} className="h-8 w-8 text-gold" />

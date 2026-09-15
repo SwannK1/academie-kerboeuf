@@ -24,7 +24,7 @@ export function CurriculumMapView({ map, competenciesById }: CurriculumMapViewPr
         return (
           <section key={subject.slug} aria-label={subject.label}>
             {/* ── En-tête de matière ── */}
-            <div className="mb-10 flex items-baseline justify-between gap-4 border-b border-white/15 pb-5">
+            <div className="mb-10 flex items-baseline justify-between gap-4 border-b border-ink/15 pb-5">
               <h2 className="text-3xl font-black text-foreground">
                 {subject.label}
               </h2>
@@ -44,7 +44,7 @@ export function CurriculumMapView({ map, competenciesById }: CurriculumMapViewPr
                         <h3 className="text-xl font-black text-foreground">
                           {subdomain.label}
                         </h3>
-                        <span className="shrink-0 rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
+                        <span className="shrink-0 rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
                           {subdomain.competencies.length}&nbsp;compétence
                           {subdomain.competencies.length > 1 ? "s" : ""}
                         </span>
@@ -95,7 +95,7 @@ function CompetencySlot({ expected, full }: CompetencySlotProps) {
         "flex flex-col rounded-md border p-4",
         isInProgress
           ? "border-sky/20 bg-sky/[0.04]"
-          : "border-white/10 bg-white/[0.04]",
+          : "border-ink/10 bg-ink/[0.04]",
       ].join(" ")}
     >
       {/* ── Titre + statut ── */}
@@ -131,7 +131,7 @@ function CompetencySlot({ expected, full }: CompetencySlotProps) {
 
       {/* ── Ressources prévues ── */}
       {slotCount > 0 ? (
-        <p className="mt-auto pt-3 text-[11px] text-white/30">
+        <p className="mt-auto pt-3 text-[11px] text-ink/30">
           {slotCount}&nbsp;ressource{slotCount > 1 ? "s" : ""} PDF
           prévue{slotCount > 1 ? "s" : ""}
         </p>

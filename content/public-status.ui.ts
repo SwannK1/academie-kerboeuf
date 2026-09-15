@@ -28,7 +28,7 @@ export const publicStatusUi = {
     label: "À venir",
     ariaLabel: "Statut public : à venir",
     variant: "upcoming",
-    className: "border-white/20 bg-white/[0.04] text-muted",
+    className: "border-ink/20 bg-ink/[0.04] text-muted",
     dotClassName: "bg-muted",
   },
 } as const satisfies Record<

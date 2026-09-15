@@ -107,7 +107,7 @@ export function HierarchyCard({
   return href ? (
     <Link
       href={href}
-      className={`${className} transition hover:-translate-y-0.5 hover:bg-white/[0.08]`}
+      className={`${className} transition hover:-translate-y-0.5 hover:bg-ink/[0.08]`}
     >
       {content}
     </Link>
@@ -127,7 +127,7 @@ export function ProfileLinks({
         <li key={profile.href}>
           <Link
             href={profile.href}
-            className="flex items-center justify-between gap-3 rounded-md border border-white/10 bg-background/45 px-3 py-2.5 text-sm font-bold text-foreground transition hover:border-white/25"
+            className="flex items-center justify-between gap-3 rounded-md border border-ink/10 bg-background/45 px-3 py-2.5 text-sm font-bold text-foreground transition hover:border-ink/25"
           >
             <span>{profile.name}</span>
             <span className="shrink-0 text-xs font-medium text-muted">

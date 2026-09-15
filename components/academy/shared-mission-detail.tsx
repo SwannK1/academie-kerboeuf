@@ -77,7 +77,7 @@ export function SharedMissionDetail({
 
       <section className="mission-detail-hero relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-detail-effects mission-grid absolute inset-0 -z-20 opacity-30" />
-        <div className="mission-detail-effects absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.08),rgba(9,16,15,0.94))]" />
+        <div className="mission-detail-effects absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.08),rgba(245,239,224,0.94))]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
           <div>
             <p
@@ -115,7 +115,7 @@ export function SharedMissionDetail({
             </div>
           </div>
 
-          <aside className="mission-detail-card rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+          <aside className="mission-detail-card rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Dossier mission
             </p>
@@ -166,7 +166,7 @@ export function SharedMissionDetail({
                     <Link
                       key={path.slug}
                       href={`/parcours/${path.slug}`}
-                      className="block rounded border border-white/10 bg-ink/35 p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
+                      className="block rounded border border-ink/10 bg-ink/35 p-3 text-sm leading-6 text-muted transition hover:border-gold/30 hover:text-foreground"
                     >
                       {path.title} · {path.estimatedDuration}
                     </Link>
@@ -184,7 +184,7 @@ export function SharedMissionDetail({
             ) : null}
 
             {mission.support ? (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
                   Activité élève
                 </p>
@@ -198,7 +198,7 @@ export function SharedMissionDetail({
             ) : null}
 
             {questions.length > 0 ? (
-              <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
                 <h2 className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
                   Questions progressives
                 </h2>
@@ -206,7 +206,7 @@ export function SharedMissionDetail({
                   {questions.map((question, index) => (
                     <div
                       key={question}
-                      className="mission-question rounded border border-white/10 bg-ink/35 p-4"
+                      className="mission-question rounded border border-ink/10 bg-ink/35 p-4"
                     >
                       <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
                         Question {index + 1}
@@ -228,7 +228,7 @@ export function SharedMissionDetail({
 
             {hasCorrection ? (
               <div
-                className={`mission-correction rounded-md border border-white/10 bg-white/[0.04] p-6 ${
+                className={`mission-correction rounded-md border border-ink/10 bg-ink/[0.04] p-6 ${
                   showCorrection ? "" : "mission-correction--hidden"
                 }`}
               >
@@ -240,14 +240,14 @@ export function SharedMissionDetail({
                     {correction.map((answer, index) => (
                       <p
                         key={`${answer}-${index}`}
-                        className="rounded border border-white/10 bg-ink/35 p-4 text-sm leading-7 text-muted"
+                        className="rounded border border-ink/10 bg-ink/35 p-4 text-sm leading-7 text-muted"
                       >
                         {answer}
                       </p>
                     ))}
                   </div>
                 ) : (
-                  <p className="mt-4 rounded border border-white/10 bg-ink/35 p-4 text-sm leading-7 text-muted">
+                  <p className="mt-4 rounded border border-ink/10 bg-ink/35 p-4 text-sm leading-7 text-muted">
                     Correction masquée. Utilise le bouton &ldquo;Correction&rdquo; pour
                     l&rsquo;afficher.
                   </p>
@@ -257,7 +257,7 @@ export function SharedMissionDetail({
 
             <Link
               href={missionsPath}
-              className="mission-detail-chrome inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+              className="mission-detail-chrome inline-flex rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-background transition hover:brightness-110"
             >
               Retour aux missions {level.label}
             </Link>

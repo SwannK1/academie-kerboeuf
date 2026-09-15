@@ -165,7 +165,7 @@ export function TeacherProfessionalDevelopmentClient() {
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
           >
             Imprimer
           </button>
@@ -174,7 +174,7 @@ export function TeacherProfessionalDevelopmentClient() {
 
       <section
         aria-label="Recherche et filtres"
-        className="mt-6 grid gap-3 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4 print:hidden"
+        className="mt-6 grid gap-3 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4 print:hidden"
       >
         <div className="lg:col-span-2">
           <label
@@ -189,7 +189,7 @@ export function TeacherProfessionalDevelopmentClient() {
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
             placeholder="Titre, organisme, objectif, notes…"
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           />
         </div>
 
@@ -206,7 +206,7 @@ export function TeacherProfessionalDevelopmentClient() {
             onChange={(event) =>
               setTypeFilter(event.target.value as TypeFilter)
             }
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           >
             <option value="tous">Tous les types</option>
             {professionalDevelopmentTypes.map((type) => (
@@ -230,7 +230,7 @@ export function TeacherProfessionalDevelopmentClient() {
             onChange={(event) =>
               setStatusFilter(event.target.value as StatusFilter)
             }
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           >
             <option value="tous">Tous les statuts</option>
             {professionalDevelopmentStatuses.map((status) => (
@@ -266,7 +266,7 @@ export function TeacherProfessionalDevelopmentClient() {
             {filteredEntries.map((entry) => (
               <li
                 key={entry.id}
-                className="rounded-lg border border-white/10 bg-background/45 p-5"
+                className="rounded-lg border border-ink/10 bg-background/45 p-5"
               >
                 {editingId === entry.id ? (
                   <EntryEditor
@@ -304,7 +304,7 @@ export function TeacherProfessionalDevelopmentClient() {
                       <button
                         type="button"
                         onClick={() => setPendingDeleteId(null)}
-                        className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground"
+                        className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground"
                       >
                         Annuler
                       </button>
@@ -372,7 +372,7 @@ function EntryCard({
             "inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border text-lg",
             entry.isFavorite
               ? "border-gold/50 bg-gold/10 text-gold"
-              : "border-white/15 text-muted hover:text-gold",
+              : "border-ink/15 text-muted hover:text-gold",
           ].join(" ")}
         >
           {entry.isFavorite ? "★" : "☆"}
@@ -419,21 +419,21 @@ function EntryCard({
         <button
           type="button"
           onClick={onEdit}
-          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
         >
           Modifier
         </button>
         <button
           type="button"
           onClick={onDuplicate}
-          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-sky/50 hover:text-sky"
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-sky/50 hover:text-sky"
         >
           Dupliquer
         </button>
         <button
           type="button"
           onClick={onRequestDelete}
-          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-ember/50 hover:text-ember"
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           Supprimer
         </button>
@@ -473,7 +473,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
           type="text"
           value={entry.title}
           onChange={(event) => onChange({ title: event.target.value })}
-          className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+          className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
         />
       </div>
 
@@ -493,7 +493,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
                 typeId: event.target.value as ProfessionalDevelopmentTypeId,
               })
             }
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           >
             {professionalDevelopmentTypes.map((type) => (
               <option key={type.id} value={type.id}>
@@ -519,7 +519,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
                   .value as ProfessionalDevelopmentStatusId,
               })
             }
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           >
             {professionalDevelopmentStatuses.map((status) => (
               <option key={status.id} value={status.id}>
@@ -544,7 +544,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
           onChange={(event) =>
             onChange({ organizationOrAuthor: event.target.value })
           }
-          className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+          className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
         />
       </div>
 
@@ -561,7 +561,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
             type="date"
             value={entry.date}
             onChange={(event) => onChange({ date: event.target.value })}
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           />
         </div>
 
@@ -578,7 +578,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
             placeholder="Ex. 3 h, 2 jours…"
             value={entry.duration}
             onChange={(event) => onChange({ duration: event.target.value })}
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           />
         </div>
       </div>
@@ -595,7 +595,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
           value={entry.goal}
           onChange={(event) => onChange({ goal: event.target.value })}
           rows={2}
-          className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+          className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
         />
       </div>
 
@@ -611,7 +611,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
           value={entry.notes}
           onChange={(event) => onChange({ notes: event.target.value })}
           rows={3}
-          className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+          className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
         />
       </div>
 
@@ -628,7 +628,7 @@ function EntryEditor({ entry, onChange, onClose }: EntryEditorProps) {
           placeholder="https://…"
           value={entry.link}
           onChange={(event) => onChange({ link: event.target.value })}
-          className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+          className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
         />
       </div>
 

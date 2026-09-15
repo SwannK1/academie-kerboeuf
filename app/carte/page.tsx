@@ -147,7 +147,7 @@ export default function CartePage() {
       {/* ── Hero ── */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-20" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(5,8,7,0.04),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.04),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-7xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Vue d&rsquo;ensemble
@@ -169,7 +169,7 @@ export default function CartePage() {
             </Link>
             <Link
               href="/missions-recentes"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               Missions récentes
             </Link>
@@ -202,7 +202,7 @@ export default function CartePage() {
       </section>
 
       {/* ── Lieux transversaux ── */}
-      <section className="border-y border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-y border-ink/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
@@ -267,7 +267,7 @@ export default function CartePage() {
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {/* Maternelle */}
-            <div className={`rounded-md border ${accentBorder.jade} bg-white/[0.04] p-4`}>
+            <div className={`rounded-md border ${accentBorder.jade} bg-ink/[0.04] p-4`}>
               <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.jade}`}>
                 Maternelle
               </p>
@@ -291,7 +291,7 @@ export default function CartePage() {
             </div>
 
             {/* Primaire */}
-            <div className={`rounded-md border ${accentBorder.gold} bg-white/[0.04] p-4`}>
+            <div className={`rounded-md border ${accentBorder.gold} bg-ink/[0.04] p-4`}>
               <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.gold}`}>
                 Primaire
               </p>
@@ -317,7 +317,7 @@ export default function CartePage() {
             </div>
 
             {/* Collège */}
-            <div className={`rounded-md border ${accentBorder.sky} bg-white/[0.04] p-4`}>
+            <div className={`rounded-md border ${accentBorder.sky} bg-ink/[0.04] p-4`}>
               <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.sky}`}>
                 Collège
               </p>
@@ -342,7 +342,7 @@ export default function CartePage() {
             </div>
 
             {/* Lycée */}
-            <div className={`rounded-md border ${accentBorder.ember} bg-white/[0.04] p-4`}>
+            <div className={`rounded-md border ${accentBorder.ember} bg-ink/[0.04] p-4`}>
               <p className={`mb-3 text-xs font-black uppercase tracking-[0.18em] ${accentText.ember}`}>
                 Lycée
               </p>
@@ -369,7 +369,7 @@ export default function CartePage() {
       </section>
 
       {/* ── Navigation globale ── */}
-      <section className="border-t border-white/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="border-t border-ink/10 bg-panel/40 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-ember">
@@ -444,7 +444,7 @@ function UniversCard({ univers }: { univers: UniversEntry }) {
   return (
     <Link
       href={univers.href}
-      className={`group rounded-md border p-6 transition hover:-translate-y-1 hover:bg-white/[0.06] ${accentBorder[color]} bg-white/[0.04]`}
+      className={`group rounded-md border p-6 transition hover:-translate-y-1 hover:bg-ink/[0.06] ${accentBorder[color]} bg-ink/[0.04]`}
     >
       <div className="flex items-start justify-between gap-4">
         <span
@@ -541,13 +541,13 @@ function LieuCard({
         {lieu.cyclesConcernes.slice(0, 3).map((cycle) => (
           <span
             key={cycle}
-            className="rounded bg-white/[0.04] px-2 py-0.5 text-xs font-medium text-muted"
+            className="rounded bg-ink/[0.04] px-2 py-0.5 text-xs font-medium text-muted"
           >
             {cycle}
           </span>
         ))}
         {lieu.cyclesConcernes.length > 3 && (
-          <span className="rounded bg-white/[0.04] px-2 py-0.5 text-xs font-medium text-muted/60">
+          <span className="rounded bg-ink/[0.04] px-2 py-0.5 text-xs font-medium text-muted/60">
             +{lieu.cyclesConcernes.length - 3}
           </span>
         )}
@@ -560,8 +560,8 @@ function LieuCard({
     </>
   );
 
-  const cardClass = `rounded-md border p-4 ${accentBorder[color]} bg-white/[0.04] ${
-    linked ? "transition hover:-translate-y-1 hover:bg-white/[0.06]" : "opacity-80"
+  const cardClass = `rounded-md border p-4 ${accentBorder[color]} bg-ink/[0.04] ${
+    linked ? "transition hover:-translate-y-1 hover:bg-ink/[0.06]" : "opacity-80"
   }`;
 
   if (linked && lieu.route) {
@@ -589,7 +589,7 @@ function NavCard({
   return (
     <Link
       href={href}
-      className={`group rounded-md border p-4 transition hover:-translate-y-1 hover:bg-white/[0.06] ${accentBorder[color]} bg-white/[0.04]`}
+      className={`group rounded-md border p-4 transition hover:-translate-y-1 hover:bg-ink/[0.06] ${accentBorder[color]} bg-ink/[0.04]`}
     >
       <p className={`text-sm font-black ${accentText[color]}`}>{label}</p>
       <p className="mt-1 text-xs leading-5 text-muted">{detail}</p>

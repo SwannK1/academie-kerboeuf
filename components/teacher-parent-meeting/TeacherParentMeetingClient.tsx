@@ -110,7 +110,7 @@ export function TeacherParentMeetingClient() {
 
       <section
         aria-label="Préparation de la réunion"
-        className="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+        className="rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
       >
         <h2 className="text-xl font-black text-foreground">
           Informations de la réunion
@@ -129,7 +129,7 @@ export function TeacherParentMeetingClient() {
               type="date"
               value={state.meeting.date}
               onChange={(event) => updateMeeting("date", event.target.value)}
-              className="mt-2 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground sm:max-w-xs"
+              className="mt-2 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground sm:max-w-xs"
             />
           </div>
 
@@ -146,7 +146,7 @@ export function TeacherParentMeetingClient() {
               onChange={(event) => updateMeeting("agenda", event.target.value)}
               rows={4}
               placeholder="Points à aborder"
-              className="mt-2 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-2 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -163,7 +163,7 @@ export function TeacherParentMeetingClient() {
               onChange={(event) => updateMeeting("documents", event.target.value)}
               rows={3}
               placeholder="Liste des documents"
-              className="mt-2 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-2 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -180,7 +180,7 @@ export function TeacherParentMeetingClient() {
               onChange={(event) => updateMeeting("questions", event.target.value)}
               rows={3}
               placeholder="Questions probables des familles"
-              className="mt-2 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-2 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
             />
           </div>
         </div>
@@ -192,7 +192,7 @@ export function TeacherParentMeetingClient() {
 
       <section
         aria-label="Checklist de préparation"
-        className="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+        className="rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-xl font-black text-foreground">
@@ -213,7 +213,7 @@ export function TeacherParentMeetingClient() {
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
             placeholder="Ajouter une tâche"
-            className="min-h-11 flex-1 rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="min-h-11 flex-1 rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           />
           <button
             type="submit"
@@ -228,14 +228,14 @@ export function TeacherParentMeetingClient() {
             {state.tasks.map((task) => (
               <li
                 key={task.id}
-                className="flex items-center gap-3 rounded-md border border-white/10 bg-background/45 px-4 py-2"
+                className="flex items-center gap-3 rounded-md border border-ink/10 bg-background/45 px-4 py-2"
               >
                 <input
                   id={`tache-${task.id}`}
                   type="checkbox"
                   checked={task.isDone}
                   onChange={() => toggleTask(task.id)}
-                  className="h-5 w-5 shrink-0 rounded border-white/30"
+                  className="h-5 w-5 shrink-0 rounded border-ink/30"
                 />
                 <label
                   htmlFor={`tache-${task.id}`}
@@ -251,7 +251,7 @@ export function TeacherParentMeetingClient() {
                   type="button"
                   onClick={() => removeTask(task.id)}
                   aria-label={`Supprimer la tâche : ${task.label}`}
-                  className="shrink-0 rounded-md border border-white/10 px-2 py-1 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember"
+                  className="shrink-0 rounded-md border border-ink/10 px-2 py-1 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember"
                 >
                   Supprimer
                 </button>

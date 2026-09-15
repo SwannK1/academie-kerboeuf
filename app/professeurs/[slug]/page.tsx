@@ -234,7 +234,7 @@ function PersonalitySection({ professor }: { professor: ProfessorProfile }) {
 
 function PersonalityItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded border border-white/10 bg-ink/35 p-4">
+    <div className="rounded border border-ink/10 bg-ink/35 p-4">
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
         {label}
       </p>
@@ -369,7 +369,7 @@ function AtmosphereSection({ professor }: { professor: ProfessorProfile }) {
 
           <div className="grid gap-4 md:grid-cols-2">
             {professor.personality ? (
-              <div className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Personnalité
                 </p>
@@ -377,7 +377,7 @@ function AtmosphereSection({ professor }: { professor: ProfessorProfile }) {
               </div>
             ) : null}
             {professor.pedagogicalRole ? (
-              <div className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+              <div className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Rôle pédagogique
                 </p>
@@ -412,7 +412,7 @@ function IntellectualGesturesSection({ professor }: { professor: ProfessorProfil
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-white/[0.018]"
+        className="absolute inset-0 -z-10 bg-ink/[0.018]"
       />
       <div className="mx-auto max-w-7xl">
         <SectionTitle
@@ -444,7 +444,7 @@ function ProfessorPedagogyTimeline({ professor }: { professor: ProfessorProfile 
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-white/[0.018]"
+        className="absolute inset-0 -z-10 bg-ink/[0.018]"
       />
       <div className="mx-auto max-w-7xl">
         <SectionTitle
@@ -452,7 +452,7 @@ function ProfessorPedagogyTimeline({ professor }: { professor: ProfessorProfile 
           title={`Comment travaille ${professor.name}`}
         />
 
-        <div className="mt-8 grid gap-px overflow-hidden rounded-md border border-white/10 bg-white/[0.06] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-px overflow-hidden rounded-md border border-ink/10 bg-ink/[0.06] sm:grid-cols-2 lg:grid-cols-4">
           {professor.pedagogySteps.map((step, i) => (
             <div key={step.label} className="flex flex-col gap-4 bg-ink/80 p-7 backdrop-blur-sm">
               <span
@@ -498,7 +498,7 @@ function ProfessorVisionSection({ professor }: { professor: ProfessorProfile }) 
             </div>
           ) : null}
           {professor.missionPhilosophy ? (
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-7">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-7">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted">
                 Philosophie des missions
               </p>
@@ -519,7 +519,7 @@ function StudentTransformationSection({ professor }: { professor: ProfessorProfi
 
   return (
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/[0.018]" />
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="Ce qu'on apprend avec lui / elle"
@@ -530,7 +530,7 @@ function StudentTransformationSection({ professor }: { professor: ProfessorProfi
           {professor.studentTransformation.map((item, i) => (
             <div
               key={i}
-              className="flex gap-4 rounded-md border border-white/10 bg-white/[0.035] p-5"
+              className="flex gap-4 rounded-md border border-ink/10 bg-ink/[0.035] p-5"
             >
               <span
                 className="shrink-0 text-lg font-black leading-none"
@@ -579,8 +579,8 @@ function ProfessorSignatureSection({ professor }: { professor: ProfessorProfile 
                 key={block.label}
                 className={`rounded-md border p-6 ${
                   isAccent
-                    ? `${a.borderMid} bg-white/[0.03]`
-                    : "border-white/10 bg-white/[0.035]"
+                    ? `${a.borderMid} bg-ink/[0.03]`
+                    : "border-ink/10 bg-ink/[0.035]"
                 }`}
               >
                 <p
@@ -595,7 +595,7 @@ function ProfessorSignatureSection({ professor }: { professor: ProfessorProfile 
                     <li
                       key={item}
                       className={`rounded border px-3 py-1.5 text-xs font-semibold ${
-                        isAccent ? a.badge : "border-white/10 bg-white/[0.04] text-muted"
+                        isAccent ? a.badge : "border-ink/10 bg-ink/[0.04] text-muted"
                       }`}
                     >
                       {item}
@@ -618,7 +618,7 @@ function SubjectsSection({ professor }: { professor: ProfessorProfile }) {
 
   return (
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/[0.018]" />
       <div className="mx-auto max-w-7xl">
         <SectionTitle eyebrow="Couverture pédagogique" title="Matières enseignées" />
         <div className="mt-6 flex flex-wrap gap-3">
@@ -652,7 +652,7 @@ function MethodSection({ professor }: { professor: ProfessorProfile }) {
           {professor.method.map((block) => (
             <div
               key={block.label}
-              className="rounded-md border border-white/10 bg-white/[0.045] p-5"
+              className="rounded-md border border-ink/10 bg-ink/[0.045] p-5"
             >
               <p className={`text-xs font-bold uppercase tracking-[0.18em] ${a.text}`}>
                 {block.label}
@@ -674,7 +674,7 @@ function MissionsSection({ professor }: { professor: ProfessorProfile }) {
 
   return (
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/[0.018]" />
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionTitle
@@ -683,7 +683,7 @@ function MissionsSection({ professor }: { professor: ProfessorProfile }) {
           />
           <Link
             href={professor.missionsPath}
-            className="inline-flex h-10 shrink-0 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm font-bold text-foreground transition hover:bg-white/10"
+            className="inline-flex h-10 shrink-0 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-sm font-bold text-foreground transition hover:bg-ink/10"
           >
             Voir toutes les missions
           </Link>
@@ -701,7 +701,7 @@ function MissionsSection({ professor }: { professor: ProfessorProfile }) {
             ))}
           </div>
         ) : (
-          <div className="mt-8 rounded-md border border-white/10 bg-white/[0.04] p-6">
+          <div className="mt-8 rounded-md border border-ink/10 bg-ink/[0.04] p-6">
             <p className="text-sm leading-7 text-muted">
               Aucune mission dédiée n’est encore reliée à cette personnalité.
               Les ressources existantes restent accessibles depuis le catalogue central.
@@ -718,14 +718,14 @@ function MissionsSection({ professor }: { professor: ProfessorProfile }) {
           </Link>
           <Link
             href={professor.levelPath}
-            className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+            className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
           >
             Espace {professor.levelLabel}
           </Link>
           {professor.levelPath.includes("/cm2") && (
             <Link
               href={`${professor.levelPath}/matieres`}
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-ink/15 bg-ink/[0.04] px-6 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
             >
               Matières CM2
             </Link>
@@ -748,7 +748,7 @@ function CharacterCrossLinks({ professor }: { professor: ProfessorProfile }) {
   return (
     <section className="px-4 pb-14 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-2">
-        <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+        <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
           <p className={`text-xs font-bold uppercase tracking-[0.18em] ${a.text}`}>
             Ressources associées
           </p>
@@ -758,7 +758,7 @@ function CharacterCrossLinks({ professor }: { professor: ProfessorProfile }) {
                 <Link
                   key={resource.id}
                   href={resource.href}
-                  className={`rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
+                  className={`rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
                 >
                   <span className="font-bold text-foreground">{resource.title}</span>
                   <span className="block text-xs uppercase tracking-[0.12em] text-muted">
@@ -774,7 +774,7 @@ function CharacterCrossLinks({ professor }: { professor: ProfessorProfile }) {
           )}
         </article>
 
-        <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+        <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
           <p className={`text-xs font-bold uppercase tracking-[0.18em] ${a.text}`}>
             Parcours associés
           </p>
@@ -784,7 +784,7 @@ function CharacterCrossLinks({ professor }: { professor: ProfessorProfile }) {
                 <Link
                   key={path.slug}
                   href={`/parcours/${path.slug}`}
-                  className={`rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
+                  className={`rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted transition ${a.borderHover} hover:text-foreground`}
                 >
                   <span className="font-bold text-foreground">{path.title}</span>
                   <span className="block text-xs uppercase tracking-[0.12em] text-muted">
@@ -818,7 +818,7 @@ function RelatedProfessorsSection({ professors }: { professors: ProfessorProfile
               <Link
                 key={p.slug}
                 href={p.profileHref}
-                className="group flex flex-col gap-4 rounded-md border border-white/10 bg-white/[0.045] p-5 transition hover:border-white/20 hover:bg-white/[0.065]"
+                className="group flex flex-col gap-4 rounded-md border border-ink/10 bg-ink/[0.045] p-5 transition hover:border-ink/20 hover:bg-ink/[0.065]"
               >
                 <div className="flex items-start gap-4">
                   <ProfessorAvatar professor={p} size="sm" />
@@ -832,7 +832,7 @@ function RelatedProfessorsSection({ professors }: { professors: ProfessorProfile
                     <p className={`mt-0.5 text-sm font-bold ${pa.textMuted}`}>{p.role}</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                <div className="flex items-center justify-between border-t border-ink/10 pt-4">
                   <span className={`rounded border px-2 py-1 text-xs font-bold uppercase tracking-[0.1em] ${pa.badge}`}>
                     {p.mainSubject}
                   </span>
@@ -892,7 +892,7 @@ function FelixCM2Section() {
 function FelixGesturesSection() {
   return (
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/[0.018]" />
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="Gestes intellectuels"
@@ -902,7 +902,7 @@ function FelixGesturesSection() {
           {FELIX_GESTURES.map((gesture) => (
             <div
               key={gesture.label}
-              className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+              className="rounded-md border border-ink/10 bg-ink/[0.035] p-5"
             >
               <p className="text-sm font-bold text-gold">{gesture.label}</p>
               <p className="mt-2 text-xs leading-6 text-muted">{gesture.description}</p>
@@ -949,7 +949,7 @@ function FelixPlacesSection() {
 function FelixBadgesSection() {
   return (
     <section className="relative isolate px-4 pb-14 sm:px-6 lg:px-8">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/[0.018]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/[0.018]" />
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="Compétences reconnues"
@@ -961,7 +961,7 @@ function FelixBadgesSection() {
             return (
               <div
                 key={badge.slug}
-                className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+                className="rounded-md border border-ink/10 bg-ink/[0.035] p-5"
               >
                 <span
                   className={`inline-flex rounded border px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] ${ba.badge}`}
@@ -989,7 +989,7 @@ function FelixCM2NavigationSection() {
             <Link
               key={link.href}
               href={link.href}
-              className="group rounded-md border border-white/10 bg-white/[0.035] p-6 transition hover:border-gold/30 hover:bg-white/[0.055]"
+              className="group rounded-md border border-ink/10 bg-ink/[0.035] p-6 transition hover:border-gold/30 hover:bg-ink/[0.055]"
             >
               <p className="text-sm font-bold text-foreground transition group-hover:text-gold">
                 {link.label} →
@@ -1007,7 +1007,7 @@ function FelixCM2NavigationSection() {
 
 function InfoBlock({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-white/10 bg-ink/35 p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/35 p-5">
       <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">{label}</p>
       <p className="mt-2 text-sm font-semibold leading-6 text-foreground">{value}</p>
     </div>

@@ -99,7 +99,7 @@ export default function SiteMapPage() {
               <Link
                 key={pathname}
                 href={pathname}
-                className="rounded-md border border-white/10 bg-white/[0.035] px-4 py-3 font-semibold text-muted transition hover:border-gold/40 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                className="rounded-md border border-ink/10 bg-ink/[0.035] px-4 py-3 font-semibold text-muted transition hover:border-gold/40 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 {labelForPath(pathname)}
               </Link>

@@ -103,7 +103,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
               className={`rounded-sm border px-4 py-2 text-sm font-bold transition ${
                 sib.isCurrent
                   ? "border-jade/50 bg-jade/15 text-jade"
-                  : "border-white/10 bg-white/[0.03] text-muted hover:border-white/25 hover:bg-white/[0.06] hover:text-foreground"
+                  : "border-ink/10 bg-ink/[0.03] text-muted hover:border-ink/25 hover:bg-ink/[0.06] hover:text-foreground"
               }`}
               aria-current={sib.isCurrent ? "page" : undefined}
             >
@@ -113,13 +113,13 @@ export default async function FicheDetailPage({ params }: PageProps) {
         </nav>
 
         {/* ── Contenu ──────────────────────────────────────────────────────── */}
-        <div className="mt-10 rounded-md border border-white/10 bg-white/[0.03] p-8">
+        <div className="mt-10 rounded-md border border-ink/10 bg-ink/[0.03] p-8">
           {clickable && sheet.imageHref ? (
             <div className="flex flex-col items-start gap-4">
               <img
                 src={sheet.imageHref}
                 alt={`${notion.title} — ${label}`}
-                className="w-full rounded-md border border-white/10"
+                className="w-full rounded-md border border-ink/10"
               />
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -147,7 +147,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
               <p className="text-sm font-bold text-muted">
                 Cette feuille n&apos;est pas encore disponible.
               </p>
-              <p className="text-xs leading-6 text-white/30">
+              <p className="text-xs leading-6 text-ink/30">
                 La fiche {label.toLowerCase()} pour «&nbsp;{notion.title}&nbsp;» sera
                 mise en ligne prochainement.
               </p>
@@ -156,7 +156,7 @@ export default async function FicheDetailPage({ params }: PageProps) {
         </div>
 
         {/* ── Retour catalogue ─────────────────────────────────────────────── */}
-        <div className="mt-10 border-t border-white/10 pt-8">
+        <div className="mt-10 border-t border-ink/10 pt-8">
           <Link
             href="/primaire/cm2/fiches/mathematiques"
             className="text-sm font-bold text-jade hover:underline"

@@ -194,7 +194,7 @@ export function SchoolCouncilPlanner() {
     <div>
       <section
         aria-labelledby="creer-conseil-titre"
-        className="rounded-lg border border-white/10 bg-white/[0.03] p-5"
+        className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5"
       >
         <h2 id="creer-conseil-titre" className="text-xl font-black text-foreground">
           Créer un conseil
@@ -209,7 +209,7 @@ export function SchoolCouncilPlanner() {
               type="date"
               value={date}
               onChange={(event) => setDate(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
             />
           </label>
 
@@ -219,7 +219,7 @@ export function SchoolCouncilPlanner() {
               value={agenda}
               onChange={(event) => setAgenda(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/15 bg-background/40 p-3 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/15 bg-background/40 p-3 text-sm text-foreground"
             />
           </label>
 
@@ -231,7 +231,7 @@ export function SchoolCouncilPlanner() {
               <button
                 type="button"
                 onClick={addDraftPoint}
-                className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
+                className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
               >
                 + Ajouter un point
               </button>
@@ -241,7 +241,7 @@ export function SchoolCouncilPlanner() {
               {points.map((point) => (
                 <div
                   key={point.id}
-                  className="rounded-md border border-white/10 bg-background/40 p-3"
+                  className="rounded-md border border-ink/10 bg-background/40 p-3"
                 >
                   <div className="flex flex-wrap items-center gap-2">
                     <select
@@ -251,7 +251,7 @@ export function SchoolCouncilPlanner() {
                           category: event.target.value as CouncilPointCategory,
                         })
                       }
-                      className="min-h-9 rounded border border-white/15 bg-background/60 px-2 text-xs font-bold text-foreground"
+                      className="min-h-9 rounded border border-ink/15 bg-background/60 px-2 text-xs font-bold text-foreground"
                     >
                       {councilPointCategories.map((category) => (
                         <option key={category.id} value={category.id}>
@@ -263,7 +263,7 @@ export function SchoolCouncilPlanner() {
                       type="button"
                       onClick={() => removeDraftPoint(point.id)}
                       disabled={points.length === 1}
-                      className="ml-auto min-h-9 rounded border border-white/15 px-2 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose disabled:opacity-30"
+                      className="ml-auto min-h-9 rounded border border-ink/15 px-2 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose disabled:opacity-30"
                     >
                       Retirer
                     </button>
@@ -275,7 +275,7 @@ export function SchoolCouncilPlanner() {
                       updateDraftPoint(point.id, { title: event.target.value })
                     }
                     placeholder="Titre du point"
-                    className="mt-2 min-h-10 w-full rounded-md border border-white/15 bg-background/60 px-3 text-sm text-foreground"
+                    className="mt-2 min-h-10 w-full rounded-md border border-ink/15 bg-background/60 px-3 text-sm text-foreground"
                   />
                   <textarea
                     value={point.details}
@@ -284,7 +284,7 @@ export function SchoolCouncilPlanner() {
                     }
                     placeholder="Détails (facultatif)"
                     rows={2}
-                    className="mt-2 w-full rounded-md border border-white/15 bg-background/60 p-2 text-sm text-foreground"
+                    className="mt-2 w-full rounded-md border border-ink/15 bg-background/60 p-2 text-sm text-foreground"
                   />
                 </div>
               ))}
@@ -297,7 +297,7 @@ export function SchoolCouncilPlanner() {
               value={decisions}
               onChange={(event) => setDecisions(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/15 bg-background/40 p-3 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/15 bg-background/40 p-3 text-sm text-foreground"
             />
           </label>
 
@@ -309,7 +309,7 @@ export function SchoolCouncilPlanner() {
               value={questions}
               onChange={(event) => setQuestions(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/15 bg-background/40 p-3 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/15 bg-background/40 p-3 text-sm text-foreground"
             />
           </label>
 
@@ -319,7 +319,7 @@ export function SchoolCouncilPlanner() {
               value={notes}
               onChange={(event) => setNotes(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/15 bg-background/40 p-3 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/15 bg-background/40 p-3 text-sm text-foreground"
             />
           </label>
 
@@ -343,14 +343,14 @@ export function SchoolCouncilPlanner() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
+            className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
           >
             Imprimer
           </button>
         </div>
 
         {councils.length === 0 ? (
-          <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+          <p className="mt-4 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
             Aucun conseil enregistré pour le moment.
           </p>
         ) : (
@@ -358,7 +358,7 @@ export function SchoolCouncilPlanner() {
             {councils.map((council) => (
               <li
                 key={council.id}
-                className="rounded-lg border border-white/10 bg-white/[0.03] p-5"
+                className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
@@ -387,7 +387,7 @@ export function SchoolCouncilPlanner() {
                       <button
                         type="button"
                         onClick={cancelDelete}
-                        className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground"
+                        className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground"
                       >
                         Annuler
                       </button>
@@ -396,7 +396,7 @@ export function SchoolCouncilPlanner() {
                     <button
                       type="button"
                       onClick={() => requestDelete(council.id)}
-                      className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                      className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
                     >
                       Supprimer
                     </button>
@@ -408,7 +408,7 @@ export function SchoolCouncilPlanner() {
                     {council.points.map((point) => (
                       <li
                         key={point.id}
-                        className="rounded-md border border-white/10 bg-background/40 p-3"
+                        className="rounded-md border border-ink/10 bg-background/40 p-3"
                       >
                         <p className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
                           {
@@ -502,7 +502,7 @@ function CouncilActions({
   }
 
   return (
-    <div className="mt-5 border-t border-white/10 pt-4">
+    <div className="mt-5 border-t border-ink/10 pt-4">
       <p className="text-xs font-bold uppercase tracking-[0.08em] text-foreground">
         Actions de suivi
       </p>
@@ -513,12 +513,12 @@ function CouncilActions({
           value={draftLabel}
           onChange={(event) => setDraftLabel(event.target.value)}
           placeholder="Nouvelle action"
-          className="min-h-9 flex-1 rounded-md border border-white/15 bg-background/40 px-3 text-sm text-foreground"
+          className="min-h-9 flex-1 rounded-md border border-ink/15 bg-background/40 px-3 text-sm text-foreground"
         />
         <button
           type="button"
           onClick={handleAdd}
-          className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
+          className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-jade/40"
         >
           Ajouter
         </button>
@@ -529,7 +529,7 @@ function CouncilActions({
           {council.actions.map((action) => (
             <li
               key={action.id}
-              className="flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-background/40 p-2"
+              className="flex flex-wrap items-center gap-2 rounded-md border border-ink/10 bg-background/40 p-2"
             >
               <span className="flex-1 text-sm text-foreground">{action.label}</span>
 
@@ -540,7 +540,7 @@ function CouncilActions({
                     status: event.target.value as ActionStatus,
                   })
                 }
-                className="min-h-9 rounded border border-white/15 bg-background/60 px-2 text-xs font-bold text-foreground"
+                className="min-h-9 rounded border border-ink/15 bg-background/60 px-2 text-xs font-bold text-foreground"
               >
                 {actionStatuses.map((status) => (
                   <option key={status.id} value={status.id}>
@@ -556,7 +556,7 @@ function CouncilActions({
                     priority: event.target.value as ActionPriority,
                   })
                 }
-                className="min-h-9 rounded border border-white/15 bg-background/60 px-2 text-xs font-bold text-foreground"
+                className="min-h-9 rounded border border-ink/15 bg-background/60 px-2 text-xs font-bold text-foreground"
               >
                 {actionPriorities.map((priority) => (
                   <option key={priority.id} value={priority.id}>
@@ -568,7 +568,7 @@ function CouncilActions({
               <button
                 type="button"
                 onClick={() => onRemoveAction(action.id)}
-                className="min-h-9 rounded border border-white/15 px-2 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                className="min-h-9 rounded border border-ink/15 px-2 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
               >
                 Retirer
               </button>

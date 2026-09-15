@@ -138,7 +138,7 @@ export default function Cm2ParcoursPage() {
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(243,196,91,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(80,200,164,0.13),transparent_30%),linear-gradient(180deg,rgba(5,8,7,0.02),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(143,84,23,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(63,107,82,0.13),transparent_30%),linear-gradient(180deg,rgba(245,239,224,0.02),rgba(245,239,224,0.94))]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.7fr] lg:items-end">
           <div>
             <p className="inline-flex rounded-md border border-gold/35 bg-gold/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-gold">
@@ -155,20 +155,20 @@ export default function Cm2ParcoursPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/primaire/cm2"
-                className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+                className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-background transition hover:brightness-110"
               >
                 Retour au niveau CM2
               </Link>
               <Link
                 href="/primaire/cm2/missions"
-                className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+                className="rounded-md border border-ink/15 bg-ink/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-ink/10"
               >
                 Voir toutes les missions
               </Link>
             </div>
           </div>
 
-          <aside className="rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+          <aside className="rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
               Repères de progression
             </p>
@@ -271,7 +271,7 @@ export default function Cm2ParcoursPage() {
                     <Link
                       key={step.href}
                       href={step.href}
-                      className="rounded border border-white/10 bg-ink/35 p-4 transition hover:border-gold/30 hover:bg-white/[0.06]"
+                      className="rounded border border-ink/10 bg-ink/35 p-4 transition hover:border-gold/30 hover:bg-ink/[0.06]"
                     >
                       <span className="font-mono text-xs font-black text-gold">
                         Étape {index + 1}
@@ -293,7 +293,7 @@ export default function Cm2ParcoursPage() {
 
       <section className="px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+          <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
             <SectionHeader
               eyebrow="Liens utiles"
               title="Continuer l’exploration"
@@ -323,7 +323,7 @@ function DomainCard({
   };
 }) {
   return (
-    <article className="flex min-h-full flex-col rounded-md border border-white/10 bg-white/[0.045] p-5">
+    <article className="flex min-h-full flex-col rounded-md border border-ink/10 bg-ink/[0.045] p-5">
       <h3 className="text-xl font-black text-foreground">{domain.name}</h3>
       <p className="mt-3 flex-1 text-sm leading-7 text-muted">
         {domain.description}
@@ -333,7 +333,7 @@ function DomainCard({
           <Link
             key={mission.slug}
             href={`/primaire/cm2/missions/${mission.slug}`}
-            className="rounded border border-white/10 bg-ink/35 p-3 text-sm font-bold text-foreground transition hover:border-gold/30 hover:text-gold"
+            className="rounded border border-ink/10 bg-ink/35 p-3 text-sm font-bold text-foreground transition hover:border-gold/30 hover:text-gold"
           >
             {mission.title}
           </Link>
@@ -353,7 +353,7 @@ function ProgressionStep({
   missions: Cm2Mission[];
 }) {
   return (
-    <article className="grid gap-4 rounded-md border border-white/10 bg-white/[0.04] p-5 sm:grid-cols-[auto_1fr]">
+    <article className="grid gap-4 rounded-md border border-ink/10 bg-ink/[0.04] p-5 sm:grid-cols-[auto_1fr]">
       <span className="grid size-12 place-items-center rounded bg-gold/10 font-mono text-sm font-black text-gold">
         {String(index).padStart(2, "0")}
       </span>
@@ -364,7 +364,7 @@ function ProgressionStep({
             <Link
               key={mission.slug}
               href={`/primaire/cm2/missions/${mission.slug}`}
-              className="rounded border border-white/10 bg-ink/35 p-4 transition hover:border-gold/30 hover:bg-white/[0.06]"
+              className="rounded border border-ink/10 bg-ink/35 p-4 transition hover:border-gold/30 hover:bg-ink/[0.06]"
             >
               <span
                 className={`text-xs font-bold uppercase tracking-[0.16em] ${mission.theme.textClass}`}
@@ -396,7 +396,7 @@ function AudiencePanel({
   items: string[];
 }) {
   return (
-    <article className="rounded-md border border-white/10 bg-white/[0.045] p-6">
+    <article className="rounded-md border border-ink/10 bg-ink/[0.045] p-6">
       <p className="text-xs font-bold uppercase tracking-[0.22em] text-jade">
         {eyebrow}
       </p>
@@ -405,7 +405,7 @@ function AudiencePanel({
         {items.map((item) => (
           <li
             key={item}
-            className="rounded border border-white/10 bg-ink/35 p-3 text-sm leading-6 text-muted"
+            className="rounded border border-ink/10 bg-ink/35 p-3 text-sm leading-6 text-muted"
           >
             {item}
           </li>
@@ -425,7 +425,7 @@ function UsefulLink({
   return (
     <Link
       href={href}
-      className="rounded-md border border-white/15 bg-white/[0.05] px-4 py-3 text-sm font-bold text-foreground transition hover:border-gold/35 hover:bg-gold/10 hover:text-gold"
+      className="rounded-md border border-ink/15 bg-ink/[0.05] px-4 py-3 text-sm font-bold text-foreground transition hover:border-gold/35 hover:bg-gold/10 hover:text-gold"
     >
       {children}
     </Link>

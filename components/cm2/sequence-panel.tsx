@@ -18,7 +18,7 @@ export function SequencePanel({ sequence }: Props) {
   if (!sequence || sequence.length === 0) return null;
 
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <div className="flex items-baseline gap-3">
         <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
           Séquence de séances
@@ -32,14 +32,14 @@ export function SequencePanel({ sequence }: Props) {
         {sequence.map((step) => {
           const config = typeConfig[step.type] ?? {
             label: step.type,
-            color: "border-white/15 bg-white/[0.04] text-muted",
+            color: "border-ink/15 bg-ink/[0.04] text-muted",
           };
           return (
             <li
               key={step.order}
-              className="grid gap-3 rounded border border-white/10 bg-ink/30 p-4 sm:grid-cols-[auto_1fr]"
+              className="grid gap-3 rounded border border-ink/10 bg-ink/30 p-4 sm:grid-cols-[auto_1fr]"
             >
-              <span className="grid size-10 place-items-center rounded bg-white/[0.06] font-mono text-sm font-black text-foreground">
+              <span className="grid size-10 place-items-center rounded bg-ink/[0.06] font-mono text-sm font-black text-foreground">
                 {String(step.order).padStart(2, "0")}
               </span>
               <div>

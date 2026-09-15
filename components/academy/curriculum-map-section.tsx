@@ -8,8 +8,8 @@ type CurriculumMapSectionProps = {
 export function CurriculumMapSection({ domain }: CurriculumMapSectionProps) {
   return (
     <section aria-labelledby={`domain-${domain.domainSlug}`}>
-      <div className="rounded-md border border-white/10 bg-white/[0.02]">
-        <div className="border-b border-white/10 px-4 py-3">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.02]">
+        <div className="border-b border-ink/10 px-4 py-3">
           <p
             id={`domain-${domain.domainSlug}`}
             className="text-sm font-bold text-foreground"
@@ -17,7 +17,7 @@ export function CurriculumMapSection({ domain }: CurriculumMapSectionProps) {
             {domain.label}
           </p>
         </div>
-        <div className="divide-y divide-white/[0.06] px-4">
+        <div className="divide-y divide-ink/[0.06] px-4">
           {domain.subdomains.map((subdomain) => (
             <div key={subdomain.subdomainSlug} className="py-3">
               <p

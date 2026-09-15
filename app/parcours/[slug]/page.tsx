@@ -65,7 +65,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
 
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(75,180,140,0.18),transparent_36%),linear-gradient(180deg,rgba(5,8,7,0.06),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(63,107,82,0.18),transparent_36%),linear-gradient(180deg,rgba(245,239,224,0.06),rgba(245,239,224,0.94))]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.72fr] lg:items-end">
           <div>
             <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
@@ -79,7 +79,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
             </p>
           </div>
 
-          <aside className="rounded-md border border-white/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
+          <aside className="rounded-md border border-ink/12 bg-panel/72 p-5 shadow-2xl shadow-black/35">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
               Dossier parcours
             </p>
@@ -101,7 +101,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
                 {path.competencies.map((competency) => (
                   <li
                     key={competency}
-                    className="rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                    className="rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
                   >
                     {competency}
                   </li>
@@ -139,7 +139,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
           </aside>
 
           <div>
-            <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
                 Progression étape par étape
               </p>
@@ -148,7 +148,7 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
                   <Link
                     key={step.href}
                     href={step.href}
-                    className="group grid gap-4 rounded-md border border-white/10 bg-ink/35 p-5 transition hover:border-gold/35 hover:bg-white/[0.065] md:grid-cols-[auto_1fr_auto] md:items-start"
+                    className="group grid gap-4 rounded-md border border-ink/10 bg-ink/35 p-5 transition hover:border-gold/35 hover:bg-ink/[0.065] md:grid-cols-[auto_1fr_auto] md:items-start"
                   >
                     <span className="grid size-11 place-items-center rounded-md border border-gold/30 bg-gold/10 font-mono text-sm font-black text-gold">
                       {String(index + 1).padStart(2, "0")}
@@ -186,13 +186,13 @@ export default async function LearningPathDetailPage({ params }: PageProps) {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/ressources"
-                className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+                className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-background transition hover:brightness-110"
               >
                 Retour aux ressources
               </Link>
               <Link
                 href="/parcours"
-                className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+                className="rounded-md border border-ink/15 bg-ink/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-ink/10"
               >
                 Tous les parcours
               </Link>
@@ -212,7 +212,7 @@ function Meta({
   value: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded border border-white/10 bg-white/[0.04] p-3">
+    <div className="flex items-center justify-between gap-4 rounded border border-ink/10 bg-ink/[0.04] p-3">
       <span className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
         {label}
       </span>
@@ -231,7 +231,7 @@ function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-6">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-6">
       <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accentClass}`}>
         {title}
       </p>

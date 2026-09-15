@@ -81,7 +81,7 @@ export default function ReussirEntreeSixiemePage() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
         <div className="mission-grid absolute inset-0 -z-20 opacity-25" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(75,180,140,0.16),transparent_36%),linear-gradient(180deg,rgba(5,8,7,0.06),rgba(9,16,15,0.94))]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(63,107,82,0.16),transparent_36%),linear-gradient(180deg,rgba(245,239,224,0.06),rgba(245,239,224,0.94))]" />
         <div className="mx-auto max-w-4xl">
           <p className="inline-flex rounded-md border border-jade/35 bg-jade/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-jade">
             Parcours de transition
@@ -107,7 +107,7 @@ export default function ReussirEntreeSixiemePage() {
               return (
                 <div
                   key={bloc.title}
-                  className="rounded-md border border-white/10 bg-white/[0.04] p-5"
+                  className="rounded-md border border-ink/10 bg-ink/[0.04] p-5"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h2 className="text-lg font-black text-foreground">
@@ -118,7 +118,7 @@ export default function ReussirEntreeSixiemePage() {
                   <p className="mt-3 text-sm leading-6 text-muted">
                     {bloc.objectif}
                   </p>
-                  <p className="mt-3 rounded border border-white/8 bg-white/[0.03] px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-jade">
+                  <p className="mt-3 rounded border border-ink/8 bg-ink/[0.03] px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-jade">
                     {bloc.competence}
                   </p>
                   <p className="mt-3 text-xs leading-5 text-muted/70">
@@ -133,7 +133,7 @@ export default function ReussirEntreeSixiemePage() {
 
       {/* Pour qui ? */}
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl rounded-md border border-white/10 bg-panel/72 p-6">
+        <div className="mx-auto max-w-4xl rounded-md border border-ink/10 bg-panel/72 p-6">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">
             Pour qui ?
           </p>
@@ -146,7 +146,7 @@ export default function ReussirEntreeSixiemePage() {
             ].map((item) => (
               <li
                 key={item}
-                className="rounded border border-white/10 bg-white/[0.04] px-4 py-3 text-sm leading-6 text-muted"
+                className="rounded border border-ink/10 bg-ink/[0.04] px-4 py-3 text-sm leading-6 text-muted"
               >
                 {item}
               </li>
@@ -160,19 +160,19 @@ export default function ReussirEntreeSixiemePage() {
         <div className="mx-auto max-w-4xl flex flex-wrap gap-3">
           <Link
             href="/parcours"
-            className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-ink transition hover:bg-[#ffd778]"
+            className="rounded-md bg-gold px-5 py-3 text-sm font-extrabold text-background transition hover:brightness-110"
           >
             Tous les parcours
           </Link>
           <Link
             href="/college"
-            className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+            className="rounded-md border border-ink/15 bg-ink/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-ink/10"
           >
             Collège
           </Link>
           <Link
             href="/primaire/cm2"
-            className="rounded-md border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-white/10"
+            className="rounded-md border border-ink/15 bg-ink/[0.05] px-5 py-3 text-sm font-bold text-foreground transition hover:bg-ink/10"
           >
             CM2
           </Link>

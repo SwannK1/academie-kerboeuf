@@ -27,16 +27,16 @@ type MissionSkillPanelProps = {
 export function MissionSkillPanel({ skills, evidence }: MissionSkillPanelProps) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
         <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
           Compétences travaillées
         </h2>
         <ul className="mt-4 space-y-3" aria-label="Compétences">
           {skills.map((skill) => {
             const badgeClass =
-              gestureColor[skill.gesture] ?? "border-white/20 bg-white/[0.04] text-muted";
+              gestureColor[skill.gesture] ?? "border-ink/20 bg-ink/[0.04] text-muted";
             return (
-              <li key={skill.id} className="rounded border border-white/10 bg-ink/35 p-3">
+              <li key={skill.id} className="rounded border border-ink/10 bg-ink/35 p-3">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-bold text-foreground text-sm">{skill.label}</h3>
                   <span
@@ -52,7 +52,7 @@ export function MissionSkillPanel({ skills, evidence }: MissionSkillPanelProps) 
         </ul>
       </div>
 
-      <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+      <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
         <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
           Preuves attendues
         </h2>
@@ -60,7 +60,7 @@ export function MissionSkillPanel({ skills, evidence }: MissionSkillPanelProps) 
           {evidence.map((item, index) => (
             <li
               key={index}
-              className="flex items-start gap-3 rounded border border-white/10 bg-ink/35 p-3"
+              className="flex items-start gap-3 rounded border border-ink/10 bg-ink/35 p-3"
             >
               <span className="shrink-0 rounded border border-gold/25 bg-gold/10 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.12em] text-gold">
                 {evidenceIcon[item.type] ?? item.type}

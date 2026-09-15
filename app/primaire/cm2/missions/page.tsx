@@ -148,7 +148,7 @@ export default function Cm2MissionsPage() {
             {audienceCards.map((card) => (
               <article
                 key={card.title}
-                className={`rounded-md border bg-white/[0.045] p-5 ${card.accent.split(" ")[0]}`}
+                className={`rounded-md border bg-ink/[0.045] p-5 ${card.accent.split(" ")[0]}`}
               >
                 <h2 className={`text-xl font-black ${card.accent.split(" ")[1]}`}>
                   {card.title}
@@ -158,7 +158,7 @@ export default function Cm2MissionsPage() {
             ))}
           </div>
 
-          <div className="mt-6 grid gap-3 rounded-md border border-white/10 bg-panel/65 p-5 sm:grid-cols-4">
+          <div className="mt-6 grid gap-3 rounded-md border border-ink/10 bg-panel/65 p-5 sm:grid-cols-4">
             <Metric value={cm2Missions.length} label="missions CM2" />
             <Metric value={felixProjects.length} label="projets Félix" />
             <Metric value={availableMissions.length} label="disponibles" />
@@ -171,7 +171,7 @@ export default function Cm2MissionsPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/primaire/cm2"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               ← Retour CM2
             </Link>
@@ -183,7 +183,7 @@ export default function Cm2MissionsPage() {
             </Link>
             <Link
               href="/professeurs"
-              className="rounded-md border border-white/15 bg-white/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-white/[0.08]"
+              className="rounded-md border border-ink/15 bg-ink/[0.04] px-5 py-3 text-sm font-black text-foreground transition hover:bg-ink/[0.08]"
             >
               Voir les professeurs
             </Link>
@@ -198,7 +198,7 @@ export default function Cm2MissionsPage() {
       {/* Projets Félix enrichis */}
       <section className="cm2-print-section px-4 pb-16 sm:px-6 lg:px-8" aria-labelledby="felix-projects-title">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6 flex flex-col justify-between gap-4 border-b border-white/10 pb-6 sm:flex-row sm:items-end">
+          <div className="mb-6 flex flex-col justify-between gap-4 border-b border-ink/10 pb-6 sm:flex-row sm:items-end">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Projets transversaux Félix
@@ -218,7 +218,7 @@ export default function Cm2MissionsPage() {
                 return count > 0 ? (
                   <span
                     key={statusKey}
-                    className="rounded border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-bold text-muted"
+                    className="rounded border border-ink/10 bg-ink/[0.04] px-3 py-1 text-xs font-bold text-muted"
                   >
                     {count} {getPublicStatusLabel(statusKey)}
                   </span>
@@ -232,7 +232,7 @@ export default function Cm2MissionsPage() {
               <Link
                 key={project.slug}
                 href={`/primaire/cm2/missions/${project.slug}`}
-                className={`group flex min-h-full flex-col rounded-md border bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:bg-white/[0.07] ${project.theme.ringClass}`}
+                className={`group flex min-h-full flex-col rounded-md border bg-ink/[0.045] p-5 transition hover:-translate-y-1 hover:bg-ink/[0.07] ${project.theme.ringClass}`}
               >
                 <div className={`mb-4 h-1 rounded-full ${project.theme.accentClass}`} aria-hidden="true" />
                 <div className="flex items-start justify-between gap-3">
@@ -247,10 +247,10 @@ export default function Cm2MissionsPage() {
                   {project.synopsis}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
+                  <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
                     {project.duration}
                   </span>
-                  <span className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
+                  <span className="rounded border border-ink/10 bg-ink/[0.04] px-2 py-0.5 text-xs font-bold text-muted">
                     {project.skills.length} compétences
                   </span>
                 </div>
@@ -292,7 +292,7 @@ export default function Cm2MissionsPage() {
               <Link
                 key={mission.slug}
                 href={`/primaire/cm2/missions/${mission.slug}`}
-                className={`rounded-md border bg-ink/35 p-4 transition hover:-translate-y-1 hover:bg-white/[0.06] ${mission.theme.ringClass}`}
+                className={`rounded-md border bg-ink/35 p-4 transition hover:-translate-y-1 hover:bg-ink/[0.06] ${mission.theme.ringClass}`}
               >
                 <p
                   className={`text-xs font-bold uppercase tracking-[0.16em] ${mission.theme.textClass}`}
@@ -316,7 +316,7 @@ export default function Cm2MissionsPage() {
 
       <section className="cm2-print-section px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-8 flex flex-col gap-3 border-b border-ink/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Catalogue par domaine
@@ -340,7 +340,7 @@ export default function Cm2MissionsPage() {
               }
 
               return (
-                <section key={section.title} className="border-t border-white/10 pt-8">
+                <section key={section.title} className="border-t border-ink/10 pt-8">
                   <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
                     <div>
                       <h3 className="text-2xl font-black text-foreground">
@@ -370,7 +370,7 @@ export default function Cm2MissionsPage() {
 
 function Metric({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.045] p-4">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.045] p-4">
       <p className="text-3xl font-black text-foreground">{value}</p>
       <p className="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-muted">
         {label}

@@ -397,7 +397,7 @@ export function TeacherLogbookClient() {
 
       <section
         aria-labelledby="navigation-semaine"
-        className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+        className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
       >
         <h2 id="navigation-semaine" className="text-xl font-black text-foreground">
           {formatWeekRangeLabel(currentWeekKey)}
@@ -406,7 +406,7 @@ export function TeacherLogbookClient() {
           <button
             type="button"
             onClick={() => goToWeek(addDaysToKey(currentWeekKey, -7))}
-            className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             ← Semaine précédente
           </button>
@@ -420,7 +420,7 @@ export function TeacherLogbookClient() {
           <button
             type="button"
             onClick={() => goToWeek(addDaysToKey(currentWeekKey, 7))}
-            className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Semaine suivante →
           </button>
@@ -433,7 +433,7 @@ export function TeacherLogbookClient() {
                 const [y, m, d] = event.target.value.split("-").map(Number);
                 goToWeek(getMondayKey(new Date(y, m - 1, d)));
               }}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-2 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-2 text-sm font-medium text-foreground"
             />
           </label>
         </div>
@@ -453,7 +453,7 @@ export function TeacherLogbookClient() {
           className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
             viewMode === "grille"
               ? "border-jade/60 bg-jade/15 text-jade"
-              : "border-white/15 text-foreground hover:border-jade/40"
+              : "border-ink/15 text-foreground hover:border-jade/40"
           }`}
         >
           Vue grille (organiser)
@@ -465,7 +465,7 @@ export function TeacherLogbookClient() {
           className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
             viewMode === "journal"
               ? "border-jade/60 bg-jade/15 text-jade"
-              : "border-white/15 text-foreground hover:border-jade/40"
+              : "border-ink/15 text-foreground hover:border-jade/40"
           }`}
         >
           Voir mon cahier journal (imprimable)
@@ -480,7 +480,7 @@ export function TeacherLogbookClient() {
       <>
       <section
         aria-labelledby="semaine-speciale"
-        className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
       >
         <h2 id="semaine-speciale" className="text-xl font-black text-foreground">
           Semaine spéciale et duplication
@@ -497,7 +497,7 @@ export function TeacherLogbookClient() {
                     : null,
                 )
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               <option value="">Semaine normale</option>
               {logbookSpecialWeekTypes.map((type) => (
@@ -514,7 +514,7 @@ export function TeacherLogbookClient() {
                 type="text"
                 value={week.specialWeekNote}
                 onChange={(event) => setSpecialWeekNote(event.target.value)}
-                className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 placeholder="Sortie au musée, évaluations de période, remplacement..."
               />
             </label>
@@ -522,7 +522,7 @@ export function TeacherLogbookClient() {
           <button
             type="button"
             onClick={duplicateWeekToNext}
-            className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Dupliquer cette semaine → semaine suivante
           </button>
@@ -543,14 +543,14 @@ export function TeacherLogbookClient() {
           <table className="w-full min-w-[900px] border-collapse text-sm print:min-w-0 print:text-xs">
             <thead>
               <tr>
-                <th scope="col" className="w-32 border border-white/10 p-2 text-left text-xs font-bold uppercase tracking-[0.1em] text-muted">
+                <th scope="col" className="w-32 border border-ink/10 p-2 text-left text-xs font-bold uppercase tracking-[0.1em] text-muted">
                   Créneau
                 </th>
                 {logbookDays.map((day) => (
                   <th
                     key={day.id}
                     scope="col"
-                    className="border border-white/10 p-2 text-left text-xs font-bold uppercase tracking-[0.1em] text-muted"
+                    className="border border-ink/10 p-2 text-left text-xs font-bold uppercase tracking-[0.1em] text-muted"
                   >
                     {day.label}
                   </th>
@@ -562,7 +562,7 @@ export function TeacherLogbookClient() {
                 <tr key={slot.id}>
                   <th
                     scope="row"
-                    className="border border-white/10 p-2 align-top text-left text-xs font-bold text-foreground"
+                    className="border border-ink/10 p-2 align-top text-left text-xs font-bold text-foreground"
                   >
                     {slot.label}
                   </th>
@@ -575,7 +575,7 @@ export function TeacherLogbookClient() {
                         key={day.id}
                         onDragOver={(event) => event.preventDefault()}
                         onDrop={() => handleDropOnCell(day.id, slot.id)}
-                        className="border border-white/10 p-2 align-top"
+                        className="border border-ink/10 p-2 align-top"
                       >
                         <ul className="space-y-2" role="list">
                           {cellSessions.map((session, index) => (
@@ -585,7 +585,7 @@ export function TeacherLogbookClient() {
                               onDragStart={() => {
                                 dragSourceRef.current = session.id;
                               }}
-                              className="rounded-md border border-white/15 bg-background/40 p-2 print:border-black/40"
+                              className="rounded-md border border-ink/15 bg-background/40 p-2 print:border-black/40"
                             >
                               <button
                                 type="button"
@@ -608,7 +608,7 @@ export function TeacherLogbookClient() {
                                   {session.location ? ` · ${session.location}` : ""}
                                 </span>
                                 <span
-                                  className="mt-1 inline-flex items-center gap-1 rounded border border-white/20 px-1.5 py-0.5 text-[11px] font-bold text-foreground"
+                                  className="mt-1 inline-flex items-center gap-1 rounded border border-ink/20 px-1.5 py-0.5 text-[11px] font-bold text-foreground"
                                   aria-label={`Statut : ${statusLabel(session.status)}`}
                                 >
                                   <span aria-hidden="true">
@@ -625,7 +625,7 @@ export function TeacherLogbookClient() {
                                   }
                                   disabled={index === 0}
                                   aria-label={`Monter ${session.title || "la séance"}`}
-                                  className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
+                                  className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
                                 >
                                   ↑
                                 </button>
@@ -636,7 +636,7 @@ export function TeacherLogbookClient() {
                                   }
                                   disabled={index === cellSessions.length - 1}
                                   aria-label={`Descendre ${session.title || "la séance"}`}
-                                  className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
+                                  className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 disabled:cursor-not-allowed disabled:opacity-30"
                                 >
                                   ↓
                                 </button>
@@ -654,7 +654,7 @@ export function TeacherLogbookClient() {
                                       ];
                                     moveSession(session.id, targetDay, targetSlot);
                                   }}
-                                  className="min-h-8 rounded-md border border-white/15 bg-background/60 px-1 text-[11px] font-medium text-foreground"
+                                  className="min-h-8 rounded-md border border-ink/15 bg-background/60 px-1 text-[11px] font-medium text-foreground"
                                 >
                                   {logbookDays.map((d) =>
                                     logbookSlots.map((s) => (
@@ -674,7 +674,7 @@ export function TeacherLogbookClient() {
                         <button
                           type="button"
                           onClick={() => addSession(day.id, slot.id)}
-                          className="mt-2 min-h-8 w-full rounded-md border border-dashed border-white/20 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
+                          className="mt-2 min-h-8 w-full rounded-md border border-dashed border-ink/20 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade print:hidden"
                         >
                           + Ajouter une séance
                         </button>
@@ -690,7 +690,7 @@ export function TeacherLogbookClient() {
 
       <section
         aria-labelledby="duplication-jour"
-        className="rounded-lg border border-white/10 bg-background/45 p-4 print:hidden"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4 print:hidden"
       >
         <h2 id="duplication-jour" className="text-xl font-black text-foreground">
           Dupliquer une journée
@@ -705,7 +705,7 @@ export function TeacherLogbookClient() {
 
       <section
         aria-labelledby="impression-semaine"
-        className="rounded-lg border border-white/10 bg-background/45 p-4 print:border-black/40"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4 print:border-black/40"
       >
         <h2 id="impression-semaine" className="text-xl font-black text-foreground">
           À imprimer cette semaine
@@ -720,7 +720,7 @@ export function TeacherLogbookClient() {
             {printables.map((session) => (
               <li
                 key={session.id}
-                className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-white/10 bg-background/30 p-3 print:border-black/30"
+                className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-ink/10 bg-background/30 p-3 print:border-black/30"
               >
                 <span className="text-sm font-bold text-foreground">
                   {session.printableLabel || session.title || "(sans titre)"}
@@ -737,7 +737,7 @@ export function TeacherLogbookClient() {
                     onChange={(event) =>
                       setPrintCopies(session.id, Number(event.target.value))
                     }
-                    className="min-h-8 w-20 rounded-md border border-white/15 bg-background/60 px-2 text-sm font-medium text-foreground"
+                    className="min-h-8 w-20 rounded-md border border-ink/15 bg-background/60 px-2 text-sm font-medium text-foreground"
                   />
                 </label>
                 <span className="hidden text-sm font-bold text-foreground print:inline">
@@ -821,14 +821,14 @@ function JournalView({
 
             return (
               <div key={day.id} className="print:break-inside-avoid">
-                <h3 className="border-b border-white/15 pb-1 text-lg font-black text-foreground print:border-black/40 print:text-sm">
+                <h3 className="border-b border-ink/15 pb-1 text-lg font-black text-foreground print:border-black/40 print:text-sm">
                   {day.label}
                 </h3>
                 <ul className="mt-3 space-y-4" role="list">
                   {daySessions.map(({ session, slotLabel }) => (
                     <li
                       key={session.id}
-                      className="rounded-lg border border-white/10 bg-background/40 p-4 print:break-inside-avoid print:border-black/30"
+                      className="rounded-lg border border-ink/10 bg-background/40 p-4 print:break-inside-avoid print:border-black/30"
                     >
                       <div className="flex flex-wrap items-baseline justify-between gap-2">
                         <p className="text-sm font-black text-foreground">
@@ -952,7 +952,7 @@ function DayDuplicationForm({
               setSource(event.target.value as LogbookDay);
               resetFeedback();
             }}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
           >
             {logbookDays.map((day) => (
               <option key={day.id} value={day.id}>
@@ -970,7 +970,7 @@ function DayDuplicationForm({
               setTargetDateStr(event.target.value);
               resetFeedback();
             }}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
           />
         </label>
         <button
@@ -1022,7 +1022,7 @@ function DayDuplicationForm({
             <button
               type="button"
               onClick={resetFeedback}
-              className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground"
             >
               Annuler
             </button>
@@ -1075,7 +1075,7 @@ function SessionEditorModal({
         if (event.key === "Escape") onClose();
       }}
     >
-      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg border border-white/15 bg-background p-6">
+      <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg border border-ink/15 bg-background p-6">
         <div className="flex items-start justify-between gap-4">
           <h2 id={titleId} className="text-xl font-black text-foreground">
             Détail de la séance
@@ -1084,7 +1084,7 @@ function SessionEditorModal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
-            className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground"
+            className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-sm font-bold text-foreground"
           >
             ✕
           </button>
@@ -1097,7 +1097,7 @@ function SessionEditorModal({
               type="text"
               value={draft.title}
               onChange={(event) => update("title", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="Lecture suivie chapitre 3"
             />
           </label>
@@ -1109,7 +1109,7 @@ function SessionEditorModal({
               onChange={(event) =>
                 update("subject", event.target.value as LogbookSession["subject"])
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {logbookSubjects.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -1126,7 +1126,7 @@ function SessionEditorModal({
               onChange={(event) =>
                 update("level", event.target.value as LogbookSession["level"])
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {logbookLevels.map((l) => (
                 <option key={l.id} value={l.id}>
@@ -1142,7 +1142,7 @@ function SessionEditorModal({
               type="text"
               value={draft.durationLabel}
               onChange={(event) => update("durationLabel", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="45 min"
             />
           </label>
@@ -1154,7 +1154,7 @@ function SessionEditorModal({
               onChange={(event) =>
                 update("group", event.target.value as LogbookSession["group"])
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {logbookGroups.map((g) => (
                 <option key={g.id} value={g.id}>
@@ -1170,7 +1170,7 @@ function SessionEditorModal({
               type="text"
               value={draft.material}
               onChange={(event) => update("material", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="Manuel, cahier du jour"
             />
           </label>
@@ -1181,7 +1181,7 @@ function SessionEditorModal({
               type="text"
               value={draft.location}
               onChange={(event) => update("location", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="Salle de classe, gymnase"
             />
           </label>
@@ -1193,7 +1193,7 @@ function SessionEditorModal({
               onChange={(event) =>
                 update("status", event.target.value as LogbookStatus)
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {logbookStatuses.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -1209,7 +1209,7 @@ function SessionEditorModal({
               value={draft.objective}
               onChange={(event) => update("objective", event.target.value)}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
 
@@ -1219,7 +1219,7 @@ function SessionEditorModal({
               value={draft.outline}
               onChange={(event) => update("outline", event.target.value)}
               rows={3}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
 
@@ -1229,7 +1229,7 @@ function SessionEditorModal({
               type="text"
               value={draft.printsToPrepare}
               onChange={(event) => update("printsToPrepare", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="Fiche d'exercices à photocopier"
             />
           </label>
@@ -1256,7 +1256,7 @@ function SessionEditorModal({
                   onChange={(event) =>
                     update("printableLabel", event.target.value)
                   }
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 />
               </label>
               <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1268,7 +1268,7 @@ function SessionEditorModal({
                   onChange={(event) =>
                     update("printableCopies", Math.max(1, Number(event.target.value)))
                   }
-                  className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                  className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                 />
               </label>
             </>
@@ -1280,7 +1280,7 @@ function SessionEditorModal({
               value={draft.personalNote}
               onChange={(event) => update("personalNote", event.target.value)}
               rows={2}
-              className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+              className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
             />
           </label>
 
@@ -1290,13 +1290,13 @@ function SessionEditorModal({
               type="text"
               value={draft.resourceLink}
               onChange={(event) => update("resourceLink", event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="/primaire/cp/programmes/francais/lecture-comprehension"
             />
           </label>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-4">
+        <div className="mt-6 flex flex-wrap gap-2 border-t border-ink/10 pt-4">
           <button
             type="button"
             onClick={() => onSave(draft)}
@@ -1307,35 +1307,35 @@ function SessionEditorModal({
           <button
             type="button"
             onClick={() => onDuplicate(draft)}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Dupliquer
           </button>
           <button
             type="button"
             onClick={() => onPostpone(draft)}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Reporter au lendemain
           </button>
           <button
             type="button"
             onClick={() => onSetStatus(draft.id, "faite")}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Marquer faite
           </button>
           <button
             type="button"
             onClick={() => onSetStatus(draft.id, "a-reporter")}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Marquer à reporter
           </button>
           <button
             type="button"
             onClick={() => onSetStatus(draft.id, "a-ajuster")}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Marquer à ajuster
           </button>
@@ -1349,7 +1349,7 @@ function SessionEditorModal({
           <button
             type="button"
             onClick={onClose}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-white/30"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-ink/30"
           >
             Fermer
           </button>

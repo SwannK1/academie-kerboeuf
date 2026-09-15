@@ -6,7 +6,7 @@ const cardClassByTier: Record<string, string> = {
     "flex flex-col rounded-lg border border-gold/35 bg-gold/[0.06] p-5 transition hover:border-gold/55 hover:bg-gold/[0.1]",
   classe:
     "flex flex-col rounded-lg border border-sky/25 bg-sky/[0.05] p-4 transition hover:border-sky/45 hover:bg-sky/[0.09]",
-  plus: "flex flex-col rounded-lg border border-white/10 bg-white/[0.03] p-4 transition hover:border-white/20 hover:bg-white/[0.06]",
+  plus: "flex flex-col rounded-lg border border-ink/10 bg-ink/[0.03] p-4 transition hover:border-ink/20 hover:bg-ink/[0.06]",
 };
 
 export function TeacherDashboard({

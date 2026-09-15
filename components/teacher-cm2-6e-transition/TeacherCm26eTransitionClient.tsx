@@ -160,22 +160,22 @@ export function TeacherCm26eTransitionClient() {
           <button
             type="button"
             onClick={handlePrint}
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade print:hidden"
           >
             Imprimer
           </button>
         </div>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4" role="list">
-          <li className="rounded-md border border-white/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
+          <li className="rounded-md border border-ink/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
             {summary.done} / {summary.total} tâches terminées
           </li>
-          <li className="rounded-md border border-white/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
+          <li className="rounded-md border border-ink/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
             {summary.pending} tâches restantes
           </li>
-          <li className="rounded-md border border-white/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
+          <li className="rounded-md border border-ink/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
             {summary.importantPending} tâches importantes en attente
           </li>
-          <li className="rounded-md border border-white/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
+          <li className="rounded-md border border-ink/10 bg-background/45 px-4 py-3 text-sm font-bold text-foreground">
             {summary.meetings} rencontre(s) enregistrée(s)
           </li>
         </ul>
@@ -183,7 +183,7 @@ export function TeacherCm26eTransitionClient() {
 
       <section
         aria-label="Ajouter une tâche"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6 print:hidden"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6 print:hidden"
       >
         <h2 className="text-xl font-black text-foreground">Ajouter une tâche</h2>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -199,7 +199,7 @@ export function TeacherCm26eTransitionClient() {
               type="text"
               value={newTaskLabel}
               onChange={(event) => setNewTaskLabel(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
               placeholder="Décrire la tâche"
             />
           </div>
@@ -218,7 +218,7 @@ export function TeacherCm26eTransitionClient() {
                   event.target.value as TeacherCm26eTaskCategoryId,
                 )
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               {teacherCm26eTaskCategories.map((category) => (
                 <option key={category.id} value={category.id}>
@@ -240,7 +240,7 @@ export function TeacherCm26eTransitionClient() {
               onChange={(event) =>
                 setNewTaskPriority(event.target.value as TeacherCm26eTaskPriority)
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               {teacherCm26eTaskPriorities.map((priority) => (
                 <option key={priority.id} value={priority.id}>
@@ -281,7 +281,7 @@ export function TeacherCm26eTransitionClient() {
                     {tasks.map((task) => (
                       <li
                         key={task.id}
-                        className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-white/10 bg-background/45 px-4 py-3"
+                        className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-ink/10 bg-background/45 px-4 py-3"
                       >
                         <label className="flex min-h-11 flex-1 items-center gap-3 text-sm font-bold text-foreground">
                           <input
@@ -302,7 +302,7 @@ export function TeacherCm26eTransitionClient() {
                                 ? "border-ember/30 bg-ember/[0.08] text-ember"
                                 : task.priority === "normale"
                                   ? "border-sky/30 bg-sky/[0.08] text-sky"
-                                  : "border-white/15 bg-white/[0.04] text-muted",
+                                  : "border-ink/15 bg-ink/[0.04] text-muted",
                             ].join(" ")}
                           >
                             {
@@ -314,7 +314,7 @@ export function TeacherCm26eTransitionClient() {
                           <button
                             type="button"
                             onClick={() => handleDeleteTask(task.id)}
-                            className="min-h-11 rounded-md border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember print:hidden"
+                            className="min-h-11 rounded-md border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember print:hidden"
                           >
                             Supprimer
                           </button>
@@ -335,7 +335,7 @@ export function TeacherCm26eTransitionClient() {
 
       <section
         aria-label="Créer une rencontre"
-        className="mt-8 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6 print:hidden"
+        className="mt-8 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6 print:hidden"
       >
         <h2 className="text-xl font-black text-foreground">
           Créer une rencontre
@@ -353,7 +353,7 @@ export function TeacherCm26eTransitionClient() {
               type="date"
               value={meetingDate}
               onChange={(event) => setMeetingDate(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
           <div>
@@ -368,7 +368,7 @@ export function TeacherCm26eTransitionClient() {
               type="text"
               value={meetingLocation}
               onChange={(event) => setMeetingLocation(event.target.value)}
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
               placeholder="École, collège, visioconférence..."
             />
           </div>
@@ -384,7 +384,7 @@ export function TeacherCm26eTransitionClient() {
               value={meetingAgenda}
               onChange={(event) => setMeetingAgenda(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
               placeholder="Points à aborder"
             />
           </div>
@@ -400,7 +400,7 @@ export function TeacherCm26eTransitionClient() {
               value={meetingDecisions}
               onChange={(event) => setMeetingDecisions(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
               placeholder="Décisions prises lors de la rencontre"
             />
           </div>
@@ -416,7 +416,7 @@ export function TeacherCm26eTransitionClient() {
               value={meetingFollowUpTasks}
               onChange={(event) => setMeetingFollowUpTasks(event.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
               placeholder="Actions à mener après la rencontre"
             />
           </div>
@@ -449,7 +449,7 @@ export function TeacherCm26eTransitionClient() {
                   <button
                     type="button"
                     onClick={() => handleDeleteMeeting(meeting.id)}
-                    className="min-h-11 rounded-md border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember print:hidden"
+                    className="min-h-11 rounded-md border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-ember/40 hover:text-ember print:hidden"
                   >
                     Supprimer
                   </button>

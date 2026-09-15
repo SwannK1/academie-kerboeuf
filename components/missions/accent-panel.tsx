@@ -8,7 +8,7 @@ type AccentPanelProps = {
 
 export function AccentPanel({ title, accentClass, children }: AccentPanelProps) {
   return (
-    <div className="mission-detail-card rounded-md border border-white/10 bg-white/[0.04] p-6">
+    <div className="mission-detail-card rounded-md border border-ink/10 bg-ink/[0.04] p-6">
       <p className={`text-xs font-bold uppercase tracking-[0.22em] ${accentClass}`}>
         {title}
       </p>

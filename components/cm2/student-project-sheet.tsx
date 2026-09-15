@@ -18,10 +18,10 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
 
   return (
     <article
-      className="student-project-sheet mission-detail-card rounded-md border border-white/10 bg-white/[0.045] p-5 sm:p-6"
+      className="student-project-sheet mission-detail-card rounded-md border border-ink/10 bg-ink/[0.045] p-5 sm:p-6"
       aria-labelledby="student-project-sheet-title"
     >
-      <div className="student-project-sheet__header border-b border-white/10 pb-5">
+      <div className="student-project-sheet__header border-b border-ink/10 pb-5">
         <p className={`text-xs font-bold uppercase tracking-[0.18em] ${mission.theme.textClass}`}>
           Fiche élève
         </p>
@@ -37,7 +37,7 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
       </div>
 
       <div className="student-project-sheet__grid mt-5 grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
-        <section className="rounded border border-white/10 bg-ink/25 p-4">
+        <section className="rounded border border-ink/10 bg-ink/25 p-4">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
             Ma mission
           </p>
@@ -46,7 +46,7 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
           </p>
         </section>
 
-        <section className="rounded border border-white/10 bg-ink/25 p-4">
+        <section className="rounded border border-ink/10 bg-ink/25 p-4">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
             Objectif élève
           </p>
@@ -65,7 +65,7 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
             {steps.map((step) => (
               <li
                 key={step.order}
-                className="student-project-sheet__step grid gap-3 rounded border border-white/10 bg-white/[0.035] p-3 sm:grid-cols-[auto_1fr]"
+                className="student-project-sheet__step grid gap-3 rounded border border-ink/10 bg-ink/[0.035] p-3 sm:grid-cols-[auto_1fr]"
               >
                 <span className="grid size-8 place-items-center rounded bg-jade/10 font-mono text-xs font-black text-jade">
                   {step.order}
@@ -83,7 +83,7 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
       ) : null}
 
       <div className="student-project-sheet__grid mt-5 grid gap-4 lg:grid-cols-2">
-        <section className="student-project-sheet__section rounded border border-white/10 bg-ink/25 p-4">
+        <section className="student-project-sheet__section rounded border border-ink/10 bg-ink/25 p-4">
           <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
             Critères de réussite
           </h3>
@@ -100,7 +100,7 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
           </ul>
         </section>
 
-        <section className="student-project-sheet__section rounded border border-white/10 bg-ink/25 p-4">
+        <section className="student-project-sheet__section rounded border border-ink/10 bg-ink/25 p-4">
           <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
             Production attendue
           </h3>
@@ -108,14 +108,14 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
         </section>
       </div>
 
-      <section className="student-project-sheet__trace mt-5 rounded border border-dashed border-white/20 bg-white/[0.025] p-4">
+      <section className="student-project-sheet__trace mt-5 rounded border border-dashed border-ink/20 bg-ink/[0.025] p-4">
         <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-muted">
           Ma trace / Ce que je retiens
         </h3>
         <div aria-hidden="true" className="mt-4 space-y-5">
-          <div className="border-b border-white/20" />
-          <div className="border-b border-white/20" />
-          <div className="border-b border-white/20" />
+          <div className="border-b border-ink/20" />
+          <div className="border-b border-ink/20" />
+          <div className="border-b border-ink/20" />
         </div>
       </section>
 
@@ -128,10 +128,10 @@ export function StudentProjectSheet({ mission }: StudentProjectSheetProps) {
             {selfEvaluation.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 rounded border border-white/10 bg-white/[0.035] p-3 text-sm leading-6 text-muted"
+                className="flex items-start gap-3 rounded border border-ink/10 bg-ink/[0.035] p-3 text-sm leading-6 text-muted"
               >
                 <span
-                  className="mt-1 grid size-4 shrink-0 place-items-center rounded-sm border border-white/35"
+                  className="mt-1 grid size-4 shrink-0 place-items-center rounded-sm border border-ink/35"
                   aria-hidden="true"
                 />
                 <span>{item}</span>

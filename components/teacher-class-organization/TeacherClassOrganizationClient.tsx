@@ -222,7 +222,7 @@ export function TeacherClassOrganizationClient() {
                   className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
                     level === option.id
                       ? "border-jade/60 bg-jade/15 text-jade"
-                      : "border-white/15 text-foreground hover:border-jade/40"
+                      : "border-ink/15 text-foreground hover:border-jade/40"
                   }`}
                 >
                   {option.label}
@@ -245,7 +245,7 @@ export function TeacherClassOrganizationClient() {
                   className={`min-h-11 rounded-md border px-4 text-sm font-bold transition ${
                     period === option.id
                       ? "border-jade/60 bg-jade/15 text-jade"
-                      : "border-white/15 text-foreground hover:border-jade/40"
+                      : "border-ink/15 text-foreground hover:border-jade/40"
                   }`}
                 >
                   {option.label}
@@ -258,7 +258,7 @@ export function TeacherClassOrganizationClient() {
 
       <section
         aria-labelledby="vue-rapide-semaine"
-        className="rounded-lg border border-white/10 bg-background/45 p-4"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4"
       >
         <h2
           id="vue-rapide-semaine"
@@ -275,7 +275,7 @@ export function TeacherClassOrganizationClient() {
             return (
               <li
                 key={group.id}
-                className="rounded-md border border-white/10 bg-background/30 px-3 py-2 text-xs font-bold text-foreground"
+                className="rounded-md border border-ink/10 bg-background/30 px-3 py-2 text-xs font-bold text-foreground"
               >
                 {group.label} — {counts.done} / {counts.total}
               </li>
@@ -309,7 +309,7 @@ export function TeacherClassOrganizationClient() {
                 }}
                 onDragOver={(event) => event.preventDefault()}
                 onDrop={() => handleDrop(index)}
-                className="flex items-center gap-3 rounded-md border border-white/10 bg-background/30 p-3"
+                className="flex items-center gap-3 rounded-md border border-ink/10 bg-background/30 p-3"
               >
                 <label className="flex flex-1 items-center gap-3 text-sm">
                   <input
@@ -337,7 +337,7 @@ export function TeacherClassOrganizationClient() {
                     onClick={() => moveItem(index, -1)}
                     disabled={index === 0}
                     aria-label={`Monter la priorité ${item.label}`}
-                    className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
+                    className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     ↑
                   </button>
@@ -346,7 +346,7 @@ export function TeacherClassOrganizationClient() {
                     onClick={() => moveItem(index, 1)}
                     disabled={index === priorities.length - 1}
                     aria-label={`Descendre la priorité ${item.label}`}
-                    className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
+                    className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-jade/50 hover:text-jade disabled:cursor-not-allowed disabled:opacity-30"
                   >
                     ↓
                   </button>
@@ -354,7 +354,7 @@ export function TeacherClassOrganizationClient() {
                     type="button"
                     onClick={() => removePriority(item.id)}
                     aria-label={`Supprimer la priorité ${item.label}`}
-                    className="min-h-8 min-w-8 rounded-md border border-white/15 px-2 text-xs font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+                    className="min-h-8 min-w-8 rounded-md border border-ink/15 px-2 text-xs font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
                   >
                     ✕
                   </button>
@@ -363,7 +363,7 @@ export function TeacherClassOrganizationClient() {
             );
           })}
           {priorities.length === 0 && (
-            <li className="rounded-md border border-white/10 bg-background/30 p-3 text-sm text-muted">
+            <li className="rounded-md border border-ink/10 bg-background/30 p-3 text-sm text-muted">
               Aucune priorité pour cette semaine.
             </li>
           )}
@@ -372,7 +372,7 @@ export function TeacherClassOrganizationClient() {
 
       <section
         aria-labelledby="ajout-priorite"
-        className="rounded-lg border border-white/10 bg-background/45 p-4"
+        className="rounded-lg border border-ink/10 bg-background/45 p-4"
       >
         <h2 id="ajout-priorite" className="text-xl font-black text-foreground">
           Ajouter une priorité
@@ -384,7 +384,7 @@ export function TeacherClassOrganizationClient() {
               type="text"
               value={newLabel}
               onChange={(event) => setNewLabel(event.target.value)}
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
               placeholder="Préparer les évaluations, commander le matériel, préparer la réunion de cycle"
             />
           </label>
@@ -395,7 +395,7 @@ export function TeacherClassOrganizationClient() {
               onChange={(event) =>
                 setNewGroup(event.target.value as ClassOrgGroupId)
               }
-              className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+              className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
             >
               {classOrgGroups.map((group) => (
                 <option key={group.id} value={group.id}>

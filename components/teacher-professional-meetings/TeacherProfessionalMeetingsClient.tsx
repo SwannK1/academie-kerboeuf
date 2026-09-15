@@ -124,7 +124,7 @@ export function TeacherProfessionalMeetingsClient() {
         <button
           type="button"
           onClick={handlePrint}
-          className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
+          className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-sky/40 hover:text-sky"
         >
           Imprimer
         </button>
@@ -147,7 +147,7 @@ export function TeacherProfessionalMeetingsClient() {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Titre, objectif, lieu, notes…"
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           />
         </div>
 
@@ -164,7 +164,7 @@ export function TeacherProfessionalMeetingsClient() {
             onChange={(event) =>
               setTypeFilter(event.target.value as TeacherMeetingType | typeof ALL_TYPES)
             }
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           >
             <option value={ALL_TYPES}>Tous les types</option>
             {teacherMeetingTypes.map((type) => (
@@ -190,7 +190,7 @@ export function TeacherProfessionalMeetingsClient() {
                 event.target.value as TeacherMeetingStatus | typeof ALL_STATUSES,
               )
             }
-            className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+            className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
           >
             <option value={ALL_STATUSES}>Tous les statuts</option>
             {teacherMeetingStatuses.map((status) => (
@@ -204,7 +204,7 @@ export function TeacherProfessionalMeetingsClient() {
 
       <section aria-label="Liste des rendez-vous" className="mt-8">
         {filteredMeetings.length === 0 ? (
-          <p className="rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+          <p className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
             Aucun rendez-vous ne correspond à la recherche ou aux filtres.
           </p>
         ) : (
@@ -212,7 +212,7 @@ export function TeacherProfessionalMeetingsClient() {
             {filteredMeetings.map((meeting) => (
               <li
                 key={meeting.id}
-                className="rounded-lg border border-white/10 bg-white/[0.03] p-5 sm:p-6 print:break-inside-avoid"
+                className="rounded-lg border border-ink/10 bg-ink/[0.03] p-5 sm:p-6 print:break-inside-avoid"
               >
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
@@ -230,7 +230,7 @@ export function TeacherProfessionalMeetingsClient() {
                         handleUpdate(meeting.id, { title: event.target.value })
                       }
                       placeholder="Ex. Point d'étape avec la direction"
-                      className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm font-bold text-foreground"
+                      className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm font-bold text-foreground"
                     />
                   </div>
 
@@ -249,7 +249,7 @@ export function TeacherProfessionalMeetingsClient() {
                           type: event.target.value as TeacherMeetingType,
                         })
                       }
-                      className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                      className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                     >
                       {teacherMeetingTypes.map((type) => (
                         <option key={type.id} value={type.id}>
@@ -273,7 +273,7 @@ export function TeacherProfessionalMeetingsClient() {
                       onChange={(event) =>
                         handleUpdate(meeting.id, { date: event.target.value })
                       }
-                      className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                      className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                     />
                   </div>
 
@@ -292,7 +292,7 @@ export function TeacherProfessionalMeetingsClient() {
                         handleUpdate(meeting.id, { location: event.target.value })
                       }
                       placeholder="Ex. Bureau de direction, visioconférence…"
-                      className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                      className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                     />
                   </div>
 
@@ -311,7 +311,7 @@ export function TeacherProfessionalMeetingsClient() {
                           status: event.target.value as TeacherMeetingStatus,
                         })
                       }
-                      className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                      className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                     >
                       {teacherMeetingStatuses.map((status) => (
                         <option key={status.id} value={status.id}>
@@ -336,7 +336,7 @@ export function TeacherProfessionalMeetingsClient() {
                           priority: event.target.value as TeacherMeetingPriority,
                         })
                       }
-                      className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+                      className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
                     >
                       {teacherMeetingPriorities.map((priority) => (
                         <option key={priority.id} value={priority.id}>
@@ -362,7 +362,7 @@ export function TeacherProfessionalMeetingsClient() {
                         handleUpdate(meeting.id, { objective: event.target.value })
                       }
                       rows={2}
-                      className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
+                      className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
                     />
                   </div>
 
@@ -380,7 +380,7 @@ export function TeacherProfessionalMeetingsClient() {
                         handleUpdate(meeting.id, { agenda: event.target.value })
                       }
                       rows={3}
-                      className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
+                      className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
                     />
                   </div>
 
@@ -398,7 +398,7 @@ export function TeacherProfessionalMeetingsClient() {
                         handleUpdate(meeting.id, { notes: event.target.value })
                       }
                       rows={3}
-                      className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
+                      className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
                     />
                   </div>
 
@@ -416,7 +416,7 @@ export function TeacherProfessionalMeetingsClient() {
                         handleUpdate(meeting.id, { decisions: event.target.value })
                       }
                       rows={2}
-                      className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
+                      className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
                     />
                   </div>
 
@@ -436,7 +436,7 @@ export function TeacherProfessionalMeetingsClient() {
                         })
                       }
                       rows={2}
-                      className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
+                      className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm leading-6 text-foreground"
                     />
                   </div>
                 </div>
@@ -463,7 +463,7 @@ export function TeacherProfessionalMeetingsClient() {
                       <button
                         type="button"
                         onClick={() => setPendingDeleteId(null)}
-                        className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-white/30"
+                        className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-ink/30"
                       >
                         Annuler
                       </button>
@@ -472,7 +472,7 @@ export function TeacherProfessionalMeetingsClient() {
                     <button
                       type="button"
                       onClick={() => setPendingDeleteId(meeting.id)}
-                      className="min-h-9 rounded-md border border-white/15 px-3 text-xs font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
+                      className="min-h-9 rounded-md border border-ink/15 px-3 text-xs font-bold text-foreground transition hover:border-rose/40 hover:text-rose"
                     >
                       Supprimer
                     </button>

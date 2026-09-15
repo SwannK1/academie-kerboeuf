@@ -13,7 +13,7 @@ export function InteractiveImageMap(props: PedagogicalImageHero) {
       aria-labelledby={titleId}
     >
       <div className="mx-auto max-w-7xl">
-        <div className="border-b border-white/10 pb-6">
+        <div className="border-b border-ink/10 pb-6">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-jade">
             {eyebrow}
           </p>
@@ -26,7 +26,7 @@ export function InteractiveImageMap(props: PedagogicalImageHero) {
         </div>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-start">
-          <figure className="overflow-hidden rounded-md border border-white/10 bg-white/[0.04]">
+          <figure className="overflow-hidden rounded-md border border-ink/10 bg-ink/[0.04]">
             <div className="relative aspect-[16/10]">
               <Image
                 src={image.src}
@@ -49,7 +49,7 @@ export function InteractiveImageMap(props: PedagogicalImageHero) {
                 <li key={zone.title}>
                   <Link
                     href={zone.href}
-                    className="group grid min-h-full gap-3 rounded-md border border-white/10 bg-white/[0.045] p-4 transition hover:border-gold/35 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                    className="group grid min-h-full gap-3 rounded-md border border-ink/10 bg-ink/[0.045] p-4 transition hover:border-gold/35 hover:bg-ink/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                   >
                     <span className="flex items-start gap-3">
                       <span
@@ -73,7 +73,7 @@ export function InteractiveImageMap(props: PedagogicalImageHero) {
                     </span>
 
                     <span className="flex flex-wrap items-center gap-2">
-                      <span className="rounded border border-white/10 bg-ink/35 px-2 py-1 text-xs font-bold text-muted">
+                      <span className="rounded border border-ink/10 bg-ink/35 px-2 py-1 text-xs font-bold text-muted">
                         {zone.professor}
                       </span>
                       <PublicStatusBadge status={zone.status} />

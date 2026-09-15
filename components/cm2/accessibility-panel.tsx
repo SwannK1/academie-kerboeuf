@@ -29,12 +29,12 @@ export function AccessibilityPanel({ accessibility }: Props) {
   if (sections.length === 0 && !hasGeneral) return null;
 
   return (
-    <div className="rounded-md border border-white/10 bg-white/[0.04] p-5">
+    <div className="rounded-md border border-ink/10 bg-ink/[0.04] p-5">
       <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
         Aides pédagogiques
       </h2>
 
-      <div className="mt-4 divide-y divide-white/10">
+      <div className="mt-4 divide-y divide-ink/10">
         {sections.map((section) => (
           <div key={section.label} className="py-4 first:pt-0">
             <h3
@@ -58,7 +58,7 @@ export function AccessibilityPanel({ accessibility }: Props) {
                   className="flex items-start gap-2 text-sm leading-6 text-muted"
                 >
                   <span
-                    className="mt-1.5 size-1 shrink-0 rounded-full bg-white/30"
+                    className="mt-1.5 size-1 shrink-0 rounded-full bg-ink/30"
                     aria-hidden="true"
                   />
                   {item}

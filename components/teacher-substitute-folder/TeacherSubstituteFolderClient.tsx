@@ -157,7 +157,7 @@ export function TeacherSubstituteFolderClient() {
           <button
             type="button"
             onClick={handleReset}
-            className="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-ember/50 hover:text-ember"
+            className="inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-ember/50 hover:text-ember"
           >
             Réinitialiser
           </button>
@@ -173,7 +173,7 @@ export function TeacherSubstituteFolderClient() {
             <section
               key={section.id}
               aria-label={section.title}
-              className="rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6 print:break-inside-avoid print:border-black/20 print:bg-transparent"
+              className="rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6 print:break-inside-avoid print:border-black/20 print:bg-transparent"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
@@ -184,7 +184,7 @@ export function TeacherSubstituteFolderClient() {
                     {section.description}
                   </p>
                 </div>
-                <p className="shrink-0 rounded-md border border-white/10 bg-background/45 px-3 py-1 text-xs font-bold text-muted print:hidden">
+                <p className="shrink-0 rounded-md border border-ink/10 bg-background/45 px-3 py-1 text-xs font-bold text-muted print:hidden">
                   {done} / {tasks.length}
                 </p>
               </div>
@@ -193,7 +193,7 @@ export function TeacherSubstituteFolderClient() {
                 {tasks.map((task) => (
                   <li
                     key={task.id}
-                    className="flex items-center gap-3 rounded-md border border-white/10 bg-background/45 px-4 py-2 print:border-black/20 print:bg-transparent"
+                    className="flex items-center gap-3 rounded-md border border-ink/10 bg-background/45 px-4 py-2 print:border-black/20 print:bg-transparent"
                   >
                     <label className="flex min-h-11 flex-1 items-center gap-3 text-sm font-bold text-foreground print:text-black">
                       <input
@@ -202,7 +202,7 @@ export function TeacherSubstituteFolderClient() {
                         onChange={() =>
                           handleToggleStatus(section.id, task.id)
                         }
-                        className="h-5 w-5 shrink-0 rounded border-white/30 print:border-black"
+                        className="h-5 w-5 shrink-0 rounded border-ink/30 print:border-black"
                       />
                       <span
                         className={

@@ -50,7 +50,7 @@ export function LevelMissions({ level }: LevelMissionsProps) {
 
       <section className="px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col gap-3 border-b border-white/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-8 flex flex-col gap-3 border-b border-ink/10 pb-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.22em] text-jade">
                 Catalogue pédagogique
@@ -75,13 +75,13 @@ export function LevelMissions({ level }: LevelMissionsProps) {
                   <>
                     <Link
                       href={getLevelPath(level)}
-                      className="inline-flex rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:border-jade/35 hover:bg-jade/10"
+                      className="inline-flex rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:border-jade/35 hover:bg-jade/10"
                     >
                       Retour à {level.label}
                     </Link>
                     <Link
                       href="/ressources"
-                      className="inline-flex rounded-md border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:border-sky/35 hover:bg-sky/10"
+                      className="inline-flex rounded-md border border-ink/15 bg-ink/[0.04] px-4 py-3 text-sm font-bold text-foreground transition hover:border-sky/35 hover:bg-sky/10"
                     >
                       Ressources
                     </Link>

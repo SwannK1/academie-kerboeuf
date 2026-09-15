@@ -717,9 +717,9 @@ export function TeacherCurriculumPlanner() {
               {visibleLegacyEntries.map((entry) => (
                 <li
                   key={entry.id}
-                  className="flex flex-wrap items-center gap-2 rounded border border-white/10 bg-background/40 p-3"
+                  className="flex flex-wrap items-center gap-2 rounded border border-ink/10 bg-background/40 p-3"
                 >
-                  <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
+                  <span className="rounded border border-ink/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
                     {entry.level.toUpperCase()}
                   </span>
                   <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
@@ -732,7 +732,7 @@ export function TeacherCurriculumPlanner() {
                     <button
                       type="button"
                       onClick={() => ignoreLegacyEntry(entry.id)}
-                      className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-white/30 hover:text-foreground"
+                      className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-ink/30 hover:text-foreground"
                     >
                       Ignorer
                     </button>
@@ -749,7 +749,7 @@ export function TeacherCurriculumPlanner() {
             </ul>
           )}
 
-          <div className="mt-5 border-t border-white/10 pt-4">
+          <div className="mt-5 border-t border-ink/10 pt-4">
             {legacyDeletionConfirming ? (
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-bold text-rose">
@@ -765,7 +765,7 @@ export function TeacherCurriculumPlanner() {
                 <button
                   type="button"
                   onClick={() => setLegacyDeletionConfirming(false)}
-                  className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-white/30"
+                  className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-ink/30"
                 >
                   Annuler
                 </button>
@@ -774,7 +774,7 @@ export function TeacherCurriculumPlanner() {
               <button
                 type="button"
                 onClick={() => setLegacyDeletionConfirming(true)}
-                className="min-h-9 rounded border border-white/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                className="min-h-9 rounded border border-ink/15 px-3 text-xs font-bold text-muted transition hover:border-rose/40 hover:text-rose"
               >
                 Supprimer l&apos;ancienne programmation
               </button>
@@ -801,7 +801,7 @@ export function TeacherCurriculumPlanner() {
                 "min-h-11 rounded-md border px-4 text-sm font-bold transition",
                 level.id === selectedLevel
                   ? "border-jade/60 bg-jade/10 text-jade"
-                  : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                  : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
               ].join(" ")}
             >
               {level.label}
@@ -828,7 +828,7 @@ export function TeacherCurriculumPlanner() {
                 "min-h-11 rounded-md border px-4 text-sm font-bold transition",
                 view === option.id
                   ? "border-sky/60 bg-sky/10 text-sky"
-                  : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
+                  : "border-ink/10 bg-ink/[0.04] text-muted hover:border-sky/40",
               ].join(" ")}
             >
               {option.label}
@@ -837,11 +837,11 @@ export function TeacherCurriculumPlanner() {
           <button
             type="button"
             onClick={() => window.print()}
-            className="min-h-11 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
+            className="min-h-11 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground transition hover:border-jade/40"
           >
             Imprimer
           </button>
-          <label className="flex min-h-11 items-center gap-2 rounded-md border border-white/15 px-4 text-sm font-bold text-foreground">
+          <label className="flex min-h-11 items-center gap-2 rounded-md border border-ink/15 px-4 text-sm font-bold text-foreground">
             <input
               type="checkbox"
               checked={showHidden}
@@ -867,7 +867,7 @@ export function TeacherCurriculumPlanner() {
                   "min-h-11 rounded-md border px-4 text-sm font-bold transition",
                   activeSubjectId === null
                     ? "border-sky/60 bg-sky/10 text-sky"
-                    : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
+                    : "border-ink/10 bg-ink/[0.04] text-muted hover:border-sky/40",
                 ].join(" ")}
               >
                 Toutes
@@ -882,7 +882,7 @@ export function TeacherCurriculumPlanner() {
                     "min-h-11 rounded-md border px-4 text-sm font-bold transition",
                     activeSubjectId === subject.id
                       ? "border-sky/60 bg-sky/10 text-sky"
-                      : "border-white/10 bg-white/[0.04] text-muted hover:border-sky/40",
+                      : "border-ink/10 bg-ink/[0.04] text-muted hover:border-sky/40",
                   ].join(" ")}
                 >
                   {subject.label}
@@ -900,7 +900,7 @@ export function TeacherCurriculumPlanner() {
                     "min-h-9 rounded border px-3 text-xs font-bold transition",
                     activeDomainId === null
                       ? "border-jade/50 bg-jade/10 text-jade"
-                      : "border-white/10 bg-white/[0.03] text-muted hover:border-jade/30",
+                      : "border-ink/10 bg-ink/[0.03] text-muted hover:border-jade/30",
                   ].join(" ")}
                 >
                   Tous les domaines
@@ -915,7 +915,7 @@ export function TeacherCurriculumPlanner() {
                       "min-h-9 rounded border px-3 text-xs font-bold transition",
                       activeDomainId === domain.id
                         ? "border-jade/50 bg-jade/10 text-jade"
-                        : "border-white/10 bg-white/[0.03] text-muted hover:border-jade/30",
+                        : "border-ink/10 bg-ink/[0.03] text-muted hover:border-jade/30",
                     ].join(" ")}
                   >
                     {domain.label}
@@ -936,7 +936,7 @@ export function TeacherCurriculumPlanner() {
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder="Ex : conjuguer, fractions, frise chronologique…"
                 aria-label="Rechercher une compétence"
-                className="mt-4 min-h-11 w-full max-w-xl rounded-md border border-white/15 bg-white/[0.04] px-4 text-sm text-foreground placeholder:text-muted focus:border-jade/50 focus:outline-none"
+                className="mt-4 min-h-11 w-full max-w-xl rounded-md border border-ink/15 bg-ink/[0.04] px-4 text-sm text-foreground placeholder:text-muted focus:border-jade/50 focus:outline-none"
               />
             </section>
           ) : null}
@@ -948,7 +948,7 @@ export function TeacherCurriculumPlanner() {
               </h2>
 
               {visibleCompetencies.length === 0 ? (
-                <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+                <p className="mt-4 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
                   Aucune compétence ne correspond à cette recherche.
                 </p>
               ) : (
@@ -958,13 +958,13 @@ export function TeacherCurriculumPlanner() {
                     return (
                       <li
                         key={competency.id}
-                        className="rounded-md border border-white/10 bg-white/[0.03] p-3"
+                        className="rounded-md border border-ink/10 bg-ink/[0.03] p-3"
                       >
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
+                          <span className="rounded border border-ink/15 px-2 py-0.5 text-xs font-bold uppercase tracking-[0.08em] text-foreground">
                             {schoolLevels.find((l) => l.id === competency.level)?.label}
                           </span>
-                          <span className="rounded border border-white/15 px-2 py-0.5 text-xs text-muted">
+                          <span className="rounded border border-ink/15 px-2 py-0.5 text-xs text-muted">
                             {competency.cycle === "cycle-2" ? "Cycle 2" : "Cycle 3"}
                           </span>
                           <span className="text-xs font-bold uppercase tracking-[0.08em] text-sky">
@@ -992,7 +992,7 @@ export function TeacherCurriculumPlanner() {
                                   }
                                 }}
                                 aria-label={`Ajouter ${competency.label} à une période`}
-                                className="min-h-9 rounded border border-white/15 bg-white/[0.04] px-2 text-xs text-foreground focus:border-jade/50 focus:outline-none"
+                                className="min-h-9 rounded border border-ink/15 bg-ink/[0.04] px-2 text-xs text-foreground focus:border-jade/50 focus:outline-none"
                               >
                                 <option value="" disabled>
                                   Choisir une période
@@ -1029,7 +1029,7 @@ export function TeacherCurriculumPlanner() {
                 </button>
               </div>
               {freeFormOpen ? (
-                <div className="mt-4 grid gap-4 rounded-lg border border-white/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="mt-4 grid gap-4 rounded-lg border border-ink/10 bg-background/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
                   <label className="flex flex-col gap-2 text-sm font-bold text-foreground sm:col-span-2">
                     Titre
                     <input
@@ -1037,7 +1037,7 @@ export function TeacherCurriculumPlanner() {
                       value={freeTitle}
                       onChange={(event) => setFreeTitle(event.target.value)}
                       placeholder="Ex : Atelier production d'écrits"
-                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                      className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                     />
                   </label>
                   <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1045,7 +1045,7 @@ export function TeacherCurriculumPlanner() {
                     <select
                       value={freeSubjectId}
                       onChange={(event) => setFreeSubjectId(event.target.value)}
-                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                      className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                     >
                       <option value="">Choisir</option>
                       {subjectsForLevel.map((subject) => (
@@ -1061,7 +1061,7 @@ export function TeacherCurriculumPlanner() {
                       type="text"
                       value={freeDomain}
                       onChange={(event) => setFreeDomain(event.target.value)}
-                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                      className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                     />
                   </label>
                   <label className="flex flex-col gap-2 text-sm font-bold text-foreground">
@@ -1069,7 +1069,7 @@ export function TeacherCurriculumPlanner() {
                     <select
                       value={freePeriod}
                       onChange={(event) => setFreePeriod(Number(event.target.value) as PlanningPeriodNumber)}
-                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                      className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                     >
                       {planningPeriodNumbers.map((period) => (
                         <option key={period} value={period}>
@@ -1086,7 +1086,7 @@ export function TeacherCurriculumPlanner() {
                       step={5}
                       value={freeDuree}
                       onChange={(event) => setFreeDuree(Number(event.target.value) || 0)}
-                      className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+                      className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
                     />
                   </label>
                   <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-4">
@@ -1110,7 +1110,7 @@ export function TeacherCurriculumPlanner() {
             </h2>
 
             {planningCards.length === 0 ? (
-              <p className="mt-4 rounded-lg border border-white/10 bg-white/[0.03] p-5 text-sm leading-7 text-muted">
+              <p className="mt-4 rounded-lg border border-ink/10 bg-ink/[0.03] p-5 text-sm leading-7 text-muted">
                 Aucune compétence n&apos;est encore placée dans une période pour ce niveau.
               </p>
             ) : (
@@ -1125,7 +1125,7 @@ export function TeacherCurriculumPlanner() {
                       aria-labelledby={`periode-${period}-titre`}
                       className={[
                         "flex flex-col rounded-lg border bg-background/40 p-3 transition print:break-inside-avoid print:border-black print:bg-transparent",
-                        isDragOver ? "border-jade/60 bg-jade/5" : "border-white/10",
+                        isDragOver ? "border-jade/60 bg-jade/5" : "border-ink/10",
                       ].join(" ")}
                       onDragOver={(event) => {
                         event.preventDefault();
@@ -1169,7 +1169,7 @@ export function TeacherCurriculumPlanner() {
                           <button
                             type="button"
                             onClick={() => setResetConfirm(null)}
-                            className="rounded border border-white/15 px-2 py-1 font-bold text-muted hover:border-white/30"
+                            className="rounded border border-ink/15 px-2 py-1 font-bold text-muted hover:border-ink/30"
                           >
                             Annuler
                           </button>
@@ -1181,7 +1181,7 @@ export function TeacherCurriculumPlanner() {
                           <li
                             className={[
                               "rounded border border-dashed p-3 text-xs leading-6 text-muted transition print:hidden",
-                              isDragOver ? "border-jade/50 bg-jade/5 text-jade" : "border-white/15",
+                              isDragOver ? "border-jade/50 bg-jade/5 text-jade" : "border-ink/15",
                             ].join(" ")}
                           >
                             {isDragOver ? "Déposer ici pour ajouter à cette période" : "Aucune carte dans cette période."}
@@ -1213,7 +1213,7 @@ export function TeacherCurriculumPlanner() {
                                   handleDrop(period, card.cardKey);
                                 }}
                                 className={[
-                                  "cursor-grab rounded border border-white/10 bg-white/[0.03] p-2 active:cursor-grabbing print:cursor-default print:border-black",
+                                  "cursor-grab rounded border border-ink/10 bg-ink/[0.03] p-2 active:cursor-grabbing print:cursor-default print:border-black",
                                   draggedKey === card.cardKey ? "opacity-40" : "",
                                   card.hidden ? "opacity-50" : "",
                                 ].join(" ")}
@@ -1225,11 +1225,11 @@ export function TeacherCurriculumPlanner() {
                                     </span>
                                   ) : null}
                                   {card.hidden ? (
-                                    <span className="rounded border border-white/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted print:hidden">
+                                    <span className="rounded border border-ink/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted print:hidden">
                                       Masquée
                                     </span>
                                   ) : null}
-                                  <span className="rounded border border-white/15 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted print:border-black print:text-black">
+                                  <span className="rounded border border-ink/15 px-1.5 py-0.5 text-[10px] font-bold uppercase text-muted print:border-black print:text-black">
                                     {card.resourceStatus
                                       ? PLANNING_RESOURCE_STATUSES.find((r) => r.id === card.resourceStatus)?.label
                                       : "Aucune ressource"}
@@ -1267,7 +1267,7 @@ export function TeacherCurriculumPlanner() {
                                     type="button"
                                     onClick={() => moveWithinPeriod(card.cardKey, -1)}
                                     disabled={isFirst}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
                                   >
                                     Monter
                                   </button>
@@ -1275,7 +1275,7 @@ export function TeacherCurriculumPlanner() {
                                     type="button"
                                     onClick={() => moveWithinPeriod(card.cardKey, 1)}
                                     disabled={isLast}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
                                   >
                                     Descendre
                                   </button>
@@ -1283,7 +1283,7 @@ export function TeacherCurriculumPlanner() {
                                     type="button"
                                     onClick={() => moveToAdjacentPeriod(card.cardKey, -1)}
                                     disabled={isFirstPeriod}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
                                   >
                                     Période précédente
                                   </button>
@@ -1291,7 +1291,7 @@ export function TeacherCurriculumPlanner() {
                                     type="button"
                                     onClick={() => moveToAdjacentPeriod(card.cardKey, 1)}
                                     disabled={isLastPeriod}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-sky/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-30"
                                   >
                                     Période suivante
                                   </button>
@@ -1305,28 +1305,28 @@ export function TeacherCurriculumPlanner() {
                                   <button
                                     type="button"
                                     onClick={() => duplicateCard(card)}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-foreground"
                                   >
                                     Dupliquer
                                   </button>
                                   <button
                                     type="button"
                                     onClick={() => setPriority(card, card.priority === "essential" ? "important" : "essential")}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
                                   >
                                     {card.priority === "essential" ? "Retirer priorité" : "Marquer prioritaire"}
                                   </button>
                                   <button
                                     type="button"
                                     onClick={() => setStatus(card, "termine")}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-jade/40 hover:text-jade"
                                   >
                                     Marquer terminée
                                   </button>
                                   <button
                                     type="button"
                                     onClick={() => setHidden(card, !card.hidden)}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-white/30"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-ink/30"
                                   >
                                     {card.hidden ? "Restaurer" : "Masquer"}
                                   </button>
@@ -1340,7 +1340,7 @@ export function TeacherCurriculumPlanner() {
                                   <button
                                     type="button"
                                     onClick={() => removeCard(card)}
-                                    className="min-h-7 rounded border border-white/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
+                                    className="min-h-7 rounded border border-ink/15 px-2 text-[11px] font-bold text-muted transition hover:border-rose/40 hover:text-rose"
                                   >
                                     Retirer
                                   </button>
@@ -1370,7 +1370,7 @@ export function TeacherCurriculumPlanner() {
                 .filter((card) => card.subjectId === subject.id && (showHidden || !card.hidden))
                 .sort((a, b) => a.period - b.period || a.order - b.order);
               return (
-                <div key={subject.id} className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+                <div key={subject.id} className="rounded-lg border border-ink/10 bg-ink/[0.03] p-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-black uppercase tracking-[0.08em] text-sky">{subject.label}</h3>
                     <button
@@ -1394,7 +1394,7 @@ export function TeacherCurriculumPlanner() {
                       <button
                         type="button"
                         onClick={() => setResetConfirm(null)}
-                        className="rounded border border-white/15 px-2 py-1 font-bold text-muted hover:border-white/30"
+                        className="rounded border border-ink/15 px-2 py-1 font-bold text-muted hover:border-ink/30"
                       >
                         Annuler
                       </button>
@@ -1407,9 +1407,9 @@ export function TeacherCurriculumPlanner() {
                       {subjectCards.map((card) => (
                         <li
                           key={card.cardKey}
-                          className="flex flex-wrap items-center gap-2 rounded border border-white/10 bg-background/40 p-2 text-sm"
+                          className="flex flex-wrap items-center gap-2 rounded border border-ink/10 bg-background/40 p-2 text-sm"
                         >
-                          <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                          <span className="rounded border border-ink/15 px-2 py-0.5 text-xs font-bold text-muted">
                             Période {card.period}
                           </span>
                           <span className="font-bold text-foreground">{card.title}</span>
@@ -1447,7 +1447,7 @@ export function TeacherCurriculumPlanner() {
                   "rounded-lg border p-4",
                   stat.dureeTotale > HEAVY_PERIOD_MINUTES_THRESHOLD
                     ? "border-rose/40 bg-rose/10"
-                    : "border-white/10 bg-white/[0.03]",
+                    : "border-ink/10 bg-ink/[0.03]",
                 ].join(" ")}
               >
                 <p className="text-sm font-black text-foreground">Période {stat.period}</p>
@@ -1463,7 +1463,7 @@ export function TeacherCurriculumPlanner() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+            <div className="rounded-lg border border-ink/10 bg-ink/[0.03] p-4">
               <h3 className="text-sm font-black uppercase tracking-[0.08em] text-foreground">
                 Matières peu présentes ({subjectsWithoutCards.length})
               </h3>
@@ -1477,7 +1477,7 @@ export function TeacherCurriculumPlanner() {
                 </ul>
               )}
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+            <div className="rounded-lg border border-ink/10 bg-ink/[0.03] p-4">
               <h3 className="text-sm font-black uppercase tracking-[0.08em] text-foreground">
                 Compétences non placées
               </h3>
@@ -1504,7 +1504,7 @@ export function TeacherCurriculumPlanner() {
                 {cardsWithoutDuration.map((card) => (
                   <li key={card.cardKey} className="flex flex-wrap items-center gap-2">
                     <span className="font-bold text-foreground">{card.title}</span>
-                    <span className="rounded border border-white/15 px-2 py-0.5 text-xs font-bold text-muted">
+                    <span className="rounded border border-ink/15 px-2 py-0.5 text-xs font-bold text-muted">
                       Période {card.period}
                     </span>
                   </li>
@@ -1584,7 +1584,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
       role="dialog"
       aria-label={`Modifier la carte ${card.title}`}
       onClick={(event) => event.stopPropagation()}
-      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-white/10 bg-background p-6 shadow-2xl print:hidden"
+      className="fixed inset-y-0 right-0 z-[60] flex w-full max-w-sm flex-col gap-4 overflow-y-auto border-l border-ink/10 bg-background p-6 shadow-2xl print:hidden"
     >
       <div className="flex items-start justify-between gap-2">
         <h3 className="text-lg font-black text-foreground">Modifier la carte</h3>
@@ -1592,7 +1592,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
           type="button"
           onClick={onClose}
           aria-label="Fermer le panneau"
-          className="min-h-9 min-w-9 rounded-md border border-white/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
+          className="min-h-9 min-w-9 rounded-md border border-ink/15 px-2 text-sm font-bold text-foreground transition hover:border-ember/50 hover:text-ember"
         >
           ✕
         </button>
@@ -1616,7 +1616,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
             type="text"
             defaultValue={card.title}
             onBlur={(event) => onUpdate({ title: event.target.value })}
-            className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+            className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
           />
         </label>
       ) : (
@@ -1631,7 +1631,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
         <select
           value={card.period}
           onChange={(event) => onUpdate({ period: Number(event.target.value) as PlanningPeriodNumber })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         >
           {planningPeriodNumbers.map((period) => (
             <option key={period} value={period}>
@@ -1649,7 +1649,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
           step={5}
           defaultValue={card.dureeMinutes}
           onBlur={(event) => onUpdate({ dureeMinutes: Number(event.target.value) || 0 })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1658,7 +1658,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
         <select
           value={card.priority}
           onChange={(event) => onUpdate({ priority: event.target.value as PlanningPriority })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         >
           {PLANNING_PRIORITIES.map((option) => (
             <option key={option.id} value={option.id}>
@@ -1673,7 +1673,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
         <select
           value={card.status}
           onChange={(event) => onUpdate({ status: event.target.value as PlanningStatus })}
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         >
           {PLANNING_STATUSES.map((option) => (
             <option key={option.id} value={option.id}>
@@ -1689,7 +1689,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
           defaultValue={card.teacherNote}
           onBlur={(event) => onUpdate({ teacherNote: event.target.value })}
           rows={3}
-          className="rounded-md border border-white/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
+          className="rounded-md border border-ink/15 bg-background/60 px-3 py-2 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1700,7 +1700,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
           defaultValue={card.resourceHref ?? ""}
           onBlur={(event) => onUpdate({ resourceHref: event.target.value.trim() || undefined })}
           placeholder="https://…"
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         />
       </label>
 
@@ -1713,7 +1713,7 @@ function PlanningCardEditor({ card, onClose, onUpdate, onDelete }: PlanningCardE
               resourceStatus: (event.target.value || undefined) as PlanningResourceStatus | undefined,
             })
           }
-          className="min-h-11 rounded-md border border-white/15 bg-background/60 px-3 text-sm font-medium text-foreground"
+          className="min-h-11 rounded-md border border-ink/15 bg-background/60 px-3 text-sm font-medium text-foreground"
         >
           <option value="">Non précisé</option>
           {PLANNING_RESOURCE_STATUSES.map((option) => (

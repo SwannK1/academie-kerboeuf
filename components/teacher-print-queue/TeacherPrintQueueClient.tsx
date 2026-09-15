@@ -256,7 +256,7 @@ export function TeacherPrintQueueClient() {
                   title: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -277,7 +277,7 @@ export function TeacherPrintQueueClient() {
                   subject: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -298,7 +298,7 @@ export function TeacherPrintQueueClient() {
                   level: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -321,7 +321,7 @@ export function TeacherPrintQueueClient() {
                   pageCount: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -343,7 +343,7 @@ export function TeacherPrintQueueClient() {
                   copyCount: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -363,7 +363,7 @@ export function TeacherPrintQueueClient() {
                   sides: event.target.value as TeacherPrintQueueSides,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               <option value="recto">Recto</option>
               <option value="recto-verso">Recto-verso</option>
@@ -386,7 +386,7 @@ export function TeacherPrintQueueClient() {
                   color: event.target.value as TeacherPrintQueueColor,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             >
               <option value="noir-et-blanc">Noir et blanc</option>
               <option value="couleur">Couleur</option>
@@ -410,7 +410,7 @@ export function TeacherPrintQueueClient() {
                   desiredDate: event.target.value,
                 }))
               }
-              className="mt-1 min-h-11 w-full rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+              className="mt-1 min-h-11 w-full rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
             />
           </div>
 
@@ -431,7 +431,7 @@ export function TeacherPrintQueueClient() {
                   note: event.target.value,
                 }))
               }
-              className="mt-1 w-full rounded-md border border-white/10 bg-background/45 px-3 py-2 text-sm text-foreground"
+              className="mt-1 w-full rounded-md border border-ink/10 bg-background/45 px-3 py-2 text-sm text-foreground"
             />
           </div>
 
@@ -459,7 +459,7 @@ export function TeacherPrintQueueClient() {
               "min-h-11 rounded-md border px-3 text-sm font-bold transition",
               statusFilter === "tous"
                 ? "border-jade/60 bg-jade/10 text-jade"
-                : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
             ].join(" ")}
           >
             Tous
@@ -474,7 +474,7 @@ export function TeacherPrintQueueClient() {
                 "min-h-11 rounded-md border px-3 text-sm font-bold transition",
                 statusFilter === status.id
                   ? "border-jade/60 bg-jade/10 text-jade"
-                  : "border-white/10 bg-white/[0.04] text-foreground hover:border-jade/40",
+                  : "border-ink/10 bg-ink/[0.04] text-foreground hover:border-jade/40",
               ].join(" ")}
             >
               {status.label}
@@ -491,13 +491,13 @@ export function TeacherPrintQueueClient() {
           placeholder="Rechercher…"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-          className="min-h-11 w-full max-w-xs rounded-md border border-white/10 bg-background/45 px-3 text-sm text-foreground"
+          className="min-h-11 w-full max-w-xs rounded-md border border-ink/10 bg-background/45 px-3 text-sm text-foreground"
         />
 
         <button
           type="button"
           onClick={handlePrint}
-          className="ml-auto inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
+          className="ml-auto inline-flex min-h-11 items-center justify-center rounded-md border border-ink/15 px-4 text-sm font-black text-foreground transition hover:border-jade/50 hover:text-jade"
         >
           Imprimer la liste
         </button>
@@ -505,7 +505,7 @@ export function TeacherPrintQueueClient() {
 
       <section
         aria-label="Demandes de photocopies"
-        className="mt-6 rounded-lg border border-white/10 bg-white/[0.04] p-5 sm:p-6"
+        className="mt-6 rounded-lg border border-ink/10 bg-ink/[0.04] p-5 sm:p-6"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-xl font-black text-foreground">
@@ -531,7 +531,7 @@ export function TeacherPrintQueueClient() {
               return (
                 <li
                   key={item.id}
-                  className="rounded-md border border-white/10 bg-background/45 p-4"
+                  className="rounded-md border border-ink/10 bg-background/45 p-4"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -556,7 +556,7 @@ export function TeacherPrintQueueClient() {
                           event.target.value as TeacherPrintQueueStatus,
                         )
                       }
-                      className="min-h-11 rounded-md border border-white/10 bg-background/60 px-2 text-sm font-bold text-foreground print:hidden"
+                      className="min-h-11 rounded-md border border-ink/10 bg-background/60 px-2 text-sm font-bold text-foreground print:hidden"
                     >
                       {teacherPrintQueueStatuses.map((status) => (
                         <option key={status.id} value={status.id}>
@@ -614,7 +614,7 @@ export function TeacherPrintQueueClient() {
                     <button
                       type="button"
                       onClick={() => handleDuplicate(item.id)}
-                      className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
+                      className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground transition hover:border-jade/50 hover:text-jade"
                     >
                       Dupliquer
                     </button>
@@ -647,7 +647,7 @@ export function TeacherPrintQueueClient() {
                         <button
                           type="button"
                           onClick={handleDeleteCancel}
-                          className="min-h-11 rounded-md border border-white/15 px-3 text-sm font-bold text-foreground"
+                          className="min-h-11 rounded-md border border-ink/15 px-3 text-sm font-bold text-foreground"
                         >
                           Annuler
                         </button>

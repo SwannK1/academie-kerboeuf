@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Archivo, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
 import {
@@ -7,6 +8,18 @@ import {
   SITE_NAME,
 } from "@/content/seo";
 import "./globals.css";
+
+const bodyFont = Archivo({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const displayFont = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(getPublicSiteUrl()),
@@ -43,11 +56,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="h-full scroll-smooth antialiased">
+    <html
+      lang="fr"
+      className={`h-full scroll-smooth antialiased ${bodyFont.variable} ${displayFont.variable}`}
+    >
       <body className="min-h-full overflow-x-hidden bg-background text-foreground">
         <a
           href="#contenu-principal"
-          className="fixed left-4 top-4 z-[60] -translate-y-24 rounded-md bg-gold px-4 py-2 text-sm font-bold text-ink shadow-lg transition focus:translate-y-0 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-white print:hidden"
+          className="fixed left-4 top-4 z-[60] -translate-y-24 rounded-md bg-gold px-4 py-2 text-sm font-bold text-background shadow-lg transition focus:translate-y-0 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-foreground print:hidden"
         >
           Aller au contenu principal
         </a>

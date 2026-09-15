@@ -109,7 +109,7 @@ function FillBlankInteractive({
               onChange={(e) => handleChange(part.blankId, e.target.value)}
               disabled={submitted}
               aria-label={blank?.hint ?? `Trou ${part.blankId}`}
-              className={`inline-block rounded border px-2 py-0.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-jade/40 disabled:cursor-not-allowed ${resultClass || "border-white/25 bg-white/[0.035]"}`}
+              className={`inline-block rounded border px-2 py-0.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-jade/40 disabled:cursor-not-allowed ${resultClass || "border-ink/25 bg-ink/[0.035]"}`}
               style={{ width: "8rem" }}
             />
           );
@@ -237,7 +237,7 @@ function FillBlankProjection({ activity }: { activity: FillBlankActivityData }) 
         return (
           <span
             key={i}
-            className="inline-block rounded border-2 border-dashed border-white/30 px-4 py-1 text-center text-muted"
+            className="inline-block rounded border-2 border-dashed border-ink/30 px-4 py-1 text-center text-muted"
             style={{ minWidth: "8rem" }}
             aria-label="Trou à compléter"
           >

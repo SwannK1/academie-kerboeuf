@@ -81,8 +81,8 @@ export default async function MsDomainPage({ params }: PageProps) {
 
       <section className="px-4 pb-10 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-[1.3fr_0.7fr]">
-          <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
-            <div className="mb-4 border-b border-white/10 pb-3">
+          <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
+            <div className="mb-4 border-b border-ink/10 pb-3">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-jade">
                 Observables
               </p>
@@ -94,7 +94,7 @@ export default async function MsDomainPage({ params }: PageProps) {
               {domain.observables.map((observable) => (
                 <article
                   key={observable.id}
-                  className="rounded border border-white/10 bg-ink/30 p-4"
+                  className="rounded border border-ink/10 bg-ink/30 p-4"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="text-sm font-black leading-6 text-foreground">
@@ -154,7 +154,7 @@ export default async function MsDomainPage({ params }: PageProps) {
                   .map((sequence) => (
                     <article
                       key={sequence.id}
-                      className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+                      className="rounded-md border border-ink/10 bg-ink/[0.035] p-5"
                     >
                       <h3 className="text-base font-black text-foreground">
                         {sequence.title}
@@ -168,7 +168,7 @@ export default async function MsDomainPage({ params }: PageProps) {
                           return (
                             <div
                               key={resource.kind}
-                              className="flex flex-wrap items-center justify-between gap-3 rounded border border-white/10 bg-ink/30 p-3"
+                              className="flex flex-wrap items-center justify-between gap-3 rounded border border-ink/10 bg-ink/30 p-3"
                             >
                               <span className="text-xs font-bold text-foreground">
                                 {resource.label}
@@ -192,7 +192,7 @@ export default async function MsDomainPage({ params }: PageProps) {
               )}
             </div>
           ) : (
-            <p className="rounded border border-white/10 bg-white/[0.025] p-5 text-sm text-muted">
+            <p className="rounded border border-ink/10 bg-ink/[0.025] p-5 text-sm text-muted">
               Aucune ressource PDF n&apos;est encore publiée pour ce domaine.
             </p>
           )}
@@ -201,8 +201,8 @@ export default async function MsDomainPage({ params }: PageProps) {
 
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-md border border-white/10 bg-white/[0.035] p-5">
-            <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-white/10 pb-3">
+          <div className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
+            <div className="mb-4 flex flex-wrap items-end justify-between gap-3 border-b border-ink/10 pb-3">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
                   Ressources prévues
@@ -213,7 +213,7 @@ export default async function MsDomainPage({ params }: PageProps) {
               </div>
               <Link
                 href="/maternelle/ms"
-                className="rounded-md border border-white/15 bg-white/[0.04] px-3 py-2 text-sm font-bold text-foreground transition hover:bg-white/[0.08]"
+                className="rounded-md border border-ink/15 bg-ink/[0.04] px-3 py-2 text-sm font-bold text-foreground transition hover:bg-ink/[0.08]"
               >
                 Retour MS
               </Link>
@@ -222,7 +222,7 @@ export default async function MsDomainPage({ params }: PageProps) {
               {domain.resourceSlots.map((slot) => (
                 <div
                   key={slot.kind}
-                  className="rounded border border-white/10 bg-ink/30 p-4"
+                  className="rounded border border-ink/10 bg-ink/30 p-4"
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
                     {slot.label}
@@ -240,7 +240,7 @@ export default async function MsDomainPage({ params }: PageProps) {
 
 function CompactList({ title, items }: { title: string; items: string[] }) {
   return (
-    <section className="rounded-md border border-white/10 bg-white/[0.035] p-5">
+    <section className="rounded-md border border-ink/10 bg-ink/[0.035] p-5">
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold">
         {title}
       </p>

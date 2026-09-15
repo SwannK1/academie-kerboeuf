@@ -34,7 +34,7 @@ export function TeacherHubPage({ hub }: { hub: TeacherHub }) {
               <Link
                 key={tool.href}
                 href={tool.href}
-                className="group flex min-h-44 flex-col rounded-md border border-white/12 bg-white/[0.04] p-5 transition hover:border-gold/40 hover:bg-gold/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                className="group flex min-h-44 flex-col rounded-md border border-ink/12 bg-ink/[0.04] p-5 transition hover:border-gold/40 hover:bg-gold/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
               >
                 <Icon name={tool.icon} className="h-6 w-6 text-gold" />
                 <h3 className="mt-3 text-lg font-black text-foreground">{tool.title}</h3>

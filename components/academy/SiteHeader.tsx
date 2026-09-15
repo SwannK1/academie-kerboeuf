@@ -33,7 +33,7 @@ export function SiteHeader() {
   }, [isOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/82 backdrop-blur-xl print:hidden">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-background/85 backdrop-blur-xl print:hidden">
       <nav
         className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
         aria-label="Navigation principale"
@@ -43,7 +43,7 @@ export function SiteHeader() {
           className="group flex min-w-0 items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
           onClick={() => setIsOpen(false)}
         >
-          <span className="grid size-10 shrink-0 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold shadow-[0_0_28px_rgba(243,196,91,0.18)]">
+          <span className="grid size-10 shrink-0 place-items-center rounded-md border border-gold/40 bg-gold/10 text-sm font-black text-gold shadow-[0_0_28px_rgba(143,84,23,0.18)]">
             AK
           </span>
           <span className="flex min-w-0 flex-col leading-none">
@@ -56,7 +56,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 rounded-md border border-white/10 bg-white/[0.04] p-1 lg:flex">
+        <div className="hidden items-center gap-1 rounded-md border border-ink/10 bg-ink/[0.04] p-1 lg:flex">
           {headerNavigationItems.map((item) => {
             const active = isGlobalNavItemActive(pathname, item);
 
@@ -67,8 +67,8 @@ export function SiteHeader() {
                 aria-current={active ? "page" : undefined}
                 className={`rounded px-2.5 py-2 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                   active
-                    ? "bg-gold text-ink"
-                    : "text-muted hover:bg-white/10 hover:text-foreground"
+                    ? "bg-gold text-background"
+                    : "text-muted hover:bg-ink/10 hover:text-foreground"
                 }`}
               >
                 {item.label}
@@ -80,7 +80,7 @@ export function SiteHeader() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="grid size-10 place-items-center rounded-md border border-white/12 bg-white/[0.06] text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold lg:hidden"
+          className="grid size-10 place-items-center rounded-md border border-ink/12 bg-ink/[0.06] text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold lg:hidden"
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsOpen((open) => !open)}
@@ -111,7 +111,7 @@ export function SiteHeader() {
       {isOpen ? (
         <div
           id="mobile-navigation"
-          className="border-t border-white/10 bg-ink/96 px-4 py-3 shadow-2xl shadow-black/40 lg:hidden"
+          className="border-t border-ink/10 bg-background/96 px-4 py-3 shadow-2xl shadow-black/40 lg:hidden"
         >
           <div className="mx-auto grid max-w-7xl gap-2">
             {mobileNavigationItems.map((item) => {
@@ -128,8 +128,8 @@ export function SiteHeader() {
                   }}
                   className={`rounded-md px-3 py-3 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
                     active
-                      ? "bg-gold text-ink"
-                      : "bg-white/[0.04] text-muted hover:bg-white/10 hover:text-foreground"
+                      ? "bg-gold text-background"
+                      : "bg-ink/[0.04] text-muted hover:bg-ink/10 hover:text-foreground"
                   }`}
                 >
                   {item.label}
