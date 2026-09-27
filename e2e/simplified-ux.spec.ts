@@ -1,27 +1,20 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("parcours UX simplifiés", () => {
-  test("l’accueil présente deux décisions dominantes", async ({ page }) => {
+  test("l’accueil met en avant les actions du jour", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      /Que voulez-vous faire aujourd’hui|Que voulez-vous faire aujourd'hui/,
-    );
-    await expect(page.getByRole("link", { name: /Je cherche une ressource/ })).toHaveAttribute(
-      "href",
-      "/ressources",
-    );
-    await expect(page.getByRole("link", { name: /Je prépare ma classe/ })).toHaveAttribute(
-      "href",
-      "/enseignants",
-    );
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Préparer sa classe/);
+    await expect(page.getByRole("link", { name: /Trouver une ressource/ })).toHaveAttribute("href", "/ressources");
+    await expect(page.getByRole("link", { name: /Préparer ma journée/ })).toHaveAttribute("href", "/enseigner");
+    await expect(page.getByRole("link", { name: /Construire une séance/ })).toHaveAttribute("href", "/enseigner/semaine");
+    await expect(page.getByRole("link", { name: /Voir ma progression/ })).toHaveAttribute("href", "/enseigner/periode");
   });
 
-  test("Ressources mène directement de CE1 à Français", async ({ page }) => {
-    await page.goto("/");
-    await page.getByRole("link", { name: /Je cherche une ressource/ }).click();
-    await page.locator('main a[href="/primaire/ce1"]').click();
-    await page.locator('main a[href="/primaire/ce1/matieres/francais"]').click();
+  test("les niveaux mènent directement de CE1 à Français", async ({ page }) => {
+    await page.goto("/primaire");
+    await page.locator('main a[href="/primaire/ce1"]').first().click();
+    await page.locator('main a[href="/primaire/ce1/matieres/francais"]').first().click();
 
     await expect(page).toHaveURL("/primaire/ce1/matieres/francais");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Français");
@@ -63,8 +56,8 @@ test.describe("parcours UX simplifiés", () => {
     test(`${journey.levelLabel} suit le parcours niveau → matière → ressource`, async ({
       page,
     }) => {
-      await page.goto("/ressources");
-      await page.locator(`main a[href="/primaire/${journey.level}"]`).click();
+      await page.goto("/primaire");
+      await page.locator(`main a[href="/primaire/${journey.level}"]`).first().click();
 
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
         `Ressources ${journey.levelLabel}`,
@@ -96,27 +89,28 @@ test.describe("parcours UX simplifiés", () => {
     }
   });
 
-  test("l’espace enseignants expose quatre entrées principales", async ({ page }) => {
-    await page.goto("/enseignants");
+  test("l’espace Enseigner expose ses vues de travail", async ({ page }) => {
+    await page.goto("/enseigner");
 
-    const hubs = ["Mon année", "Ma semaine", "Ma classe", "Tous les outils"];
-    for (const hub of hubs) {
-      await expect(page.getByRole("link", { name: new RegExp(hub) })).toBeVisible();
+    const nav = page.getByRole("navigation", { name: "Enseigner" });
+    for (const tab of ["Aujourd'hui", "Ma semaine", "Ma période", "Mon année", "Ma classe"]) {
+      await expect(nav.getByRole("link", { name: tab, exact: true })).toBeVisible();
     }
-    await expect(page.locator("main h2")).toHaveCount(4);
   });
 
-  test("le parcours semaine conserve le cahier journal", async ({ page }) => {
+  test("le parcours semaine mène au cahier journal", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: /Je prépare ma classe/ }).click();
-    await page.getByRole("link", { name: /Ma semaine/ }).click();
+    await page.getByRole("link", { name: /Préparer ma journée/ }).click();
+    // Une seule question si le niveau n'est pas encore connu.
+    await page.getByRole("radio", { name: "CE1" }).click();
+    await page.getByRole("navigation", { name: "Enseigner" }).getByRole("link", { name: "Ma semaine" }).click();
     await page.getByRole("link", { name: /Cahier journal/ }).click();
 
-    await expect(page).toHaveURL("/enseignants/cahier-journal");
+    await expect(page).toHaveURL(/\/enseigner\/cahier-journal\?semaine=/);
   });
 
   test("les titres utilisent une seule fois le nom du site", async ({ page }) => {
-    for (const route of ["/enseignants", "/primaire/ce1", "/primaire/ce1/matieres/francais"]) {
+    for (const route of ["/enseigner", "/enseigner/semaine", "/direction", "/primaire/ce1", "/primaire/ce1/matieres/francais"]) {
       await page.goto(route);
       expect((await page.title()).match(/Académie Kerboeuf/g)).toHaveLength(1);
     }

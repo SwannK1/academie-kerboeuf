@@ -61,7 +61,7 @@ export const footerPrimaryNavigationItems = footerNavigationItems.filter(
 );
 
 export const footerSecondaryNavigationItems = footerNavigationItems.filter(
-  (item) => !item.inHeader,
+  (item) => !item.inHeader && item.id !== "workspace",
 );
 
 export const mainNavigationItems = headerNavigationItems;

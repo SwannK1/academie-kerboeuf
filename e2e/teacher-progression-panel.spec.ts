@@ -10,7 +10,7 @@ import { trackConsoleErrors } from "./utils/console-errors";
 const COMPETENCE_LABEL = "Carte de test panneau latéral";
 
 async function createFreeCardAndOpenPanel(page: Page) {
-  await page.goto("/enseignants/progression");
+  await page.goto("/archives/progression");
 
   await page.getByRole("button", { name: "Carte libre" }).click();
   await page

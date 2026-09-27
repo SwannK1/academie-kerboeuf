@@ -28,7 +28,7 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("programmation : création accentuée, refresh et impression", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/programmation/annuelle");
+    await page.goto("/archives/programmation/annuelle");
     await expectHealthyPage(page, "Programmation annuelle");
 
     const section = page.locator("section", { has: page.getByRole("heading", { name: "Carte libre" }) });
@@ -46,7 +46,7 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("progression : création, édition persistée et donnée invalide signalée", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/progression");
+    await page.goto("/archives/progression");
     await expectHealthyPage(page, "Progression de période");
     await page.getByRole("button", { name: "Carte libre" }).click();
     await page.getByLabel("Compétence (texte libre)").fill("Résoudre un problème à étapes");
@@ -62,7 +62,7 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("emploi du temps : refresh, conflit disponible et horaires invalides refusés", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/emploi-du-temps");
+    await page.goto("/archives/emploi-du-temps");
     await expectHealthyPage(page, "Emploi du temps hebdomadaire");
     await expect(page.getByLabel("Semaine affichée")).toContainText("Semaine réelle");
     await page.reload();
@@ -76,7 +76,7 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("cahier journal : séance vide éditable, accents et conservation", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/cahier-journal");
+    await page.goto("/archives/cahier-journal");
     await expectHealthyPage(page, "Cahier journal");
     await page.getByRole("button", { name: /Ajouter une séance/i }).first().click();
     await page.getByLabel("Titre court").fill("Poésie — récitation à voix haute");
@@ -91,12 +91,12 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("cahier journal : envoyer une séance imprimable vers Photocopies pré-remplit la demande", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/cahier-journal");
+    await page.goto("/archives/cahier-journal");
     await expectHealthyPage(page, "Cahier journal");
     await page.getByRole("button", { name: /Ajouter une séance/i }).first().click();
     await page.getByLabel("Titre court").fill("Fiche exercices fractions");
     await page.getByLabel("Matière").selectOption("mathematiques");
-    await page.getByLabel("Niveau").selectOption("ce1");
+    await page.getByRole("combobox", { name: /^Niveau/ }).selectOption("ce1");
     await page.getByLabel("Support imprimable réellement disponible").check();
     await page.getByLabel("Nom du support").fill("Fiche fractions CE1");
     await page.getByLabel("Exemplaires").fill("26");
@@ -117,7 +117,7 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("cahier journal : dupliquer une journée vers une nouvelle date", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/cahier-journal");
+    await page.goto("/archives/cahier-journal");
     await expectHealthyPage(page, "Cahier journal");
 
     // Séance d'origine, le lundi de la semaine affichée.
@@ -182,7 +182,7 @@ test.describe("Outils enseignants — fiabilité annuelle", () => {
 
   test("liste et plan de classe : ajout clavier, renommage, sauvegarde et refresh", async ({ page }) => {
     const errors = trackConsoleErrors(page);
-    await page.goto("/enseignants/organisation-classe");
+    await page.goto("/archives/organisation-classe");
     await expectHealthyPage(page, "Plan de classe et groupes");
     const input = page.getByLabel("Prénom ou code");
     await input.fill("Éléonore-Alexandrine");

@@ -115,7 +115,7 @@ function LogbookSheet({
   return (
     <article className={`print-sheet rounded-2xl border border-line bg-white p-6 shadow-[0_20px_50px_-40px_rgba(43,36,32,0.6)] sm:p-8 ${breakBefore ? "print-break-before" : ""}`}>
       <header className="flex items-baseline justify-between border-b-2 border-foreground pb-2">
-        <h2 className="font-serif text-2xl font-semibold capitalize">{formatLongDate(date)} {fromIso(date).getFullYear()}</h2>
+        <h2 className="font-serif text-2xl font-semibold">{formatLongDate(date)} {fromIso(date).getFullYear()}</h2>
         <p className="text-sm text-muted">Cahier journal · {levelLabel(context.level)}</p>
       </header>
 

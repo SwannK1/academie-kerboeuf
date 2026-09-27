@@ -132,3 +132,21 @@ reste possible.
   présents.
 - Titres de ressources dispersés dans des dizaines de fichiers TS.
   → Index unique généré depuis les PDF (`scripts/build-resource-index.py`).
+
+## 5. Fusion avec l'audit « consolidation » (27/09/2026)
+
+Décision du propriétaire : garder la refonte et y intégrer ce qui est
+compatible dans l'audit de consolidation.
+
+| Point de l'audit | Traitement |
+|---|---|
+| Accueil cockpit (« Pour enseigner aujourd'hui », « Continuer ») | Fait : 4 actions, carte Continuer (dernier écran, dernière ressource, dernier outil), Direction, ressources par niveau. |
+| Tableau de bord enseignant groupé | Couvert par Enseigner (Aujourd'hui / Semaine / Période / Année / Classe) + « Autres outils » épinglables. Pas de `/enseignants/tableau-de-bord` séparé : il doublonnerait. |
+| Ressource → séance → cahier journal → progression | Fait : « Ajouter à… » (séance prévue, nouvelle séance du jour = cahier journal, notion placée dans la progression) ; une notion de la progression ouvre ses ressources. |
+| Actions standard (Projeter, Imprimer, Télécharger, Favori) | Fait dans le panneau ressource. « Correction » n'est proposé que si un fichier correction existe (aucun aujourd'hui : les évaluations ne sont pas des corrections). |
+| Trois statuts publics | Fait dans `public-status.ui.ts` : Disponible · Partiellement disponible · En préparation (« à venir » affiché en préparation). |
+| Bibliothèque vs feuille de route | La bibliothèque `/ressources` ne liste que les PDF présents. Les pages de niveau historiques gardent leurs catalogues détaillés. |
+| Favoris `/mes-favoris`, récents `/recents` | Faits, locaux, sans compte. |
+| Recherche globale | Ressources, écrans, outils et niveaux. |
+| Univers narratif, personnages, lycée | Restent archivés (redirections) : décision de la refonte maintenue. |
+| CE1 niveau de référence | Production éditoriale de PDF : hors périmètre du code (voir limites). |

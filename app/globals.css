@@ -690,7 +690,7 @@ a {
   html, body { background: #fff !important; color: #000; }
   body { font-size: 10.5pt; }
   .print-only { display: block; }
-  .no-print, header, footer, nav { display: none !important; }
+  .no-print { display: none !important; }
   main { padding: 0 !important; margin: 0 !important; }
   .print-sheet { box-shadow: none !important; border: 0 !important; padding: 0 !important; max-width: none !important; }
   .print-avoid-break { break-inside: avoid; page-break-inside: avoid; }

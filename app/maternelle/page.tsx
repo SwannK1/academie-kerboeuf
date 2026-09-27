@@ -136,7 +136,7 @@ export default function MaternellePage() {
         <div className="mx-auto max-w-7xl">
           <div className="rounded-md border border-ink/10 bg-ink/[0.025] p-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-muted">
-              À venir
+              En préparation
             </p>
             <p className="mt-2 text-sm font-bold text-foreground">
               En cours de structuration — aucun lien avant disponibilité réelle

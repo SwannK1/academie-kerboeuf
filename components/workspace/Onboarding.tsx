@@ -7,6 +7,7 @@ import { Icon } from "@/components/icons/Icon";
 import { Button, ChipGroup, Skeleton } from "@/components/workspace/ui";
 import { TEACH_LEVELS, levelLabel, type TeachLevel } from "@/lib/workspace/curriculum";
 import { updateProfile, useProfile, type Role, type SchoolType } from "@/lib/workspace/profile";
+import { useActivity } from "@/lib/workspace/activity";
 
 const ROLE_OPTIONS: { id: Role; label: string }[] = [
   { id: "enseignant", label: "J'enseigne" },
@@ -78,20 +79,36 @@ export function Onboarding({ compact = false }: { compact?: boolean }) {
 
 function ContinueCard() {
   const profile = useProfile();
-  if (!profile) return null;
+  const activity = useActivity();
+  if (!profile || !activity) return null;
+  const lastOf = (kind: "page" | "ressource" | "outil") => activity.recents.find((r) => r.kind === kind);
   const home = profile.role === "direction" ? { href: "/direction", label: "Tableau de bord Direction" } : { href: "/enseigner", label: "Ma journée" };
-  const target = profile.lastPath ? { href: profile.lastPath, label: profile.lastLabel ?? home.label } : home;
+  const page = lastOf("page") ?? { href: home.href, label: home.label };
+  const cards = [
+    { eyebrow: profile.level ? `Continuer ma préparation ${levelLabel(profile.level)}` : "Continuer", label: page.label, href: page.href, icon: "calendar" as const },
+    lastOf("ressource") ? { eyebrow: "Revoir ma dernière ressource", label: lastOf("ressource")!.label, href: lastOf("ressource")!.href, icon: "book-open" as const } : null,
+    lastOf("outil") ? { eyebrow: "Dernier outil utilisé", label: lastOf("outil")!.label, href: lastOf("outil")!.href, icon: "grid" as const } : null,
+  ].filter((c): c is NonNullable<typeof c> => c !== null);
+
   return (
-    <section aria-label="Continuer" className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-panel-soft px-5 py-4 sm:px-6">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Continuer là où vous vous êtes arrêté</p>
-        <p className="mt-1 font-serif text-xl font-semibold text-foreground">{target.label}</p>
-        {profile.level ? <p className="text-sm text-muted">Classe de {levelLabel(profile.level)}</p> : null}
+    <section aria-labelledby="continuer">
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 id="continuer" className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">Continuer</h2>
+        <Link href="/recents" className="text-sm text-muted underline decoration-ink/25 hover:text-foreground">Tout l&apos;historique</Link>
       </div>
-      <Link href={target.href} className="btn btn-primary">
-        Reprendre
-        <Icon name="arrow-right" className="h-4 w-4" />
-      </Link>
+      <ul className="mt-3 grid gap-3 md:grid-cols-3">
+        {cards.map((card) => (
+          <li key={card.eyebrow}>
+            <Link href={card.href} className="flex h-full items-start gap-3 rounded-2xl border border-line bg-panel-soft p-4 transition hover:border-ink/25">
+              <Icon name={card.icon} className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+              <span className="min-w-0">
+                <span className="block text-xs text-muted">{card.eyebrow}</span>
+                <span className="mt-0.5 line-clamp-2 block font-medium leading-snug">{card.label}</span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

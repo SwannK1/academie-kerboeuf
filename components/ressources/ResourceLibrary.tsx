@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ResourcePanel } from "@/components/ressources/ResourcePanel";
+import { useActivity } from "@/lib/workspace/activity";
 import { Icon } from "@/components/icons/Icon";
-import { ActionMenu, Button, ChipGroup, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
+import { Button, ChipGroup } from "@/components/workspace/ui";
 import {
   FILE_TYPE_LABELS,
   RESOURCE_SUBJECTS,
@@ -14,44 +16,17 @@ import {
   getVisibleCollections,
   publishedResources,
   searchResources,
+  suggestResources,
   subjectLabel,
   type ResourceFileType,
   type ResourceUnit,
 } from "@/lib/resources/library";
-import { RESOURCE_LEVELS, getSubject, isMaternelle, levelLabel, type ResourceLevel, type TeachLevel } from "@/lib/workspace/curriculum";
+import { RESOURCE_LEVELS, findNotion, getSubject, isTeachLevel, levelLabel, type ResourceLevel } from "@/lib/workspace/curriculum";
 import { useProfile } from "@/lib/workspace/profile";
-import { addDays, dayLabel, formatShortDate, mondayOf, todayIso, weekday } from "@/lib/workspace/school-year";
-import {
-  createSession,
-  freeSlotsOn,
-  schoolDatesOfWeek,
-  sessionTitle,
-  sessionsOn,
-  teachStore,
-  toggleFavorite,
-  toggleResource,
-  useTeach,
-  type TeachState,
-} from "@/lib/workspace/teach";
+import { dayLabel, formatShortDate } from "@/lib/workspace/school-year";
+import { sessionTitle, useTeach } from "@/lib/workspace/teach";
 
 const PAGE = 24;
-
-const TEACH_SUBJECT: Record<string, string> = {
-  francais: "francais",
-  maths: "mathematiques",
-  langage: "langage",
-  sciences: "sciences-technologie",
-  "hg-emc": "histoire",
-  langues: "langue-vivante",
-  arts: "arts-plastiques",
-  eps: "eps",
-};
-
-function teachSubjectFor(unit: ResourceUnit, level: TeachLevel): string {
-  if (unit.subject === "maths" && isMaternelle(level)) return "premiers-outils-mathematiques";
-  if (unit.subject === "sciences" && ["cp", "ce1", "ce2"].includes(level)) return "questionner-le-monde";
-  return TEACH_SUBJECT[unit.subject] ?? "francais";
-}
 
 const levelsWithResources = RESOURCE_LEVELS.filter((l) => publishedResources.some((u) => u.level === l.id));
 
@@ -60,6 +35,7 @@ export function ResourceLibrary() {
   const router = useRouter();
   const profile = useProfile();
   const teach = useTeach();
+  const activity = useActivity();
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [limit, setLimit] = useState(PAGE);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -94,11 +70,23 @@ export function ResourceLibrary() {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- déclenché par la saisie uniquement
   }, [query]);
 
-  const { results, inferred } = useMemo(
-    () => searchResources({ q, level, subject, type, collection }),
-    [q, level, subject, type, collection],
-  );
-  const shown = favorites && teach ? results.filter((u) => teach.favorites.includes(u.id)) : results;
+  const notionId = params.get("notion");
+  const notion = notionId && level && isTeachLevel(level) ? findNotion(level, notionId) : null;
+  const { results, inferred } = useMemo(() => {
+    if (notion && level) {
+      const units = suggestResources({
+        level,
+        resourceSubject: getSubject(notion.subjectId).resourceSubject,
+        domain: notion.domainLabel,
+        text: notion.label,
+        limit: 12,
+      });
+      return { results: units, inferred: {} };
+    }
+    return searchResources({ q, level, subject, type, collection });
+  }, [notion, q, level, subject, type, collection]);
+  const favoriteIds = new Set(activity?.favorites.filter((f) => f.kind === "ressource").map((f) => f.id));
+  const shown = favorites ? results.filter((u) => favoriteIds.has(u.id)) : results;
 
   const subjectsHere = RESOURCE_SUBJECTS.filter((s) =>
     publishedResources.some((u) => u.subject === s.id && (!level || u.level === level)),
@@ -117,6 +105,17 @@ export function ResourceLibrary() {
           <Link href="/enseigner/semaine" className="font-semibold text-gold hover:underline">
             Retour à la semaine
           </Link>
+        </div>
+      ) : null}
+
+      {notion ? (
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-line bg-panel-soft px-4 py-3 text-sm">
+          <span>
+            Ressources proches de la notion <strong>{notion.label}</strong>
+          </span>
+          <button type="button" className="text-muted underline" onClick={() => setParam({ notion: null })}>
+            Voir toute la bibliothèque
+          </button>
         </div>
       ) : null}
 
@@ -167,12 +166,12 @@ export function ResourceLibrary() {
             value={type ?? inferred.type ?? null}
             onChange={(v) => setParam({ type: v })}
           />
-          {teach?.favorites.length ? (
+          {favoriteIds.size ? (
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Mes favoris</p>
               <button type="button" aria-pressed={favorites} className={`chip chip-sm ${favorites ? "chip-on" : ""}`} onClick={() => setParam({ favoris: favorites ? null : "1" })}>
                 <Icon name="star" className="h-3.5 w-3.5" />
-                {teach.favorites.length}
+                {favoriteIds.size}
               </button>
             </div>
           ) : null}
@@ -213,7 +212,7 @@ export function ResourceLibrary() {
       <ul className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {shown.slice(0, limit).map((unit) => (
           <li key={unit.id}>
-            <ResourceCard unit={unit} favorite={Boolean(teach?.favorites.includes(unit.id))} onOpen={() => setParam({ voir: unit.id })} />
+            <ResourceCard unit={unit} favorite={favoriteIds.has(unit.id)} onOpen={() => setParam({ voir: unit.id })} />
           </li>
         ))}
       </ul>
@@ -224,14 +223,27 @@ export function ResourceLibrary() {
       ) : null}
       {!shown.length ? (
         <div className="mt-6 rounded-2xl border border-dashed border-line p-8 text-center">
-          <p className="text-foreground">Aucune ressource publiée ne correspond.</p>
-          <button type="button" className="mt-2 text-sm text-gold underline" onClick={() => router.replace("/ressources?tous=1")}>
-            Effacer les filtres
-          </button>
+          <p className="text-foreground">Cette ressource est encore en préparation.</p>
+          <p className="mt-1 text-sm text-muted">Voici ce qui est déjà disponible :</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {level ? (
+              <button type="button" className="btn btn-secondary" onClick={() => router.replace(`/ressources?niveau=${level}`)}>
+                Toutes les ressources {levelLabel(level)}
+              </button>
+            ) : null}
+            {subject ? (
+              <button type="button" className="btn btn-secondary" onClick={() => router.replace(`/ressources?matiere=${subject}&tous=1`)}>
+                Toutes les ressources {subjectLabel(subject)}
+              </button>
+            ) : null}
+            <button type="button" className="btn btn-quiet" onClick={() => router.replace("/ressources?tous=1")}>
+              Effacer les filtres
+            </button>
+          </div>
         </div>
       ) : null}
 
-      <ResourcePanel unit={viewed} teach={teach} profileLevel={profile?.level ?? null} targetSessionId={session?.id ?? null} onClose={() => setParam({ voir: null })} />
+      <ResourcePanel unit={viewed} targetSessionId={session?.id ?? null} onClose={() => setParam({ voir: null })} onNavigate={(id) => setParam({ voir: id })} />
     </>
   );
 }
@@ -261,157 +273,3 @@ function ResourceCard({ unit, favorite, onOpen }: { unit: ResourceUnit; favorite
   );
 }
 
-function addMenu(unit: ResourceUnit, teach: TeachState, level: TeachLevel): MenuSection[] {
-  const today = todayIso();
-  const monday = weekday(today) >= 6 ? addDays(mondayOf(today), 7) : mondayOf(today);
-  const dates = schoolDatesOfWeek(teach, monday).filter((d) => d >= today || weekday(today) >= 6);
-  const subjectId = teachSubjectFor(unit, level);
-  const matching = teach.sessions
-    .filter((s) => s.date >= today && s.date < addDays(monday, 7) && s.subject === subjectId && !s.resources.includes(unit.id))
-    .sort((a, b) => a.date.localeCompare(b.date) || a.start - b.start)
-    .slice(0, 5);
-
-  function addToDay(date: string) {
-    const before = teachStore.get();
-    const slot = freeSlotsOn(teach, date).find((s) => s.subject === subjectId);
-    const last = sessionsOn(teach, date).at(-1);
-    createSession({
-      date,
-      start: slot?.start ?? (last ? last.start + last.duration : 510),
-      duration: slot?.duration ?? 30,
-      level,
-      subject: subjectId,
-      notionLabel: unit.title,
-      resources: [unit.id],
-    });
-    toast(`Ajoutée ${date === today ? "aujourd'hui" : dayLabel(date).toLowerCase()}`, () => teachStore.set(before));
-  }
-
-  return [
-    ...(matching.length
-      ? [
-          {
-            title: "À une séance prévue",
-            actions: matching.map((s) => ({
-              label: `${dayLabel(s.date)} · ${sessionTitle(s)}`.slice(0, 60),
-              icon: "plus" as const,
-              onSelect: () => {
-                toggleResource(s.id, unit.id);
-                toast("Ressource ajoutée à la séance");
-              },
-            })),
-          },
-        ]
-      : []),
-    {
-      title: "Nouvelle séance",
-      actions: dates.map((d) => ({
-        label: d === today ? "Aujourd'hui" : `${dayLabel(d)} ${formatShortDate(d)}`,
-        icon: "calendar" as const,
-        onSelect: () => addToDay(d),
-      })),
-    },
-  ];
-}
-
-function ResourcePanel({
-  unit,
-  teach,
-  profileLevel,
-  targetSessionId,
-  onClose,
-}: {
-  unit: ResourceUnit | undefined;
-  teach: TeachState | null;
-  profileLevel: TeachLevel | null;
-  targetSessionId: string | null;
-  onClose: () => void;
-}) {
-  const [picked, setPicked] = useState<{ id?: string; index: number }>({ index: 0 });
-  const fileIndex = picked.id === unit?.id ? picked.index : 0;
-  const setFileIndex = (index: number) => setPicked({ id: unit?.id, index });
-  const file = unit?.files[Math.min(fileIndex, (unit?.files.length ?? 1) - 1)];
-  const favorite = Boolean(unit && teach?.favorites.includes(unit.id));
-  const level: TeachLevel = profileLevel ?? (RESOURCE_LEVELS.slice(0, 8).some((l) => l.id === unit?.level) ? (unit?.level as TeachLevel) : "cm2");
-  const target = targetSessionId && teach ? teach.sessions.find((s) => s.id === targetSessionId) : undefined;
-  const alreadyInTarget = Boolean(target && unit && target.resources.includes(unit.id));
-
-  return (
-    <SidePanel
-      open={Boolean(unit)}
-      wide
-      onClose={onClose}
-      title={unit?.title ?? ""}
-      subtitle={unit ? `${levelLabel(unit.level)} · ${subjectLabel(unit.subject)}${unit.domain ? ` · ${unit.domain}` : ""}` : undefined}
-      footer={
-        unit && file ? (
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-1">
-              <a href={file.href} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                <Icon name="printer" className="h-4 w-4" />
-                Ouvrir et imprimer
-              </a>
-              <a href={file.href} download className="btn btn-quiet" aria-label="Télécharger le PDF">
-                <Icon name="download" className="h-4 w-4" />
-                <span className="hidden sm:inline">Télécharger</span>
-              </a>
-              {teach ? (
-                <button type="button" onClick={() => toggleFavorite(unit.id)} aria-pressed={favorite} className={`btn btn-quiet ${favorite ? "text-gold" : ""}`}>
-                  <Icon name="star" className="h-4 w-4" />
-                  <span className="hidden sm:inline">{favorite ? "Dans mes favoris" : "Favori"}</span>
-                </button>
-              ) : null}
-            </div>
-            {target ? (
-              <Button
-                variant="primary"
-                icon={alreadyInTarget ? "check" : "plus"}
-                onClick={() => {
-                  if (!alreadyInTarget) {
-                    toggleResource(target.id, unit.id);
-                    toast("Ressource ajoutée à la séance");
-                  }
-                }}
-              >
-                {alreadyInTarget ? "Dans la séance" : "Ajouter à la séance"}
-              </Button>
-            ) : teach ? (
-              <ActionMenu
-                label="Ajouter à ma semaine"
-                sections={addMenu(unit, teach, level)}
-                triggerContent={
-                  <span className="btn btn-primary">
-                    <Icon name="plus" className="h-4 w-4" />
-                    Ajouter à…
-                  </span>
-                }
-              />
-            ) : null}
-          </div>
-        ) : null
-      }
-    >
-      {unit && file ? (
-        <div className="grid gap-4">
-          {unit.objective ? <p className="text-[15px] leading-7 text-foreground">{unit.objective}</p> : null}
-          {unit.files.length > 1 ? (
-            <ChipGroup
-              label="Document"
-              hideLabel
-              size="sm"
-              options={unit.files.map((f, i) => ({ id: i, label: `${FILE_TYPE_LABELS[f.type]}${f.pages > 1 ? ` · ${f.pages} p.` : ""}` }))}
-              value={fileIndex}
-              onChange={(i) => i !== null && setFileIndex(i)}
-            />
-          ) : null}
-          <div className="overflow-hidden rounded-xl border border-line bg-white">
-            <iframe key={file.href} src={`${file.href}#view=FitH&toolbar=0`} title={`Aperçu : ${unit.title} (${FILE_TYPE_LABELS[file.type]})`} className="h-[62vh] w-full" />
-          </div>
-          <p className="text-xs text-muted">
-            PDF A4 · {file.pages} page{file.pages > 1 ? "s" : ""} · {getSubject(teachSubjectFor(unit, level)).label}
-          </p>
-        </div>
-      ) : null}
-    </SidePanel>
-  );
-}

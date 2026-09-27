@@ -69,8 +69,8 @@ export default function PsPage() {
             <div className="grid grid-cols-4 gap-2 sm:min-w-[28rem]">
               <QuickMetric label="Domaines" value={psDomains.length} />
               <QuickMetric label="Séquences" value={sequenceCount} />
-              <QuickMetric label="Pilote" value={statusCounts["in-progress"]} />
-              <QuickMetric label="À venir" value={statusCounts.upcoming} />
+              <QuickMetric label="En cours" value={statusCounts["in-progress"]} />
+              <QuickMetric label="En préparation" value={statusCounts.upcoming} />
             </div>
           </div>
         </div>

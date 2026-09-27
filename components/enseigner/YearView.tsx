@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ActionMenu, Button, ChipGroup, toast, type MenuSection } from "@/components/workspace/ui";
 import { PageTitle, WithTeach, type TeachContext } from "@/components/enseigner/EnseignerShell";
@@ -26,8 +27,13 @@ export const STATE_TONE: Record<ProgressState, string> = {
   reportee: "text-gold",
 };
 
-export function progressMenu(notionId: string, current: Progress | undefined): MenuSection[] {
+export function progressMenu(
+  notionId: string,
+  current: Progress | undefined,
+  openResources?: () => void,
+): MenuSection[] {
   return [
+    ...(openResources ? [{ actions: [{ label: "Voir les ressources", icon: "book-open" as const, onSelect: openResources }] }] : []),
     {
       title: "Placer en",
       actions: COLUMNS.filter((c) => c.id !== (current?.period ?? 0)).map((c) => ({
@@ -57,6 +63,7 @@ function Year({ context }: { context: TeachContext }) {
   const tree = getCurriculum(context.level);
   const [subjectId, setSubjectId] = useState<string | null>(tree[0]?.id ?? null);
   const [overColumn, setOverColumn] = useState<number | null>(null);
+  const router = useRouter();
   const subject = tree.find((s) => s.id === subjectId) ?? tree[0];
   const notions: (Notion & { domainLabel: string })[] =
     subject?.domains.flatMap((d) => d.notions.map((n) => ({ ...n, domainLabel: d.label }))) ?? [];
@@ -155,7 +162,7 @@ function Year({ context }: { context: TeachContext }) {
                           ) : null}
                         </p>
                       </div>
-                      <ActionMenu label={`Déplacer ou changer l'état : ${notion.label}`} sections={progressMenu(notion.id, p)} buttonClassName="size-8 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100" />
+                      <ActionMenu label={`Déplacer ou changer l'état : ${notion.label}`} sections={progressMenu(notion.id, p, () => router.push(`/ressources?niveau=${context.level}&notion=${notion.id}`))} buttonClassName="size-8 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100" />
                     </li>
                   );
                 })}

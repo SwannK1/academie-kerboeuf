@@ -11,8 +11,8 @@ export const publicStatusUi = {
     dotClassName: "bg-jade",
   },
   partial: {
-    label: "Disponible partiellement",
-    ariaLabel: "Statut public : disponible partiellement",
+    label: "Partiellement disponible",
+    ariaLabel: "Statut public : partiellement disponible",
     variant: "partial",
     className: "border-gold/35 bg-gold/10 text-gold",
     dotClassName: "bg-gold",
@@ -25,8 +25,9 @@ export const publicStatusUi = {
     dotClassName: "bg-sky",
   },
   upcoming: {
-    label: "À venir",
-    ariaLabel: "Statut public : à venir",
+    // Trois états publics seulement : « à venir » s'affiche comme « en préparation ».
+    label: "En préparation",
+    ariaLabel: "Statut public : en préparation",
     variant: "upcoming",
     className: "border-ink/20 bg-ink/[0.04] text-muted",
     dotClassName: "bg-muted",

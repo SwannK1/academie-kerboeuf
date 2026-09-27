@@ -10,7 +10,7 @@ import { trackConsoleErrors } from "./utils/console-errors";
 const CARD_TITLE = "Atelier de test panneau latéral";
 
 async function createFreeCardAndOpenPanel(page: Page) {
-  await page.goto("/enseignants/programmation/annuelle");
+  await page.goto("/archives/programmation/annuelle");
 
   const freeCardSection = page.locator("section", {
     has: page.getByRole("heading", { name: "Carte libre" }),

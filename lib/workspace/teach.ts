@@ -206,12 +206,14 @@ export function recommendedSlots(level: TeachLevel, days: number[]): Slot[] {
     const afternoon: Record<number, [string, string]> = upper
       ? { 1: ["sciences-technologie", "arts-plastiques"], 2: ["histoire", "emc"], 3: ["eps", "langue-vivante"], 4: ["geographie", "education-musicale"], 5: ["eps", "langue-vivante"] }
       : { 1: ["questionner-le-monde", "arts-plastiques"], 2: ["eps", "emc"], 3: ["eps", "langue-vivante"], 4: ["questionner-le-monde", "education-musicale"], 5: ["eps", "langue-vivante"] };
+    // Journée type : 8h30–11h45 et 13h30–16h30, récréations 10h15 et 15h15 laissées libres.
     slots.push(
       day(d, 510, 60, "francais"),
-      day(d, 570, 30, "francais"),
-      day(d, 640, 60, "mathematiques"),
+      day(d, 570, 45, "francais"),
+      day(d, 630, 75, "mathematiques"),
       day(d, 810, 60, afternoon[d][0]),
       day(d, 870, 45, afternoon[d][1]),
+      day(d, 930, 60, d === 2 || d === 4 ? "mathematiques" : "francais"),
     );
   }
   return slots;

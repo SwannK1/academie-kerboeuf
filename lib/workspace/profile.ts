@@ -3,6 +3,7 @@
 import { createLocalStore, isRecord, useLocalStore } from "@/lib/workspace/store";
 import { isTeachLevel, type TeachLevel } from "@/lib/workspace/curriculum";
 import type { Zone } from "@/lib/workspace/school-year";
+import { recordRecent } from "@/lib/workspace/activity";
 
 export type Role = "enseignant" | "direction" | "les-deux";
 export type SchoolType = "maternelle" | "elementaire" | "primaire";
@@ -48,6 +49,7 @@ export function updateProfile(patch: Partial<Profile>) {
 }
 
 export function rememberPlace(path: string, label: string) {
+  recordRecent({ kind: "page", id: path, label, href: path });
   const current = profileStore.get();
   if (current.lastPath === path && current.lastLabel === label) return;
   profileStore.set({ ...current, lastPath: path, lastLabel: label });

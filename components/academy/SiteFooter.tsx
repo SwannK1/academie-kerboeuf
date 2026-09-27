@@ -26,7 +26,7 @@ export function SiteFooter() {
             </span>
             <span>
               <span className="block text-sm font-semibold tracking-[0.16em] text-foreground">
-                ACADEMIE
+                ACADÉMIE
               </span>
               <span className="block text-xs font-medium tracking-[0.22em] text-gold">
                 KERBOEUF

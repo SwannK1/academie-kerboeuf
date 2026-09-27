@@ -165,7 +165,7 @@ function SheetRow({
       {clickable ? (
         <span className="text-xs font-bold text-jade">Ouvrir →</span>
       ) : (
-        <span className="text-xs text-ink/25">À venir</span>
+        <span className="text-xs text-ink/25">En préparation</span>
       )}
     </span>
   );

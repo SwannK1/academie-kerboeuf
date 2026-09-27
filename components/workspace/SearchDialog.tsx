@@ -6,10 +6,11 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "@/components/icons/Icon";
 import { FILE_TYPE_LABELS, normalize, searchResources, subjectLabel } from "@/lib/resources/library";
-import { levelLabel } from "@/lib/workspace/curriculum";
+import { RESOURCE_LEVELS, levelLabel } from "@/lib/workspace/curriculum";
+import { TEACHER_TOOLS } from "@/content/teacher-tools";
 
 /** Raccourcis vers les écrans de travail, trouvables par mots-clés. */
-const PLACES: { label: string; href: string; keywords: string }[] = [
+const BASE_PLACES: { label: string; href: string; keywords: string }[] = [
   { label: "Aujourd'hui", href: "/enseigner", keywords: "aujourd hui journee jour classe" },
   { label: "Ma semaine", href: "/enseigner/semaine", keywords: "semaine preparer seance seances organisation" },
   { label: "Cahier journal", href: "/enseigner/cahier-journal", keywords: "cahier journal imprimer" },
@@ -22,10 +23,13 @@ const PLACES: { label: string; href: string; keywords: string }[] = [
   { label: "Conseil de cycle", href: "/direction/reunions?nouveau=conseil-cycle", keywords: "conseil cycle reunion" },
   { label: "Organiser une sortie", href: "/direction/demarches/sortie", keywords: "sortie voyage piscine musee transport" },
   { label: "Exercice de sécurité", href: "/direction/demarches/exercice-securite", keywords: "ppms incendie exercice securite evacuation" },
-  { label: "Photocopies", href: "/enseignants/photocopies", keywords: "photocopies impression" },
-  { label: "APC", href: "/enseignants/apc", keywords: "apc aide personnalisee" },
-  { label: "Liaison CM2 → 6e", href: "/enseignants/liaison-cm2-6e", keywords: "liaison cm2 6e sixieme college" },
   { label: "Mon espace · sauvegarde", href: "/mon-espace", keywords: "compte profil sauvegarde export mon espace" },
+];
+
+const PLACES = [
+  ...BASE_PLACES,
+  ...TEACHER_TOOLS.flatMap((group) => group.items.map((tool) => ({ label: tool.title, href: tool.href, keywords: normalize(`outil ${tool.text}`) }))),
+  ...RESOURCE_LEVELS.map((level) => ({ label: `Ressources ${level.label}`, href: `/ressources?niveau=${level.id}`, keywords: `niveau ${normalize(level.label)} ${level.id}` })),
 ];
 
 export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => void }) {

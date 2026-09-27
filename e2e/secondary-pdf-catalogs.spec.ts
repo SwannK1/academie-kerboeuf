@@ -2,10 +2,11 @@ import { expect, test } from "@playwright/test";
 import catalog from "../content/secondary-resource-catalog.generated.json";
 import { trackConsoleErrors } from "./utils/console-errors";
 
-const levelRoutes = ["/college", "/college/6e", "/college/5e", "/college/4e", "/college/3e", "/lycee", "/lycee/seconde"];
-const baseFor = (level: string) => level === "seconde" ? "/lycee/seconde" : `/college/${level}`;
+// Le lycée est retiré du périmètre : ses routes redirigent vers /ressources.
+const levelRoutes = ["/college", "/college/6e", "/college/5e", "/college/4e", "/college/3e"];
+const baseFor = (level: string) => `/college/${level}`;
 const representativeCompetencies = [...new Map(
-  catalog.map((item) => [`${item.level}/${item.subject}`, item]),
+  catalog.filter((item) => item.level !== "seconde").map((item) => [`${item.level}/${item.subject}`, item]),
 ).values()];
 
 test.describe("Catalogue PDF secondaire", () => {
@@ -34,6 +35,7 @@ test.describe("Catalogue PDF secondaire", () => {
 
   test("chaque PDF catalogué répond en application/pdf", async ({ request }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "Audit HTTP exhaustif exécuté une seule fois");
+    test.setTimeout(180_000);
     const hrefs = catalog.flatMap((item) => item.resources.map((resource) => resource.href));
     expect(new Set(hrefs).size).toBe(hrefs.length);
     for (const href of hrefs) {
@@ -45,8 +47,17 @@ test.describe("Catalogue PDF secondaire", () => {
 
   test("les routes secondaires inconnues répondent 404", async ({ request }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "Audit 404 exécuté une seule fois");
-    for (const route of ["/college/inconnu", "/college/6e/inconnue", "/college/6e/francais/inconnue", "/lycee/inconnu", "/lycee/seconde/inconnue", "/lycee/seconde/francais/inconnue"]) {
+    for (const route of ["/college/inconnu", "/college/6e/inconnue", "/college/6e/francais/inconnue"]) {
       expect((await request.get(route)).status(), route).toBe(404);
+    }
+  });
+
+  test("les anciennes routes lycée redirigent vers la bibliothèque", async ({ request }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chromium", "Audit exécuté une seule fois");
+    for (const route of ["/lycee", "/lycee/seconde", "/lycee/seconde/francais/inconnue"]) {
+      const response = await request.get(route, { maxRedirects: 0 });
+      expect(response.status(), route).toBe(308);
+      expect(response.headers().location, route).toBe("/ressources");
     }
   });
 });

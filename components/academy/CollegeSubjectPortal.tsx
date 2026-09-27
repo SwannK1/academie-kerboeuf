@@ -90,7 +90,7 @@ export function CollegeSubjectPortal({
                     </span>
                   ) : (
                     <span className="mt-5 inline-flex w-fit rounded border border-ink/10 bg-ink/[0.04] px-2.5 py-1 text-xs font-bold text-muted">
-                      À venir
+                      En préparation
                     </span>
                   )}
                 </div>

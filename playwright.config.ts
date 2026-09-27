@@ -4,6 +4,10 @@ import { defineConfig, devices } from "@playwright/test";
  * Suite minimale et isolée : panneaux latéraux enseignants uniquement.
  * Aucune dépendance à des données externes ni à Auth/Admin/Supabase.
  */
+// Port surchargeable : un autre projet local peut déjà occuper 3100
+// (reuseExistingServer réutiliserait alors son serveur).
+const PORT = process.env.E2E_PORT ?? "3100";
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -11,12 +15,12 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://127.0.0.1:3100",
+    baseURL: `http://127.0.0.1:${PORT}`,
     trace: "retain-on-failure",
   },
   webServer: {
-    command: "npm run build && npm run start -- -p 3100",
-    url: "http://127.0.0.1:3100",
+    command: `npm run build && npm run start -- -p ${PORT}`,
+    url: `http://127.0.0.1:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },
