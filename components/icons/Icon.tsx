@@ -38,7 +38,24 @@ export type IconName =
   | "music-note"
   | "map"
   | "flask"
-  | "bookmark";
+  | "bookmark"
+  | "plus"
+  | "copy"
+  | "more"
+  | "check"
+  | "x"
+  | "arrow-up"
+  | "arrow-down"
+  | "arrow-right"
+  | "star"
+  | "download"
+  | "chevron-left"
+  | "chevron-right"
+  | "trash"
+  | "external"
+  | "grip"
+  | "user"
+  | "move";
 
 const paths: Record<IconName, React.ReactNode> = {
   calendar: (
@@ -244,6 +261,63 @@ const paths: Record<IconName, React.ReactNode> = {
     </>
   ),
   bookmark: <path d="M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4-6.5 4V4.5a1 1 0 0 1 1-1Z" />,
+  plus: <path d="M12 5v14M5 12h14" />,
+  copy: (
+    <>
+      <rect x="8.5" y="8.5" width="11" height="11" rx="1.5" />
+      <path d="M15.5 8.5V5.5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3" />
+    </>
+  ),
+  more: (
+    <>
+      <circle cx="6" cy="12" r="1.2" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none" />
+      <circle cx="18" cy="12" r="1.2" fill="currentColor" stroke="none" />
+    </>
+  ),
+  check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
+  x: <path d="M6 6l12 12M18 6L6 18" />,
+  "arrow-up": <path d="M12 19V5M6 11l6-6 6 6" />,
+  "arrow-down": <path d="M12 5v14M6 13l6 6 6-6" />,
+  "arrow-right": <path d="M5 12h14M13 6l6 6-6 6" />,
+  star: <path d="M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8Z" />,
+  download: (
+    <>
+      <path d="M12 4v11M7 10.5l5 5 5-5" />
+      <path d="M4.5 19.5h15" />
+    </>
+  ),
+  "chevron-left": <path d="M14.5 6l-6 6 6 6" />,
+  "chevron-right": <path d="M9.5 6l6 6-6 6" />,
+  trash: (
+    <>
+      <path d="M4.5 7h15M10 7V4.5h4V7" />
+      <path d="M6.5 7l1 13h9l1-13" />
+    </>
+  ),
+  external: (
+    <>
+      <path d="M13.5 4.5h6v6M19.5 4.5l-8 8" />
+      <path d="M17 13.5v5a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h5" />
+    </>
+  ),
+  grip: (
+    <>
+      {[7, 12, 17].flatMap((y) => [9, 15].map((x) => <circle key={`${x}-${y}`} cx={x} cy={y} r="1.1" fill="currentColor" stroke="none" />))}
+    </>
+  ),
+  user: (
+    <>
+      <circle cx="12" cy="8.5" r="3.5" />
+      <path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" />
+    </>
+  ),
+  move: (
+    <>
+      <path d="M12 3.5v17M3.5 12h17" />
+      <path d="M9.5 6L12 3.5 14.5 6M9.5 18l2.5 2.5 2.5-2.5M6 9.5L3.5 12 6 14.5M18 9.5l2.5 2.5-2.5 2.5" />
+    </>
+  ),
 };
 
 export function Icon({

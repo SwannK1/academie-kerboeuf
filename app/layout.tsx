@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/academy/SiteFooter";
 import { SiteHeader } from "@/components/academy/SiteHeader";
+import { Toaster } from "@/components/workspace/ui";
 import {
   DEFAULT_SITE_DESCRIPTION,
   getPublicSiteUrl,
@@ -70,6 +71,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <Toaster />
       </body>
     </html>
   );

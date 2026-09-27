@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_NAME = "Académie Kerboeuf";
 export const SITE_TITLE_SEPARATOR = " | ";
 export const DEFAULT_SITE_DESCRIPTION =
-  "Une plateforme pédagogique immersive pour élèves, enseignants et parents, de la maternelle à la Terminale.";
+  "Préparer sa classe, piloter son école, trouver des ressources prêtes à imprimer : la plateforme de travail des professeurs des écoles et des directions.";
 
 const DEFAULT_SITE_URL = "https://academie-kerboeuf.vercel.app";
 

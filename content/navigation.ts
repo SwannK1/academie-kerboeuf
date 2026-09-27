@@ -1,16 +1,13 @@
 export type GlobalNavigationItemId =
-  | "home"
+  | "teach"
+  | "direction"
   | "resources"
-  | "primary"
-  | "teachers"
-  | "universe"
+  | "search"
+  | "workspace"
   | "maternelle"
+  | "primary"
   | "college"
-  | "lycee"
-  | "map"
-  | "method"
-  | "characters"
-  | "recent-missions";
+  | "method";
 
 export type NavigationItem = {
   label: string;
@@ -25,19 +22,22 @@ export type GlobalNavigationItem = NavigationItem & {
   inFooter: boolean;
 };
 
+/**
+ * Navigation de la plateforme de travail : trois univers (Enseigner,
+ * Direction, Ressources), la recherche et Mon espace. Les niveaux sont
+ * accessibles depuis Ressources ; l'ancien univers narratif et le lycée
+ * sont archivés (voir docs/refonte-2026/inventaire.md).
+ */
 export const globalNavigationItems = [
-  { id: "home", label: "Accueil", href: "/", order: 10, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "resources", label: "Ressources", href: "/ressources", order: 20, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "primary", label: "Primaire", href: "/primaire", order: 30, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "teachers", label: "Préparer ma classe", href: "/enseignants", order: 40, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "universe", label: "Univers", href: "/univers", order: 50, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "teach", label: "Enseigner", href: "/enseigner", order: 10, inHeader: true, inMobileMenu: true, inFooter: true },
+  { id: "direction", label: "Direction", href: "/direction", order: 20, inHeader: true, inMobileMenu: true, inFooter: true },
+  { id: "resources", label: "Ressources", href: "/ressources", order: 30, inHeader: true, inMobileMenu: true, inFooter: true },
+  { id: "search", label: "Recherche", href: "/recherche", order: 40, inHeader: false, inMobileMenu: false, inFooter: false },
+  { id: "workspace", label: "Mon espace", href: "/mon-espace", order: 50, inHeader: false, inMobileMenu: true, inFooter: true },
   { id: "maternelle", label: "Maternelle", href: "/maternelle", order: 60, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "college", label: "Collège", href: "/college", order: 70, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "lycee", label: "Lycée", href: "/lycee", order: 80, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "map", label: "Carte", href: "/carte", order: 90, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "method", label: "À propos", href: "/methode", order: 100, inHeader: true, inMobileMenu: true, inFooter: true },
-  { id: "characters", label: "Personnages", href: "/personnages", order: 110, inHeader: false, inMobileMenu: false, inFooter: true },
-  { id: "recent-missions", label: "Missions récentes", href: "/missions-recentes", order: 120, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "primary", label: "Élémentaire", href: "/primaire", order: 70, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "college", label: "Collège", href: "/college", order: 80, inHeader: false, inMobileMenu: false, inFooter: true },
+  { id: "method", label: "À propos", href: "/methode", order: 90, inHeader: false, inMobileMenu: false, inFooter: true },
 ] as const satisfies readonly GlobalNavigationItem[];
 
 function byOrder(a: GlobalNavigationItem, b: GlobalNavigationItem) {
@@ -49,7 +49,7 @@ export const headerNavigationItems = [...globalNavigationItems]
   .sort(byOrder);
 
 export const mobileNavigationItems = [...globalNavigationItems]
-  .filter((item) => item.inHeader && item.inMobileMenu)
+  .filter((item) => item.inMobileMenu)
   .sort(byOrder);
 
 export const footerNavigationItems = [...globalNavigationItems]
@@ -57,7 +57,7 @@ export const footerNavigationItems = [...globalNavigationItems]
   .sort(byOrder);
 
 export const footerPrimaryNavigationItems = footerNavigationItems.filter(
-  (item) => item.inHeader,
+  (item) => item.inHeader || item.id === "workspace",
 );
 
 export const footerSecondaryNavigationItems = footerNavigationItems.filter(

@@ -7,8 +7,8 @@ import {
 } from "@/content/navigation";
 
 const footerSections = [
-  { title: "Navigation principale", links: footerPrimaryNavigationItems },
-  { title: "Accès contextuels", links: footerSecondaryNavigationItems },
+  { title: "Espaces", links: footerPrimaryNavigationItems },
+  { title: "Ressources par niveau", links: footerSecondaryNavigationItems },
   { title: "Informations légales", links: legalNavigationItems },
 ];
 
@@ -34,8 +34,9 @@ export function SiteFooter() {
             </span>
           </Link>
           <p className="mt-4 max-w-xl text-sm leading-7 text-muted">
-            Un espace pédagogique pour structurer les niveaux, les élèves,
-            les matières et les missions, de la maternelle à la Terminale.
+            La plateforme de travail et de ressources de l&apos;école :
+            préparer sa classe, piloter son école, trouver les bonnes
+            ressources.
           </p>
         </div>
 

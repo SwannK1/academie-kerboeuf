@@ -1,173 +1,76 @@
 import Link from "next/link";
-import { PublicStatusBadge } from "@/components/academy/PublicStatusBadge";
-import { getLevelGroupAvailability } from "@/content/site-availability";
+import { Icon, type IconName } from "@/components/icons/Icon";
+import { Onboarding } from "@/components/workspace/Onboarding";
+import { publishedResources } from "@/lib/resources/library";
 
-type Accent = "jade" | "gold" | "sky" | "ember";
-
-const accentClasses: Record<Accent, { text: string; border: string; bg: string }> = {
-  jade: { text: "text-jade", border: "border-jade/35", bg: "bg-jade/10" },
-  gold: { text: "text-gold", border: "border-gold/35", bg: "bg-gold/10" },
-  sky: { text: "text-sky", border: "border-sky/35", bg: "bg-sky/10" },
-  ember: { text: "text-ember", border: "border-ember/35", bg: "bg-ember/10" },
-};
-
-const levelCopy: Record<string, { text: string; accent: Accent; detail: string }> = {
-  maternelle: {
-    text: "Les domaines et ressources de PS, MS et GS.",
-    accent: "jade",
-    detail: "PS · MS · GS",
+const SPACES: { href: string; title: string; promise: string; detail: string; icon: IconName }[] = [
+  {
+    href: "/enseigner",
+    title: "Enseigner",
+    promise: "Préparer mes journées et mon année.",
+    detail: "Emploi du temps, semaine, séances, cahier journal, progression.",
+    icon: "calendar",
   },
-  primaire: {
-    text: "Les matières et ressources du CP au CM2.",
-    accent: "gold",
-    detail: "CP · CE1 · CE2 · CM1 · CM2",
+  {
+    href: "/direction",
+    title: "Direction",
+    promise: "Organiser et piloter mon école.",
+    detail: "Échéances, conseils, démarches guidées, sources officielles.",
+    icon: "building",
   },
-  college: {
-    text: "Les ressources disponibles de la 6e à la 3e.",
-    accent: "sky",
-    detail: "6e · 5e · 4e · 3e",
+  {
+    href: "/ressources",
+    title: "Ressources",
+    promise: "Trouver un support prêt à utiliser.",
+    detail: "Leçons, exercices, évaluations en PDF, de la PS à la 3e.",
+    icon: "books",
   },
-  lycee: {
-    text: "Les ressources disponibles de la Seconde à la Terminale.",
-    accent: "ember",
-    detail: "Seconde · Première · Terminale",
-  },
-};
+];
 
 export default function Home() {
-  const levelGroups = getLevelGroupAvailability().filter(
-    (group) => group.id !== "enseignants",
-  );
+  const pdfCount = publishedResources.reduce((sum, unit) => sum + unit.files.length, 0);
 
   return (
-    <main id="contenu-principal">
-      <section className="relative isolate overflow-hidden px-4 pb-16 pt-28 sm:px-6 lg:px-8">
-        <div className="mission-grid absolute inset-0 -z-30 opacity-45" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(245,239,224,0.1),rgba(245,239,224,0.96))]" />
+    <main id="contenu-principal" className="px-4 pb-20 pt-28 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gold">Académie Kerboeuf</p>
+        <h1 className="mt-4 max-w-3xl font-serif text-4xl font-semibold leading-[1.1] text-foreground sm:text-[3.4rem]">
+          Préparer sa classe. Piloter son école. Trouver les bonnes ressources.
+        </h1>
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">
+          On clique, on choisit, on déplace, on imprime. On écrit seulement quand c&apos;est vraiment utile.
+        </p>
 
-        <div className="mx-auto max-w-6xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-gold">
-            Académie Kerboeuf
-          </p>
-          <h1 className="mx-auto mt-5 max-w-4xl text-4xl font-black leading-tight text-foreground sm:text-6xl">
-            Que voulez-vous faire aujourd&apos;hui&nbsp;?
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted">
-            Le site organise. Les PDF enseignent.
-          </p>
-
-          <div className="mt-10 grid gap-4 text-left md:grid-cols-2">
-            <PrimaryChoice
-              href="/ressources"
-              eyebrow="Ressources"
-              title="Je cherche une ressource"
-              description="Leçons, exercices et évaluations par niveau et matière."
-              accent="jade"
-            />
-            <PrimaryChoice
-              href="/enseignants"
-              eyebrow="Préparation"
-              title="Je prépare ma classe"
-              description="Programmation, semaine, cahier journal et outils pratiques."
-              accent="gold"
-            />
-          </div>
+        <div className="mt-10">
+          <Onboarding />
         </div>
-      </section>
 
-      <section className="border-t border-ink/10 bg-panel/30 px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted">
-              Accès par niveau
-            </p>
-            <h2 className="mt-3 text-3xl font-black text-foreground">
-              Parcourir les ressources
-            </h2>
-            <p className="mt-3 text-sm leading-7 text-muted">
-              Choisissez un univers scolaire, puis un niveau et une matière.
-            </p>
-          </div>
-
-          <div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {levelGroups.map((group) => {
-              const copy = levelCopy[group.id];
-              const accent = accentClasses[copy.accent];
-
-              return (
-                <Link
-                  key={group.id}
-                  href={group.href}
-                  className={`group flex min-h-48 flex-col rounded-md border ${accent.border} bg-ink/[0.035] p-5 transition hover:-translate-y-0.5 hover:bg-ink/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold`}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <span className={`rounded px-2 py-1 text-xs font-black ${accent.bg} ${accent.text}`}>
-                      {copy.detail}
-                    </span>
-                    <PublicStatusBadge status={group.status} />
-                  </div>
-                  <h3 className="mt-5 text-2xl font-black text-foreground">
-                    {group.label}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-muted">
-                    {copy.text}
-                  </p>
-                  <span className={`mt-4 text-sm font-black ${accent.text}`}>
-                    Choisir un niveau →
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-ink/10 pt-6 text-sm">
-            <Link href="/univers" className="font-bold text-muted transition hover:text-foreground">
-              Découvrir l&apos;univers pédagogique
+        <nav aria-label="Espaces" className="mt-10 grid gap-4 md:grid-cols-3">
+          {SPACES.map((space) => (
+            <Link
+              key={space.href}
+              href={space.href}
+              className="group flex flex-col rounded-2xl border border-line bg-panel-soft p-6 transition hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-[0_18px_40px_-28px_rgba(43,36,32,0.6)]"
+            >
+              <span className="grid size-11 place-items-center rounded-xl bg-gold/10 text-gold">
+                <Icon name={space.icon} className="h-5 w-5" />
+              </span>
+              <span className="mt-5 font-serif text-2xl font-semibold text-foreground">{space.title}</span>
+              <span className="mt-1 text-[15px] font-medium text-foreground">{space.promise}</span>
+              <span className="mt-2 text-sm leading-6 text-muted">{space.detail}</span>
+              <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
+                Ouvrir
+                <Icon name="arrow-right" className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </span>
             </Link>
-            <Link href="/methode" className="font-bold text-muted transition hover:text-foreground">
-              Comprendre la méthode
-            </Link>
-            <Link href="/carte" className="font-bold text-muted transition hover:text-foreground">
-              Voir la carte de l&apos;Académie
-            </Link>
-          </div>
-        </div>
-      </section>
+          ))}
+        </nav>
+
+        <p className="mt-10 text-sm text-muted">
+          {pdfCount} PDF disponibles aujourd&apos;hui, tous téléchargeables et imprimables. Vos préparations restent sur cet
+          appareil, sans inscription.
+        </p>
+      </div>
     </main>
-  );
-}
-
-function PrimaryChoice({
-  href,
-  eyebrow,
-  title,
-  description,
-  accent,
-}: {
-  href: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  accent: "jade" | "gold";
-}) {
-  const tone =
-    accent === "jade"
-      ? "border-jade/40 bg-jade/[0.07] text-jade hover:bg-jade/[0.12]"
-      : "border-gold/40 bg-gold/[0.07] text-gold hover:bg-gold/[0.12]";
-
-  return (
-    <Link
-      href={href}
-      className={`group flex min-h-64 flex-col rounded-md border p-6 transition hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold sm:p-8 ${tone}`}
-    >
-      <p className="text-xs font-black uppercase tracking-[0.2em]">{eyebrow}</p>
-      <h2 className="mt-5 text-3xl font-black leading-tight text-foreground sm:text-4xl">
-        {title}
-      </h2>
-      <p className="mt-4 flex-1 text-base leading-7 text-muted">{description}</p>
-      <span className="mt-6 text-base font-black transition group-hover:translate-x-1">
-        Commencer →
-      </span>
-    </Link>
   );
 }
