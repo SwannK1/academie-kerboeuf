@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 import { Icon } from "@/components/icons/Icon";
 import { ActionMenu, Button, ChipGroup, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
 import {
@@ -10,7 +9,6 @@ import {
   normalize,
   publishedResources,
   subjectLabel,
-  type ResourceFile,
   type ResourceUnit,
 } from "@/lib/resources/library";
 import { getCurriculum, isTeachLevel, levelLabel, type TeachLevel } from "@/lib/workspace/curriculum";
@@ -144,8 +142,11 @@ function addMenu(unit: ResourceUnit, teach: TeachState, level: TeachLevel, zone:
 function printPdf(href: string) {
   const frame = document.createElement("iframe");
   frame.style.position = "fixed";
-  frame.style.width = "0";
-  frame.style.height = "0";
+  // Taille non nulle : Chrome ne charge pas le lecteur PDF dans un cadre de 0 px.
+  frame.style.width = "1px";
+  frame.style.height = "1px";
+  frame.style.left = "-10px";
+  frame.style.opacity = "0";
   frame.style.border = "0";
   frame.src = href;
   frame.onload = () => {
@@ -158,33 +159,6 @@ function printPdf(href: string) {
     setTimeout(() => frame.remove(), 60_000);
   };
   document.body.appendChild(frame);
-}
-
-function Projector({ file, title, onClose }: { file: ResourceFile; title: string; onClose: () => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    ref.current?.requestFullscreen?.().catch(() => undefined);
-    function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      if (document.fullscreenElement) document.exitFullscreen().catch(() => undefined);
-    };
-  }, [onClose]);
-  return createPortal(
-    <div ref={ref} role="dialog" aria-modal="true" aria-label={`Projection : ${title}`} className="fixed inset-0 z-[100] flex flex-col bg-[#1b1714]">
-      <div className="flex items-center justify-between px-4 py-2 text-sm text-white/80">
-        <span className="truncate">{title}</span>
-        <button type="button" onClick={onClose} className="btn text-white hover:bg-white/10">
-          <Icon name="x" className="h-4 w-4" /> Quitter la projection
-        </button>
-      </div>
-      <iframe src={`${file.href}#view=Fit&toolbar=0&navpanes=0`} title={`Projection : ${title}`} className="min-h-0 flex-1 bg-white" />
-    </div>,
-    document.body,
-  );
 }
 
 export function ResourcePanel({
@@ -202,7 +176,6 @@ export function ResourcePanel({
   const profile = useProfile();
   const activity = useActivity();
   const [picked, setPicked] = useState<{ id?: string; index: number }>({ index: 0 });
-  const [projecting, setProjecting] = useState(false);
   const fileIndex = picked.id === unit?.id ? picked.index : 0;
   const file = unit?.files[Math.min(fileIndex, (unit?.files.length ?? 1) - 1)];
   const favorite = Boolean(unit && isFavorite(activity, "ressource", unit.id));
@@ -240,9 +213,15 @@ export function ResourcePanel({
           unit && file ? (
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex flex-wrap items-center gap-1">
-                <button type="button" className="btn btn-secondary" onClick={() => setProjecting(true)}>
+                <a
+                  href={`${file.href}#view=Fit`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                  title="Ouvre le PDF page entière dans un nouvel onglet, prêt pour le vidéoprojecteur (plein écran : F11)"
+                >
                   <Icon name="presentation" className="h-4 w-4" /> Projeter
-                </button>
+                </a>
                 <button type="button" className="btn btn-secondary" onClick={() => printPdf(file.href)}>
                   <Icon name="printer" className="h-4 w-4" /> Imprimer
                 </button>
@@ -339,7 +318,6 @@ export function ResourcePanel({
           </div>
         ) : null}
       </SidePanel>
-      {projecting && unit && file ? <Projector file={file} title={unit.title} onClose={() => setProjecting(false)} /> : null}
     </>
   );
 }
