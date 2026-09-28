@@ -541,7 +541,7 @@ export function ReorderList<T extends { id: string }>({
                   onClick={() => move(item.id, -1)}
                   disabled={index === 0}
                   aria-label="Monter"
-                  className="grid size-9 place-items-center rounded-md text-muted hover:bg-ink/6 disabled:opacity-25"
+                  className="grid size-11 place-items-center rounded-md text-muted hover:bg-ink/6 disabled:opacity-25 md:size-9"
                 >
                   <Icon name="arrow-up" className="h-4 w-4" />
                 </button>
@@ -550,7 +550,7 @@ export function ReorderList<T extends { id: string }>({
                   onClick={() => move(item.id, 1)}
                   disabled={index === items.length - 1}
                   aria-label="Descendre"
-                  className="grid size-9 place-items-center rounded-md text-muted hover:bg-ink/6 disabled:opacity-25"
+                  className="grid size-11 place-items-center rounded-md text-muted hover:bg-ink/6 disabled:opacity-25 md:size-9"
                 >
                   <Icon name="arrow-down" className="h-4 w-4" />
                 </button>

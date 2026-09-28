@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ResourcePanel, printPdf } from "@/components/ressources/ResourcePanel";
+import { ResourcePanel, defaultPrintFile, defaultProjectFile, printPdf } from "@/components/ressources/ResourcePanel";
 import { RESOURCE_DRAG } from "@/lib/workspace/dnd";
 import { useActivity } from "@/lib/workspace/activity";
 import { Icon } from "@/components/icons/Icon";
@@ -253,8 +253,7 @@ export function ResourceLibrary() {
       ) : null}
       {!shown.length ? (
         <div className="mt-6 rounded-2xl border border-dashed border-line p-8 text-center">
-          <p className="text-foreground">Cette ressource est encore en préparation.</p>
-          <p className="mt-1 text-sm text-muted">Voici ce qui est déjà disponible :</p>
+          <p className="text-foreground">Pas encore de fiche ici.</p>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             {level ? (
               <button type="button" className="btn btn-secondary" onClick={() => router.replace(`/ressources?niveau=${level}`)}>
@@ -279,7 +278,8 @@ export function ResourceLibrary() {
 }
 
 function ResourceCard({ unit, favorite, onOpen }: { unit: ResourceUnit; favorite: boolean; onOpen: () => void }) {
-  const lesson = unit.files[0];
+  const printFile = defaultPrintFile(unit);
+  const projectFile = defaultProjectFile(unit);
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-panel-soft transition hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-[0_18px_40px_-28px_rgba(43,36,32,0.6)]">
       <button
@@ -309,26 +309,32 @@ function ResourceCard({ unit, favorite, onOpen }: { unit: ResourceUnit; favorite
         </span>
       </button>
       <div className="flex items-center gap-1 border-t border-line px-2 py-1.5 transition md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
-        <button type="button" onClick={onOpen} className="btn btn-quiet min-h-9 flex-1 px-2 text-[13px]" aria-label={`Aperçu : ${unit.title}`}>
+        <button type="button" onClick={onOpen} className="btn btn-quiet min-h-11 flex-1 px-2 text-[13px] md:min-h-9" aria-label={`Aperçu : ${unit.title}`}>
           <Icon name="image" className="h-4 w-4" /> Aperçu
         </button>
-        {unit.files.length > 1 ? (
-          <ActionMenu
-            label={`Imprimer : ${unit.title}`}
-            triggerContent={
-              <span className="btn btn-quiet min-h-9 px-2 text-[13px]">
-                <Icon name="printer" className="h-4 w-4" /> Imprimer
-              </span>
-            }
-            sections={[{ title: "Imprimer", actions: unit.files.map((f) => ({ label: FILE_TYPE_LABELS[f.type], icon: "printer" as const, onSelect: () => printPdf(f.href) })) }]}
-          />
-        ) : lesson ? (
-          <button type="button" onClick={() => printPdf(lesson.href)} className="btn btn-quiet min-h-9 px-2 text-[13px]" aria-label={`Imprimer : ${unit.title}`}>
-            <Icon name="printer" className="h-4 w-4" /> Imprimer
-          </button>
+        {printFile ? (
+          <span className="flex items-center">
+            <button
+              type="button"
+              onClick={() => printPdf(printFile.href)}
+              className="btn btn-quiet min-h-11 px-2 text-[13px] md:min-h-9"
+              aria-label={`Imprimer : ${unit.title} (${FILE_TYPE_LABELS[printFile.type]})`}
+              title={`Imprimer : ${FILE_TYPE_LABELS[printFile.type]}`}
+            >
+              <Icon name="printer" className="h-4 w-4" /> Imprimer
+            </button>
+            {unit.files.length > 1 ? (
+              <ActionMenu
+                label={`Imprimer un autre document : ${unit.title}`}
+                trigger="chevron-right"
+                buttonClassName="size-11 md:size-9 rotate-90"
+                sections={[{ title: "Imprimer", actions: unit.files.map((f) => ({ label: FILE_TYPE_LABELS[f.type], icon: "printer" as const, onSelect: () => printPdf(f.href) })) }]}
+              />
+            ) : null}
+          </span>
         ) : null}
-        {lesson ? (
-          <a href={`${lesson.href}#view=Fit`} target="_blank" rel="noopener noreferrer" className="btn btn-quiet min-h-9 px-2 text-[13px]" aria-label={`Projeter : ${unit.title}`}>
+        {projectFile ? (
+          <a href={`${projectFile.href}#view=Fit`} target="_blank" rel="noopener noreferrer" className="btn btn-quiet min-h-11 px-2 text-[13px] md:min-h-9" aria-label={`Projeter : ${unit.title}`}>
             <Icon name="presentation" className="h-4 w-4" /> Projeter
           </a>
         ) : null}

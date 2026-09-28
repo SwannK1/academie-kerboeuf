@@ -222,19 +222,21 @@ function PrepRow({ meeting, item, controls }: { meeting: Meeting; item: MeetingI
   const cycle = [5, 10, 15, 20];
   return (
     <div className={`flex items-center gap-2 rounded-lg border px-2 py-1 transition ${item.included ? "border-line bg-panel-soft" : "border-transparent"}`}>
-      <input
-        type="checkbox"
-        className="check ml-1"
-        checked={item.included}
-        onChange={() => updateItem(meeting.id, item.id, { included: !item.included })}
-        aria-label={`Inclure : ${item.label}`}
-      />
-      <span className={`min-w-0 flex-1 py-2 text-[15px] ${item.included ? "" : "text-muted"}`}>{item.label}</span>
+      <label className="flex min-h-11 min-w-0 flex-1 cursor-pointer items-center gap-2 pl-1">
+        <input
+          type="checkbox"
+          className="check"
+          checked={item.included}
+          onChange={() => updateItem(meeting.id, item.id, { included: !item.included })}
+          aria-label={`Inclure : ${item.label}`}
+        />
+        <span className={`min-w-0 flex-1 py-2 text-[15px] ${item.included ? "" : "text-muted"}`}>{item.label}</span>
+      </label>
       {item.included ? (
         <button
           type="button"
           onClick={() => updateItem(meeting.id, item.id, { minutes: cycle[(cycle.indexOf(item.minutes ?? 10) + 1) % cycle.length] })}
-          className="min-h-9 rounded-full border border-line px-2.5 text-xs tabular-nums text-muted hover:border-ink/30"
+          className="min-h-11 rounded-full border border-line px-2.5 text-xs tabular-nums text-muted hover:border-ink/30 md:min-h-9"
           aria-label={`Durée : ${item.minutes} minutes. Changer`}
         >
           {item.minutes} min

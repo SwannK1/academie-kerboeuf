@@ -157,7 +157,7 @@ export function MySpace() {
       <section aria-labelledby="donnees">
         <h2 id="donnees" className="font-serif text-2xl font-semibold">Mon travail</h2>
         <p className="mt-2 max-w-2xl text-muted">
-          Tout est enregistré sur cet appareil, dans ce navigateur, sans compte. Aucune donnée d&apos;élève n&apos;est demandée ni stockée.
+          Sur cet appareil, sans compte. Aucune donnée d&apos;élève.
         </p>
         <ul className="mt-4 grid gap-x-8 gap-y-1 text-sm sm:grid-cols-2">
           {counts.map((c) => (
@@ -189,15 +189,14 @@ export function MySpace() {
           />
         </div>
         <p className="mt-4 max-w-2xl text-sm text-muted">
-          Pour passer d&apos;un ordinateur à un autre, enregistrez une sauvegarde puis restaurez-la sur l&apos;autre appareil. La synchronisation
-          automatique par compte n&apos;est pas encore disponible.
+          Changer d&apos;appareil : enregistrer ici, restaurer là-bas. Pas encore de synchronisation automatique.
         </p>
       </section>
 
       <section aria-labelledby="anciens">
         <h2 id="anciens" className="font-serif text-2xl font-semibold">Anciens outils</h2>
         <p className="mt-2 max-w-2xl text-sm text-muted">
-          Ils ont été remplacés par Enseigner et Direction. Leurs données sont intactes : ouvrez-les pour les consulter ou les exporter.
+          Remplacés par Enseigner et Direction. Données intactes.
         </p>
         <ul className="mt-3 grid gap-1 sm:grid-cols-2 lg:grid-cols-3">
           {ARCHIVED.map((tool) => (

@@ -110,10 +110,10 @@ function Period({ context }: { context: TeachContext }) {
                   onClick={() => {
                     const before = teachStore.get();
                     const n = proposeDistribution(context.level);
-                    toast(`${n} notions réparties sur l'année`, () => teachStore.set(before));
+                    toast(n ? "Première répartition créée · à ajuster" : "Tout est déjà réparti", () => teachStore.set(before));
                   }}
                 >
-                  Répartir l&apos;année
+                  Proposer une répartition
                 </Button>
                 <Button href="/enseigner/annee" variant="quiet">
                   À la main
@@ -189,7 +189,7 @@ function Period({ context }: { context: TeachContext }) {
                         type="button"
                         onClick={() => setProgress(notion.id, { state: NEXT_STATE[stateId] })}
                         aria-label={`${notion.label} : ${PROGRESS_STATES.find((s) => s.id === stateId)?.label}. Passer à ${PROGRESS_STATES.find((s) => s.id === NEXT_STATE[stateId])?.label}`}
-                        className={`grid size-9 shrink-0 place-items-center rounded-full text-lg leading-none hover:bg-ink/6 ${STATE_TONE[stateId]}`}
+                        className={`grid size-11 shrink-0 place-items-center rounded-full md:size-9 text-lg leading-none hover:bg-ink/6 ${STATE_TONE[stateId]}`}
                       >
                         {SYMBOL[stateId]}
                       </button>
@@ -202,7 +202,7 @@ function Period({ context }: { context: TeachContext }) {
                       </div>
                       <ActionMenu
                         label={`Actions : ${notion.label}`}
-                        buttonClassName="size-9"
+                        buttonClassName="size-11 md:size-9"
                         sections={[
                           {
                             actions: [

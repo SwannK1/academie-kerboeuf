@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Icon } from "@/components/icons/Icon";
-import { ActionMenu, Button, ChipGroup, Hint, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
+import { ActionMenu, ChipGroup, Hint, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
 import type { TeachContext } from "@/components/enseigner/EnseignerShell";
 import { FILE_TYPE_LABELS, getResource, suggestResources, type ResourceUnit } from "@/lib/resources/library";
 import { getCurriculum, getSubject, getTimetableSubjects } from "@/lib/workspace/curriculum";
@@ -126,18 +126,26 @@ export function SessionPanel({
   );
 }
 
+/**
+ * Tout est enregistré à chaque clic : pas de bouton de validation. Le pied de
+ * panneau affiche « ✓ Enregistré » dès la première modification ; on ferme
+ * par la croix, Échap ou un clic à côté.
+ */
 function PanelFooter({ session, context, onClose }: { session: Session; context: TeachContext; onClose: () => void }) {
+  const [initial] = useState(() => JSON.stringify(session));
+  const saved = JSON.stringify(session) !== initial;
   return (
     <div className="flex items-center justify-between gap-2">
-      <label className="flex min-h-10 cursor-pointer items-center gap-2.5 text-sm font-medium">
+      <label className="flex min-h-11 cursor-pointer items-center gap-2.5 text-sm font-medium">
         <input type="checkbox" className="check" checked={session.done} onChange={() => toggleSessionDone(session.id, context.zone)} />
         Terminée
       </label>
-      <div className="flex items-center gap-1">
-        <ActionMenu label="Dupliquer, déplacer, plus d'actions" sections={sessionMenuSections(session, context, onClose)} trigger="more" />
-        <Button variant="primary" onClick={onClose}>
-          OK
-        </Button>
+      <div className="flex items-center gap-2">
+        <span role="status" className={`flex items-center gap-1 text-sm font-medium text-jade transition-opacity ${saved ? "opacity-100" : "opacity-0"}`}>
+          <Icon name="check" className="h-4 w-4" />
+          Enregistré
+        </span>
+        <ActionMenu label="Dupliquer, déplacer, plus d'actions" sections={sessionMenuSections(session, context, onClose)} trigger="more" buttonClassName="size-11" />
       </div>
     </div>
   );

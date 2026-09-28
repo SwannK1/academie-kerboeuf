@@ -107,7 +107,7 @@ function ClassSettings({ context }: { context: TeachContext }) {
           <p className="px-1 pb-2 text-xs text-muted">
             {armed
               ? `Touchez « + » sous un jour pour placer ${getSubject(armed).short}.`
-              : "Glissez une matière sur un jour, ou touchez-la puis « + Créneau »."}
+              : "Glisser une matière sur un jour, ou la toucher puis « + Créneau »."}
           </p>
           <div className="flex flex-wrap gap-2">
             {subjects.map((subject) => {

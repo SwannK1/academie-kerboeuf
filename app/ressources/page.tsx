@@ -28,10 +28,10 @@ export default function RessourcesPage() {
         </div>
         <nav aria-label="Parcourir par niveau" className="mt-16 border-t border-line pt-6 text-sm text-muted">
           Parcourir aussi par programme :{" "}
-          <Link href="/maternelle" className="underline decoration-ink/25 hover:text-foreground">maternelle</Link>,{" "}
-          <Link href="/primaire" className="underline decoration-ink/25 hover:text-foreground">élémentaire</Link>,{" "}
-          <Link href="/college" className="underline decoration-ink/25 hover:text-foreground">collège</Link>,{" "}
-          <Link href="/enseignants/liaison-cm2-6e" className="underline decoration-ink/25 hover:text-foreground">liaison CM2 → 6e</Link>.
+          <Link href="/maternelle" className="inline-flex min-h-11 items-center underline decoration-ink/25 hover:text-foreground">maternelle</Link>,{" "}
+          <Link href="/primaire" className="inline-flex min-h-11 items-center underline decoration-ink/25 hover:text-foreground">élémentaire</Link>,{" "}
+          <Link href="/college" className="inline-flex min-h-11 items-center underline decoration-ink/25 hover:text-foreground">collège</Link>,{" "}
+          <Link href="/enseignants/liaison-cm2-6e" className="inline-flex min-h-11 items-center underline decoration-ink/25 hover:text-foreground">liaison CM2 → 6e</Link>.
         </nav>
       </div>
     </main>

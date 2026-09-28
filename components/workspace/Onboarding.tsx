@@ -53,7 +53,7 @@ export function Onboarding({ compact = false }: { compact?: boolean }) {
       <h2 id="onboarding-title" className="font-serif text-2xl font-semibold text-foreground">
         Que faites-vous&nbsp;?
       </h2>
-      <p className="mt-1 text-sm text-muted">Deux clics, et Académie Kerboeuf s&apos;adapte. Aucun compte nécessaire.</p>
+      <p className="mt-1 text-sm text-muted">Sans compte.</p>
       <div className="mt-5 grid gap-5">
         <ChipGroup label="Votre rôle" hideLabel options={ROLE_OPTIONS} value={role} onChange={setRole} />
         {teaches ? (

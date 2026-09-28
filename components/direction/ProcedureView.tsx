@@ -155,9 +155,7 @@ function ProcedureRunner({ procedure, context }: { procedure: Procedure; context
                 ))}
               </ul>
             </section>
-          ) : (
-            <p className="text-sm text-muted">Choisissez : la liste apparaît.</p>
-          )}
+          ) : null}
         </div>
         <aside>
           <SourceLinks sources={procedure.sources} />

@@ -166,7 +166,7 @@ export function DayColumn({
             {dayLabel(date)} <span className="font-normal text-muted">{formatShortDate(date)}</span>
             {isToday ? <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[11px] font-semibold text-gold">Aujourd&apos;hui</span> : null}
           </h2>
-          <ActionMenu label={`Actions pour ${dayLabel(date)}`} sections={dayMenu} buttonClassName="size-8" />
+          <ActionMenu label={`Actions pour ${dayLabel(date)}`} sections={dayMenu} buttonClassName="size-11 md:size-8" />
         </header>
       ) : null}
 
@@ -306,7 +306,7 @@ export function SessionCard({
         <label className="hidden size-9 cursor-pointer place-items-center rounded-md hover:bg-ink/6 md:grid" title={session.done ? "Rouvrir" : "Terminer"}>
           <input type="checkbox" className="check" checked={session.done} onChange={() => toggleSessionDone(session.id, context.zone)} aria-label={`${session.done ? "Rouvrir" : "Terminer"} : ${title}`} />
         </label>
-        <ActionMenu label={`Actions : ${title}`} sections={sessionMenuSections(session, context)} buttonClassName="size-9" />
+        <ActionMenu label={`Actions : ${title}`} sections={sessionMenuSections(session, context)} buttonClassName="size-11 md:size-9" />
       </div>
     </div>
   );

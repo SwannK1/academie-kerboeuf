@@ -78,7 +78,7 @@ export function WithTeach({
     return (
       <div className="mt-8 max-w-xl rounded-2xl border border-line bg-panel-soft p-6">
         <h1 className="font-serif text-2xl font-semibold">Votre niveau principal&nbsp;?</h1>
-        <p className="mt-1 text-sm text-muted">Il sert à proposer les bonnes notions et les bonnes ressources. Modifiable à tout moment.</p>
+        <p className="mt-1 text-sm text-muted">Modifiable à tout moment.</p>
         <div className="mt-5">
           <ChipGroup
             label="Niveau"

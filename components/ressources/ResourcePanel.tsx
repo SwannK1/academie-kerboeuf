@@ -9,6 +9,7 @@ import {
   normalize,
   publishedResources,
   subjectLabel,
+  type ResourceFile,
   type ResourceUnit,
 } from "@/lib/resources/library";
 import { getCurriculum, isTeachLevel, levelLabel, type TeachLevel } from "@/lib/workspace/curriculum";
@@ -139,7 +140,23 @@ function addMenu(unit: ResourceUnit, teach: TeachState, level: TeachLevel, zone:
   ];
 }
 
+/** Document imprimé par défaut depuis une carte : la fiche élève plutôt que la leçon. */
+export function defaultPrintFile(unit: ResourceUnit): ResourceFile | undefined {
+  for (const type of ["exercices", "texte", "atelier", "fiche", "lecon"] as const) {
+    const file = unit.files.find((f) => f.type === type);
+    if (file) return file;
+  }
+  return unit.files[0];
+}
+
+/** Document projeté par défaut : la leçon. */
+export function defaultProjectFile(unit: ResourceUnit): ResourceFile | undefined {
+  return unit.files.find((f) => f.type === "lecon") ?? unit.files[0];
+}
+
 export function printPdf(href: string) {
+  // Signal observable (tests, mesures) : la boîte d'impression native n'est pas automatisable.
+  window.dispatchEvent(new CustomEvent("ak:impression", { detail: href }));
   const frame = document.createElement("iframe");
   frame.style.position = "fixed";
   // Taille non nulle : Chrome ne charge pas le lecteur PDF dans un cadre de 0 px.

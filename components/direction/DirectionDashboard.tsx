@@ -290,7 +290,7 @@ function EntryRow({ entry, today }: { entry: Entry; today: string }) {
           {entry.postpone || entry.remove || entry.href ? (
             <ActionMenu
               label={`Actions : ${entry.label}`}
-              buttonClassName="size-9 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+              buttonClassName="size-11 md:size-9 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
               sections={[
                 {
                   actions: [

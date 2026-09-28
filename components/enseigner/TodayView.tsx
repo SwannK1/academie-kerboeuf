@@ -82,7 +82,7 @@ function Today({ context }: { context: TeachContext }) {
         <div>
           {sessions.length ? (
             <p className="mb-3 text-sm text-muted">
-              {prepared} / {sessions.length} séance{sessions.length > 1 ? "s" : ""} avec une notion choisie
+              {prepared} / {sessions.length} prête{prepared > 1 ? "s" : ""}
             </p>
           ) : null}
           <DayColumn date={day} context={context} onOpen={setOpenId} large showHeader={false} />
@@ -97,7 +97,7 @@ function Today({ context }: { context: TeachContext }) {
                   {s.notionLabel ?? "Séance à préciser"}
                 </li>
               ))}
-              {!sessionsOn(context.teach, next).length ? <li>Rien de préparé pour l&apos;instant.</li> : null}
+              {!sessionsOn(context.teach, next).length ? <li>Rien de préparé.</li> : null}
             </ul>
             <Link href="/enseigner/semaine" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-gold hover:underline">
               Préparer la semaine <Icon name="arrow-right" className="h-4 w-4" />

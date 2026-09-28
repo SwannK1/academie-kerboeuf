@@ -40,6 +40,25 @@ function nextClassDay(): string {
   return iso(d);
 }
 
+/**
+ * Impression : la boîte native du navigateur n'est pas automatisable. On
+ * vérifie qu'elle est réellement déclenchée : window.print() pour les vues
+ * HTML, cadre PDF + signal « ak:impression » pour les fiches, et aucun
+ * repli en nouvel onglet.
+ */
+async function trackPrints(page: Page) {
+  await page.addInitScript(() => {
+    const w = window as unknown as { __prints: string[] };
+    w.__prints = [];
+    window.print = () => {
+      w.__prints.push("page");
+    };
+    window.addEventListener("ak:impression", (event) => w.__prints.push((event as CustomEvent<string>).detail));
+  });
+}
+
+const prints = (page: Page) => page.evaluate(() => (window as unknown as { __prints: string[] }).__prints);
+
 class Journey {
   clicks = 0;
   fields = 0;
@@ -121,10 +140,12 @@ test.describe("Professeur", () => {
     await j.click(panel.getByRole("radio", { name: /Poser et effectuer une soustraction avec retenue/ }));
     await j.click(panel.getByRole("button", { name: /Poser et calculer une addition ou une soustraction/ }));
     await expect(panel.getByRole("button", { name: /Poser et calculer une addition ou une soustraction/ })).toHaveAttribute("aria-pressed", "true");
-    await j.click(panel.getByRole("button", { name: "OK" }));
-
+    // Enregistré à chaque clic : aucune validation demandée.
+    await expect(panel.getByRole("status")).toHaveText(/Enregistré/);
+    await expect(panel.getByRole("button", { name: "OK" })).toHaveCount(0);
+    await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: /soustraction avec retenue/ }).first()).toBeVisible();
-    j.report({ clicks: 4 });
+    j.report({ clicks: 3 });
     expect(errors).toEqual([]);
   });
 
@@ -163,17 +184,31 @@ test.describe("Professeur", () => {
   test("C · trouver une fiche de soustraction et l'imprimer", async ({ page }, info) => {
     // Aucune fiche de mathématiques CE1 n'est publiée : le parcours est joué en CE2.
     await seed(page, { "ak-profil-v1": profile("ce2") });
+    await trackPrints(page);
+    const popups: string[] = [];
+    page.on("popup", (popup) => popups.push(popup.url()));
     await page.goto("/");
     const j = new Journey(page, info, "C");
     await j.click(page.getByRole("link", { name: "Trouver un PDF" }));
     await j.click(page.getByRole("radio", { name: "Maths" }));
     const card = page.locator("main li").filter({ hasText: "Poser et calculer une addition ou une soustraction" });
+    // Actions visibles sans survol sur mobile, au survol ou au focus sur ordinateur.
     await card.hover();
-    await j.click(card.getByRole("button", { name: /^Imprimer/ }));
-    await j.click(page.getByRole("menuitem", { name: "Exercices" }));
-    // Le PDF est chargé dans un cadre d'impression (la boîte d'impression du navigateur n'est pas pilotable).
+    await j.click(card.getByRole("button", { name: /^Imprimer : .*\(Exercices\)/ }));
+    await expect.poll(() => prints(page)).toEqual([expect.stringMatching(/exercices\.pdf$/)]);
     await expect(page.locator('body > iframe[src$="exercices.pdf"]')).toHaveCount(1);
-    j.report({ clicks: 4 });
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(popups).toEqual([]);
+    j.report({ clicks: 3 });
+
+    // Projeter ouvre directement le PDF page entière, sans panneau.
+    await expect(card.getByRole("link", { name: /^Projeter/ })).toHaveAttribute("href", /lecon\.pdf#view=Fit$/);
+    // Depuis le panneau, Imprimer suit le document choisi.
+    await card.getByRole("button", { name: /^Aperçu/ }).click();
+    const panel = page.getByRole("dialog");
+    await panel.getByRole("radio", { name: /Évaluation/ }).click();
+    await panel.getByRole("button", { name: "Imprimer" }).click();
+    await expect.poll(async () => (await prints(page)).at(-1)).toMatch(/evaluation\.pdf$/);
   });
 
   test("D · trouver une fiche et l'ajouter à une séance", async ({ page, isMobile }, info) => {
@@ -258,6 +293,7 @@ test.describe("Professeur", () => {
 
   test("F · produire le cahier journal", async ({ page }, info) => {
     const errors = trackConsoleErrors(page);
+    await trackPrints(page);
     const monday = iso(currentMonday());
     await seed(page, {
       "ak-profil-v1": profile("ce1"),
@@ -287,11 +323,13 @@ test.describe("Professeur", () => {
     await expect(sheet.getByText(/Distinguer nom, verbe/)).toBeVisible();
     await expect(sheet.getByText("Reconnaître un nom").filter({ visible: true }).first()).toBeVisible();
 
+    await j.click(page.getByRole("button", { name: "Imprimer" }));
+    expect(await prints(page)).toEqual(["page"]);
     await page.emulateMedia({ media: "print" });
     await expect(page.getByRole("navigation", { name: "Enseigner" })).toBeHidden();
     await expect(page.getByRole("button", { name: "Imprimer" })).toBeHidden();
     await expect(page.locator("article header h2").first()).toBeVisible();
-    j.report({ clicks: 1 });
+    j.report({ clicks: 2 });
     expect(errors).toEqual([]);
   });
 });
@@ -299,6 +337,7 @@ test.describe("Professeur", () => {
 test.describe("Direction", () => {
   test("G · H · I · créer un conseil d'école, choisir et réordonner, imprimer", async ({ page }, info) => {
     const errors = trackConsoleErrors(page);
+    await trackPrints(page);
     await seed(page, { "ak-profil-v1": profile("ce1", "direction") });
     await page.goto("/direction");
 
@@ -323,6 +362,8 @@ test.describe("Direction", () => {
     await expect(sheet).not.toContainText("Travaux et locaux");
     await expect(sheet.locator("li").nth(2)).toContainText("Projet d'école");
     await expect(sheet.locator("li").nth(2)).toContainText("15 min");
+    await i.click(page.getByRole("button", { name: "Imprimer" }));
+    expect(await prints(page)).toEqual(["page"]);
     await page.emulateMedia({ media: "print" });
     await expect(page.getByRole("button", { name: "Imprimer" })).toBeHidden();
     await expect(sheet.getByRole("heading", { name: "Conseil d'école n°1" })).toBeVisible();
