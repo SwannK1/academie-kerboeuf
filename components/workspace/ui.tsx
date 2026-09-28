@@ -620,26 +620,33 @@ export function Toaster() {
 
 // ── Divers ─────────────────────────────────────────────────────────────────
 
-export function SourceLinks({ sources }: { sources: OfficialSource[] }) {
+/** Sources officielles repliées : la checklist reste le produit principal. */
+export function SourceLinks({ sources, why }: { sources: OfficialSource[]; why?: string }) {
   if (!sources.length) return null;
   return (
-    <div className="rounded-lg border border-line bg-panel/40 p-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Sources officielles</p>
-      <ul className="mt-2 grid gap-2">
-        {sources.map((source) => (
-          <li key={source.id} className="text-sm">
-            <a href={source.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1.5 text-foreground underline decoration-ink/25 hover:decoration-gold">
-              <span>{source.label}</span>
-              <Icon name="external" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted" />
-            </a>
-            <span className="block text-xs text-muted">
-              {source.publisher} · vérifié le {new Date(`${source.verifiedAt}T12:00`).toLocaleDateString("fr-FR")}
-            </span>
-          </li>
-        ))}
-      </ul>
-      <p className="mt-3 text-xs leading-5 text-muted">La source officielle fait foi. Académie Kerboeuf vous aide à vous organiser.</p>
-    </div>
+    <details className="group rounded-lg border border-line bg-panel/40">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 px-4 text-sm font-medium text-muted hover:text-foreground">
+        Pourquoi ? · Sources officielles
+        <Icon name="chevron-right" className="h-4 w-4 transition group-open:rotate-90" />
+      </summary>
+      <div className="px-4 pb-4">
+        {why ? <p className="mb-3 text-sm leading-6 text-foreground">{why}</p> : null}
+        <ul className="grid gap-2">
+          {sources.map((source) => (
+            <li key={source.id} className="text-sm">
+              <a href={source.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1.5 text-foreground underline decoration-ink/25 hover:decoration-gold">
+                <span>{source.label}</span>
+                <Icon name="external" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted" />
+              </a>
+              <span className="block text-xs text-muted">
+                {source.publisher} · vérifié le {new Date(`${source.verifiedAt}T12:00`).toLocaleDateString("fr-FR")}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs leading-5 text-muted">La source officielle fait foi.</p>
+      </div>
+    </details>
   );
 }
 

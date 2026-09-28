@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/icons/Icon";
 import { Onboarding } from "@/components/workspace/Onboarding";
+import { HomeSwitch } from "@/components/workspace/HomeCockpit";
 import { getVisibleCollections, publishedResources } from "@/lib/resources/library";
 
 const TODAY_ACTIONS: { href: string; title: string; text: string; icon: IconName }[] = [
@@ -24,6 +25,9 @@ export default function Home() {
   return (
     <main id="contenu-principal" className="px-4 pb-20 pt-24 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
+        <HomeSwitch
+          landing={
+            <>
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gold">Académie Kerboeuf</p>
         <h1 className="mt-3 max-w-3xl font-serif text-[2.1rem] font-semibold leading-[1.12] text-foreground sm:text-5xl">
           Préparer sa classe. Piloter son école. Trouver les bonnes ressources.
@@ -97,6 +101,9 @@ export default function Home() {
           Sans inscription : vos préparations, favoris et récents restent sur cet appareil.{" "}
           <Link href="/mon-espace" className="underline decoration-ink/25 hover:text-foreground">Mon espace</Link>
         </p>
+            </>
+          }
+        />
       </div>
     </main>
   );

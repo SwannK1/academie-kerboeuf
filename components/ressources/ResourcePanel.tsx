@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Icon } from "@/components/icons/Icon";
-import { ActionMenu, Button, ChipGroup, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
+import { ActionMenu, ChipGroup, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
 import {
   FILE_TYPE_LABELS,
   normalize,
@@ -139,7 +139,7 @@ function addMenu(unit: ResourceUnit, teach: TeachState, level: TeachLevel, zone:
   ];
 }
 
-function printPdf(href: string) {
+export function printPdf(href: string) {
   const frame = document.createElement("iframe");
   frame.style.position = "fixed";
   // Taille non nulle : Chrome ne charge pas le lecteur PDF dans un cadre de 0 px.
@@ -209,25 +209,63 @@ export function ResourcePanel({
         onClose={onClose}
         title={unit?.title ?? ""}
         subtitle={unit ? `${levelLabel(unit.level)} · ${subjectLabel(unit.subject)}${unit.domain ? ` · ${unit.domain}` : ""}` : undefined}
-        footer={
-          unit && file ? (
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex flex-wrap items-center gap-1">
-                <a
-                  href={`${file.href}#view=Fit`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                  title="Ouvre le PDF page entière dans un nouvel onglet, prêt pour le vidéoprojecteur (plein écran : F11)"
+      >
+        {unit && file ? (
+          <div className="grid gap-4">
+            {unit.files.length > 1 ? (
+              <ChipGroup
+                label="Document"
+                hideLabel
+                size="sm"
+                options={unit.files.map((f, i) => ({ id: i, label: `${FILE_TYPE_LABELS[f.type]}${f.pages > 1 ? ` · ${f.pages} p.` : ""}` }))}
+                value={fileIndex}
+                onChange={(i) => i !== null && setPicked({ id: unit.id, index: i })}
+              />
+            ) : null}
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button type="button" className="btn btn-primary min-h-12 px-5 text-[15px]" onClick={() => printPdf(file.href)}>
+                <Icon name="printer" className="h-5 w-5" /> Imprimer
+              </button>
+              <a
+                href={`${file.href}#view=Fit`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary min-h-12 px-5 text-[15px]"
+                title="Page entière dans un nouvel onglet (plein écran : F11)"
+              >
+                <Icon name="presentation" className="h-5 w-5" /> Projeter
+              </a>
+              {target ? (
+                <button
+                  type="button"
+                  className="btn btn-secondary min-h-12 px-5 text-[15px]"
+                  onClick={() => {
+                    if (!alreadyInTarget) {
+                      toggleResource(target.id, unit.id);
+                      toast("Ressource ajoutée à la séance");
+                    }
+                  }}
                 >
-                  <Icon name="presentation" className="h-4 w-4" /> Projeter
-                </a>
-                <button type="button" className="btn btn-secondary" onClick={() => printPdf(file.href)}>
-                  <Icon name="printer" className="h-4 w-4" /> Imprimer
+                  <Icon name={alreadyInTarget ? "check" : "plus"} className="h-5 w-5" />
+                  {alreadyInTarget ? "Dans la séance" : "Ajouter à la séance"}
                 </button>
-                <a href={file.href} download className="btn btn-quiet" aria-label={`Télécharger ${FILE_TYPE_LABELS[file.type]}`}>
-                  <Icon name="download" className="h-4 w-4" />
-                  <span className="hidden sm:inline">Télécharger</span>
+              ) : teach && canPlan ? (
+                <ActionMenu
+                  label="Ajouter à ma séance, mon cahier journal ou ma progression"
+                  align="left"
+                  sections={addMenu(unit, teach, level, profile?.zone ?? "A")}
+                  triggerContent={
+                    <span className="btn btn-secondary min-h-12 px-5 text-[15px]">
+                      <Icon name="plus" className="h-5 w-5" />
+                      Ajouter à…
+                    </span>
+                  }
+                />
+              ) : null}
+              <span className="ml-auto flex items-center">
+                <a href={file.href} download className="grid size-11 place-items-center rounded-md text-muted hover:bg-ink/6 hover:text-foreground" aria-label={`Télécharger ${FILE_TYPE_LABELS[file.type]}`} title="Télécharger">
+                  <Icon name="download" className="h-5 w-5" />
                 </a>
                 <button
                   type="button"
@@ -242,58 +280,19 @@ export function ResourcePanel({
                   }
                   aria-pressed={favorite}
                   aria-label={favorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-                  className={`btn btn-quiet ${favorite ? "text-gold" : ""}`}
+                  title="Favori"
+                  className={`grid size-11 place-items-center rounded-md hover:bg-ink/6 ${favorite ? "text-gold" : "text-muted"}`}
                 >
-                  <Icon name="star" className="h-4 w-4" />
+                  <Icon name="star" className="h-5 w-5" />
                 </button>
-              </div>
-              {target ? (
-                <Button
-                  variant="primary"
-                  icon={alreadyInTarget ? "check" : "plus"}
-                  onClick={() => {
-                    if (!alreadyInTarget) {
-                      toggleResource(target.id, unit.id);
-                      toast("Ressource ajoutée à la séance");
-                    }
-                  }}
-                >
-                  {alreadyInTarget ? "Dans la séance" : "Ajouter à la séance"}
-                </Button>
-              ) : teach && canPlan ? (
-                <ActionMenu
-                  label="Ajouter à ma séance, mon cahier journal ou ma progression"
-                  sections={addMenu(unit, teach, level, profile?.zone ?? "A")}
-                  triggerContent={
-                    <span className="btn btn-primary">
-                      <Icon name="plus" className="h-4 w-4" />
-                      Ajouter à…
-                    </span>
-                  }
-                />
-              ) : null}
+              </span>
             </div>
-          ) : null
-        }
-      >
-        {unit && file ? (
-          <div className="grid gap-4">
-            {unit.objective ? <p className="text-[15px] leading-7 text-foreground">{unit.objective}</p> : null}
-            {unit.files.length > 1 ? (
-              <ChipGroup
-                label="Document"
-                hideLabel
-                size="sm"
-                options={unit.files.map((f, i) => ({ id: i, label: `${FILE_TYPE_LABELS[f.type]}${f.pages > 1 ? ` · ${f.pages} p.` : ""}` }))}
-                value={fileIndex}
-                onChange={(i) => i !== null && setPicked({ id: unit.id, index: i })}
-              />
-            ) : null}
             <div className="overflow-hidden rounded-xl border border-line bg-white">
-              <iframe key={file.href} src={`${file.href}#view=FitH&toolbar=0`} title={`Aperçu : ${unit.title} (${FILE_TYPE_LABELS[file.type]})`} className="h-[58vh] w-full" />
+              <iframe key={file.href} src={`${file.href}#view=FitH&toolbar=0`} title={`Aperçu : ${unit.title} (${FILE_TYPE_LABELS[file.type]})`} className="h-[55vh] w-full sm:h-[62vh]" />
             </div>
             <p className="text-xs text-muted">
               PDF A4 · {file.pages} page{file.pages > 1 ? "s" : ""}
+              {unit.objective ? <span className="mt-1 block text-sm leading-6">{unit.objective}</span> : null}
             </p>
 
             <nav aria-label="Ressources liées" className="grid gap-2 border-t border-line pt-4 sm:grid-cols-2">

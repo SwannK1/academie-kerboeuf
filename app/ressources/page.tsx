@@ -19,7 +19,7 @@ export default function RessourcesPage() {
       <div className="mx-auto max-w-7xl">
         <h1 className="font-serif text-3xl font-semibold text-foreground sm:text-4xl">Ressources</h1>
         <p className="mt-2 max-w-2xl text-muted">
-          {files} PDF prêts à imprimer. Seules les ressources réellement disponibles sont affichées.
+          {files} PDF prêts à imprimer.
         </p>
         <div className="mt-6">
           <Suspense fallback={<Skeleton className="h-14" />}>

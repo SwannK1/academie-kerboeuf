@@ -22,8 +22,8 @@ export type Task = {
 export type ItemOutcome = "traite" | "decision" | "a-suivre";
 
 export const ITEM_OUTCOMES: { id: ItemOutcome; label: string }[] = [
-  { id: "traite", label: "Traité" },
-  { id: "decision", label: "Décision prise" },
+  { id: "traite", label: "Information" },
+  { id: "decision", label: "Décidé" },
   { id: "a-suivre", label: "À suivre" },
 ];
 

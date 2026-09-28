@@ -23,23 +23,32 @@ type Entry = {
   toggle: () => void;
   remove?: () => void;
   postpone?: (days: number) => void;
+  /** tâche libre : peut changer de colonne */
+  moveTo?: (due: string) => void;
 };
 
-function bucketOf(due: string | null, today: string, periodEnd: string): "now" | "week" | "soon" | "period" | "later" {
+type BucketId = "today" | "week" | "soon" | "later";
+
+function bucketOf(due: string | null, today: string): BucketId {
   if (!due) return "week";
-  if (due <= addDays(today, 3)) return "now";
+  if (due <= today) return "today";
   if (due <= addDays(today, 7)) return "week";
-  if (due <= addDays(today, 42)) return "soon";
-  if (due <= periodEnd) return "period";
+  if (due <= addDays(today, 60)) return "soon";
   return "later";
 }
 
-const BUCKETS: { id: ReturnType<typeof bucketOf>; title: string; empty: string }[] = [
-  { id: "now", title: "Maintenant", empty: "Rien d'urgent." },
+/** Échéance donnée à une tâche déposée dans une colonne. */
+function dueFor(bucket: BucketId, today: string): string {
+  return bucket === "today" ? today : bucket === "week" ? addDays(today, 5) : addDays(today, 21);
+}
+
+const BUCKETS: { id: Exclude<BucketId, "later">; title: string; empty: string }[] = [
+  { id: "today", title: "Aujourd'hui", empty: "Rien pour aujourd'hui." },
   { id: "week", title: "Cette semaine", empty: "Semaine dégagée." },
-  { id: "soon", title: "À anticiper", empty: "Rien dans les six prochaines semaines." },
-  { id: "period", title: "Cette période", empty: "" },
+  { id: "soon", title: "À anticiper", empty: "Rien dans les deux mois." },
 ];
+
+const TASK_DRAG = "application/x-ak-tache";
 
 export function DirectionDashboard() {
   return (
@@ -56,6 +65,7 @@ function Dashboard({ context }: { context: DirectionContext }) {
   const period = getPeriodFor(today, zone);
   const [draft, setDraft] = useState("");
   const [showDone, setShowDone] = useState(false);
+  const [over, setOver] = useState<BucketId | null>(null);
 
   const entries: Entry[] = [
     ...MILESTONES_2026_2027.filter((m) => m.date >= addDays(today, -21) || !direction.milestonesDone.includes(m.id)).map((m) => ({
@@ -82,6 +92,7 @@ function Dashboard({ context }: { context: DirectionContext }) {
         toast("Tâche supprimée", () => directionStore.set(before));
       },
       postpone: (days: number) => updateTask(t.id, { due: addDays(t.due ?? today, days) }),
+      moveTo: (due: string) => updateTask(t.id, { due }),
     })),
   ].sort((a, b) => (a.due ?? "9").localeCompare(b.due ?? "9"));
 
@@ -103,24 +114,46 @@ function Dashboard({ context }: { context: DirectionContext }) {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="grid content-start gap-7">
           {BUCKETS.map((bucket) => {
-            const items = open.filter((e) => bucketOf(e.due, today, period.end) === bucket.id);
-            if (!items.length && !bucket.empty) return null;
+            const items = open.filter((e) => bucketOf(e.due, today) === bucket.id);
             return (
-              <section key={bucket.id} aria-labelledby={`b-${bucket.id}`}>
-                <h2 id={`b-${bucket.id}`} className="flex items-center gap-2 font-serif text-xl font-semibold">
+              <section
+                key={bucket.id}
+                aria-labelledby={`b-${bucket.id}`}
+                onDragOver={(event) => {
+                  if (event.dataTransfer.types.includes(TASK_DRAG)) {
+                    event.preventDefault();
+                    setOver(bucket.id);
+                  }
+                }}
+                onDragLeave={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node)) setOver(null);
+                }}
+                onDrop={(event) => {
+                  const id = event.dataTransfer.getData(TASK_DRAG);
+                  setOver(null);
+                  if (id) updateTask(id, { due: dueFor(bucket.id, today) });
+                }}
+                className={`rounded-2xl p-2 transition ${over === bucket.id ? "bg-gold/[0.06] ring-2 ring-gold/40" : ""}`}
+              >
+                <h2 id={`b-${bucket.id}`} className="flex items-center gap-2 px-2 font-serif text-xl font-semibold">
                   {bucket.title}
                   {items.length ? <span className="text-sm font-normal text-muted">{items.length}</span> : null}
                 </h2>
                 {items.length ? (
                   <ul className="mt-2 grid gap-0.5">
                     {items.map((e) => (
-                      <li key={e.id}>
+                      <li
+                        key={e.id}
+                        draggable={Boolean(e.moveTo)}
+                        onDragStart={(event) => event.dataTransfer.setData(TASK_DRAG, e.id)}
+                        className={e.moveTo ? "cursor-grab" : ""}
+                      >
                         <EntryRow entry={e} today={today} />
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="mt-1 text-sm text-muted">{bucket.empty}</p>
+                  <p className="mt-1 px-2 text-sm text-muted">{bucket.empty}</p>
                 )}
                 {bucket.id === "week" ? (
                   <form
@@ -150,6 +183,12 @@ function Dashboard({ context }: { context: DirectionContext }) {
               </section>
             );
           })}
+
+          {open.some((e) => bucketOf(e.due, today) === "later") ? (
+            <p className="px-2 text-sm text-muted">
+              Plus tard : {open.filter((e) => bucketOf(e.due, today) === "later").length} échéance(s) de l&apos;année.
+            </p>
+          ) : null}
 
           {done.length ? (
             <section>
@@ -256,6 +295,12 @@ function EntryRow({ entry, today }: { entry: Entry; today: string }) {
                 {
                   actions: [
                     ...(entry.href ? [{ label: entry.actionLabel ?? "Ouvrir", icon: "arrow-right" as const, onSelect: () => router.push(entry.href as string) }] : []),
+                    ...(entry.moveTo
+                      ? [
+                          { label: "Aujourd'hui", icon: "arrow-right" as const, onSelect: () => entry.moveTo?.(today) },
+                          { label: "Cette semaine", icon: "arrow-right" as const, onSelect: () => entry.moveTo?.(addDays(today, 5)) },
+                        ]
+                      : []),
                     ...(entry.postpone
                       ? [
                           { label: "Reporter d'une semaine", icon: "repeat" as const, onSelect: () => entry.postpone?.(7) },

@@ -152,7 +152,7 @@ function MeetingEditor({ meeting, context }: { meeting: Meeting; context: Direct
           <div>
             {previous && meeting.items.some((i) => previous.items.some((p) => p.label === i.label)) ? (
               <div className="mb-4">
-                <Hint>Points repris du n°{previous.number}. Cochez, décochez, réordonnez.</Hint>
+                <Hint>Repris du n°{previous.number}.</Hint>
               </div>
             ) : null}
             <label className="mb-5 flex flex-wrap items-center gap-3 text-sm">
@@ -207,8 +207,7 @@ function MeetingEditor({ meeting, context }: { meeting: Meeting; context: Direct
             </div>
           </div>
           <aside className="grid content-start gap-4">
-            <p className="text-sm leading-6 text-muted">{kind.hint}</p>
-            <SourceLinks sources={kind.sources} />
+            <SourceLinks sources={kind.sources} why={kind.hint} />
           </aside>
         </div>
       ) : null}
@@ -248,6 +247,7 @@ function PrepRow({ meeting, item, controls }: { meeting: Meeting; item: MeetingI
 
 function LiveMeeting({ meeting }: { meeting: Meeting }) {
   const items = meeting.items.filter((i) => i.included);
+  const [precision, setPrecision] = useState<string[]>([]);
   return (
     <ol className="grid gap-3">
       {items.map((item, index) => (
@@ -269,13 +269,6 @@ function LiveMeeting({ meeting }: { meeting: Meeting }) {
           </div>
           {item.outcome === "decision" || item.outcome === "a-suivre" ? (
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <input
-                value={item.decision}
-                onChange={(event) => updateItem(meeting.id, item.id, { decision: event.target.value })}
-                placeholder={item.outcome === "decision" ? "Décision (facultatif)" : "Ce qu'il faut suivre (facultatif)"}
-                aria-label="Décision ou suivi"
-                className="field min-w-0 flex-1"
-              />
               {item.taskId ? (
                 <span className="inline-flex min-h-10 items-center gap-1.5 text-sm text-jade">
                   <Icon name="check" className="h-4 w-4" /> Action dans le tableau de bord
@@ -283,6 +276,7 @@ function LiveMeeting({ meeting }: { meeting: Meeting }) {
               ) : (
                 <ActionMenu
                   label="Créer une action de suivi"
+                  align="left"
                   triggerContent={
                     <span className="btn btn-secondary">
                       <Icon name="plus" className="h-4 w-4" /> Créer une action
@@ -299,6 +293,19 @@ function LiveMeeting({ meeting }: { meeting: Meeting }) {
                     },
                   ]}
                 />
+              )}
+              {item.decision || precision.includes(item.id) ? (
+                <input
+                  value={item.decision}
+                  onChange={(event) => updateItem(meeting.id, item.id, { decision: event.target.value })}
+                  placeholder="Précision (facultatif)"
+                  aria-label="Décision ou suivi"
+                  className="field min-w-0 flex-1"
+                />
+              ) : (
+                <button type="button" onClick={() => setPrecision((list) => [...list, item.id])} className="btn btn-quiet">
+                  + Ajouter une précision
+                </button>
               )}
             </div>
           ) : null}

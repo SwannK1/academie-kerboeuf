@@ -54,7 +54,7 @@ function ProcedureRunner({ procedure, context }: { procedure: Procedure; context
   const run: ProcedureRun | undefined = context.direction.runs.filter((r) => r.procedureId === procedure.id).at(-1);
   const choices = run?.choices ?? [];
   const checked = run?.checked ?? [];
-  const answered = procedure.questions.every((q) => q.options.some((o) => choices.includes(o.id)));
+  const answered = procedure.questions.every((q) => q.optional || q.options.some((o) => choices.includes(o.id)));
   const items = visibleItems(procedure, choices);
   const done = items.filter((i) => checked.includes(i.id)).length;
 
@@ -156,7 +156,7 @@ function ProcedureRunner({ procedure, context }: { procedure: Procedure; context
               </ul>
             </section>
           ) : (
-            <p className="text-sm text-muted">Choisissez ci-dessus : la liste adaptée apparaît.</p>
+            <p className="text-sm text-muted">Choisissez : la liste apparaît.</p>
           )}
         </div>
         <aside>

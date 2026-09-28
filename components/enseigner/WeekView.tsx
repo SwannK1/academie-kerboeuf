@@ -7,6 +7,7 @@ import { Icon } from "@/components/icons/Icon";
 import { ActionMenu, Button, Hint, IconButton, toast } from "@/components/workspace/ui";
 import { PageTitle, WithTeach, type TeachContext } from "@/components/enseigner/EnseignerShell";
 import { DayColumn } from "@/components/enseigner/DayPlan";
+import { ResourceTray } from "@/components/enseigner/ResourceTray";
 import { SessionPanel } from "@/components/enseigner/SessionPanel";
 import { getSubject, levelLabel } from "@/lib/workspace/curriculum";
 import { addDays, formatShortDate, formatTime, getPeriodFor, mondayOf, todayIso, WEEKDAYS, weekday } from "@/lib/workspace/school-year";
@@ -37,11 +38,13 @@ function Week({ context }: { context: TeachContext }) {
   const [monday, setMonday] = useState(currentMonday);
   const [openId, setOpenId] = useState<string | null>(null);
   const router = useRouter();
+  const [trayOpen, setTrayOpen] = useState(false);
   const dates = schoolDatesOfWeek(context.teach, monday);
   const period = getPeriodFor(monday, context.zone);
   const habits = detectHabits(context.teach).slice(0, 1);
   const weekSessions = context.teach.sessions.filter((s) => s.date >= monday && s.date < addDays(monday, 7));
   const done = weekSessions.filter((s) => s.done).length;
+  const previousWeekCount = context.teach.sessions.filter((s) => s.date >= addDays(monday, -7) && s.date < monday).length;
 
   return (
     <>
@@ -59,6 +62,10 @@ function Week({ context }: { context: TeachContext }) {
               ) : null}
               <IconButton icon="chevron-right" label="Semaine suivante" tone="quiet" onClick={() => setMonday(addDays(monday, 7))} />
             </div>
+            <button type="button" aria-pressed={trayOpen} onClick={() => setTrayOpen((v) => !v)} className={`btn ${trayOpen ? "btn-primary" : "btn-secondary"}`}>
+              <Icon name="books" className="h-4 w-4" />
+              Ressources
+            </button>
             <Button href={`/enseigner/cahier-journal?semaine=${monday}`} icon="printer">
               Cahier journal
             </Button>
@@ -99,7 +106,7 @@ function Week({ context }: { context: TeachContext }) {
               </>
             }
           >
-            Votre emploi du temps remplit automatiquement la semaine. Partez d&apos;un modèle, vous l&apos;ajusterez ensuite.
+            Partir d&apos;une semaine type&nbsp;?
           </Hint>
         </div>
       ) : null}
@@ -125,22 +132,44 @@ function Week({ context }: { context: TeachContext }) {
         </div>
       ))}
 
-      <div className={`grid gap-3 md:grid-cols-2 ${dates.length >= 5 ? "lg:grid-cols-5" : "lg:grid-cols-4"}`}>
-        {dates.map((date) => (
-          <DayColumn key={date} date={date} context={context} onOpen={setOpenId} />
-        ))}
+      {!weekSessions.length && previousWeekCount ? (
+        <div className="mb-4">
+          <Hint
+            action={
+              <Button
+                variant="primary"
+                icon="repeat"
+                onClick={() => {
+                  const before = teachStore.get();
+                  const n = duplicateWeek(addDays(monday, -7));
+                  toast(`${n} séances reprises`, () => teachStore.set(before));
+                }}
+              >
+                Reprendre la semaine
+              </Button>
+            }
+          >
+            Même structure que la semaine dernière&nbsp;?
+          </Hint>
+        </div>
+      ) : null}
+
+      <div className={trayOpen ? "grid gap-4 xl:grid-cols-[minmax(0,1fr)_17rem]" : ""}>
+        <div className={`grid gap-3 md:grid-cols-2 ${dates.length >= 5 ? "lg:grid-cols-5" : "lg:grid-cols-4"}`}>
+          {dates.map((date) => (
+            <DayColumn key={date} date={date} context={context} onOpen={setOpenId} />
+          ))}
+        </div>
+        {trayOpen ? <ResourceTray level={context.level} /> : null}
       </div>
 
       {weekSessions.length ? (
         <p className="mt-4 flex items-center gap-2 text-sm text-muted">
           <Icon name="check-circle" className="h-4 w-4 text-jade" />
-          {done} / {weekSessions.length} séances terminées cette semaine
+          {done} / {weekSessions.length} terminées
         </p>
       ) : null}
 
-      <p className="mt-6 hidden text-xs text-muted md:block">
-        Astuce : glissez une séance vers un autre jour ou sur un créneau libre. Le menu <span aria-hidden="true">···</span> fait la même chose au clavier.
-      </p>
 
       <SessionPanel sessionId={openId} context={context} onClose={() => setOpenId(null)} />
     </>

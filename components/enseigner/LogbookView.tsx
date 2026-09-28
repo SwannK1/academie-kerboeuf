@@ -152,6 +152,15 @@ function LogbookSheet({
                     </button>
                     {kind || org ? <span className="block text-[11px] text-muted">{[kind, org].filter(Boolean).join(" · ")}</span> : null}
                     {withNotes && session.note ? <span className="mt-1 block whitespace-pre-line text-[12px] italic text-muted">{session.note}</span> : null}
+                    {session.resources.length ? (
+                      <span className="mt-1 block text-[12px] text-muted sm:hidden print:hidden">
+                        {session.resources
+                          .map(getResource)
+                          .filter(Boolean)
+                          .map((unit) => unit!.title)
+                          .join(" · ")}
+                      </span>
+                    ) : null}
                   </td>
                   <td className="hidden py-2.5 pr-2 text-[12px] sm:table-cell print:table-cell">
                     {session.resources

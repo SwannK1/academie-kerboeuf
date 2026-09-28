@@ -4,9 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ActionMenu, Button, ChipGroup, toast, type MenuSection } from "@/components/workspace/ui";
 import { PageTitle, WithTeach, type TeachContext } from "@/components/enseigner/EnseignerShell";
-import { getCurriculum, isMaternelle, levelLabel, type Notion } from "@/lib/workspace/curriculum";
-import { getCompetenciesByLevel, type SchoolLevel } from "@/content/teacher-programming-curriculum";
-import { PROGRESS_STATES, setProgress, teachStore, type Progress, type ProgressState } from "@/lib/workspace/teach";
+import { getCurriculum, levelLabel, type Notion } from "@/lib/workspace/curriculum";
+import { PROGRESS_STATES, proposeDistribution, setProgress, teachStore, type Progress, type ProgressState } from "@/lib/workspace/teach";
 
 const COLUMNS: { id: Progress["period"]; label: string }[] = [
   { id: 0, label: "Non planifié" },
@@ -70,21 +69,9 @@ function Year({ context }: { context: TeachContext }) {
   const { progress } = context.teach;
   const planned = notions.filter((n) => (progress[n.id]?.period ?? 0) > 0).length;
 
-  function proposeDistribution() {
+  function distribute() {
     const before = teachStore.get();
-    const suggested = new Map<string, number>();
-    if (!isMaternelle(context.level)) {
-      for (const c of getCompetenciesByLevel(context.level as SchoolLevel)) suggested.set(c.id, c.suggestedPeriods?.[0] ?? 1);
-    }
-    teachStore.update((s) => {
-      const next = { ...s.progress };
-      notions.forEach((n, index) => {
-        if ((next[n.id]?.period ?? 0) > 0) return;
-        const period = (suggested.get(n.id) ?? Math.min(5, Math.floor((index * 5) / notions.length) + 1)) as Progress["period"];
-        next[n.id] = { period, state: next[n.id]?.state ?? "prevue" };
-      });
-      return { ...s, progress: next };
-    });
+    proposeDistribution(context.level, subject?.id);
     toast("Répartition proposée : ajustez en déplaçant les cartes", () => teachStore.set(before));
   }
 
@@ -95,7 +82,7 @@ function Year({ context }: { context: TeachContext }) {
         title="Mon année"
         actions={
           planned < notions.length ? (
-            <Button onClick={proposeDistribution} icon="repeat">
+            <Button onClick={distribute} icon="repeat">
               Proposer une répartition
             </Button>
           ) : null
@@ -111,7 +98,7 @@ function Year({ context }: { context: TeachContext }) {
         onChange={setSubjectId}
       />
       <p className="mt-3 text-sm text-muted">
-        {planned} / {notions.length} notions placées. Glissez une carte vers une période, ou utilisez son menu.
+        {planned} / {notions.length} placées
       </p>
 
       <div className="mt-5 grid gap-3 md:grid-cols-3 xl:grid-cols-6">

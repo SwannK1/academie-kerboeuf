@@ -14,6 +14,7 @@
 import { asArray, createId, createLocalStore, isRecord, useLocalStore } from "@/lib/workspace/store";
 import {
   findNotion,
+  getCurriculum,
   getSubject,
   isMaternelle,
   isTeachLevel,
@@ -521,4 +522,92 @@ export function sessionTitle(session: Pick<Session, "notionLabel" | "subject" | 
   if (session.notionLabel) return session.notionLabel;
   if (session.notionId) return findNotion(session.level, session.notionId)?.label ?? getSubject(session.subject).label;
   return getSubject(session.subject).label;
+}
+
+// ── Notions probables ──────────────────────────────────────────────────────
+
+/**
+ * Notions d'une matière classées par probabilité pour une séance :
+ * prévues dans la période et pas encore travaillées d'abord, puis la notion
+ * de la dernière séance de la matière (continuité), puis l'ordre du programme.
+ */
+export function rankNotions(state: TeachState, level: TeachLevel, subjectId: string, date: string, zone: Zone) {
+  const subject = getCurriculum(level).find((s) => s.id === subjectId);
+  if (!subject) return [];
+  const period = getPeriodFor(date, zone).id;
+  const recent = state.sessions
+    .filter((s) => s.subject === subjectId && s.notionId && s.date < date)
+    .sort((a, b) => b.date.localeCompare(a.date) || b.start - a.start)[0]?.notionId;
+  const all = subject.domains.flatMap((d) => d.notions.map((n) => ({ ...n, domainLabel: d.label })));
+  const score = (id: string) => {
+    const p = state.progress[id];
+    let value = 0;
+    if (p?.period === period && (p.state === "prevue" || p.state === "commencee" || p.state === "a-reprendre")) value += 4;
+    else if (p && p.period > 0 && p.period < period && p.state !== "travaillee") value += 2;
+    if (id === recent) value += 3;
+    if (p?.state === "travaillee") value -= 2;
+    return value;
+  };
+  return all
+    .map((n, index) => ({ n, s: score(n.id), index }))
+    .sort((a, b) => b.s - a.s || a.index - b.index)
+    .map(({ n, s }) => ({ ...n, hint: s >= 4 ? "Prévue cette période" : n.id === recent ? "Dernière séance" : null }));
+}
+
+/**
+ * Programme une notion dans le prochain créneau libre de sa matière (à partir
+ * d'aujourd'hui, sur deux semaines). Retourne la date choisie, ou null.
+ */
+export function scheduleNotion(
+  notion: { id: string; label: string; domainId: string; subjectId: string },
+  level: TeachLevel,
+  zone: Zone,
+  from: string,
+): string | null {
+  const state = teachStore.get();
+  for (let i = 0; i < 14; i += 1) {
+    const date = addDays(from, i);
+    if (!state.schoolDays.includes(weekday(date)) || isHoliday(date, zone)) continue;
+    const slot = freeSlotsOn(state, date).find((s) => s.subject === notion.subjectId);
+    if (slot) {
+      createSession({
+        date,
+        start: slot.start,
+        duration: slot.duration,
+        level,
+        subject: notion.subjectId,
+        domainId: notion.domainId,
+        notionId: notion.id,
+        notionLabel: notion.label,
+      });
+      return date;
+    }
+  }
+  return null;
+}
+
+/**
+ * Répartition proposée des notions non placées sur P1 → P5 (point de départ à
+ * ajuster, jamais une programmation officielle). Sans `subjectId`, toutes les
+ * matières du niveau sont réparties.
+ */
+export function proposeDistribution(level: TeachLevel, subjectId?: string): number {
+  const subjects = getCurriculum(level).filter((s) => !subjectId || s.id === subjectId);
+  let placed = 0;
+  update((s) => {
+    const next = { ...s.progress };
+    for (const subject of subjects) {
+      for (const domain of subject.domains) {
+        domain.notions.forEach((notion, index) => {
+          if ((next[notion.id]?.period ?? 0) > 0) return;
+          // Chaque domaine est étalé sur l'année, dans l'ordre du programme.
+          const period = Math.min(5, Math.floor((index * 5) / domain.notions.length) + 1) as Progress["period"];
+          next[notion.id] = { period, state: next[notion.id]?.state ?? "prevue" };
+          placed += 1;
+        });
+      }
+    }
+    return { ...s, progress: next };
+  });
+  return placed;
 }

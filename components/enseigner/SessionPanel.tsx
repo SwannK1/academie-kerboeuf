@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Icon } from "@/components/icons/Icon";
 import { ActionMenu, Button, ChipGroup, Hint, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
 import type { TeachContext } from "@/components/enseigner/EnseignerShell";
-import { FILE_TYPE_LABELS, getResource, suggestResources } from "@/lib/resources/library";
-import { getCurriculum, getSubject, getTimetableSubjects, levelLabel } from "@/lib/workspace/curriculum";
+import { FILE_TYPE_LABELS, getResource, suggestResources, type ResourceUnit } from "@/lib/resources/library";
+import { getCurriculum, getSubject, getTimetableSubjects } from "@/lib/workspace/curriculum";
 import { addDays, dayLabel, formatLongDate, formatShortDate, formatTime, mondayOf } from "@/lib/workspace/school-year";
 import {
   DURATIONS,
@@ -14,6 +15,7 @@ import {
   SESSION_KINDS,
   duplicateSession,
   moveSession,
+  rankNotions,
   nextSchoolDay,
   remainingWeeklyDates,
   removeSession,
@@ -116,7 +118,7 @@ export function SessionPanel({
       open={Boolean(session)}
       onClose={onClose}
       title={session ? sessionTitle(session) : ""}
-      subtitle={session ? `${formatLongDate(session.date)} · ${formatTime(session.start)} · ${levelLabel(session.level)}` : undefined}
+      subtitle={session ? `${formatLongDate(session.date)} · ${formatTime(session.start)} · ${session.duration} min · ${getSubject(session.subject).short}` : undefined}
       footer={session ? <PanelFooter session={session} context={context} onClose={onClose} /> : null}
     >
       {session ? <SessionEditor key={session.id} session={session} context={context} /> : null}
@@ -142,100 +144,146 @@ function PanelFooter({ session, context, onClose }: { session: Session; context:
 }
 
 function SessionEditor({ session, context }: { session: Session; context: TeachContext }) {
-  const tree = getCurriculum(session.level);
-  const subjects = getTimetableSubjects(session.level);
-  const subjectTree = tree.find((s) => s.id === session.subject);
-  const domain = subjectTree?.domains.find((d) => d.id === session.domainId);
-  const [showNote, setShowNote] = useState(Boolean(session.note));
-  const [showAllNotions, setShowAllNotions] = useState(false);
-  const progress = session.notionId ? context.teach.progress[session.notionId] : undefined;
+  const [more, setMore] = useState(false);
+  const [changing, setChanging] = useState(false);
+  const [allNotions, setAllNotions] = useState(false);
   const set = (patch: Partial<Session>) => updateSession(session.id, patch);
 
-  const suggestions = suggestResources({
-    level: session.level,
-    resourceSubject: getSubject(session.subject).resourceSubject,
-    domain: domain?.label ?? "",
-    text: session.notionLabel ?? "",
-    limit: 6,
-  })
-    .filter((unit) => !session.resources.includes(unit.id))
-    .slice(0, 4);
+  const subjectTree = getCurriculum(session.level).find((s) => s.id === session.subject);
+  const domain = subjectTree?.domains.find((d) => d.id === session.domainId);
+  const resourceSubject = getSubject(session.subject).resourceSubject;
+  // Une notion qui a déjà une fiche publiée remonte, à priorité égale.
+  const ranked = rankNotions(context.teach, session.level, session.subject, session.date, context.zone)
+    .map((n, index) => ({
+      ...n,
+      index,
+      ready: Boolean(resourceSubject) && suggestResources({ level: session.level, resourceSubject, text: n.label, strict: true, limit: 1 }).length > 0,
+    }))
+    .sort((a, b) => Number(Boolean(b.hint)) - Number(Boolean(a.hint)) || Number(b.ready) - Number(a.ready) || a.index - b.index);
+  const hasNotion = Boolean(session.notionId || session.notionLabel);
+  const pickingNotion = ranked.length > 0 && (!hasNotion || changing);
+  const progress = session.notionId ? context.teach.progress[session.notionId] : undefined;
 
-  const notions = domain?.notions ?? [];
-  const visibleNotions = showAllNotions || notions.length <= 6 ? notions : notions.slice(0, 6);
+  const attached = session.resources.map(getResource).filter((u): u is ResourceUnit => Boolean(u));
+  // Correspondances directes avec la notion d'abord ; à défaut, fiches du même domaine.
+  const direct = hasNotion
+    ? suggestResources({ level: session.level, resourceSubject, domain: domain?.label ?? "", text: session.notionLabel ?? "", strict: true, limit: 8 })
+    : [];
+  const sameDomain =
+    hasNotion && !direct.length
+      ? suggestResources({ level: session.level, resourceSubject, domain: domain?.label ?? "", text: "", limit: 6 })
+      : [];
+  const suggestions = [...direct, ...sameDomain].filter((unit) => !session.resources.includes(unit.id));
+  const resourceChoices = [...attached, ...suggestions].slice(0, Math.max(6, attached.length));
+
+  function chooseNotion(id: string, label: string, domainId: string) {
+    set({ notionId: id, notionLabel: label, domainId });
+    setChanging(false);
+  }
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-center gap-3 text-sm">
-        <TimeStepper value={session.start} onChange={(start) => set({ start })} />
-        <span className="text-muted">·</span>
-        <span className="text-muted">{dayLabel(session.date)}</span>
-      </div>
-
-      <ChipGroup
-        label="Matière"
-        size="sm"
-        options={subjects.map((s) => ({ id: s.id, label: s.short }))}
-        value={session.subject}
-        onChange={(subject) => subject && set({ subject, domainId: null, notionId: null, notionLabel: null })}
-      />
-
-      {subjectTree ? (
-        <ChipGroup
-          label="Domaine"
-          size="sm"
-          allowEmpty
-          options={subjectTree.domains.map((d) => ({ id: d.id, label: d.label }))}
-          value={session.domainId}
-          onChange={(domainId) => set({ domainId, notionId: null, notionLabel: null })}
-        />
-      ) : null}
-
-      {domain ? (
-        <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Notion</p>
-          <div role="radiogroup" aria-label="Notion" className="grid gap-1.5">
-            {visibleNotions.map((notion) => {
+      {pickingNotion ? (
+        <section aria-labelledby="choisir-notion">
+          <h3 id="choisir-notion" className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+            Quelle notion ?
+          </h3>
+          <ul role="radiogroup" aria-labelledby="choisir-notion" className="grid gap-1.5">
+            {(allNotions ? ranked : ranked.slice(0, 6)).map((notion) => {
               const on = notion.id === session.notionId;
               return (
-                <button
-                  key={notion.id}
-                  type="button"
-                  role="radio"
-                  aria-checked={on}
-                  onClick={() => set(on ? { notionId: null, notionLabel: null } : { notionId: notion.id, notionLabel: notion.label })}
-                  className={`flex min-h-10 items-center gap-2.5 rounded-lg border px-3 py-2 text-left text-sm transition ${
-                    on ? "border-foreground bg-foreground text-background" : "border-line bg-panel-soft hover:border-ink/30"
-                  }`}
-                >
-                  {on ? <Icon name="check" className="h-4 w-4 shrink-0" /> : <span className="w-4 shrink-0" />}
-                  {notion.label}
-                </button>
+                <li key={notion.id}>
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={on}
+                    onClick={() => chooseNotion(notion.id, notion.label, notion.domainId)}
+                    className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-4 py-2.5 text-left transition ${
+                      on ? "border-foreground bg-foreground text-background" : "border-line bg-panel-soft hover:border-ink/30"
+                    }`}
+                  >
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[15px] leading-snug">{notion.label}</span>
+                      <span className={`text-xs ${on ? "text-background/70" : "text-muted"}`}>
+                        {notion.domainLabel}
+                        {notion.hint ? <span className="font-semibold text-gold"> · {notion.hint}</span> : null}
+                        {notion.ready ? <span className={`font-semibold ${on ? "" : "text-jade"}`}> · Fiche prête</span> : null}
+                      </span>
+                    </span>
+                    <Icon name={on ? "check" : "chevron-right"} className="h-4 w-4 shrink-0 opacity-60" />
+                  </button>
+                </li>
               );
             })}
-          </div>
-          {notions.length > visibleNotions.length ? (
-            <button type="button" onClick={() => setShowAllNotions(true)} className="mt-2 text-sm text-muted underline decoration-ink/25">
-              Voir les {notions.length - visibleNotions.length} autres notions
+          </ul>
+          {!allNotions && ranked.length > 6 ? (
+            <button type="button" onClick={() => setAllNotions(true)} className="mt-2 min-h-10 text-sm text-muted underline decoration-ink/25">
+              Toutes les notions ({ranked.length})
+            </button>
+          ) : null}
+        </section>
+      ) : hasNotion ? (
+        <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-panel/40 px-4 py-2.5">
+          <span className="min-w-0 text-sm">
+            <span className="block text-xs text-muted">{domain?.label ?? getSubject(session.subject).label}</span>
+            <span className="line-clamp-2">{session.notionLabel}</span>
+          </span>
+          {ranked.length ? (
+            <button type="button" onClick={() => setChanging(true)} className="btn btn-quiet shrink-0">
+              Changer
             </button>
           ) : null}
         </div>
       ) : null}
 
-      {session.notionId || !subjectTree?.domains.length ? (
-        <>
-          <ChipGroup label="Type" size="sm" allowEmpty options={SESSION_KINDS} value={session.kind} onChange={(kind) => set({ kind })} />
-          <ChipGroup label="Organisation" size="sm" allowEmpty options={ORGANISATIONS} value={session.organisation} onChange={(organisation) => set({ organisation })} />
-        </>
+      {hasNotion && !changing ? (
+        <section aria-labelledby="choisir-ressource">
+          <h3 id="choisir-ressource" className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+            {direct.length || !sameDomain.length ? "Ressource" : "Ressources du même domaine"}
+          </h3>
+          {resourceChoices.length ? (
+            <ul className="grid grid-cols-2 gap-2">
+              {resourceChoices.map((unit) => {
+                const on = session.resources.includes(unit.id);
+                return (
+                  <li key={unit.id}>
+                    <button
+                      type="button"
+                      aria-pressed={on}
+                      onClick={() => toggleResource(session.id, unit.id)}
+                      className={`group flex h-full w-full flex-col overflow-hidden rounded-xl border text-left transition ${
+                        on ? "border-jade ring-2 ring-jade/40" : "border-line hover:border-ink/30"
+                      }`}
+                    >
+                      <span className="relative block aspect-[4/3] overflow-hidden bg-white">
+                        {unit.preview ? <Image src={unit.preview} alt="" fill sizes="200px" className="object-cover object-top" /> : null}
+                        {on ? (
+                          <span className="absolute right-1.5 top-1.5 grid size-7 place-items-center rounded-full bg-jade text-white">
+                            <Icon name="check" className="h-4 w-4" />
+                          </span>
+                        ) : null}
+                      </span>
+                      <span className="flex-1 bg-panel-soft px-2.5 py-2">
+                        <span className="line-clamp-2 text-[13px] leading-snug">{unit.title}</span>
+                        <span className="text-[11px] text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted">Pas encore de fiche publiée pour cette notion.</p>
+          )}
+          <Link
+            href={`/ressources?niveau=${session.level}&seance=${session.id}${session.notionId ? `&notion=${session.notionId}` : ""}`}
+            className="mt-2 inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold hover:underline"
+          >
+            <Icon name="search" className="h-4 w-4" />
+            Autre ressource
+          </Link>
+        </section>
       ) : null}
-
-      <ChipGroup
-        label="Durée"
-        size="sm"
-        options={Array.from(new Set([...DURATIONS, session.duration])).sort((a, b) => a - b).map((d) => ({ id: d, label: `${d} min` }))}
-        value={session.duration}
-        onChange={(duration) => duration && set({ duration })}
-      />
 
       {session.done && session.notionId && progress?.state === "commencee" ? (
         <Hint
@@ -245,76 +293,43 @@ function SessionEditor({ session, context }: { session: Session; context: TeachC
             </button>
           }
         >
-          Notion travaillée pour la période&nbsp;?
+          Notion travaillée&nbsp;?
         </Hint>
       ) : null}
 
-      <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Ressources</p>
-        {session.resources.length ? (
-          <ul className="mb-3 grid gap-1.5">
-            {session.resources.map((id) => {
-              const unit = getResource(id);
-              if (!unit) return null;
-              return (
-                <li key={id} className="flex items-center gap-2 rounded-lg border border-line bg-panel-soft py-1 pl-3 pr-1">
-                  <Icon name="book-open" className="h-4 w-4 shrink-0 text-jade" />
-                  <span className="min-w-0 flex-1 truncate text-sm">{unit.title}</span>
-                  {unit.files[0] ? (
-                    <a href={unit.files[0].href} target="_blank" rel="noopener noreferrer" className="grid size-9 place-items-center rounded-md text-muted hover:bg-ink/6" aria-label={`Ouvrir ${unit.title}`}>
-                      <Icon name="external" className="h-4 w-4" />
-                    </a>
-                  ) : null}
-                  <button type="button" onClick={() => toggleResource(session.id, id)} className="grid size-9 place-items-center rounded-md text-muted hover:bg-ink/6" aria-label={`Retirer ${unit.title}`}>
-                    <Icon name="x" className="h-4 w-4" />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        ) : null}
-        {suggestions.length ? (
-          <ul className="grid gap-1.5">
-            {suggestions.map((unit) => (
-              <li key={unit.id}>
-                <button
-                  type="button"
-                  onClick={() => toggleResource(session.id, unit.id)}
-                  className="flex w-full items-center gap-2.5 rounded-lg border border-dashed border-line px-3 py-2 text-left text-sm transition hover:border-ink/30 hover:bg-panel-soft"
-                >
-                  <Icon name="plus" className="h-4 w-4 shrink-0 text-muted" />
-                  <span className="min-w-0 flex-1">
-                    <span className="block leading-snug">{unit.title}</span>
-                    <span className="text-xs text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-muted">Aucune ressource publiée ne correspond encore à cette notion.</p>
-        )}
-        <Link href={`/ressources?niveau=${session.level}&seance=${session.id}`} className="mt-2 inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold hover:underline">
-          <Icon name="search" className="h-4 w-4" />
-          Chercher dans la bibliothèque
-        </Link>
-      </div>
-
-      {showNote ? (
-        <label className="grid gap-1.5">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Précision personnelle</span>
-          <textarea
-            className="field min-h-24"
-            value={session.note}
-            onChange={(event) => set({ note: event.target.value })}
-            placeholder="Facultatif"
-          />
-        </label>
-      ) : (
-        <button type="button" onClick={() => setShowNote(true)} className="justify-self-start text-sm text-muted underline decoration-ink/25 hover:text-foreground">
-          Ajouter une précision personnelle
+      <div className="border-t border-line pt-3">
+        <button type="button" aria-expanded={more} onClick={() => setMore((v) => !v)} className="flex min-h-10 items-center gap-1.5 text-sm text-muted hover:text-foreground">
+          <Icon name={more ? "chevron-right" : "plus"} className={`h-4 w-4 transition ${more ? "rotate-90" : ""}`} />
+          Plus d&apos;options
         </button>
-      )}
+        {more ? (
+          <div className="mt-4 grid gap-6">
+            <div className="flex flex-wrap items-center gap-3 text-sm">
+              <TimeStepper value={session.start} onChange={(start) => set({ start })} />
+            </div>
+            <ChipGroup
+              label="Durée"
+              size="sm"
+              options={Array.from(new Set([...DURATIONS, session.duration])).sort((a, b) => a - b).map((d) => ({ id: d, label: `${d} min` }))}
+              value={session.duration}
+              onChange={(duration) => duration && set({ duration })}
+            />
+            <ChipGroup label="Type" size="sm" allowEmpty options={SESSION_KINDS} value={session.kind} onChange={(kind) => set({ kind })} />
+            <ChipGroup label="Organisation" size="sm" allowEmpty options={ORGANISATIONS} value={session.organisation} onChange={(organisation) => set({ organisation })} />
+            <ChipGroup
+              label="Matière"
+              size="sm"
+              options={getTimetableSubjects(session.level).map((s) => ({ id: s.id, label: s.short }))}
+              value={session.subject}
+              onChange={(subject) => subject && set({ subject, domainId: null, notionId: null, notionLabel: null })}
+            />
+            <label className="grid gap-1.5">
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Précision personnelle</span>
+              <textarea className="field min-h-20" value={session.note} onChange={(event) => set({ note: event.target.value })} placeholder="Facultatif" />
+            </label>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

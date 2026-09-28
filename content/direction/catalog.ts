@@ -90,7 +90,7 @@ export type ChecklistItem = {
   unless?: string[];
 };
 
-export type ProcedureQuestion = { id: string; label: string; options: { id: string; label: string }[] };
+export type ProcedureQuestion = { id: string; label: string; optional?: boolean; options: { id: string; label: string }[] };
 
 export type Procedure = {
   id: string;
@@ -106,26 +106,33 @@ export const PROCEDURES: Procedure[] = [
   {
     id: "sortie",
     title: "Organiser une sortie",
-    summary: "Choisissez le type de sortie : la liste adaptée se charge.",
+    summary: "Deux clics, la liste adaptée se charge.",
     icon: "map-pin",
     questions: [
       {
-        id: "type",
-        label: "Type de sortie",
+        id: "nuitee",
+        label: "Avec nuitée ?",
         options: [
-          { id: "pied", label: "À pied" },
-          { id: "transport", label: "Transport" },
-          { id: "musee", label: "Musée, spectacle" },
-          { id: "piscine", label: "Piscine, activité physique" },
-          { id: "sejour", label: "Séjour avec nuitée" },
+          { id: "sejour", label: "Oui" },
+          { id: "sans-nuitee", label: "Non" },
         ],
       },
       {
-        id: "temps",
-        label: "Horaires",
+        id: "transport",
+        label: "Transport ?",
         options: [
-          { id: "scolaire", label: "Sur temps scolaire" },
-          { id: "depassement", label: "Dépasse les horaires" },
+          { id: "pied", label: "À pied" },
+          { id: "car", label: "Car" },
+          { id: "public", label: "Transport public" },
+        ],
+      },
+      {
+        id: "activite",
+        label: "Activité",
+        optional: true,
+        options: [
+          { id: "musee", label: "Musée, spectacle" },
+          { id: "piscine", label: "Activité sportive" },
         ],
       },
     ],
@@ -135,14 +142,13 @@ export const PROCEDURES: Procedure[] = [
       { id: "autorisation-ien", label: "Dossier transmis à l'IEN pour autorisation, après accord de la direction", when: ["sejour"] },
       { id: "encadrement", label: "Vérifier le taux d'encadrement dans le guide officiel" },
       { id: "accompagnateurs", label: "Liste des accompagnateurs et, si besoin, leur agrément" },
-      { id: "transport", label: "Réserver le transport et vérifier les conditions du transporteur", when: ["transport"] },
-      { id: "transport-sejour", label: "Réserver le transport", when: ["sejour"] },
+      { id: "transport", label: "Réserver le car et vérifier les conditions du transporteur", when: ["car"] },
+      { id: "transport-public", label: "Vérifier les horaires et les titres de transport", when: ["public"] },
       { id: "itineraire", label: "Préparer l'itinéraire et les points de traversée", when: ["pied"] },
       { id: "reservation", label: "Réserver le lieu et confirmer par écrit", when: ["musee"] },
       { id: "agrement-intervenant", label: "Vérifier l'agrément des intervenants extérieurs", when: ["piscine"] },
       { id: "hebergement", label: "Vérifier l'hébergement et le programme du séjour", when: ["sejour"] },
-      { id: "familles-info", label: "Informer les familles (date, horaires, tenue)", unless: ["depassement", "sejour"] },
-      { id: "familles-autorisation", label: "Recueillir les autorisations des familles", when: ["depassement"] },
+      { id: "familles-info", label: "Informer les familles ; autorisation écrite si la sortie dépasse les horaires", unless: ["sejour"] },
       { id: "familles-autorisation-sejour", label: "Recueillir les autorisations des familles", when: ["sejour"] },
       { id: "financement", label: "Budget : coopérative, mairie, participation limitée des familles" },
       { id: "trousse", label: "Trousse de secours et numéros utiles" },

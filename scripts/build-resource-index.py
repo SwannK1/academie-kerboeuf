@@ -158,6 +158,19 @@ DOMAIN_LABELS = {
 }
 
 
+def unit_slug(level: str, raw: str) -> str:
+    """Slug sans préfixe redondant : « ce2-ma-nc-poser » → « ma-nc-poser », « ce1-francais-nom » → « nom »."""
+    slug = slugify(raw)
+    for prefix in (f"{level}-francais-", f"{level}-mathematiques-", f"{level}-"):
+        if slug.startswith(prefix):
+            slug = slug[len(prefix):]
+            break
+    for prefix in ("francais-", "mathematiques-"):
+        if slug.startswith(prefix):
+            slug = slug[len(prefix):]
+    return slug.removesuffix("-entry")
+
+
 def level_of(rel: Path) -> str | None:
     parts = rel.parts
     if parts[0] == "maternelle":
@@ -219,9 +232,9 @@ def main() -> None:
             title = first or stem.split("_")[-1].replace("-", " ")
             domain = "Lecture"
         else:
-            unit_key = f"{level}-{subject}-{slugify(path.parent.name)}"
+            unit_key = f"{level}-{subject}-{unit_slug(level, path.parent.name)}"
             if path.parent.name in ("evaluations",):
-                unit_key = f"{level}-{subject}-{slugify(stem.rsplit('-', 1)[0])}"
+                unit_key = f"{level}-{subject}-{unit_slug(level, stem.rsplit('-', 1)[0])}"
             domain = domain or DOMAIN_LABELS.get(path.parent.parent.name)
 
         if not title:

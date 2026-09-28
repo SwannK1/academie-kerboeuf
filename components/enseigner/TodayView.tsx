@@ -73,7 +73,7 @@ function Today({ context }: { context: TeachContext }) {
               </Button>
             }
           >
-            Pour préparer en quelques clics, commencez par une semaine type. Vous la modifierez dans Ma classe.
+            Partir d&apos;une semaine type&nbsp;?
           </Hint>
         </div>
       ) : null}

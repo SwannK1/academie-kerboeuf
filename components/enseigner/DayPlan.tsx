@@ -4,9 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/icons/Icon";
 import { ActionMenu, accentStyles, toast } from "@/components/workspace/ui";
+import { RESOURCE_DRAG, SESSION_DRAG } from "@/lib/workspace/dnd";
+import { getResource } from "@/lib/resources/library";
+import { teachSubjectFor } from "@/components/ressources/ResourcePanel";
 import type { TeachContext } from "@/components/enseigner/EnseignerShell";
 import { sessionMenuSections } from "@/components/enseigner/SessionPanel";
-import { getSubject } from "@/lib/workspace/curriculum";
+import { getSubject, getTimetableSubjects } from "@/lib/workspace/curriculum";
 import { addDays, dayLabel, formatShortDate, formatTime, isHoliday, mondayOf, todayIso } from "@/lib/workspace/school-year";
 import {
   createSession,
@@ -18,12 +21,13 @@ import {
   sessionsOn,
   stripDated,
   teachStore,
+  toggleResource,
   toggleSessionDone,
   type Session,
   type Slot,
 } from "@/lib/workspace/teach";
 
-const DRAG_TYPE = "application/x-ak-seance";
+const DRAG_TYPE = SESSION_DRAG;
 
 type Item = { kind: "session"; session: Session } | { kind: "slot"; slot: Slot };
 
@@ -55,12 +59,41 @@ export function DayColumn({
   const holiday = isHoliday(date, context.zone);
   const isToday = date === todayIso();
 
-  function addFree() {
+  function addFree(subject: string) {
+    const slot = freeSlotsOn(context.teach, date).find((s) => s.subject === subject);
     const last = sessionsOn(context.teach, date).at(-1);
-    const start = last ? last.start + last.duration : 510;
-    const id = createSession({ date, start, level: context.level, subject: "francais" });
+    const id = createSession({
+      date,
+      start: slot?.start ?? (last ? last.start + last.duration : 510),
+      duration: slot?.duration ?? 45,
+      level: context.level,
+      subject,
+    });
     onOpen(id);
   }
+
+  /** Dépôt d'une ressource sur la journée : dans le créneau libre de sa matière, sinon en fin de journée. */
+  function dropResource(resourceId: string, slot?: Slot) {
+    const unit = getResource(resourceId);
+    if (!unit) return;
+    const before = teachStore.get();
+    const subject = slot?.subject ?? teachSubjectFor(unit, context.level);
+    const target = slot ?? freeSlotsOn(context.teach, date).find((s) => s.subject === subject);
+    const last = sessionsOn(context.teach, date).at(-1);
+    createSession({
+      date,
+      start: target?.start ?? (last ? last.start + last.duration : 510),
+      duration: target?.duration ?? 45,
+      level: context.level,
+      subject,
+      notionLabel: unit.title,
+      resources: [unit.id],
+    });
+    toast(`Séance créée avec « ${unit.title} »`, () => teachStore.set(before));
+  }
+
+  const previousSameDay = addDays(date, -7);
+  const canRepeatLastWeek = !items.some((i) => i.kind === "session") && sessionsOn(context.teach, previousSameDay).length > 0;
 
   function fromTemplate(templateId: string) {
     const template = context.teach.templates.find((t) => t.id === templateId);
@@ -106,7 +139,7 @@ export function DayColumn({
     <section
       aria-label={`${dayLabel(date)} ${formatShortDate(date)}`}
       onDragOver={(event) => {
-        if (event.dataTransfer.types.includes(DRAG_TYPE)) {
+        if (event.dataTransfer.types.includes(DRAG_TYPE) || event.dataTransfer.types.includes(RESOURCE_DRAG)) {
           event.preventDefault();
           setOver(true);
         }
@@ -116,7 +149,9 @@ export function DayColumn({
       }}
       onDrop={(event) => {
         const id = event.dataTransfer.getData(DRAG_TYPE);
+        const resourceId = event.dataTransfer.getData(RESOURCE_DRAG);
         setOver(false);
+        if (resourceId) dropResource(resourceId);
         if (id) {
           const before = teachStore.get();
           moveSession(id, date);
@@ -127,12 +162,27 @@ export function DayColumn({
     >
       {showHeader ? (
         <header className="flex items-center justify-between gap-2 px-2 pb-2 pt-1">
-          <h2 className="text-sm font-semibold text-foreground">
+          <h2 className="flex flex-wrap items-center gap-x-1.5 text-sm font-semibold text-foreground">
             {dayLabel(date)} <span className="font-normal text-muted">{formatShortDate(date)}</span>
-            {isToday ? <span className="ml-2 rounded-full bg-gold/15 px-2 py-0.5 text-[11px] font-semibold text-gold">Aujourd&apos;hui</span> : null}
+            {isToday ? <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[11px] font-semibold text-gold">Aujourd&apos;hui</span> : null}
           </h2>
           <ActionMenu label={`Actions pour ${dayLabel(date)}`} sections={dayMenu} buttonClassName="size-8" />
         </header>
+      ) : null}
+
+      {!holiday && canRepeatLastWeek ? (
+        <button
+          type="button"
+          onClick={() => {
+            const before = teachStore.get();
+            const n = duplicateDay(previousSameDay, date);
+            toast(`${n} séance${n > 1 ? "s" : ""} reprise${n > 1 ? "s" : ""}`, () => teachStore.set(before));
+          }}
+          className="mb-1.5 flex min-h-11 w-full items-center gap-2 rounded-xl border border-gold/35 bg-gold/[0.07] px-3 text-left text-sm font-medium text-foreground transition hover:bg-gold/[0.12]"
+        >
+          <Icon name="repeat" className="h-4 w-4 text-gold" />
+          Comme {dayLabel(previousSameDay).toLowerCase()} dernier
+        </button>
       ) : null}
 
       {holiday ? (
@@ -146,7 +196,7 @@ export function DayColumn({
               </li>
             ) : (
               <li key={item.slot.id}>
-                <GhostSlot slot={item.slot} date={date} context={context} onOpen={onOpen} large={large} />
+                <GhostSlot slot={item.slot} date={date} context={context} onOpen={onOpen} large={large} onDropResource={(id) => dropResource(id, item.slot)} />
               </li>
             ),
           )}
@@ -154,19 +204,27 @@ export function DayColumn({
       )}
 
       {!holiday ? (
-        <div className="mt-1.5 flex items-center gap-1">
-          <button type="button" onClick={addFree} className="flex min-h-10 flex-1 items-center gap-2 rounded-lg px-3 text-sm text-muted transition hover:bg-ink/5 hover:text-foreground">
-            <Icon name="plus" className="h-4 w-4" />
-            Ajouter
-          </button>
-          {context.teach.templates.length ? (
-            <ActionMenu
-              label="Ajouter depuis un modèle"
-              trigger="bookmark"
-              buttonClassName="size-9"
-              sections={[{ title: "Mes modèles", actions: context.teach.templates.map((t) => ({ label: t.name, onSelect: () => fromTemplate(t.id) })) }]}
-            />
-          ) : null}
+        <div className="mt-1.5">
+          <ActionMenu
+            label={`Ajouter une séance ${dayLabel(date).toLowerCase()}`}
+            align="left"
+            buttonClassName="flex min-h-10 w-full items-center gap-2 rounded-lg px-3 text-sm text-muted transition hover:bg-ink/5 hover:text-foreground"
+            triggerContent={
+              <>
+                <Icon name="plus" className="h-4 w-4" />
+                Ajouter
+              </>
+            }
+            sections={[
+              {
+                title: "Matière",
+                actions: getTimetableSubjects(context.level).map((subject) => ({ label: subject.label, onSelect: () => addFree(subject.id) })),
+              },
+              ...(context.teach.templates.length
+                ? [{ title: "Mes modèles", actions: context.teach.templates.map((t) => ({ label: t.name, icon: "bookmark" as const, onSelect: () => fromTemplate(t.id) })) }]
+                : []),
+            ]}
+          />
         </div>
       ) : null}
     </section>
@@ -188,6 +246,7 @@ export function SessionCard({
   const accent = accentStyles[subject.accent];
   const title = sessionTitle(session);
   const hasNotion = Boolean(session.notionLabel);
+  const [resourceOver, setResourceOver] = useState(false);
 
   return (
     <div
@@ -196,9 +255,28 @@ export function SessionCard({
         event.dataTransfer.setData(DRAG_TYPE, session.id);
         event.dataTransfer.effectAllowed = "move";
       }}
+      onDragOver={(event) => {
+        if (event.dataTransfer.types.includes(RESOURCE_DRAG)) {
+          event.preventDefault();
+          event.stopPropagation();
+          setResourceOver(true);
+        }
+      }}
+      onDragLeave={() => setResourceOver(false)}
+      onDrop={(event) => {
+        const resourceId = event.dataTransfer.getData(RESOURCE_DRAG);
+        if (!resourceId) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setResourceOver(false);
+        if (!session.resources.includes(resourceId)) {
+          toggleResource(session.id, resourceId);
+          toast("Ressource ajoutée à la séance");
+        }
+      }}
       className={`group relative flex items-stretch rounded-xl border bg-panel-soft transition hover:border-ink/25 hover:shadow-[0_10px_24px_-18px_rgba(43,36,32,0.55)] ${
-        session.done ? "border-line opacity-70" : "border-line"
-      }`}
+        resourceOver ? "border-jade ring-2 ring-jade/40" : "border-line"
+      } ${session.done ? "opacity-70" : ""}`}
     >
       <span className={`my-2 ml-2 w-1 shrink-0 rounded-full ${accent.dot}`} aria-hidden="true" />
       <button
@@ -240,12 +318,14 @@ function GhostSlot({
   context,
   onOpen,
   large,
+  onDropResource,
 }: {
   slot: Slot;
   date: string;
   context: TeachContext;
   onOpen: (id: string) => void;
   large: boolean;
+  onDropResource: (resourceId: string) => void;
 }) {
   const subject = getSubject(slot.subject);
   const [over, setOver] = useState(false);
@@ -257,7 +337,7 @@ function GhostSlot({
         onOpen(id);
       }}
       onDragOver={(event) => {
-        if (event.dataTransfer.types.includes(DRAG_TYPE)) {
+        if (event.dataTransfer.types.includes(DRAG_TYPE) || event.dataTransfer.types.includes(RESOURCE_DRAG)) {
           event.preventDefault();
           event.stopPropagation();
           setOver(true);
@@ -268,6 +348,11 @@ function GhostSlot({
         event.preventDefault();
         event.stopPropagation();
         setOver(false);
+        const resourceId = event.dataTransfer.getData(RESOURCE_DRAG);
+        if (resourceId) {
+          onDropResource(resourceId);
+          return;
+        }
         const id = event.dataTransfer.getData(DRAG_TYPE);
         if (id) {
           const before = teachStore.get();

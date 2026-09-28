@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ResourcePanel } from "@/components/ressources/ResourcePanel";
+import { ResourcePanel, printPdf } from "@/components/ressources/ResourcePanel";
+import { RESOURCE_DRAG } from "@/lib/workspace/dnd";
 import { useActivity } from "@/lib/workspace/activity";
 import { Icon } from "@/components/icons/Icon";
-import { Button, ChipGroup } from "@/components/workspace/ui";
+import { ActionMenu, Button, ChipGroup } from "@/components/workspace/ui";
 import {
   FILE_TYPE_LABELS,
   RESOURCE_SUBJECTS,
@@ -38,6 +39,7 @@ export function ResourceLibrary() {
   const activity = useActivity();
   const [query, setQuery] = useState(params.get("q") ?? "");
   const [limit, setLimit] = useState(PAGE);
+  const [showTypes, setShowTypes] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const levelParam = params.get("niveau") as ResourceLevel | null;
@@ -50,7 +52,10 @@ export function ResourceLibrary() {
   const q = params.get("q") ?? "";
 
   // Niveau du profil proposé par défaut, sans l'imposer (« tous » reste un clic).
-  const level = levelParam === null && !q && !collection && !params.has("tous") && profile?.level ? profile.level : levelParam;
+  const level =
+    levelParam === null && !q && !collection && !params.has("tous") && !params.has("recents") && !params.has("favoris") && profile?.level
+      ? profile.level
+      : levelParam;
 
   function setParam(patch: Record<string, string | null>) {
     const next = new URLSearchParams(params.toString());
@@ -86,7 +91,13 @@ export function ResourceLibrary() {
     return searchResources({ q, level, subject, type, collection });
   }, [notion, q, level, subject, type, collection]);
   const favoriteIds = new Set(activity?.favorites.filter((f) => f.kind === "ressource").map((f) => f.id));
-  const shown = favorites ? results.filter((u) => favoriteIds.has(u.id)) : results;
+  const recentIds = (activity?.recents ?? []).filter((r) => r.kind === "ressource").map((r) => r.id);
+  const recentsOnly = params.get("recents") === "1";
+  const shown = recentsOnly
+    ? recentIds.map((id) => results.find((u) => u.id === id)).filter((u): u is ResourceUnit => Boolean(u))
+    : favorites
+      ? results.filter((u) => favoriteIds.has(u.id))
+      : results;
 
   const subjectsHere = RESOURCE_SUBJECTS.filter((s) =>
     publishedResources.some((u) => u.subject === s.id && (!level || u.level === level)),
@@ -140,41 +151,60 @@ export function ResourceLibrary() {
         />
       </form>
 
-      <div className="mt-5 grid gap-4">
+      <div className="mt-5 grid gap-3">
         <ChipGroup
-          label="Niveau"
-          size="sm"
+          label="Afficher"
+          hideLabel
           allowEmpty
-          options={levelsWithResources}
-          value={level ?? inferred.level ?? null}
-          onChange={(v) => setParam({ niveau: v, tous: v ? null : "1", matiere: null })}
+          options={[
+            ...(recentIds.length ? [{ id: "recents", label: "Récents" }] : []),
+            ...(favoriteIds.size ? [{ id: "favoris", label: "★ Favoris" }] : []),
+            ...subjectsHere,
+          ]}
+          value={recentsOnly ? "recents" : favorites ? "favoris" : subject ?? inferred.subject ?? null}
+          onChange={(v) =>
+            setParam({
+              recents: v === "recents" ? "1" : null,
+              favoris: v === "favoris" ? "1" : null,
+              matiere: v && v !== "recents" && v !== "favoris" ? v : null,
+            })
+          }
         />
-        <div className="flex flex-wrap gap-x-8 gap-y-4">
-          <ChipGroup
-            label="Matière"
-            size="sm"
-            allowEmpty
-            options={subjectsHere}
-            value={subject ?? inferred.subject ?? null}
-            onChange={(v) => setParam({ matiere: v })}
+        <div className="flex flex-wrap items-center gap-2">
+          <ActionMenu
+            label="Changer de niveau"
+            align="left"
+            triggerContent={
+              <span className="chip chip-sm">
+                {level ? levelLabel(level) : inferred.level ? levelLabel(inferred.level) : "Tous niveaux"}
+                <Icon name="chevron-right" className="h-3.5 w-3.5 rotate-90" />
+              </span>
+            }
+            sections={[
+              {
+                title: "Niveau",
+                actions: [
+                  { label: "Tous niveaux", onSelect: () => setParam({ niveau: null, tous: "1", matiere: null }) },
+                  ...levelsWithResources.map((l) => ({ label: l.label, onSelect: () => setParam({ niveau: l.id, tous: null, matiere: null }) })),
+                ],
+              },
+            ]}
           />
-          <ChipGroup
-            label="Type"
-            size="sm"
-            allowEmpty
-            options={TYPE_FILTERS}
-            value={type ?? inferred.type ?? null}
-            onChange={(v) => setParam({ type: v })}
-          />
-          {favoriteIds.size ? (
-            <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Mes favoris</p>
-              <button type="button" aria-pressed={favorites} className={`chip chip-sm ${favorites ? "chip-on" : ""}`} onClick={() => setParam({ favoris: favorites ? null : "1" })}>
-                <Icon name="star" className="h-3.5 w-3.5" />
-                {favoriteIds.size}
-              </button>
-            </div>
-          ) : null}
+          {showTypes || type ? (
+            <ChipGroup
+              label="Type"
+              hideLabel
+              size="sm"
+              allowEmpty
+              options={TYPE_FILTERS}
+              value={type ?? inferred.type ?? null}
+              onChange={(v) => setParam({ type: v })}
+            />
+          ) : (
+            <button type="button" onClick={() => setShowTypes(true)} className="btn btn-quiet">
+              Leçon, exercices…
+            </button>
+          )}
         </div>
       </div>
 
@@ -249,27 +279,60 @@ export function ResourceLibrary() {
 }
 
 function ResourceCard({ unit, favorite, onOpen }: { unit: ResourceUnit; favorite: boolean; onOpen: () => void }) {
+  const lesson = unit.files[0];
   return (
-    <button type="button" onClick={onOpen} className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-line bg-panel-soft text-left transition hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-[0_18px_40px_-28px_rgba(43,36,32,0.6)]">
-      <span className="relative block aspect-[4/3] overflow-hidden border-b border-line bg-white">
-        {unit.preview ? (
-          <Image src={unit.preview} alt="" fill sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 90vw" className="object-cover object-top transition group-hover:scale-[1.02]" />
-        ) : null}
-        {favorite ? (
-          <span className="absolute right-2 top-2 grid size-7 place-items-center rounded-full bg-background/90 text-gold">
-            <Icon name="star" className="h-4 w-4" />
-            <span className="sr-only">Favori</span>
-          </span>
-        ) : null}
-      </span>
-      <span className="flex flex-1 flex-col p-4">
-        <span className="text-xs text-muted">
-          {levelLabel(unit.level)} · {subjectLabel(unit.subject)}
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-panel-soft transition hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-[0_18px_40px_-28px_rgba(43,36,32,0.6)]">
+      <button
+        type="button"
+        draggable
+        onDragStart={(event) => event.dataTransfer.setData(RESOURCE_DRAG, unit.id)}
+        onClick={onOpen}
+        className="flex flex-1 flex-col text-left"
+      >
+        <span className="relative block aspect-[4/3] w-full overflow-hidden border-b border-line bg-white">
+          {unit.preview ? (
+            <Image src={unit.preview} alt="" fill sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 90vw" className="object-cover object-top transition group-hover:scale-[1.02]" />
+          ) : null}
+          {favorite ? (
+            <span className="absolute right-2 top-2 grid size-7 place-items-center rounded-full bg-background/90 text-gold">
+              <Icon name="star" className="h-4 w-4" />
+              <span className="sr-only">Favori</span>
+            </span>
+          ) : null}
         </span>
-        <span className="mt-1 line-clamp-2 font-medium leading-snug text-foreground">{unit.title}</span>
-        <span className="mt-auto pt-3 text-xs text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
-      </span>
-    </button>
+        <span className="flex flex-1 flex-col px-4 pb-2 pt-3">
+          <span className="text-xs text-muted">
+            {levelLabel(unit.level)} · {subjectLabel(unit.subject)}
+          </span>
+          <span className="mt-1 line-clamp-2 font-medium leading-snug text-foreground">{unit.title}</span>
+          <span className="mt-auto pt-2 text-xs text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
+        </span>
+      </button>
+      <div className="flex items-center gap-1 border-t border-line px-2 py-1.5 transition md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
+        <button type="button" onClick={onOpen} className="btn btn-quiet min-h-9 flex-1 px-2 text-[13px]" aria-label={`Aperçu : ${unit.title}`}>
+          <Icon name="image" className="h-4 w-4" /> Aperçu
+        </button>
+        {unit.files.length > 1 ? (
+          <ActionMenu
+            label={`Imprimer : ${unit.title}`}
+            triggerContent={
+              <span className="btn btn-quiet min-h-9 px-2 text-[13px]">
+                <Icon name="printer" className="h-4 w-4" /> Imprimer
+              </span>
+            }
+            sections={[{ title: "Imprimer", actions: unit.files.map((f) => ({ label: FILE_TYPE_LABELS[f.type], icon: "printer" as const, onSelect: () => printPdf(f.href) })) }]}
+          />
+        ) : lesson ? (
+          <button type="button" onClick={() => printPdf(lesson.href)} className="btn btn-quiet min-h-9 px-2 text-[13px]" aria-label={`Imprimer : ${unit.title}`}>
+            <Icon name="printer" className="h-4 w-4" /> Imprimer
+          </button>
+        ) : null}
+        {lesson ? (
+          <a href={`${lesson.href}#view=Fit`} target="_blank" rel="noopener noreferrer" className="btn btn-quiet min-h-9 px-2 text-[13px]" aria-label={`Projeter : ${unit.title}`}>
+            <Icon name="presentation" className="h-4 w-4" /> Projeter
+          </a>
+        ) : null}
+      </div>
+    </div>
   );
 }
-

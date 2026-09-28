@@ -88,7 +88,7 @@ function ClassSettings({ context }: { context: TeachContext }) {
           <div>
             <h2 id="edt-title" className="font-serif text-2xl font-semibold">Semaine type</h2>
             <p className="mt-1 text-sm text-muted">
-              Elle remplit chaque semaine automatiquement. {Math.round((totalMinutes / 60) * 10) / 10} h d&apos;enseignement placées.
+              {Math.round((totalMinutes / 60) * 10) / 10} h placées
             </p>
           </div>
           <Button
@@ -107,7 +107,7 @@ function ClassSettings({ context }: { context: TeachContext }) {
           <p className="px-1 pb-2 text-xs text-muted">
             {armed
               ? `Touchez « + » sous un jour pour placer ${getSubject(armed).short}.`
-              : "Palette : glissez une matière sur un jour, ou touchez-la puis « + »."}
+              : "Glissez une matière sur un jour, ou touchez-la puis « + Créneau »."}
           </p>
           <div className="flex flex-wrap gap-2">
             {subjects.map((subject) => {

@@ -240,6 +240,14 @@ export function searchResources(query: ResourceQuery): {
   return { results: scored.map((s) => s.unit), inferred };
 }
 
+/** Mots trop génériques pour rapprocher une notion d'une fiche (verbes de consigne, mots outils). */
+const GENERIC_WORDS = new Set([
+  "les", "des", "une", "dans", "pour", "avec", "son", "ses", "leur", "leurs", "par", "sur", "aux", "entre", "partir", "simple", "simples", "court", "courte", "courts",
+  "identifier", "reconnaitre", "distinguer", "comparer", "ranger", "lire", "ecrire", "utiliser", "resoudre", "poser", "effectuer", "calculer",
+  "construire", "comprendre", "mobiliser", "reperer", "repondre", "produire", "decrire", "situer", "memoriser", "connaitre", "savoir",
+  "nombre", "nombres", "phrase", "phrases", "texte", "textes", "mots", "probleme", "problemes", "question", "questions",
+]);
+
 const LANGUAGE_DOMAINS = ["grammaire", "conjugaison", "orthographe", "vocabulaire", "lexique", "etude de la langue"];
 
 function domainAffinity(unitDomain: string, domain: string): number {
@@ -260,21 +268,27 @@ export function suggestResources(options: {
   domain?: string;
   text?: string;
   limit?: number;
+  /** ne garder que les ressources qui partagent un mot avec la notion */
+  strict?: boolean;
 }): ResourceUnit[] {
-  const { level, resourceSubject, domain = "", text = "", limit = 4 } = options;
+  const { level, resourceSubject, domain = "", text = "", limit = 4, strict = false } = options;
   const pool = publishedResources.filter(
     (unit) => unit.level === level && (!resourceSubject || unit.subject === resourceSubject),
   );
   const words = normalize(text)
     .split(" ")
-    .filter((w) => w.length >= 3 && !["les", "des", "une", "dans", "pour", "avec", "son", "ses"].includes(w));
+    .filter((w) => w.length >= 3 && !GENERIC_WORDS.has(w));
   return pool
     .map((unit) => {
-      const hay = normalize(`${unit.title} ${unit.objective}`);
-      const wordScore = words.reduce((sum, w) => sum + (hay.includes(w.length > 5 ? w.slice(0, 5) : w) ? 2 : 0), 0);
-      return { unit, score: wordScore + domainAffinity(unit.domain, domain) };
+      // Correspondance en début de mot : « aire » ne doit pas trouver « perpendiculaires ».
+      const hayWords = normalize(`${unit.title} ${unit.objective}`).split(" ");
+      const wordScore = words.reduce((sum, w) => {
+        const stem = w.length > 5 ? w.slice(0, 5) : w;
+        return sum + (hayWords.some((h) => h.startsWith(stem)) ? 2 : 0);
+      }, 0);
+      return { unit, score: wordScore + domainAffinity(unit.domain, domain), wordScore };
     })
-    .filter((s) => s.score > 0 || !domain)
+    .filter((s) => (strict ? s.wordScore > 0 : s.score > 0 || !domain))
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
     .map((s) => s.unit);
