@@ -90,6 +90,7 @@ export function ResourceLibrary() {
     }
     return searchResources({ q, level, subject, type, collection });
   }, [notion, q, level, subject, type, collection]);
+  const objectsFirst = Boolean(profile?.level);
   const favoriteIds = new Set(activity?.favorites.filter((f) => f.kind === "ressource").map((f) => f.id));
   const recentIds = (activity?.recents ?? []).filter((r) => r.kind === "ressource").map((r) => r.id);
   const recentsOnly = params.get("recents") === "1";
@@ -130,28 +131,10 @@ export function ResourceLibrary() {
         </div>
       ) : null}
 
-      <form
-        role="search"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setParam({ q: query || null });
-          inputRef.current?.blur();
-        }}
-        className="relative"
-      >
-        <Icon name="search" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
-        <input
-          ref={inputRef}
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          aria-label="Que cherchez-vous ?"
-          placeholder="Que cherchez-vous ? « soustraction CE1 », « imparfait »…"
-          className="h-14 w-full rounded-2xl border border-line bg-panel-soft pl-12 pr-4 text-base shadow-[0_12px_30px_-24px_rgba(43,36,32,0.5)] placeholder:text-muted/70 focus:outline-2 focus:outline-gold"
-        />
-      </form>
-
-      <div className="mt-5 grid gap-3">
+      {/* Profil connu : les objets (récents, favoris, matières, niveau) d'abord, la recherche ensuite. */}
+      {objectsFirst ? (
+        <>
+      <div className={`grid gap-3 ${objectsFirst ? "" : "mt-5"}`}>
         <ChipGroup
           label="Afficher"
           hideLabel
@@ -207,6 +190,111 @@ export function ResourceLibrary() {
           )}
         </div>
       </div>
+
+      <form
+        role="search"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setParam({ q: query || null });
+          inputRef.current?.blur();
+        }}
+        className={`relative ${objectsFirst ? "mt-4 max-w-xl" : ""}`}
+      >
+        <Icon name="search" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+        <input
+          ref={inputRef}
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          aria-label="Que cherchez-vous ?"
+          placeholder={objectsFirst ? "Rechercher une notion…" : "Que cherchez-vous ? « soustraction CE1 », « imparfait »…"}
+          className={`w-full border border-line bg-panel-soft pl-12 pr-4 text-base placeholder:text-muted/70 focus:outline-2 focus:outline-gold ${objectsFirst ? "h-12 rounded-xl" : "h-14 rounded-2xl shadow-[0_12px_30px_-24px_rgba(43,36,32,0.5)]"}`}
+        />
+      </form>
+
+        </>
+      ) : (
+        <>
+      <form
+        role="search"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setParam({ q: query || null });
+          inputRef.current?.blur();
+        }}
+        className={`relative ${objectsFirst ? "mt-4 max-w-xl" : ""}`}
+      >
+        <Icon name="search" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+        <input
+          ref={inputRef}
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          aria-label="Que cherchez-vous ?"
+          placeholder={objectsFirst ? "Rechercher une notion…" : "Que cherchez-vous ? « soustraction CE1 », « imparfait »…"}
+          className={`w-full border border-line bg-panel-soft pl-12 pr-4 text-base placeholder:text-muted/70 focus:outline-2 focus:outline-gold ${objectsFirst ? "h-12 rounded-xl" : "h-14 rounded-2xl shadow-[0_12px_30px_-24px_rgba(43,36,32,0.5)]"}`}
+        />
+      </form>
+
+      <div className={`grid gap-3 ${objectsFirst ? "" : "mt-5"}`}>
+        <ChipGroup
+          label="Afficher"
+          hideLabel
+          allowEmpty
+          options={[
+            ...(recentIds.length ? [{ id: "recents", label: "Récents" }] : []),
+            ...(favoriteIds.size ? [{ id: "favoris", label: "★ Favoris" }] : []),
+            ...subjectsHere,
+          ]}
+          value={recentsOnly ? "recents" : favorites ? "favoris" : subject ?? inferred.subject ?? null}
+          onChange={(v) =>
+            setParam({
+              recents: v === "recents" ? "1" : null,
+              favoris: v === "favoris" ? "1" : null,
+              matiere: v && v !== "recents" && v !== "favoris" ? v : null,
+            })
+          }
+        />
+        <div className="flex flex-wrap items-center gap-2">
+          <ActionMenu
+            label="Changer de niveau"
+            align="left"
+            triggerContent={
+              <span className="chip chip-sm">
+                {level ? levelLabel(level) : inferred.level ? levelLabel(inferred.level) : "Tous niveaux"}
+                <Icon name="chevron-right" className="h-3.5 w-3.5 rotate-90" />
+              </span>
+            }
+            sections={[
+              {
+                title: "Niveau",
+                actions: [
+                  { label: "Tous niveaux", onSelect: () => setParam({ niveau: null, tous: "1", matiere: null }) },
+                  ...levelsWithResources.map((l) => ({ label: l.label, onSelect: () => setParam({ niveau: l.id, tous: null, matiere: null }) })),
+                ],
+              },
+            ]}
+          />
+          {showTypes || type ? (
+            <ChipGroup
+              label="Type"
+              hideLabel
+              size="sm"
+              allowEmpty
+              options={TYPE_FILTERS}
+              value={type ?? inferred.type ?? null}
+              onChange={(v) => setParam({ type: v })}
+            />
+          ) : (
+            <button type="button" onClick={() => setShowTypes(true)} className="btn btn-quiet">
+              Leçon, exercices…
+            </button>
+          )}
+        </div>
+      </div>
+
+        </>
+      )}
 
       {!q && !collection && collections.length ? (
         <section aria-labelledby="collections" className="mt-8">
@@ -308,7 +396,7 @@ function ResourceCard({ unit, favorite, onOpen }: { unit: ResourceUnit; favorite
           <span className="mt-auto pt-2 text-xs text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
         </span>
       </button>
-      <div className="flex items-center gap-1 border-t border-line px-2 py-1.5 transition md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
+      <div className="flex items-center gap-1 border-t border-line px-2 py-1.5 transition hover-reveal">
         <button type="button" onClick={onOpen} className="btn btn-quiet min-h-11 flex-1 px-2 text-[13px] md:min-h-9" aria-label={`Aperçu : ${unit.title}`}>
           <Icon name="image" className="h-4 w-4" /> Aperçu
         </button>

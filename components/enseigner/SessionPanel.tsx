@@ -7,6 +7,7 @@ import { Icon } from "@/components/icons/Icon";
 import { ActionMenu, ChipGroup, Hint, SidePanel, toast, type MenuSection } from "@/components/workspace/ui";
 import type { TeachContext } from "@/components/enseigner/EnseignerShell";
 import { FILE_TYPE_LABELS, getResource, suggestResources, type ResourceUnit } from "@/lib/resources/library";
+import { defaultPrintFile, defaultProjectFile, printPdf } from "@/components/ressources/ResourcePanel";
 import { getCurriculum, getSubject, getTimetableSubjects } from "@/lib/workspace/curriculum";
 import { addDays, dayLabel, formatLongDate, formatShortDate, formatTime, mondayOf } from "@/lib/workspace/school-year";
 import {
@@ -169,6 +170,8 @@ function SessionEditor({ session, context }: { session: Session; context: TeachC
     }))
     .sort((a, b) => Number(Boolean(b.hint)) - Number(Boolean(a.hint)) || Number(b.ready) - Number(a.ready) || a.index - b.index);
   const hasNotion = Boolean(session.notionId || session.notionLabel);
+  // Trois suggestions, davantage seulement si plusieurs notions sont prévues ou en continuité.
+  const suggestionCount = Math.max(3, ranked.filter((n) => n.hint).length);
   const pickingNotion = ranked.length > 0 && (!hasNotion || changing);
   const progress = session.notionId ? context.teach.progress[session.notionId] : undefined;
 
@@ -182,7 +185,7 @@ function SessionEditor({ session, context }: { session: Session; context: TeachC
       ? suggestResources({ level: session.level, resourceSubject, domain: domain?.label ?? "", text: "", limit: 6 })
       : [];
   const suggestions = [...direct, ...sameDomain].filter((unit) => !session.resources.includes(unit.id));
-  const resourceChoices = [...attached, ...suggestions].slice(0, Math.max(6, attached.length));
+  const resourceChoices = suggestions.slice(0, attached.length ? 4 : 6);
 
   function chooseNotion(id: string, label: string, domainId: string) {
     set({ notionId: id, notionLabel: label, domainId });
@@ -194,10 +197,10 @@ function SessionEditor({ session, context }: { session: Session; context: TeachC
       {pickingNotion ? (
         <section aria-labelledby="choisir-notion">
           <h3 id="choisir-notion" className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-            Quelle notion ?
+            {allNotions ? "Toutes les notions" : "Suggestions"}
           </h3>
           <ul role="radiogroup" aria-labelledby="choisir-notion" className="grid gap-1.5">
-            {(allNotions ? ranked : ranked.slice(0, 6)).map((notion) => {
+            {(allNotions ? ranked : ranked.slice(0, suggestionCount)).map((notion) => {
               const on = notion.id === session.notionId;
               return (
                 <li key={notion.id}>
@@ -224,7 +227,7 @@ function SessionEditor({ session, context }: { session: Session; context: TeachC
               );
             })}
           </ul>
-          {!allNotions && ranked.length > 6 ? (
+          {!allNotions && ranked.length > suggestionCount ? (
             <button type="button" onClick={() => setAllNotions(true)} className="mt-2 min-h-10 text-sm text-muted underline decoration-ink/25">
               Toutes les notions ({ranked.length})
             </button>
@@ -246,41 +249,67 @@ function SessionEditor({ session, context }: { session: Session; context: TeachC
 
       {hasNotion && !changing ? (
         <section aria-labelledby="choisir-ressource">
-          <h3 id="choisir-ressource" className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-            {direct.length || !sameDomain.length ? "Ressource" : "Ressources du même domaine"}
-          </h3>
-          {resourceChoices.length ? (
-            <ul className="grid grid-cols-2 gap-2">
-              {resourceChoices.map((unit) => {
-                const on = session.resources.includes(unit.id);
+          {attached.length ? (
+            <ul aria-label="Fiches de la séance" className="mb-4 grid gap-2">
+              {attached.map((unit) => {
+                const printFile = defaultPrintFile(unit);
+                const projectFile = defaultProjectFile(unit);
                 return (
-                  <li key={unit.id}>
-                    <button
-                      type="button"
-                      aria-pressed={on}
-                      onClick={() => toggleResource(session.id, unit.id)}
-                      className={`group flex h-full w-full flex-col overflow-hidden rounded-xl border text-left transition ${
-                        on ? "border-jade ring-2 ring-jade/40" : "border-line hover:border-ink/30"
-                      }`}
-                    >
-                      <span className="relative block aspect-[4/3] overflow-hidden bg-white">
-                        {unit.preview ? <Image src={unit.preview} alt="" fill sizes="200px" className="object-cover object-top" /> : null}
-                        {on ? (
-                          <span className="absolute right-1.5 top-1.5 grid size-7 place-items-center rounded-full bg-jade text-white">
-                            <Icon name="check" className="h-4 w-4" />
-                          </span>
-                        ) : null}
-                      </span>
-                      <span className="flex-1 bg-panel-soft px-2.5 py-2">
-                        <span className="line-clamp-2 text-[13px] leading-snug">{unit.title}</span>
-                        <span className="text-[11px] text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
-                      </span>
-                    </button>
+                  <li key={unit.id} className="flex items-center gap-3 rounded-xl border border-jade/40 bg-jade/[0.05] p-2">
+                    <span className="relative h-14 w-11 shrink-0 overflow-hidden rounded-md border border-line bg-white">
+                      {unit.preview ? <Image src={unit.preview} alt="" fill sizes="44px" className="object-cover object-top" /> : null}
+                    </span>
+                    <span className="min-w-0 flex-1 text-[13px] leading-snug">
+                      <span className="line-clamp-2">{unit.title}</span>
+                    </span>
+                    <span className="flex shrink-0 items-center">
+                      {printFile ? (
+                        <button type="button" onClick={() => printPdf(printFile.href)} className="grid size-11 place-items-center rounded-md text-foreground hover:bg-ink/6" aria-label={`Imprimer : ${unit.title}`} title="Imprimer">
+                          <Icon name="printer" className="h-5 w-5" />
+                        </button>
+                      ) : null}
+                      {projectFile ? (
+                        <a href={`${projectFile.href}#view=Fit`} target="_blank" rel="noopener noreferrer" className="grid size-11 place-items-center rounded-md text-foreground hover:bg-ink/6" aria-label={`Projeter : ${unit.title}`} title="Projeter">
+                          <Icon name="presentation" className="h-5 w-5" />
+                        </a>
+                      ) : null}
+                      <button type="button" onClick={() => toggleResource(session.id, unit.id)} className="grid size-11 place-items-center rounded-md text-muted hover:bg-ink/6" aria-label={`Retirer : ${unit.title}`} title="Retirer">
+                        <Icon name="x" className="h-5 w-5" />
+                      </button>
+                    </span>
                   </li>
                 );
               })}
             </ul>
-          ) : (
+          ) : null}
+          <h3 id="choisir-ressource" className={`mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted ${attached.length && !resourceChoices.length ? "sr-only" : ""}`}>
+            {attached.length ? "Autres fiches" : direct.length || !sameDomain.length ? "Ressource" : "Ressources du même domaine"}
+          </h3>
+          {resourceChoices.length ? (
+            <ul className="grid grid-cols-2 gap-2">
+              {resourceChoices.map((unit) => (
+                <li key={unit.id}>
+                  <button
+                    type="button"
+                    onClick={() => toggleResource(session.id, unit.id)}
+                    aria-label={`Ajouter : ${unit.title}`}
+                    className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-line text-left transition hover:border-ink/30"
+                  >
+                    <span className="relative block aspect-[4/3] overflow-hidden bg-white">
+                      {unit.preview ? <Image src={unit.preview} alt="" fill sizes="200px" className="object-cover object-top" /> : null}
+                      <span className="absolute right-1.5 top-1.5 grid size-7 place-items-center rounded-full bg-background/90 text-foreground">
+                        <Icon name="plus" className="h-4 w-4" />
+                      </span>
+                    </span>
+                    <span className="flex-1 bg-panel-soft px-2.5 py-2">
+                      <span className="line-clamp-2 text-[13px] leading-snug">{unit.title}</span>
+                      <span className="text-[11px] text-muted">{unit.files.map((f) => FILE_TYPE_LABELS[f.type]).join(" · ")}</span>
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : attached.length ? null : (
             <p className="text-sm text-muted">Pas encore de fiche publiée pour cette notion.</p>
           )}
           <Link

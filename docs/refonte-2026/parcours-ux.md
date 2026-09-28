@@ -68,3 +68,22 @@ précision » (réunion), « Ajouter un point libre », « Ajouter une tâche »
   + signal `ak:impression` (fiches) vérifiés par les tests. La boîte de
   dialogue native du navigateur n'est pas automatisable : c'est une limite de
   test, pas une erreur applicative.
+
+## Dernière passe avant fusion
+
+- Cockpit : Ma semaine · Trouver un PDF · Cahier journal · Ma progression ;
+  « Continuer : … » vers le dernier écran seulement s'il n'est pas déjà sur le cockpit.
+- Direction : section « Plus tard » repliable ; « Source officielle » dans le menu `…`.
+- Bac de ressources : sous 1280 px, panneau (feuille du bas sur téléphone),
+  toucher une fiche ouvre « Ajouter à… ».
+- Séance : 3 suggestions de notions, « Toutes les notions » à la demande ;
+  fiche attachée avec Imprimer · Projeter · Retirer.
+- Semaine : « x / n prêtes » par journée.
+- Progression : l'état se choisit dans un mini-menu (plus de cycle au clic).
+- Bibliothèque : avec un profil connu, objets d'abord, recherche compacte ensuite.
+- Réunions : « Reprendre le n°X » proposé (rubriques, durées, points « À suivre »
+  reportés), sans recopier décisions ni suites.
+- Démarches : « ✓ Démarche terminée » quand tout est coché.
+- Actions révélées au survol : seulement avec une souris ; toujours visibles au toucher.
+
+Métriques A → K inchangées. Bac mobile : 5 clics (Ressources → matière → fiche → Ajouter à… → jour).

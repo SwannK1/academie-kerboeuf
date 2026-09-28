@@ -137,9 +137,17 @@ test.describe("Professeur", () => {
     // Matière, heure, durée, niveau : déjà connus, pas redemandés.
     await expect(panel).toContainText("10h30 · 75 min · Maths");
     await expect(panel.getByRole("radio", { name: /Poser et effectuer une soustraction/ })).toContainText("Fiche prête");
+    // Trois suggestions d'abord, la liste complète à la demande.
+    await expect(panel.getByRole("radiogroup").getByRole("radio")).toHaveCount(3);
+    await expect(panel.getByRole("button", { name: /Toutes les notions/ })).toBeVisible();
     await j.click(panel.getByRole("radio", { name: /Poser et effectuer une soustraction avec retenue/ }));
-    await j.click(panel.getByRole("button", { name: /Poser et calculer une addition ou une soustraction/ }));
-    await expect(panel.getByRole("button", { name: /Poser et calculer une addition ou une soustraction/ })).toHaveAttribute("aria-pressed", "true");
+    await j.click(panel.getByRole("button", { name: /^Ajouter : Poser et calculer une addition ou une soustraction/ }));
+    // La fiche devient l'objet de la séance, avec ses actions directes.
+    const attached = panel.getByRole("list", { name: "Fiches de la séance" });
+    await expect(attached).toContainText("Poser et calculer une addition ou une soustraction");
+    await expect(attached.getByRole("button", { name: /^Imprimer/ })).toBeVisible();
+    await expect(attached.getByRole("link", { name: /^Projeter/ })).toHaveAttribute("href", /lecon\.pdf#view=Fit$/);
+    await expect(attached.getByRole("button", { name: /^Retirer/ })).toBeVisible();
     // Enregistré à chaque clic : aucune validation demandée.
     await expect(panel.getByRole("status")).toHaveText(/Enregistré/);
     await expect(panel.getByRole("button", { name: "OK" })).toHaveCount(0);
@@ -437,7 +445,9 @@ test.describe("Accueil et bibliothèque", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(/Bonjour|Bonsoir/);
     await expect(page.getByText(/CE1 · Période/)).toBeVisible();
     await expect(page.getByText(/créneaux? à préparer|séances?/).first()).toBeVisible();
-    await expect(page.getByRole("link", { name: "Trouver un PDF" })).toBeVisible();
+    const quick = page.getByRole("navigation", { name: "Actions rapides" });
+    await expect(quick.getByRole("link")).toHaveText(["Ma semaine", "Trouver un PDF", "Cahier journal", "Ma progression"]);
+    await expect(quick.getByRole("link", { name: "Ma progression" })).toHaveAttribute("href", "/enseigner/periode");
   });
 
   test("seules les ressources publiées sont listées et chaque PDF existe", async ({ page, request }) => {
@@ -452,3 +462,135 @@ test.describe("Accueil et bibliothèque", () => {
     expect(res.headers()["content-type"]).toContain("pdf");
   });
 });
+
+test.describe("Finition", () => {
+  test("bac de ressources : panneau sur écran étroit, « Ajouter à… » au doigt", async ({ page }, info) => {
+    const narrow = (page.viewportSize()?.width ?? 1280) < 1280;
+    test.skip(!narrow, "Sur grand écran, le bac est latéral (parcours D bis)");
+    await seed(page, { "ak-profil-v1": profile("ce2"), "ak-enseigner-v1": teachState("ce2", [], slotsFor([1, 2, 4, 5])) });
+    await page.goto("/enseigner/semaine");
+    const j = new Journey(page, info, "Bac mobile");
+    await j.click(page.getByRole("button", { name: "Ressources", exact: true }));
+    const sheet = page.getByRole("dialog", { name: "Ressources" });
+    await j.click(sheet.getByRole("radio", { name: "Maths" }));
+    await expect(sheet.getByRole("list").getByRole("button")).toHaveCount(4);
+    await j.click(sheet.getByRole("button", { name: /Multiplier par 2, 5 et 10/ }));
+    await expect(page.getByRole("dialog", { name: "Multiplier par 2, 5 et 10" })).toBeVisible();
+    await j.click(page.getByRole("button", { name: /Ajouter à ma séance/ }));
+    await j.click(page.getByRole("menuitem").filter({ hasText: /Lundi|Mardi|Jeudi|Vendredi|Aujourd'hui/ }).first());
+    await expect(page.getByText(/Ajoutée au cahier journal/)).toBeVisible();
+    j.report({ clicks: 5 });
+  });
+
+  test("semaine : chaque journée indique son niveau de préparation", async ({ page }) => {
+    const monday = iso(currentMonday());
+    await seed(page, {
+      "ak-profil-v1": profile("ce2"),
+      "ak-enseigner-v1": teachState(
+        "ce2",
+        [
+          { id: "p1", date: monday, start: 510, duration: 60, level: "ce2", subject: "francais", domainId: null, notionId: null, notionLabel: "Lecture", kind: null, organisation: null, resources: [], note: "", done: false },
+        ],
+        slotsFor([1, 2, 4, 5]),
+      ),
+    });
+    await page.goto("/enseigner/semaine");
+    await expect(page.getByRole("region", { name: /^Lundi/ }).getByLabel("1 séance prête sur 4")).toBeVisible();
+    await expect(page.getByRole("region", { name: /^Mardi/ }).getByText("0 / 4 prêtes")).toBeVisible();
+  });
+
+  test("progression : l'état se choisit dans un mini-menu", async ({ page }) => {
+    await seed(page, {
+      "ak-profil-v1": profile("ce2"),
+      "ak-enseigner-v1": { ...teachState("ce2"), progress: { "ce2-mathematiques-nombres-et-calculs-1": { period: 1, state: "prevue" } } },
+    });
+    await page.goto("/enseigner/periode");
+    const todo = page.getByRole("region", { name: "À faire" });
+    const doing = page.getByRole("region", { name: "En cours" });
+    const card = todo.getByRole("listitem").first();
+    await expect(card).toBeVisible();
+    const label = (await card.locator("p").first().textContent()) ?? "";
+    await card.getByRole("button", { name: /^État : À faire/ }).click();
+    await page.getByRole("menuitem", { name: /En cours/ }).click();
+    await expect(doing.getByText(label)).toBeVisible();
+  });
+
+  test("Direction : « Plus tard » se déplie, la source est dans le menu", async ({ page }) => {
+    const far = iso(addDays(new Date(), 90));
+    await seed(page, {
+      "ak-profil-v1": profile("ce2", "direction"),
+      "ak-direction-v1": {
+        version: 1,
+        tasks: [{ id: "t-far", label: "Préparer la kermesse", due: far, done: false, origin: { kind: "manuel" } }],
+        meetings: [],
+        runs: [],
+        milestonesDone: [],
+      },
+    });
+    await page.goto("/direction");
+    await expect(page.getByText("Préparer la kermesse")).toHaveCount(0);
+    await page.getByRole("button", { name: /Plus tard/ }).click();
+    await expect(page.getByText("Préparer la kermesse")).toBeVisible();
+    await page.getByRole("button", { name: "Actions : Préparer la kermesse" }).click();
+    await page.getByRole("menuitem", { name: "Cette semaine" }).click();
+    const week = page.locator("section").filter({ has: page.getByRole("heading", { name: "Cette semaine" }) });
+    await expect(week.getByText("Préparer la kermesse")).toBeVisible();
+
+    await expect(page.getByRole("link", { name: "source", exact: true })).toHaveCount(0);
+    await page.getByRole("button", { name: /^Actions : Élections des représentants/ }).click();
+    await expect(page.getByRole("menuitem", { name: "Source officielle" })).toBeVisible();
+  });
+
+  test("réunion : reprendre le conseil précédent sans recopier ses décisions", async ({ page }) => {
+    await seed(page, {
+      "ak-profil-v1": profile("ce2", "direction"),
+      "ak-direction-v1": {
+        version: 1,
+        tasks: [],
+        meetings: [
+          {
+            id: "r1",
+            kind: "conseil-ecole",
+            number: 1,
+            date: "2026-11-09",
+            createdAt: "2026-10-20T10:00:00.000Z",
+            items: [
+              { id: "a", label: "Effectifs et organisation de l'école", minutes: 15, included: true, outcome: "traite", decision: "", taskId: null },
+              { id: "b", label: "Travaux de la cour", minutes: 10, included: true, outcome: "a-suivre", decision: "Devis à demander", taskId: null },
+              { id: "c", label: "Coopérative scolaire", minutes: 5, included: true, outcome: "decision", decision: "Bilan validé", taskId: null },
+            ],
+          },
+        ],
+        runs: [],
+        milestonesDone: [],
+      },
+    });
+    await page.goto("/direction/reunions?nouveau=conseil-ecole");
+    await expect(page.getByRole("heading", { name: "Conseil d'école n°2" })).toBeVisible();
+    await expect(page.getByText("1 point à suivre au n°1.")).toBeVisible();
+    await page.getByRole("button", { name: "Reprendre le n°1" }).click();
+    const items = page.getByRole("list", { name: "Points de l'ordre du jour" });
+    await expect(items).toContainText("Travaux de la cour (suite du n°1)");
+    await expect(items).toContainText("15 min");
+    await page.getByRole("radio", { name: "3 · Imprimer" }).click();
+    await page.getByRole("radio", { name: "Relevé de décisions" }).click();
+    await expect(page.locator("article")).not.toContainText("Bilan validé");
+    await expect(page.locator("article")).not.toContainText("Devis à demander");
+  });
+
+  test("démarche : fin claire quand tout est coché", async ({ page }) => {
+    await page.goto("/direction/demarches/commandes");
+    await expect(page.getByRole("heading", { name: "À faire" })).toBeVisible();
+    const boxes = page.getByRole("checkbox");
+    const count = await boxes.count();
+    expect(count).toBeGreaterThan(0);
+    for (let i = 0; i < count; i += 1) {
+      await boxes.nth(i).check();
+      await expect(boxes.nth(i)).toBeChecked();
+    }
+    await expect(page.getByRole("status").filter({ hasText: "Démarche terminée" })).toBeVisible();
+    await page.goto("/direction/demarches");
+    await expect(page.getByRole("link", { name: /Passer les commandes/ })).toContainText("✓ Terminée");
+  });
+});
+

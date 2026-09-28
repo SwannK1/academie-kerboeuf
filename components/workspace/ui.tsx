@@ -671,3 +671,16 @@ export function Skeleton({ className = "h-40" }: { className?: string }) {
 /** Contexte « ajouter à une séance » partagé entre bibliothèque et semaine. */
 export const PickerContext = createContext<{ pickResource?: (resourceId: string) => void }>({});
 export const usePicker = () => useContext(PickerContext);
+
+/** Media query côté client (faux au rendu serveur). */
+export function useMediaQuery(query: string): boolean {
+  return useSyncExternalStore(
+    (listener) => {
+      const list = window.matchMedia(query);
+      list.addEventListener("change", listener);
+      return () => list.removeEventListener("change", listener);
+    },
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
+}

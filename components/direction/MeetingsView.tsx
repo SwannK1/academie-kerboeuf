@@ -16,8 +16,10 @@ import {
   itemToTask,
   removeMeeting,
   reorderItems,
+  resumeFromPrevious,
   updateItem,
   updateMeeting,
+  useDirection,
   type Meeting,
   type MeetingItem,
 } from "@/lib/workspace/direction";
@@ -26,8 +28,14 @@ import { addDays, formatLongDate, formatShortDate, fromIso, todayIso } from "@/l
 type Mode = "preparer" | "reunion" | "imprimer";
 
 export function MeetingsView() {
+  const id = useSearchParams().get("id");
+  const direction = useDirection();
+  const meeting = id ? direction?.meetings.find((m) => m.id === id) : undefined;
+  const place = meeting
+    ? { path: `/direction/reunions?id=${meeting.id}`, label: `${getMeetingKind(meeting.kind).label} n°${meeting.number}` }
+    : { path: "/direction/reunions", label: "Réunions" };
   return (
-    <WithDirection place={{ path: "/direction/reunions", label: "Réunions" }}>
+    <WithDirection place={place}>
       {(context) => <Meetings context={context} />}
     </WithDirection>
   );
@@ -93,6 +101,12 @@ function MeetingEditor({ meeting, context }: { meeting: Meeting; context: Direct
   const included = meeting.items.filter((i) => i.included);
   const minutes = included.reduce((sum, i) => sum + (i.minutes ?? 0), 0);
   const previous = context.direction.meetings.filter((m) => m.kind === meeting.kind && m.number < meeting.number).at(-1);
+  // La proposition de reprise disparaît dès que l'ordre du jour a été touché.
+  const untouched =
+    !meeting.date &&
+    meeting.items.length === kind.items.length &&
+    meeting.items.every((item, index) => item.included && item.label === kind.items[index] && item.minutes === 10);
+  const followUps = previous?.items.filter((i) => i.outcome === "a-suivre").length ?? 0;
   const title = `${kind.label} n°${meeting.number}`;
 
   return (
@@ -150,9 +164,24 @@ function MeetingEditor({ meeting, context }: { meeting: Meeting; context: Direct
       {mode === "preparer" ? (
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
           <div>
-            {previous && meeting.items.some((i) => previous.items.some((p) => p.label === i.label)) ? (
+            {previous && untouched ? (
               <div className="mb-4">
-                <Hint>Repris du n°{previous.number}.</Hint>
+                <Hint
+                  action={
+                    <Button
+                      icon="repeat"
+                      onClick={() => {
+                        const before = directionStore.get();
+                        resumeFromPrevious(meeting.id, previous.id);
+                        toast(`Repris du n°${previous.number}`, () => directionStore.set(before));
+                      }}
+                    >
+                      Reprendre le n°{previous.number}
+                    </Button>
+                  }
+                >
+                  {followUps ? `${followUps} point${followUps > 1 ? "s" : ""} à suivre au n°${previous.number}.` : `Conseil précédent : n°${previous.number}.`}
+                </Hint>
               </div>
             ) : null}
             <label className="mb-5 flex flex-wrap items-center gap-3 text-sm">

@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Icon } from "@/components/icons/Icon";
-import { ActionMenu, Button, Hint, IconButton, toast } from "@/components/workspace/ui";
+import { ActionMenu, Button, Hint, IconButton, toast, SidePanel, useMediaQuery } from "@/components/workspace/ui";
 import { PageTitle, WithTeach, type TeachContext } from "@/components/enseigner/EnseignerShell";
 import { DayColumn } from "@/components/enseigner/DayPlan";
 import { ResourceTray } from "@/components/enseigner/ResourceTray";
+import { ResourcePanel } from "@/components/ressources/ResourcePanel";
+import { getResource } from "@/lib/resources/library";
 import { SessionPanel } from "@/components/enseigner/SessionPanel";
 import { getSubject, levelLabel } from "@/lib/workspace/curriculum";
 import { addDays, formatShortDate, formatTime, getPeriodFor, mondayOf, todayIso, WEEKDAYS, weekday } from "@/lib/workspace/school-year";
@@ -39,6 +41,8 @@ function Week({ context }: { context: TeachContext }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const router = useRouter();
   const [trayOpen, setTrayOpen] = useState(false);
+  const [openResource, setOpenResource] = useState<string | null>(null);
+  const wide = useMediaQuery("(min-width: 1280px)");
   const dates = schoolDatesOfWeek(context.teach, monday);
   const period = getPeriodFor(monday, context.zone);
   const habits = detectHabits(context.teach).slice(0, 1);
@@ -154,13 +158,13 @@ function Week({ context }: { context: TeachContext }) {
         </div>
       ) : null}
 
-      <div className={trayOpen ? "grid gap-4 xl:grid-cols-[minmax(0,1fr)_17rem]" : ""}>
+      <div className={trayOpen && wide ? "grid gap-4 xl:grid-cols-[minmax(0,1fr)_17rem]" : ""}>
         <div className={`grid gap-3 md:grid-cols-2 ${dates.length >= 5 ? "lg:grid-cols-5" : "lg:grid-cols-4"}`}>
           {dates.map((date) => (
             <DayColumn key={date} date={date} context={context} onOpen={setOpenId} />
           ))}
         </div>
-        {trayOpen ? <ResourceTray level={context.level} /> : null}
+        {trayOpen && wide ? <ResourceTray level={context.level} onOpen={setOpenResource} /> : null}
       </div>
 
       {weekSessions.length ? (
@@ -172,6 +176,18 @@ function Week({ context }: { context: TeachContext }) {
 
 
       <SessionPanel sessionId={openId} context={context} onClose={() => setOpenId(null)} />
+      {/* Écran étroit : le bac s'ouvre en panneau ; toucher une fiche ouvre « Ajouter à… ». */}
+      <SidePanel open={trayOpen && !wide} title="Ressources" onClose={() => setTrayOpen(false)}>
+        <ResourceTray
+          level={context.level}
+          compact
+          onOpen={(id) => {
+            setTrayOpen(false);
+            setOpenResource(id);
+          }}
+        />
+      </SidePanel>
+      <ResourcePanel unit={openResource ? getResource(openResource) : undefined} targetSessionId={null} onClose={() => setOpenResource(null)} onNavigate={setOpenResource} />
     </>
   );
 }

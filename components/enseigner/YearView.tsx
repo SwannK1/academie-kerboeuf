@@ -149,7 +149,7 @@ function Year({ context }: { context: TeachContext }) {
                           ) : null}
                         </p>
                       </div>
-                      <ActionMenu label={`Déplacer ou changer l'état : ${notion.label}`} sections={progressMenu(notion.id, p, () => router.push(`/ressources?niveau=${context.level}&notion=${notion.id}`))} buttonClassName="size-11 md:size-8 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100" />
+                      <ActionMenu label={`Déplacer ou changer l'état : ${notion.label}`} sections={progressMenu(notion.id, p, () => router.push(`/ressources?niveau=${context.level}&notion=${notion.id}`))} buttonClassName="size-11 md:size-8 hover-reveal" />
                     </li>
                   );
                 })}

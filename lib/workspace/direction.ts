@@ -123,10 +123,10 @@ function itemsFrom(labels: string[], included = true): MeetingItem[] {
 }
 
 /**
- * Nouvelle réunion. Si une réunion du même type existe, sa structure est
- * reprise (points retenus et ordre) : « reprendre la réunion précédente ».
+ * Nouvelle réunion, à partir des points proposés pour ce type. La reprise de
+ * la réunion précédente est une action explicite : `resumeFromPrevious`.
  */
-export function createMeeting(kind: MeetingKind, fromPrevious = true): string {
+export function createMeeting(kind: MeetingKind, fromPrevious = false): string {
   const id = createId("reunion");
   update((s) => {
     const same = s.meetings.filter((m) => m.kind === kind);
@@ -212,4 +212,26 @@ export function updateRun(id: string, patch: Partial<Omit<ProcedureRun, "id">>) 
 
 export function removeRun(id: string) {
   update((s) => ({ ...s, runs: s.runs.filter((r) => r.id !== id) }));
+}
+
+/**
+ * Reprend la structure de la réunion précédente du même type : rubriques et
+ * durées conservées, points « À suivre » reportés et signalés. Aucune
+ * décision ni suite donnée n'est recopiée.
+ */
+export function resumeFromPrevious(meetingId: string, previousId: string) {
+  update((s) => {
+    const previous = s.meetings.find((m) => m.id === previousId);
+    if (!previous) return s;
+    const items: MeetingItem[] = previous.items.map((item) => ({
+      id: createId("point"),
+      label: item.outcome === "a-suivre" && !item.label.includes("(suite du n°") ? `${item.label} (suite du n°${previous.number})` : item.label,
+      minutes: item.minutes,
+      included: item.included || item.outcome === "a-suivre",
+      outcome: null,
+      decision: "",
+      taskId: null,
+    }));
+    return { ...s, meetings: s.meetings.map((m) => (m.id === meetingId ? { ...m, items } : m)) };
+  });
 }

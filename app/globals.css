@@ -703,3 +703,13 @@ a {
   .chip,
   .chip-sm { min-height: 2.75rem; }
 }
+
+/*
+ * Actions secondaires révélées au survol : uniquement avec une vraie souris.
+ * Sur écran tactile (téléphone, tablette), elles restent toujours visibles.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .group .hover-reveal { opacity: 0; }
+  .group:hover .hover-reveal,
+  .group:focus-within .hover-reveal { opacity: 1; }
+}

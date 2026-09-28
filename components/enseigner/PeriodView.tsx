@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ActionMenu, Button, ChipGroup, Hint, toast } from "@/components/workspace/ui";
 import { PageTitle, WithTeach, type TeachContext } from "@/components/enseigner/EnseignerShell";
-import { STATE_TONE, progressMenu } from "@/components/enseigner/YearView";
+import { STATE_TONE } from "@/components/enseigner/YearView";
 import { findNotion, getCurriculum, levelLabel } from "@/lib/workspace/curriculum";
 import { dayLabel, formatShortDate, getPeriodFor, getPeriods, todayIso } from "@/lib/workspace/school-year";
 import { PROGRESS_STATES, proposeDistribution, scheduleNotion, setProgress, teachStore, type Progress, type ProgressState } from "@/lib/workspace/teach";
@@ -27,13 +27,13 @@ const COLUMNS: { id: string; label: string; symbol: string; states: ProgressStat
 ];
 
 const SYMBOL: Record<ProgressState, string> = { prevue: "○", reportee: "○", commencee: "◐", "a-reprendre": "◐", travaillee: "●" };
-const NEXT_STATE: Record<ProgressState, ProgressState> = {
-  prevue: "commencee",
-  reportee: "commencee",
-  commencee: "travaillee",
-  "a-reprendre": "travaillee",
-  travaillee: "prevue",
-};
+const STATE_CHOICES: { id: ProgressState; label: string }[] = [
+  { id: "prevue", label: "À faire" },
+  { id: "commencee", label: "En cours" },
+  { id: "travaillee", label: "Travaillé" },
+  { id: "a-reprendre", label: "À reprendre" },
+  { id: "reportee", label: "Reportée" },
+];
 
 function Period({ context }: { context: TeachContext }) {
   const router = useRouter();
@@ -185,14 +185,21 @@ function Period({ context }: { context: TeachContext }) {
                       onDragStart={(event) => event.dataTransfer.setData(NOTION_DRAG, notion.id)}
                       className="group flex items-start gap-2 rounded-xl border border-line bg-panel-soft py-2 pl-2 pr-1"
                     >
-                      <button
-                        type="button"
-                        onClick={() => setProgress(notion.id, { state: NEXT_STATE[stateId] })}
-                        aria-label={`${notion.label} : ${PROGRESS_STATES.find((s) => s.id === stateId)?.label}. Passer à ${PROGRESS_STATES.find((s) => s.id === NEXT_STATE[stateId])?.label}`}
-                        className={`grid size-11 shrink-0 place-items-center rounded-full md:size-9 text-lg leading-none hover:bg-ink/6 ${STATE_TONE[stateId]}`}
-                      >
-                        {SYMBOL[stateId]}
-                      </button>
+                      <ActionMenu
+                        label={`État : ${STATE_CHOICES.find((st) => st.id === stateId)?.label}. Changer`}
+                        align="left"
+                        triggerContent={<span aria-hidden="true">{SYMBOL[stateId]}</span>}
+                        buttonClassName={`grid size-11 shrink-0 place-items-center rounded-full text-lg leading-none hover:bg-ink/6 md:size-9 ${STATE_TONE[stateId]}`}
+                        sections={[
+                          {
+                            title: "État",
+                            actions: STATE_CHOICES.map((choice) => ({
+                              label: `${SYMBOL[choice.id]}  ${choice.label}`,
+                              onSelect: () => setProgress(notion.id, { state: choice.id }),
+                            })),
+                          },
+                        ]}
+                      />
                       <div className="min-w-0 flex-1 py-1">
                         <p className="text-[13px] leading-snug">{notion.label}</p>
                         <p className="mt-0.5 text-[11px] text-muted">
@@ -217,7 +224,6 @@ function Period({ context }: { context: TeachContext }) {
                               { label: "Voir les ressources", icon: "book-open", onSelect: () => router.push(`/ressources?niveau=${context.level}&notion=${notion.id}`) },
                             ],
                           },
-                          ...progressMenu(notion.id, p).slice(-1),
                         ]}
                       />
                     </li>

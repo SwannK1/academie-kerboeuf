@@ -66,6 +66,7 @@ function Dashboard({ context }: { context: DirectionContext }) {
   const [draft, setDraft] = useState("");
   const [showDone, setShowDone] = useState(false);
   const [over, setOver] = useState<BucketId | null>(null);
+  const [showLater, setShowLater] = useState(false);
 
   const entries: Entry[] = [
     ...MILESTONES_2026_2027.filter((m) => m.date >= addDays(today, -21) || !direction.milestonesDone.includes(m.id)).map((m) => ({
@@ -98,6 +99,7 @@ function Dashboard({ context }: { context: DirectionContext }) {
 
   const open = entries.filter((e) => !e.done);
   const done = entries.filter((e) => e.done);
+  const later = open.filter((e) => bucketOf(e.due, today) === "later");
 
   function add(due: string | null) {
     if (!draft.trim()) return;
@@ -184,10 +186,30 @@ function Dashboard({ context }: { context: DirectionContext }) {
             );
           })}
 
-          {open.some((e) => bucketOf(e.due, today) === "later") ? (
-            <p className="px-2 text-sm text-muted">
-              Plus tard : {open.filter((e) => bucketOf(e.due, today) === "later").length} échéance(s) de l&apos;année.
-            </p>
+          {later.length ? (
+            <section aria-labelledby="b-later" className="px-2">
+              <h2 id="b-later">
+                <button
+                  type="button"
+                  aria-expanded={showLater}
+                  onClick={() => setShowLater((v) => !v)}
+                  className="flex min-h-11 items-center gap-2 font-serif text-xl font-semibold"
+                >
+                  Plus tard
+                  <span className="text-sm font-normal text-muted">{later.length}</span>
+                  <Icon name="chevron-right" className={`h-4 w-4 text-muted transition ${showLater ? "rotate-90" : ""}`} />
+                </button>
+              </h2>
+              {showLater ? (
+                <ul className="mt-1 grid gap-0.5">
+                  {later.map((e) => (
+                    <li key={e.id}>
+                      <EntryRow entry={e} today={today} />
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </section>
           ) : null}
 
           {done.length ? (
@@ -270,14 +292,6 @@ function EntryRow({ entry, today }: { entry: Entry; today: string }) {
         <>
           {entry.due ? <span className={late ? "font-semibold text-ember" : ""}>{late ? "En retard · " : ""}{formatShortDate(entry.due)}</span> : null}
           {entry.meta ? <span> · {entry.meta}</span> : null}
-          {entry.sourceHref ? (
-            <>
-              {" · "}
-              <a href={entry.sourceHref} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/25">
-                source
-              </a>
-            </>
-          ) : null}
         </>
       }
       actions={
@@ -287,10 +301,10 @@ function EntryRow({ entry, today }: { entry: Entry; today: string }) {
               {entry.actionLabel ?? "Ouvrir"}
             </Link>
           ) : null}
-          {entry.postpone || entry.remove || entry.href ? (
+          {entry.postpone || entry.remove || entry.href || entry.sourceHref ? (
             <ActionMenu
               label={`Actions : ${entry.label}`}
-              buttonClassName="size-11 md:size-9 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+              buttonClassName="size-11 md:size-9 hover-reveal"
               sections={[
                 {
                   actions: [
@@ -306,6 +320,9 @@ function EntryRow({ entry, today }: { entry: Entry; today: string }) {
                           { label: "Reporter d'une semaine", icon: "repeat" as const, onSelect: () => entry.postpone?.(7) },
                           { label: "Reporter d'un mois", icon: "repeat" as const, onSelect: () => entry.postpone?.(28) },
                         ]
+                      : []),
+                    ...(entry.sourceHref
+                      ? [{ label: "Source officielle", icon: "external" as const, onSelect: () => window.open(entry.sourceHref, "_blank", "noopener,noreferrer") }]
                       : []),
                     ...(entry.remove ? [{ label: "Supprimer", icon: "trash" as const, tone: "danger" as const, onSelect: entry.remove }] : []),
                   ],

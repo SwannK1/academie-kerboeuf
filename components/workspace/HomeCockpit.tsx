@@ -13,11 +13,14 @@ import { addDays, formatLongDate, formatShortDate, getPeriodFor, isHoliday, toda
 import { freeSlotsOn, nextSchoolDay, sessionsOn, useTeach } from "@/lib/workspace/teach";
 
 const QUICK: { href: string; label: string; icon: IconName }[] = [
-  { href: "/enseigner/semaine", label: "Préparer une séance", icon: "presentation" },
   { href: "/enseigner/semaine", label: "Ma semaine", icon: "calendar" },
   { href: "/ressources", label: "Trouver un PDF", icon: "search" },
   { href: "/enseigner/cahier-journal", label: "Cahier journal", icon: "notebook" },
+  { href: "/enseigner/periode", label: "Ma progression", icon: "check-circle" },
 ];
+
+/** Écrans déjà accessibles depuis le cockpit : « Continuer » n'y renvoie pas. */
+const ALREADY_ON_COCKPIT = new Set(["/", "/enseigner", "/direction", ...QUICK.map((q) => q.href)]);
 
 const KIND_ICON: Record<string, IconName> = { ressource: "book-open", outil: "grid", page: "calendar" };
 
@@ -95,6 +98,16 @@ function Cockpit() {
             </Link>
           </div>
         </section>
+      ) : null}
+
+      {profile.lastPath && profile.lastLabel && !ALREADY_ON_COCKPIT.has(profile.lastPath.split("?")[0]) ? (
+        <Link href={profile.lastPath} className="-mt-3 flex min-h-12 items-center justify-between gap-3 rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 font-medium transition hover:bg-gold/[0.1]">
+          <span className="min-w-0 truncate">
+            <span className="text-muted">Continuer : </span>
+            {profile.lastLabel}
+          </span>
+          <Icon name="arrow-right" className="h-4 w-4 shrink-0 text-gold" />
+        </Link>
       ) : null}
 
       {isTeacher(profile) ? (

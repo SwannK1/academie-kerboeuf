@@ -9,6 +9,10 @@ import { PROCEDURES, getProcedure, visibleItems, type Procedure } from "@/conten
 import { addTask, directionStore, startRun, updateRun, type ProcedureRun } from "@/lib/workspace/direction";
 import { addDays, todayIso } from "@/lib/workspace/school-year";
 
+function checkedCount(procedure: Procedure, run: ProcedureRun): number {
+  return run.checked.filter((c) => visibleItems(procedure, run.choices).some((i) => i.id === c)).length;
+}
+
 export function ProceduresIndex() {
   return (
     <WithDirection place={{ path: "/direction/demarches", label: "Démarches" }}>
@@ -27,7 +31,7 @@ export function ProceduresIndex() {
                     <span className="mt-1 text-sm text-muted">{p.summary}</span>
                     {run ? (
                       <span className="mt-3 text-xs font-medium text-jade">
-                        En cours · {run.checked.filter((c) => visibleItems(p, run.choices).some((i) => i.id === c)).length} / {total}
+                        {checkedCount(p, run) === total && total ? "✓ Terminée" : `En cours · ${checkedCount(p, run)} / ${total}`}
                       </span>
                     ) : null}
                   </Link>
@@ -139,6 +143,12 @@ function ProcedureRunner({ procedure, context }: { procedure: Procedure; context
 
           {answered ? (
             <section aria-label="Liste à cocher">
+              {items.length && done === items.length ? (
+                <p role="status" className="mb-3 flex min-h-12 items-center gap-2 rounded-xl border border-jade/40 bg-jade/[0.08] px-4 font-semibold text-jade">
+                  <Icon name="check-circle" className="h-5 w-5" />
+                  Démarche terminée
+                </p>
+              ) : null}
               <div className="mb-2 flex items-center justify-between">
                 <h2 className="font-serif text-xl font-semibold">À faire</h2>
                 <span className="text-sm text-muted">

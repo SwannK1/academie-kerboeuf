@@ -92,6 +92,12 @@ export function DayColumn({
     toast(`Séance créée avec « ${unit.title} »`, () => teachStore.set(before));
   }
 
+  // Même règle que le cockpit : une séance est prête dès que sa notion est choisie.
+  const readiness = {
+    ready: items.filter((i) => i.kind === "session" && (i.session.notionId || i.session.notionLabel)).length,
+    total: items.length,
+  };
+
   const previousSameDay = addDays(date, -7);
   const canRepeatLastWeek = !items.some((i) => i.kind === "session") && sessionsOn(context.teach, previousSameDay).length > 0;
 
@@ -166,7 +172,17 @@ export function DayColumn({
             {dayLabel(date)} <span className="font-normal text-muted">{formatShortDate(date)}</span>
             {isToday ? <span className="rounded-full bg-gold/15 px-2 py-0.5 text-[11px] font-semibold text-gold">Aujourd&apos;hui</span> : null}
           </h2>
-          <ActionMenu label={`Actions pour ${dayLabel(date)}`} sections={dayMenu} buttonClassName="size-11 md:size-8" />
+          <span className="ml-auto flex items-center gap-1">
+            {!holiday && readiness.total ? (
+              <span
+                className={`whitespace-nowrap text-[11px] tabular-nums ${readiness.ready === readiness.total ? "font-semibold text-jade" : "text-muted"}`}
+                aria-label={`${readiness.ready} séance${readiness.ready > 1 ? "s" : ""} prête${readiness.ready > 1 ? "s" : ""} sur ${readiness.total}`}
+              >
+                {readiness.ready === readiness.total ? "✓ prête" : `${readiness.ready} / ${readiness.total} prêtes`}
+              </span>
+            ) : null}
+            <ActionMenu label={`Actions pour ${dayLabel(date)}`} sections={dayMenu} buttonClassName="size-11 md:size-8" />
+          </span>
         </header>
       ) : null}
 
@@ -302,7 +318,7 @@ export function SessionCard({
           ) : null}
         </span>
       </button>
-      <div className="flex items-start gap-0.5 py-1 pr-1 opacity-100 transition md:absolute md:right-1 md:top-1 md:rounded-lg md:bg-panel-soft md:py-0 md:pr-0 md:opacity-0 md:shadow-sm md:group-hover:opacity-100 md:group-focus-within:opacity-100">
+      <div className="hover-reveal flex items-start gap-0.5 py-1 pr-1 transition [@media(hover:hover)_and_(pointer:fine)]:absolute [@media(hover:hover)_and_(pointer:fine)]:right-1 [@media(hover:hover)_and_(pointer:fine)]:top-1 [@media(hover:hover)_and_(pointer:fine)]:rounded-lg [@media(hover:hover)_and_(pointer:fine)]:bg-panel-soft [@media(hover:hover)_and_(pointer:fine)]:py-0 [@media(hover:hover)_and_(pointer:fine)]:pr-0 [@media(hover:hover)_and_(pointer:fine)]:shadow-sm">
         <label className="hidden size-9 cursor-pointer place-items-center rounded-md hover:bg-ink/6 md:grid" title={session.done ? "Rouvrir" : "Terminer"}>
           <input type="checkbox" className="check" checked={session.done} onChange={() => toggleSessionDone(session.id, context.zone)} aria-label={`${session.done ? "Rouvrir" : "Terminer"} : ${title}`} />
         </label>
